@@ -46,7 +46,7 @@ CAUTION: 更新物件擷取時的最後存取時間可能會降低 StorageGRID �
 |===
 
 
-.2+| ${post_edited_translations.segment} 2+| 如果停用上次存取時間（預設），則行為 2+| 啟用上次存取時間後的行為 
+.2+| 請求類型 2+| 如果停用上次存取時間（預設），則行為 2+| 啟用上次存取時間後的行為 
 
 
 | 最後存取時間已更新？ | 物件已新增至 ILM 評估佇列？ | 最後存取時間已更新？ | 物件已新增至 ILM 評估佇列？ 
@@ -107,20 +107,20 @@ CAUTION: 更新物件擷取時的最後存取時間可能會降低 StorageGRID �
  a| 
 請求將物件從一個儲存桶複製到另一個儲存桶。
  a| 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 不，對於來源複本
+* 是的，對於目的地複本。
 
  a| 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-
- a| 
-* 是的，對於來源複本
-* ${post_edited_translations.segment}
+* 不，對於來源複本
+* 是的，對於目的地複本。
 
  a| 
 * 是的，對於來源複本
-* ${post_edited_translations.segment}
+* 是的，對於目的地複本。
+
+ a| 
+* 是的，對於來源複本
+* 是的，對於目的地複本。
 
 
 
@@ -138,7 +138,7 @@ CAUTION: 更新物件擷取時的最後存取時間可能會降低 StorageGRID �
 
 |===
 .步驟
-. ${post_edited_translations.segment}
+. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 . 從表格中選擇儲存桶名稱。
 +
 顯示儲存桶詳細資料頁面。

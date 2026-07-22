@@ -15,7 +15,7 @@ summary: 使用本節中的範例為儲存桶建立 StorageGRID 存取原則。
 
 儲存桶原則指定該原則所附加的儲存桶的存取權限。您可以透過下列其中一種工具，使用 S3 PutBucketPolicy API 設定儲存桶原則：
 
-* link:../tenant/manage-bucket-policy.html["${post_edited_translations.segment}"]。
+* link:../tenant/manage-bucket-policy.html["租戶管理員"]。
 * 使用 AWS CLI 執行以下命令（請參閱link:operations-on-buckets.html["儲存貯體上的作業"]）：
 +
 [listing, subs="specialcharacters,quotes"]

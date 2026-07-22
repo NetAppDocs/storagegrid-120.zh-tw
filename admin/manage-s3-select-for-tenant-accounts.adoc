@@ -32,14 +32,14 @@ S3 Select 允許 S3 用戶端使用 SelectObjectContent 要求，以僅篩選和
 [[grid-administration-requirements]]
 === 網格管理要求
 
-網格系統管理員必須授予租戶 S3 Select 能力。選取 *Allow S3 Select*，當 link:creating-tenant-account.html["${post_edited_translations.segment}"] 或 link:editing-tenant-account.html["編輯租戶"] 時。
+網格系統管理員必須授予租戶 S3 Select 能力。選取 *Allow S3 Select*，當 link:creating-tenant-account.html["建立租戶"] 或 link:editing-tenant-account.html["編輯租戶"] 時。
 
 
 
 [[object-format-requirements]]
 === 物件格式要求
 
-${post_edited_translations.segment}
+要查詢的物件必須採用以下格式之一：
 
 * *CSV*。可直接使用，也可壓縮成 GZIP 或 BZIP2 壓縮包。
 * *Parquet*。Parquet 物件的其他需求：
@@ -62,7 +62,7 @@ SelectObjectContent 請求必須傳送至 link:configuring-load-balancer-endpoin
 
 端點使用的管理節點和 Gateway 節點必須是下列節點之一：
 
-* ${post_edited_translations.segment}
+* 服務應用裝置節點
 * 基於 VMware 的軟體節點
 * 裸機節點執行已啟用 cgroup v2 的核心
 
@@ -72,7 +72,7 @@ SelectObjectContent 請求必須傳送至 link:configuring-load-balancer-endpoin
 [[general-considerations]]
 === 一般性考慮
 
-${post_edited_translations.segment}
+查詢不能直接傳送到儲存節點。
 
 
 CAUTION: SelectObjectContent 請求可能會降低所有 S3 用戶端和所有租戶的負載平衡器效能。僅在需要時且僅針對信任的租戶啟用此功能。

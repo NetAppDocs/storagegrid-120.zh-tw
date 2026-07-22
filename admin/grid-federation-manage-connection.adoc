@@ -15,7 +15,7 @@ summary: 管理 StorageGRID 系統之間的網格聯合連線包括編輯連線�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入任一網格上的 Grid Manager。
-* 您擁有link:admin-group-permissions.html["${post_edited_translations.segment}"]您目前登入的網格的權限。
+* 您擁有link:admin-group-permissions.html["根目錄存取權限"]您目前登入的網格的權限。
 
 
 
@@ -55,8 +55,8 @@ NOTE: 編輯網格聯合連線時，StorageGRID 會嘗試在第一個網格的�
 --
 .詳細資料頁面
 --
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 選取連線名稱以顯示其詳細資訊。
+.. 選擇 *Edit*。
 .. 輸入新資訊。
 
 
@@ -69,7 +69,7 @@ NOTE: 編輯網格聯合連線時，StorageGRID 會嘗試在第一個網格的�
 
 . 選擇 *Download verification file*。
 +
-${post_edited_translations.segment}
+若要稍後下載此檔案，請前往連線的詳細資訊頁面。
 
 . 找出下載的檔案 (`_connection-name_.grid-federation`)，並將其儲存到安全的位置。
 +
@@ -97,21 +97,21 @@ NOTE: 如果在開始編輯連線時連線狀態不是 *Connected*，則不會�
 . 選擇 *Configuration* > *System* > *Grid federation*。
 . 選擇 *Upload verification file* 以存取上傳頁面。
 . 選擇 *Upload verification file*。然後，瀏覽並選擇從第一個網格下載的檔案。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 請輸入您目前登入的網格的佈建密碼。
+. 選擇 *Save and test*。
 +
 如果使用修改後的值可以建立連線，則會顯示成功訊息。否則，會顯示錯誤訊息。請查看訊息並解決任何問題。
 
 . 關閉精靈以返回網格聯盟頁面。
 . 確認*連線狀態*為*已連線*。
 . 前往第一個網格上的網格同盟頁面，然後重新整理瀏覽器。確認「連線狀態」目前為「已連線」。
-. ${post_edited_translations.segment}
+. 連線建立後，安全地刪除驗證檔案的所有副本。
 
 
 
 
 [[testgridfedconnectiontest-a-grid-federation-connection]]
-== ${post_edited_translations.segment}
+== [[test_grid_fed_connection]]測試網格聯盟連線
 
 .步驟
 . 從主要管理節點登入 Grid Manager。
@@ -129,7 +129,7 @@ NOTE: 如果在開始編輯連線時連線狀態不是 *Connected*，則不會�
 --
 .詳細資料頁面
 --
-.. ${post_edited_translations.segment}
+.. 選取連線名稱以顯示其詳細資訊。
 .. 選擇 *Test connection*。
 
 
@@ -164,7 +164,7 @@ NOTE: 如果在開始編輯連線時連線狀態不是 *Connected*，則不會�
 
 
  a| 
-${post_edited_translations.segment}
+正在等待連線
  a| 
 您已在此網格上設定連線，但另一個網格上的連線尚未完成。請從此網格下載驗證檔案，並將其上傳至另一個網格。
 
@@ -173,7 +173,7 @@ ${post_edited_translations.segment}
  a| 
 未知
  a| 
-${post_edited_translations.segment}
+連線狀態未知，可能是連網問題或節點離線造成的。
 
 |===
 . 如果連線狀態為 *Error*，請解決任何問題。然後，再次選取 *Test connection* 以確認問題已解決。
@@ -187,18 +187,18 @@ ${post_edited_translations.segment}
 每個網格聯盟連線都使用四個自動產生的 SSL 憑證來保護連線安全。當每個網格的兩個憑證即將到期時、*網格聯盟憑證到期* 警示會提醒您輪換憑證。
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 如果連線兩端的憑證過期，連線將停止運作，複寫作業將處於擱置狀態，直到憑證更新為止。
 
 .步驟
 . 從任一網格上的主要管理節點登入 Grid Manager。
 . 選擇 *Configuration* > *System* > *Grid federation*。
-. ${post_edited_translations.segment}
+. 在網格聯盟頁面的任一標籤中，選取連線名稱以顯示其詳細資訊。
 . 選取 *Certificates* 索引標籤。
 . 選取 *Rotate certificates*。
 . 請指定新憑證的有效天數。
 . 請輸入您目前登入的網格佈建密碼。
 . 選取 *Rotate certificates*。
-. ${post_edited_translations.segment}
+. 根據需要，在連線的另一個網格上重複這些步驟。
 +
 一般來說，連接兩端的憑證有效期限應相同。
 
@@ -213,7 +213,7 @@ CAUTION: ${post_edited_translations.segment}
 
 image:grid-federation-remove-connection.png["移除網格同盟連線的步驟"]
 
-${post_edited_translations.segment}
+移除連線之前，請注意以下事項：
 
 * 移除連接不會刪除網格之間已複製的任何項目。例如，當租戶的權限被移除時，兩個網格中都存在的租戶使用者、群組和物件不會從任何一個網格中刪除。如果您想要刪除這些項目，則必須手動從兩個網格中刪除它們。
 * 移除連線時，任何正在等待複寫的物件（已攝取但尚未複寫到另一個網格）的複寫都會永久失敗。
@@ -225,10 +225,10 @@ ${post_edited_translations.segment}
 === 停用所有租戶儲存桶的複寫
 
 .步驟
-. ${post_edited_translations.segment}
+. 從任一網格開始，從主要管理節點登入 Grid Manager。
 . 選擇 *Configuration* > *System* > *Grid federation*。
 . 選取連線名稱以顯示其詳細資訊。
-. ${post_edited_translations.segment}
+. 在「允許的租戶」標籤上，確定是否有任何租戶正在使用該連線。
 . 如果列出了任何租戶，請指示所有租戶link:../tenant/grid-federation-manage-cross-grid-replication.html["停用跨網格複寫"]在連線的兩個網格上為其所有儲存桶進行操作。
 +
 
@@ -246,7 +246,7 @@ TIP: 如果任何租戶儲存桶啟用了跨網格複寫，則無法移除「使
 .步驟
 . 選擇 *Configuration* > *System* > *Grid federation*。
 . 選取連線名稱以顯示其詳細資訊。
-. 在「允許的租戶」索引標籤中，移除每個租戶的「使用網格聯合連線」權限。請參閱link:grid-federation-manage-tenants.html["${post_edited_translations.segment}"]。
+. 在「允許的租戶」索引標籤中，移除每個租戶的「使用網格聯合連線」權限。請參閱link:grid-federation-manage-tenants.html["管理獲準租戶"]。
 . 對另一個網格上的允許租戶重複這些步驟。
 
 

@@ -24,7 +24,7 @@ StorageGRID 在每個節點上包含內部防火牆，透過控制節點的網�
 +
 ** 具有不受信任用戶端網路的節點，只接受在該節點上設定的負載平衡器端點連接埠上的連線（全域端點、節點介面及節點類型繫結端點）。
 ** 無論「管理外部網路」標籤上的設定為何，負載平衡器端點連接埠都是不受信任的用戶端網路上_唯一開啟的連接埠_。
-** ${post_edited_translations.segment}
+** 如果設定為可信，則在「管理外部存取」標籤下開啟的所有連接埠以及在用戶端網路上開啟的任何負載平衡端點均可存取。
 
 
 
@@ -34,7 +34,7 @@ NOTE: 在一個標籤頁中所做的設定可能會影響在另一個標籤頁�
 
 若要設定內部防火牆控制，請參閱 link:../admin/configure-firewall-controls.html["設定防火牆控制"]。
 
-如需更多關於外部防火牆與網路安全性的資訊，請參閱 link:../admin/controlling-access-through-firewalls.html["${post_edited_translations.segment}"]。
+如需更多關於外部防火牆與網路安全性的資訊，請參閱 link:../admin/controlling-access-through-firewalls.html["控制外部防火牆的存取"]。
 
 
 
@@ -54,7 +54,7 @@ NOTE: 特權 IP 位址預設情況下沒有內部網格連接埠存取權限。
 假設您要使用防禦主機（經過安全性強化之主機）進行網路管理。您可以使用以下一般步驟：
 
 . 使用「特權位址清單」標籤新增跳轉主機的 IP 位址。
-. ${post_edited_translations.segment}
+. 使用「管理外部存取」標籤來封鎖所有連接埠。
 
 
 
@@ -70,7 +70,7 @@ CAUTION: 在封鎖連接埠 443 和 8443 之前，請先新增特權 IP 位址�
 假設您想要鎖定敏感的連接埠以及該連接埠上的服務。您可以使用以下一般步驟：
 
 . 使用「特權位址清單」索引標籤，僅向需要存取該服務的主機授予存取權限。
-. ${post_edited_translations.segment}
+. 使用「管理外部存取」標籤來封鎖所有連接埠。
 
 
 
@@ -88,7 +88,7 @@ CAUTION: 在封鎖任何用於存取 Grid Manager 和 Tenant Manager 的連接�
 
 
 [[untrusted-client-networks-tab]]
-== ${post_edited_translations.segment}
+== 「不受信任的用戶端網路」索引標籤
 
 如果您使用的是用戶端網路，可以透過僅在明確設定的端點上接受傳入用戶端流量，協助保護 StorageGRID 免受惡意攻擊。
 
@@ -99,7 +99,7 @@ CAUTION: 在封鎖任何用於存取 Grid Manager 和 Tenant Manager 的連接�
 
 
 [[example-1-gateway-node-only-accepts-https-s3-requests]]
-=== ${post_edited_translations.segment}
+=== 範例 1：閘道節點僅接受 HTTPS S3 請求
 
 假設您希望閘道節點拒絕用戶端網路上除 HTTPS S3 請求之外的所有傳入流量。您可以執行以下一般步驟：
 
@@ -112,7 +112,7 @@ CAUTION: 在封鎖任何用於存取 Grid Manager 和 Tenant Manager 的連接�
 
 
 [[example-2-storage-node-sends-s3-platform-services-requests]]
-=== ${post_edited_translations.segment}
+=== 範例 2：儲存節點發送 S3 平台服務請求
 
 假設您想要從儲存節點啟用傳出 S3 平台服務流量，但希望阻止用戶端網路上到該儲存節點的任何傳入連線。您可以執行以下一般步驟：
 
@@ -128,7 +128,7 @@ CAUTION: 在封鎖任何用於存取 Grid Manager 和 Tenant Manager 的連接�
 
 假設您只想在特定子網路上允許 Grid Manager 存取。您需要執行以下步驟：
 
-. ${post_edited_translations.segment}
+. 將管理節點的用戶端網路連接至子網路。
 . 使用「不受信任的用戶端網路」索引標籤將用戶端網路設定為不受信任。
 . 建立管理介面負載平衡器端點時，輸入連接埠並選擇該連接埠將存取的管理介面。
 . 針對「不受信任的用戶端網路」選取 *Yes*。

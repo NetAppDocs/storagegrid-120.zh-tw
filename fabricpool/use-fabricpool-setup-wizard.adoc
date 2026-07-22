@@ -61,25 +61,25 @@ TIP: 除非您知道自己有特殊要求或您的實作需要進行大量自訂
 [[configure-identity-federation-and-sso]]
 === 設定身分識別聯盟和單一登入
 
-如果您打算為 StorageGRID 系統使用身分聯合或單一登入 （SSO），則已啟用這些功能。您也知道哪個聯合群組應擁有 ONTAP 將使用的租戶帳戶的 root 存取權。請參閱 link:../admin/using-identity-federation.html["${post_edited_translations.segment}"] 和 link:../admin/how-sso-works.html["設定單一登入"]。
+如果您打算為 StorageGRID 系統使用身分聯合或單一登入 （SSO），則已啟用這些功能。您也知道哪個聯合群組應擁有 ONTAP 將使用的租戶帳戶的 root 存取權。請參閱 link:../admin/using-identity-federation.html["使用身分聯盟"] 和 link:../admin/how-sso-works.html["設定單一登入"]。
 
 
 
 [[obtain-and-configure-domain-names]]
-=== ${post_edited_translations.segment}
+=== 取得並設定網域名稱
 
 * 您知道 StorageGRID 應該使用哪一個完整網域名稱 (FQDN)。網域名稱伺服器 (DNS) 項目會將此 FQDN 對應到您使用精靈建立的 HA 群組的虛擬 IP (VIP) 位址。請參閱link:../fabricpool/configure-dns-server.html["設定 DNS 伺服器"]。
-* 如果您打算使用 S3 虛擬託管式要求，則需要注意link:../admin/configuring-s3-api-endpoint-domain-names.html["${post_edited_translations.segment}"]。ONTAP 預設使用路徑式 URL，但建議使用虛擬託管式要求。
+* 如果您打算使用 S3 虛擬託管式要求，則需要注意link:../admin/configuring-s3-api-endpoint-domain-names.html["已設定的 S3 端點網域名稱"]。ONTAP 預設使用路徑式 URL，但建議使用虛擬託管式要求。
 
 
 
 
 [[review-load-balancer-and-security-certificate-requirements]]
-=== ${post_edited_translations.segment}
+=== 審查負載平衡器和安全性憑證要求
 
 如果您打算使用 StorageGRID 負載平衡器，您已閱讀一般 link:../admin/managing-load-balancing.html["負載平衡的考量因素"]。您已準備好要上傳的憑證或產生憑證所需的值。
 
-${post_edited_translations.segment}
+如果您打算使用外部（第三方）負載平衡器端點，則您需要該負載平衡器的完整網域名稱 (FQDN)、連接埠和憑證。
 
 
 

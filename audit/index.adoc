@@ -17,4 +17,4 @@ summary: 這些說明包含關於 StorageGRID 稽核訊息與稽核日誌之結�
 
 若要使用文字日誌檔，您必須能夠存取管理節點上已設定的稽核共享。
 
-如需設定稽核訊息層級與使用外部 syslog 伺服器的相關資訊，請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+如需設定稽核訊息層級與使用外部 syslog 伺服器的相關資訊，請參閱 link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]。

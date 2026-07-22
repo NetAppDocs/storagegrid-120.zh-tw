@@ -1,8 +1,8 @@
 ---
 section: network
-title: "${post_edited_translations.segment}"
+title: 網路連線準則
 entries:
-- title: "${post_edited_translations.segment}"
+- title: 網路連線準則
   pdf-filename: StorageGRID 的網路準則
   url: "/network/index.html"
 - title: StorageGRID 網路類型
@@ -35,7 +35,7 @@ entries:
   url: "/network/post-installation-guidelines.html"
 - title: 網路連接埠參考
   entries:
-  - title: "${post_edited_translations.segment}"
+  - title: 內部網格節點通訊
     url: "/network/internal-grid-node-communications.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 對外溝通
     url: "/network/external-communications.html"

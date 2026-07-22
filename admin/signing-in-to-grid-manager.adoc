@@ -32,7 +32,7 @@ summary: '您可以透過在支援的 Web 瀏覽器的網址列中輸入管理�
 
 
 [[sign-in-to-grid-manager-on-first-admin-node]]
-== ${post_edited_translations.segment}
+== 在第一個管理節點登入 Grid Manager
 
 .開始之前
 * 您已擁有登入憑證。
@@ -64,12 +64,12 @@ NOTE: SSO 功能在受限的 Grid Manager 連接埠上無法使用。您必須�
 . 如果出現安全性警報，請使用瀏覽器的安裝精靈安裝憑證。參見link:using-storagegrid-security-certificates.html["管理安全性證書"]。
 . 登入網格管理器。
 +
-${post_edited_translations.segment}
+顯示的登入畫面取決於是否已為 StorageGRID 設定單一登入 （SSO）。
 
 +
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.未使用單一登入
 --
 .. 請輸入您的 Grid Manager 使用者名稱和密碼。
 .. 選擇 *Sign In*。
@@ -83,11 +83,11 @@ ${post_edited_translations.segment}
 ... 選擇 *Sign in*。帳戶欄位可以保留 0。
 ... 在貴組織的 SSO 登入頁面上輸入您的標準 SSO 憑證。
 +
-${post_edited_translations.segment}
+例如，如果 StorageGRID 使用 SSO，且您之前曾存取 Grid Manager 或租戶帳戶：
 
 +
 .... 輸入 *0*（Grid Manager 的帳戶 ID），或者如果 *Grid Manager* 出現在最近的帳戶清單中，則選取 *Grid Manager*。
-.... ${post_edited_translations.segment}
+.... 選擇 *登入*。
 .... 使用您的標準 SSO 憑證登入您組織的 SSO 登入頁面。
 
 
@@ -110,7 +110,7 @@ ${post_edited_translations.segment}
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.未使用單一登入
 --
 .步驟
 . 在瀏覽器網址列中，輸入另一個管理節點的完整網域名稱或 IP 位址。視需要加入連接埠號碼。
@@ -125,7 +125,7 @@ ${post_edited_translations.segment}
 
 .步驟
 . 在瀏覽器網址列中輸入另一個管理節點的完整網域名稱或 IP 位址。
-. ${post_edited_translations.segment}
+. 如果您的 SSO 工作階段已過期，請重新輸入您的憑證。
 
 
 --

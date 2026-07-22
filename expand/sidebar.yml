@@ -36,7 +36,7 @@ entries:
     url: "/expand/deploying-new-grid-nodes.html"
   - title: 執行擴充
     url: "/expand/performing-expansion.html"
-- title: "${post_edited_translations.segment}"
+- title: 新增儲存設備磁碟區
   entries:
   - title: 向儲存節點新增儲存設備磁碟區
     url: "/expand/adding-storage-volumes-to-storage-nodes.html"
@@ -52,9 +52,9 @@ entries:
     url: "/expand/verifying-storage-node-is-active.html"
   - title: 複製管理節點資料庫
     url: "/expand/copying-admin-node-database.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 複製 Prometheus 計量
     url: "/expand/copying-prometheus-metrics.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 複製稽核日誌
     url: "/expand/copying-audit-logs.html"
   - title: 重新平衡擦除編碼資料
     url: "/expand/rebalancing-erasure-coded-data-after-adding-storage-nodes.html"

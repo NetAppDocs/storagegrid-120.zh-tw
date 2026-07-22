@@ -2,7 +2,7 @@
 permalink: ilm/index.html 
 sidebar: sidebar 
 keywords: information lifecycle management overview, about information lifecycle management, ilm overview, about ilm 
-summary: ${post_edited_translations.segment} 
+summary: ILM 原則中的資訊生命週期管理 （ILM） 規則指示 StorageGRID 如何建立和發佈物件資料的複本，以及如何隨時間管理這些複本。 
 ---
 = 使用 ILM 管理 StorageGRID 中的物件
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+ILM 原則中的資訊生命週期管理 （ILM） 規則指示 StorageGRID 如何建立和發佈物件資料的複本，以及如何隨時間管理這些複本。
 
 
 
@@ -20,12 +20,12 @@ ${post_edited_translations.segment}
 
 設計與實作 ILM 規則和原則需要仔細的規劃。您必須瞭解您的營運需求、 StorageGRID 系統的拓撲、您的物件保護需求，以及可用的儲存設備類型。然後，您必須確定您希望如何複製、分發和儲存不同類型的物件。
 
-${post_edited_translations.segment}
+請依照以下步驟操作：
 
 * 瞭解 StorageGRID 資訊生命週期管理，包括 link:how-ilm-operates-throughout-objects-life.html["ILM 如何在物件的整個生命週期中運作"]。
-* 了解如何設定 link:what-storage-pool-is.html["儲存池"]、link:what-cloud-storage-pool-is.html["${post_edited_translations.segment}"] 和 link:what-ilm-rule-is.html["ILM 規則"]。
+* 了解如何設定 link:what-storage-pool-is.html["儲存池"]、link:what-cloud-storage-pool-is.html["雲端儲存資源池"] 和 link:what-ilm-rule-is.html["ILM 規則"]。
 * 了解如何 link:creating-ilm-policy.html["建立、模擬及啟動 ILM 原則"] 以跨一個或多個站台保護物件資料。
-* 瞭解如何 link:managing-objects-with-s3-object-lock.html["${post_edited_translations.segment}"]，這有助於確保特定 S3 儲存貯體中的物件在指定的時間內不會被刪除或覆寫。
+* 瞭解如何 link:managing-objects-with-s3-object-lock.html["使用 S3 物件鎖定管理物件"]，這有助於確保特定 S3 儲存貯體中的物件在指定的時間內不會被刪除或覆寫。
 
 
 

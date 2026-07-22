@@ -36,12 +36,12 @@ NOTE: CloudMirror 如果來源儲存桶已啟用 S3 Object Lock，則不支援�
 [[notifications]]
 == 通知
 
-${post_edited_translations.segment}
+每個儲存桶的事件通知用於將針對物件執行的特定操作通知傳送至指定的外部 Kafka 叢集、webhook 端點或 Amazon Simple Notification Service。
 
 例如，您可以設定警示，以便在每個物件新增至儲存桶時向系統管理員傳送警示，其中物件代表與關鍵系統事件相關聯的日誌檔案。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 雖然可以在啟用了 S3 物件鎖定的儲存桶上設定事件通知，但物件的 S3 物件鎖定中繼資料（包括保留至日期和法律保留狀態）不會包含在通知訊息中。
 
 
 
@@ -70,7 +70,7 @@ NOTE: 雖然可以在啟用 S3 物件鎖定的儲存桶上設定 Elasticsearch �
 
 
 .相關資訊
-* link:../tenant/what-platform-services-are.html["${post_edited_translations.segment}"]
-* link:configuring-storage-proxy-settings.html["${post_edited_translations.segment}"]
+* link:../tenant/what-platform-services-are.html["管理平台服務"]
+* link:configuring-storage-proxy-settings.html["設定儲存設備 Proxy 設定"]
 * link:../monitor/index.html["監控 StorageGRID"]
 

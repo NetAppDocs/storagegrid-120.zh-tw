@@ -73,7 +73,7 @@ SPUT S3 PUT object bucket1/part3.txt tenant:92484777680322627870  cbid:5373D7383
 `$ audit-explain -h`
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。

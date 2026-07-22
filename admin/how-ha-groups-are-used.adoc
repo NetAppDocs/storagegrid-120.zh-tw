@@ -2,7 +2,7 @@
 permalink: admin/how-ha-groups-are-used.html 
 sidebar: sidebar 
 keywords: ha groups, high availability group 
-summary: ${post_edited_translations.segment} 
+summary: 您可以使用高可用度 （HA） 群組為 StorageGRID 提供高可用度的連線，用於物件資料和管理用途。 
 ---
 = StorageGRID HA 群組如何提供高可用性
 :allow-uri-read: 
@@ -11,28 +11,28 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以使用高可用度 （HA） 群組為 StorageGRID 提供高可用度的連線，用於物件資料和管理用途。
 
 * HA 群組可以為 Grid Manager 或 Tenant Manager 提供高可用度的管理連線。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* HA 組可以為 S3 用戶端提供高可用度的資料連線。
+* 僅包含一個介面的 HA 群組可讓您提供多個 VIP 位址並明確設定 IPv6 位址。
 
 
 只有當群組中包含的所有節點都提供相同的服務時，HA 群組才能提供高可用度。建立 HA 群組時，請從提供您所需服務的節點類型中新增介面。
 
 * *管理節點*：包含負載平衡器服務，並啟用對 Grid Manager 或 Tenant Manager 的存取。
-* ${post_edited_translations.segment}
+* *閘道節點*：包含負載平衡器服務。
 
 
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| HA 群組的用途 | 將此類節點新增至 HA 群組 
 
 
  a| 
 存取 Grid Manager
  a| 
-* ${post_edited_translations.segment}
+* 主管理節點（*Primary*）
 * 非主要管理節點
 
 
@@ -43,7 +43,7 @@ ${post_edited_translations.segment}
  a| 
 僅限存取 Tenant Manager
  a| 
-* ${post_edited_translations.segment}
+* 主管理節點或非主管理節點
 
 
 
@@ -58,10 +58,10 @@ S3 用戶端存取——負載平衡器服務
 
 
  a| 
-適用於 link:../admin/manage-s3-select-for-tenant-accounts.html["${post_edited_translations.segment}"] 的 S3 用戶端存取
+適用於 link:../admin/manage-s3-select-for-tenant-accounts.html["S3 Select"] 的 S3 用戶端存取
  a| 
 * 服務應用裝置
-* ${post_edited_translations.segment}
+* 基於 VMware 的軟體節點
 
 
 *注意*：使用 S3 Select 時建議使用 HA 群組，但並非必須。
@@ -70,10 +70,10 @@ S3 用戶端存取——負載平衡器服務
 
 
 [[limitations-of-using-ha-groups-with-grid-manager-or-tenant-manager]]
-== ${post_edited_translations.segment}
+== 使用 Grid Manager 或 Tenant Manager 的 HA 群組限制
 
 如果 Grid Manager 或 Tenant Manager 服務發生故障，則不會觸發 HA 群組故障轉移。
 
-${post_edited_translations.segment}
+如果您在故障轉移發生時已登入 Grid Manager 或 Tenant Manager，則會被登出，必須重新登入才能繼續執行工作。
 
 當主要管理節點無法使用時，無法執行某些維護程序。在容錯移轉期間，您可以使用 Grid Manager 來監控您的 StorageGRID 系統。

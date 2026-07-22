@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: expansion, Linux, add storage volumes, StorageGRID 
 summary: 如果儲存節點包含的儲存 Volume 少於 48 個，則可以透過新增區塊儲存設備來增加其容量，使 Linux 主機能夠看到這些設備，並將新的區塊設備對應新增至用於儲存節點的 StorageGRID 組態檔案中。 
 ---
-= ${post_edited_translations.segment}
+= 在 StorageGRID 中為 Linux 儲存節點新增直連或 SAN 磁碟區
 :allow-uri-read: 
 :imagesdir: ../media/
 
@@ -36,8 +36,8 @@ CAUTION: 在軟體升級、恢復程序或其他擴充程序進行期間，請�
 ** 如果您使用 StorageGRID 節點移轉功能，請確保新 Volume 對其他作為此儲存節點移轉目標的 Linux 主機可見。如需詳細資訊，請參閱適用於您的 Linux 平台的 StorageGRID 安裝說明。
 
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 以根目錄或具有 sudo 權限的帳戶登入支援儲存節點的 Linux 主機。
+. 確認新的儲存設備磁碟區在 Linux 主機上可見。
 +
 您可能需要重新掃描設備。
 
@@ -130,26 +130,26 @@ ERROR: BLOCK_DEVICE_<PURPOSE> = <path-name>
 +
 狀態會自動更新。
 
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 請等待所有服務進入「執行中」或「已驗證」狀態。
+.. 退出狀態畫面：
 +
 `Ctrl+C`
 
 
 
-. ${post_edited_translations.segment}
+. 配置新儲存設備以供儲存節點使用：
 +
 .. 設定新的儲存設備磁碟區：
 +
 `sudo add_rangedbs.rb`
 
 +
-${post_edited_translations.segment}
+此指令碼會尋找所有新的儲存設備磁碟區，並提示您進行格式化。
 
 .. 輸入 *y* 以格式化儲存設備磁碟區。
 .. 如果之前已對任何磁碟區進行過格式化，請決定是否要重新格式化它們。
 +
-*** ${post_edited_translations.segment}
+*** 輸入 *y* 重新格式化。
 *** 輸入 *n* 可跳過重新格式化。
 
 
@@ -158,7 +158,7 @@ ${post_edited_translations.segment}
 +
 The `setup_rangedbs.sh` 指令碼會自動運作。
 
-. ${post_edited_translations.segment}
+. 確認儲存節點的儲存設備狀態為線上：
 +
 .. 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 .. 選擇 *節點* > *_儲存節點_* > *工作*。
@@ -166,9 +166,9 @@ The `setup_rangedbs.sh` 指令碼會自動運作。
 .. 選取 *Save* 。
 
 
-. ${post_edited_translations.segment}
+. 若要查看新的物件儲存設備，請選擇 *Storage*。
 . 請查看 *Volumes* 表中的詳細資訊。
 
 
 .結果
-${post_edited_translations.segment}
+現在您可以使用儲存節點的擴充容量來儲存物件資料。

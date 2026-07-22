@@ -84,9 +84,9 @@ PORT_REMAP_INBOUND =
 +
 狀態會自動更新。
 
-.. ${post_edited_translations.segment}
+.. 等待所有服務的狀態都變成「正在執行」或「已驗證」。
 .. 離開狀態畫面：``Ctrl+C``
 
 
-. ${post_edited_translations.segment}
+. 對每個存在連接埠重新映射衝突的管理節點和閘道節點重複這些步驟。
 

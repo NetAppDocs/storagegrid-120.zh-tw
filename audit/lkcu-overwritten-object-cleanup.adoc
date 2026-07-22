@@ -28,11 +28,11 @@ CSIZ
 
 
  a| 
-${post_edited_translations.segment}
+LTYP
  a| 
 清理類型
  a| 
-${post_edited_translations.segment}
+僅限內部使用。
 
 
 

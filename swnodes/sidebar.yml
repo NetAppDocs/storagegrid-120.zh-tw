@@ -13,7 +13,7 @@ entries:
     entries:
     - title: 所需資訊和材料
       url: "/swnodes/required-materials.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 下載並擷取 StorageGRID 安裝檔案
       url: "/swnodes/downloading-and-extracting-storagegrid-installation-files.html"
     - title: 手動驗證安裝檔案
       url: "/swnodes/download-files-verify.html"
@@ -33,7 +33,7 @@ entries:
         url: "/swnodes/installing-linux.html"
       - title: AppArmor 設定檔安裝（僅限 Ubuntu 和 Debian）
         url: "/swnodes/understanding-apparmor-profile-installation.html"
-      - title: "${post_edited_translations.segment}"
+      - title: 設定主機網路
         url: "/swnodes/configuring-host-network.html"
       - title: 設定主機儲存設備
         url: "/swnodes/configuring-host-storage.html"

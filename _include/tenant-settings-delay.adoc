@@ -3,4 +3,4 @@
 
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 根據網路連線、節點狀態和 Cassandra 操作情況，在整個網格中套用租戶設定可能需要 15 分鐘或更長時間。

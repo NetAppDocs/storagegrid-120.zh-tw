@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: storage volumes, expand, expansion, add, storage nodes, adding storage capacity, StorageGRID 
 summary: 您可以擴充低於最大支援 Volume 數量的 Storage Node 的儲存容量。您可能需要將儲存 Volume 新增至多個 Storage Node，以滿足複寫或銷毀編碼複本的 ILM 需求。 
 ---
-= ${post_edited_translations.segment}
+= 在 StorageGRID 系統新增儲存設備 Volume
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

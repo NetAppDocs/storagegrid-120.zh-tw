@@ -6,4 +6,4 @@ Active IQ 是一款雲端型數位顧問，利用預測分析和 NetApp 安裝�
 
 如果您想在 NetApp 支援網站上使用 Active IQ 儀表板和功能，則必須啟用 AutoSupport。
 
-https://docs.netapp.com/us-en/active-iq/index.html["${post_edited_translations.segment}"^]
+https://docs.netapp.com/us-en/active-iq/index.html["Active IQ Digital Advisor 說明文件"^]

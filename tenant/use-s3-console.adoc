@@ -45,7 +45,7 @@ S3 Console 針對大多數常見情況提供了更佳的使用者介面體驗。
 . 選擇 *Storage* > *Buckets* > *_bucket name_*。
 . 選取 S3 Console 索引標籤。
 . 將存取金鑰 ID 和秘密存取金鑰貼到對應欄位中。或者，選取 *Upload access keys* 並選取您的 `.csv`檔案。
-. ${post_edited_translations.segment}
+. 選擇 *登入*。
 . 儲存桶物件表隨即顯示。您可以視需要管理物件。
 
 

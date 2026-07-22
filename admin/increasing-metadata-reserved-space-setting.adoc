@@ -2,7 +2,7 @@
 permalink: admin/increasing-metadata-reserved-space-setting.html 
 sidebar: sidebar 
 keywords: increase metadata reserved space setting 
-summary: ${post_edited_translations.segment} 
+summary: 如果您的儲存節點符合 RAM 和可用空間的特定要求，則可以增加中繼資料保留空間系統設定。 
 ---
 = 在 StorageGRID 中增加 Metadata Reserved Space 設定
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+如果您的儲存節點符合 RAM 和可用空間的特定要求，則可以增加中繼資料保留空間系統設定。
 
 .您需要準備的項目
 * 您已使用 link:web-browser-requirements.html["支援的網頁瀏覽器"] 登入網格管理員。
@@ -19,7 +19,7 @@ ${post_edited_translations.segment}
 
 
 .關於此任務
-${post_edited_translations.segment}
+您可以手動將系統範圍的元資料保留空間設定增加到 8 TB。
 
 只有當以下兩個條件都成立時，才能增加系統範圍的中繼資料保留空間設定值：
 

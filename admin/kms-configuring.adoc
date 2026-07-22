@@ -11,7 +11,7 @@ summary: '金鑰管理伺服器 (KMS) 是一個外部第三方系統，使用金
 
 
 [role="lead"]
-${post_edited_translations.segment}
+金鑰管理伺服器 (KMS) 是一個外部的第三方系統，它使用金鑰管理互通協定 (KMIP) 向關聯的 StorageGRID 站台的 StorageGRID 應用裝置節點提供加密金鑰。
 
 StorageGRID 僅支援特定的金鑰管理伺服器。如需支援的產品與版本清單，請使用  https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
 

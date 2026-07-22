@@ -25,23 +25,23 @@ NOTE: 為確保伺服器憑證失效不會中斷運作，當伺服器憑證即�
 
 [NOTE]
 ====
-${post_edited_translations.segment}
+如果您使用網域名稱而非 IP 位址存取 Grid Manager 或 Tenant Manager，則在發生下列任一情況時，瀏覽器會顯示憑證錯誤，且沒有繞過選項：
 
-* ${post_edited_translations.segment}
-* 你<<還原預設管理介面憑證,${post_edited_translations.segment}>>。
+* 您的自訂管理介面憑證已過期。
+* 你<<還原預設管理介面憑證,將自訂管理介面憑證回復為預設伺服器憑證>>。
 
 
 ====
 
 
 [[add-a-custom-management-interface-certificate]]
-== ${post_edited_translations.segment}
+== 新增自訂管理介面憑證
 
 若要新增自訂管理介面憑證，您可以提供自己的憑證，也可以使用 Grid Manager 產生憑證。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Certificates*。
+. 在「全域」標籤上，選取「管理介面憑證」。
 . 選擇 *Use custom certificate*。
 . 上傳或產生憑證。
 +
@@ -54,7 +54,7 @@ ${post_edited_translations.segment}
 .. 選擇 *Upload certificate*。
 .. 上傳所需的伺服器憑證檔案：
 +
-*** ${post_edited_translations.segment}
+*** *伺服器憑證*：自訂伺服器憑證檔案（PEM 編碼）。
 *** *憑證私鑰*：自訂伺服器憑證私鑰檔案 (`.key`）
 +
 
@@ -65,7 +65,7 @@ NOTE: EC 私鑰必須至少 224 位元。RSA 私鑰必須至少 2048 位元。
 
 .. 展開 *憑證詳細資料* 以檢視您上傳之每個憑證的中繼資料。如果您上傳了選用的 CA 套裝組合，每個憑證都會顯示在各自的索引標籤上。
 +
-*** ${post_edited_translations.segment}
+*** 選擇「下載憑證」以儲存憑證檔案，或選擇「下載 CA 套裝組合」以儲存憑證套裝組合。
 +
 指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
 
@@ -109,7 +109,7 @@ IP
 
 
  a| 
-${post_edited_translations.segment}
+主題（選用）
  a| 
 X.509 憑證擁有者的主旨或可分辨名稱 (DN)。
 
@@ -118,24 +118,24 @@ X.509 憑證擁有者的主旨或可分辨名稱 (DN)。
 
 
  a| 
-${post_edited_translations.segment}
+有效天數
  a| 
-${post_edited_translations.segment}
+憑證自建立之日起到期的天數。
 
 
 
  a| 
-${post_edited_translations.segment}
+新增金鑰使用延伸
  a| 
 如果選取（預設且建議），則會將金鑰用途和擴充金鑰用途擴充功能新增至產生的憑證。
 
 這些擴充定義了憑證中包含的金鑰的用途。
 
-${post_edited_translations.segment}
+*注意*：除非您在使用包含這些擴充功能的憑證時，舊版用戶端發生連線問題，否則請保持選取此核取方塊。
 
 |===
 .. 選擇 *Generate* 。
-.. ${post_edited_translations.segment}
+.. 選擇 *Certificate details* 以查看產生的憑證的中繼資料。
 +
 *** 選取 *Download certificate* 以儲存憑證檔案。
 +
@@ -152,10 +152,10 @@ ${post_edited_translations.segment}
 
 --
 ====
-. ${post_edited_translations.segment}
+. 重新整理頁面以確保瀏覽器已更新。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 上傳或產生新憑證後，最多需要一天時間才能清除任何相關的憑證到期警示。
 
 . 新增自訂管理介面憑證後，「管理介面憑證」頁面會顯示目前使用中憑證的詳細憑證資訊。+ 您可以根據需要下載或複製憑證 PEM。
 
@@ -165,24 +165,24 @@ NOTE: ${post_edited_translations.segment}
 [[restore-the-default-management-interface-certificate]]
 == 還原預設管理介面憑證
 
-${post_edited_translations.segment}
+您可以回復使用 Grid Manager 和 Tenant Manager 連線的預設管理介面憑證。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Certificates*。
+. 在「全域」標籤上，選取「管理介面憑證」。
+. 選擇 *Use default certificate*。
 +
 當您還原預設管理介面憑證時，您設定的自訂伺服器憑證檔案將會被刪除，且無法從系統中復原。預設管理介面憑證會用於所有後續的新用戶端連線。
 
-. ${post_edited_translations.segment}
+. 重新整理頁面以確保瀏覽器已更新。
 
 
 
 
 [[use-a-script-to-generate-a-new-self-signed-management-interface-certificate]]
-== ${post_edited_translations.segment}
+== 使用指令碼產生新的自簽名管理介面憑證
 
-${post_edited_translations.segment}
+如果需要嚴格的主機名稱驗證，可以使用指令碼產生管理介面憑證。
 
 .開始之前
 * 您有link:admin-group-permissions.html["特定存取權限"]。
@@ -190,11 +190,11 @@ ${post_edited_translations.segment}
 
 
 .關於此任務
-${post_edited_translations.segment}
+正式作業環境的最佳實務做法是使用由外部憑證授權單位簽發的憑證。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 取得每個管理節點的完整網域名稱（FQDN）。
+. 登入主要管理節點：
 +
 .. 請輸入以下命令： `ssh admin@primary_Admin_Node_IP`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -205,7 +205,7 @@ ${post_edited_translations.segment}
 
 
 
-. ${post_edited_translations.segment}
+. 使用新的自我簽署憑證設定 StorageGRID。
 +
 `$ sudo make-certificate --domains _wildcard-admin-node-fqdn_ --type management`
 
@@ -224,16 +224,16 @@ NOTE: 憑證的有效期自執行  `make-certificate` 時開始。您必須確�
 
 
 
-. ${post_edited_translations.segment}
+. 選取並複製憑證。
 +
-${post_edited_translations.segment}
+選擇時請包含 BEGIN 和 END 標籤。
 
 . 登出命令 shell。 `$ exit`
-. ${post_edited_translations.segment}
+. 確認憑證已設定：
 +
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 存取網格管理器。
+.. 選擇 *Configuration* > *Security* > *Certificates*
+.. 在「全域」標籤上，選取「管理介面憑證」。
 
 
 . 設定您的管理用戶端以使用您複製的公開憑證。請包含 BEGIN 和 END 標記。
@@ -242,14 +242,14 @@ ${post_edited_translations.segment}
 
 
 [[download-or-copy-the-management-interface-certificate]]
-== ${post_edited_translations.segment}
+== 下載或複製管理介面憑證
 
 您可以儲存或複製管理介面憑證的內容以供其他地方使用。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Certificates*。
+. 在「全域」標籤上，選取「管理介面憑證」。
+. 選取 *Server* 或 *CA bundle* 索引標籤，然後下載或複製憑證。
 +
 [role="tabbed-block"]
 ====

@@ -18,7 +18,7 @@ ADC 服務位於部分儲存節點上，負責維護網格拓撲資訊並為網�
 如果移除節點會導致無法再滿足 ADC 法定人數，則無法將 Storage Node 退役。為了在退役期間滿足 ADC 法定人數，每個站台至少必須有三個具有 ADC 服務的 Storage Node。如果某個站台有三個以上具有 ADC 服務的 Storage Node，則在退役後，這些節點的簡單多數必須保持可用： `((0.5 * _Storage Nodes with ADC_) + 1)`
 
 
-CAUTION: 在包含基於軟體的僅中繼資料節點的網格中退役儲存節點時，請務必注意。如果您退役所有設定為同時儲存物件和中繼資料的節點，則網格將無法儲存物件。如需有關僅中繼資料儲存節點的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+CAUTION: 在包含基於軟體的僅中繼資料節點的網格中退役儲存節點時，請務必注意。如果您退役所有設定為同時儲存物件和中繼資料的節點，則網格將無法儲存物件。如需有關僅中繼資料儲存節點的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["儲存節點類型"]。
 
 例如，假設某個站台目前包含六個具有 ADC 服務的 Storage Nodes，而您想要將三個 Storage Nodes 退役。由於 ADC 仲裁要求，您必須完成兩個退役程序，如下所示：
 

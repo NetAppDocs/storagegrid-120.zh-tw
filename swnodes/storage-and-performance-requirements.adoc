@@ -134,7 +134,7 @@ Container 資源池
 
 如需詳細資訊，請參閱 <<storage_req_SN,儲存節點的儲存需求>>。
 
-${post_edited_translations.segment}
+*注意*：僅中繼資料儲存節點只需要一個 rangedb。
 
 
 
@@ -175,7 +175,7 @@ NOTE: 磁碟快照不能用於還原網格節點。請參考link:../maintain/war
 每個節點主機需要一個 100 GB 的 LUN 用於作業系統。
 
 |===
-| ${post_edited_translations.segment} | Container 資源池 | 系統資料 | 物件資料 
+| 節點類型 | Container 資源池 | 系統資料 | 物件資料 
 
 
 | 儲存節點  a| 
@@ -188,7 +188,7 @@ NOTE: 磁碟快照不能用於還原網格節點。請參考link:../maintain/war
 
 
  a| 
-${post_edited_translations.segment}
+管理節點
  a| 
 100 GB
  a| 
@@ -220,7 +220,7 @@ ${post_edited_translations.segment}
 .Linux 主機範例
 --
 |===
-| ${post_edited_translations.segment} | LUN 用途 | LUN 數量 | LUN 大小 
+| 節點類型 | LUN 用途 | LUN 數量 | LUN 大小 
 
 
 | 儲存節點  a| 
@@ -253,7 +253,7 @@ Container 引擎儲存資源池
 
 
  a| 
-${post_edited_translations.segment}
+管理節點
  a| 
 `/var/local` Volume
  a| 
@@ -263,7 +263,7 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
+| 管理節點  a| 
 管理節點稽核日誌
  a| 
 1
@@ -272,7 +272,7 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
+| 管理節點  a| 
 管理節點表
  a| 
 1
@@ -309,7 +309,7 @@ ${post_edited_translations.segment}
 .VMware 虛擬機器範例
 --
 |===
-| ${post_edited_translations.segment} | LUN 用途 | LUN 數量 | LUN 大小 
+| 節點類型 | LUN 用途 | LUN 數量 | LUN 大小 
 
 
  a| 
@@ -333,7 +333,7 @@ OS Volume
 
 
  a| 
-${post_edited_translations.segment}
+管理節點
  a| 
 OS Volume
  a| 
@@ -343,7 +343,7 @@ OS Volume
 
 
 
-| ${post_edited_translations.segment}  a| 
+| 管理節點  a| 
 管理節點稽核日誌
  a| 
 1
@@ -352,7 +352,7 @@ OS Volume
 
 
 
-| ${post_edited_translations.segment}  a| 
+| 管理節點  a| 
 管理節點表
  a| 
 1
@@ -404,11 +404,11 @@ NOTE: 應用裝置儲存節點最多可以有 48 個儲存 Volume。
 
 如圖所示，StorageGRID 在每個儲存節點的儲存 Volume 0 上為物件中繼資料預留空間。儲存 Volume 0 和儲存節點中任何其他儲存 Volume 上的任何剩餘空間都專門用於物件資料。
 
-image:metadata_space_storage_node.png["${post_edited_translations.segment}"]
+image:metadata_space_storage_node.png["中繼資料空間儲存節點"]
 
 為了提供備援並保護物件中繼資料免於遺失，StorageGRID 在每個站點為系統中所有物件儲存三份中繼資料副本。這三份物件中繼資料副本均勻分佈在每個站點的所有儲存節點上。
 
-安裝含有僅中繼資料 Storage Nodes 的網格時，此網格還必須包含最少數量的物件儲存節點。如需有關僅中繼資料 Storage Nodes 的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+安裝含有僅中繼資料 Storage Nodes 的網格時，此網格還必須包含最少數量的物件儲存節點。如需有關僅中繼資料 Storage Nodes 的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["儲存節點類型"]。
 
 * 對於單一站點網格，至少設定兩個儲存節點用於物件和中繼資料。
 * 對於多站點網格，每個站點至少設定一個儲存節點來儲存物件和中繼資料。
@@ -427,16 +427,16 @@ NOTE: 如果分配給 Volume 0 （僅限非生產用途）的容量小於 500 GB
 
 * 基於軟體的純中繼資料節點資源必須與現有儲存節點資源相符。例如：
 +
-** ${post_edited_translations.segment}
+** 如果現有 StorageGRID 站台使用的是 SG6000 或 SG6100 應用裝置，則基於軟體的純中繼資料節點必須符合以下最低要求：
 +
 *** 128 GB RAM
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
+*** 8 核心 CPU
+*** 8 TB SSD 或等效儲存設備，用於 Cassandra 資料庫 （rangedb/0）
 
 
-** ${post_edited_translations.segment}
+** 如果現有的 StorageGRID 站台使用具有 24 GB RAM、8 核心 CPU 和 3 TB 或 4 TB 中繼資料儲存設備的虛擬儲存節點，則基於軟體的純中繼資料節點應使用類似的資源（24 GB RAM、8 核心 CPU 和 4 TB 中繼資料儲存設備 (rangedb/0)）。
 +
-${post_edited_translations.segment}
+新增新的 StorageGRID 站台時，新站台的總中繼資料容量應至少與現有 StorageGRID 站台相符，且新站台的資源應與現有 StorageGRID 站台的儲存節點相符。
 
 
 

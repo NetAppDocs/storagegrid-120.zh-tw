@@ -8,12 +8,12 @@
 在停用身分聯合之前，您應該注意以下事項：
 
 * 已加入聯盟的用戶將無法登入。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* 如果單一登入 （SSO） 狀態為 *已啟用* 或 *沙箱模式*，則 *啟用身分識別同盟* 核取方塊會停用。您必須先將單一登入頁面上的 SSO 狀態設為 *已停用*，才能停用身分識別同盟。請參閱 link:../admin/disabling-single-sign-on.html["${post_edited_translations.segment}"]。
+* 目前已登入的聯盟使用者將保留對 StorageGRID 系統的存取，直到其工作階段過期，但工作階段過期後將無法再次登入。
+* StorageGRID 系統與身分來源之間將不會進行同步，也不會對未同步的帳戶發出警示。
+* 如果單一登入 （SSO） 狀態為 *已啟用* 或 *沙箱模式*，則 *啟用身分識別同盟* 核取方塊會停用。您必須先將單一登入頁面上的 SSO 狀態設為 *已停用*，才能停用身分識別同盟。請參閱 link:../admin/disabling-single-sign-on.html["停用單一登入"]。
 
 
 .步驟
 . 前往身分聯盟頁面。
-. ${post_edited_translations.segment}
+. 取消選取「啟用身分聯盟」核取方塊。
 

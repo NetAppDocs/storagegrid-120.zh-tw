@@ -27,10 +27,10 @@ CAUTION: 在軟體升級、恢復程序或其他擴充程序進行期間，請�
 
 .步驟
 . 如有必要，安裝新的儲存設備硬體並建立新的 VMware 資料儲存。
-. ${post_edited_translations.segment}
+. 在虛擬機器中新增一個或多個硬碟，用作儲存設備（物件存放區）。
 +
 .. 開啟 VMware vSphere Client。
-.. ${post_edited_translations.segment}
+.. 編輯虛擬機器設定，新增一個或多個額外的硬碟。
 
 
 +
@@ -41,9 +41,9 @@ CAUTION: 在軟體升級、恢復程序或其他擴充程序進行期間，請�
 
 NOTE: 不要使用 *Power Off* 或 *Reset* 來重新啟動虛擬機器。
 
-. ${post_edited_translations.segment}
+. 配置新儲存設備以供儲存節點使用：
 +
-.. ${post_edited_translations.segment}
+.. 登入網格節點：
 +
 ... 請輸入以下命令： `ssh admin@_grid_node_IP_`
 ... 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -56,12 +56,12 @@ NOTE: 不要使用 *Power Off* 或 *Reset* 來重新啟動虛擬機器。
 `sudo add_rangedbs.rb`
 
 +
-${post_edited_translations.segment}
+此指令碼會尋找所有新的儲存設備磁碟區，並提示您進行格式化。
 
-.. ${post_edited_translations.segment}
+.. 輸入 *y* 以接受格式化。
 .. 如果之前已對任何磁碟區進行過格式化，請決定是否要重新格式化它們。
 +
-*** ${post_edited_translations.segment}
+*** 輸入 *y* 重新格式化。
 *** 輸入 *n* 可跳過重新格式化。
 
 
@@ -72,15 +72,15 @@ The `setup_rangedbs.sh` 指令碼會自動運作。
 
 . 檢查服務是否正常啟動：
 +
-.. ${post_edited_translations.segment}
+.. 查看伺服器上所有服務的狀態清單：
 +
 `sudo storagegrid-status`
 
 +
 狀態會自動更新。
 
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 請等待所有服務進入「執行中」或「已驗證」狀態。
+.. 退出狀態畫面：
 +
 `Ctrl+C`
 
@@ -94,7 +94,7 @@ The `setup_rangedbs.sh` 指令碼會自動運作。
 .. 選取 *Save* 。
 
 
-. ${post_edited_translations.segment}
+. 若要查看新的物件儲存設備，請選擇 *Storage*。
 . 請查看 *Volumes* 表中的詳細資訊。
 
 

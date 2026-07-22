@@ -20,12 +20,12 @@ summary: 用戶端需要與網格節點通訊以擷取和擷取內容。所使�
 
 如果企業連網策略限制了對任何連接埠的存取，您可以執行以下操作之一：
 
-* 使用 link:../admin/configuring-load-balancer-endpoints.html["${post_edited_translations.segment}"] 以允許在使用者自訂連接埠上進行存取。
+* 使用 link:../admin/configuring-load-balancer-endpoints.html["負載平衡器端點"] 以允許在使用者自訂連接埠上進行存取。
 * 部署節點時需要重新映射連接埠。但是，您不應重新映射負載平衡器端點。有關 StorageGRID 節點的連接埠重新映射資訊，請參閱相關文件：
 
 
 
-NOTE: 連接埠重新映射支援已棄用，將在未來的版本中移除。若要移除已重新映射的連接埠，請參閱 link:../maintain/removing-port-remaps.html["${post_edited_translations.segment}"] 或 link:../maintain/removing-port-remaps-on-bare-metal-hosts.html["移除裸機主機上的連接埠重映射"]。
+NOTE: 連接埠重新映射支援已棄用，將在未來的版本中移除。若要移除已重新映射的連接埠，請參閱 link:../maintain/removing-port-remaps.html["移除 StorageGRID 應用裝置上的連接埠重映射"] 或 link:../maintain/removing-port-remaps-on-bare-metal-hosts.html["移除裸機主機上的連接埠重映射"]。
 
 * link:../swnodes/creating-node-configuration-files.html["Red Hat Enterprise Linux 上 StorageGRID 的連接埠重新映射鍵"]
 * link:../swnodes/deploying-storagegrid-node-as-virtual-machine.html#vmware-remap-ports["重新映射 VMware 上 StorageGRID 的連接埠"]
@@ -40,7 +40,7 @@ NOTE: 連接埠重新映射支援已棄用，將在未來的版本中移除。�
 下表顯示用於傳入節點流量的連接埠。
 
 
-NOTE: 此清單不包括可能設定為link:../admin/configuring-load-balancer-endpoints.html["${post_edited_translations.segment}"]的連接埠。
+NOTE: 此清單不包括可能設定為link:../admin/configuring-load-balancer-endpoints.html["負載平衡器端點"]的連接埠。
 
 [cols="1a,1a,1a,1a,1a,4a"]
 |===
@@ -148,9 +148,9 @@ HTTP
  a| 
 瀏覽器
  a| 
-${post_edited_translations.segment}
+應用裝置
  a| 
-${post_edited_translations.segment}
+連接埠 80 重新導向至連接埠 8443，供 StorageGRID 應用裝置安裝程式使用。
 
 
 
@@ -191,9 +191,9 @@ UDP
  a| 
 NTP
  a| 
-${post_edited_translations.segment}
+主要 NTP 節點
  a| 
-${post_edited_translations.segment}
+外部 NTP
  a| 
 網路時間協定服務。被選為主要 NTP 來源的節點也會與外部 NTP 時間來源同步時鐘時間。
 
@@ -227,7 +227,7 @@ SNMP 通知
  a| 
 所有節點
  a| 
-${post_edited_translations.segment}
+通知目的地
  a| 
 傳出 SNMP 通知和陷阱預設使用 UDP 連接埠 162。
 
@@ -338,7 +338,7 @@ TCP
  a| 
 KMIP
  a| 
-${post_edited_translations.segment}
+應用裝置
  a| 
 KMS
  a| 
@@ -372,11 +372,11 @@ HTTPS
  a| 
 瀏覽器
  a| 
-${post_edited_translations.segment}
+應用裝置
  a| 
-${post_edited_translations.segment}
+供網頁瀏覽器和管理 API 用戶端存取 StorageGRID 應用裝置安裝程式。
 
-${post_edited_translations.segment}
+*注意*：連接埠 443 會重新導向至 StorageGRID 應用裝置安裝程式的連接埠 8443。
 
 
 
@@ -389,7 +389,7 @@ SSH
  a| 
 服務筆記型電腦
  a| 
-${post_edited_translations.segment}
+應用裝置
  a| 
 允許以預先組態模式存取 StorageGRID 應用裝置，以便支援和疑難排解。此連接埠無需在網格節點之間或正常作業期間存取。
 
@@ -479,7 +479,7 @@ TCP
  a| 
 HTTPS
  a| 
-${post_edited_translations.segment}
+用於跨網格複寫的來源網格上的所有節點
  a| 
 目的地網格上的管理節點和閘道節點，用於跨網格複寫
  a| 

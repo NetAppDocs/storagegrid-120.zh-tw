@@ -15,7 +15,7 @@ summary: 屬於系統稽核類別的稽核訊息用於與稽核系統本身、�
 
 [cols="1a,2a,1a"]
 |===
-| 程式碼 | ${post_edited_translations.segment} | 請參閱 
+| 程式碼 | 訊息標題和執行摘要 | 請參閱 
 
 
  a| 

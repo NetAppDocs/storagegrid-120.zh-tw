@@ -33,5 +33,5 @@ summary: 如果您想要永久移除租戶對系統的存取，則可以刪除�
 ** 選擇租戶名稱以顯示詳細資料頁面，然後選擇 *Actions* > *Delete*。
 
 
-. ${post_edited_translations.segment}
+. 選取 *Yes*。
 

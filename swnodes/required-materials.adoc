@@ -21,7 +21,7 @@ summary: 安裝 StorageGRID 之前，請收集並準備所需的資訊和資料�
 網路計劃:: 您打算將哪些網路連接到每個 StorageGRID 節點。StorageGRID 支援多個網路，以實現流量隔離、安全性和管理便利性。
 +
 --
-請參閱 StorageGRID link:../network/index.html["${post_edited_translations.segment}"]。
+請參閱 StorageGRID link:../network/index.html["網路連線準則"]。
 
 --
 網路資訊:: 分配給每個網格節點的 IP 位址，以及 DNS 和 NTP 伺服器的 IP 位址。
@@ -47,19 +47,19 @@ NetApp StorageGRID 授權:: 您必須持有有效且經過數位簽署的 NetApp
 
 NOTE: StorageGRID 安裝歸檔中包含一個非生產授權，可用於測試和概念驗證網格。
 
-${post_edited_translations.segment}:: link:downloading-and-extracting-storagegrid-installation-files.html["下載 StorageGRID 安裝歸檔並擷取檔案"]。
+StorageGRID 安裝歸檔:: link:downloading-and-extracting-storagegrid-installation-files.html["下載 StorageGRID 安裝歸檔並擷取檔案"]。
 服務筆記型電腦:: StorageGRID 系統透過服務筆記型電腦進行安裝。
 +
 --
 服務用筆記型電腦必須具備：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 網路連接埠
+* SSH 用戶端（例如 PuTTY）
 * link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]
 
 
 --
-${post_edited_translations.segment}::
+StorageGRID 文件::
 +
 --
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP3351267["版本資訊"^]。您必須登入現有 NetApp 帳戶或建立帳戶才能存取發行說明。

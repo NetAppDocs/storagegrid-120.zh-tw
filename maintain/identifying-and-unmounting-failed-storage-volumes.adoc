@@ -35,7 +35,7 @@ CAUTION: 仔細識別故障的儲存設備 Volume。您將使用此資訊來驗�
 在安裝時，每個儲存設備都會獲分配一個檔案系統通用唯一識別碼 (UUID)，並使用該分配的檔案系統 UUID 掛載到 Storage Node 上的 rangedb 目錄。檔案系統 UUID 和 rangedb 目錄列在  `/etc/fstab` 檔案中。Volume 的掛載點、裝置名稱和大小會顯示在 Grid Manager 中。
 
 .步驟
-. ${post_edited_translations.segment}
+. 請完成以下步驟，記錄故障儲存設備磁碟區及其裝置名稱：
 +
 .. 選擇 *節點* > *_site_* > *_failed Storage Node_* > *儲存設備*。
 .. 向下捲動以找到 Volumes 表和 Object stores 表，並記錄狀態為「未知」或「離線」的每個 Volume 的以下資訊。

@@ -27,16 +27,16 @@ StorageGRID 將物件資料和物件中繼資料分開儲存，並為包含物�
 網格管理器儀表板可讓您快速評估整個網格以及每個資料中心的可用儲存設備。「節點」頁面提供物件資料和物件中繼資料的更詳細值。
 
 .步驟
-. ${post_edited_translations.segment}
+. 評估整個網格和每個資料中心有多少可用儲存設備。
 +
-.. ${post_edited_translations.segment}
+.. 選擇 *儀表板 > 總覽*。
 .. 請注意「資料空間使用量分析」和「中繼資料允許空間使用量分析」卡片上的值。每張卡片均列出儲存設備使用率百分比、已使用空間的容量，以及每個站台可用或允許的總空間。
 +
 
 NOTE: 摘要不包含封存媒體。
 
 +
-image:dashboard_data_and_metadata_space_usage_breakdown.png["${post_edited_translations.segment}"]
+image:dashboard_data_and_metadata_space_usage_breakdown.png["資料和中繼資料空間使用細分"]
 
 .. 請注意「儲存空間隨時間變化」卡片上的圖表。使用時間段下拉式選單，可協助您確定儲存設備的消耗速度。
 +
@@ -60,7 +60,7 @@ NOTE: 站台或網格的總值不包括至少五分鐘未報告計量的節點�
 
 . 在網格的可用儲存容量耗盡之前，請規劃進行擴充，以新增儲存節點或儲存 Volume。
 +
-${post_edited_translations.segment}
+在規劃擴充時間時，請考慮採購和安裝額外儲存容量所需的時間。
 
 +
 
@@ -74,47 +74,47 @@ NOTE: 如果您的 ILM 原則使用銷毀編碼，您可能更傾向於在現有
 
 
 [[monitor-storage-capacity-for-each-storage-node]]
-== ${post_edited_translations.segment}
+== 監控每個儲存節點的儲存容量
 
-${post_edited_translations.segment}
+監控每個儲存節點的總可用空間，以確保節點有足夠的空間來儲存新的物件資料。
 
 .關於此任務
 可用空間是指可用於儲存物件的儲存空間大小。儲存節點的總可用空間是透過將節點內所有物件儲存的可用空間相加計算得出的。
 
-image:calculating_watermarks.gif["${post_edited_translations.segment}"]
+image:calculating_watermarks.gif["總可用空間的概念圖"]
 
 .步驟
 . 選擇 *節點* > *_儲存節點_* > *儲存設備*。
 +
-${post_edited_translations.segment}
+節點的圖表和表格隨即顯示。
 
 . 將遊標停留在「儲存使用情況 - 物件資料」圖表上。
 +
-${post_edited_translations.segment}
+顯示以下數值：
 
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** *已使用空間（%）*：物件資料已使用的可用空間佔總可用空間的百分比。
+** *已使用*：已用於物件資料的總可用空間量。
+** *複製資料*：此節點、站台或網格上複製物件資料量的估計值。
+** *糾刪碼資料*：此節點、站台或網格上糾刪碼物件資料量的估計值。
 ** *總計*：此節點、站台或網格上的可用空間總量。「已用」值是 `storagegrid_storage_utilization_data_bytes`計量。
 +
 image:nodes_page_storage_used_object_data.png["節點頁面儲存設備已使用物件資料"]
 
 
 
-. ${post_edited_translations.segment}
+. 請查看圖表下方「磁碟區」和「物件存放區」表中的「可用值」。
 +
 
 NOTE: 若要查看這些值的圖表，請按一下「可用」欄中的圖表圖示 image:icon_chart_new_for_11_5.png["圖表圖示"]。
 
 +
-image:nodes_page_storage_tables.png["${post_edited_translations.segment}"]
+image:nodes_page_storage_tables.png["物件存放區表格"]
 
 . 持續監測這些數值，以估算可用儲存空間的消耗速度。
 . 若要維持系統正常運作，請在可用空間耗盡之前新增儲存節點、新增儲存 Volume 或歸檔物件資料。
 +
-${post_edited_translations.segment}
+在規劃擴充時間時，請考慮採購和安裝額外儲存容量所需的時間。
 
 +
 
@@ -149,7 +149,7 @@ StorageGRID 在每個站點維護三個物件中繼資料副本，以提供備�
 image:storage_used_object_metadata.png["儲存使用情況 - 物件中繼資料"]
 
 +
-${post_edited_translations.segment}:: 此儲存節點上已使用的允許中繼資料空間百分比。
+已使用 （%）:: 此儲存節點上已使用的允許中繼資料空間百分比。
 +
 --
 Prometheus 計量： `storagegrid_storage_utilization_metadata_bytes` 與  `storagegrid_storage_utilization_metadata_allowed_bytes`
@@ -167,7 +167,7 @@ Prometheus 計量： `storagegrid_storage_utilization_metadata_bytes`
 Prometheus 計量： `storagegrid_storage_utilization_metadata_allowed_bytes`
 
 --
-實際預留:: 此儲存節點上為中繼資料實際保留的空間。包括允許的空間和基本中繼資料操作所需的空間。若要了解如何為每個儲存節點計算此值，請參閱link:../admin/managing-object-metadata-storage.html#actual-reserved-space-for-metadata["${post_edited_translations.segment}"]。
+實際預留:: 此儲存節點上為中繼資料實際保留的空間。包括允許的空間和基本中繼資料操作所需的空間。若要了解如何為每個儲存節點計算此值，請參閱link:../admin/managing-object-metadata-storage.html#actual-reserved-space-for-metadata["中繼資料實際保留空間的完整執行摘要"]。
 +
 --
 Prometheus 計量將在未來的版本中加入。
@@ -194,16 +194,16 @@ CAUTION: 當 *Used (%)* 值達到特定臨界值時，便會觸發 *Low metadata
 [[monitor-space-usage-forecasts]]
 == 監控空間使用預測
 
-監控使用者資料與中繼資料的空間使用量預測，以評估您何時需要 link:../expand/index.html["${post_edited_translations.segment}"]。
+監控使用者資料與中繼資料的空間使用量預測，以評估您何時需要 link:../expand/index.html["擴充網格"]。
 
 如果您發現消耗率隨時間變化，請從 *Averaged over* 下拉式選單中選擇較短的範圍，以僅反映最近的擷取模式。如果您發現存在季節性模式，請選擇較長的範圍。
 
-${post_edited_translations.segment}
+如果您新安裝了 StorageGRID，請允許資料和中繼資料累積後再評估空間使用預測。
 
 .步驟
 . 在儀表板上，選擇 *Storage*。
-. ${post_edited_translations.segment}
+. 檢視儀表板卡片、依儲存資源池預測資料使用量，以及依站台預測中繼資料使用量。
 . 使用這些值來估算何時需要新增儲存節點以進行資料和中繼資料儲存。
 
 
-image:forecast-metadata-usage.png["${post_edited_translations.segment}"]
+image:forecast-metadata-usage.png["各站台中繼資料使用預測"]

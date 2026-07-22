@@ -2,7 +2,7 @@
 permalink: maintain/gathering-required-materials-site-decom.html 
 sidebar: sidebar 
 keywords: storagegrid, decommission 
-summary: ${post_edited_translations.segment} 
+summary: 在退役某個站台之前，您必須取得下列材料。 
 ---
 = 收集 StorageGRID 站台汰除所需的資料
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+在退役某個站台之前，您必須取得下列材料。
 
 [cols="1a,2a"]
 |===
@@ -30,7 +30,7 @@ link:downloading-recovery-package.html["下載恢復套件"]
  a| 
 `Passwords.txt` 檔案
  a| 
-${post_edited_translations.segment}
+此檔案包含透過命令列存取網格節點所需的密碼，並包含在恢復套件中。
 
 
 
@@ -44,7 +44,7 @@ StorageGRID 系統首次安裝時會建立並記錄佈建密碼短語。佈建�
  a| 
 StorageGRID 系統退役前的拓撲描述
  a| 
-${post_edited_translations.segment}
+如有，請取得描述系統目前拓撲的任何文件。
 
 |===
 .相關資訊

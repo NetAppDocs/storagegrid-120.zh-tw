@@ -43,12 +43,12 @@ NOTE: 已取代對連接埠重新對應的支援，且將在未來的版本中�
 
 
 [[guidelines-for-appliance-nodes]]
-== ${post_edited_translations.segment}
+== 應用裝置節點指南
 
 如果企業連網原則限制對任何這些連接埠的存取，您可以使用 StorageGRID Appliance Installer 重新對應連接埠。請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/optional-remapping-network-ports-for-appliance.html["選用：重新對應應用裝置的網路連接埠"^]。
 
 
-NOTE: 連接埠重新映射支援已棄用，將在未來的版本中移除。若要移除已重新映射的連接埠，請參閱link:../maintain/removing-port-remaps.html["${post_edited_translations.segment}"]。
+NOTE: 連接埠重新映射支援已棄用，將在未來的版本中移除。若要移除已重新映射的連接埠，請參閱link:../maintain/removing-port-remaps.html["移除 StorageGRID 應用裝置上的連接埠重映射"]。
 
 
 
@@ -78,7 +78,7 @@ TCP
  a| 
 TCP
  a| 
-${post_edited_translations.segment}
+應用裝置
  a| 
 主管理節點
  a| 
@@ -108,7 +108,7 @@ TCP
  a| 
 主管理節點
  a| 
-${post_edited_translations.segment}
+用於在安裝和其他維護程序期間，向主要管理節點傳達狀態。
 
 
 
@@ -134,7 +134,7 @@ TCP
  a| 
 儲存節點
  a| 
-${post_edited_translations.segment}
+儲存節點之間的內部流量。
 
 
 
@@ -173,7 +173,7 @@ TCP
  a| 
 管理節點
  a| 
-${post_edited_translations.segment}
+NMS 服務報告和組態內部流量。
 
 
 
@@ -422,7 +422,7 @@ TCP
  a| 
 儲存節點
  a| 
-${post_edited_translations.segment}
+資料移動服務內部流量，適用於雲端儲存資源池。
 
 
 
@@ -435,7 +435,7 @@ TCP
  a| 
 所有節點
  a| 
-${post_edited_translations.segment}
+用於銷毀編碼和複寫的區塊服務內部流量
 
 
 
@@ -491,4 +491,4 @@ Keystone 服務內部流量。
 
 |===
 .相關資訊
-link:external-communications.html["${post_edited_translations.segment}"]
+link:external-communications.html["對外溝通"]

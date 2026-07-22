@@ -2,7 +2,7 @@
 permalink: expand/adding-metadata-capacity.html 
 sidebar: sidebar 
 keywords: metadata capacity, add, adding, expand, expansion, guidelines, Storage Nodes, metadata storage, StorageGRID 
-summary: ${post_edited_translations.segment} 
+summary: 為確保有足夠的空間用於物件中繼資料，您可能需要執行擴充程序，在每個站台上新增新的儲存節點。 
 ---
 = 在 StorageGRID 中新增中繼資料容量的準則
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+為確保有足夠的空間用於物件中繼資料，您可能需要執行擴充程序，在每個站台上新增新的儲存節點。
 
 StorageGRID 會在每個儲存節點的 Volume 0 上保留物件中繼資料的空間。所有物件中繼資料的三個複本會保留在每個站台，並平均分佈在所有儲存節點上。
 
@@ -19,7 +19,7 @@ StorageGRID 會在每個儲存節點的 Volume 0 上保留物件中繼資料的�
 
 請注意，網格的物件中繼資料容量消耗速度可能快於其物件儲存容量，具體取決於您的網格使用方式。例如，如果您通常擷取大量小型物件，或向物件新增大量使用者中繼資料或標籤，即使物件儲存容量仍然充足，您也可能需要新增儲存節點來增加中繼資料容量。
 
-${post_edited_translations.segment}
+如需更多資訊，請參閱下列內容：
 
 * link:../admin/managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]
 * link:../monitor/monitoring-storage-capacity.html#monitor-object-metadata-capacity-for-each-storage-node["監控每個儲存節點的物件中繼資料容量"]
@@ -30,15 +30,15 @@ ${post_edited_translations.segment}
 [[guidelines-for-increasing-metadata-capacity]]
 == 提高中繼資料容量的指導原則
 
-${post_edited_translations.segment}
+在新增儲存節點以增加中繼資料容量之前，請審查以下準則和限制：
 
 * 假設有足夠的物件儲存容量，為物件中繼資料提供更多空間可以增加您可以在 StorageGRID 系統中儲存的物件數量。
 * 您可以透過為每個網站新增一個或多個 Storage Node 來增加網格的中繼資料容量。
-* ${post_edited_translations.segment}
+* 任何給定儲存節點上為物件中繼資料保留的實際空間，取決於中繼資料保留空間儲存設備選項（系統範圍設定）、分配給節點的 RAM 量，以及節點 Volume 0 的大小。
 * 您無法透過將儲存設備 Volume 新增至現有儲存節點來增加中繼資料容量，因為中繼資料只儲存在 Volume 0 上。
 * 新增站點並不能增加中繼資料容量。
 * StorageGRID 在每個站點保留所有物件中繼資料的三個複本。因此，您系統的中繼資料容量受限於最小站點的中繼資料容量。
-* ${post_edited_translations.segment}
+* 新增中繼資料容量時，應為每個站台新增相同數量的儲存節點。
 
 
 僅中繼資料的儲存節點有特定的硬體需求：
@@ -46,17 +46,17 @@ ${post_edited_translations.segment}
 * 使用 StorageGRID 應用裝置時，僅中繼資料節點只能在配備十二個 1.9 TB 或十二個 3.8 TB 磁碟的 SGF6112 應用裝置上設定。
 * 使用軟體型節點時，僅中繼資料節點資源必須與現有儲存節點資源相符。例如：
 +
-** ${post_edited_translations.segment}
+** 如果現有 StorageGRID 站台使用的是 SG6000 或 SG6100 應用裝置，則基於軟體的純中繼資料節點必須符合以下最低要求：
 +
 *** 128 GB RAM
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
+*** 8 核心 CPU
+*** 8 TB SSD 或等效儲存設備，用於 Cassandra 資料庫 （rangedb/0）
 
 
-** ${post_edited_translations.segment}
+** 如果現有的 StorageGRID 站台使用具有 24 GB RAM、8 核心 CPU 和 3 TB 或 4 TB 中繼資料儲存設備的虛擬儲存節點，則基於軟體的純中繼資料節點應使用類似的資源（24 GB RAM、8 核心 CPU 和 4 TB 中繼資料儲存設備 (rangedb/0)）。
 
 
-* ${post_edited_translations.segment}
+* 新增新的 StorageGRID 站台時，新站台的總中繼資料容量應至少與現有 StorageGRID 站台相符，且新站台的資源應與現有 StorageGRID 站台的儲存節點相符。
 
 
 請參閱 link:../admin/managing-object-metadata-storage.html["中繼資料保留空間的執行摘要"]。
@@ -64,7 +64,7 @@ ${post_edited_translations.segment}
 
 
 [[how-metadata-is-redistributed-when-you-add-storage-nodes]]
-== ${post_edited_translations.segment}
+== 新增儲存節點時如何重新分發中繼資料
 
 當您在擴充中新增 Storage Nodes 時， StorageGRID 會將現有的物件中繼資料重新分配至每個站台的新節點，進而增加網格的整體中繼資料容量。不需要使用者行動。
 

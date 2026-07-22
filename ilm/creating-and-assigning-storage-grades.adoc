@@ -24,7 +24,7 @@ summary: 儲存等級用於識別儲存節點所使用的儲存設備類型。�
 使用自訂儲存設備等級，您可以建立僅包含特定類型儲存節點的 ILM 儲存資源池。例如，您可能想要將某些物件儲存在速度最快的儲存節點上，例如 StorageGRID All Flash 儲存設備裝置。
 
 
-NOTE: 僅中繼資料的儲存節點無法指派儲存設備等級。如需詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+NOTE: 僅中繼資料的儲存節點無法指派儲存設備等級。如需詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["儲存節點類型"]。
 
 如果儲存設備等級不是問題（例如，所有儲存節點都相同），您可以跳過此步驟，並在 link:creating-storage-pool.html["建立儲存資源池"] 時選擇儲存設備等級的「包含所有儲存設備等級」。選擇此選項可確保儲存資源池包含網站上的所有儲存節點，無論其儲存設備等級為何。
 
@@ -40,7 +40,7 @@ NOTE: 不要建立超過必要數量的儲存設備等級。例如，不要為�
 +
 image:editing_storage_grades.gif["儲存等級頁面"]
 
-.. ${post_edited_translations.segment}
+.. 選擇 *Apply Changes*。
 .. 如果需要修改已儲存的標籤，請選擇「編輯」 image:icon_nms_edit.gif["編輯圖示"] 並選擇「套用變更」。
 +
 
@@ -59,7 +59,7 @@ image:assigning_storage_grades_to_storage_nodes.gif["儲存等級頁面"]
 
 NOTE: 每個儲存節點只能指派一次儲存設備等級。從故障中復原的儲存節點將保持先前指派的儲存設備等級。ILM 原則啟動後，請勿變更此指派。如果變更了指派，資料將根據新的儲存設備等級進行儲存。
 
-.. ${post_edited_translations.segment}
+.. 選擇 *Apply Changes*。
 
 
 

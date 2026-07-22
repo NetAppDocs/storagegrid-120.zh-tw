@@ -23,7 +23,7 @@ summary: 如果發生故障，恢復套件檔案可讓您還原 StorageGRID 系�
 
 .步驟
 . 選擇 *Maintenance* > *System* > *Recovery package*。
-. ${post_edited_translations.segment}
+. 輸入佈建密碼，然後選擇 *Start download*。
 +
 下載立即開始。
 

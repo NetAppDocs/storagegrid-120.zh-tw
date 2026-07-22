@@ -20,7 +20,7 @@ NOTE: 部分 StorageGRID 服務尚未更新，以使用這些原則中的加密�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 
 
 
@@ -29,43 +29,43 @@ NOTE: 部分 StorageGRID 服務尚未更新，以使用這些原則中的加密�
 == 選擇安全性原則
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Security settings*。
 +
 An error occurred. 
 
 +
 image:securitysettings_tls_ssh_policies_current.png["TLS 和 SSH 原則"]
 
-. ${post_edited_translations.segment}
+. 請查看索引標籤以了解可用的原則。
 +
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.現代相容性（預設）
 --
 如果您需要強式加密且沒有特殊需求，請使用預設原則。此原則與大多數 TLS 和 SSH 用戶端相容。
 
 --
-.${post_edited_translations.segment}
+.傳統相容性
 --
 如果您需要適用於較舊用戶端的額外相容性選項，請使用 Legacy 相容性原則。此原則中的額外選項可能會使其比 Modern 相容性原則更不安全。
 
 --
-.${post_edited_translations.segment}
+.通用標準
 --
 如果您需要獲得通用準則認證，請使用通用準則原則。
 
 --
-.${post_edited_translations.segment}
+.FIPS 嚴格
 --
 如果您需要 Common Criteria 認證，且需要使用 NetApp Cryptographic Security Module （NCSM） 3.0.8 或 NetApp StorageGRID Kernel Crypto API 6.1.129-1-ntap1-amd64 模組來進行連線至負載平衡器端點、Tenant Manager 和 Grid Manager 的外部用戶端連線，請使用 FIPS 嚴格原則。使用此原則可能會降低效能。
 
 NCSM 3.0.8 和 NetApp StorageGRID Kernel Crypto API 6.1.129-1-ntap1-amd64 模組用於以下操作：
 
-** ${post_edited_translations.segment}
+** NCSM
 +
 *** 以下服務之間的 TLS 連線：ADC、AMS、CMN、DDS、LDR、SSM、NMS、mgmt-api、nginx、nginx-gw 和 cache-svc
 *** 用戶端與 nginx-gw 服務（負載平衡器端點）之間的 TLS 連線
-*** ${post_edited_translations.segment}
+*** 用戶端與 LDR 服務之間的 TLS 連線
 *** 物件內容加密（適用於 SSE-S3、SSE-C 和儲存物件加密設定）
 *** SSH 連線
 
@@ -79,7 +79,7 @@ NetApp StorageGRID 核心加密 API 模組僅存在於 VM 和 StorageGRID 應用
 
 +
 *** 熵收集
-*** ${post_edited_translations.segment}
+*** 節點加密
 
 
 +
@@ -92,7 +92,7 @@ NetApp StorageGRID 核心加密 API 模組僅存在於 VM 和 StorageGRID 應用
 --
 .自訂
 --
-${post_edited_translations.segment}
+如果需要套用自己的加密演算法，請建立自訂原則。
 
 （選用）如果您的 StorageGRID 具有 FIPS 140 密碼編譯需求，請啟用 FIPS 模式功能以使用 NCSM 3.0.8 和 NetApp StorageGRID Kernel Crypto API 6.1.129-1-ntap1-amd64 模組：
 
@@ -104,7 +104,7 @@ ${post_edited_translations.segment}
 --
 ====
 . 若要查看每項原則的密碼編譯、協定和演算法的詳細資訊，請選取 *View details*。
-. ${post_edited_translations.segment}
+. 若要變更目前原則，請選取 *Use policy*。
 +
 在原則圖塊的「目前原則」旁邊會出現一個綠色對勾。
 
@@ -113,7 +113,7 @@ ${post_edited_translations.segment}
 
 
 [[create-a-custom-security-policy]]
-== ${post_edited_translations.segment}
+== 建立自訂安全性原則
 
 如果您需要套用自己的密碼編譯，可以建立自訂原則。
 
@@ -123,13 +123,13 @@ ${post_edited_translations.segment}
 +
 image:securitysettings-custom-security-policy-copy.png["複製現有原則以建立自訂原則"]
 
-. ${post_edited_translations.segment}
+. 從「自訂原則」磁貼中，選取「設定和使用」。
 . 貼上您複製的 JSON，並進行必要的修改。
 . 選擇 *Use policy*。
 +
-${post_edited_translations.segment}
+在「自訂原則」圖塊的 *Current policy* 旁邊會出現一個綠色核取記號。
 
-. ${post_edited_translations.segment}
+. （可選）選取*編輯組態*，對新的自訂原則進行更多變更。
 
 
 
@@ -138,12 +138,12 @@ ${post_edited_translations.segment}
 [[temporarily-revert-to-default-security-policy]]
 == 暫時回復預設安全性原則
 
-如果您設定了自訂安全性原則，且設定的 TLS 原則與 link:global-certificate-types.html["${post_edited_translations.segment}"] 不相容，您可能無法登入 Grid Manager。
+如果您設定了自訂安全性原則，且設定的 TLS 原則與 link:global-certificate-types.html["已設定的伺服器憑證"] 不相容，您可能無法登入 Grid Manager。
 
-${post_edited_translations.segment}
+您可以暫時回復到預設安全性原則。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入管理節點：
 +
 .. 輸入以下命令： `ssh admin@_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。

@@ -11,7 +11,7 @@
 治理
  a| 
 * 擁有 `s3:BypassGovernanceRetention`權限的使用者可以使用 `x-amz-bypass-governance-retention: true`請求標頭繞過保留設定。
-* ${post_edited_translations.segment}
+* 這些使用者可以在物件版本的保留截止日期到期之前將其刪除。
 * 這些使用者可以增加、減少或移除物件的保留截止日期。
 
 
@@ -21,8 +21,8 @@
 合規性
  a| 
 * 物件只有在達到其保留期限後才能刪除。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 物件的保留截止日期可以增加，但不能減少。
+* 在達到保留截止日期之前，無法移除該物件的保留截止日期。
 
 
 *注意*：您的網格系統管理員必須允許您使用法規遵循模式。

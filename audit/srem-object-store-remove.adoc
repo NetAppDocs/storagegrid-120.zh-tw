@@ -23,7 +23,7 @@ CBID
  a| 
 內容區塊識別碼
  a| 
-${post_edited_translations.segment}
+從永久儲存設備中刪除的內容區塊的唯一識別碼。
 
 
 

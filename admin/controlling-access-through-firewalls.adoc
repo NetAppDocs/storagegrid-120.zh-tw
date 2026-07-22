@@ -2,7 +2,7 @@
 permalink: admin/controlling-access-through-firewalls.html 
 sidebar: sidebar 
 keywords: firewall access, firewall ports, external firewall 
-summary: ${post_edited_translations.segment} 
+summary: 您可以在外部防火牆上開啟或關閉特定連接埠。 
 ---
 = 在外部防火牆控制 StorageGRID 存取
 :allow-uri-read: 
@@ -11,15 +11,15 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以在外部防火牆上開啟或關閉特定連接埠。
 
 您可以透過在外部防火牆開啟或結案特定連接埠，控制對 StorageGRID Admin Nodes 上使用者介面和 API 的存取。例如，除了使用其他方法來控制系統存取之外，您可能還希望阻止租戶在防火牆處連線至 Grid Manager。
 
-如果要設定 StorageGRID 內部防火牆，請參閱link:../admin/configure-firewall-controls.html["${post_edited_translations.segment}"]。
+如果要設定 StorageGRID 內部防火牆，請參閱link:../admin/configure-firewall-controls.html["設定內部防火牆"]。
 
 [cols="1a,1a,2a"]
 |===
-| 連接埠 | 說明 | ${post_edited_translations.segment} 
+| 連接埠 | 說明 | 如果連接埠已開啟…… 
 
 
  a| 
@@ -29,18 +29,18 @@ ${post_edited_translations.segment}
  a| 
 Web 瀏覽器和管理 API 用戶端可以存取 Grid Manager、Grid Management API、Tenant Manager 和 Tenant Management API。
 
-${post_edited_translations.segment}
+*注意：* 連接埠 443 也用於部分內部流量。
 
 
 
  a| 
 8443
  a| 
-${post_edited_translations.segment}
+管理節點上受限制的 Grid Manager 連接埠
  a| 
-* ${post_edited_translations.segment}
+* Web 瀏覽器和管理 API 用戶端可以使用 HTTPS 存取 Grid Manager 和網格管理 API。
 * Web 瀏覽器和管理 API 用戶端無法存取租戶管理器或租戶管理 API。
-* ${post_edited_translations.segment}
+* 內部內容的請求將被拒絕。
 
 
 
@@ -48,11 +48,11 @@ ${post_edited_translations.segment}
  a| 
 9443
  a| 
-${post_edited_translations.segment}
+管理節點上的租戶管理器連接埠受限
  a| 
 * Web 瀏覽器和管理 API 用戶端可以使用 HTTPS 存取租戶管理器和租戶管理 API。
 * Web 瀏覽器和管理 API 用戶端無法存取 Grid Manager 或 Grid Management API。
-* ${post_edited_translations.segment}
+* 內部內容的請求將被拒絕。
 
 
 |===
@@ -60,7 +60,7 @@ ${post_edited_translations.segment}
 TIP: 單一登入 (SSO) 在受限的 Grid Manager 或 Tenant Manager 連接埠上不可用。如果您希望使用者使用單一登入進行驗證，則必須使用預設的 HTTPS 連接埠 (443)。
 
 .相關資訊
-* link:signing-in-to-grid-manager.html["${post_edited_translations.segment}"]
+* link:signing-in-to-grid-manager.html["登入 Grid Manager"]
 * link:creating-tenant-account.html["建立租戶帳戶"]
-* link:../network/external-communications.html["${post_edited_translations.segment}"]
+* link:../network/external-communications.html["對外溝通"]
 

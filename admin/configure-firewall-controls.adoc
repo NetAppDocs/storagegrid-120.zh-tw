@@ -11,13 +11,13 @@ summary: 您可以為特定的內部 StorageGRID 連接埠設定網路存取。
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以設定 StorageGRID 防火牆來控制對 StorageGRID 節點上特定連接埠的網路存取。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 * 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
-* 您已查看 link:../admin/manage-firewall-controls.html["管理防火牆控制"] 和 link:../network/index.html["${post_edited_translations.segment}"] 中的資訊。
-* ${post_edited_translations.segment}
+* 您已查看 link:../admin/manage-firewall-controls.html["管理防火牆控制"] 和 link:../network/index.html["網路連線準則"] 中的資訊。
+* 如果您希望管理節點或閘道節點僅接受明確設定之端點的傳入流量，則需要定義負載平衡器端點。
 +
 
 NOTE: 變更用戶端網路組態時，如果負載平衡器端點尚未設定，則現有用戶端連線可能會失敗。
@@ -31,20 +31,20 @@ StorageGRID 在每個節點上都包含一個內部防火牆，可讓您開啟�
 
 如需使用防火牆控制的詳細資訊（包括範例），請參閱 link:../admin/manage-firewall-controls.html["管理防火牆控制"]。
 
-如需更多關於外部防火牆與網路安全性的資訊，請參閱 link:../admin/controlling-access-through-firewalls.html["${post_edited_translations.segment}"]。
+如需更多關於外部防火牆與網路安全性的資訊，請參閱 link:../admin/controlling-access-through-firewalls.html["控制外部防火牆的存取"]。
 
 
 
 [[access-firewall-controls]]
 [[Access-firewall-controls]]
-== ${post_edited_translations.segment}
+== 存取防火牆控制
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Firewall control*。
 +
 此頁面上的三個索引標籤說明於 link:../admin/manage-firewall-controls.html["管理防火牆控制"]。
 
-. ${post_edited_translations.segment}
+. 選取任意索引標籤以設定防火牆控制。
 +
 您可以依任何順序使用這些索引標籤。您在某個索引標籤上設定的組態不會限制您在其他索引標籤上所能執行的操作；然而，您在某個索引標籤上進行的組態變更可能會改變在其他索引標籤上設定的連接埠行為。
 
@@ -53,18 +53,18 @@ StorageGRID 在每個節點上都包含一個內部防火牆，可讓您開啟�
 
 
 [[privileged-address-list]]
-== ${post_edited_translations.segment}
+== 特權位址清單
 
-${post_edited_translations.segment}
+您可以使用「特權位址清單」標籤，授予主機對預設關閉或透過「管理外部存取」標籤上的設定關閉的連接埠的存取權限。
 
 特權 IP 位址和子網路預設沒有內部網格存取。此外，即使在「管理外部存取」索引標籤中被封鎖，在「特權位址清單」索引標籤中開啟的負載平衡器端點和其他連接埠仍可存取。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 「特權位址清單」標籤上的設定無法置換「不受信任的用戶端網路」標籤上的設定。
 
 .步驟
 . 在 Privileged address list 索引標籤上，輸入您要授予結案連接埠存取權限的位址或 IP 子網路。
-. ${post_edited_translations.segment}
+. （可選）選擇「以 CIDR 表示法新增另一個 IP 位址或子網路」以新增其他特權用戶端。
 +
 
 TIP: 盡量少將地址加入特權清單。
@@ -89,7 +89,7 @@ NOTE: 「管理外部存取」標籤中的設定無法置換「不受信任的�
 
 .步驟
 . 選擇 *Manage external access*。此標籤顯示一個表格，其中包含網格中節點的所有外部連接埠（預設非網格節點可以存取的連接埠）。
-. ${post_edited_translations.segment}
+. 使用以下選項設定要開啟和關閉的連接埠：
 +
 ** 使用每個連接埠旁邊的切換按鈕開啟或關閉所選連接埠。
 ** 選擇 *Open all displayed ports* 以開啟表格中列出的所有連接埠。
@@ -115,15 +115,15 @@ NOTE: 使用表格右側的捲動軸，以確保您已檢視所有可用的埠�
 如果節點的用戶端網路不受信任，則該節點僅接受設定為負載平衡器端點的連接埠上的傳入流量，以及（可選）您在此索引標籤中選擇的其他連接埠。您也可以使用此索引標籤為擴充中新增的節點指定預設設定。
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 如果尚未設定負載平衡器端點，現有的用戶端連線可能會失敗。
 
 在「不受信任的用戶端網路」標籤上所做的組態變更會置換「管理外部存取」標籤上的設定。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Untrusted Client Network*。
+. 在「設定新節點預設值」部分，指定在擴充程序中將新節點新增至網格時應使用的預設設定。
 +
-** ${post_edited_translations.segment}
+** *受信任*（預設）：在擴充中新增節點時，其用戶端網路受信任。
 ** *不受信任*：在擴充中新增節點時，其用戶端網路不受信任。
 +
 如有需要，您可以返回此標籤以變更特定新節點的設定。
@@ -137,8 +137,8 @@ NOTE: 此設定不會影響 StorageGRID 系統中的現有節點。
 . 使用下列選項選擇僅允許用戶端連線至明確設定的負載平衡器端點或其他選定連接埠的節點：
 +
 ** 選擇「對顯示的節點取消信任」可將表中顯示的所有節點新增至「不受信任的用戶端網路」清單。
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 選擇「信任顯示的節點」，從「不受信任的用戶端網路」清單中移除表格中顯示的所有節點。
+** 使用每個節點旁邊的切換按鈕，將所選節點的用戶端網路設定為「受信任」或「不受信任」。
 +
 例如，您可以選擇「對顯示的節點取消信任」將所有節點新增至「不受信任的用戶端網路」清單中，然後使用單一節點旁的切換按鈕將該單一節點新增至「受信任的用戶端網路」清單中。
 

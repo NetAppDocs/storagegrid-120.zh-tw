@@ -28,11 +28,11 @@ image:sign_out.png["登出連結"]
  a| 
 單一登入未使用
  a| 
-${post_edited_translations.segment}
+您已退出管理節點。
 
-${post_edited_translations.segment}
+顯示 Grid Manager 登入頁面。
 
-${post_edited_translations.segment}
+*附註：*如果您登入了多個管理節點，則必須從每個節點登出。
 
 
 

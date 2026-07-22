@@ -31,7 +31,7 @@ summary: 將 StorageGRID 附加為 FabricPool 雲端分層之前，請先審查�
 
 大多數情況下，ONTAP 和 StorageGRID 之間的連線應使用傳輸層安全性協定 （TLS） 加密。FabricPool 雖然支援不使用 TLS 加密，但不建議這樣做。為 StorageGRID 負載平衡器端點選擇網路傳輸協定時，請選擇 *HTTPS*。然後提供安全性憑證，以便 ONTAP 能夠向 StorageGRID 進行驗證。
 
-${post_edited_translations.segment}
+若要深入瞭解負載平衡端點的伺服器憑證：
 
 * link:../admin/using-storagegrid-security-certificates.html["管理安全性證書"]
 * link:../admin/managing-load-balancing.html["負載平衡的考慮因素"]
@@ -41,7 +41,7 @@ ${post_edited_translations.segment}
 
 
 [[add-certificate-to-ontap]]
-=== ${post_edited_translations.segment}
+=== 將憑證新增至 ONTAP
 
 當您將 StorageGRID 新增為 FabricPool 雲端分層時，必須在 ONTAP 叢集上安裝相同的憑證，包括根目錄憑證和任何從屬憑證授權單位 （CA） 憑證。
 
@@ -53,7 +53,7 @@ ${post_edited_translations.segment}
 
 CAUTION: 如果用於保護 ONTAP 和 StorageGRID 之間連線的憑證過期，FabricPool 將暫時停止運作，且 ONTAP 將暫時失去對分層至 StorageGRID 之資料的存取。
 
-${post_edited_translations.segment}
+為避免憑證過期問題，請遵循以下最佳實務：
 
 * 仔細監控任何警告憑證即將到期的警示，例如「負載平衡器端點憑證即將到期」和「S3 API 全域伺服器憑證即將到期」警示。
 * 請務必始終保持 StorageGRID 與 ONTAP 版本的憑證同步。如果您取代或更新用於負載平衡器端點的憑證，則必須取代或更新 ONTAP 用於雲端分層的等效憑證。

@@ -21,23 +21,23 @@ summary: 您可以檢視雲端儲存資源池的詳細資訊，以確定其使�
 .步驟
 . 選擇 *ILM* > *儲存資源池* > *雲端儲存資源池*。
 +
-${post_edited_translations.segment}
+雲端儲存資源池表格包含每個包含儲存節點的雲端儲存資源池的下列資訊：
 
 +
 ** *名稱*：資源池的唯一顯示名稱。
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** *URI*：雲端儲存資源池的統一資源識別碼。
+** *提供者類型*：此雲端儲存資源池使用哪個雲端供應商。
+** *Container*：用於雲端儲存資源池的儲存桶名稱。
 ** *ILM 使用情況*：資源池目前的使用方式。雲端儲存 Pool 可能未使用，也可能用於一個或多個 ILM 規則、銷毀編碼設定檔，或兩者皆有。
-** ${post_edited_translations.segment}
+** *Last error*：此雲端儲存資源池資訊健檢期間偵測到的上次錯誤。
 
 
-. ${post_edited_translations.segment}
+. 若要檢視特定雲端儲存資源池的詳細資訊，請選擇其名稱。
 +
-${post_edited_translations.segment}
+資源池詳細資料頁面隨即出現。
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 檢視「驗證」索引標籤，以了解此雲端儲存資源池的驗證類型並編輯驗證詳細資訊。
+. 請檢視「伺服器驗證」索引標籤，以了解驗證詳情、編輯驗證、下載新憑證或複製憑證 PEM。
 . 檢視 *ILM usage* 索引標籤，以判斷 Cloud Storage Pool 目前是否正在任何 ILM 規則或銷毀編碼設定檔中使用。
 . （可選）前往 *ILM 規則頁面* 以 link:working-with-ilm-rules-and-ilm-policies.html["了解並管理所有規則"] 使用 Cloud Storage Pool。
 

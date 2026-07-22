@@ -15,9 +15,9 @@ summary: 透過「管理磁碟機」標籤，您可以存取詳細資訊，並�
 
 使用「管理磁碟機」索引標籤，您可以執行下列操作：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 檢視應用裝置中資料儲存設備磁碟機的佈局
+* 檢視列出每個磁碟機位置、類型、狀態、韌體版本和序號的表格
+* 對每個磁碟機執行疑難排解和維護功能
 
 
 要存取「管理磁碟機」索引標籤，您必須擁有link:../admin/admin-group-permissions.html["儲存應用裝置系統管理員或 Root 存取權限"]。

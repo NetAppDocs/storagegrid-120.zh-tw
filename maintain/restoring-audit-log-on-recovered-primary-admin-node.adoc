@@ -2,7 +2,7 @@
 permalink: maintain/restoring-audit-log-on-recovered-primary-admin-node.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, restore audit log, primary admin node 
-summary: ${post_edited_translations.segment} 
+summary: 如果您能夠保留故障主要管理節點的稽核日誌，則可以將其複製到您正在恢復的主要管理節點。 
 ---
 = 在已復原的主 StorageGRID 管理節點上復原稽核日誌
 :allow-uri-read: 
@@ -11,17 +11,17 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+如果您能夠保留故障主要管理節點的稽核日誌，則可以將其複製到您正在恢復的主要管理節點。
 
 .開始之前
 * 已恢復的管理節點已安裝並正在運作。
-* ${post_edited_translations.segment}
+* 在原始管理節點發生故障後，您已將稽核日誌複製到其他位置。
 
 
 .關於此任務
 如果 Admin 節點故障，儲存至該 Admin 節點的稽核日誌可能會遺失。您可以透過從故障的 Admin 節點複製稽核日誌，然後將這些稽核日誌還原至已恢復的 Admin 節點，來避免資料遺失。視故障情況而定，可能無法從故障的 Admin 節點複製稽核日誌。在這種情況下，如果部署有多個 Admin 節點，由於稽核日誌會複寫到所有 Admin 節點，因此您可以從另一個 Admin 節點恢復稽核日誌。
 
-${post_edited_translations.segment}
+如果只有一個管理節點，且無法從故障節點複製稽核日誌，則恢復的管理節點將開始記錄事件到稽核日誌，就像安裝是全新的一樣。
 
 您必須盡快恢復管理節點，以還原記錄功能。
 
@@ -33,7 +33,7 @@ ${post_edited_translations.segment}
 * 您已明確指定稽核訊息應僅儲存在產生這些訊息的本機節點上。
 
 
-詳情請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+詳情請參閱 link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]。
 
 ====
 .步驟

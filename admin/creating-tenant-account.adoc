@@ -2,7 +2,7 @@
 permalink: admin/creating-tenant-account.html 
 sidebar: sidebar 
 keywords: create tenant, tenant account 
-summary: ${post_edited_translations.segment} 
+summary: 您必須建立至少一個租戶帳戶，才能控制對 StorageGRID 系統中儲存設備的存取。 
 ---
 = 建立 StorageGRID 租用戶帳戶
 :allow-uri-read: 
@@ -11,27 +11,27 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您必須建立至少一個租戶帳戶，才能控制對 StorageGRID 系統中儲存設備的存取。
 
-建立租戶帳戶的步驟取決於是否已設定 link:using-identity-federation.html["${post_edited_translations.segment}"] 與 link:how-sso-works.html["${post_edited_translations.segment}"]，以及您用來建立租戶帳戶的 Grid Manager 帳戶是否屬於具有 root 存取權權限的管理群組。
+建立租戶帳戶的步驟取決於是否已設定 link:using-identity-federation.html["身分聯盟"] 與 link:how-sso-works.html["單一登入"]，以及您用來建立租戶帳戶的 Grid Manager 帳戶是否屬於具有 root 存取權權限的管理群組。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您擁有 link:admin-group-permissions.html["${post_edited_translations.segment}"]。
-* 如果租戶帳戶將使用為 Grid Manager 設定的識別來源，且您想要將租戶帳戶的 root 存取權權限授予同盟群組，則您已將該同盟群組匯入 Grid Manager。您不需要為此管理群組指派任何 Grid Manager 權限。請參閱 link:managing-admin-groups.html["${post_edited_translations.segment}"]。
+* 您擁有 link:admin-group-permissions.html["root 存取權或租戶帳戶權限"]。
+* 如果租戶帳戶將使用為 Grid Manager 設定的識別來源，且您想要將租戶帳戶的 root 存取權權限授予同盟群組，則您已將該同盟群組匯入 Grid Manager。您不需要為此管理群組指派任何 Grid Manager 權限。請參閱 link:managing-admin-groups.html["管理管理員群組"]。
 * 如果您希望允許 S3 租戶使用網格聯合連線將帳戶資料 Clone 並複寫儲存桶物件到另一個網格：
 +
 ** 您有link:grid-federation-create-connection.html["已設定網格同盟連線"]。
 ** 連線狀態為*已連線*。
 ** 您擁有根目錄存取權限。
-** 您已審查 link:grid-federation-manage-tenants.html["${post_edited_translations.segment}"] 的考量事項。
-** ${post_edited_translations.segment}
+** 您已審查 link:grid-federation-manage-tenants.html["管理網格聯盟的許可租戶"] 的考量事項。
+** 如果租戶帳戶將使用為 Grid Manager 設定的身分來源，則您已將相同的聯盟群組匯入至兩個網格的 Grid Manager 中。
 +
-${post_edited_translations.segment}
+建立租戶時，您將選擇此群組，使其擁有來源租戶帳戶和目的地租戶帳戶的初始 root 存取權限。
 
 +
 
-TIP: ${post_edited_translations.segment}
+TIP: 如果在建立租戶之前，此管理員群組在兩個網格上都不存在，則租戶不會複寫至目的地。
 
 
 
@@ -40,7 +40,7 @@ TIP: ${post_edited_translations.segment}
 
 
 [[access-the-wizard]]
-== ${post_edited_translations.segment}
+== 存取精靈
 
 .步驟
 . 選擇*租戶*。
@@ -50,7 +50,7 @@ TIP: ${post_edited_translations.segment}
 
 
 [[enter-details]]
-== ${post_edited_translations.segment}
+== 請輸入詳細資料
 
 .步驟
 . 輸入租戶的詳細資料。
@@ -68,9 +68,9 @@ Name
 
 
  a| 
-${post_edited_translations.segment}
+執行摘要（可選）
  a| 
-${post_edited_translations.segment}
+用於識別租戶的執行摘要。
 
 如果您要建立的租戶將使用網格聯合連線，您可以選擇使用此欄位來協助識別哪個是來源租戶，哪一個是目的地租戶。例如，在 Grid 1 上建立的租戶的以下執行摘要也會顯示在複寫到 Grid 2 的租戶中：「此租戶是在 Grid 1 上建立的。」
 
@@ -84,9 +84,9 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+儲存配額（選用）
  a| 
-${post_edited_translations.segment}
+如果您希望此租戶擁有儲存設備配額，請提供配額的數值和單位。
 
 |===
 . 選擇 *Continue* 。
@@ -106,45 +106,45 @@ NOTE: 其中部分權限有其他額外需求。如需詳細資訊，請選取�
 +
 [cols="1a,3a"]
 |===
-| 權限 | ${post_edited_translations.segment} 
+| 權限 | 如果選取…… 
 
 
  a| 
-${post_edited_translations.segment}
+允許平台服務
  a| 
 租戶可以使用 S3 平台服務，例如 CloudMirror。請參閱 link:../admin/manage-platform-services-for-tenants.html["管理 S3 租戶帳戶的平台服務"]。
 
 
 
  a| 
-${post_edited_translations.segment}
+使用您自己的身分來源
  a| 
-租戶可以為同盟群組與使用者設定及管理自己的身分識別來源。如果您已為您的 StorageGRID 系統 link:../admin/how-sso-works.html["${post_edited_translations.segment}"] ，則會停用此選項。
+租戶可以為同盟群組與使用者設定及管理自己的身分識別來源。如果您已為您的 StorageGRID 系統 link:../admin/how-sso-works.html["設定的 SSO"] ，則會停用此選項。
 
 
 
  a| 
-${post_edited_translations.segment}
+允許 S3 Select
  a| 
-租戶可以發出 S3 SelectObjectContent API 要求，以篩選並擷取物件資料。請參閱 link:../admin/manage-s3-select-for-tenant-accounts.html["${post_edited_translations.segment}"]。
+租戶可以發出 S3 SelectObjectContent API 要求，以篩選並擷取物件資料。請參閱 link:../admin/manage-s3-select-for-tenant-accounts.html["管理租戶帳戶的 S3 Select"]。
 
 *重要提示*：SelectObjectContent 請求可能會降低所有 S3 用戶端和租戶的負載平衡器效能。請僅在必要時啟用此功能，且僅對受信任的租戶啟用。
 
 |===
-. ${post_edited_translations.segment}
+. （可選）選擇您希望此租戶擁有的進階權限。
 +
 [cols="1a,3a"]
 |===
-| 權限 | ${post_edited_translations.segment} 
+| 權限 | 如果選取…… 
 
 
  a| 
-${post_edited_translations.segment}
+網格聯盟連線
  a| 
-${post_edited_translations.segment}
+租戶可以使用網格聯盟連線，該連線可以：
 
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 將此租戶以及新增至帳戶的所有租戶群組和使用者從此網格（_來源網格_）複製到所選連線中的另一個網格（_目的地網格_）。
+** 允許此租戶在每個網格上的相應儲存桶之間設定跨網格複寫。
 
 
 請參閱 link:../admin/grid-federation-manage-tenants.html["管理網格聯盟的允許租戶"]。
@@ -154,7 +154,7 @@ ${post_edited_translations.segment}
  a| 
 S3 物件鎖定
  a| 
-${post_edited_translations.segment}
+允許租戶使用 S3 物件鎖定的特定功能：
 
 ** *設定最大保留期間* 定義新增至此儲存桶的物件應保留多長時間，從物件被擷取時開始計算。
 ** *允許法規遵循模式*可防止使用者在保留期間覆寫或刪除受保護的物件版本。
@@ -170,22 +170,22 @@ ${post_edited_translations.segment}
 == 定義 root 存取權並建立租戶
 
 .步驟
-. ${post_edited_translations.segment}
+. 根據 StorageGRID 系統是否使用身分聯盟、單一登入 (SSO) 或兩者，定義租戶帳戶的 root 存取權。
 +
 [cols="1a,2a"]
 |===
-| 選項 | ${post_edited_translations.segment} 
+| 選項 | 這樣做 
 
 
  a| 
-${post_edited_translations.segment}
+如果未啟用身分聯盟
  a| 
-${post_edited_translations.segment}
+指定以本機 root 使用者身分登入租戶時要使用的密碼。
 
 
 
  a| 
-${post_edited_translations.segment}
+如果已啟用身分聯盟
  a| 
 .. 選取現有的聯合群組，使其擁有租戶的 root 存取權。
 .. （可選）指定以本機 root 使用者身分登入租戶時要使用的密碼。
@@ -194,18 +194,18 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+如果身分聯盟和單一登入（SSO）都已啟用
  a| 
 選取現有的聯合群組，以取得租戶的 root 存取權限。本機使用者無法登入。
 
 |===
 . 選擇 *Create tenant*。
 +
-系統將顯示成功訊息，新租戶將列在「租戶」頁面上。若要了解如何檢視租戶詳細資訊和監控租戶活動，請參閱link:../monitor/monitoring-tenant-activity.html["${post_edited_translations.segment}"]。
+系統將顯示成功訊息，新租戶將列在「租戶」頁面上。若要了解如何檢視租戶詳細資訊和監控租戶活動，請參閱link:../monitor/monitoring-tenant-activity.html["監控租戶活動"]。
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 根據網路連線、節點狀態和 Cassandra 操作情況，在整個網格中套用租戶設定可能需要 15 分鐘或更長時間。
 
 . 如果您為租戶選擇了「使用網格聯合連線」權限：
 +
@@ -217,7 +217,7 @@ NOTE: 如果您看到「Tenant created without a clone」錯誤訊息，請參�
 .. 如果您在定義 root 存取權時提供了本機 root 使用者密碼，link:changing-password-for-tenant-local-root-user.html["更改本機 root 使用者的密碼"]適用於複製的租戶。
 +
 
-TIP: ${post_edited_translations.segment}
+TIP: 本機 root 使用者在變更密碼之前、無法登入目的地網格上的 Tenant Manager。
 
 
 
@@ -228,26 +228,26 @@ TIP: ${post_edited_translations.segment}
 [[sign-in-to-tenant-optional]]
 == 登入租戶（選用）
 
-根據需要，您可以立即登入新租戶以完成組態，也可以稍後登入租戶。登入步驟取決於您是使用預設連接埠 (443) 還是受限連接埠登入 Grid Manager。請參閱 link:controlling-access-through-firewalls.html["${post_edited_translations.segment}"]。
+根據需要，您可以立即登入新租戶以完成組態，也可以稍後登入租戶。登入步驟取決於您是使用預設連接埠 (443) 還是受限連接埠登入 Grid Manager。請參閱 link:controlling-access-through-firewalls.html["控制外部防火牆的存取"]。
 
 
 
 [[sign-in-now]]
-=== ${post_edited_translations.segment}
+=== 立即登入
 
 [cols="1a,3a"]
 |===
-| 如果您正在使用…… | ${post_edited_translations.segment} 
+| 如果您正在使用…… | 這樣做…… 
 
 
  a| 
-${post_edited_translations.segment}
+連接埠 443，並且您為本機 root 使用者設定了密碼
  a| 
 . 選擇 *Sign in as root*。
 +
-${post_edited_translations.segment}
+登入後，會出現用於設定儲存桶、身分聯盟、群組和使用者的連結。
 
-. ${post_edited_translations.segment}
+. 選擇連結以設定租戶帳戶。
 +
 每個連結都會在 Tenant Manager 中開啟對應的頁面。若要完成此頁面，請參閱 link:../tenant/index.html["租戶帳戶使用說明"]。
 
@@ -263,7 +263,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+受限連接埠
  a| 
 . 選擇 *Finish*
 . 在租戶表中選擇「受限」，以深入瞭解如何存取此租戶帳戶。
@@ -289,14 +289,14 @@ ${post_edited_translations.segment}
 
 [cols="1a,3a"]
 |===
-| 如果您正在使用…… | ${post_edited_translations.segment} 
+| 如果您正在使用…… | 做以下其中一項…… 
 
 
  a| 
-${post_edited_translations.segment}
+連接埠 443
  a| 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 在 Grid Manager 中，選擇 *Tenants*，然後選擇租戶名稱右側的 *Sign in*。
+* 在網頁瀏覽器中輸入租戶的網址：
 +
 `https://_FQDN_or_Admin_Node_IP_/?accountId=_20-digit-account-id_/`
 
@@ -310,10 +310,10 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+受限連接埠
  a| 
 * 從 Grid Manager 中選擇 * 租戶 *，然後選擇 * 受限 *。
-* ${post_edited_translations.segment}
+* 在網頁瀏覽器中輸入租戶的網址：
 +
 `https://_FQDN_or_Admin_Node_IP:port_/?accountId=_20-digit-account-id_`
 
@@ -329,6 +329,6 @@ ${post_edited_translations.segment}
 
 
 [[configure-the-tenant]]
-== ${post_edited_translations.segment}
+== 設定租戶
 
 請遵循 link:../tenant/index.html["使用租戶帳戶"] 中的說明來管理租戶群組與使用者、S3 存取金鑰、儲存貯體、平台服務，以及帳戶 Clone 與跨網格複寫。

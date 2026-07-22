@@ -16,19 +16,19 @@ summary: 從「退役網站精靈」的第 4 步（移除 ILM 引用）開始，
 .步驟
 . 確定是否有任何未使用的 ILM 規則參照該站台。
 +
-${post_edited_translations.segment}
+如果列出了任何 ILM 規則，這些規則仍然與該站台相關，但並未在任何原則中使用。
 
 +
 
 NOTE: 當 StorageGRID 退役某個站台時，它會自動停用所有參照該站台的未使用糾刪碼設定檔，並自動刪除所有參照該站台的未使用儲存資源池。「所有儲存節點」儲存資源池（StorageGRID 11.6 及更早版本）會被移除，因為它使用了「所有站台」站台。
 
-. ${post_edited_translations.segment}
+. 編輯或刪除每條未使用的規則：
 +
 ** 若要編輯規則，請前往 ILM 規則頁面，並更新所有使用參照該站台之糾刪碼設定檔或儲存資源池的配置。然後，返回 * 步驟 4 （ 移除 ILM 參照 ） *。
 ** 若要刪除規則，請選擇垃圾桶圖示 image:icon_trash_can.png["垃圾桶圖示"] 並選擇 *OK*。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 在退役站台之前，必須刪除「製作 2 個副本」規則。
 
 
 

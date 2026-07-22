@@ -30,14 +30,14 @@ CAUTION: 如果您執行的是中斷連線的站台退役，ILM 無法移動或�
 image:decommission_site_step_2_site_warnings.png["退役站台步驟 2 站台警告"]
 
 +
-${post_edited_translations.segment}
+在以下情況下會出現警告：
 
 +
 ** 該站台包含一個 Gateway Node。如果 S3 用戶端目前正在連線至此節點，則必須在另一個站台設定一個等效節點。在繼續執行退役程序之前，請確保用戶端可以連線至替換節點。
-** 該站點包含已連接（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）和已斷開連接的節點（image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]或image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]）。在移除此站點之前，您必須先將所有離線節點重新上線。
+** 該站點包含已連接（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）和已斷開連接的節點（image:icon_alarm_gray_administratively_down.png["圖示警報灰色管理關閉"]或image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]）。在移除此站點之前，您必須先將所有離線節點重新上線。
 
 
-. ${post_edited_translations.segment}
+. 查看您選擇移除的站台的詳細資訊。
 +
 image:decommission_site_step_2_view_details.png["退役站台步驟 2 檢視詳細資料"]
 
@@ -55,19 +55,19 @@ image:decommission_site_step_2_view_details.png["退役站台步驟 2 檢視詳�
 ** 節點名稱、類型和連線狀態：
 +
 *** image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]（已連接）
-*** image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]（管理性關閉）
+*** image:icon_alarm_gray_administratively_down.png["圖示警報灰色管理關閉"]（管理性關閉）
 *** image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]（未知）
 
 
 ** 各節點詳情：
 +
-*** ${post_edited_translations.segment}
-*** 對於 Admin 節點和 Gateway 節點，該節點目前是否用於高可用度 （HA） 群組。您無法退役 HA 群組中使用的 Admin 節點或 Gateway 節點。在開始退役之前，請編輯 HA 群組以移除該站台上的所有節點，或者如果該 HA 群組僅包含來自此站台的節點，則移除該 HA 群組。如需說明，請參閱 link:../admin/managing-high-availability-groups.html["${post_edited_translations.segment}"]。
+*** 對於每個儲存節點，物件資料已使用的空間量。
+*** 對於 Admin 節點和 Gateway 節點，該節點目前是否用於高可用度 （HA） 群組。您無法退役 HA 群組中使用的 Admin 節點或 Gateway 節點。在開始退役之前，請編輯 HA 群組以移除該站台上的所有節點，或者如果該 HA 群組僅包含來自此站台的節點，則移除該 HA 群組。如需說明，請參閱 link:../admin/managing-high-availability-groups.html["管理高可用度 （HA） 群組"]。
 
 
 
 
-. ${post_edited_translations.segment}
+. 在頁面的「其他站台詳細資料」區段中，評估網格中其他站台有多少可用空間。
 +
 image:decommission_site_step_2_view_details_for_other_sites.png["退役站台步驟 2 檢視其他站台的詳細資訊"]
 

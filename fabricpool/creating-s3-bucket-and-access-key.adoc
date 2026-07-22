@@ -21,9 +21,9 @@ summary: 在使用 StorageGRID 處理 FabricPool 工作負載之前，您必須�
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入 Tenant Manager。
 +
-${post_edited_translations.segment}
+您可以選擇以下兩種方式之一：
 
 +
 ** 在 Grid Manager 的「租戶帳戶」頁面中，選擇租戶的「登入」連結，然後輸入您的憑證。
@@ -32,17 +32,17 @@ ${post_edited_translations.segment}
 
 . 建立用於 FabricPool 資料的 S3 bucket。
 +
-${post_edited_translations.segment}
+您必須為計劃使用的每個 ONTAP 叢集建立一個唯一的儲存桶。
 
 +
-.. ${post_edited_translations.segment}
+.. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 .. 選擇 *Create bucket*。
 .. 輸入您要與 FabricPool 搭配使用的 StorageGRID bucket 名稱。例如， `fabricpool-bucket`。
 +
 
 TIP: 建立儲存桶後無法變更儲存桶名稱。
 
-.. ${post_edited_translations.segment}
+.. 選擇此儲存桶所在的區域。
 +
 預設情況下，所有 bucket 都建立在  `us-east-1` 區域中。如果預設區域設定為  `us-east-1` 以外的區域，則最初會在下拉式功能表中選取此其他區域。
 
@@ -54,7 +54,7 @@ NOTE: 請勿為 FabricPool 貯體選取 *啟用物件版本控制*。同樣地�
 
 
 
-. ${post_edited_translations.segment}
+. 建立存取金鑰和秘密存取金鑰。
 +
 .. 選擇 *STORAGE (S3)* > *My access keys*。
 .. 選取 *Create key*。

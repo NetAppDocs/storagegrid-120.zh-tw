@@ -20,7 +20,7 @@ summary: 如果 StorageGRID 嘗試與平台服務端點通訊時發生錯誤，�
 
 如果在過去 7 天內發生任何平台服務端點錯誤，租戶管理員儀表板將顯示警示訊息。您可以前往平台服務端點頁面，查看有關錯誤的更多詳細資訊。
 
-image:tenant_dashboard_endpoint_error.png["${post_edited_translations.segment}"]
+image:tenant_dashboard_endpoint_error.png["儀表板的端點錯誤訊息"]
 
 儀表板顯示的相同錯誤也會顯示在平台服務端點頁面的頂部。若要檢視更詳細的錯誤訊息：
 
@@ -71,7 +71,7 @@ StorageGRID 驗證平台服務端點時，會確認該端點的憑證可用於�
 
 .相關資訊
 * link:../admin/troubleshooting-platform-services.html["管理 StorageGRID > 疑難排解平台服務"]
-* link:creating-platform-services-endpoint.html["${post_edited_translations.segment}"]
+* link:creating-platform-services-endpoint.html["建立平台服務端點"]
 * link:testing-connection-for-platform-services-endpoint.html["測試平台服務端點的連線"]
-* link:editing-platform-services-endpoint.html["${post_edited_translations.segment}"]
+* link:editing-platform-services-endpoint.html["編輯平台服務端點"]
 

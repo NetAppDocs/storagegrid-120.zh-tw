@@ -7,7 +7,7 @@ indexpage:
   tiles:
   - title: 開始使用
     links:
-    - title: "${post_edited_translations.segment}"
+    - title: 擴充類型
       url: "../expand/index.html"
     - title: 指南：增加物件容量
       url: "../expand/guidelines-for-adding-object-capacity.html"
@@ -19,7 +19,7 @@ indexpage:
       url: "../expand/adding-new-site.html"
     - title: 收集所需材料
       url: "../expand/gather-required-materials.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 新增儲存設備磁碟區
     links:
     - title: 向儲存節點新增儲存設備磁碟區
       url: "../expand/adding-storage-volumes-to-storage-nodes.html"

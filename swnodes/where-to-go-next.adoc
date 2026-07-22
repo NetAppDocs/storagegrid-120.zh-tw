@@ -47,7 +47,7 @@ summary: 安裝完成後，請執行必要的整合和組態任務。您可以�
 == 選用任務
 
 * link:../maintain/changing-ip-addresses-and-mtu-values-for-all-nodes-in-grid.html["更新網格節點 IP 位址"] 如果自您規劃部署並產生恢復套件以來，它們已發生變更。
-* link:../admin/changing-network-options-object-encryption.html["${post_edited_translations.segment}"]（如有需要）。
+* link:../admin/changing-network-options-object-encryption.html["設定儲存設備加密"]（如有需要）。
 * link:../admin/configuring-stored-object-compression.html["設定儲存設備壓縮"]必要時減少儲存物件的大小。
 * link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]必要時，隔離和劃分網路流量。
 * link:../admin/configure-high-availability-group.html["設定高可用度群組"] 以在需要時提升 Grid Manager、Tenant Manager 和 S3 用戶端的連線可用度。

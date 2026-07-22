@@ -16,18 +16,18 @@ summary: 您必須了解在節點部署和網格組態期間如何使用網格�
 
 
 [[initial-deployment-of-a-node]]
-== ${post_edited_translations.segment}
+== 節點初始部署
 
 首次部署節點時，必須將節點連接到網格網路，並確保其可以存取主要管理節點。如果網格網路是隔離的，則可以在主要管理節點上設定管理網路，以便從網格網路外部進行組態和安裝存取。
 
 在部署期間，設定了閘道的 Grid Network 將成為節點的預設閘道。預設閘道允許位於分隔子網路上的網格節點在網格完成設定之前與主要管理節點通訊。
 
-${post_edited_translations.segment}
+如有必要，包含 NTP 伺服器或需要存取 Grid Manager 或 API 的子網路也可以設定為網格子網路。
 
 
 
 [[automatic-node-registration-with-primary-admin-node]]
-== ${post_edited_translations.segment}
+== 自動向主管理節點註冊節點
 
 節點部署完成後，它們會透過網格網路向主管理節點註冊。之後，您可以使用 Grid Manager、 `configure-storagegrid.py` Python 指令碼或安裝 API 來設定網格並核准已註冊的節點。在網格組態過程中，您可以設定多個網格子網路。完成網格組態後，系統會在每個節點上建立透過網格網路閘道連至這些子網路的靜態路由。
 
@@ -36,4 +36,4 @@ ${post_edited_translations.segment}
 [[disabling-the-admin-network-or-client-network]]
 == 停用管理網路或用戶端網路
 
-如果您要停用管理網路或用戶端網路，可以在節點核准程序中移除其組態，或在安裝完成後使用變更 IP 工具（請參閱link:../maintain/configuring-ip-addresses.html["${post_edited_translations.segment}"]）。
+如果您要停用管理網路或用戶端網路，可以在節點核准程序中移除其組態，或在安裝完成後使用變更 IP 工具（請參閱link:../maintain/configuring-ip-addresses.html["設定 IP 位址"]）。

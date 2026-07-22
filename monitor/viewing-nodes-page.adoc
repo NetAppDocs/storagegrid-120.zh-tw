@@ -2,7 +2,7 @@
 permalink: monitor/viewing-nodes-page.html 
 sidebar: sidebar 
 keywords: nodes page 
-summary: ${post_edited_translations.segment} 
+summary: 當您需要比儀表板提供的更詳細的 StorageGRID 系統資訊時，可以使用「節點」頁面檢視整個網格、網格中每個站台以及站台中每個節點的計量。 
 ---
 = 檢視 StorageGRID Nodes 頁面
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+當您需要比儀表板提供的更詳細的 StorageGRID 系統資訊時，可以使用「節點」頁面檢視整個網格、網格中每個站台以及站台中每個節點的計量。
 
 「節點」表列出了整個網格、每個站台和每個節點的摘要資訊。如果節點已中斷連線或存在作用中警示，則節點名稱旁邊會顯示一個圖示。如果節點已連線且沒有作用中警示，則不會顯示任何圖示。
 
@@ -42,7 +42,7 @@ image:nodes_table.png["節點選單"]
  a| 
 image:icon_alarm_blue_unknown.png["藍色問號圖示"]
  a| 
-${post_edited_translations.segment}
+*未連線 - 未知*
 
 由於不明原因，節點已中斷連線，或節點上的服務意外停止運作。例如，節點上的服務可能已停止，或者節點可能因為電力故障或非預期停電而失去網路連線。
 
@@ -50,7 +50,7 @@ ${post_edited_translations.segment}
  a| 
 需要立即注意。link:monitoring-system-health.html#view-current-and-resolved-alerts["選擇每個警報"]並遵循建議的措施。
 
-${post_edited_translations.segment}
+例如，您可能需要重新啟動已停止的服務或重新啟動節點的主機。
 
 *注意*：在受管關機操作期間，節點可能顯示為「未知」。在這種情況下，您可以忽略「未知」狀態。
 
@@ -61,11 +61,11 @@ image:icon_alarm_gray_administratively_down.png["灰色問號圖示"]
  a| 
 *未連線 - 管理員已關閉*
 
-${post_edited_translations.segment}
+由於預期的原因，節點未連接到網格。
 
 例如，節點或其上的服務已正常關閉、節點正在重新開機，或軟體正在升級。也可能有一個或多個警示處於作用中狀態。
 
-${post_edited_translations.segment}
+根據根本問題，這些節點通常無需干預即可恢復線上。
  a| 
 確定是否有任何警報影響此節點。
 
@@ -79,7 +79,7 @@ ${post_edited_translations.segment}
 [[alert-icons]]
 == 警報圖示
 
-${post_edited_translations.segment}
+如果某個節點存在作用中的警報，節點名稱旁邊會顯示下列圖示之一：
 
 image:icon_alert_red_critical.png["圖示警報 紅色 關鍵"] *Critical*：StorageGRID 節點或服務出現異常情況，導致其正常運作停止。您必須立即解決根本問題。如果問題無法解決，可能會導致服務中斷和資料遺失。
 
@@ -94,9 +94,9 @@ image:icon_alert_yellow_minor.png["圖示警告 黃色次要"] *Minor*：系統�
 
 若要篩選節點表中顯示的資訊，請在 *搜尋* 欄位中輸入搜尋字串。您可以依系統名稱、顯示名稱或類型進行搜尋（例如，輸入 *gat* 以快速尋找所有 Gateway 節點）。
 
-${post_edited_translations.segment}
+若要檢視網格、站台或節點的資訊：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 選擇網格名稱，即可查看整個 StorageGRID 系統統計資料的彙總總結。
+* 選擇特定資料中心站台，查看該站台所有節點的統計資料彙總總結。
 * 選擇特定節點以檢視該節點的詳細資訊。
 

@@ -14,10 +14,10 @@ summary: 您可以使用 StorageGRID 金鑰管理伺服器精靈來新增每個 
 您可以使用 StorageGRID 金鑰管理伺服器精靈來新增每個 KMS 或 KMS 叢集。
 
 .開始之前
-* 您已審閱 link:kms-considerations-and-requirements.html["${post_edited_translations.segment}"]。
+* 您已審閱 link:kms-considerations-and-requirements.html["使用金鑰管理伺服器的注意事項和要求"]。
 * 您已link:kms-configuring-storagegrid-as-client.html["在 KMS 中將 StorageGRID 設定為用戶端"]，且擁有每個 KMS 或 KMS 叢集所需的資訊。
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 
 
 .關於此任務
@@ -63,7 +63,7 @@ KMS 中 StorageGRID 用戶端的確切金鑰別名。長度必須介於 1 到 25
 
 
  a| 
-${post_edited_translations.segment}
+管理金鑰，適用於
  a| 
 將與此 KMS 關聯的 StorageGRID 站台。如果可能，您應在設定適用於所有未由其他 KMS 管理之站台的預設 KMS 之前，先設定任何特定站台的金鑰管理伺服器。
 
@@ -103,8 +103,8 @@ KMS 的完整網域名稱或 IP 位址。
 在「新增金鑰管理伺服器」精靈的步驟 2（上傳伺服器憑證）中，您需要上傳 KMS 的伺服器憑證（或憑證套裝組合）。伺服器憑證允許外部 KMS 向 StorageGRID 進行驗證。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 從*步驟 2（上傳伺服器憑證）*，瀏覽至已儲存的伺服器憑證或憑證套裝組合的位置。
+. 上傳憑證檔案。
 +
 伺服器憑證中繼資料隨即顯示。
 
@@ -118,12 +118,12 @@ NOTE: 如果您上傳了憑證套裝組合，則每個憑證的中繼資料將�
 
 
 [[sg-create-keystep-3-upload-client-certificates]]
-== ${post_edited_translations.segment}
+== [[sg-create-key]]步驟 3：上傳用戶端憑證
 
 在「新增金鑰管理伺服器」精靈的步驟 3 （ 上傳用戶端憑證 ） 中，您要上傳用戶端憑證和用戶端憑證私有金鑰。用戶端憑證可讓 StorageGRID 向 KMS 進行自我驗證。
 
 .步驟
-. ${post_edited_translations.segment}
+. 從*步驟 3（上傳用戶端憑證）*開始，瀏覽到用戶端憑證所在的位置。
 . 上傳用戶端憑證檔案。
 +
 用戶端憑證中繼資料隨即顯示。

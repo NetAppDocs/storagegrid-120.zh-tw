@@ -15,11 +15,11 @@ summary: 系統傳回的稽核訊息詳細說明列於以下章節中。每個�
 
 稽核訊息也依其四位字元代碼的字母順序排列。此字母清單可協助您找到有關特定訊息的資訊。
 
-${post_edited_translations.segment}
+本章中使用的四字元代碼是稽核訊息中找到的 ATYP 值，如下例訊息所示：
 
 [listing, subs="specialcharacters,quotes"]
 ----
 2014-07-17T03:50:47.484627
 \[AUDT:[RSLT(FC32):VRGN][AVER(UI32):10][ATIM(UI64):1405569047484627][*ATYP\(FC32\):SYSU*][ANID(UI32):11627225][AMID(FC32):ARNI][ATID(UI64):9445736326500603516]]
 ----
-有關設定稽核訊息層級、變更日誌目的地以及使用外部 syslog 伺服器處理稽核資訊的相關資訊，請參閱link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]
+有關設定稽核訊息層級、變更日誌目的地以及使用外部 syslog 伺服器處理稽核資訊的相關資訊，請參閱link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]

@@ -13,7 +13,7 @@ summary: 如果您使用 NetApp ONTAP 軟體，可以使用 NetApp FabricPool �
 [role="lead"]
 如果您使用 NetApp ONTAP 軟體，可以使用 NetApp FabricPool 將閒置資料分層到 NetApp StorageGRID 物件儲存系統。
 
-${post_edited_translations.segment}
+請依照以下步驟操作：
 
 * 瞭解為 FabricPool 工作負載設定 StorageGRID 的考量事項與最佳實踐。
 * 了解如何設定 StorageGRID 物件儲存系統以搭配 FabricPool 使用。
@@ -29,7 +29,7 @@ ${post_edited_translations.segment}
 [role="quick-margin-list"]
 * 決定您將使用哪種 FabricPool Volume 分層原則，將非作用中的 ONTAP 資料分層至 StorageGRID。
 * 規劃並安裝 StorageGRID 系統，以滿足您的儲存容量和效能需求。
-* 熟悉 StorageGRID 系統軟體，包括 link:../primer/exploring-grid-manager.html["Grid Manager"] 和 link:../primer/exploring-tenant-manager.html["${post_edited_translations.segment}"]。
+* 熟悉 StorageGRID 系統軟體，包括 link:../primer/exploring-grid-manager.html["Grid Manager"] 和 link:../primer/exploring-tenant-manager.html["租戶管理員"]。
 * 檢閱 FabricPool 以下方面的最佳實務：link:best-practices-for-high-availability-groups.html["HA 群組"]、link:best-practices-for-load-balancing.html["負載平衡"]、link:best-practices-ilm.html["ILM"]和 link:other-best-practices-for-storagegrid-and-fabricpool.html["更多"]。
 * 請查看以下補充資源，其中詳細說明了 ONTAP 和 FabricPool 的使用與設定：
 +
@@ -51,11 +51,11 @@ https://docs.netapp.com/us-en/ontap/fabricpool/index.html["ONTAP FabricPool 文�
 
 
 [role="quick-margin-para"]
-（可選）設定 link:../admin/using-identity-federation.html["${post_edited_translations.segment}"] 和 link:../admin/how-sso-works.html["${post_edited_translations.segment}"]。
+（可選）設定 link:../admin/using-identity-federation.html["身分聯盟"] 和 link:../admin/how-sso-works.html["單一登入"]。
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["三"] 設定 StorageGRID 設定
 [role="quick-margin-para"]
-${post_edited_translations.segment}
+使用 StorageGRID 取得 ONTAP 連線至網格所需的值。
 
 [role="quick-margin-para"]
 使用 link:use-fabricpool-setup-wizard.html["FabricPool 設定精靈"] 是設定所有項目的建議方式，也是最快速的方式，但如果需要，您也可以手動設定每個實體。

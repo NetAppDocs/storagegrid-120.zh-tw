@@ -13,10 +13,10 @@ summary: 所有 StorageGRID 部署都必須能夠支援以下連線。
 [role="lead"]
 所有 StorageGRID 部署都必須能夠支援以下連線。
 
-${post_edited_translations.segment}
+這些連線可透過網格、管理或用戶端網路，或這些網路的組合來進行，如網路拓撲範例所示。
 
 * *管理連線*：系統管理員到節點的傳入連線，通常透過 SSH 進行。透過 Web 瀏覽器存取 Grid Manager、Tenant Manager 和 StorageGRID Appliance Installer。
-* ${post_edited_translations.segment}
+* *NTP 伺服器連線*：傳出 UDP 連線，接收傳入 UDP 回應。
 +
 主要管理節點必須至少能夠連線到一個 NTP 伺服器。
 
@@ -33,7 +33,7 @@ ${post_edited_translations.segment}
 
 TIP: 雖然您可以使用這些自動探索的主機路由，但通常您應該手動設定 DNS 和 NTP 路由，以確保在自動探索失敗時仍能保持連線。
 
-如果您在部署期間尚未準備好設定選購的管理網路和用戶端網路，則可以在組態步驟中核准網格節點時設定這些網路。此外，您也可以在安裝完成後使用「變更 IP」工具（請參閱 link:../maintain/configuring-ip-addresses.html["${post_edited_translations.segment}"]）設定這些網路。
+如果您在部署期間尚未準備好設定選購的管理網路和用戶端網路，則可以在組態步驟中核准網格節點時設定這些網路。此外，您也可以在安裝完成後使用「變更 IP」工具（請參閱 link:../maintain/configuring-ip-addresses.html["設定 IP 位址"]）設定這些網路。
 
 
 

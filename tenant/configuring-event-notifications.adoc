@@ -131,5 +131,5 @@ NOTE: StorageGRID 系統管理員必須使用 Grid Manager 或 Grid Management A
 .相關資訊
 * link:understanding-notifications-for-buckets.html["了解儲存桶的通知"]
 * link:../s3/index.html["使用 S3 REST API"]
-* link:creating-platform-services-endpoint.html["${post_edited_translations.segment}"]
+* link:creating-platform-services-endpoint.html["建立平台服務端點"]
 

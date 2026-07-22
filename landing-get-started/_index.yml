@@ -18,19 +18,19 @@ indexpage:
       url: "../primer/exploring-grid-manager.html"
     - title: 探索租戶管理器
       url: "../primer/exploring-tenant-manager.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 網路連線準則
     links:
     - title: 網路類型
       url: "../network/storagegrid-network-types.html"
     - title: 網路需求
       url: "../network/networking-requirements-and-guidelines.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 內部網格節點通訊
       url: "../network/internal-grid-node-communications.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 對外溝通
       url: "../network/external-communications.html"
   - title: 開始使用
     links:
-    - title: "${post_edited_translations.segment}"
+    - title: StorageGRID 快速入門
       url: "../primer/quick-start.html"
     - title: 網頁瀏覽器要求
       url: "../admin/web-browser-requirements.html"

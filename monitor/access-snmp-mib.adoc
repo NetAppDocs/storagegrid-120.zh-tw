@@ -20,10 +20,10 @@ MIB 檔案包含有關您網格中節點之受管理資源與服務屬性的定�
 [[access-mib-files]]
 == 存取 MIB 檔案
 
-${post_edited_translations.segment}
+請依照以下步驟存取 MIB 檔案。
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Monitoring* > *SNMP agent*。
 . 在 SNMP 代理程式頁面上，選擇要下載的檔案：
 +
 ** *NETAPP-STORAGEGRID-MIB.txt*：定義所有管理節點上可存取的警示表和通知（陷阱）。

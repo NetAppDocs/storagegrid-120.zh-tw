@@ -17,13 +17,13 @@ summary: 當您要恢復託管在 VMware 或 Linux 主機上的故障網格節�
 您擁有以下關於故障節點的資訊：
 
 * *節點名稱*：您必須使用與故障節點相同的節點名稱來安裝服務應用裝置。節點名稱即主機名稱（系統名稱）。
-* ${post_edited_translations.segment}
+* *IP 位址*：您可以將服務應用裝置指派與故障節點相同的 IP 位址（這是首選選項），或者您可以為每個網路選擇一個新的未使用 IP 位址。
 
 
 .關於此任務
-${post_edited_translations.segment}
+只有當您要恢復託管在 VMware 或 Linux 上的故障節點，並將其替換為託管在服務應用裝置上的節點時，才執行此程序。
 
 .步驟
 . 請依照指示安裝新的服務應用裝置。參見 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["硬體安裝快速入門"^]。
-. ${post_edited_translations.segment}
+. 當提示輸入節點名稱時，請使用故障節點的節點名稱。
 

@@ -251,7 +251,7 @@ CLIENT_NETWORK_GATEWAY = 10.4.0.1
 ----
 CLIENT_NETWORK_MTU = 8192
 ----
-* *PORT_REMAP*：重新映射節點用於內部網格節點通訊或外部通訊的任何連接埠。如果企業連網原則限制了 StorageGRID 使用的一個或多個連接埠，則必須重新映射連接埠。如需 StorageGRID 所使用連接埠的清單，請參閱 link:../network/index.html["${post_edited_translations.segment}"] 中的內部網格節點通訊和外部通訊。
+* *PORT_REMAP*：重新映射節點用於內部網格節點通訊或外部通訊的任何連接埠。如果企業連網原則限制了 StorageGRID 使用的一個或多個連接埠，則必須重新映射連接埠。如需 StorageGRID 所使用連接埠的清單，請參閱 link:../network/index.html["網路連線準則"] 中的內部網格節點通訊和外部通訊。
 +
 
 NOTE: 不要重新映射您規劃用於設定負載平衡器端點的連接埠。
@@ -275,7 +275,7 @@ PORT_REMAP = client/tcp/18082/443
 如果單獨使用，此範例設定會將網格節點的傳入和傳出通訊從連接埠 18082 對稱地對應到連接埠 443。如果與 PORT_REMAP_INBOUND 結合使用，此範例設定會將傳出通訊從連接埠 18082 對應到連接埠 443。
 
 +
-${post_edited_translations.segment}
+您也可以使用逗號分隔的清單重新對應多個連接埠。
 
 +
 例如：
@@ -305,7 +305,7 @@ PORT_REMAP_INBOUND = client/tcp/443/18082
 此範例將傳送至連接埠 443 的流量通過內部防火牆，並將其導向至連接埠 18082，網格節點正在該連接埠監聽 S3 請求。
 
 +
-${post_edited_translations.segment}
+您也可以使用逗號分隔的清單重新對應多個傳入連接埠。
 
 +
 例如：
@@ -344,7 +344,7 @@ TIP: 您也可以省略 *TEMPORARY_PASSWORD_TYPE* 參數，而只指定 *CUSTOM_
 
 * 區段標頭定義將在 Grid Manager 中顯示的節點名稱。您可以透過為節點指定選用的 NODE_NAME 參數來置換該值。
 * *NODE_TYPE*：VM_Admin_Node、VM_Storage_Node 或 VM_API_Gateway_Node
-* *STORAGE_TYPE*：combined、data 或 metadata。此儲存設備節點的選用參數如果未指定，則預設為 combined（資料和中繼資料）。如需詳細資訊，請參閱link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+* *STORAGE_TYPE*：combined、data 或 metadata。此儲存設備節點的選用參數如果未指定，則預設為 combined（資料和中繼資料）。如需詳細資訊，請參閱link:../primer/what-storage-node-is.html#types-of-storage-nodes["儲存節點類型"]。
 * *GRID_NETWORK_IP*：節點在網格網路上的 IP 位址。
 * *ADMIN_NETWORK_IP*：管理網路上節點的 IP 位址。僅當節點連接到管理網路且 ADMIN_NETWORK_CONFIG 設定為 STATIC 時才需要。
 * *CLIENT_NETWORK_IP*：用戶端網路上節點的 IP 位址。僅當節點連接至用戶端網路且該節點的 CLIENT_NETWORK_CONFIG 設定為 STATIC 時才需要。
@@ -481,7 +481,7 @@ STORAGE_TYPE = data
 
   ADMIN_IP = 10.1.0.2
 ----
-.${post_edited_translations.segment}
+.非主要管理節點
 以下附加設定是非主要管理節點所必需的：
 
 * *NODE_TYPE*: VM_Admin_Node

@@ -14,7 +14,7 @@ summary: 您可以替換或還原用於 S3 用戶端連線至儲存節點或負�
 您可以替換或還原用於 S3 用戶端連線至儲存節點或負載平衡器端點的伺服器憑證。替換後的自訂伺服器憑證專屬於您的組織。
 
 
-TIP: 此版本的文件網站已移除 Swift 相關細節。請參閱 https://docs.netapp.com/us-en/storagegrid-118/admin/configuring-custom-server-certificate-for-storage-node.html["${post_edited_translations.segment}"^]。
+TIP: 此版本的文件網站已移除 Swift 相關細節。請參閱 https://docs.netapp.com/us-en/storagegrid-118/admin/configuring-custom-server-certificate-for-storage-node.html["StorageGRID 11.8：設定 S3 和 Swift API 憑證"^]。
 
 .關於此任務
 預設情況下，每個 Storage Node 都會獲發由網格 CA 簽署的 X.509 伺服器憑證。這些 CA 簽署的憑證可以替換為單一常用的自訂伺服器憑證和對應的私密金鑰。
@@ -31,11 +31,11 @@ NOTE: 為確保伺服器憑證失效不會中斷運行，當根目錄伺服器�
 
 
 [[add-a-custom-s3-api-certificate]]
-== ${post_edited_translations.segment}
+== 新增自訂 S3 API 證書
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Certificates*。
+. 在「全域」標籤上，選擇「S3 API 憑證」。
 . 選擇 *Use custom certificate*。
 . 上傳或產生憑證。
 +
@@ -48,7 +48,7 @@ NOTE: 為確保伺服器憑證失效不會中斷運行，當根目錄伺服器�
 .. 選擇 *Upload certificate*。
 .. 上傳所需的伺服器憑證檔案：
 +
-*** ${post_edited_translations.segment}
+*** *伺服器憑證*：自訂伺服器憑證檔案（PEM 編碼）。
 *** *憑證私鑰*：自訂伺服器憑證私鑰檔案 (`.key`）
 +
 
@@ -59,7 +59,7 @@ NOTE: EC 私鑰必須至少 224 位元。RSA 私鑰必須至少 2048 位元。
 
 .. 選取憑證詳細資料，以顯示已上傳之每個自訂 S3 API 憑證的中繼資料與 PEM。如果您上傳了選用的 CA 套裝組合，每個憑證都會顯示在各自的索引標籤上。
 +
-*** ${post_edited_translations.segment}
+*** 選擇「下載憑證」以儲存憑證檔案，或選擇「下載 CA 套裝組合」以儲存憑證套裝組合。
 +
 指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
 
@@ -103,7 +103,7 @@ IP
 
 
  a| 
-${post_edited_translations.segment}
+主題（選用）
  a| 
 X.509 憑證擁有者的主旨或可分辨名稱 (DN)。
 
@@ -112,24 +112,24 @@ X.509 憑證擁有者的主旨或可分辨名稱 (DN)。
 
 
  a| 
-${post_edited_translations.segment}
+有效天數
  a| 
-${post_edited_translations.segment}
+憑證自建立之日起到期的天數。
 
 
 
  a| 
-${post_edited_translations.segment}
+新增金鑰使用延伸
  a| 
 如果選取（預設且建議），則會將金鑰用途和擴充金鑰用途擴充功能新增至產生的憑證。
 
 這些擴充定義了憑證中包含的金鑰的用途。
 
-${post_edited_translations.segment}
+*注意*：除非您在使用包含這些擴充功能的憑證時，舊版用戶端發生連線問題，否則請保持選取此核取方塊。
 
 |===
 .. 選擇 *Generate* 。
-.. ${post_edited_translations.segment}
+.. 選擇「憑證詳細資料」以顯示產生的自訂 S3 API 憑證的中繼資料和 PEM。
 +
 *** 選取 *Download certificate* 以儲存憑證檔案。
 +
@@ -149,47 +149,47 @@ ${post_edited_translations.segment}
 
 --
 ====
-. ${post_edited_translations.segment}
+. 選取索引標籤以顯示預設 StorageGRID 伺服器憑證、已上傳的 CA 簽章憑證或已產生的自訂憑證的中繼資料。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 上傳或產生新憑證後，最多需要一天時間才能清除任何相關的憑證到期警示。
 
-. ${post_edited_translations.segment}
+. 重新整理頁面以確保瀏覽器已更新。
 . 新增自訂 S3 API 憑證後，S3 API 憑證頁面會顯示目前使用中自訂 S3 API 憑證的詳細憑證資訊。+ 您可以根據需要下載或複製憑證 PEM。
 
 
 
 
 [[restore-the-default-s3-api-certificate]]
-== ${post_edited_translations.segment}
+== 還原預設 S3 API 憑證
 
 您可以回復使用預設的 S3 API 憑證來建立 S3 用戶端與儲存節點的連線。但是，您不能將預設的 S3 API 憑證用於負載平衡器端點。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Certificates*。
+. 在「全域」標籤上，選擇「S3 API 憑證」。
+. 選擇 *Use default certificate*。
 +
 當您還原全域 S3 API 憑證的預設版本時，您設定的自訂伺服器憑證檔案將會被刪除，且無法從系統中復原。預設的 S3 API 憑證將用於後續與儲存節點的新 S3 用戶端連線。
 
-. ${post_edited_translations.segment}
+. 選擇「確定」以確認警告並還原預設的 S3 API 憑證。
 +
 如果您擁有根目錄存取權限，並且使用了自訂 S3 API 憑證來連接負載平衡器端點，則會顯示負載平衡器端點清單，這些端點將無法再使用預設 S3 API 憑證存取。請前往 link:../admin/configuring-load-balancer-endpoints.html["設定負載平衡器端點"] 編輯或移除受影響的端點。
 
-. ${post_edited_translations.segment}
+. 重新整理頁面以確保瀏覽器已更新。
 
 
 
 
 [[download-or-copy-the-s3-api-certificate]]
-== ${post_edited_translations.segment}
+== 下載或複製 S3 API 憑證
 
 您可以儲存或複製 S3 API 憑證內容以供其他地方使用。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Certificates*。
+. 在「全域」標籤上，選擇「S3 API 憑證」。
+. 選取 *Server* 或 *CA bundle* 索引標籤，然後下載或複製憑證。
 +
 [role="tabbed-block"]
 ====

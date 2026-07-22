@@ -16,11 +16,11 @@ summary: 請遵循每種 StorageGRID 網路類型的要求。
 
 
 [[network-gateways-and-routers]]
-== ${post_edited_translations.segment}
+== 網路閘道和路由器
 
 * 如果已設定，則指定網路的閘道必須位於該特定網路的子網路內。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 如果使用靜態位址設定介面，則必須指定除 0.0.0.0 之外的閘道位址。
+* 如果沒有閘道，最佳實務做法是將閘道位址設定為網路介面的 IP 位址。
 
 
 
@@ -35,7 +35,7 @@ NOTE: 每個網路必須連接到自己的子網路，該子網路不得與節�
 
 * 任何網路 IP 位址的子網路遮罩都不能是 255.255.255.254 或 255.255.255.255（CIDR 表示法中的 /31 或 /32）。
 * 由網路介面 IP 位址和子網路遮罩 (CIDR) 定義的子網路，不能與同一節點上設定的任何其他介面的子網路重疊。
-* ${post_edited_translations.segment}
+* 任何節點的網格網路、管理網路或用戶端網路都不得使用包含下列 IPv4 位址的子網路：
 +
 ** 192,168,130,101
 ** 192,168,130,121
@@ -50,11 +50,11 @@ NOTE: 每個網路必須連接到自己的子網路，該子網路不得與節�
 
 
 +
-${post_edited_translations.segment}
+例如，請勿將下列子網路範圍用於任何節點的網格網路、管理網路或用戶端網路：
 
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 192.168.130.0/24，因為此子網路範圍包含 IP 位址 192.168.130.101 和 192.168.130.102
+** 192.168.131.0/24，因為此子網路範圍包含 IP 位址 192.168.131.101 和 192.168.131.102
 ** 198.51.100.0/24，因為此子網路範圍包含 IP 位址 198.51.100.2 和 198.51.100.4
 
 
@@ -82,14 +82,14 @@ NOTE: 每個節點之間的網格網路必須可以直接路由。不支援節�
 
 
 [[admin-network]]
-== ${post_edited_translations.segment}
+== 管理網路
 
 管理網路是可選的。如果您計劃設定管理網路，請遵循以下要求和準則。
 
 管理網路的典型用途包括管理連線、AutoSupport、KMS 以及與 NTP、DNS 和 LDAP 等關鍵伺服器的連線（如果這些連線未透過網格網路或用戶端網路提供）。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 只要所需的網路服務和用戶端可連線，管理網路和 AESL 可以對每個節點都是唯一的。
 
 
 NOTE: 您必須在管理網路上定義至少一個子網路，才能啟用來自外部子網路的傳入連線。AESL 中的每個子網路會在每個節點上自動產生靜態路由。
@@ -107,4 +107,4 @@ NOTE: 您必須在管理網路上定義至少一個子網路，才能啟用來�
 
 
 .相關資訊
-link:../maintain/changing-nodes-network-configuration.html["${post_edited_translations.segment}"]
+link:../maintain/changing-nodes-network-configuration.html["更改節點網路組態"]

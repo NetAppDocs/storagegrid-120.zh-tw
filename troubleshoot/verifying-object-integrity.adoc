@@ -159,7 +159,7 @@ NOTE: 如有需要，您可以離開物件存在性檢查頁面，然後返回�
 當 StorageGRID 有時間實現作業中所含節點和磁碟區的中繼資料一致性後，重新執行作業可能會清除錯誤報告的遺失物件副本，或在遺漏其他物件副本時導致系統對這些副本進行檢查。
 
 +
-.. ${post_edited_translations.segment}
+.. 選擇 *Maintenance* > *Object existence check* > *Job history*。
 .. 確定哪些工作已準備好重新執行：
 +
 ... 查看「結束時間」欄，確定哪些工作是在三週前以上執行的。

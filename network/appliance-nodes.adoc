@@ -2,7 +2,7 @@
 permalink: network/appliance-nodes.html 
 sidebar: sidebar 
 keywords: networking for appliance, port bond mode 
-summary: ${post_edited_translations.segment} 
+summary: 您可以設定 StorageGRID 應用裝置上的網路連接埠，以使用符合處理量、備援和容錯移轉需求的連接埠連結模式。 
 ---
 = StorageGRID 設備節點的網路配置
 :allow-uri-read: 
@@ -11,11 +11,11 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以設定 StorageGRID 應用裝置上的網路連接埠，以使用符合處理量、備援和容錯移轉需求的連接埠連結模式。
 
-${post_edited_translations.segment}
+StorageGRID 應用裝置上的 10/25-GbE 連接埠可設定為固定或彙總連結模式，以連線至網格網路和用戶端網路。
 
-${post_edited_translations.segment}
+1-GbE 管理網路連接埠可設定為獨立模式或主備模式，以連接管理網路。
 
 請查看有關您應用裝置連接埠綁定模式的資訊：
 

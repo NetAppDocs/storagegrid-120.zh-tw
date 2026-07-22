@@ -9,7 +9,7 @@ entries:
   entries:
   - title: 網頁瀏覽器要求
     url: "/admin/web-browser-requirements.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 登入 Grid Manager
     url: "/admin/signing-in-to-grid-manager.html"
   - title: 登出 Grid Manager
     url: "/admin/signing-out-of-grid-manager.html"
@@ -17,11 +17,11 @@ entries:
     url: "/admin/changing-your-password.html"
   - title: 檢視 StorageGRID 授權資訊
     url: "/admin/viewing-storagegrid-license-information.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 更新 StorageGRID 授權資訊
     url: "/admin/updating-storagegrid-license-information.html"
   - title: 使用 API
     entries:
-    - title: "${post_edited_translations.segment}"
+    - title: 使用網格管理 API
       pdf-filename: 網格管理 API
       url: "/admin/using-grid-management-api.html"
     - title: 網格管理 API 作業
@@ -47,13 +47,13 @@ entries:
     url: "/admin/controlling-storagegrid-access.html"
   - title: 變更佈建複雜密碼
     url: "/admin/changing-provisioning-passphrase.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 變更節點主控台密碼
     url: "/admin/change-node-console-password.html"
   - title: 更改 SSH 存取密碼
     url: "/admin/change-ssh-access-passwords.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 使用身分聯盟
     url: "/admin/using-identity-federation.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 管理管理員群組
     url: "/admin/managing-admin-groups.html"
   - title: 管理員群組權限
     url: "/admin/admin-group-permissions.html"
@@ -69,7 +69,7 @@ entries:
       url: "/admin/confirming-federated-users-can-sign-in.html"
     - title: 設定 SSO
       url: "/admin/configure-sso.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 在 AD FS 中建立信賴方信任
       url: "/admin/creating-relying-party-trusts-in-ad-fs.html"
     - title: 在 Entra ID 中建立企業應用程式
       url: "/admin/creating-enterprise-application-entra-id.html"
@@ -94,16 +94,16 @@ entries:
     url: "/admin/grid-federation-create-connection.html"
   - title: 管理網格同盟連線
     url: "/admin/grid-federation-manage-connection.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 管理獲準租戶
     url: "/admin/grid-federation-manage-tenants.html"
   - title: 排除網格同盟錯誤
     url: "/admin/grid-federation-troubleshoot.html"
   - title: 識別並重試失敗的複寫操作
     url: "/admin/grid-federation-retry-failed-replication.html"
-- title: "${post_edited_translations.segment}"
+- title: 管理安全性
   entries:
   - title: 安全性元件
-    pdf-filename: "${post_edited_translations.segment}"
+    pdf-filename: 管理安全性
     url: "/admin/manage-security.html"
   - title: 檢閱 StorageGRID 加密方法
     url: "/admin/reviewing-storagegrid-encryption-methods.html"
@@ -134,10 +134,10 @@ entries:
       url: "/admin/changing-browser-session-timeout-interface.html"
     - title: 管理外部 SSH 存取
       url: "/admin/manage-external-ssh-access.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 設定金鑰管理伺服器
     entries:
     - title: 什麼是金鑰管理伺服器
-      pdf-filename: "${post_edited_translations.segment}"
+      pdf-filename: 設定金鑰管理伺服器
       url: "/admin/kms-configuring.html"
     - title: KMS 和應用裝置組態
       url: "/admin/kms-overview-of-kms-and-appliance-configuration.html"
@@ -147,11 +147,11 @@ entries:
       url: "/admin/kms-considerations-for-changing-for-site.html"
     - title: 在 KMS 中將 StorageGRID 設定為用戶端
       url: "/admin/kms-configuring-storagegrid-as-client.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 新增金鑰管理伺服器（KMS）
       url: "/admin/kms-adding.html"
     - title: 管理 KMS
       url: "/admin/kms-managing.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 管理 Proxy 設定
     entries:
     - title: 設定儲存設備 Proxy
       url: "/admin/configuring-storage-proxy-settings.html"
@@ -159,11 +159,11 @@ entries:
       url: "/admin/configuring-admin-proxy-settings.html"
   - title: 控制防火牆
     entries:
-    - title: "${post_edited_translations.segment}"
+    - title: 控制外部防火牆的存取
       url: "/admin/controlling-access-through-firewalls.html"
     - title: 管理內部防火牆
       url: "/admin/manage-firewall-controls.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 設定內部防火牆
       url: "/admin/configure-firewall-controls.html"
 - title: 管理租戶
   entries:
@@ -178,7 +178,7 @@ entries:
     url: "/admin/changing-password-for-tenant-local-root-user.html"
   - title: 刪除租戶帳戶
     url: "/admin/deleting-tenant-account.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 管理平台服務
     entries:
     - title: 什麼是平台服務
       pdf-filename: 管理 S3 租戶帳戶的平台服務
@@ -189,14 +189,14 @@ entries:
       url: "/admin/per-site-delivery-of-platform-services-messages.html"
     - title: 平台服務疑難排解
       url: "/admin/troubleshooting-platform-services.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 管理租戶帳戶的 S3 Select
     url: "/admin/manage-s3-select-for-tenant-accounts.html"
 - title: 設定用戶端連線
   entries:
   - title: 組態工作
-    pdf-filename: "${post_edited_translations.segment}"
+    pdf-filename: 設定 S3 用戶端連線
     url: "/admin/configuring-client-connections.html"
-  - title: "${post_edited_translations.segment}"
+  - title: S3 用戶端的安全
     url: "/admin/security-for-clients.html"
   - title: 使用 S3 設定精靈
     entries:
@@ -207,7 +207,7 @@ entries:
   - title: 管理 HA 群組
     entries:
     - title: HA 群組是什麼？
-      pdf-filename: "${post_edited_translations.segment}"
+      pdf-filename: 管理高可用度 （HA） 群組
       url: "/admin/managing-high-availability-groups.html"
     - title: HA 群組的使用方式
       url: "/admin/how-ha-groups-are-used.html"
@@ -232,7 +232,7 @@ entries:
     url: "/admin/configuring-network-settings.html"
   - title: StorageGRID 網路指南
     url: "/admin/guidelines-for-storagegrid-networks.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 檢視 IP 位址
     url: "/admin/viewing-ip-addresses.html"
   - title: 設定 VLAN 介面
     url: "/admin/configure-vlan-interfaces.html"
@@ -249,7 +249,7 @@ entries:
       url: "/admin/editing-traffic-classification-policy.html"
     - title: 刪除流量分類原則
       url: "/admin/deleting-traffic-classification-policy.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 檢視網路流量計量
       url: "/admin/viewing-network-traffic-metrics.html"
   - title: 支援的傳出 TLS 連線加密套件
     url: "/admin/supported-ciphers-for-outgoing-tls-connections.html"

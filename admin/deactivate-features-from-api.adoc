@@ -23,7 +23,7 @@ A 公司是一家服務供應商，透過建立租戶帳戶的方式出租其 St
 公司 A 可以透過使用 Grid Management API 中的「停用功能」系統來達成此目標。透過在 Grid Manager （包括使用者介面和 API）中完全停用「變更租戶 root 密碼」功能，公司 A 可確保管理員使用者（包括 root 使用者和屬於具有「Root 存取權」權限之群組的使用者）無法變更任何租戶帳戶的 root 使用者密碼。
 
 .步驟
-. 存取網格管理 API 的 Swagger 文件。參見link:using-grid-management-api.html["${post_edited_translations.segment}"]。
+. 存取網格管理 API 的 Swagger 文件。參見link:using-grid-management-api.html["使用網格管理 API"]。
 . 找到「停用功能」端點。
 . 若要停用某項功能（例如「變更租戶 root 使用者密碼」），請向 API 傳送如下的請求本文：
 +
@@ -37,7 +37,7 @@ A 公司是一家服務供應商，透過建立租戶帳戶的方式出租其 St
 
 
 [[reactivate-deactivated-features]]
-== ${post_edited_translations.segment}
+== 重新啟用已停用的功能
 
 預設情況下，您可以使用 Grid Management API 重新啟用已停用的功能。但是，如果您希望防止已停用的功能被重新啟用，則可以停用 *activateFeatures* 功能本身。
 
@@ -45,9 +45,9 @@ A 公司是一家服務供應商，透過建立租戶帳戶的方式出租其 St
 CAUTION: *activateFeatures* 功能無法重新啟動。如果您決定停用此功能，請注意，您將永久失去重新啟用任何其他已停用功能的能力。您必須聯絡技術支援以還原任何遺失的功能。
 
 .步驟
-. ${post_edited_translations.segment}
+. 存取網格管理 API 的 Swagger 文件。
 . 找到「停用功能」端點。
-. ${post_edited_translations.segment}
+. 若要重新啟動所有功能，請向 API 發送以下請求體：
 +
 `{ "grid": null }`
 

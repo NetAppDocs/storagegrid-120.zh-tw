@@ -21,7 +21,7 @@ summary: 您可以新增、刪除或變更一個或多個節點的管理網路�
 
 [NOTE]
 ====
-${post_edited_translations.segment}
+任何節點的網格網路、管理網路或用戶端網路都不得使用包含下列 IPv4 位址的子網路：
 
 * 192,168,130,101
 * 192,168,130,121
@@ -35,17 +35,17 @@ ${post_edited_translations.segment}
 * 198.51.100.4
 
 
-${post_edited_translations.segment}
+例如，請勿將下列子網路範圍用於任何節點的網格網路、管理網路或用戶端網路：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 192.168.130.0/24，因為此子網路範圍包含 IP 位址 192.168.130.101 和 192.168.130.102
+* 192.168.131.0/24，因為此子網路範圍包含 IP 位址 192.168.131.101 和 192.168.131.102
 * 198.51.100.0/24，因為此子網路範圍包含 IP 位址 198.51.100.2 和 198.51.100.4
 
 
 ====
 .步驟
 . 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -68,12 +68,12 @@ image:change_ip_tool_main_menu.png["快照顯示變更 IP 工具的歡迎畫面"
 +
 ** 如果要篩選要執行作業的特定節點，請選擇 *1* 以選取要編輯的節點。請選擇下列選項之一：
 +
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
+*** *1*：單一節點（依名稱選擇）
+*** *2*：單一節點（先按站台選擇，再按名稱選擇）
 *** *3*：單節點（依目前 IP 選擇）
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
+*** *4*：站台中的所有節點
+*** *5*：網格中的所有節點
+*** *0*：返回
 
 
 ** 允許保持選取「全部」。進行選取後，系統會顯示主功能表畫面。「選取的節點」欄位會反映您的新選取項目，現在所有選取的作業將僅在此項目上執行。
@@ -156,7 +156,7 @@ Updating grid network configuration on Name
 ----
 
 
-. ${post_edited_translations.segment}
+. 從 Grid Manager 下載新的恢復套件。
 +
 .. 選擇 *Maintenance* > *System* > *Recovery package*。
 .. 請輸入佈建密碼。

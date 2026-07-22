@@ -11,7 +11,7 @@ summary: 如果您正在執行擴充以新增儲存節點，並使用 ILM 規則
 
 
 [role="lead"]
-${post_edited_translations.segment}
+如果您正在執行擴充以新增儲存節點，並使用 ILM 規則對資料進行銷毀編碼，則當您無法為所使用的銷毀編碼方案新增足夠的儲存節點時，可能需要執行銷毀編碼 （EC） 重新平衡程序。
 
 在審查這些考量事項之後，請執行擴充，然後前往 link:rebalancing-erasure-coded-data-after-adding-storage-nodes.html["新增儲存節點後重新平衡銷毀編碼資料"] 執行此程序。
 
@@ -22,30 +22,30 @@ ${post_edited_translations.segment}
 
 EC 重新平衡是 StorageGRID 的程序，在儲存節點擴充之後可能需要執行此程序。此程序是從主要管理節點以命令列指令碼的形式執行。當您執行 EC 重新平衡程序時，StorageGRID 會在站台內現有的和新新增的儲存節點之間，重新分配銷毀編碼片段。
 
-${post_edited_translations.segment}
+EC 重新平衡程序：
 
 * 僅移動銷毀編碼的物件資料。它不會移動複寫的物件資料。
 * 重新分配站台內的資料。它不會在站台之間移動資料。
 * 它會將資料重新分配到站台內的所有儲存節點。它不會重新分配儲存磁碟區內的資料。
 * 嘗試將相同數量的位元組散佈至每個節點。在重新平衡完成後，包含較多複寫資料的節點將會儲存較少的銷毀編碼資料。
 * 在 Storage Nodes 之間平均重新分配銷毀編碼資料，而不考慮每個節點的相對容量。複寫資料已包含在計算中。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 不會將銷毀編碼資料經銷至已使用率超過 80% 的儲存節點。
+* 執行時可能會降低 ILM 作業和 S3 用戶端作業的效能——需要額外的資源來重新發佈銷毀編碼片段。
 
 
 當 EC 重新平衡程序完成後：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 銷毀編碼資料將從可用空間較小的儲存節點移至可用空間較大的儲存節點。
+* 銷毀編碼物件的資料保護將保持不變。
+* 儲存節點間的已使用（%）值可能有差異，原因有二：
 +
 ** 複製的物件複本將繼續使用現有節點上的空間—EC 重新平衡程序不會移動複製的資料。
-** ${post_edited_translations.segment}
+** 容量較大的節點相對而言不會比容量較小的節點更滿，即使所有節點最終都會擁有大致相同數量的資料。
 +
 例如，假設三個 200-TB 的節點各填滿了 80% （每個節點為 200 × 0.8 = 160 TB，或該站台為 480 TB）。如果您新增一個 400-TB 的節點並執行重新平衡程序，則所有節點現在將具有大約相同數量的銷毀編碼資料 （480/4 = 120 TB）。但是，較大節點的「已使用 (%)」將小於較小節點的「已使用 (%)」。
 
 +
-image:used_space_with_larger_node.png["${post_edited_translations.segment}"]
+image:used_space_with_larger_node.png["擴建前的使用空間"]
 
 
 
@@ -54,19 +54,19 @@ image:used_space_with_larger_node.png["${post_edited_translations.segment}"]
 
 
 [[when-to-rebalance-erasure-coded-data]]
-== ${post_edited_translations.segment}
+== 何時重新平衡銷毀編碼資料
 
 EC 重新平衡程序會重新分配現有的銷毀編碼資料，以確保節點不會變滿或維持客滿狀態。此程序有助於確保該站台能繼續進行 EC 編碼。
 
-${post_edited_translations.segment}
+當站台上的資料分佈有令人擔憂的偏差，且該站台主要儲存 EC 資料時（因為複寫的資料無法透過重新平衡移動），請執行重新平衡程序。
 
 請考慮以下情境：
 
 * StorageGRID 運行於單一站台，該站台包含三個儲存節點。
-* ${post_edited_translations.segment}
+* ILM 原則對所有大於 1.0 MB 的物件使用 2+1 銷毀編碼規則，對較小的物件使用 2 複本複寫規則。
 * 所有儲存節點已完全裝滿。*物件儲存空間不足* 警示已在重要嚴重性層級觸發。
 +
-image:used_space_before_expansion.png["${post_edited_translations.segment}"]
+image:used_space_before_expansion.png["擴建前的使用空間"]
 
 
 
@@ -98,56 +98,56 @@ image:used_space_after_ec_rebalance.png["EC 重新平衡 aAfter 的已使用空�
 
 
 [[recommendations-for-ec-rebalancing]]
-== ${post_edited_translations.segment}
+== EC 重新平衡的建議
 
 NetApp 在以下 _所有_ 陳述皆為真時，需要進行 EC 重新平衡：
 
 * 您對物件資料使用銷毀編碼。
 * 站台中的一個或多個儲存節點已觸發 *Low Object Storage* 警示，表示這些節點已使用 80% 或更多。
 * 您無法為使用中的銷毀編碼配置新增足夠的新儲存節點。請參閱 link:adding-storage-capacity-for-erasure-coded-objects.html["增加銷毀編碼物件的儲存容量"]。
-* ${post_edited_translations.segment}
+* 在 EC 重新平衡程序執行期間，您的 S3 用戶端可以容忍寫入和讀取作業的效能降低。
 
 
-${post_edited_translations.segment}
+如果您希望儲存節點填充到相似的層級，且您的 S3 用戶端可以容忍在 EC 重新平衡程序執行期間寫入和讀取作業的效能降低，則可以選擇執行 EC 重新平衡程序。
 
 
 
 [[how-ec-rebalance-procedure-interacts-with-other-maintenance-tasks]]
-== ${post_edited_translations.segment}
+== EC 重新平衡程序如何與其他維護工作互動
 
 在執行 EC 重新平衡程序的同時，不能執行某些維護程序。
 
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 程序 | 在 EC 重新平衡程序期間是否允許？ 
 
 
  a| 
 其他 EC 重新平衡程序
  a| 
-${post_edited_translations.segment}
+否。
 
 一次只能執行一個 EC 重新平衡程式。
 
 
 
  a| 
-${post_edited_translations.segment}
+退役程序
 
 EC 資料修理工作
  a| 
-${post_edited_translations.segment}
+否。
 
-* ${post_edited_translations.segment}
+* 在 EC 重新平衡程式運作期間，您將無法啟動退役程式或 EC 資料修理。
 * 當儲存節點退役程序或 EC 資料修理程序執行時，您將無法啟動 EC 重新平衡程序。
 
 
 
 
  a| 
-${post_edited_translations.segment}
+擴充程序
  a| 
-${post_edited_translations.segment}
+否。
 
 如果需要在擴充中新增新的儲存節點，請在新增所有新節點後執行 EC 重新平衡程序。
 
@@ -156,34 +156,34 @@ ${post_edited_translations.segment}
  a| 
 升級程序
  a| 
-${post_edited_translations.segment}
+否。
 
 如果需要升級 StorageGRID 軟體，請在執行 EC 重新平衡程序之前或之後執行升級程序。如有需要，您可以終止 EC 重新平衡程序以執行軟體升級。
 
 
 
  a| 
-${post_edited_translations.segment}
+應用裝置節點 Clone 程序
  a| 
-${post_edited_translations.segment}
+否。
 
-${post_edited_translations.segment}
+如果需要 Clone 應用裝置儲存節點，請在新增節點後執行 EC 重新平衡程式。
 
 
 
  a| 
-${post_edited_translations.segment}
+Hotfix 程序
  a| 
 是的。
 
-${post_edited_translations.segment}
+在 EC 重新平衡程序執行期間，您可以套用 StorageGRID Hotfix。
 
 
 
  a| 
 其他維護程序
  a| 
-${post_edited_translations.segment}
+否。
 
 在執行其他維護程序之前，必須終止 EC 重新平衡程序。
 
@@ -191,6 +191,6 @@ ${post_edited_translations.segment}
 
 
 [[how-ec-rebalance-procedure-interacts-with-ilm]]
-== ${post_edited_translations.segment}
+== EC 重新平衡程序如何與 ILM 互動
 
 在執行 EC 重新平衡程序時，請避免進行可能會變更現有銷毀編碼物件位置的 ILM 變更。例如，請勿開始使用具有不同銷毀編碼設定檔的 ILM 規則。如果您需要進行此類 ILM 變更，您應該終止 EC 重新平衡程序。

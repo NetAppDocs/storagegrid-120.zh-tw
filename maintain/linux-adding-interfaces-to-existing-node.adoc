@@ -17,7 +17,7 @@ summary: 安裝完成後，使用下列步驟為 Linux 節點新增管理網路�
 
 此程序需在託管需要新網路指派的節點的 Linux 伺服器上執行，而非在節點內部執行。此程序僅將介面新增至節點；若您嘗試指定任何其他網路參數，則會發生驗證錯誤。
 
-若要提供定址資訊，您必須使用 Change IP 工具。請參閱 link:changing-nodes-network-configuration.html["${post_edited_translations.segment}"]。
+若要提供定址資訊，您必須使用 Change IP 工具。請參閱 link:changing-nodes-network-configuration.html["更改節點網路組態"]。
 
 .步驟
 . 登入託管該節點的 Linux 伺服器。
@@ -37,7 +37,7 @@ NOTE: 請勿指定任何其他網路參數，否則將導致驗證錯誤。
 
 
 
-. ${post_edited_translations.segment}
+. 執行節點驗證命令：
 +
 `sudo storagegrid node validate _node-name_`
 

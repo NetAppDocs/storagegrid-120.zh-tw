@@ -22,7 +22,7 @@ summary: 節點和站台之間的網路完整性和頻寬，以及各個網格�
 
 使用 Grid Manager 監控連線能力和網路效能，以便及時解決任何問題。
 
-此外，請考慮 link:../admin/managing-traffic-classification-policies.html["${post_edited_translations.segment}"] 以便監控與特定租用戶、儲存桶、子網路或負載平衡器端點相關的流量。您可以視需要設定流量限制原則。
+此外，請考慮 link:../admin/managing-traffic-classification-policies.html["建立網路流量分類原則"] 以便監控與特定租用戶、儲存桶、子網路或負載平衡器端點相關的流量。您可以視需要設定流量限制原則。
 
 .步驟
 . 選取 *Nodes* 。
@@ -34,10 +34,10 @@ image:nodes_menu.png["節點選單"]
 
 . 選擇網格名稱、特定資料中心站點或網格節點，然後選擇「網路」標籤。
 +
-${post_edited_translations.segment}
+網路流量圖提供整個網格、資料中心站台或節點的整體網路流量總結。
 
 +
-image:nodes_page_network_traffic_graph.png["${post_edited_translations.segment}"]
+image:nodes_page_network_traffic_graph.png["節點頁面網路流量圖"]
 
 +
 .. 如果您選取了網格節點，請向下捲動以審查頁面上的「網路介面」部分。
@@ -46,7 +46,7 @@ image:nodes_page_network_interfaces.png["節點頁面網路介面"]
 
 .. 對於網格節點，請向下捲動以審查頁面上的「網路通訊」部分。
 +
-${post_edited_translations.segment}
+接收表和發送表顯示了每個網路接收和發送的位元組數和封包數，以及其他接收和傳輸計量。
 
 +
 image:nodes_page_network_communication.png["節點頁面網路通訊"]
@@ -65,7 +65,7 @@ image:traffic_classification_policies_main_screen_w_examples.png["圖示範例�
 .. 若要檢視顯示與原則關聯的連網計量的圖表，請選擇原則左側的單選按鈕，然後按一下 *Metrics*。
 .. 審查圖表以了解與該原則相關的網路流量。
 +
-如果流量分類原則的設計旨在限制網路流量，請分析限制流量的頻率，並決定該原則是否繼續符合您的需求。不時，link:../admin/managing-traffic-classification-policies.html["${post_edited_translations.segment}"]。
+如果流量分類原則的設計旨在限制網路流量，請分析限制流量的頻率，並決定該原則是否繼續符合您的需求。不時，link:../admin/managing-traffic-classification-policies.html["視需要調整每項流量分類原則"]。
 
 
 
@@ -73,21 +73,21 @@ image:traffic_classification_policies_main_screen_w_examples.png["圖示範例�
 
 .相關資訊
 * link:viewing-network-tab.html["檢視「網路」索引標籤"]
-* link:monitoring-system-health.html#monitor-node-connection-states["${post_edited_translations.segment}"]
+* link:monitoring-system-health.html#monitor-node-connection-states["監控節點連線狀態"]
 
 
 
 
 [[monitor-node-level-resources]]
-== ${post_edited_translations.segment}
+== 監控節點層級資源
 
 監控各網格節點，檢查其資源使用層級。如果節點持續過載，則可能需要更多節點才能提高運作效率。
 
 .步驟
-. ${post_edited_translations.segment}
+. 從 *Nodes* 頁面中選取節點。
 . 選擇「硬體」標籤，顯示 CPU 使用率和記憶體使用量圖表。
 +
-image:nodes_page_hardware_tab_graphs.png["${post_edited_translations.segment}"]
+image:nodes_page_hardware_tab_graphs.png["節點頁面硬體索引標籤"]
 
 . 若要顯示不同的時間間隔，請選擇圖表上方的控制項之一。您可以顯示 1 小時、1 天、1 週或 1 個月時間間隔內的資訊。您也可以設定自訂時間間隔，從而指定日期和時間範圍。
 . 如果節點是託管在儲存應用裝置或服務應用裝置上，請向下捲動以檢視元件表。所有元件的狀態應為 "Nominal"。調查具有任何其他狀態的元件。
@@ -95,5 +95,5 @@ image:nodes_page_hardware_tab_graphs.png["${post_edited_translations.segment}"]
 
 .相關資訊
 * link:viewing-hardware-tab.html#view-information-about-appliance-storage-nodes["檢視應用裝置儲存節點的相關資訊"]
-* link:viewing-hardware-tab.html#view-information-about-appliance-admin-nodes-and-gateway-nodes["${post_edited_translations.segment}"]
+* link:viewing-hardware-tab.html#view-information-about-appliance-admin-nodes-and-gateway-nodes["檢視應用裝置管理節點和閘道節點的相關資訊"]
 

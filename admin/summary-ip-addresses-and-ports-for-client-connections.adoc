@@ -15,26 +15,26 @@ summary: 為了儲存或擷取物件，S3 用戶端應用程式連接到負載�
 
 用戶端應用程式可以使用網格節點的 IP 位址以及該節點上服務的連接埠號碼來連線至 StorageGRID。（選填）您可以建立負載平衡節點的高可用度（HA）群組，以提供使用虛擬 IP（VIP）位址的高可用度連線。如果您想要使用完整網域（FQDN）代替 IP 或 VIP 位址來連線至 StorageGRID，您可以設定 DNS 項目。
 
-此表總結了用戶端連接到 StorageGRID 的不同方式，以及每種連線類型所使用的 IP 位址和連接埠。如果您已建立負載平衡器端點和高可用度 （HA） 群組，請參閱 <<${post_edited_translations.segment}>> 以在 Grid Manager 中找到這些值。
+此表總結了用戶端連接到 StorageGRID 的不同方式，以及每種連線類型所使用的 IP 位址和連接埠。如果您已建立負載平衡器端點和高可用度 （HA） 群組，請參閱 <<哪裡可以找到 IP 位址>> 以在 Grid Manager 中找到這些值。
 
 [cols="1a,1a,1a,1a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} | IP 位址 | 連接埠 
+| 連線建立位置 | 用戶端連線的服務 | IP 位址 | 連接埠 
 
 
  a| 
-${post_edited_translations.segment}
+HA 群組
  a| 
 負載平衡器
  a| 
-${post_edited_translations.segment}
+HA 群組的虛擬 IP 位址
  a| 
 指派給負載平衡器端點的連接埠
 
 
 
  a| 
-${post_edited_translations.segment}
+管理節點
  a| 
 負載平衡器
  a| 
@@ -72,39 +72,39 @@ LDR
 
 
 [[example-urls]]
-== ${post_edited_translations.segment}
+== 範例網址
 
 若要將用戶端應用程式連接到 HA 閘道節點群組的負載平衡器端點，請使用如下所示結構的 URL：
 
 `https://_VIP-of-HA-group:LB-endpoint-port_`
 
-${post_edited_translations.segment}
+例如，如果 HA 群組的虛擬 IP 位址為 192.0.2.5，負載平衡器端點的連接埠號碼為 10443，則應用程式可以使用下列 URL 連線至 StorageGRID：
 
 `\https://192.0.2.5:10443`
 
 
 
 [[where-to-find-ip-addresses]]
-== ${post_edited_translations.segment}
+== 哪裡可以找到 IP 位址
 
 . 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 . 尋找網格節點的 IP 位址：
 +
 .. 選取 *Nodes* 。
-.. ${post_edited_translations.segment}
+.. 選擇要連線的管理節點、閘道節點或儲存節點。
 .. 選擇 *Overview* 標籤。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 在「節點資訊」區段中，記下節點的 IP 位址。
+.. 選擇 *Show more* 以檢視 IPv6 位址和介面映射。
 +
-${post_edited_translations.segment}
+用戶端應用程式可以連接到清單中的任何 IP 位址：
 
 +
 *** *eth0:* 網格網路
-*** ${post_edited_translations.segment}
+*** *eth1:* 管理網路（選用）
 *** *eth2:* 用戶端網路（選購）
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果您正在檢視管理節點或閘道節點，且它是高可用度群組中的作用中節點，則 HA 群組的虛擬 IP 位址將顯示在 eth2 上。
 
 
 
@@ -116,9 +116,9 @@ NOTE: ${post_edited_translations.segment}
 .. 在表格中，記下 HA 群組的虛擬 IP 位址。
 
 
-. ${post_edited_translations.segment}
+. 若要尋找負載平衡器端點的連接埠號碼：
 +
-.. ${post_edited_translations.segment}
+.. 選擇 *Configuration* > *Network* > *Load balancer endpoints*。
 .. 記下您要使用的端點的連接埠號碼。
 +
 

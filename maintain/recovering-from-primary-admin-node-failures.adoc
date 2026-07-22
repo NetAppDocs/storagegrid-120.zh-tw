@@ -16,7 +16,7 @@ summary: '您必須完成一組特定的工作，才能從主要 Admin 節點故
 
 CAUTION: 您必須及時修復或更換故障的主要管理節點，否則可能無法執行某些維護程序。
 
-${post_edited_translations.segment}
+請依照以下高階步驟恢復主管理節點：
 
 . link:copying-audit-logs-from-failed-primary-admin-node.html["從故障的主管理節點複製稽核日誌"]
 . link:replacing-primary-admin-node.html["替換主管理節點"]

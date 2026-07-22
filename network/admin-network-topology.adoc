@@ -13,12 +13,12 @@ summary: 擁有管理網路是選用的。使用管理網路和網格網路的�
 [role="lead"]
 擁有管理網路是選用的。使用管理網路和網格網路的一種方法，是為每個節點設定可路由的網格網路和受限的管理網路。
 
-${post_edited_translations.segment}
+設定管理網路時，需要為每個網格節點的 eth1 介面建立主機 IP 位址、子網路遮罩和閘道 IP 位址。
 
 管理網路可以對每個節點獨立設定，並且可以包含多個子網路。每個節點都可以設定一個管理外部子網路清單 （AESL）。AESL 列出了每個節點可透過管理網路存取的子網路。AESL 還必須包含網格將透過管理網路存取的任何服務的子網路，例如 NTP、DNS、KMS 和 LDAP。AESL 中的每個子網路都套用靜態路由。
 
-${post_edited_translations.segment}
+在此範例中，網格網路用於與 S3 用戶端請求和物件管理相關的網路流量，而管理網路則用於管理功能。
 
-image:grid_admin_networks.png["${post_edited_translations.segment}"]
+image:grid_admin_networks.png["網格管理網路"]
 
-image:grid_admin_networks_ips.png["${post_edited_translations.segment}"]
+image:grid_admin_networks_ips.png["網格管理網路 IP"]

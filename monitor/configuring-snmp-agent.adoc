@@ -15,7 +15,7 @@ summary: 您可以設定 StorageGRID SNMP 代理程式，使其使用第三方 S
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:../admin/admin-group-permissions.html["根目錄存取權限"]。
 
 
 .關於此任務
@@ -26,17 +26,17 @@ StorageGRID SNMP 代理程式支援 SNMPv1、SNMPv2c 和 SNMPv3。您可以為�
 
 
 [[specify-basic-configuration]]
-== ${post_edited_translations.segment}
+== 指定基本組態
 
 首先，啟用 StorageGRID SMNP 代理程式並提供基本資訊。
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Monitoring* > *SNMP agent*。
 +
 顯示 SNMP 代理程式頁面。
 
 . 若要在所有網格節點上啟用 SNMP 代理程式，請勾選「啟用 SNMP」核取方塊。
-. ${post_edited_translations.segment}
+. 請在基本組態部分輸入以下資訊。
 +
 [cols="1a,2a"]
 |===
@@ -73,7 +73,7 @@ StorageGRID SNMP 代理程式支援 SNMPv1、SNMPv2c 和 SNMPv3。您可以為�
  a| 
 啟用驗證陷阱
  a| 
-${post_edited_translations.segment}
+如果選取，StorageGRID SNMP 代理程式會在收到未經正確驗證的協定訊息時傳送驗證陷阱。
 
 |===
 
@@ -96,7 +96,7 @@ TIP: 為確保 StorageGRID 系統的安全性，請勿使用「public」作為�
 +
 每個社群字串最多可包含 32 個字元，且不能包含空白字元。
 
-. ${post_edited_translations.segment}
+. 選擇 *Add another community string* 以新增其他字串。
 +
 最多允許使用五個字串。
 
@@ -118,7 +118,7 @@ TIP: 為確保 StorageGRID 系統的安全性，請勿使用「public」作為�
 *預設陷阱社群*最多可包含 32 個字元，且不能包含空白字元。
 
 . 若要新增陷阱目的地，請選擇「建立」。
-. ${post_edited_translations.segment}
+. 選擇此陷阱目的地將使用的 SNMP 版本。
 . 請填寫您所選版本的「建立陷阱目的地」表單。
 +
 [role="tabbed-block"]
@@ -171,7 +171,7 @@ TIP: 為確保 StorageGRID 系統的安全性，請勿使用「public」作為�
 --
 .SNMPv2c
 --
-${post_edited_translations.segment}
+如果您選擇 SNMPv2c 作為版本，請填寫以下欄位。
 
 [cols="1a,2a"]
 |===
@@ -188,7 +188,7 @@ ${post_edited_translations.segment}
  a| 
 主機
  a| 
-${post_edited_translations.segment}
+用於接收陷阱的 IPv4 或 IPv6 位址或 FQDN。
 
 
 
@@ -234,7 +234,7 @@ ${post_edited_translations.segment}
  a| 
 主機
  a| 
-${post_edited_translations.segment}
+用於接收陷阱的 IPv4 或 IPv6 位址或 FQDN。
 
 
 
@@ -306,9 +306,9 @@ SNMP 預設使用 IPv4。
 
 
  a| 
-${post_edited_translations.segment}
+傳輸協定
  a| 
-${post_edited_translations.segment}
+此位址將使用 UDP 還是 TCP。
 
 SNMP 預設使用 UDP。
 
@@ -321,7 +321,7 @@ StorageGRID 網路
 
 ** 網格網路、管理網路和用戶端網路：SNMP 代理程式將傾聽所有三個網路上的查詢。
 ** Grid 網路
-** ${post_edited_translations.segment}
+** 管理網路
 ** 用戶端網路
 +
 *注意*：如果您使用用戶端網路傳輸不安全的資料，並且為用戶端網路建立了代理程式位址，請注意 SNMP 流量也將是不安全的。
@@ -342,14 +342,14 @@ SNMP 代理程式的預設 UDP 連接埠為 161，但您可以輸入任何未使
 |===
 . 選擇 *Create* 。
 +
-${post_edited_translations.segment}
+代理程式地址已建立並新增至表格中。
 
 
 
 
 
 [[create-usm-userscreate-usm-users]]
-== ${post_edited_translations.segment}
+== 建立 USM 使用者
 
 如果您使用的是 SNMPv3，請使用「其他組態」部分中的「USM 使用者」標籤來定義有權查詢 MIB 或接收陷阱和通知的 USM 使用者。
 
@@ -389,18 +389,18 @@ NOTE: SNMPv3 _inform_ 目的地必須具有包含引擎 ID 的使用者。SNMPv3
  a| 
 權威引擎辨識碼
  a| 
-${post_edited_translations.segment}
+如果此使用者將用於 inform 目的地，則此使用者的權威引擎 ID。
 
 輸入 10 到 64 個十六進位字元（5 到 32 個位元組），且不含空格。在通知的設陷目的地中將選取的 USM 使用者需要此值。在設陷的設陷目的地中將選取的 USM 使用者不允許使用此值。
 
-${post_edited_translations.segment}
+*注意*：如果您選擇了 *唯讀 MIB 存取*，則不會顯示此欄位，因為具有唯讀 MIB 存取權限的 USM 使用者不能擁有引擎 ID。
 
 
 
  a| 
 安全性層級
  a| 
-${post_edited_translations.segment}
+USM 使用者的安全性層級：
 
 ** *authPriv*：此使用者使用驗證與隱私（加密）進行通訊。您必須指定身分驗證傳輸協定與密碼，以及隱私協定與密碼。
 ** *authNoPriv*：此使用者通訊時已進行驗證，但未加密（無加密）。您必須指定身分驗證傳輸協定和密碼。
@@ -409,16 +409,16 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+驗證通訊協定
  a| 
-${post_edited_translations.segment}
+始終設定為 SHA，這是唯一支援的協定 (HMAC-SHA-96)。
 
 
 
  a| 
 密碼
  a| 
-${post_edited_translations.segment}
+此使用者用於驗證的密碼。
 
 
 
@@ -437,9 +437,9 @@ ${post_edited_translations.segment}
 |===
 . 選擇 *Create* 。
 +
-${post_edited_translations.segment}
+USM 使用者已建立並新增至表格中。
 
-. ${post_edited_translations.segment}
+. 完成 SNMP 代理程式組態後，選擇「儲存」。
 +
 新的 SNMP 代理程式組態生效。
 

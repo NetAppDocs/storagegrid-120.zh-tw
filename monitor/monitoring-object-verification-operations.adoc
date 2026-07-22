@@ -27,9 +27,9 @@ StorageGRID 系統可以驗證儲存節點上物件資料的完整性，檢查�
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果系統偵測到無法自動修正的毀損物件，則會觸發「偵測到未辨識的毀損物件」警報。
 
-* ${post_edited_translations.segment}
+* 使用者可以觸發*物件存在性檢查*，以更快速地驗證物件資料的存在性（儘管無法驗證其正確性）。
 +
 物件存在性檢查用於驗證儲存節點上是否存在所有預期的複寫物件副本和銷除編碼片段。物件存在性檢查提供了一種驗證儲存裝置完整性的方法，尤其是在近期硬體問題可能影響資料完整性的情況下。
 
@@ -40,7 +40,7 @@ NOTE: ${post_edited_translations.segment}
 .步驟
 . 審查背景驗證結果：
 +
-.. ${post_edited_translations.segment}
+.. 選擇 *節點* > *_儲存節點_* > *物件*。
 .. 檢視驗證結果：
 +
 *** 若要檢查複製物件資料的驗證情況，請查看「驗證」區段中的屬性。
@@ -58,9 +58,9 @@ image:nodes_storage_node_ilm_ec_verification.png["節點 > 儲存節點 > ILM > 
 
 
 
-. ${post_edited_translations.segment}
+. 檢視物件存在性檢查作業的結果：
 +
-.. ${post_edited_translations.segment}
+.. 選擇 *Maintenance* > *Object existence check* > *Job history*。
 .. 掃描「偵測到遺失物件複本」欄。如果有任何工作導致 100 個或更多遺失物件複本，且已觸發「*可能遺失物件*」警示，請聯絡技術支援。
 +
 image:oec_job_history.png["物件存在性檢查作業歷史記錄"]

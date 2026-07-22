@@ -18,7 +18,7 @@ NOTE: Grid Manager 會隨著每個版本更新，可能與此頁面上的範例�
 
 所有節點都會顯示「硬體」索引標籤。
 
-image:nodes_page_hardware_tab_graphs.png["${post_edited_translations.segment}"]
+image:nodes_page_hardware_tab_graphs.png["節點頁面硬體索引標籤"]
 
 若要顯示不同的時間間隔，請選擇圖表上方的控制項之一。您可以顯示 1 小時、1 天、1 週或 1 個月時間間隔內的資訊。您也可以設定自訂時間間隔，從而指定日期和時間範圍。
 
@@ -285,28 +285,28 @@ SANtricity System Manager 報告的儲存控制器 NVSRAM 版本。
 *** 1：第二擴充櫃
 
 
-${post_edited_translations.segment}
+*注意：*擴充機櫃僅適用於 SG6060 和 SG6160。
 
 
 
  a| 
-${post_edited_translations.segment}
+機櫃狀態
  a| 
-${post_edited_translations.segment}
+儲存設備機櫃的整體狀況。
 
 
 
  a| 
-${post_edited_translations.segment}
+IOM 狀態
  a| 
 任何擴充櫃中輸入/輸出模組 （IOM） 的狀態。如果這不是擴充櫃，則不適用。
 
 
 
  a| 
-${post_edited_translations.segment}
+電源狀態
  a| 
-${post_edited_translations.segment}
+儲存設備機櫃電源的整體狀況。
 
 
 
@@ -318,7 +318,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+風扇狀態
  a| 
 儲存設備機櫃中冷卻風扇的整體狀況。
 
@@ -334,7 +334,7 @@ ${post_edited_translations.segment}
  a| 
 資料磁碟機
  a| 
-${post_edited_translations.segment}
+儲存設備機櫃中用於資料儲存的磁碟機數量。
 
 
 
@@ -348,24 +348,24 @@ ${post_edited_translations.segment}
  a| 
 快取磁碟機
  a| 
-${post_edited_translations.segment}
+儲存設備機櫃中用作快取的磁碟機數量。
 
 
 
  a| 
-${post_edited_translations.segment}
+快取磁碟機大小
  a| 
 儲存設備機櫃中最小快取磁碟機的大小。通常，所有快取磁碟機的大小都相同。
 
 
 
  a| 
-${post_edited_translations.segment}
+組態狀態
  a| 
-${post_edited_translations.segment}
+儲存設備機櫃的組態狀態。
 
 |===
-.. ${post_edited_translations.segment}
+.. 確認所有狀態均為「Nominal」。
 +
 如果狀態不是 「Nominal」，請審查任何目前的警示。您也可以使用 SANtricity System Manager 來深入瞭解其中部分硬體值。請參閱安裝與維護應用裝置的說明。
 
@@ -376,30 +376,30 @@ ${post_edited_translations.segment}
 網路流量圖提供整體網路流量的概覽。
 
 +
-image:nodes_page_network_traffic_graph.png["${post_edited_translations.segment}"]
+image:nodes_page_network_traffic_graph.png["節點頁面網路流量圖"]
 
 +
-.. ${post_edited_translations.segment}
+.. 請審查「網路介面」區段。
 +
 image:nodes_page_network_interfaces.png["節點頁面網路介面"]
 
 +
-${post_edited_translations.segment}
+使用下表以及網路介面表中「速度」欄中的值，確定應用裝置上的 10/25-GbE 網路連接埠是否已設定為使用作用中/備份模式或 LACP 模式。
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 表中所示數值假設所有四個連結均已使用。
 
 +
 [cols="1a,1a,1a,1a"]
 |===
-| ${post_edited_translations.segment} | 連結模式 | ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 連結模式 | 連結模式 | 單一 HIC 連結速度（hic1、hic2、hic3、hic4） | 預期網格/用戶端網路速度（eth0，eth2） 
 
 
  a| 
 彙總
  a| 
-${post_edited_translations.segment}
+LACP
  a| 
 25
  a| 
@@ -410,7 +410,7 @@ ${post_edited_translations.segment}
  a| 
 固定的
  a| 
-${post_edited_translations.segment}
+LACP
  a| 
 25
  a| 
@@ -432,7 +432,7 @@ ${post_edited_translations.segment}
  a| 
 彙總
  a| 
-${post_edited_translations.segment}
+LACP
  a| 
 10
  a| 
@@ -443,7 +443,7 @@ ${post_edited_translations.segment}
  a| 
 固定的
  a| 
-${post_edited_translations.segment}
+LACP
  a| 
 10
  a| 
@@ -464,18 +464,18 @@ ${post_edited_translations.segment}
 +
 請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/configuring-network-links.html["設定網路鏈路"^]以取得有關設定 10/25-GbE 連接埠的更多資訊。
 
-.. ${post_edited_translations.segment}
+.. 請審查「網路通訊」部分。
 +
-${post_edited_translations.segment}
+接收表和傳輸表顯示每個網路接收和傳送的位元組數和封包數，以及其他接收和傳輸計量。
 
 +
 image:nodes_page_network_communication.png["節點頁面網路通訊"]
 
 
 
-. ${post_edited_translations.segment}
+. 選擇 *Storage* 以檢視圖表，該圖表顯示物件資料和物件中繼資料隨時間推移使用的儲存設備百分比，以及有關磁碟裝置、磁碟區和物件儲存的資訊。
 +
-image:nodes_page_storage_used_object_data.png["${post_edited_translations.segment}"]
+image:nodes_page_storage_used_object_data.png["儲存使用量 - 物件資料"]
 
 +
 image:storage_used_object_metadata.png["儲存使用情況 - 物件中繼資料"]
@@ -498,7 +498,7 @@ image:nodes_page_storage_tables.png["節點頁儲存表"]
 
 
 [[view-information-about-appliance-admin-nodes-and-gateway-nodes]]
-== ${post_edited_translations.segment}
+== 檢視應用裝置管理節點和閘道節點的相關資訊
 
 「節點」頁面列出了每個用作管理節點或閘道節點的服務應用裝置的服務健全狀況資訊以及所有運算、磁碟設備和網路資源。您也可以檢視記憶體容量、儲存設備硬體、網路資源、網路介面、網路位址以及接收和傳送資料。
 
@@ -514,7 +514,7 @@ image:nodes_page_storage_tables.png["節點頁儲存表"]
 ** *hic*：應用裝置上的實體 10、25 或 100 GbE 連接埠之一。這些連接埠可以綁定在一起，並連接到 StorageGRID 網格網路 （eth0） 和用戶端網路 （eth2）。
 ** *mtc*：應用裝置上的其中一個實體 1-GbE 連接埠。一或多個 mtc 介面會連結以形成管理網路介面（eth1）。您可以保留其他 mtc 介面，以便資料中心內的技術人員進行臨時本機連線。
 +
-image:nodes_page_overview_tab_services_appliance.png["${post_edited_translations.segment}"]
+image:nodes_page_overview_tab_services_appliance.png["節點頁面「服務應用裝置」的「概述」標籤"]
 
 
 
@@ -529,7 +529,7 @@ image:nodes_page_hardware_tab_graphs_services_appliance.png["節點頁面硬體�
 
 .. 往下捲動以檢視應用裝置的元件表。此表包含型號名稱、序號、控制器韌體版本以及每個元件的狀態等資訊。
 +
-image:nodes_page_hardware_tab_services_appliance.png["${post_edited_translations.segment}"]
+image:nodes_page_hardware_tab_services_appliance.png["節點頁面「硬體」索引標籤，適用於服務應用裝置"]
 
 +
 [cols="1a,2a"]
@@ -540,7 +540,7 @@ image:nodes_page_hardware_tab_services_appliance.png["${post_edited_translations
  a| 
 應用裝置型號
  a| 
-${post_edited_translations.segment}
+此 StorageGRID 應用裝置的型號。
 
 
 
@@ -568,7 +568,7 @@ ${post_edited_translations.segment}
  a| 
 儲存設備 RAID 模式
  a| 
-${post_edited_translations.segment}
+應用裝置的 RAID 模式。
 
 
 
@@ -598,7 +598,7 @@ ${post_edited_translations.segment}
  a| 
 運算硬體
  a| 
-${post_edited_translations.segment}
+運算控制器硬體的狀態。
 
 
 
@@ -615,7 +615,7 @@ ${post_edited_translations.segment}
 運算控制器的溫度狀態。
 
 |===
-.. ${post_edited_translations.segment}
+.. 確認所有狀態均為「Nominal」。
 +
 如果狀態不是「正常」，請審查所有目前警報。
 
@@ -626,30 +626,30 @@ ${post_edited_translations.segment}
 網路流量圖提供整體網路流量的概覽。
 
 +
-image:nodes_page_network_traffic_graph.png["${post_edited_translations.segment}"]
+image:nodes_page_network_traffic_graph.png["節點頁面網路流量圖"]
 
 +
-.. ${post_edited_translations.segment}
+.. 請審查「網路介面」區段。
 +
-image:nodes_page_hardware_tab_network_services_appliance.png["${post_edited_translations.segment}"]
+image:nodes_page_hardware_tab_network_services_appliance.png["節點頁面硬體索引標籤網路服務應用裝置"]
 
 +
-${post_edited_translations.segment}
+使用下表以及網路介面表中「速度」欄中的值，確定應用裝置上的四個 40/100-GbE 網路連接埠是否已設定為使用作用中/備份模式或 LACP 模式。
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 表中所示數值假設所有四個連結均已使用。
 
 +
 [cols="1a,1a,1a,1a"]
 |===
-| ${post_edited_translations.segment} | 連結模式 | ${post_edited_translations.segment} | 預期網格/用戶端網路速度（eth0、eth2） 
+| 連結模式 | 連結模式 | 單一 HIC 連結速度（hic1、hic2、hic3、hic4） | 預期網格/用戶端網路速度（eth0、eth2） 
 
 
  a| 
 彙總
  a| 
-${post_edited_translations.segment}
+LACP
  a| 
 100
  a| 
@@ -660,7 +660,7 @@ ${post_edited_translations.segment}
  a| 
 固定的
  a| 
-${post_edited_translations.segment}
+LACP
  a| 
 100
  a| 
@@ -682,7 +682,7 @@ ${post_edited_translations.segment}
  a| 
 彙總
  a| 
-${post_edited_translations.segment}
+LACP
  a| 
 40
  a| 
@@ -693,7 +693,7 @@ ${post_edited_translations.segment}
  a| 
 固定的
  a| 
-${post_edited_translations.segment}
+LACP
  a| 
 40
  a| 
@@ -711,16 +711,16 @@ ${post_edited_translations.segment}
 40
 
 |===
-.. ${post_edited_translations.segment}
+.. 請審查「網路通訊」部分。
 +
-${post_edited_translations.segment}
+接收表和發送表顯示了每個網路接收和發送的位元組數和封包數，以及其他接收和傳輸計量。
 
 +
 image:nodes_page_network_communication.png["節點頁面網路通訊"]
 
 
 
-. ${post_edited_translations.segment}
+. 選擇 *Storage* 以檢視有關服務應用裝置上的磁碟設備和磁碟區的資訊。
 +
 image:nodes_page_storage_tab_services_appliance.png["節點頁面儲存索引標籤服務應用裝置"]
 

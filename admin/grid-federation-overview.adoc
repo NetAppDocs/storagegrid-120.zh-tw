@@ -40,7 +40,7 @@ image:grid-federation-workflow.png["網格聯盟連線工作流程"]
 
 * 一個網格可以與其他網格建立一個或多個網格聯邦連接。每個網格聯邦連接都是獨立的，與其他連接互不影響。例如，如果 Grid 1 與 Grid 2 有一個連接，又與 Grid 3 有一個連接，那麼 Grid 2 和 Grid 3 之間並不存在隱含的連接。
 * 網格聯盟連線是雙向的。連線建立後，您可以從任一網格監控和管理該連線。
-* 必須至少存在一個網格同盟連線，才能使用 link:grid-federation-what-is-account-clone.html["帳戶 Clone"] 或 link:grid-federation-what-is-cross-grid-replication.html["${post_edited_translations.segment}"]。
+* 必須至少存在一個網格同盟連線，才能使用 link:grid-federation-what-is-account-clone.html["帳戶 Clone"] 或 link:grid-federation-what-is-cross-grid-replication.html["跨網格複寫"]。
 
 
 
@@ -58,7 +58,7 @@ image:grid-federation-workflow.png["網格聯盟連線工作流程"]
 
 
 [[use-fqdns-to-load-balance-the-connection]]
-=== ${post_edited_translations.segment}
+=== 使用完全限定網域名稱 (FQDN) 進行連線負載平衡
 
 在正式作業環境中，請使用完整網域名稱 (FQDN) 來識別連線中的每個網格。然後，如下建立對應的 DNS 項目：
 
@@ -66,7 +66,7 @@ image:grid-federation-workflow.png["網格聯盟連線工作流程"]
 * Grid 2 的 FQDN 會對應到 Grid 2 的一個或多個 VIP 位址，或對應到 Grid 2 中的一個或多個管理節點或閘道節點的 IP 位址。
 
 
-${post_edited_translations.segment}
+當您使用多個 DNS 項目時，使用連線的請求將如下進行負載平衡：
 
 * 對應到多個 HA 群組 VIP 位址的 DNS 項目會在 HA 群組的作用中節點之間進行負載平衡。
 * 對應至多個管理節點或閘道節點 IP 位址的 DNS 條目，會在對應的節點之間進行負載平衡。

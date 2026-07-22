@@ -21,7 +21,7 @@ summary: 若要確定站台是否可以退役，請先存取「退役站台」�
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Maintenance* > *Tasks* > *Decommission*。
 . 選擇 *Decommission Site*。
 +
 Decommission Site 精靈的 Step 1 (Select Site) 會隨之出現。此步驟包含您 StorageGRID 系統中各個站台的按字母順序排列清單。
@@ -35,17 +35,17 @@ image:decommission_site_step_select_site.png["退役站台步驟 1 選擇站台"
 
 +
 ** 對於已連線的網站退役，此值表示在安全退役此網站之前，需要將多少物件資料移轉到其他網站或由 ILM 刪除。
-** ${post_edited_translations.segment}
+** 對於斷開連線的站台退役，此值表示當您退役此站台時，您的系統中有多少資料儲存設備將無法存取。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果您的 ILM 原則旨在防止單一站台的資料遺失，則您的物件資料複本仍應存在於其餘站台上。
 
 
 
 . 審查 *Decommission Possible* 欄中的原因，以確定目前哪些站台可以退役。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果一個站台無法退役的原因不只一個，則會顯示最關鍵的原因。
 
 +
 [cols="1a,1a,1a"]
@@ -96,9 +96,9 @@ NOTE: ${post_edited_translations.segment}
 
 
 [[decommission_possible]]
-. ${post_edited_translations.segment}
+. 如果可以退役，請選擇該站台的單選按鈕。
 +
-${post_edited_translations.segment}
+*下一步* 按鈕已啟用。
 
 . 選擇 *Next* 。
 +

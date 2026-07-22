@@ -18,7 +18,7 @@ indexpage:
       url: "../tenant/understanding-tenant-management-api.html"
   - title: 管理租戶群組和用戶
     links:
-    - title: "${post_edited_translations.segment}"
+    - title: 使用身分聯盟
       url: "../tenant/using-identity-federation.html"
     - title: 建立 S3 群組
       url: "../tenant/creating-groups-for-s3-tenant.html"
@@ -28,7 +28,7 @@ indexpage:
       url: "../tenant/manage-users.html"
   - title: 管理 S3 存取金鑰和儲存桶
     links:
-    - title: "${post_edited_translations.segment}"
+    - title: 管理 S3 存取金鑰
       url: "../tenant/managing-s3-access-keys.html"
     - title: 建立儲存桶
       url: "../tenant/creating-s3-bucket.html"

@@ -65,7 +65,7 @@ image:autosupport_configure_delivery_santricity.png["設定 AutoSupport 傳送�
 
 NOTE: 用於啟用 HTTPS 的憑證已預先安裝。
 
-. ${post_edited_translations.segment}
+. 選擇*透過 Proxy 伺服器*。
 . 輸入 `tunnel-host`作為 *Host address*。
 +
 `tunnel-host` 是使用管理節點傳送 E 系列 AutoSupport 套件的特殊位址。

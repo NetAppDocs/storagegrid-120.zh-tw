@@ -25,28 +25,28 @@ StorageGRID 提供數種加密資料的選項。您應該 link:reviewing-storage
 [[manage-certificates]]
 == 管理憑證
 
-您可以link:using-storagegrid-security-certificates.html["${post_edited_translations.segment}"]用於 HTTP 連線或用於向伺服器驗證用戶端或使用者身分的用戶端憑證。
+您可以link:using-storagegrid-security-certificates.html["設定和管理伺服器憑證"]用於 HTTP 連線或用於向伺服器驗證用戶端或使用者身分的用戶端憑證。
 
 
 
 [[configure-key-management-servers]]
-== ${post_edited_translations.segment}
+== 設定金鑰管理伺服器
 
-使用 link:kms-configuring.html["${post_edited_translations.segment}"] 可讓您保護 StorageGRID 資料，即使應用裝置已從資料中心移除也是如此。在應用裝置磁碟區加密之後，除非節點可以與 KMS 進行通訊，否則您將無法存取應用裝置上的任何資料。
+使用 link:kms-configuring.html["金鑰管理伺服器"] 可讓您保護 StorageGRID 資料，即使應用裝置已從資料中心移除也是如此。在應用裝置磁碟區加密之後，除非節點可以與 KMS 進行通訊，否則您將無法存取應用裝置上的任何資料。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 若要使用加密金鑰管理，必須在安裝期間為每個應用裝置啟用 *節點加密* 設定，然後再將應用裝置新增至網格。
 
 
 
 [[manage-proxy-settings]]
-== ${post_edited_translations.segment}
+== 管理 Proxy 設定
 
-如果您使用 S3 平台服務或雲端儲存池，則可以在儲存節點與外部 S3 端點之間設定 link:configuring-storage-proxy-settings.html["${post_edited_translations.segment}"]。如果您使用 HTTPS 或 HTTP 傳送 AutoSupport 套件，則可以在管理節點與技術支援之間設定 link:configuring-admin-proxy-settings.html["${post_edited_translations.segment}"]。
+如果您使用 S3 平台服務或雲端儲存池，則可以在儲存節點與外部 S3 端點之間設定 link:configuring-storage-proxy-settings.html["儲存設備 Proxy 伺服器"]。如果您使用 HTTPS 或 HTTP 傳送 AutoSupport 套件，則可以在管理節點與技術支援之間設定 link:configuring-admin-proxy-settings.html["管理 Proxy 伺服器"]。
 
 
 
 [[control-firewalls]]
 == 控制防火牆
 
-為了增強系統的安全性，您可以透過在 link:controlling-access-through-firewalls.html["${post_edited_translations.segment}"] 開啟或關閉特定連接埠來控制對 StorageGRID 管理節點的存取。您也可以透過設定每個節點的 link:manage-firewall-controls.html["${post_edited_translations.segment}"] 來控制其網路存取。您可以封鎖部署所需連接埠以外的所有連接埠存取。
+為了增強系統的安全性，您可以透過在 link:controlling-access-through-firewalls.html["外部防火牆"] 開啟或關閉特定連接埠來控制對 StorageGRID 管理節點的存取。您也可以透過設定每個節點的 link:manage-firewall-controls.html["內部防火牆"] 來控制其網路存取。您可以封鎖部署所需連接埠以外的所有連接埠存取。

@@ -2,7 +2,7 @@
 permalink: maintain/adding-to-or-changing-subnet-lists-on-grid-network.html 
 sidebar: sidebar 
 keywords: storagegrid, subnet list, grid network 
-summary: ${post_edited_translations.segment} 
+summary: 您可以使用變更 IP 工具在網格網路上新增或變更子網路。 
 ---
 = 在 StorageGRID 中新增或變更 Grid Network 上的子網路清單
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以使用變更 IP 工具在網格網路上新增或變更子網路。
 
 .開始之前
 * 您擁有  `Passwords.txt` 檔案。
@@ -24,7 +24,7 @@ NOTE: 如果您僅需變更 Grid Network Subnet List，請使用 Grid Manager �
 
 [NOTE]
 ====
-${post_edited_translations.segment}
+任何節點的網格網路、管理網路或用戶端網路都不得使用包含下列 IPv4 位址的子網路：
 
 * 192,168,130,101
 * 192,168,130,121
@@ -38,17 +38,17 @@ ${post_edited_translations.segment}
 * 198.51.100.4
 
 
-${post_edited_translations.segment}
+例如，請勿將下列子網路範圍用於任何節點的網格網路、管理網路或用戶端網路：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 192.168.130.0/24，因為此子網路範圍包含 IP 位址 192.168.130.101 和 192.168.130.102
+* 192.168.131.0/24，因為此子網路範圍包含 IP 位址 192.168.131.101 和 192.168.131.102
 * 198.51.100.0/24，因為此子網路範圍包含 IP 位址 198.51.100.2 和 198.51.100.4
 
 
 ====
 .步驟
 . 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -91,7 +91,7 @@ NOTE: 對於所有命令，您可以使用以下格式輸入多個位址： `add
 
 TIP: 您可以使用「向上箭頭」將先前輸入的值調回目前的輸入提示符，然後視需要進行編輯，從而減少所需的輸入量。
 
-${post_edited_translations.segment}
+以下範例輸入顯示如何為網格網路子網路清單設定子網路：
 
 image:change_ip_tool_gnsl_sample_input.gif["快照由周圍文字描述"]
 
@@ -133,19 +133,19 @@ Updating grid network configuration on Name
 ----
 
 
-. ${post_edited_translations.segment}
+. 如果您在進行 Grid Network 變更時選擇了選項 *10*，請選擇下列其中一個選項：
 +
 ** *apply*：立即套用變更，並在必要時自動重新啟動每個節點。
 +
 如果新的網路組態無需任何外部變更即可與舊的網路組態同時運行，則可以使用 *apply* 選項進行完全自動化的組態變更。
 
-** ${post_edited_translations.segment}
+** *stage*：下次節點重新啟動時套用變更。
 +
 如果要使新的網路組態生效，需要對實體或虛擬連網組態進行變更，則必須使用 *stage* 選項，關閉受影響的節點，進行必要的實體連網變更，然後重新啟動受影響的節點。
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果使用 *stage* 選項，請在接移後儘快重新啟動節點，以最大程度地減少中斷。
 
 ** *取消*：此時請勿進行任何網路變更。
 +
@@ -154,7 +154,7 @@ NOTE: ${post_edited_translations.segment}
 
 
 +
-${post_edited_translations.segment}
+套用或接移變更後，由於網格組態變更，將會產生新的恢復套件。
 
 . 如果組態因錯誤而停止，則可以使用下列選項：
 +
@@ -164,10 +164,10 @@ ${post_edited_translations.segment}
 +
 失敗的作業稍後可以透過從主功能表選取選項 *10* （套用變更）來重試。在所有作業成功完成之前，IP 變更程序將不會完成。
 
-** ${post_edited_translations.segment}
+** 如果您必須手動介入（例如，重新開機節點），並且確信工具認為失敗的行動實際上已成功完成，請輸入 *f* 將其標記為成功並繼續下一個操作。
 
 
-. ${post_edited_translations.segment}
+. 從 Grid Manager 下載新的恢復套件。
 +
 .. 選擇 *Maintenance* > *System* > *Recovery package*。
 .. 請輸入佈建密碼。

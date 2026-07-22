@@ -17,10 +17,10 @@ summary: 您可以監控物件擷取和檢索速率，以及物件數量、查�
 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 從儀表板中，選擇 *效能* 索引標籤。
+. 請參閱 S3 圖表，其中匯總了儲存節點在選定時間範圍內執行的用戶端操作數量，以及儲存節點接收的 API 請求數量。
 . 選擇 *Nodes* 以存取節點頁面。
-. ${post_edited_translations.segment}
+. 從節點首頁（網格層級）中選擇「物件」索引標籤。
 +
 此圖表顯示整個 StorageGRID 系統的 S3 擷取和擷取速率（以位元組/秒為單位）以及擷取或擷取的資料量。您可以選擇時間間隔，或套用自訂時間間隔。
 

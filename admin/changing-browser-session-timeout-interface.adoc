@@ -2,7 +2,7 @@
 permalink: admin/changing-browser-session-timeout-interface.html 
 sidebar: sidebar 
 keywords: security, browser inactivity timeout, management API stack track 
-summary: ${post_edited_translations.segment} 
+summary: 介面安全性設定可讓您控制使用者在超過指定時間閒置時是否登出，以及 API 錯誤回應中是否包含堆疊追蹤。 
 ---
 = 更改 StorageGRID 介面安全性設定
 :allow-uri-read: 
@@ -11,30 +11,30 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+介面安全性設定可讓您控制使用者在超過指定時間閒置時是否登出，以及 API 錯誤回應中是否包含堆疊追蹤。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 
 
 .關於此任務
-${post_edited_translations.segment}
+*安全性設定*頁面包含*瀏覽器閒置逾時*和*管理 API 堆疊追蹤*設定。
 
-${post_edited_translations.segment}:: 指示使用者瀏覽器在登出前可以保持非活動狀態的時間長度。預設值為 15 分鐘。
+瀏覽器閒置逾時:: 指示使用者瀏覽器在登出前可以保持非活動狀態的時間長度。預設值為 15 分鐘。
 +
 --
 瀏覽器閒置逾時時間也受以下因素控制：
 
 * 一個獨立、不可設定的 StorageGRID 定時器，其包含在系統安全性中。每位使用者登入 16 小時後，其驗證權杖便會過期。當使用者的驗證過期時，該使用者會自動登出，即使已停用瀏覽器閒置逾時或尚未達到瀏覽器逾時值也是如此。若要更新權杖，使用者必須重新登入。
-* ${post_edited_translations.segment}
+* 身分供應商的逾時設定，假設 StorageGRID 已啟用單一登入 （SSO）。
 +
 如果啟用了 SSO 且使用者的瀏覽器逾時，則使用者必須重新輸入其 SSO 憑證才能再次存取 StorageGRID。請參閱link:how-sso-works.html["單一登入 (SSO) 的工作原理"]。
 
 
 
 --
-${post_edited_translations.segment}:: 控制是否在 Grid Manager 和 Tenant Manager API 錯誤回應中傳回堆疊追蹤。
+管理 API 堆疊追蹤:: 控制是否在 Grid Manager 和 Tenant Manager API 錯誤回應中傳回堆疊追蹤。
 +
 --
 此選項預設為停用狀態，但您可能需要在測試環境中啟用此功能。通常，在生產環境中應停用 stack trace，以避免在發生 API 錯誤時洩露內部軟體細節。
@@ -43,9 +43,9 @@ ${post_edited_translations.segment}:: 控制是否在 Grid Manager 和 Tenant Ma
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Security settings*。
 . 選取*介面*索引標籤。
-. ${post_edited_translations.segment}
+. 若要變更瀏覽器閒置逾時設定：
 +
 .. 展開折疊面板。
 .. 若要變更逾時時間，請指定 60 秒到 7 天之間的值。預設逾時時間為 15 分鐘。
@@ -62,7 +62,7 @@ ${post_edited_translations.segment}:: 控制是否在 Grid Manager 和 Tenant Ma
 .. 勾選此核取方塊，即可在 Grid Manager 和 Tenant Manager API 錯誤回應中傳回堆疊追蹤。
 +
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 在生產環境中停用堆疊追蹤，以避免在發生 API 錯誤時洩露內部軟體細節。
 
 .. 選取 *Save* 。
 

@@ -14,26 +14,26 @@ summary: 您可以使用 StorageGRID 日誌來疑難排解問題。
 您可以使用 StorageGRID 日誌來疑難排解問題。
 
 
-NOTE: 如果您想要將日誌傳送到外部 syslog 伺服器，或是變更例如  `bycast.log` 和  `nms.log` 等稽核資訊的目的地，請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+NOTE: 如果您想要將日誌傳送到外部 syslog 伺服器，或是變更例如  `bycast.log` 和  `nms.log` 等稽核資訊的目的地，請參閱 link:../monitor/configure-log-management.html["設定日誌管理"]。
 
 
 
 [[general-storagegrid-logs]]
-== ${post_edited_translations.segment}
+== 通用 StorageGRID 日誌
 
 [cols="3a,3a,2a"]
 |===
 | 檔案名稱 | 附註 | 發現於 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/bycast.log  a| 
 主要的 StorageGRID 疑難排解檔案。
  a| 
 所有節點
 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/bycast-err.log  a| 
 包含  `bycast.log` 的子集 （ 嚴重性為 ERROR 和 CRITICAL 的訊息 ）。CRITICAL 訊息也會顯示在系統中。
  a| 
 所有節點
@@ -51,35 +51,35 @@ NOTE: 如果您想要將日誌傳送到外部 syslog 伺服器，或是變更例
 
 
 [[cipher-related-logs]]
-== ${post_edited_translations.segment}
+== 密碼相關日誌
 
 [cols="3a,3a,2a"]
 |===
 | 檔案名稱 | 附註 | 發現於 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| /var/local/log/ssh-config-generation.log  a| 
+包含與產生 SSH 組態和重新載入 SSH 服務相關的日誌。
  a| 
 所有節點
 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/nginx/config-generation.log  a| 
 包含與產生 nginx 組態和重新載入 nginx 服務相關的日誌。
  a| 
 所有節點
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| /var/local/log/nginx-gw/config-generation.log  a| 
+包含與產生 nginx-gw 組態（以及重新載入 nginx-gw 服務）相關的日誌。
  a| 
 管理節點和 Gateway 節點
 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/update-cipher-configurations.log  a| 
 包含與設定 TLS 和 SSH 原則相關的日誌檔。
  a| 
 所有節點
@@ -88,15 +88,15 @@ ${post_edited_translations.segment}
 
 
 [[grid-federation-logs]]
-== ${post_edited_translations.segment}
+== 網格聯盟日誌
 
 [cols="3a,3a,2a"]
 |===
 | 檔案名稱 | 附註 | 發現於 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| /var/local/log/update_grid_federation_config.log  a| 
+包含與產生網格聯盟連線的 nginx 和 nginx-gw 組態相關的日誌。
  a| 
 所有節點
 
@@ -111,12 +111,12 @@ ${post_edited_translations.segment}
 | 檔案名稱 | 附註 | 發現於 
 
 
-| ${post_edited_translations.segment}  a| 
-* ${post_edited_translations.segment}
+| /var/local/log/nms.log  a| 
+* 擷取來自 Grid Manager 和 Tenant Manager 的通知。
 * 擷取與 NMS 服務運作相關的事件。例如：電子郵件通知與組態變更。
 * 包含因系統組態變更而導致的 XML 套裝組合更新。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 包含與每天執行一次的屬性降採樣相關的錯誤訊息。
+* 包含 Java Web 伺服器錯誤訊息，例如頁面產生錯誤和 HTTP 狀態 500 錯誤。
 * 包含與 AutoSupport 相關的日誌。
 
  a| 
@@ -124,8 +124,8 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| /var/local/log/nms.errlog  a| 
+包含與 MySQL 資料庫升級相關的錯誤訊息。
 
 包含對應服務的標準錯誤 (stderr) 流。每個服務對應一個日誌檔。除非服務出現問題，否則這些檔案通常為空。
  a| 
@@ -142,14 +142,14 @@ ${post_edited_translations.segment}
 
 
 [[server-manager-logs]]
-== ${post_edited_translations.segment}
+== Server Manager 日誌
 
 [cols="3a,3a,2a"]
 |===
 | 檔案名稱 | 附註 | 發現於 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/servermanager.log  a| 
 Server Manager 應用程式在伺服器上執行的日誌檔。
  a| 
 所有節點
@@ -157,13 +157,13 @@ Server Manager 應用程式在伺服器上執行的日誌檔。
 
 
 | /var/local/log/GridstatBackend.errlog  a| 
-${post_edited_translations.segment}
+Server Manager GUI 後端應用程式的日誌檔案。
  a| 
 所有節點
 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/gridstat.errlog  a| 
 Server Manager GUI 的日誌檔。
  a| 
 所有節點
@@ -181,14 +181,14 @@ Server Manager GUI 的日誌檔。
 
 | /var/local/log/acct.errlog  a| 
  a| 
-${post_edited_translations.segment}
+執行 ADC 服務的儲存節點
 
 
 
 | /var/local/log/adc.errlog  a| 
 包含對應服務的標準錯誤 (stderr) 流。每個服務對應一個日誌檔。除非服務出現問題，否則這些檔案通常為空。
  a| 
-${post_edited_translations.segment}
+執行 ADC 服務的儲存節點
 
 
 
@@ -199,46 +199,46 @@ ${post_edited_translations.segment}
 
 
 | /var/local/log/cache-svc.log + /var/local/log/cache-svc.errlog  a| 
-${post_edited_translations.segment}
+快取服務日誌。
  a| 
 閘道節點
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| /var/local/log/cassandra/system.log  a| 
+如果在新增新的儲存節點時出現問題，或 nodetool 修理工作停滯，則可以使用中繼資料儲存（Cassandra 資料庫）的資訊。
  a| 
 儲存節點
 
 
 
 | /var/local/log/cassandra-reaper.log  a| 
-${post_edited_translations.segment}
+Cassandra Reaper 服務的資訊，該服務用於修復 Cassandra 資料庫中的資料。
  a| 
 儲存節點
 
 
 
 | /var/local/log/cassandra-reaper.errlog  a| 
-${post_edited_translations.segment}
+Cassandra Reaper 服務的錯誤訊息。
  a| 
 儲存節點
 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/chunk.errlog  a| 
  a| 
 儲存節點
 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/cmn.errlog  a| 
  a| 
 管理節點
 
 
 
-| ${post_edited_translations.segment}  a| 
+| /var/local/log/cms.errlog  a| 
 此日誌檔可能會出現在從舊版 StorageGRID 升級的系統上。它包含舊版資訊。
  a| 
 儲存節點
@@ -258,7 +258,7 @@ ${post_edited_translations.segment}
 
 
 | /var/local/log/dynip*  a| 
-${post_edited_translations.segment}
+包含與 dynip 服務相關的日誌，該服務監控網格的動態 IP 變化並更新本機組態。
  a| 
 所有節點
 
@@ -271,23 +271,23 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| /var/local/log/hagroups.log  a| 
+與高可用度群組相關的日誌。
  a| 
-${post_edited_translations.segment}
+管理節點和閘道節點
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| /var/local/log/hagroups_events.log  a| 
+追蹤狀態變更，例如從 BACKUP 轉換為 MASTER 或 FAULT。
  a| 
-${post_edited_translations.segment}
+管理節點和閘道節點
 
 
 
 | /var/local/log/idnt.errlog  a| 
  a| 
-${post_edited_translations.segment}
+執行 ADC 服務的儲存節點
 
 
 
@@ -300,7 +300,7 @@ ${post_edited_translations.segment}
 
 | /var/local/log/kstn.errlog  a| 
  a| 
-${post_edited_translations.segment}
+執行 ADC 服務的儲存節點
 
 
 
@@ -336,7 +336,7 @@ ${post_edited_translations.segment}
 | /var/local/log/nginx-gw/*.log  a| 
 包含與 nginx-gw 服務相關的一般日誌，包括錯誤日誌和管理節點上受限管理連接埠的日誌。
  a| 
-${post_edited_translations.segment}
+管理節點和閘道節點
 
 
 
@@ -350,7 +350,7 @@ ${post_edited_translations.segment}
 | /var/local/log/nginx-gw/endpoint-access.log.gz  a| 
 包含 Load Balancer 服務的存取日誌，該服務提供從用戶端到 Storage Nodes 的 S3 流量負載平衡。
  a| 
-${post_edited_translations.segment}
+管理節點和閘道節點
 
 
 

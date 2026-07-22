@@ -17,14 +17,14 @@ summary: 如果網格節點故障，您必須儘快將其恢復。在開始之�
 CAUTION: StorageGRID 是一個由多個相互協作的節點所組成的分散式系統。請勿使用磁碟快照來還原網格節點。相反地，請參閱每種節點類型的恢復與維護程序。
 
 
-NOTE: 如果整個 StorageGRID 站台發生故障，請聯絡技術支援。技術支援將與您合作制定並執行站台恢復計畫，以最大限度地恢復資料量並達成您的業務目標。請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+NOTE: 如果整個 StorageGRID 站台發生故障，請聯絡技術支援。技術支援將與您合作制定並執行站台恢復計畫，以最大限度地恢復資料量並達成您的業務目標。請參閱 link:how-site-recovery-is-performed-by-technical-support.html["技術支援如何恢復站台"]。
 
-${post_edited_translations.segment}
+盡快恢復故障網格節點的部分原因包括以下幾點：
 
 * 網格節點故障會降低系統和物件資料的備援，如果另一個節點發生故障，則可能導致永久性資料遺失。
-* ${post_edited_translations.segment}
+* 網格節點故障會影響日常運作效率。
 * 網格節點故障會降低您監控系統運作的能力。
-* ${post_edited_translations.segment}
+* 如果實施了嚴格的 ILM 規則，發生故障的網格節點可能會導致 500 內部伺服器錯誤。
 * 如果未及時恢復網格節點，恢復時間可能會增加。例如，可能會產生需要在恢復完成前清除的佇列。
 
 
@@ -33,12 +33,12 @@ ${post_edited_translations.segment}
 
 
 [[preconditions-for-recovering-grid-nodes]]
-== ${post_edited_translations.segment}
+== 恢復網格節點的前提條件
 
-${post_edited_translations.segment}
+恢復網格節點時，假定滿足下列所有條件：
 
-* ${post_edited_translations.segment}
-* 替換應用裝置上的 StorageGRID Appliance Installer 版本與您的 StorageGRID 系統軟體版本相符，如 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/verifying-and-upgrading-storagegrid-appliance-installer-version.html["${post_edited_translations.segment}"^]所述。
+* 故障的實體或虛擬硬體已更換並完成組態設定。
+* 替換應用裝置上的 StorageGRID Appliance Installer 版本與您的 StorageGRID 系統軟體版本相符，如 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/verifying-and-upgrading-storagegrid-appliance-installer-version.html["驗證並升級 StorageGRID 應用裝置安裝程式版本"^]所述。
 * 如果您要恢復的網格節點不是主要管理節點，則正在恢復的網格節點與管理恢復程序的管理節點之間存在連線。
 * 如果您要還原應用裝置儲存節點，則必須在應用裝置安裝期間指定與原始應用裝置相同的儲存設備類型（組合儲存、僅中繼資料儲存或僅資料儲存）。如果您指定了不同的儲存設備類型，則恢復將會失敗，並且需要使用正確的儲存設備類型重新安裝應用裝置。
 

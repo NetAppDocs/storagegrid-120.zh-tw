@@ -52,7 +52,7 @@ image:eth0_bond.gif["這張映像由周圍的文字進行解釋。"]
 
 現在，假設您想將 NodeA 移轉到 Host2。如果 Host2 也具有名為 bond0.1001、bond0.1002 和 bond0.1003 的介面，系統將允許移轉，因為系統假定名稱相同的介面在 Host2 上提供與 Host1 上相同的連線能力。如果 Host2 沒有名稱相同的介面，則不允許移轉。
 
-實現跨多個主機的一致網路介面命名的方法有很多；請參閱 link:configuring-host-network.html["${post_edited_translations.segment}"] 以取得一些範例。
+實現跨多個主機的一致網路介面命名的方法有很多；請參閱 link:configuring-host-network.html["設定主機網路"] 以取得一些範例。
 
 
 

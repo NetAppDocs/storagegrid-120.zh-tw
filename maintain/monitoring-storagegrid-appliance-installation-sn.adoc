@@ -14,9 +14,9 @@ summary: StorageGRID 應用裝置安裝程式會提供狀態，直到安裝完�
 StorageGRID 應用裝置安裝程式會提供狀態，直到安裝完成為止。軟體安裝完成後，應用裝置會重新開機。
 
 .步驟
-. ${post_edited_translations.segment}
+. 若要監控安裝進度，請點選選單列中的「Monitor Installation」。
 +
-${post_edited_translations.segment}
+「Monitor Installation」頁面顯示安裝進度。
 
 +
 藍色狀態列表示目前正在進行的工作。綠色狀態列表示已成功完成的工作。

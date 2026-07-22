@@ -18,18 +18,18 @@ summary: 您可以透過新增網站來擴充 StorageGRID 系統。
 [[guidelines-for-adding-a-site]]
 == 新增網站的指南
 
-${post_edited_translations.segment}
+在新增站台前，請審查以下要求和限制：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 每次擴充作業只能新增一個站台。
+* 在同一擴充過程中，不能為現有站台新增網格節點。
+* 所有站台必須至少包含三個儲存節點。
 * 新增網站並不會自動增加您可以儲存的物件數量。網格的總物件容量取決於可用儲存容量、資訊生命週期管理原則以及每個網站的中繼資料容量。
-* ${post_edited_translations.segment}
+* 在調整新站台規模時，必須確保其包含足夠的中繼資料容量。
 +
 StorageGRID 會在每個站台保留所有物件中繼資料的複本。新增站台時，必須確保其包含足夠的中繼資料容量，以因應現有物件中繼資料的需求，並預留足夠的中繼資料容量以支援未來成長。
 
 +
-${post_edited_translations.segment}
+如需更多資訊，請參閱下列內容：
 
 +
 ** link:../admin/managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]

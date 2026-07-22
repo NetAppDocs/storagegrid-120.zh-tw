@@ -20,7 +20,7 @@ summary: 您可以在安裝 Linux 節點之後，向其新增額外的 Trunk 或
 
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 在軟體升級、恢復程序或擴充程序進行期間，請勿嘗試為節點新增介面。
 
 .關於此任務
 節點安裝完成後，您可以依照下列步驟為 Linux 節點新增一個或多個額外的介面。例如，您可能需要向 Admin 或 Gateway Node 新增一個主幹介面，以便使用 VLAN 介面隔離不同應用程式或租戶的流量。或者，您可能需要新增一個存取介面，以便在高可用度 （HA） 群組中使用。
@@ -31,7 +31,7 @@ CAUTION: ${post_edited_translations.segment}
 
 .步驟
 . 登入託管該節點的 Linux 伺服器。
-. ${post_edited_translations.segment}
+. 使用 vim 或 pico 等文字編輯器編輯節點組態檔案：
 +
 `/etc/storagegrid/nodes/_node-name_.conf`
 

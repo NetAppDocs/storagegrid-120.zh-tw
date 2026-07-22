@@ -2,7 +2,7 @@
 permalink: maintain/selecting-node-recovery-procedure.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, procedure 
-summary: ${post_edited_translations.segment} 
+summary: 您必須為發生故障的節點類型選擇正確的恢復程序。 
 ---
 = 選擇 StorageGRID 節點還原程序
 :allow-uri-read: 
@@ -11,11 +11,11 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您必須為發生故障的節點類型選擇正確的恢復程序。
 
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 網格節點 | 恢復程序 
 
 
  a| 
@@ -23,12 +23,12 @@ ${post_edited_translations.segment}
  a| 
 請聯絡技術支援。如果多個儲存節點發生故障，技術支援必須協助進行恢復，以防止可能導致資料遺失的資料庫不一致問題。可能需要執行站點恢復流程。
 
-link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]
+link:how-site-recovery-is-performed-by-technical-support.html["技術支援如何恢復站台"]
 
 
 
  a| 
-${post_edited_translations.segment}
+單一儲存節點
  a| 
 儲存節點恢復程序取決於故障的類型和持續時間。
 
@@ -37,7 +37,7 @@ link:recovering-from-storage-node-failures.html["從儲存節點故障中恢復"
 
 
  a| 
-${post_edited_translations.segment}
+管理節點
  a| 
 管理節點恢復程序取決於您需要恢復的是主要管理節點還是非主要管理節點。
 
@@ -48,7 +48,7 @@ link:recovering-from-admin-node-failures.html["從管理節點故障中恢復"]
  a| 
 閘道節點
  a| 
-link:replacing-gateway-node.html["${post_edited_translations.segment}"]
+link:replacing-gateway-node.html["從閘道節點故障中恢復"]
 
 
 

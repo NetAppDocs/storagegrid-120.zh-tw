@@ -26,7 +26,7 @@ Y(CSTR):"hello1"][CBID(UI64):0x50C4F7AC2BC8EDF7][CSIZ(UI64):0
 ][ANID(UI32):12872812][AMID(FC32):S3RQ][ATID(UI64):1579224144
 102530435]]
 ----
-${post_edited_translations.segment}
+稽核訊息包含有關正在記錄之事件的資訊，以及有關稽核訊息本身的資訊。
 
 若要確定稽核訊息記錄的是哪個事件，請尋找 ATYP 屬性（如下所示）：
 

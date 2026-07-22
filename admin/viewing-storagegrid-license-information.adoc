@@ -2,7 +2,7 @@
 permalink: admin/viewing-storagegrid-license-information.html 
 sidebar: sidebar 
 keywords: storagegrid license, view license, licensed capacity of grid 
-summary: ${post_edited_translations.segment} 
+summary: 您可以隨時檢視 StorageGRID 系統的授權資訊，例如網格的最大儲存容量。 
 ---
 = 檢視 StorageGRID 授權資訊
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以隨時檢視 StorageGRID 系統的授權資訊，例如網格的最大儲存容量。
 
 .開始之前
 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
@@ -19,31 +19,31 @@ ${post_edited_translations.segment}
 .關於此任務
 如果此 StorageGRID 系統的軟體授權發生問題，儀表板上的「健全狀況」狀態卡會包含「授權」狀態圖示和 *License* 連結。該數字表示與授權相關的問題數量。
 
-image:dashboard_health_panel_license_status.png["${post_edited_translations.segment}"]
+image:dashboard_health_panel_license_status.png["儀表板健康狀態卡授權狀態"]
 
 .步驟
-. ${post_edited_translations.segment}
+. 您可以透過以下方式之一存取授權頁面：
 +
-** ${post_edited_translations.segment}
+** 選取 *Maintenance* > *System* > *License*。
 ** 從儀表板的「健全狀況」卡中，選擇「授權狀態」圖示或「授權」連結。
 +
-${post_edited_translations.segment}
+只有當授權出現問題時，才會顯示此連結。
 
 
 
-. ${post_edited_translations.segment}
+. 檢視目前授權的唯讀詳細資料：
 +
-** ${post_edited_translations.segment}
+** StorageGRID 系統 ID，即此 StorageGRID 安裝的唯一識別號碼。
 ** 授權序號
-** ${post_edited_translations.segment}
+** 授權類型，可以是 *Perpetual* 或 *Subscription*
 ** 網格的授權儲存容量
-** ${post_edited_translations.segment}
+** 支援的儲存容量
 ** 授權結束日期。永久授權會顯示 *N/A*。
-** ${post_edited_translations.segment}
+** 支援終止日期
 +
-此日期是從目前的授權檔案中讀取，如果您在取得授權檔案後延長或續約支援服務合約，則此日期可能會過期。若要更新此值，請參閱 link:updating-storagegrid-license-information.html["${post_edited_translations.segment}"]。您也可以使用 Active IQ 檢視實際的合約結束日期。
+此日期是從目前的授權檔案中讀取，如果您在取得授權檔案後延長或續約支援服務合約，則此日期可能會過期。若要更新此值，請參閱 link:updating-storagegrid-license-information.html["更新 StorageGRID 授權資訊"]。您也可以使用 Active IQ 檢視實際的合約結束日期。
 
-** ${post_edited_translations.segment}
+** 授權文字檔案的內容
 
 
 

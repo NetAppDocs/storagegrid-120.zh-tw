@@ -13,12 +13,12 @@ summary: 設定並使用儲存資源池，透過將資料分散至多個站台�
 [role="lead"]
 設定並使用儲存資源池，透過將資料分散至多個站台來防止資料遺失。複寫複本和銷毀編碼複本需要不同的儲存資源池組態。
 
-請參閱 link:using-multiple-storage-pools-for-cross-site-replication.html["${post_edited_translations.segment}"]。
+請參閱 link:using-multiple-storage-pools-for-cross-site-replication.html["利用複寫和銷毀編碼實現站台遺失保護的範例"]。
 
 
 
 [[guidelines-for-all-storage-pools]]
-== ${post_edited_translations.segment}
+== 所有儲存資源池的指導方針
 
 * 盡可能保持儲存資源池組態簡單。請勿建立超出必要數量的儲存資源池。
 * 建立包含儘可能多節點的儲存資源池。每個儲存資源池應包含兩個或更多節點。如果某個節點變得無法使用，節點不足的儲存資源池可能會導致 ILM 積壓。
@@ -31,15 +31,15 @@ summary: 設定並使用儲存資源池，透過將資料分散至多個站台�
 [[guidelines-for-storage-pools-used-for-replicated-copies]]
 == 用於複寫複本的儲存資源池準則
 
-* 使用 link:what-replication-is.html["${post_edited_translations.segment}"] 進行站台遺失保護時，請在 link:create-ilm-rule-define-placements.html["${post_edited_translations.segment}"] 中指定一或多個站台專屬儲存資源池。
+* 使用 link:what-replication-is.html["複寫"] 進行站台遺失保護時，請在 link:create-ilm-rule-define-placements.html["每個 ILM 規則的放置說明"] 中指定一或多個站台專屬儲存資源池。
 +
-${post_edited_translations.segment}
+StorageGRID 安裝過程中，系統會自動為每個站台建立一個儲存資源池。
 
 +
-${post_edited_translations.segment}
+為每個站台使用儲存資源池可確保複製的物件複本放置在您預期的位置（例如，每個站台上每個物件各一個複本，以防止站台遺失）。
 
 * 如果您在擴充中新增站台，請建立一個僅包含該新站台的新儲存資源池。然後，link:working-with-ilm-rules-and-ilm-policies.html#edit-an-ilm-rule["更新 ILM 規則"] 以控制哪些物件會儲存在新站台上。
-* ${post_edited_translations.segment}
+* 如果複本數量少於儲存資源池數量，系統會將複本分配至各個儲存資源池，以平衡磁碟使用量。
 * 如果儲存資源池重疊（包含相同的 Storage Node），該物件的所有複本可能僅會儲存於單一站台。您必須確保選取的儲存資源池不包含相同的 Storage Node。
 
 
@@ -48,8 +48,8 @@ ${post_edited_translations.segment}
 [[guidelines-for-storage-pools-used-for-erasure-coded-copies]]
 == 用於銷毀編碼複本的儲存資源池準則
 
-* 若要使用 link:what-erasure-coding-is.html["${post_edited_translations.segment}"] 進行站台遺失保護，請建立至少包含三個站台的儲存資源池。如果儲存資源池僅包含兩個站台，則無法將其用於銷毀編碼。對於包含兩個站台的儲存資源池，沒有可用的銷毀編碼方案。
-* 儲存資源池中所包含的 Storage Node 和站台數量會決定哪些 link:what-erasure-coding-schemes-are.html["${post_edited_translations.segment}"] 可用。
+* 若要使用 link:what-erasure-coding-is.html["銷毀編碼"] 進行站台遺失保護，請建立至少包含三個站台的儲存資源池。如果儲存資源池僅包含兩個站台，則無法將其用於銷毀編碼。對於包含兩個站台的儲存資源池，沒有可用的銷毀編碼方案。
+* 儲存資源池中所包含的 Storage Node 和站台數量會決定哪些 link:what-erasure-coding-schemes-are.html["銷毀編碼方案"] 可用。
 * 如果可能的話，儲存資源池應包含多於您所選銷毀編碼配置所需之最少數量的 Storage Node。例如，如果您使用 6+3 銷毀編碼配置，則必須至少有九個 Storage Node。不過，建議每個站台至少增加一個 Storage Node。
 * 盡可能均勻地在各個站點部署 Storage Nodes。例如，為了支援 6+3 銷毀編碼方案，設定一個包含至少三個站點上三個 Storage Nodes 的儲存資源池。
 * 如果您有高處理量需求，若站台之間的網路延遲大於 100 ms，則不建議使用包含多個站台的儲存資源池。隨著延遲增加，由於 TCP 網路處理量降低， StorageGRID 建立、放置和擷取物件片段的速度會急劇下降。

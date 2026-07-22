@@ -15,17 +15,17 @@ summary: 如果您想要依儲存貯體、租戶、IP 子網路或負載平衡�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
+* 您已建立要比對的任何負載平衡器端點。
+* 您已建立所有要比對的租戶。
 
 
 .步驟
 . 選擇 *組態* > *網路* > *流量分類*。
 . 選擇 *Create* 。
-. ${post_edited_translations.segment}
+. 輸入原則的名稱和執行摘要（選用），然後選取 *Continue*。
 +
-${post_edited_translations.segment}
+例如，說明此流量分類原則適用於哪些情況，以及將限制哪些方面。
 
 . 選取 *Add rule* 並指定以下詳細資料，以針對該原則建立一或多個比對規則。您建立的任何原則都應至少包含一個比對規則。選取 *Continue*。
 +
@@ -42,16 +42,16 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+匹配值
  a| 
 請輸入與所選類型相符的值。
 
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 儲存桶：輸入一個或多個儲存桶名稱。
+** 儲存桶正規表示式：輸入一個或多個用於符合一組儲存桶名稱的正規表示式。
 +
 此正規表示式未設定錨點。使用 ^ 錨點來匹配儲存桶名稱的開頭，使用 $ 錨點來匹配名稱的結尾。正規表示式匹配支援 PCRE （Perl 相容正規表示式）語法的子集。
 
-** ${post_edited_translations.segment}
+** CIDR：以 CIDR 表示法輸入一個或多個與所需子網路相符的 IPv4 子網路。
 ** 負載平衡器端點：選取端點名稱。這些是您在 link:../admin/configuring-load-balancer-endpoints.html["設定負載平衡器端點"] 上定義的負載平衡器端點。
 ** 租戶：租戶比對使用存取金鑰 ID。如果請求不包含存取金鑰 ID （例如，匿名存取），則使用所存取儲存桶的所有權來確定租戶。
 
@@ -63,7 +63,7 @@ ${post_edited_translations.segment}
  a| 
 如果您想要比對除與剛才定義的「類型」和「比對值」一致的流量_以外_的所有網路流量，請選取 *反向比對* 核取方塊。否則，請保持清除該核取方塊。
 
-${post_edited_translations.segment}
+例如，如果您希望此原則用於除一個負載平衡器端點之外的所有端點，請指定要排除的負載平衡器端點，並選擇 *Inverse match*。
 
 對於包含多個匹配器（其中至少一個是反向匹配器）的原則，請注意不要建立匹配所有請求的原則。
 
@@ -71,7 +71,7 @@ ${post_edited_translations.segment}
 . （可選）選擇 *Add a limit*，然後選擇以下詳細資訊，以新增一個或多個限制來控制規則匹配的網路流量。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 即使您不新增任何限制，StorageGRID 也會收集計量，以便您了解網路流量趨勢。
 
 +
 [cols="1a,3a"]
@@ -91,7 +91,7 @@ NOTE: ${post_edited_translations.segment}
 ** 精確的 IP 位址（/32 遮罩）
 ** 確切的儲存桶名稱
 ** Bucket 正規表示式
-** ${post_edited_translations.segment}
+** 租戶
 ** 端點
 ** 非精確 CIDR 匹配（非 /32）
 ** 反向匹配
@@ -118,18 +118,18 @@ NOTE: ${post_edited_translations.segment}
  a| 
 單元
  a| 
-${post_edited_translations.segment}
+描述您輸入數值的單位。
 
 |===
 +
-${post_edited_translations.segment}
+例如，如果您想要為 SLA 分層建立 4 GB/s 的頻寬限制，請建立兩個 Aggregate 頻寬限制：GET/HEAD 為 4 GB/s，PUT/POST/DELETE 為 4 GB/s。
 
 . 選擇 *Continue* 。
 . 讀取並審查流量分類原則。使用 *上一步* 按鈕返回並根據需要進行變更。當您對原則感到滿意時，選取 *儲存並繼續*。
 +
-${post_edited_translations.segment}
+現在，S3 用戶端流量將根據流量分類原則進行處理。
 
 
 
 .完成後
-link:viewing-network-traffic-metrics.html["${post_edited_translations.segment}"]以驗證原則是否正在執行您預期的流量限制。
+link:viewing-network-traffic-metrics.html["檢視網路流量計量"]以驗證原則是否正在執行您預期的流量限制。

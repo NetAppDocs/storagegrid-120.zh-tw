@@ -2,7 +2,7 @@
 permalink: fabricpool/configure-ontap.html 
 sidebar: sidebar 
 keywords: fabricPool, StorageGRID, system manager, ONTAP CLI, add cloud tier 
-summary: ${post_edited_translations.segment} 
+summary: 取得所需的 StorageGRID 資訊後，您可以前往 ONTAP 將 StorageGRID 新增為雲端分層。 
 ---
 = 配置 ONTAP System Manager，將 StorageGRID 新增為 FabricPool 雲端層
 :allow-uri-read: 
@@ -11,25 +11,25 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+取得所需的 StorageGRID 資訊後，您可以前往 ONTAP 將 StorageGRID 新增為雲端分層。
 
 .開始之前
 * 如果您已完成 FabricPool 設定精靈，您將擁有已下載的 `ONTAP_FabricPool_settings___bucketname__.txt`檔案。
-* ${post_edited_translations.segment}
+* 如果您手動設定了 StorageGRID，則您需要提供 StorageGRID 的完整網域名稱 （FQDN） 或 StorageGRID HA 群組的虛擬 IP （VIP） 位址、負載平衡器端點的連接埠號碼、負載平衡器憑證、租戶帳戶 root 使用者的存取金鑰 ID 和秘密金鑰，以及 ONTAP 將在該租戶中使用的儲存貯體名稱。
 
 
 
 
 [[access-ontap-system-manager]]
-== ${post_edited_translations.segment}
+== 存取 ONTAP System Manager
 
 這些說明介紹如何使用 ONTAP System Manager 將 StorageGRID 新增為雲端分層。您也可以使用 ONTAP CLI 完成相同的組態。如需說明，請前往  https://docs.netapp.com/us-en/ontap/fabricpool/index.html["ONTAP FabricPool 文件"^]。
 
 .步驟
-. ${post_edited_translations.segment}
+. 存取要分層到 StorageGRID 的 ONTAP 叢集的 System Manager。
 . 以叢集系統管理員身分登入。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 導覽至 *STORAGE* > *Tiers* > *Add Cloud Tier*。
+. 從物件存放區供應商清單中選取 *StorageGRID*。
 
 
 
@@ -57,29 +57,29 @@ Name
  a| 
 URL 樣式
  a| 
-如果您 link:../admin/configuring-s3-api-endpoint-domain-names.html["${post_edited_translations.segment}"]，請選取 *Virtual Hosted-Style URL*。
+如果您 link:../admin/configuring-s3-api-endpoint-domain-names.html["已設定的 S3 端點網域名稱"]，請選取 *Virtual Hosted-Style URL*。
 
 *Path-Style URL* 是 ONTAP 的預設值，但建議針對 StorageGRID 使用虛擬託管樣式請求。如果您在 *Server name (FQDN)* 欄位中提供 IP 位址而非網域名稱，則必須使用 *Path-Style URL*。
 
 
 
  a| 
-${post_edited_translations.segment}
+伺服器名稱（FQDN）
  a| 
 輸入您用於 StorageGRID 的完整網域名稱 （FQDN） 或 StorageGRID HA 群組的虛擬 IP （VIP） 位址。例如， `s3.storagegrid.__company__.com`。
 
 請注意下列事項：
 
-** ${post_edited_translations.segment}
-** 如果您提供網域名稱，DNS 記錄必須對應至您將用來連線至 StorageGRID 的每個 IP 位址。請參閱 link:configure-dns-server.html["${post_edited_translations.segment}"]。
+** 您在此處指定的 IP 位址或網域名稱必須與您為 StorageGRID 負載平衡器端點上傳或產生的憑證相符。
+** 如果您提供網域名稱，DNS 記錄必須對應至您將用來連線至 StorageGRID 的每個 IP 位址。請參閱 link:configure-dns-server.html["設定 DNS 伺服器"]。
 
 
 
 
  a| 
-${post_edited_translations.segment}
+SSL
  a| 
-${post_edited_translations.segment}
+已啟用（預設）。
 
 
 
@@ -101,7 +101,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+存取金鑰和私鑰
  a| 
 輸入 StorageGRID 租戶帳戶的 root 使用者的存取金鑰 ID 和秘密存取金鑰。
 
@@ -110,15 +110,15 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+Container 名稱
  a| 
 輸入您為此 ONTAP 分層建立的 StorageGRID 儲存貯體名稱。
 
 |===
 . 在 ONTAP 中完成最後的 FabricPool 組態。
 +
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 將一個或多個 Aggregate 附加至雲端分層。
+.. （可選）建立 Volume 分層原則。
 
 
 

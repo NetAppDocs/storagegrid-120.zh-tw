@@ -24,7 +24,7 @@ StorageGRID 系統透過套用有效的 ILM 原則來管理物件。ILM 原則�
 == 使用 Grid Manager 儀表板索引標籤
 
 .步驟
-${post_edited_translations.segment}
+使用 Grid Manager 儀表板上的 ILM 索引標籤來監控 ILM 作業：
 
 . 登入網格管理器。
 . 從儀表板中，選取 ILM 索引標籤，並記下 ILM 佇列（物件）卡和 ILM 評估率卡上的值。
@@ -36,29 +36,29 @@ ${post_edited_translations.segment}
 
 
 [[use-the-nodes-page]]
-== ${post_edited_translations.segment}
+== 使用「節點」頁面
 
 .步驟
-${post_edited_translations.segment}
+此外，請使用「節點」頁面調查 ILM 佇列：
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 在未來的 StorageGRID 版本中，「節點」頁面上的圖表將由對應的儀表板卡片取代。
 
 . 選取 *Nodes* 。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *_grid name_* > *ILM*。
+. 將遊標停留在 ILM 佇列圖上，即可查看特定時間點以下屬性的值：
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** *已排隊的物件（來自用戶端操作）*：由於用戶端操作（例如，擷取）而等待 ILM 評估的物件總數。
+** *已排隊物件（來自所有操作）*：等待 ILM 評估的物件總數。
+** *掃描速率（物件/秒）*：網格中的物件被掃描並排入 ILM 佇列的速率。
+** *評估速率（物件/秒）*：目前網格中物件根據 ILM 原則進行評估的速率。
 
 
 +
 
 NOTE: ILM 佇列區段僅包含於網格。此資訊不會顯示在站台或 Storage 節點的 ILM 索引標籤上。
 
-. ${post_edited_translations.segment}
+. 在 ILM 佇列部分，查看以下屬性。
 +
 ** *掃描週期 - 估計值*：完成所有物件的完整 ILM 掃描的估計時間。
 +

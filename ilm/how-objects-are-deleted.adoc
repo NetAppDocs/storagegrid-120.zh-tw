@@ -25,27 +25,27 @@ StorageGRID 可以使用以下兩種方法之一來刪除物件：
 
 [cols="1a,3a"]
 |===
-| ${post_edited_translations.segment} | 使用時 
+| 執行刪除的方法 | 使用時 
 
 
  a| 
-${post_edited_translations.segment}
+物件已排隊等待刪除
  a| 
-${post_edited_translations.segment}
+當下列任一條件成立時：
 
 * 自動物件刪除已由下列其中一個事件觸發：
 +
 ** S3 儲存桶生命週期組態中的到期日或天數已達到。
-** ${post_edited_translations.segment}
+** ILM 規則中指定的最後一個時段已過。
 
 
 +
-${post_edited_translations.segment}
+*注意：* 如果儲存貯體中已啟用 S3 Object Lock，則其中的物件若處於合法持有狀態，或已指定保留截止日期但尚未到期，則無法刪除。
 
-* ${post_edited_translations.segment}
+* S3 用戶端請求刪除，且下列一個或多個條件成立：
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 例如，由於物件位置暫時無法使用，因此無法在 30 秒內刪除複本。
+** 後台刪除佇列處於閒置狀態。
 
 
 
@@ -57,8 +57,8 @@ ${post_edited_translations.segment}
  a| 
 當 S3 用戶端發出刪除請求且滿足以下所有條件時：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 所有複本可在 30 秒內移除。
+* 後台刪除佇列包含待處理的物件。
 
 
 |===
@@ -97,7 +97,7 @@ StorageGRID 刪除物件的方式會影響系統的效能表現：
 
 如果用戶端從 link:../tenant/what-is-branch-bucket.html["分支桶"] 刪除具有版本 ID 的物件版本，StorageGRID 會隱藏該物件版本的存在，但不會在分支儲存貯體中建立刪除標記。如果用戶端從分支儲存貯體刪除不具版本 ID 的物件，StorageGRID 會根據標準 S3 行為在分支儲存貯體中建立刪除標記。
 
-${post_edited_translations.segment}
+刪除版本化物件時，若要釋放可用空間或移除刪除標記，請使用下列其中一種方法：
 
 * *S3 用戶端要求*：在 S3 DELETE Object 要求中指定物件版本 ID (`DELETE /object?versionId=ID`）。請記住，此要求僅會移除指定版本的物件複本（其他版本仍會佔用空間）。
 * *儲存桶生命週期*：在儲存桶生命週期組態中使用  `NoncurrentVersionExpiration` 行動。當 NoncurrentDays 達到指定數量時，StorageGRID 將永久移除所有非目前物件版本的複本。這些物件版本將無法復原。
@@ -116,13 +116,13 @@ ${post_edited_translations.segment}
 
 
 
-* *刪除儲存貯體中的物件*：使用租戶管理程式link:../tenant/deleting-s3-bucket-objects.html["${post_edited_translations.segment}"]，包括刪除標記，從儲存貯體中移除物件。
+* *刪除儲存貯體中的物件*：使用租戶管理程式link:../tenant/deleting-s3-bucket-objects.html["刪除所有物件版本"]，包括刪除標記，從儲存貯體中移除物件。
 
 
 刪除版本化物件時，StorageGRID 會建立一個零位元組的刪除標記作為物件的目前版本。必須先移除所有物件和刪除標記，才能刪除版本化儲存桶。
 
 * 在 StorageGRID 11.7 或更早版本中建立的刪除標記只能透過 S3 用戶端請求移除，ILM、儲存桶生命週期規則或儲存桶中的刪除物件操作均無法移除它們。
-* ${post_edited_translations.segment}
+* 在 StorageGRID 11.8 或更新版本中建立的儲存桶中的刪除標記，可透過 ILM、儲存桶生命週期規則、儲存桶操作中的刪除物件或明確的 S3 用戶端刪除來移除。
 
 
 .相關資訊

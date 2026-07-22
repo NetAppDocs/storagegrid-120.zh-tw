@@ -14,15 +14,15 @@ summary: 您可以在安裝虛擬機器節點後，向其新增額外的 trunk �
 VM 節點安裝完成後，您可以為其新增中繼介面或存取介面。新增的介面將顯示在 VLAN 介面頁面和 HA 群組頁面上。
 
 .開始之前
-* 您可以存取以下說明link:../swnodes/index.html["${post_edited_translations.segment}"]。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 您可以存取以下說明link:../swnodes/index.html["在 VMware 平台上安裝 StorageGRID"]。
+* 您擁有管理節點和閘道節點 VMware 虛擬機器。
+* 您有一個網路子網路，但它並未用作網格網路、管理網路或用戶端網路。
 * 您擁有  `Passwords.txt` 檔案。
 * 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
 
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 在軟體升級、恢復程序或擴充程序進行期間，請勿嘗試為節點新增介面。
 
 .關於此任務
 在安裝 VMware 節點之後，請使用下列步驟將一或多個額外的介面新增至該節點。例如，您可能想要將 trunk 介面新增至 Admin 或 Gateway 節點，以便使用 VLAN 介面來隔離屬於不同應用程式或租戶的流量。或者，您可能想要新增存取介面，以用於高可用度 （HA） 群組。

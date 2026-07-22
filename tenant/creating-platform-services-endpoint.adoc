@@ -336,7 +336,7 @@ SASL/SCRAM-SHA-512
 
 
  a| 
-${post_edited_translations.segment}
+TLS
  a| 
 驗證與端點資源建立 TLS 連線的伺服器憑證。
 
@@ -373,7 +373,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+TLS
  a| 
 驗證與端點資源建立 TLS 連線的伺服器憑證。
 

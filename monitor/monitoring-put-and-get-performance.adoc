@@ -2,7 +2,7 @@
 permalink: monitor/monitoring-put-and-get-performance.html 
 sidebar: sidebar 
 keywords: put, get, performance 
-summary: ${post_edited_translations.segment} 
+summary: 您可以監控某些操作（例如物件存放區和擷取）的效能，以協助識別可能需要進一步調查的變更。 
 ---
 = 監控 StorageGRID 中的 PUT 和 GET 效能
 :allow-uri-read: 
@@ -11,14 +11,14 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以監控某些操作（例如物件存放區和擷取）的效能，以協助識別可能需要進一步調查的變更。
 
 .關於此任務
 若要監控 PUT 和 GET 效能，您可以直接從工作站執行 S3 命令，也可以使用開源的 S3tester 應用程式。使用這些方法，您可以獨立於 StorageGRID 外部因素（例如用戶端應用程式問題或外部網路問題）來評估效能。
 
 在執行 PUT 和 GET 操作測試時，請遵循以下準則：
 
-* ${post_edited_translations.segment}
+* 使用與您通常擷取至網格中的物件大小相當的物件大小。
 * 對本地端和遠端站台執行操作。
 
 
@@ -26,5 +26,5 @@ link:../audit/index.html["稽核日誌"] 中的訊息指出執行特定作業所
 
 分析結果時，請檢視滿足請求所需的平均時間，以及您可以達到的整體處理量。定期重複相同的測試並記錄結果，以便您識別可能需要調查的趨勢。
 
-* 您可以 https://github.com/s3tester["${post_edited_translations.segment}"^]。
+* 您可以 https://github.com/s3tester["從 GitHub 下載 S3tester"^]。
 

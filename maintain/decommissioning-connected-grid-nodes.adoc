@@ -2,7 +2,7 @@
 permalink: maintain/decommissioning-connected-grid-nodes.html 
 sidebar: sidebar 
 keywords: storagegrid, decommission, connected nodes, decommission node 
-summary: ${post_edited_translations.segment} 
+summary: 您可以退役並永久移除連接到網格的節點。 
 ---
 = 停用已連線的 StorageGRID 節點
 :allow-uri-read: 
@@ -11,16 +11,16 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以退役並永久移除連接到網格的節點。
 
 .開始之前
 * 您已瞭解退役 link:considerations-for-decommissioning-admin-or-gateway-nodes.html["管理節點和 Gateway 節點"] 的考量事項，以及退役 link:considerations-for-decommissioning-storage-nodes.html["儲存節點"] 的考量事項。
-* ${post_edited_translations.segment}
+* 您已收集齊所有所需材料。
 * 您已確保沒有正在進行的資料修理工作。
 * 您已確認網格中任何位置均未進行儲存節點恢復。如果正在進行恢復，請等待恢復過程中執行的任何 Cassandra 重新建置完成。然後您可以繼續進行退役。
 * 您已確保在節點退役程序執行時不會執行其他維護程序，除非節點退役程序已暫停。
 * 您擁有佈建密碼。
-* ${post_edited_translations.segment}
+* 網格節點已連線。
 * 您要退役的節點，其「*可退役*」欄位中會顯示綠色核取記號。
 +
 
@@ -30,35 +30,35 @@ NOTE: 如果一個或多個磁碟區處於離線（未掛載）狀態，或處�
 
 NOTE: 如果在退役進行期間有一個或多個磁碟區離線，則在這些磁碟區重新上線後，退役程序才會完成。
 
-* 所有網格節點均顯示正常（綠色）狀態image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]。如果在 *Health* 欄中看到以下圖示之一，則必須嘗試解決問題：
+* 所有網格節點均顯示正常（綠色）狀態image:icon_alert_green_checkmark.png["綠色核取記號圖示"]。如果在 *Health* 欄中看到以下圖示之一，則必須嘗試解決問題：
 +
 [cols="1a,1a,3a"]
 |===
-| 圖示 | ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 圖示 | 顏色 | 嚴重程度 
 
 
  a| 
 image:icon_alarm_yellow_notice.gif["黃色方塊圖示"]
  a| 
-${post_edited_translations.segment}
+黃色
  a| 
-${post_edited_translations.segment}
+注意
 
 
 
  a| 
 image:icon_alert_yellow_minor.png["淺橙色菱形圖示"]
  a| 
-${post_edited_translations.segment}
+淺橘色
  a| 
 次要的
 
 
 
  a| 
-image:icon_alert_orange_major.png["${post_edited_translations.segment}"]
+image:icon_alert_orange_major.png["深橙色菱形圖示"]
  a| 
-${post_edited_translations.segment}
+深橙色
  a| 
 主要的
 
@@ -79,10 +79,10 @@ image:icon_alert_red_critical.png["紅色叉圖示"]
 CAUTION: 除非本程序另有指示，否則請勿移除網格節點的虛擬機器或其他資源。
 
 
-CAUTION: 在包含基於軟體的僅中繼資料節點的網格中退役儲存節點時，請務必注意。如果您退役所有設定為同時儲存物件和中繼資料的節點，則網格將無法儲存物件。如需有關僅中繼資料儲存節點的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+CAUTION: 在包含基於軟體的僅中繼資料節點的網格中退役儲存節點時，請務必注意。如果您退役所有設定為同時儲存物件和中繼資料的節點，則網格將無法儲存物件。如需有關僅中繼資料儲存節點的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["儲存節點類型"]。
 
 .關於此任務
-${post_edited_translations.segment}
+當節點退役時，其服務將停用，且節點會自動關閉。
 
 .步驟
 . 在「退役節點」頁面上，選取要退役的每個網格節點的核取方塊。
@@ -90,10 +90,10 @@ ${post_edited_translations.segment}
 +
 *Start Decommission* 按鈕已啟用。
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Start Decommission*。
+. 審查確認對話方塊中的節點清單，然後選擇 *OK*。
 +
-${post_edited_translations.segment}
+節點退役程序開始，並顯示每個節點的進度。
 
 +
 
@@ -107,7 +107,7 @@ CAUTION: 退役程序開始後，請勿將儲存節點設為離線。變更其�
 
 NOTE: 請盡快下載恢復套件，以確保在退役程序期間發生問題時能夠恢復您的網格。
 
-. ${post_edited_translations.segment}
+. 定期監控「退役節點」頁面，以確保所有選定的節點都已成功退役。
 +
 
 TIP: 儲存節點的退役可能需要數天或數週時間。
@@ -128,5 +128,5 @@ TIP: 儲存節點的退役可能需要數天或數週時間。
 
 
 . 確保已退役網格節點的磁碟機已完全擦除。使用市售的資料擦除工具或服務，永久且安全地從磁碟機中移除資料。
-. 如果您已退役某個應用裝置節點，且該應用裝置上的資料已使用節點加密進行保護，請使用 StorageGRID Appliance Installer 清除金鑰管理伺服器組態（Clear KMS）。如果您想將該應用裝置新增至另一個網格，則必須清除 KMS 組態。如需相關指示，請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/monitoring-node-encryption-in-maintenance-mode.html["${post_edited_translations.segment}"^]。
+. 如果您已退役某個應用裝置節點，且該應用裝置上的資料已使用節點加密進行保護，請使用 StorageGRID Appliance Installer 清除金鑰管理伺服器組態（Clear KMS）。如果您想將該應用裝置新增至另一個網格，則必須清除 KMS 組態。如需相關指示，請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/monitoring-node-encryption-in-maintenance-mode.html["維護模式下監控節點加密"^]。
 

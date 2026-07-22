@@ -28,7 +28,7 @@ CBID
 
 
  a| 
-${post_edited_translations.segment}
+ECPR
  a| 
 糾刪碼設定檔
  a| 
@@ -37,11 +37,11 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+LTYP
  a| 
-${post_edited_translations.segment}
+位置類型
  a| 
-${post_edited_translations.segment}
+CLDI（線上）：用於複製物件資料
 
 CLEC（線上）：用於糾刪碼物件資料
 
@@ -50,7 +50,7 @@ CLNL（近線）：用於已歸檔的複製物件資料
 
 
  a| 
-${post_edited_translations.segment}
+NOID
  a| 
 來源節點 ID
  a| 
@@ -81,11 +81,11 @@ RSLT
  a| 
 TSRC
  a| 
-${post_edited_translations.segment}
+觸發來源
  a| 
 USER: 使用者觸發
 
-${post_edited_translations.segment}
+SYST: 系統已觸發
 
 
 
@@ -94,6 +94,6 @@ UUID
  a| 
 通用唯一識別符
  a| 
-${post_edited_translations.segment}
+StorageGRID 系統中受影響物件的識別碼。
 
 |===

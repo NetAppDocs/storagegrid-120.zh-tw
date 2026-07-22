@@ -90,15 +90,15 @@ TIP: 此版本的文件網站已移除 Swift 相關細節。請參閱 https://do
 
 [cols="1a,1a,1a"]
 |===
-| 價值 | ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 價值 | 其中值已設定 | 值使用處 
 
 
  a| 
 虛擬 IP（VIP）位址
  a| 
-${post_edited_translations.segment}
+StorageGRID > HA 群組
  a| 
-${post_edited_translations.segment}
+DNS 項目
 
 
 
@@ -121,12 +121,12 @@ StorageGRID > 負載平衡器端點
 
 
  a| 
-${post_edited_translations.segment}
+伺服器名稱（FQDN）
  a| 
 StorageGRID > 負載平衡器端點
  a| 
 * 用戶端應用程式
-* ${post_edited_translations.segment}
+* DNS 項目
 
 
 
@@ -151,9 +151,9 @@ StorageGRID > 租戶與儲存桶
 
 
 [[how-do-i-get-these-values]]
-=== ${post_edited_translations.segment}
+=== 我該如何取得這些值？
 
-${post_edited_translations.segment}
+根據您的需求，您可以透過以下任一方式取得所需資訊：
 
 * *請使用 link:use-s3-setup-wizard.html["S3 設定精靈"]*。S3 設定精靈可協助您快速設定 StorageGRID 中的所需值，並輸出一個或兩個檔案，供您在設定 S3 應用程式時使用。此精靈會引導您完成所需步驟，並確保您的設定符合 StorageGRID 最佳實務做法。
 +

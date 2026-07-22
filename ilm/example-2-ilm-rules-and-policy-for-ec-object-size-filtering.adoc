@@ -53,12 +53,12 @@ NOTE: 銷毀編碼最適合大於 1 MB 的物件。不要對小於 200 KB 的物
 
 
  a| 
-${post_edited_translations.segment}
+放置位置
  a| 
-${post_edited_translations.segment}
+使用三個站台建立 2+1 銷毀編碼複本
 
 |===
-image:policy_2_rule_1_ec_objects_adv_filtering.png["${post_edited_translations.segment}"]
+image:policy_2_rule_1_ec_objects_adv_filtering.png["ILM 規則 1（例 2）：對所有大於 1 MB 的物件使用 EC"]
 
 
 
@@ -94,7 +94,7 @@ image:policy_2_rule_1_ec_objects_adv_filtering.png["${post_edited_translations.s
 
 
  a| 
-${post_edited_translations.segment}
+放置位置
  a| 
 從第 0 天起永遠保留，在站台 1 保留一份複本，在站台 2 保留一份複本。
 

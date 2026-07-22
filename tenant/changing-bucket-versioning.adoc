@@ -27,15 +27,15 @@ summary: 如果您使用的是 S3 租戶，則可以變更 S3 儲存桶的版本
 * 已暫停：版本控制功能先前已啟用，現已暫停
 
 
-${post_edited_translations.segment}
+如需更多資訊，請參閱下列內容：
 
 * link:../s3/object-versioning.html["物件版本控制"]
 * link:../ilm/example-4-ilm-rules-and-policy-for-s3-versioned-objects.html["S3 版本化物件的 ILM 規則和原則（範例 4）"]
-* link:../ilm/how-objects-are-deleted.html["${post_edited_translations.segment}"]
+* link:../ilm/how-objects-are-deleted.html["物件如何刪除"]
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 . 從表格中選擇儲存桶名稱。
 +
 顯示儲存桶詳細資料頁面。

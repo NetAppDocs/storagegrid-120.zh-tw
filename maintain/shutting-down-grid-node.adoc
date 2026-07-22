@@ -2,7 +2,7 @@
 permalink: maintain/shutting-down-grid-node.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, node shutdown, shut down node, node shut down 
-summary: ${post_edited_translations.segment} 
+summary: 您可以從節點的命令 shell 關閉網格節點。 
 ---
 = 關閉 StorageGRID 節點
 :allow-uri-read: 
@@ -18,25 +18,25 @@ summary: ${post_edited_translations.segment}
 
 
 .關於此任務
-${post_edited_translations.segment}
+在執行此程序之前，請審查以下事項：
 
 * 一般而言，為避免中斷，不應同時關閉多個節點。
 * 除非文件或技術支援明確指示，否則請勿在維護程序期間關閉節點。
-* ${post_edited_translations.segment}
+* 關閉過程取決於節點的安裝位置，如下：
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 關閉 VMware 節點會關閉虛擬機器。
+** 關閉 Linux 節點也會關閉 Container。
 ** 關閉 StorageGRID 應用裝置節點會關閉運算控制器。
 
 
-* ${post_edited_translations.segment}
+* 如果您打算關閉站台上的多個儲存節點，請在關閉節點前約一小時內停止在該站台接收物件。
 +
 如果任何 ILM 規則使用 *雙重提交* 擷取選項（或如果規則使用 *平衡* 選項且無法立即建立所有必需的副本），StorageGRID 會立即將所有新擷取的物件提交到同一網格上的兩個儲存節點，並在稍後評估 ILM。如果網格上的多個儲存節點關閉，則在關閉期間您可能無法存取新擷取的物件。如果站台上剩餘的可用儲存節點過少，寫入作業也可能會失敗。請參閱 link:../ilm/index.html["使用 ILM 管理物件"]。
 
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -68,7 +68,7 @@ NOTE: 在應用裝置節點上下達  `shutdown -h now` 命令之後，您必須
 ====
 .SG6160
 --
-.. ${post_edited_translations.segment}
+.. 關閉 SG6100-CN 儲存控制器的電源。
 .. 等待 SG6100-CN 儲存控制器上的藍色電源 LED 熄滅。
 
 
@@ -82,29 +82,29 @@ NOTE: 在應用裝置節點上下達  `shutdown -h now` 命令之後，您必須
 --
 .SG6000
 --
-.. ${post_edited_translations.segment}
+.. 等待儲存控制器背面的綠色快取作用中 LED 熄滅。
 +
 當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
 
-.. ${post_edited_translations.segment}
+.. 關閉應用裝置的電源，並等待藍色電源指示燈熄滅。
 
 
 --
 .SG5800
 --
-.. ${post_edited_translations.segment}
+.. 等待儲存控制器背面的綠色快取作用中 LED 熄滅。
 +
 當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
 
 .. 從 SANtricity System Manager 的首頁，選擇「檢視正在進行的動作」。
 .. 請確認所有操作均已完成，然後再進行下一步。
-.. ${post_edited_translations.segment}
+.. 關閉控制器機櫃的兩個電源開關，並等待控制器機櫃的所有 LED 指示燈熄滅。
 
 
 --
 .SG5700
 --
-.. ${post_edited_translations.segment}
+.. 等待儲存控制器背面的綠色快取作用中 LED 熄滅。
 +
 當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
 

@@ -13,16 +13,16 @@ summary: 當啟用單一登入（SSO）時，使用者只有在透過您組織�
 [role="lead"]
 啟用單一登入 （SSO） 後，使用者只有在透過貴組織實作的 SSO 登入流程驗證其憑證後，才能存取 Grid Manager、Tenant Manager、Grid Management API 或 Tenant Management API。本機使用者無法登入 StorageGRID。
 
-${post_edited_translations.segment}
+StorageGRID 系統支援使用安全性斷言標記語言 2.0 （SAML 2.0） 標準的單一登入 （SSO）。
 
-${post_edited_translations.segment}
+在啟用單一登入 （SSO） 之前，請審查啟用 SSO 後 StorageGRID 登入和登出流程會受到哪些影響。
 
 
 
 [[sign-in-when-sso-is-enabled]]
-== ${post_edited_translations.segment}
+== 啟用單一登入後即可登入
 
-${post_edited_translations.segment}
+啟用 SSO 後，當您登入 StorageGRID 時，系統會將您重新導向至您組織的 SSO 頁面以驗證您的憑證。
 
 .步驟
 . 在網頁瀏覽器中輸入任何 StorageGRID 管理節點的完整網域名稱或 IP 位址。
@@ -30,17 +30,17 @@ ${post_edited_translations.segment}
 StorageGRID 登入頁面隨即出現。
 
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 如果這是您第一次透過此瀏覽器存取 URL，系統會提示您輸入帳戶 ID。
+** 如果您之前曾存取過 Grid Manager 或 Tenant Manager，系統會提示您選擇最近的帳戶或輸入帳戶 ID。
 +
 
 NOTE: 當您輸入租戶帳戶的完整 URL （即完整網域或 IP 位址，後跟  `/?accountId=_20-digit-account-id_`）時，不會顯示 StorageGRID 登入頁面。相反地，您會立即被重新導向至您組織的 SSO 登入頁面，您可以在該頁面 <<signin_sso,使用您的 SSO 憑證登入>>。
 
 
 
-. ${post_edited_translations.segment}
+. 請指明您要存取的是 Grid Manager 還是 Tenant Manager：
 +
-** ${post_edited_translations.segment}
+** 若要存取 Grid Manager，請將「Account ID」欄位留空，輸入「0」作為帳戶 ID，或如果它出現在最近的帳戶清單中，請選擇「Grid Manager」。
 ** 若要存取 Tenant Manager，請輸入 20 位數的租戶帳戶 ID，或如果租戶出現在最近的帳戶清單中，請按名稱選擇租戶。
 
 
@@ -53,18 +53,18 @@ StorageGRID 會將您重新導向至您組織的 SSO 登入頁面。例如：
 如果您的 SSO 憑證正確：
 
 +
-.. ${post_edited_translations.segment}
+.. 身分供應商 （IdP） 向 StorageGRID 提供驗證回應。
 .. StorageGRID 驗證驗證回應。
-.. ${post_edited_translations.segment}
+.. 如果回應有效，且您屬於具有 StorageGRID 存取權限的聯合群組，則您已登入 Grid Manager 或 Tenant Manager，具體取決於您選擇的帳戶。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果服務帳戶無法存取，只要您是屬於具有 StorageGRID 存取權限的聯合群組的現有使用者，您仍然可以登入。
 
 
 
-. ${post_edited_translations.segment}
+. 如果您擁有足夠的權限，您也可以選擇存取其他管理節點，或存取 Grid Manager 或 Tenant Manager。
 +
-${post_edited_translations.segment}
+您無需重新輸入 SSO 憑證。
 
 
 
@@ -73,10 +73,10 @@ ${post_edited_translations.segment}
 [[sign-out-when-sso-is-enabled]]
 == 啟用 SSO 後登出
 
-${post_edited_translations.segment}
+當 StorageGRID 啟用 SSO 時，登出時所發生的情況取決於您登入的系統以及您從哪裡登出。
 
 .步驟
-. ${post_edited_translations.segment}
+. 在使用者介面的右上角找到「*登出*」連結。
 . 選擇「登出」。
 +
 StorageGRID 登入頁面隨即顯示。*最近使用的帳戶* 下拉式功能表已更新，包含 *Grid Manager* 或租戶名稱，以便您日後能更快速地存取這些使用者介面。
@@ -103,16 +103,16 @@ Grid Manager 位於一個或多個管理節點上
 
 
  a| 
-${post_edited_translations.segment}
+一個或多個管理節點上的租戶管理器
  a| 
-${post_edited_translations.segment}
+任何管理節點上的租戶管理器
  a| 
 所有管理節點上的租戶管理器
 
 
 
  a| 
-${post_edited_translations.segment}
+Grid Manager 和 Tenant Manager
  a| 
 Grid Manager
  a| 
@@ -121,7 +121,7 @@ Grid Manager
 
 
  a| 
-${post_edited_translations.segment}
+租戶管理員
  a| 
 僅限租戶管理員。您還必須登出 Grid Manager 才能登出單一登入。
 

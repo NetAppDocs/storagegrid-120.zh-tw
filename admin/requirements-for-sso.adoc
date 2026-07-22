@@ -16,12 +16,12 @@ summary: 在為 StorageGRID 系統啟用單一登入之前，請審查相關要�
 
 
 [[identity-provider-requirements]]
-== ${post_edited_translations.segment}
+== 身分供應商要求
 
 StorageGRID 支援以下 SSO 身分供應商 (IdP)：
 
 * Active Directory Federation Service （AD FS）
-* ${post_edited_translations.segment}
+* Microsoft Entra ID
 * PingFederate
 
 
@@ -29,7 +29,7 @@ StorageGRID 支援以下 SSO 身分供應商 (IdP)：
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 已設定 LDAP 服務類型 | 單一登入身分供應商選項 
 
 
  a| 
@@ -51,13 +51,13 @@ Entra ID
 
 
 [[ad-fs-requirements]]
-=== ${post_edited_translations.segment}
+=== AD FS 要求
 
 您可以使用以下任何版本的 AD FS：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* Windows Server 2022 AD FS
+* Windows Server 2019 AD FS
+* Windows Server 2016 AD FS
 
 
 
@@ -98,4 +98,4 @@ NOTE: 不建議在信賴方信任、企業應用程式或 SP 連線中使用管�
 [[port-requirements]]
 == 連接埠需求
 
-單一登入 (SSO) 在受限的 Grid Manager 或 Tenant Manager 連接埠上不可用。如果您希望使用者使用單一登入進行驗證，則必須使用預設的 HTTPS 連接埠 (443)。請參閱link:controlling-access-through-firewalls.html["${post_edited_translations.segment}"]。
+單一登入 (SSO) 在受限的 Grid Manager 或 Tenant Manager 連接埠上不可用。如果您希望使用者使用單一登入進行驗證，則必須使用預設的 HTTPS 連接埠 (443)。請參閱link:controlling-access-through-firewalls.html["控制外部防火牆的存取"]。

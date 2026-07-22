@@ -45,14 +45,14 @@ S3 Object Lock 需要儲存桶版本控制，該功能在建立儲存桶時會�
 * 處於合規模式：
 +
 ** 物件只有在達到其保留期限後才能刪除。
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 物件的保留截止日期可以增加，但不能減少。
+** 在達到保留截止日期之前，無法移除該物件的保留截止日期。
 
 
 * 處於 GOVERNANCE 模式：
 +
 ** 擁有 `s3:BypassGovernanceRetention`權限的使用者可以使用 `x-amz-bypass-governance-retention: true`請求標頭繞過保留設定。
-** ${post_edited_translations.segment}
+** 這些使用者可以在物件版本的保留截止日期到期之前將其刪除。
 ** 這些使用者可以增加、減少或移除物件的保留截止日期。
 
 

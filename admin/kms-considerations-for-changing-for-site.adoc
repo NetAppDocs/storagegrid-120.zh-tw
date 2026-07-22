@@ -20,7 +20,7 @@ summary: 每個金鑰管理伺服器 （KMS） 或 KMS 叢集都會向單一站�
 . 首先，您設定一個預設的 KMS，該 KMS 適用於所有沒有專用 KMS 的站台。
 . 儲存 KMS 後，所有啟用了「節點加密」設定的應用裝置節點都會連接到 KMS 並要求加密金鑰。此金鑰用於加密所有站台上的應用裝置節點。解密這些應用裝置也必須使用此金鑰。
 +
-image:kms_default_key.png["${post_edited_translations.segment}"]
+image:kms_default_key.png["KMS 預設金鑰"]
 
 . 您決定為某個站台（圖中的 Data Center 3）新增一個站台特定的 KMS。但是，由於應用裝置節點已加密，因此在嘗試儲存站台特定 KMS 的組態時會發生驗證錯誤。出現此錯誤的原因是站台特定 KMS 沒有解密該站台節點的正確金鑰。
 +
@@ -28,7 +28,7 @@ image:kms_wrong_key.png["KMS 金鑰錯誤"]
 
 . 若要解決此問題，您可以將目前的加密金鑰版本從預設 KMS 複製到新的 KMS。（技術上而言，您是將原始金鑰複製到具有相同別名的新金鑰。原始金鑰會成為新金鑰的先前版本。）特定站台的 KMS 現在具有正確的金鑰來解密 Data Center 3 的應用裝置節點，因此可以將其儲存在 StorageGRID 中。
 +
-image:kms_copied_key.png["${post_edited_translations.segment}"]
+image:kms_copied_key.png["KMS 複製金鑰"]
 
 
 
@@ -37,30 +37,30 @@ image:kms_copied_key.png["${post_edited_translations.segment}"]
 [[use-cases-for-changing-which-kms-is-used-for-a-site]]
 == 變更網站所使用 KMS 的使用案例
 
-${post_edited_translations.segment}
+下表摘要說明變更站台 KMS 的最常見情況所需的步驟。
 
 [cols="1a,2a"]
 |===
-| 變更站台 KMS 的使用案例 | ${post_edited_translations.segment} 
+| 變更站台 KMS 的使用案例 | 必要步驟 
 
 
  a| 
-${post_edited_translations.segment}
+您有一個或多個站台專屬的 KMS 項目，且您想要使用其中一個作為預設 KMS。
  a| 
 編輯站台專屬的 KMS。在 *Manages keys for* 欄位中，選取 *Sites not managed by another KMS (default KMS)*。站台專屬的 KMS 現在將作為預設 KMS 使用。它將套用至任何沒有專用 KMS 的站台。
 
-link:kms-editing.html["${post_edited_translations.segment}"]
+link:kms-editing.html["編輯金鑰管理伺服器 (KMS)"]
 
 
 
  a| 
 您擁有預設的 KMS ，且您在擴充中新增了新的站台。您不想對新站台使用預設的 KMS 。
  a| 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 如果新站台的應用裝置節點已透過預設 KMS 進行加密，請使用 KMS 軟體將目前版本的加密金鑰從預設 KMS 複製到新的 KMS。
+. 使用 Grid Manager，新增新的 KMS 並選擇站台。
 
 
-link:kms-adding.html["${post_edited_translations.segment}"]
+link:kms-adding.html["新增金鑰管理伺服器（KMS）"]
 
 
 
@@ -71,6 +71,6 @@ link:kms-adding.html["${post_edited_translations.segment}"]
 . 使用 Grid Manager，編輯現有的 KMS 組態，並輸入新的主機名稱或 IP 位址。
 
 
-link:kms-adding.html["${post_edited_translations.segment}"]
+link:kms-adding.html["新增金鑰管理伺服器（KMS）"]
 
 |===

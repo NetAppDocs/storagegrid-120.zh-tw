@@ -39,7 +39,7 @@ NOTE: 若要變更 Grid Manager 中顯示的儲存設備值的單位，請選擇
 
 * link:managing-alerts.html["管理警報"]
 * link:logs-files-reference.html["檢視日誌檔"]
-* link:configure-log-management.html["${post_edited_translations.segment}"]
+* link:configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]
 * link:considerations-for-external-syslog-server.html["使用外部 syslog 伺服器"]收集稽核資訊
 * link:using-snmp-monitoring.html["使用 SNMP 進行監控"]
 * link:manage-io-prioritization.html["變更 I/O 優先權"]變更 I/O 作業的相對優先順序

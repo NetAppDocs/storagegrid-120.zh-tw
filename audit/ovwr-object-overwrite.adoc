@@ -84,7 +84,7 @@ SUCS：成功
 
 
  a| 
-${post_edited_translations.segment}
+SGRP
  a| 
 網站（組）
  a| 

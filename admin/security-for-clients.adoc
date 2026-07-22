@@ -20,18 +20,18 @@ StorageGRID 租戶帳戶使用 S3 用戶端應用程式將物件資料儲存至 
 
 以下列表總結了 S3 REST API 的安全性實作方式：
 
-${post_edited_translations.segment}:: ${post_edited_translations.segment}
-${post_edited_translations.segment}:: 由系統 CA 簽署的 X.509 伺服器憑證或系統管理員提供的自訂伺服器憑證
+連線安全性:: TLS
+伺服器驗證:: 由系統 CA 簽署的 X.509 伺服器憑證或系統管理員提供的自訂伺服器憑證
 用戶端驗證:: S3 帳戶存取金鑰 ID 和秘密存取金鑰
-${post_edited_translations.segment}:: 儲存桶所有權和所有適用的存取控制原則
+用戶端授權:: 儲存桶所有權和所有適用的存取控制原則
 
 
 
 
 [[how-storagegrid-provides-security-for-client-applications]]
-== ${post_edited_translations.segment}
+== StorageGRID 如何為用戶端應用程式提供安全性
 
-${post_edited_translations.segment}
+S3 用戶端應用程式可以連線至閘道節點或管理節點上的 Load Balancer 服務，或直接連線至儲存節點。
 
 * 連接到負載平衡器服務的用戶端可以使用 HTTPS 或 HTTP，具體取決於您如何link:configuring-load-balancer-endpoints.html["設定負載平衡器端點"]。
 +

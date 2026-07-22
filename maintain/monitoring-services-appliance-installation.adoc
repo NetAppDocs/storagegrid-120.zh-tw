@@ -14,9 +14,9 @@ summary: StorageGRID 應用裝置安裝程式會提供狀態，直到安裝完�
 StorageGRID 應用裝置安裝程式會提供狀態，直到安裝完成為止。軟體安裝完成後，應用裝置會重新開機。
 
 .步驟
-. ${post_edited_translations.segment}
+. 若要監控安裝進度，請點選選單列中的「Monitor Installation」。
 +
-${post_edited_translations.segment}
+「Monitor Installation」頁面顯示安裝進度。
 
 +
 藍色狀態列表示目前正在進行的工作。綠色狀態列表示已成功完成的工作。
@@ -29,17 +29,17 @@ NOTE: 安裝程式會確保不會重新執行先前安裝中已完成的工作�
 +
 ** *1.設定儲存設備*
 +
-${post_edited_translations.segment}
+在此階段，安裝程式會清除磁碟機上的所有現有組態，並設定主機設定。
 
 ** *2.安裝作業系統*
 +
-${post_edited_translations.segment}
+在此階段，安裝程式會將 StorageGRID 的基本作業系統映像從主要管理節點複製到應用裝置，或從主要管理節點的安裝套件安裝基本作業系統。
 
 
 
 . 持續監控安裝進度，直到出現以下情況之一：
 +
-** ${post_edited_translations.segment}
+** 對於應用裝置 Gateway 節點或非主要應用裝置管理節點，*Install StorageGRID* 階段會暫停，嵌入式主控台上會出現一則訊息，提示您使用 Grid Manager 在管理節點上核准此節點。
 ** 對於應用裝置主管理節點，會出現第五階段（載入 StorageGRID 安裝程式）。如果第五階段持續超過 10 分鐘，請手動重新整理頁面。
 
 
@@ -47,7 +47,7 @@ ${post_edited_translations.segment}
 +
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | 參考 
+| 恢復類型 | 參考 
 
 
  a| 
@@ -58,16 +58,16 @@ link:selecting-start-recovery-to-configure-gateway-node.html["選擇「開始恢
 
 
  a| 
-${post_edited_translations.segment}
+非主要管理節點
  a| 
-link:selecting-start-recovery-to-configure-non-primary-admin-node.html["${post_edited_translations.segment}"]
+link:selecting-start-recovery-to-configure-non-primary-admin-node.html["選擇「開始恢復」以設定非主要管理節點"]
 
 
 
  a| 
 主管理節點
  a| 
-link:configuring-replacement-primary-admin-node.html["${post_edited_translations.segment}"]
+link:configuring-replacement-primary-admin-node.html["設定替換主要管理節點"]
 
 |===
 

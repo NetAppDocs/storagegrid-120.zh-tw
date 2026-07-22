@@ -15,7 +15,7 @@ summary: 您可以變更預設或自訂警報規則的啟用/停用狀態。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您擁有 link:../admin/admin-group-permissions.html["管理警報或 Root 存取權限"]。
 
 
 .關於此任務

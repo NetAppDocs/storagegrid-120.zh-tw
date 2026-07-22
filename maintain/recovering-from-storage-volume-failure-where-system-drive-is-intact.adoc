@@ -16,11 +16,11 @@ summary: 您必須完成一系列工作，以恢復軟體型儲存節點，其�
 
 NOTE: 此恢復程序僅適用於軟體型儲存節點。如果應用裝置儲存節點上的儲存 Volume 發生故障，請改用應用裝置恢復程序：link:recovering-storagegrid-appliance-storage-node.html["恢復應用裝置儲存節點"]。
 
-${post_edited_translations.segment}
+此恢復程序包括以下任務：
 
-* link:reviewing-warnings-about-storage-volume-recovery.html["${post_edited_translations.segment}"]
-* link:identifying-and-unmounting-failed-storage-volumes.html["${post_edited_translations.segment}"]
-* link:recovering-failed-storage-volumes-and-rebuilding-cassandra-database.html["${post_edited_translations.segment}"]
-* link:restoring-object-data-to-storage-volume-where-system-drive-is-intact.html["${post_edited_translations.segment}"]
-* link:checking-storage-state-after-recovering-storage-volumes.html["${post_edited_translations.segment}"]
+* link:reviewing-warnings-about-storage-volume-recovery.html["審查儲存 Volume 恢復警告"]
+* link:identifying-and-unmounting-failed-storage-volumes.html["識別並取下故障儲存設備 Volume"]
+* link:recovering-failed-storage-volumes-and-rebuilding-cassandra-database.html["恢復 Volume 並重新建置 Cassandra 資料庫"]
+* link:restoring-object-data-to-storage-volume-where-system-drive-is-intact.html["恢復物件資料"]
+* link:checking-storage-state-after-recovering-storage-volumes.html["檢查儲存設備狀態"]
 

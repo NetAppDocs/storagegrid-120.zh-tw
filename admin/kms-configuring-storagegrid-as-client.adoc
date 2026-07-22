@@ -42,11 +42,11 @@ NOTE: 這些說明適用於 Thales CipherTrust Manager 和 Hashicorp Vault。有
 
 . 對於每個 KMS 或 KMS 叢集，取得由憑證授權單位 （CA） 簽署的伺服器憑證，或取得包含每個 PEM 編碼的 CA 憑證檔案（按憑證鏈順序串連）的憑證套裝組合。
 +
-${post_edited_translations.segment}
+伺服器憑證可讓外部 KMS 向 StorageGRID 進行驗證。
 
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 憑證必須使用隱私增強郵件 (PEM) Base-64 編碼的 X.509 格式。
+** 每個伺服器憑證中的「主體替代名稱 (SAN)」欄位必須包含 StorageGRID 將連線的完整網域名稱 (FQDN) 或 IP 位址。
 +
 
 NOTE: 在 StorageGRID 中設定 KMS 時，必須在 *主機名稱* 欄位中輸入相同的 FQDN 或 IP 位址。
@@ -54,7 +54,7 @@ NOTE: 在 StorageGRID 中設定 KMS 時，必須在 *主機名稱* 欄位中輸�
 ** 伺服器憑證必須與 KMS 的 KMIP 介面使用的憑證相符，該介面通常使用連接埠 5696。
 
 
-. ${post_edited_translations.segment}
+. 取得外部 KMS 頒發給 StorageGRID 的公用用戶端憑證，以及用戶端憑證的私密金鑰。
 +
 用戶端憑證允許 StorageGRID 向 KMS 進行驗證。
 

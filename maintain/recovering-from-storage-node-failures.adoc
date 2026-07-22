@@ -13,7 +13,7 @@ summary: 恢復故障儲存節點的程序取決於故障類型和發生故障�
 [role="lead"]
 恢復故障儲存節點的程序取決於故障類型和發生故障的儲存節點類型。
 
-${post_edited_translations.segment}
+使用此表選擇發生故障的儲存節點的恢復程序。
 
 [cols="1a,1a,1a"]
 |===
@@ -30,16 +30,16 @@ ${post_edited_translations.segment}
 
 技術支援可以確定何時可以安全地開始恢復第二個儲存節點。
 
-${post_edited_translations.segment}
+*注意*：如果一個站台上有多個包含 ADC 服務的儲存節點發生故障，該站台的所有待處理平台服務請求都將遺失。
 
 
 
  a| 
-${post_edited_translations.segment}
+站台中多個儲存節點發生故障，或整個站台發生故障。
  a| 
 請聯絡技術支援。可能需要執行站台恢復程序。
  a| 
-技術支援將評估您的狀況並制定恢復計畫。請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+技術支援將評估您的狀況並制定恢復計畫。請參閱 link:how-site-recovery-is-performed-by-technical-support.html["技術支援如何恢復站台"]。
 
 
 
@@ -64,9 +64,9 @@ link:recovering-from-storage-volume-failure-where-system-drive-is-intact.html["�
  a| 
 系統磁碟機故障。
  a| 
-link:reviewing-warnings-for-system-drive-recovery.html["${post_edited_translations.segment}"]
+link:reviewing-warnings-for-system-drive-recovery.html["從系統磁碟機故障中恢復"]
  a| 
-${post_edited_translations.segment}
+節點替換流程取決於部署平台，以及是否有任何儲存 Volume 也發生故障。
 
 |===
 

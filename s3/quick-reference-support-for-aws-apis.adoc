@@ -61,7 +61,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-for-multipart-uploads.html["多部分上傳作業"]
 
 
@@ -86,7 +86,7 @@ StorageGRID 支援以下請求本文 XML 標籤：
 * `PartNumber`
 
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:complete-multipart-upload.html["CompleteMultipartUpload"]
 
 
@@ -122,7 +122,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:put-object-copy.html["CopyObject"]
 
 
@@ -139,7 +139,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 .請求本文
 StorageGRID 支援 Amazon S3 REST API 在實作時定義的所有請求本文參數。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -171,7 +171,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:initiate-multipart-upload.html["CreateMultipartUpload"]
 
 
@@ -182,7 +182,7 @@ link:initiate-multipart-upload.html["CreateMultipartUpload"]
 .URI 查詢參數和請求標頭
 StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -196,7 +196,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -210,7 +210,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -224,7 +224,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 * link:operations-on-buckets.html["儲存貯體上的作業"]
 * link:create-s3-lifecycle-configuration.html["建立 S3 生命週期組態"]
 
@@ -240,7 +240,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -254,7 +254,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -268,7 +268,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -285,7 +285,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-objects.html["對物件進行操作"]
 
 
@@ -302,7 +302,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 .請求本文
 StorageGRID 支援 Amazon S3 REST API 在實作時定義的所有請求本文參數。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-objects.html["對物件進行操作"]
 
 
@@ -315,7 +315,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-objects.html["對物件進行操作"]
 
 
@@ -329,7 +329,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -343,7 +343,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -357,7 +357,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -371,7 +371,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 * link:operations-on-buckets.html["儲存貯體上的作業"]
 * link:create-s3-lifecycle-configuration.html["建立 S3 生命週期組態"]
 
@@ -387,7 +387,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -401,7 +401,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -415,7 +415,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -429,7 +429,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -443,7 +443,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -457,7 +457,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -493,7 +493,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> URI
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:get-object.html["GetObject"]
 
 
@@ -507,7 +507,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-objects.html["對物件進行操作"]
 
 
@@ -521,7 +521,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
 
 
@@ -535,7 +535,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
 
 
@@ -549,7 +549,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
 
 
@@ -563,7 +563,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-objects.html["對物件進行操作"]
 
 
@@ -577,7 +577,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -602,7 +602,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:head-object.html["HeadObject"]
 
 
@@ -616,7 +616,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-the-service.html["服務操作 > ListBuckets"]
 
 
@@ -637,7 +637,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> 以
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:list-multipart-uploads.html["ListMultipartUploads"]
 
 
@@ -658,7 +658,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> 以
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -681,7 +681,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> 以
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -703,7 +703,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> 以
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -722,7 +722,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> 以
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:list-multipart-uploads.html["ListMultipartUploads"]
 
 
@@ -736,7 +736,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 StorageGRID 支援 Amazon S3 REST API 在實作時定義的所有請求本文參數。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -756,7 +756,7 @@ StorageGRID 支援以下請求本文 XML 標籤：
 * `SSEAlgorithm`
 
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -788,7 +788,7 @@ StorageGRID 支援以下請求本文 XML 標籤：
 * `Value`
 
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 * link:operations-on-buckets.html["儲存貯體上的作業"]
 * link:create-s3-lifecycle-configuration.html["建立 S3 生命週期組態"]
 
@@ -818,7 +818,7 @@ StorageGRID 支援以下請求本文 XML 標籤：
 * `Value`
 
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -850,7 +850,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 * `StorageClass`
 
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -864,7 +864,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 StorageGRID 支援 Amazon S3 REST API 在實作時定義的所有請求本文參數。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -882,7 +882,7 @@ StorageGRID 支援以下請求本文參數：
 * `Status`
 
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-buckets.html["儲存貯體上的作業"]
 
 
@@ -915,7 +915,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 * 物件的二進位資料
 
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:put-object.html["PutObject"]
 
 
@@ -929,7 +929,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 StorageGRID 支援 Amazon S3 REST API 在實作時定義的所有請求本文參數。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
 
 
@@ -943,7 +943,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 StorageGRID 支援 Amazon S3 REST API 在實作時定義的所有請求本文參數。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
 
 
@@ -960,7 +960,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> ，
 .請求本文
 StorageGRID 支援 Amazon S3 REST API 在實作時定義的所有請求本文參數。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
 
 
@@ -974,7 +974,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>>。
 .請求本文
 StorageGRID 支援 Amazon S3 REST API 在實作時定義的所有請求本文參數。
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:operations-on-objects.html["對物件進行操作"]
 
 
@@ -1027,7 +1027,7 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> URI
 * 零件的二進位資料
 
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:upload-part.html["UploadPart"]
 
 
@@ -1061,5 +1061,5 @@ StorageGRID 支援此請求的所有 <<common-params,常用參數和標頭>> URI
 .請求本文
 無
 
-.${post_edited_translations.segment}
+.StorageGRID 文件
 link:upload-part-copy.html["UploadPartCopy"]

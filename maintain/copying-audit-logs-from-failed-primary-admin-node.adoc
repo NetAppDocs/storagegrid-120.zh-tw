@@ -34,7 +34,7 @@ NOTE: 如果現在無法在故障的管理節點上存取稽核日誌，您或�
 
 
 . 停止 AMS 服務以防止其建立新的日誌檔：``service ams stop``
-. ${post_edited_translations.segment}
+. 導航至稽核匯出目錄：
 +
 `cd /var/local/audit/export`
 

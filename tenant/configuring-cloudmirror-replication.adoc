@@ -71,7 +71,7 @@ NOTE: CloudMirror 複寫與跨網格複寫功能有重要的相似之處，也�
 
 
 
-. ${post_edited_translations.segment}
+. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 . 選取來源儲存貯體的名稱。
 +
 顯示儲存桶詳細資料頁面。
@@ -98,4 +98,4 @@ NOTE: StorageGRID 系統管理員必須使用 Grid Manager 或 Grid Management A
 
 
 .相關資訊
-link:creating-platform-services-endpoint.html["${post_edited_translations.segment}"]
+link:creating-platform-services-endpoint.html["建立平台服務端點"]

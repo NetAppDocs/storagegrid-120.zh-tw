@@ -22,7 +22,7 @@ summary: 主管理節點比非主管理節點提供更多功能。例如，某�
 
 .步驟
 . 選取 *Nodes* 。
-. ${post_edited_translations.segment}
+. 在搜尋框中輸入*primary*。
 +
 在搜尋結果中，識別「類型」欄位中顯示「Primary Admin Node」的節點。應該會列出一個主要管理節點。
 

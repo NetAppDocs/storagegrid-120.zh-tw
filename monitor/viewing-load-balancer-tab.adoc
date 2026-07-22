@@ -2,7 +2,7 @@
 permalink: monitor/viewing-load-balancer-tab.html 
 sidebar: sidebar 
 keywords: load balancer tab 
-summary: ${post_edited_translations.segment} 
+summary: 負載平衡器標籤包含與負載平衡器服務運作相關的效能和診斷圖表。 
 ---
 = 檢視 StorageGRID 負載平衡器索引標籤
 :allow-uri-read: 
@@ -11,18 +11,18 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+負載平衡器標籤包含與負載平衡器服務運作相關的效能和診斷圖表。
 
 系統會針對 Admin Nodes、Gateway Nodes、每個站台及整個網格顯示 Load Balancer 索引標籤。針對每個站台，Load Balancer 索引標籤提供該站台所有節點統計資料的彙總摘要。針對整個網格，Load Balancer 索引標籤提供所有站台統計資料的彙總摘要。
 
-${post_edited_translations.segment}
+如果沒有 I/O 透過負載平衡器服務執行，或未設定負載平衡器，則圖表會顯示「無資料」。
 
 image:nodes_page_load_balancer_tab.png["節點頁面負載平衡器索引標籤"]
 
 
 
 [[request-traffic]]
-== ${post_edited_translations.segment}
+== 請求流量
 
 此圖顯示負載平衡器端點與發出請求的用戶端之間傳輸的資料處理量的 3 分鐘移動平均值，單位為位元/秒。
 
@@ -32,7 +32,7 @@ NOTE: 此值會在每次要求完成時更新。因此，在低要求率或存�
 
 
 [[incoming-request-rate]]
-== ${post_edited_translations.segment}
+== 傳入請求率
 
 此圖表顯示每秒新要求數的 3 分鐘移動平均值，並依要求類型（GET、PUT、HEAD 和 DELETE）進行細分。當新要求的標頭通過驗證後，此值將會更新。
 
@@ -46,9 +46,9 @@ NOTE: 此值會在每次要求完成時更新。因此，在低要求率或存�
 
 
 [[error-response-rate]]
-== ${post_edited_translations.segment}
+== 錯誤回應率
 
-${post_edited_translations.segment}
+此圖表提供每秒返回給用戶端的錯誤回應數量的 3 分鐘移動平均值，並依錯誤回應代碼細分。
 
 .相關資訊
 * link:monitoring-load-balancing-operations.html["監控負載平衡作業"]

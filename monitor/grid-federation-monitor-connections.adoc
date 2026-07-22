@@ -15,7 +15,7 @@ summary: 您可以監控所有網格聯合連線的基本資訊、特定連線�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入任一網格上的 Grid Manager。
-* 您具有您登入之網格的 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您具有您登入之網格的 link:../admin/admin-group-permissions.html["根目錄存取權限"]。
 
 
 
@@ -48,8 +48,8 @@ image:grid-federation-connections-tab.png["網格同盟連線索引標籤"]
 
 +
 ** link:../monitor/monitoring-tenant-activity.html["檢視每位獲準租戶的詳細資訊頁面"]。
-** 檢視每個連線的詳細資訊頁面。請參閱 <<view-specific-connection,${post_edited_translations.segment}>>。
-** 選擇允許的租戶並link:../admin/grid-federation-manage-tenants.html["${post_edited_translations.segment}"]。
+** 檢視每個連線的詳細資訊頁面。請參閱 <<view-specific-connection,檢視特定連線>>。
+** 選擇允許的租戶並link:../admin/grid-federation-manage-tenants.html["移除權限"]。
 ** 檢查是否有跨網格複寫錯誤，並清除最後一個錯誤（如有）。參見link:../admin/grid-federation-troubleshoot.html["排除網格同盟錯誤"]。
 +
 image:grid-federation-permitted-tenants-tab.png["網格聯盟允許的租戶索引標籤"]
@@ -72,7 +72,7 @@ image:grid-federation-permitted-tenants-tab.png["網格聯盟允許的租戶索�
 
 +
 ** 查看連線的基本狀態訊息，包括本機和遠端主機名稱、連接埠和連線狀態。
-** 選擇連線至 link:../admin/grid-federation-manage-connection.html["${post_edited_translations.segment}"]。
+** 選擇連線至 link:../admin/grid-federation-manage-connection.html["編輯、測試或移除"]。
 
 
 . 檢視特定連線時，請選擇「*允許的租戶*」索引標籤，以檢視該連線的允許租戶詳細資訊。
@@ -81,7 +81,7 @@ image:grid-federation-permitted-tenants-tab.png["網格聯盟允許的租戶索�
 
 +
 ** link:../monitor/monitoring-tenant-activity.html["檢視每位獲準租戶的詳細資訊頁面"]。
-** link:../admin/grid-federation-manage-tenants.html["${post_edited_translations.segment}"]以使用連線。
+** link:../admin/grid-federation-manage-tenants.html["移除租戶的權限"]以使用連線。
 ** 檢查跨網格複寫錯誤並清除最後一個錯誤。請參閱 link:../admin/grid-federation-troubleshoot.html["排除網格同盟錯誤"]。
 +
 image:grid-federation-permitted-tenants-tab-for-connection.png["用於連線的網格同盟允許租戶索引標籤"]
@@ -94,9 +94,9 @@ image:grid-federation-permitted-tenants-tab-for-connection.png["用於連線的�
 
 +
 ** link:../admin/grid-federation-manage-connection.html["輪換連線憑證"]。
-** ${post_edited_translations.segment}
+** 選擇「伺服器」或「用戶端」以檢視或下載關聯的憑證，或複製憑證 PEM。
 +
-image:grid-federation-certificates-tab.png["${post_edited_translations.segment}"]
+image:grid-federation-certificates-tab.png["grid-federation-certificates-tab"]
 
 
 

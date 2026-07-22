@@ -15,7 +15,7 @@ StorageGRID 系統內交換的稽核訊息包括所有訊息共有的標準資�
 
 如果 link:using-audit-explain-tool.html["audit-explain"] 和 link:using-audit-sum-tool.html["audit-sum"] 工具提供的摘要資訊不足，請參閱本節以了解所有稽核訊息的一般格式。
 
-${post_edited_translations.segment}
+以下是稽核日誌檔案中可能出現的稽核訊息範例：
 
 [listing]
 ----
@@ -26,7 +26,7 @@ ${post_edited_translations.segment}
 
 * 括弧內 `[ ]`
 * 由字串 `AUDT`引入，表示一條稽核訊息
-* ${post_edited_translations.segment}
+* 前後均無分隔符號（無逗號或空格）
 * 以換行字元終止 `\n`
 
 

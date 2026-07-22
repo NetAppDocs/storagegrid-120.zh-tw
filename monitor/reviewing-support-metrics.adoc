@@ -38,7 +38,7 @@ Prometheus 介面隨即出現。您可以使用此介面對可用的 StorageGRID
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 名稱中包含 _private_ 的計量僅供內部使用，且可能在 StorageGRID 版本之間變更，恕不另行通知。
 
 . 若要存取包含 StorageGRID 計量隨時間變化的圖表的預先建置儀表板，請按一下 Grafana 區段中的連結。
 +

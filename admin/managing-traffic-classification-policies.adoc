@@ -18,13 +18,13 @@ summary: '流量分類原則可讓您識別和監控不同類型的網路流量�
 
 
 [[matching-rules]]
-== ${post_edited_translations.segment}
+== 匹配規則
 
 每項流量分類原則都包含一條或多條符合規則，用於識別與以下一個或多個實體相關的網路流量：
 
 * 儲存貯格
 * 子網路
-* ${post_edited_translations.segment}
+* 租戶
 * 負載平衡器端點
 
 
@@ -35,12 +35,12 @@ StorageGRID 會根據規則的目標監控符合該原則中任何規則的流�
 [[traffic-limiting]]
 == 流量限制
 
-${post_edited_translations.segment}
+您也可以選擇在原則中新增以下限制類型：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 聚合頻寬
+* 每個請求的頻寬
+* 並行要求
+* 請求速率
 
 
 限制值是按負載平衡器強制執行的。如果流量同時分佈在多個負載平衡器上，則總最大速率是您指定的速率限制的倍數。
@@ -50,7 +50,7 @@ NOTE: 您可以建立原則來限制 Aggregate 頻寬或限制每次要求頻寬
 
 對於 Aggregate 或單次請求頻寬限制，請求將按照您設定的速率進行入站或出站。StorageGRID 只能強制執行一種速度，因此將依比對器類型強制執行最特定的原則比對項目。請求所消耗的頻寬不會計入其他包含 Aggregate 頻寬限制原則的較不具體的比對原則。對於所有其他類型的限制，用戶端請求將延遲 250 毫秒，且對於超過任何比對原則限制的請求，將收到 503 Slow Down 回應。
 
-${post_edited_translations.segment}
+在 Grid Manager 中，您可以檢視流量圖表，並驗證原則是否正在執行您預期的流量限制。
 
 
 

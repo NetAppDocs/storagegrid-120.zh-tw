@@ -17,4 +17,4 @@ StorageGRID 嘗試傳送 AutoSupport 套件至 NetApp 支援網站。如果嘗�
 
 
 
-TIP: 此外，您也可以link:../monitor/collecting-log-files-and-system-data.html["${post_edited_translations.segment}"]將它們傳送到 NetApp 支援網站。
+TIP: 此外，您也可以link:../monitor/collecting-log-files-and-system-data.html["收集更全面的日誌檔案和系統資料"]將它們傳送到 NetApp 支援網站。

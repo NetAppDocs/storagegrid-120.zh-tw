@@ -56,13 +56,13 @@ NOTE: 選擇警報本身，而不是警報組的標題。
 . 選擇 *節點* > *_儲存節點或站台_* > *儲存設備*。
 . 將遊標停留在「已使用儲存空間 - 物件資料」圖表上。
 +
-${post_edited_translations.segment}
+顯示以下數值：
 
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** *已使用空間（%）*：物件資料已使用的可用空間佔總可用空間的百分比。
+** *已使用*：已用於物件資料的總可用空間量。
+** *複製資料*：此節點、站台或網格上複製物件資料量的估計值。
+** *糾刪碼資料*：此節點、站台或網格上糾刪碼物件資料量的估計值。
 ** *總計*：此節點、站台或網格上的可用空間總量。「已用」值是 `storagegrid_storage_utilization_data_bytes`計量。
 
 

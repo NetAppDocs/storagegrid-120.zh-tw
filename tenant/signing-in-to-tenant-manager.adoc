@@ -41,14 +41,14 @@ URL 始終包含完整網域名稱（FQDN）、管理節點的 IP 位址或管�
 . 啟動一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
 . 在瀏覽器的網址列中，輸入存取 Tenant Manager 的 URL。
 . 如果出現安全性警報，請使用瀏覽器的安裝精靈安裝憑證。
-. ${post_edited_translations.segment}
+. 登入 Tenant Manager。
 +
 顯示的登入畫面取決於您輸入的 URL 以及是否已為 StorageGRID 設定單一登入 （SSO）。
 
 +
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.未使用單一登入
 --
 如果 StorageGRID 未使用 SSO，則會顯示下列其中一個畫面：
 
@@ -57,7 +57,7 @@ URL 始終包含完整網域名稱（FQDN）、管理節點的 IP 位址或管�
 +
 ... 如果未顯示租戶的 20 位數帳戶 ID，請選擇最近帳戶清單中顯示的租戶帳戶名稱，或輸入帳戶 ID。
 ... 請輸入您的使用者名稱和密碼。
-... ${post_edited_translations.segment}
+... 選擇 *登入*。
 +
 租戶管理員儀表板隨即顯示。
 
@@ -78,7 +78,7 @@ URL 始終包含完整網域名稱（FQDN）、管理節點的 IP 位址或管�
 ** 租戶管理員 SSO 登入頁面。
 +
 ... 如果未顯示租戶的 20 位數帳戶 ID，請選擇最近帳戶清單中顯示的租戶帳戶名稱，或輸入帳戶 ID。
-... ${post_edited_translations.segment}
+... 選擇 *登入*。
 ... 使用您的標準 SSO 憑證登入您組織的 SSO 登入頁面。
 +
 租戶管理員儀表板隨即顯示。

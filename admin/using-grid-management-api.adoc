@@ -16,9 +16,9 @@ summary: 您可以使用 Grid Management REST API 而非 Grid Manager 使用者�
 
 
 [[top-level-resources]]
-== ${post_edited_translations.segment}
+== 頂層資源
 
-${post_edited_translations.segment}
+網格管理 API 提供下列頂層資源：
 
 * `/grid`: 存取僅限於 Grid Manager 使用者，並根據設定的群組權限而定。
 * `/org`：存取權限僅限於屬於租戶帳戶的本機或聯合 LDAP 群組的使用者。如需詳細資訊，請參閱 link:../tenant/index.html["使用租戶帳戶"]。
@@ -32,7 +32,7 @@ ${post_edited_translations.segment}
 
 Grid Management API 使用 Swagger 開放原始碼 API 平台。Swagger 提供直覺式使用者介面，讓開發人員和非開發人員都能使用該 API 在 StorageGRID 中執行即時操作。
 
-${post_edited_translations.segment}
+Swagger 使用者介面為每個 API 操作提供完整的詳細資訊和文件。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
@@ -43,9 +43,9 @@ ${post_edited_translations.segment}
 CAUTION: 您透過 API 文件網頁執行的任何 API 操作都是即時操作。請務必小心，避免誤建立、更新或刪除組態資料或其他資料。
 
 .步驟
-. ${post_edited_translations.segment}
+. 從 Grid Manager 標題列中，選擇說明圖示，然後選擇 *API documentation*。
 +
-image:help_menu.png["${post_edited_translations.segment}"] neoplasms_and_cancer_types_1000_1000.jpg (1000×1000)
+image:help_menu.png["說明功能表"] neoplasms_and_cancer_types_1000_1000.jpg (1000×1000)
 
 Neoplasms and cancer types are broad categories of abnormal cell growth. Neoplasms, commonly known as tumors, can be benign (non-cancerous) or malignant (cancerous). Cancer, on the other hand, refers specifically to malignant neoplasms that have the potential to invade or spread to other parts of the body.
 
@@ -65,22 +65,22 @@ There are over 100 different types of cancer, which are typically classified by 
 
 Understanding the different types of neoplasms and cancers is crucial for accurate diagnosis, treatment planning, and prognosis. Treatment options vary widely depending on the type and stage of the cancer, and may include surgery, chemotherapy, radiation therapy, immunotherapy, and targeted therapy.
 
-. ${post_edited_translations.segment}
+. 若要使用私有 API 執行操作，請在 StorageGRID 管理 API 頁面上選擇 *前往私有 API 文件*。
 +
 私有 API 如有變更，恕不另行通知。StorageGRID 私有端點也會忽略要求的 API 版本。
 
-. ${post_edited_translations.segment}
+. 選擇所需操作。
 +
-${post_edited_translations.segment}
+擴充 API 操作後，可以看到可用的 HTTP 操作，例如 GET、PUT、UPDATE 和 DELETE。
 
-. ${post_edited_translations.segment}
+. 選擇 HTTP 行動以查看請求詳細資訊，包括端點 URL、任何必要或選用參數的清單、請求本文範例（如有需要）以及可能的回應。
 +
-image:swagger_example.png["${post_edited_translations.segment}"]
+image:swagger_example.png["來自 Swagger UI 的範例"]
 
 . 確定請求是否需要其他參數，例如群組 ID 或使用者 ID。然後，取得這些值。您可能需要先發出另一個 API 請求，才能獲得所需資訊。
 . 確定是否需要修改範例要求本文。如果需要，您可以選取 *Model* 來瞭解每個欄位的需求。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Try it out*。
+. 請提供任何必要的參數，或視需要修改要求本文。
 . 選擇 *Execute*。
-. ${post_edited_translations.segment}
+. 查看回應代碼以確定請求是否成功。
 

@@ -17,7 +17,7 @@ summary: 您可以選擇性地設計 StorageGRID 網路流量分類原則，以�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:../admin/admin-group-permissions.html["根目錄存取權限"]。
 
 
 .關於此任務
@@ -38,8 +38,8 @@ NOTE: 一般來說，FabricPool 讀取作業比寫入作業更需要優先處理
 .步驟
 . 選擇 *組態* > *網路* > *流量分類*。
 . 選擇 *Create* 。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 輸入原則的名稱和執行摘要（選用），然後選取 *Continue*。
+. 在「新增符合規則」步驟中，至少新增一條規則。
 +
 .. 選擇 *新增規則*
 .. 對於「類型」，選擇「負載平衡端點」，然後選擇您為 FabricPool 建立的負載平衡端點。
@@ -52,16 +52,16 @@ NOTE: 一般來說，FabricPool 讀取作業比寫入作業更需要優先處理
 . （可選）新增一個或多個限制，以控制規則所匹配的網路流量。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 即使您不新增任何限制，StorageGRID 也會收集計量，以便您了解網路流量趨勢。
 
 +
 .. 選擇 *Add a limit*。
-.. ${post_edited_translations.segment}
+.. 選擇要限制的流量類型以及要套用的限制。
 
 
 . 選擇 *Continue* 。
 . 讀取並審查流量分類原則。使用 *上一步* 按鈕返回並根據需要進行變更。當您對原則感到滿意時，選取 *儲存並繼續*。
 
 
-.${post_edited_translations.segment}
-link:../admin/viewing-network-traffic-metrics.html["${post_edited_translations.segment}"]以驗證原則是否正在執行您預期的流量限制。
+.完成後
+link:../admin/viewing-network-traffic-metrics.html["檢視網路流量計量"]以驗證原則是否正在執行您預期的流量限制。

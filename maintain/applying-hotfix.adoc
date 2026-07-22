@@ -14,7 +14,7 @@ summary: 此 Hotfix 首先會自動套用至主要管理節點。然後，您必
 此 Hotfix 首先會自動套用至主要管理節點。然後，您必須核准將此 Hotfix 套用至其他網格節點，直到所有節點都執行相同的軟體版本為止。您可以自訂核准順序，選擇核准個別網格節點、網格節點群組或所有網格節點。
 
 .開始之前
-* 您已審閱 link:storagegrid-hotfix-procedure.html["${post_edited_translations.segment}"]。
+* 您已審閱 link:storagegrid-hotfix-procedure.html["應用 Hotfix 的注意事項"]。
 * 您擁有佈建密碼。
 * 您擁有 Root 存取或維護權限。
 
@@ -35,7 +35,7 @@ image:software_update_landing.png["軟體更新登陸頁面"]
 
 . 選擇 *Apply hotfix*。
 +
-${post_edited_translations.segment}
+StorageGRID Hotfix 頁面隨即出現。
 
 +
 image:hotfix_choose_file.png["Hotfix 選擇檔案"]
@@ -43,7 +43,7 @@ image:hotfix_choose_file.png["Hotfix 選擇檔案"]
 . 選擇您從 NetApp 支援網站下載的 Hotfix 檔案。
 +
 .. 選取 *Browse*。
-.. ${post_edited_translations.segment}
+.. 找到並選擇檔案。
 +
 `hotfix-install-_version_`
 
@@ -53,24 +53,24 @@ image:hotfix_choose_file.png["Hotfix 選擇檔案"]
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 請勿更改檔案名稱，因為這是驗證程序的一部分。
 
 
 
 . 請在文字方塊中輸入資源配置密碼。
 +
-${post_edited_translations.segment}
+*Start* 按鈕變為啟用狀態。
 
 . 選擇 *Start*。
 +
-${post_edited_translations.segment}
+螢幕上出現警告，說明主要管理節點上的服務重新啟動時，瀏覽器連線可能會暫時中斷。
 
 . 選擇「確定」開始將 Hotfix 套用到主要管理節點。
 +
 Hotfix 程序啟動時：
 
 +
-.. ${post_edited_translations.segment}
+.. 執行 Hotfix 驗證，包括程式碼簽署驗證。
 +
 
 NOTE: 如果出現任何錯誤，請解決這些錯誤，重新上傳 Hotfix 檔案，然後再次選擇「開始」。
@@ -105,7 +105,7 @@ NOTE: 您必須先完成 StorageGRID Hotfix，然後才能開始進行其他軟�
 
 ** 選擇「移除」或「全部移除」可從 Hotfix 佇列中移除一個節點或所有節點。
 +
-${post_edited_translations.segment}
+當階段進展到「已排隊」之後，*移除*按鈕將被隱藏，您將無法再從 Hotfix 流程中移除節點。
 
 +
 image:approve_all_progresstable.png["Hotfix 進度，移除按鈕"]

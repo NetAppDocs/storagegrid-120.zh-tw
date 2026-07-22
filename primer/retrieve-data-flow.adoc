@@ -22,6 +22,6 @@ image:retrieve_data_flow.png["擷取"]
 
 . LDR 服務接收來自用戶端應用程式的擷取請求。
 . LDR 服務查詢中繼資料儲存以取得物件資料位置和中繼資料。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. LDR 服務將擷取請求轉送至來源 LDR 服務。
+. 來源 LDR 服務從查詢的 LDR 服務傳回物件資料，系統將該物件傳回給用戶端應用程式。
 

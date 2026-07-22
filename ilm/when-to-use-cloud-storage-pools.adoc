@@ -16,7 +16,7 @@ summary: 使用 Cloud Storage Pools ，您可以將資料備份或分層到外�
 
 
 [[back-up-storagegrid-data-to-external-location]]
-== ${post_edited_translations.segment}
+== 將 StorageGRID 資料備份到外部位置
 
 您可以使用雲端儲存資源池將 StorageGRID 物件備份到外部位置。
 
@@ -24,10 +24,10 @@ summary: 使用 Cloud Storage Pools ，您可以將資料備份或分層到外�
 
 雲端儲存資源池中的物件資料也可用於恢復因儲存設備 Volume 或 Storage Node 故障而從 StorageGRID 遺失的資料。如果物件的唯一剩餘複本位於雲端儲存資源池中，StorageGRID 會暫時恢復該物件，並在復原的 Storage Node 上建立新複本。
 
-${post_edited_translations.segment}
+實作備份解決方案：
 
 . 建立單一雲端儲存資源池。
-. ${post_edited_translations.segment}
+. 設定 ILM 規則，同時在儲存節點上儲存物件複本（作為複寫複本或銷毀編碼複本），並在 Cloud Storage Pool 中儲存單一物件複本。
 . 將此規則新增至您的 ILM 原則。然後，模擬並啟動該原則。
 
 
@@ -48,12 +48,12 @@ ${post_edited_translations.segment}
 
 
 [[maintain-multiple-cloud-endpoints]]
-== ${post_edited_translations.segment}
+== 維護多個雲端端點
 
 如果您想要將物件資料分層或備份到多個雲端，可以設定多個雲端儲存資源池端點。ILM 規則中的篩選器可讓您指定要將哪些物件儲存在每個雲端儲存資源池中。例如，您可能想要將來自某些租戶或儲存貯體的物件儲存在 Amazon S3 Glacier 中，並將來自其他租戶或儲存貯體的物件儲存在 Azure Blob storage 中。或者，您可能想要在 Amazon S3 Glacier 與 Azure Blob storage 之間移動資料。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 使用多個 Cloud Storage Pool 端點時，請記住，一個物件一次只能儲存在一個 Cloud Storage Pool 中。
 
 要實作多個雲端端點：
 

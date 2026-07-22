@@ -11,7 +11,7 @@ summary: '如果您已設定並啟用單一登入 (SSO)，並且使用 Active Di
 
 
 [role="lead"]
-如果您擁有link:../admin/how-sso-works.html["${post_edited_translations.segment}"]並使用 Active Directory 作為 SSO 供應商，則必須發出一系列 API 請求，以取得對 Grid Management API 或 Tenant Management API 有效的驗證權杖。
+如果您擁有link:../admin/how-sso-works.html["設定並啟用單一登入（SSO）"]並使用 Active Directory 作為 SSO 供應商，則必須發出一系列 API 請求，以取得對 Grid Management API 或 Tenant Management API 有效的驗證權杖。
 
 
 
@@ -35,7 +35,7 @@ summary: '如果您已設定並啟用單一登入 (SSO)，並且使用 Active Di
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 範例 curl 工作流程無法防止其他使用者看到密碼。
 
 
 
@@ -50,13 +50,13 @@ NOTE: ${post_edited_translations.segment}
 
 . 如果您想使用該 `storagegrid-ssoauth.py`指令碼，請將指令碼傳遞給 Python 解譯器並執行該指令碼。
 +
-${post_edited_translations.segment}
+出現提示時，請輸入以下參數的值：
 
 +
 ** 單一登入 (SSO) 方法。輸入 ADFS 或 adfs。
 ** SSO 使用者名稱
 ** StorageGRID 安裝所在的網域
-** ${post_edited_translations.segment}
+** StorageGRID 的位址
 ** 如果您想存取租戶管理 API，則需要租戶帳戶 ID。
 +
 image:sso_auth_python_script_adfs.png["AD FS 的 SSO 驗證指令碼"]
@@ -137,7 +137,7 @@ SAMLRequest=fZHRToMwFIZfhb...UJikvo77sXPw%3D%3D&RelayState=12345&client-request-
 ----
 export SAMLREQUESTID='00000000-0000-0000-ee02-0080000000de'
 ----
-.. ${post_edited_translations.segment}
+.. 將您的憑證傳送至上一個回應中的表單動作。
 +
 [source, bash]
 ----
@@ -281,7 +281,7 @@ curl -k -X DELETE "https://$STORAGEGRID_ADDRESS/api/v3/authorize" \
 ----
 export LOGOUT_REQUEST='https://adfs.example.com/adfs/ls/?SAMLRequest=fZDNboMwEIRfhZ...HcQ%3D%3D'
 ----
-. ${post_edited_translations.segment}
+. 向登出 URL 發送請求以觸發 SLO 並重新導向回 StorageGRID。
 +
 [source, bash]
 ----
@@ -297,7 +297,7 @@ HTTP/1.1 302 Found
 Location: https://$STORAGEGRID_ADDRESS:443/api/saml-logout?SAMLResponse=fVLLasMwEPwVo7ss%...%23rsa-sha256
 Set-Cookie: MSISSignoutProtocol=U2FtbA==; expires=Tue, 20 Nov 2018 22:35:03 GMT; path=/adfs; HttpOnly; Secure
 ----
-. ${post_edited_translations.segment}
+. 刪除 StorageGRID 持有者權杖。
 +
 刪除 StorageGRID bearer token 的運作方式與沒有 SSO 時相同。如果未提供 `Cookie "sso=true"，使用者將從 StorageGRID 登出，而不影響 SSO 狀態。
 

@@ -20,14 +20,14 @@ summary: 設定 StorageGRID 以搭配 FabricPool 使用時，您可以選擇性�
 .開始之前
 * 您已審閱 link:best-practices-for-high-availability-groups.html["高可用度群組的最佳實務做法"]。
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:../admin/admin-group-permissions.html["根目錄存取權限"]。
 * 如果您打算使用 VLAN，則需要建立 VLAN 介面。請參閱link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]。
 
 
 .步驟
 . 選擇 *Configuration* > *Network* > *High availability groups*。
 . 選擇 *Create* 。
-. ${post_edited_translations.segment}
+. 在「輸入詳細資料」步驟中，請填寫以下欄位。
 +
 [cols="1a,2a"]
 |===
@@ -37,19 +37,19 @@ summary: 設定 StorageGRID 以搭配 FabricPool 使用時，您可以選擇性�
  a| 
 HA 組名
  a| 
-${post_edited_translations.segment}
+此 HA 群組的唯一顯示名稱。
 
 
 
  a| 
-${post_edited_translations.segment}
+執行摘要（可選）
  a| 
 此 HA 群組的執行摘要。
 
 |===
 . 在「新增介面」步驟中，選擇要在此 HA 群組中使用的節點介面。
 +
-${post_edited_translations.segment}
+使用欄標題對列進行排序，或輸入搜尋字詞以更快找到介面。
 
 +
 您可以選擇一個或多個節點，但每個節點只能選擇一個介面。
@@ -74,7 +74,7 @@ ${post_edited_translations.segment}
  a| 
 子網路 CIDR
  a| 
-${post_edited_translations.segment}
+VIP 子網路的位址（CIDR 表示法）—IPv4 位址後面接著一個斜槓和子網路長度（0-32）。
 
 網路位址不得設定任何主機位元。例如  `192.16.0.0/22`。
 

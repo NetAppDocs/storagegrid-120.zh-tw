@@ -15,7 +15,7 @@ summary: 如果您希望在發生警報時收到電子郵件通知，則必須�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您擁有 link:../admin/admin-group-permissions.html["管理警報或 Root 存取權限"]。
 
 
 .關於此任務
@@ -101,7 +101,7 @@ SMTP 伺服器的完整網域名稱 (FQDN) 或 IP 位址。
 
 +
 
-NOTE: 如果需要編輯電子郵件設定，請選擇鉛筆圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"] 來更新此欄位。
+NOTE: 如果需要編輯電子郵件設定，請選擇鉛筆圖示 image:icon_edit_tm.png["編輯圖示"] 來更新此欄位。
 
 
 
@@ -109,7 +109,7 @@ NOTE: 如果需要編輯電子郵件設定，請選擇鉛筆圖示 image:icon_ed
 +
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 嚴重程度 | 說明 
 
 
  a| 
@@ -141,9 +141,9 @@ NOTE: 如果需要編輯電子郵件設定，請選擇鉛筆圖示 image:icon_ed
 .. 檢查所有電子郵件收件者的收件匣，並確認已收到測試郵件。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果幾分鐘內沒有收到電子郵件，或觸發了「Email notification failure」警示，請檢查您的設定並重試。
 
-.. ${post_edited_translations.segment}
+.. 登入任何其他管理節點，並傳送測試電子郵件以驗證所有站台的連線能力。
 +
 
 NOTE: 當您測試警示通知時，必須登入每個 Admin 節點以驗證連線能力。這與測試 AutoSupport 套件不同，後者是由所有 Admin 節點傳送測試電子郵件。
@@ -155,18 +155,18 @@ NOTE: 當您測試警示通知時，必須登入每個 Admin 節點以驗證連�
 發送測試郵件不會儲存您的設定。您必須選取 *Save*。
 
 +
-${post_edited_translations.segment}
+電子郵件設定已儲存。
 
 
 
 
 
 [[information-included-in-alert-email-notifications]]
-== ${post_edited_translations.segment}
+== 警報電子郵件通知中包含的訊息
 
 在您設定 SMTP 電子郵件伺服器之後，當觸發警示時，系統會將電子郵件通知傳送給指定的收件者，除非該警示規則已被靜音隱藏。請參閱 link:silencing-alert-notifications.html["靜音警報通知"]。
 
-${post_edited_translations.segment}
+電子郵件通知包含以下資訊：
 
 image:alerts_email_notification.png["警示電子郵件通知"]
 
@@ -212,7 +212,7 @@ image:alerts_email_notification.png["警示電子郵件通知"]
 
 
 [[how-alerts-are-grouped]]
-== ${post_edited_translations.segment}
+== 警報的分組方式
 
 若要防止觸發警示時傳送過多的電子郵件通知，StorageGRID 會嘗試將多個警示分組到相同通知中。
 
@@ -233,7 +233,7 @@ image:alerts_email_notification.png["警示電子郵件通知"]
 
 
  a| 
-${post_edited_translations.segment}
+對於特定節點上的特定警示，如果多個嚴重程度的閾值都達到，則只會傳送最嚴重警示的通知。
  a| 
 * 警報 A 已觸發，且次要、主要和關鍵警報閾值均已達到。系統將發送一則關鍵警報通知。
 
@@ -281,26 +281,26 @@ StorageGRID 會繼續每 7 天發送電子郵件通知，直到所有警示的�
 
 
 [[troubleshoot-alert-email-notifications]]
-== ${post_edited_translations.segment}
+== 排除警報電子郵件通知問題
 
 如果觸發了「電子郵件通知故障」警示，或您無法收到測試警示電子郵件通知，請按照以下步驟解決此問題。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您擁有 link:../admin/admin-group-permissions.html["管理警報或 Root 存取權限"]。
 
 
 .步驟
 . 請檢查您的設定。
 +
 .. 選擇 *Alerts* > *Email setup*。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 請確認電子郵件（SMTP）伺服器設定是否正確。
+.. 請確認您已為收件者指定了有效的電子郵件地址。
 
 
 . 請檢查您的垃圾郵件過濾器，確保郵件未被傳送至垃圾郵件資料夾。
 . 請您的電子郵件系統管理員確認來自該寄件者地址的電子郵件未遭封鎖。
-. ${post_edited_translations.segment}
+. 收集管理節點的日誌檔，然後聯絡技術支援。
 +
 技術支援可以利用日誌中的資訊來幫助確定問題所在。例如，prometheus.log 日誌檔可能會顯示連接到您指定的伺服器時發生的錯誤。
 

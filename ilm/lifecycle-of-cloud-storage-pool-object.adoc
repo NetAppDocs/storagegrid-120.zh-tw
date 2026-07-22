@@ -2,7 +2,7 @@
 permalink: ilm/lifecycle-of-cloud-storage-pool-object.html 
 sidebar: sidebar 
 keywords: lifecycle of cloud storage pool object 
-summary: ${post_edited_translations.segment} 
+summary: 在實作 Cloud Storage Pools 之前，請審查每種類型的 Cloud Storage Pool 中所儲存物件的生命週期。 
 ---
 = StorageGRID 中雲端儲存資源池物件的生命週期
 :allow-uri-read: 
@@ -11,12 +11,12 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+在實作 Cloud Storage Pools 之前，請審查每種類型的 Cloud Storage Pool 中所儲存物件的生命週期。
 
 
 
 [[s3-lifecycle-of-a-cloud-storage-pool-object]]
-== ${post_edited_translations.segment}
+== S3：雲端儲存資源池物件的生命週期
 
 這些步驟說明儲存在 S3 雲端儲存資源池中物件的生命週期階段。
 
@@ -24,7 +24,7 @@ ${post_edited_translations.segment}
 NOTE: 「Glacier」是指 Glacier 儲存類別和 Glacier Deep Archive 儲存類別，但有一個例外：Glacier Deep Archive 儲存類別不支援 Expedited 還原分層。僅支援 Bulk 或 Standard 擷取。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: Google Cloud Platform (GCP) 支援從長期儲存設備中擷取物件，而無需執行 POST 復原作業。
 
 . *儲存在 StorageGRID 中的物件*
 +
@@ -71,13 +71,13 @@ NOTE: 如果 StorageGRID 中的儲存節點上也存在該物件的一個或多�
 +
 若要啟動生命週期，用戶端應用程式會將物件儲存在 StorageGRID 中。
 
-. ${post_edited_translations.segment}
+. *物件已移至 Azure 雲端儲存資源池*
 +
 當物件與使用 Azure 雲端儲存資源池作為其放置位置的 ILM 規則相符時，StorageGRID 會將物件移至雲端儲存資源池指定的外部 Azure Blob 儲存 Container。
 
-. ${post_edited_translations.segment}
+. *物件已移至歸檔分層（不可擷取狀態）*
 +
-${post_edited_translations.segment}
+將物件移至 Azure Cloud Storage Pool 後，StorageGRID 會自動將物件轉換至 Azure Blob 儲存設備 Archive 分層。
 
 . *從歸檔分層還原的物件*
 +

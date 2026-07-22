@@ -2,7 +2,7 @@
 permalink: audit/object-delete-transactions.html 
 sidebar: sidebar 
 keywords: object delete transaction, S3 delete, SDEL, WDEL 
-summary: ${post_edited_translations.segment} 
+summary: 您可以透過尋找 S3 API 特定的稽核訊息，在稽核日誌中識別物件刪除交易。 
 ---
 = StorageGRID 中物件刪除交易的稽核訊息
 :allow-uri-read: 
@@ -11,26 +11,26 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以透過尋找 S3 API 特定的稽核訊息，在稽核日誌中識別物件刪除交易。
 
 以下表格並未列出刪除交易期間產生的所有稽核訊息。表格中僅包含追蹤刪除交易所需的訊息。
 
 
 
 [[s3-delete-audit-messages]]
-== ${post_edited_translations.segment}
+== S3 刪除稽核訊息
 
 [cols="1a,1a,2a,1a,2a"]
 |===
-| 程式碼 | Name | 說明 | ${post_edited_translations.segment} | 請參閱 
+| 程式碼 | Name | 說明 | 追蹤 | 請參閱 
 
 
  a| 
 SDEL
  a| 
-${post_edited_translations.segment}
+S3 刪除
  a| 
-${post_edited_translations.segment}
+請求從儲存貯體中刪除物件。
  a| 
 CBID, S3KY
  a| 
@@ -50,7 +50,7 @@ NOTE: 以下範例並未列出刪除交易期間產生的所有稽核訊息。�
 
 
 [[sdel-s3-delete]]
-=== ${post_edited_translations.segment}
+=== SDEL：S3 刪除
 
 當用戶端向 LDR 服務傳送 DeleteObject 要求時，即會開始刪除物件。該訊息包含要從中刪除物件的 Bucket 以及用於識別物件的 S3 Key。
 

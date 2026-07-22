@@ -15,7 +15,7 @@ summary: 檔案 /var/local/log/bycast.log 是 StorageGRID 軟體的主要故障�
 
 檔案 `/var/local/log/bycast-err.log`是 `bycast.log`的子集。它包含嚴重等級為 ERROR 和 CRITICAL 的訊息。
 
-您可以選擇變更稽核日誌的目的地，並將稽核資訊傳送至外部 syslog 伺服器。設定外部 syslog 伺服器後，本機稽核記錄日誌仍會繼續產生和儲存。請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+您可以選擇變更稽核日誌的目的地，並將稽核資訊傳送至外部 syslog 伺服器。設定外部 syslog 伺服器後，本機稽核記錄日誌仍會繼續產生和儲存。請參閱 link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]。
 
 
 
@@ -33,7 +33,7 @@ summary: 檔案 /var/local/log/bycast.log 是 StorageGRID 軟體的主要故障�
 
 NOTE: 如果日誌檔已被壓縮，您絕不能將其解壓縮到寫入該檔案的相同位置。將檔案解壓縮到相同位置可能會干擾日誌輪替指令碼。
 
-您可以選擇變更稽核日誌的目的地，並將稽核資訊傳送至外部 syslog 伺服器。設定外部 syslog 伺服器後，本機稽核記錄日誌仍會繼續產生和儲存。請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+您可以選擇變更稽核日誌的目的地，並將稽核資訊傳送至外部 syslog 伺服器。設定外部 syslog 伺服器後，本機稽核記錄日誌仍會繼續產生和儲存。請參閱 link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]。
 
 .相關資訊
 link:collecting-log-files-and-system-data.html["收集日誌檔和系統資料"]
@@ -979,7 +979,7 @@ EILSEQ
  a| 
 085
  a| 
-${post_edited_translations.segment}
+ERESTART
  a| 
 被中斷的系統呼叫應該會重新啟動
 
@@ -990,14 +990,14 @@ ${post_edited_translations.segment}
  a| 
 ESTRPIPE
  a| 
-${post_edited_translations.segment}
+資料流管道錯誤
 
 
 
  a| 
 087
  a| 
-${post_edited_translations.segment}
+EUSERS
  a| 
 使用者過多
 
@@ -1006,7 +1006,7 @@ ${post_edited_translations.segment}
  a| 
 088
  a| 
-${post_edited_translations.segment}
+ENOTSOCK
  a| 
 對非通訊端設備執行通訊端操作
 
@@ -1015,7 +1015,7 @@ ${post_edited_translations.segment}
  a| 
 089
  a| 
-${post_edited_translations.segment}
+EDESTADDRREQ
  a| 
 需要目的地地址
 
@@ -1033,7 +1033,7 @@ EMSGSIZE
  a| 
 091
  a| 
-${post_edited_translations.segment}
+EPROTOTYPE
  a| 
 通訊協定類型錯誤，套接字
 
@@ -1042,7 +1042,7 @@ ${post_edited_translations.segment}
  a| 
 092
  a| 
-${post_edited_translations.segment}
+ENOPROTOOPT
  a| 
 通訊協定無法使用
 
@@ -1060,7 +1060,7 @@ EPROTONOSUPPORT
  a| 
 094
  a| 
-${post_edited_translations.segment}
+ESOCKTNOSUPPORT
  a| 
 不支援的通訊端類型
 
@@ -1096,7 +1096,7 @@ EAFNOSUPPORT
  a| 
 098
  a| 
-${post_edited_translations.segment}
+EADDRINUSE
  a| 
 地址已被使用
 
@@ -1114,7 +1114,7 @@ EADDRNOTAVAIL
  a| 
 100
  a| 
-${post_edited_translations.segment}
+ENETDOWN
  a| 
 網路中斷
 
@@ -1132,9 +1132,9 @@ ENETUNREACH
  a| 
 102
  a| 
-${post_edited_translations.segment}
+ENETRESET
  a| 
-${post_edited_translations.segment}
+由於重置，網路連線中斷
 
 
 
@@ -1168,7 +1168,7 @@ ENOBUFS
  a| 
 106
  a| 
-${post_edited_translations.segment}
+EISCONN
  a| 
 傳輸端點已連接
 
@@ -1188,14 +1188,14 @@ ENOTCONN
  a| 
 ESHUTDOWN
  a| 
-${post_edited_translations.segment}
+傳輸端點關閉後無法傳送
 
 
 
  a| 
 109
  a| 
-${post_edited_translations.segment}
+ETOOMANYREFS
  a| 
 太多引用：無法拼接
 
@@ -1251,7 +1251,7 @@ EALREADY
  a| 
 EINPROGRESS
  a| 
-${post_edited_translations.segment}
+操作正在進行中
 
 
 
@@ -1274,7 +1274,7 @@ EUCLEAN
  a| 
 118
  a| 
-${post_edited_translations.segment}
+ENOTNAM
  a| 
 不是 XENIX 命名類型的檔案
 
@@ -1294,7 +1294,7 @@ ENAVAIL
  a| 
 EISNAM
  a| 
-${post_edited_translations.segment}
+是命名類型的檔案
 
 
 
@@ -1303,7 +1303,7 @@ ${post_edited_translations.segment}
  a| 
 EREMOTEIO
  a| 
-${post_edited_translations.segment}
+遠端 I/O 錯誤
 
 
 
@@ -1312,7 +1312,7 @@ ${post_edited_translations.segment}
  a| 
 EDQUOT
  a| 
-${post_edited_translations.segment}
+超過配額
 
 
 

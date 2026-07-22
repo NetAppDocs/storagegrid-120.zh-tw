@@ -2,7 +2,7 @@
 permalink: ilm/why-you-should-not-use-single-copy-replication.html 
 sidebar: sidebar 
 keywords: dual commit, single commit, number of copies for replication 
-summary: ${post_edited_translations.segment} 
+summary: 建立 ILM 規則以建立複寫複本時，應一律在放置說明中為任何時間段指定至少兩個複本。 
 ---
 = StorageGRID 中單一複本複寫的風險
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+建立 ILM 規則以建立複寫複本時，應一律在放置說明中為任何時間段指定至少兩個複本。
 
 
 NOTE: 請勿使用在任何時間段內僅建立一個複寫複本的 ILM 規則。如果物件僅存在一個複寫複本，則當 Storage Node 故障或發生重大錯誤時，該物件將會遺失。在升級等維護程序期間，您也會暫時失去對該物件的存取權限。
@@ -22,8 +22,8 @@ image:ilm_replication_make_1_copy.png["ILM 複寫製作 1 個複本"]
 
 當 ILM 規則僅建立物件的單一複寫複本時，如果該 Storage Node 無法使用，則該物件將變得無法存取。在此範例中，每當 Storage Node 2 離線時（例如在升級或其他維護程序期間），您將暫時失去對物件 AAA 的存取權限。如果 Storage Node 2 故障，您將完全失去物件 AAA。
 
-image:ilm_replication_make_1_copy_sn_fails.png["${post_edited_translations.segment}"]
+image:ilm_replication_make_1_copy_sn_fails.png["ILM 複寫製作 1 個複本 SN 失敗"]
 
 為避免遺失物件資料，您應該始終為所有需要以複寫保護的物件建立至少兩個複本。如果存在兩個或多個複本，即使某個 Storage Node 發生故障或離線，您仍然可以存取該物件。
 
-image:ilm_replication_make_2_copies_sn_fails.png["${post_edited_translations.segment}"]
+image:ilm_replication_make_2_copies_sn_fails.png["ILM 複製建立 2 個複本 SN 失敗"]

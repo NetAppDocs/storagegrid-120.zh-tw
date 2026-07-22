@@ -22,10 +22,10 @@ summary: 您可以使用 Tenant Manager 刪除空的 S3 儲存桶。
 .關於此任務
 這些說明介紹如何使用租戶管理員刪除 S3 儲存桶。您也可以使用 link:understanding-tenant-management-api.html["租戶管理 API"] 或 link:../s3/operations-on-buckets.html["S3 REST API"] 刪除 S3 儲存桶。
 
-如果 S3 儲存桶包含物件、非目前物件版本或刪除標記，則無法刪除該儲存桶。有關如何刪除 S3 版本化物件的資訊，請參閱link:../ilm/how-objects-are-deleted.html["${post_edited_translations.segment}"]。
+如果 S3 儲存桶包含物件、非目前物件版本或刪除標記，則無法刪除該儲存桶。有關如何刪除 S3 版本化物件的資訊，請參閱link:../ilm/how-objects-are-deleted.html["物件如何刪除"]。
 
 .步驟
-. ${post_edited_translations.segment}
+. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 +
 「儲存桶」頁面隨即出現，並顯示所有現有的 S3 儲存桶。
 

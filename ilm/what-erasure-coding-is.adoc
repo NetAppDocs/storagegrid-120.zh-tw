@@ -15,7 +15,7 @@ summary: 銷毀編碼是 StorageGRID 用於儲存物件資料的兩種方法之�
 
 當存取某個物件時，系統會使用儲存的片段重新組裝。如果資料片段或同位元檢查片段毀損或遺失，銷毀編碼演算法可以使用剩餘資料片段和同位元檢查片段的子集來重建該片段。
 
-建立 ILM 規則時，StorageGRID 會建立支援這些規則的銷毀編碼設定檔。您可以檢視銷毀編碼設定檔列表，link:manage-erasure-coding-profiles.html#rename-an-erasure-coding-profile["${post_edited_translations.segment}"]，或link:manage-erasure-coding-profiles.html#deactivate-an-erasure-coding-profile["如果銷毀編碼設定檔目前未在任何 ILM 規則中使用，請停用該設定檔。"]。
+建立 ILM 規則時，StorageGRID 會建立支援這些規則的銷毀編碼設定檔。您可以檢視銷毀編碼設定檔列表，link:manage-erasure-coding-profiles.html#rename-an-erasure-coding-profile["重新命名銷毀編碼設定檔"]，或link:manage-erasure-coding-profiles.html#deactivate-an-erasure-coding-profile["如果銷毀編碼設定檔目前未在任何 ILM 規則中使用，請停用該設定檔。"]。
 
 以下範例說明如何對物件資料使用銷毀編碼演算法。在本例中，ILM 規則採用 4+2 銷毀編碼方案。每個物件被分割成四個相等的資料片段，並從物件資料計算出兩個同位元檢查片段。這六個片段分別儲存在三個資料中心站台的不同節點上，以在節點故障或站台遺失時提供資料保護。
 
@@ -30,7 +30,7 @@ image:ec_recoverable_4_plus_2.png["銷毀編碼可恢復 4 Plus 2"]
 image:ec_unrecoverable_4_plus_2.png["銷毀編碼不可恢復 4 Plus 2"]
 
 .相關資訊
-* link:what-replication-is.html["${post_edited_translations.segment}"]
+* link:what-replication-is.html["什麼是複寫"]
 * link:what-storage-pool-is.html["什麼是儲存資源池"]
 * link:what-erasure-coding-schemes-are.html["什麼是銷毀編碼方案？"]
 * link:manage-erasure-coding-profiles.html#rename-an-erasure-coding-profile["重新命名糾刪碼設定檔"]

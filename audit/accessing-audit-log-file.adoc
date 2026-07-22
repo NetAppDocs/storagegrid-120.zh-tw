@@ -22,7 +22,7 @@ The `audit.log`檔案將保持為空，除非您為*管理節點/本機節點*�
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入管理節點：
 +
 .. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。

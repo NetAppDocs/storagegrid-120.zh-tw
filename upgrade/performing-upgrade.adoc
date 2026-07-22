@@ -69,7 +69,7 @@ NOTE: 如果您需要在所有 Linux 主機上下載並安裝 RPM 或 DEB 套件
 
 .步驟
 . 對於 *Run prechecks* 步驟，首先輸入網格的佈建密碼。
-. ${post_edited_translations.segment}
+. 選擇 *Download recovery package*。
 +
 在升級主要管理節點之前，您應該下載最新的恢復套件檔案複本。恢復套件檔案可讓您在發生故障時還原系統。
 
@@ -163,7 +163,7 @@ NOTE: 對於 StorageGRID 12.0 升級，如果您想要核准單一節點而非�
 +
 [cols="1a,1a"]
 |===
-| 任務 | ${post_edited_translations.segment} 
+| 任務 | 操作說明 
 
 
  a| 
@@ -237,7 +237,7 @@ NOTE: 當應用裝置節點達到此階段時，應用裝置上的 StorageGRID A
 NOTE: 某些應用裝置機型可能需要多次重新開機才能升級韌體和 BIOS。
 
 ** 重新開機後執行步驟
-** ${post_edited_translations.segment}
+** 開始服務
 ** 完畢
 
 

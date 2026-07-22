@@ -2,7 +2,7 @@
 permalink: maintain/obtaining-required-materials-for-hotfix.html 
 sidebar: sidebar 
 keywords: storagegrid, hotfix 
-summary: ${post_edited_translations.segment} 
+summary: 在套用 Hotfix 之前，您必須取得所有必要的材料。 
 ---
 = 取得 StorageGRID 熱修復程式所需的材料
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+在套用 Hotfix 之前，您必須取得所有必要的材料。
 
 [cols="1a,2a"]
 |===
@@ -19,16 +19,16 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+StorageGRID Hotfix 檔案
  a| 
-${post_edited_translations.segment}
+您必須下載 StorageGRID Hotfix 檔案。
 
 
 
  a| 
-* ${post_edited_translations.segment}
+* 網路連接埠
 * link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]
-* ${post_edited_translations.segment}
+* SSH 用戶端（例如 PuTTY）
 
  a| 
 
@@ -41,7 +41,7 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
+| Passwords.txt 檔案  a| 
 選填，且僅在您使用 SSH 用戶端手動套用 Hotfix 時使用。 `Passwords.txt` 檔案是恢復套件  `.zip` 檔案的一部分。
 
 

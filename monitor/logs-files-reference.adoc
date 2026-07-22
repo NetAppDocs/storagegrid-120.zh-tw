@@ -50,7 +50,7 @@ NOTE: 此處提供的每種日誌類型的詳細資訊僅供參考。這些日�
 * 更清楚地掌握負載平衡器上流量分類器所封鎖之請求的可見度。
 
 
-若要匯出日誌檔，請參閱link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+若要匯出日誌檔，請參閱link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]。
 
 
 
@@ -134,22 +134,22 @@ Grafana、Jaeger、node exporter 和 Prometheus 的服務日誌檔。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| miscd  a| 
 其他存取和錯誤日誌。
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| mysql  a| 
+mariaDB 資料庫組態及相關日誌。
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| 網  a| 
+網路相關腳本和 Dynip 服務產生的日誌。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| nginx  a| 
 負載平衡器與網格聯盟組態檔案和記錄。也包括 Grid Manager 和 Tenant Manager 流量記錄。
 
 
@@ -179,12 +179,12 @@ ${post_edited_translations.segment}
 
 
 | ntp  a| 
-${post_edited_translations.segment}
+NTP 組態檔案和日誌。
 
 
 
  a| 
-${post_edited_translations.segment}
+孤立物件
  a| 
 與孤立物件相關的日誌。
 
@@ -200,22 +200,22 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
+| 效能  a| 
 CPU、連網和磁碟 I/O 的效能資訊。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| prometheus-data  a| 
 目前 Prometheus 計量（如果日誌收集包含 Prometheus 資料）。
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| 供應  a| 
+與網格佈建程序相關的日誌。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| raft  a| 
 平台服務中使用的 Raft 叢集的日誌。
 
 
@@ -230,17 +230,17 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| sockets-data  a| 
+用於網路偵錯的 Sockets 資料。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| system-commands.txt  a| 
 StorageGRID Container 指令的輸出。包含系統資訊，例如連網和磁碟使用情況。
 
 
 
 | 同步恢復套件  a| 
-${post_edited_translations.segment}
+與維護所有管理節點和託管 ADC 服務的儲存節點上最新恢復套件的一致性有關。
 
 |===

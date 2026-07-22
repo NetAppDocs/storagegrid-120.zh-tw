@@ -19,7 +19,7 @@ NOTE: 您的網格系統管理員必須授予您使用 S3 Object Lock 特定功�
 
 
 [[what-is-s3-object-lock]]
-== ${post_edited_translations.segment}
+== 什麼是 S3 Object Lock？
 
 StorageGRID S3 物件鎖定功能是一種物件保護解決方案，相當於 Amazon Simple Storage Service （Amazon S3） 中的 S3 物件鎖定。
 
@@ -36,21 +36,21 @@ StorageGRID S3 物件鎖定功能是一種物件保護解決方案，相當於 A
 
 
 [[retention-modes]]
-=== ${post_edited_translations.segment}
+=== 保留模式
 
 StorageGRID S3 Object Lock 功能支援兩種保留模式，可對物件套用不同層級的保護。這些模式相當於 Amazon S3 保留模式。
 
-* ${post_edited_translations.segment}
+* 處於法規遵循模式：
 +
 ** 物件只有在達到其保留期限後才能刪除。
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 物件的保留截止日期可以增加，但不能減少。
+** 在達到保留截止日期之前，無法移除該物件的保留截止日期。
 
 
-* ${post_edited_translations.segment}
+* 處於治理模式：
 +
 ** 擁有特殊權限的使用者可以使用請求中的繞過標頭來修改某些保留設定。
-** ${post_edited_translations.segment}
+** 這些使用者可以在物件版本的保留截止日期到期之前將其刪除。
 ** 這些使用者可以增加、減少或移除物件的保留截止日期。
 
 
@@ -59,12 +59,12 @@ StorageGRID S3 Object Lock 功能支援兩種保留模式，可對物件套用�
 
 
 [[retention-settings-for-object-versions]]
-=== ${post_edited_translations.segment}
+=== 物件版本的保留設定
 
 如果在建立儲存桶時啟用了 S3 物件鎖定，使用者可以使用 S3 用戶端應用程式，選擇性地為新增至儲存桶中的每個物件指定以下保留設定：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* *保留模式*：法規遵循或治理模式。
+* *保留至日期*：如果物件版本的保留至日期在未來，則可以擷取該物件，但無法刪除該物件。
 * *合法持有*：對物件版本套用合法持有會立即鎖定該物件。例如，您可能需要對與調查或法律糾紛相關的物件套用合法持有。合法持有沒有到期日期，會一直有效，直到明確移除為止。合法持有與保留截止日期無關。
 +
 
@@ -82,8 +82,8 @@ NOTE: 如果物件處於合法持有狀態，無論其保留模式為何，任�
 
 如果在建立儲存桶時啟用了 S3 Object Lock，使用者可以選擇為該儲存桶指定以下預設設定：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* *預設保留模式*：法規遵循或治理。
+* *預設保留期間*：新增至此儲存貯體的新物件版本應保留多長時間，從新增之日起算。
 
 
 預設儲存桶設定僅適用於沒有自身保留設定的新物件。新增或變更這些預設設定不會影響現有儲存桶物件。
@@ -100,10 +100,10 @@ NOTE: 如果物件處於合法持有狀態，無論其保留模式為何，任�
 網格系統管理員::
 +
 --
-* ${post_edited_translations.segment}
-* 確保資訊生命週期管理 (ILM) 原則符合法規；也就是說，它們符合 link:../ilm/managing-objects-with-s3-object-lock.html["${post_edited_translations.segment}"]。
+* 為整個 StorageGRID 系統啟用全域 S3 物件鎖定設定。
+* 確保資訊生命週期管理 (ILM) 原則符合法規；也就是說，它們符合 link:../ilm/managing-objects-with-s3-object-lock.html["啟用 S3 物件鎖定的儲存桶的要求"]。
 * 如有需要，允許租戶使用 Compliance 作為保留模式。否則，僅允許使用 Governance 模式。
-* ${post_edited_translations.segment}
+* 根據需要，設定租戶的最長保留期間。
 
 
 --
@@ -112,11 +112,11 @@ NOTE: 如果物件處於合法持有狀態，無論其保留模式為何，任�
 --
 * 檢閱啟用 S3 Object Lock 的儲存桶和物件的注意事項。
 * 如有需要，請聯絡網格系統管理員啟用全域 S3 Object Lock 設定並設定權限。
-* ${post_edited_translations.segment}
+* 建立啟用 S3 物件鎖定的儲存桶。
 * （可選）設定儲存貯體的預設保留設定：
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 預設保留模式：Governance 或 Compliance（如果網格系統管理員允許）。
+** 預設保留期間：必須小於或等於網格系統管理員設定的最大保留期間。
 
 
 * 使用 S3 用戶端應用程式新增物件，並可選擇設定物件特定的保留：
@@ -135,7 +135,7 @@ NOTE: 如果物件處於合法持有狀態，無論其保留模式為何，任�
 [[requirements-for-buckets-with-s3-object-lock-enabled]]
 == 啟用 S3 Object Lock 的儲存桶要求
 
-* ${post_edited_translations.segment}
+* 如果 StorageGRID 系統已啟用全域 S3 物件鎖定設定，您可以使用 Tenant Manager、租戶管理 API 或 S3 REST API 建立已啟用 S3 物件鎖定的儲存桶。
 * 如果您計劃使用 S3 Object Lock，則必須在建立儲存格時啟用 S3 Object Lock。您無法為現有的儲存格啟用 S3 Object Lock。
 * 為儲存桶啟用 S3 Object Lock 後，StorageGRID 會自動為該儲存桶啟用版本控制。您無法停用 S3 Object Lock 或暫停該儲存桶的版本控制。
 * 您也可以選擇使用 Tenant Manager、租戶管理 API 或 S3 REST API 為每個儲存桶指定預設保留模式和保留期間。儲存桶的預設保留設定僅適用於新增至儲存桶且沒有自身保留設定的新物件。您可以透過在上傳每個物件版本時為其指定保留模式和保留截止日期來置換這些預設設定。
@@ -146,7 +146,7 @@ NOTE: 如果物件處於合法持有狀態，無論其保留模式為何，任�
 
 
 [[requirements-for-objects-in-buckets-with-s3-object-lock-enabled]]
-== ${post_edited_translations.segment}
+== 啟用 S3 物件鎖定的儲存桶中的物件要求
 
 * 若要保護物件版本，您可以為儲存桶指定預設保留設定，也可以為每個物件版本指定保留設定。可以使用 S3 用戶端應用程式或 S3 REST API 指定物件層級的保留設定。
 * 保留設定適用於各個物件版本。一個物件版本可以同時擁有保留截止日期和合法持有設定，也可以只擁有其中一項，或者兩者都沒有。為物件指定保留截止日期或合法持有設定僅保護請求中指定的版本。您可以建立物件的新版本，而物件的先前版本仍保持鎖定狀態。
@@ -159,14 +159,14 @@ NOTE: 如果物件處於合法持有狀態，無論其保留模式為何，任�
 
 啟用 S3 Object Lock 後，儲存到儲存桶中的每個物件都會經歷以下階段：
 
-. ${post_edited_translations.segment}
+. *物件擷取*
 +
 當物件版本新增至已啟用 S3 Object Lock 的儲存桶時，保留設定的套用方式如下：
 
 +
 ** 如果為物件指定了保留設定，則套用物件層級的設定。任何預設儲存貯體設定都將被忽略。
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 如果未為物件指定保留設定，則套用預設儲存桶設定（如果存在）。
+** 如果未為物件或儲存貯體指定保留設定，則該物件不受 S3 Object Lock 保護。
 
 
 +

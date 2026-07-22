@@ -13,9 +13,9 @@ summary: 如果建立或編輯租戶時使用了網格聯合連線，則該租�
 [role="lead"]
 如果建立或編輯租戶時使用了網格聯合連線，則該租戶會從一個 StorageGRID 系統（來源租戶）複製到另一個 StorageGRID 系統（複本租戶）。租戶複製完成後，新增至來源租戶的任何群組和使用者都會 Clone 至複本租戶。
 
-租戶最初建立的 StorageGRID 系統是租戶的來源網格。租戶被複製到的 StorageGRID 系統是租戶的目的地網格。兩個租戶帳戶具有相同的帳戶 ID、名稱、執行摘要、儲存設備配額和已指派的權限，但目的地租戶最初沒有 root 使用者密碼。如需詳細資訊，請參閱 link:../admin/grid-federation-what-is-account-clone.html["什麼是帳戶 Clone"] 和 link:../admin/grid-federation-manage-tenants.html["${post_edited_translations.segment}"]。
+租戶最初建立的 StorageGRID 系統是租戶的來源網格。租戶被複製到的 StorageGRID 系統是租戶的目的地網格。兩個租戶帳戶具有相同的帳戶 ID、名稱、執行摘要、儲存設備配額和已指派的權限，但目的地租戶最初沒有 root 使用者密碼。如需詳細資訊，請參閱 link:../admin/grid-federation-what-is-account-clone.html["什麼是帳戶 Clone"] 和 link:../admin/grid-federation-manage-tenants.html["管理獲準租戶"]。
 
-複製租戶帳戶資訊是link:../admin/grid-federation-what-is-cross-grid-replication.html["${post_edited_translations.segment}"]儲存桶物件的必要條件。在兩個網格上擁有相同的租戶群組和使用者，可確保您能在任一網格上存取對應的儲存桶和物件。
+複製租戶帳戶資訊是link:../admin/grid-federation-what-is-cross-grid-replication.html["跨網格複寫"]儲存桶物件的必要條件。在兩個網格上擁有相同的租戶群組和使用者，可確保您能在任一網格上存取對應的儲存桶和物件。
 
 
 
@@ -34,7 +34,7 @@ image:grid-federation-account-clone-workflow-tm.png["租戶帳戶 Clone 工作�
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["二"]（可選）設定身分識別聯盟
 [role="quick-margin-para"]
-如果您的租戶帳戶擁有 *Use own identity source* 權限以使用聯合群組和使用者，請為來源和目的地租戶帳戶設定相同的身分來源（以及相同的設定）。只有當兩個網格使用相同的身分來源時，才能 Clone 聯合群組和使用者。如需相關指示，請參閱 link:using-identity-federation.html["${post_edited_translations.segment}"]。
+如果您的租戶帳戶擁有 *Use own identity source* 權限以使用聯合群組和使用者，請為來源和目的地租戶帳戶設定相同的身分來源（以及相同的設定）。只有當兩個網格使用相同的身分來源時，才能 Clone 聯合群組和使用者。如需相關指示，請參閱 link:using-identity-federation.html["使用身分聯盟"]。
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["三"] 建立群組和使用者
 [role="quick-margin-para"]
@@ -93,7 +93,7 @@ image:grid-federation-local-user-clone.png["映像顯示本機使用者從來源
 [[federated-groups-created-on-source-grid-are-cloned]]
 === 在來源網格上建立的聯合群組會被 Clone。
 
-假設使用帳戶 Clone 搭配 link:../admin/grid-federation-what-is-account-clone.html#account-clone-sso["${post_edited_translations.segment}"] 和 link:../admin/grid-federation-what-is-account-clone.html#account-clone-identity-federation["${post_edited_translations.segment}"] 的要求已滿足，則您為來源網格上的租戶建立（匯入）的聯合群組將自動 Clone 至目的地網格上的租戶。
+假設使用帳戶 Clone 搭配 link:../admin/grid-federation-what-is-account-clone.html#account-clone-sso["單一登入"] 和 link:../admin/grid-federation-what-is-account-clone.html#account-clone-identity-federation["身分聯盟"] 的要求已滿足，則您為來源網格上的租戶建立（匯入）的聯合群組將自動 Clone 至目的地網格上的租戶。
 
 兩個群組具有相同的存取模式、群組權限和 S3 群組原則。
 

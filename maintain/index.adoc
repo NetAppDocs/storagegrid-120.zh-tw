@@ -21,8 +21,8 @@ NOTE: 在這些說明中，「Linux」指的是 Red Hat® Enterprise Linux® （
 [[before-you-begin]]
 == 開始之前
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 您對 StorageGRID 系統有廣泛的了解。
+* 您已審查 StorageGRID 系統的拓撲，並瞭解網格組態。
 * 您明白必須嚴格遵守所有指示並注意所有警告。
 * 您瞭解，未描述的維護程序不受支援，或需要簽訂服務合約。
 

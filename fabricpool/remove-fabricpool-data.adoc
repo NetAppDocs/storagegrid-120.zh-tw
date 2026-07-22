@@ -36,7 +36,7 @@ summary: 如果您需要移除目前儲存在 StorageGRID 中的 FabricPool 資�
 您可以使用 `volume object-store`命令搭配 `tiering`選項來 https://docs.netapp.com/us-en/ontap/fabricpool/check-status-performance-tier-promotion-task.html["查看效能層促銷狀態"^]。
 
 . 提升操作完成後，請登入 StorageGRID Tenant Manager 以存取 FabricPool 租戶帳戶。
-. ${post_edited_translations.segment}
+. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 . 確認 FabricPool 儲存桶現在已空。
 . 如果儲存貯體是空的，link:../tenant/deleting-s3-bucket.html["刪除儲存桶"]。
 

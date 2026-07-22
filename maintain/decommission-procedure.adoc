@@ -13,9 +13,9 @@ summary: 您可以執行退役程序，從 StorageGRID 系統永久移除網格�
 [role="lead"]
 您可以執行退役程序，從 StorageGRID 系統永久移除網格節點或整個站台。
 
-${post_edited_translations.segment}
+若要移除網格節點或站台，您可以執行下列退役程序之一：
 
-* 執行 link:grid-node-decommissioning.html["${post_edited_translations.segment}"] 以移除一個或多個節點，這些節點可以位於一個或多個站台。您要移除的節點可以處於線上並已連接至 StorageGRID 系統，也可以處於離線並已中斷連線。
+* 執行 link:grid-node-decommissioning.html["網格節點退役"] 以移除一個或多個節點，這些節點可以位於一個或多個站台。您要移除的節點可以處於線上並已連接至 StorageGRID 系統，也可以處於離線並已中斷連線。
 * 執行link:considerations-for-removing-site.html["站台退役"]以移除站台。如果所有節點都已連線至 StorageGRID ，您可執行 * 連線站台退役 * 。如果所有節點都與 StorageGRID 中斷連線，您可執行 * 離線站台退役 * 。如果站台包含連線和離線節點的混合，您必須將所有離線節點重新恢復線上。
 +
 

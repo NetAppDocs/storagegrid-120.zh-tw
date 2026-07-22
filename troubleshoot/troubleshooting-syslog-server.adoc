@@ -15,12 +15,12 @@ summary: 下表說明可能與使用外部 syslog 伺服器相關的錯誤訊息
 
 如果您在傳送測試訊息以驗證外部 syslog 伺服器是否正確設定時遇到問題，「設定外部 syslog 伺服器」精靈將顯示這些錯誤。
 
-執行階段問題可能會透過 link:../monitor/alerts-reference.html#audit-and-syslog-alerts["${post_edited_translations.segment}"] 警示回報。如果您收到此警示，請依照警示中的指示重新傳送測試訊息，以便取得詳細的錯誤訊息。
+執行階段問題可能會透過 link:../monitor/alerts-reference.html#audit-and-syslog-alerts["外部 syslog 伺服器轉送錯誤"] 警示回報。如果您收到此警示，請依照警示中的指示重新傳送測試訊息，以便取得詳細的錯誤訊息。
 
 如需將稽核資訊傳送至外部 syslog 伺服器的詳細資訊，請參閱：
 
 * link:../monitor/considerations-for-external-syslog-server.html["使用外部 syslog 伺服器的注意事項"]
-* link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]
+* link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]
 
 
 [cols="1a,3a"]

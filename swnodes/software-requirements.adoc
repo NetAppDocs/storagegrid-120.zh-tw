@@ -129,7 +129,7 @@ IMPORTANT: Docker 支援已過時，將在未來版本中移除。
 
 * 根據需求在 Hypervisor 中設定連網，以支援您正在安裝的 StorageGRID 系統的連網。
 +
-link:../network/index.html["${post_edited_translations.segment}"]
+link:../network/index.html["網路連線準則"]
 
 * 確保資料存放區足夠大，能夠容納主機網格節點所需的虛擬機器和虛擬磁碟。
 * 如果建立多個資料存放區，請為每個資料存放區命名，以便在建立虛擬機器時可以輕鬆識別每個網格節點要使用哪個資料存放區。

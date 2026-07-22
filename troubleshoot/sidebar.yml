@@ -1,9 +1,9 @@
 ---
 section: troubleshoot
-title: "${post_edited_translations.segment}"
+title: StorageGRID 系統故障排除
 entries:
 - title: 故障排除指南
-  pdf-filename: "${post_edited_translations.segment}"
+  pdf-filename: StorageGRID 系統故障排除
   url: "/troubleshoot/index.html"
 - title: 排查物件和儲存設備問題
   entries:
@@ -11,16 +11,16 @@ entries:
     url: "/troubleshoot/confirming-object-data-locations.html"
   - title: 物件儲存故障
     url: "/troubleshoot/object-store-storage-volume-failures.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 驗證物件完整性
     url: "/troubleshoot/verifying-object-integrity.html"
   - title: 故障排除：S3 PUT 物件大小過大警報
     url: "/troubleshoot/troubleshoot-s3-put-object-size-too-large-alert.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 排除遺失和缺失的物件資料
     entries:
     - title: 檢索物件的方法
-      pdf-filename: "${post_edited_translations.segment}"
+      pdf-filename: 排除遺失和缺失的物件資料
       url: "/troubleshoot/troubleshooting-lost-and-missing-object-data.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 調查可能遺失的物件
       url: "/troubleshoot/investigating-potentially-lost-objects.html"
   - title: 排除物件資料儲存設備不足警報
     url: "/troubleshoot/troubleshooting-low-object-data-storage-alert.html"
@@ -36,5 +36,5 @@ entries:
   url: "/troubleshoot/troubleshooting-network-hardware-and-platform-issues.html"
 - title: 排除外部 syslog 伺服器故障
   url: "/troubleshoot/troubleshooting-syslog-server.html"
-- title: "${post_edited_translations.segment}"
+- title: 排除負載平衡器快取問題
   url: "/troubleshoot/troubleshooting-load-balancer-caching.html"

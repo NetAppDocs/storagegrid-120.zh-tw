@@ -16,7 +16,7 @@ StorageGRID 12.0 使用第 4 版的 Grid Management API。第 4 版已淘汰第 
 
 NOTE: 您可以繼續在 StorageGRID 12.0 中使用已淘汰版本的管理 API ；然而，未來的 StorageGRID 版本將移除對這些 API 版本的支援。升級至 StorageGRID 12.0 後，您可以使用  `PUT /grid/config/management` API 來停用已淘汰的 API 。
 
-若要深入瞭解，請前往 link:../admin/using-grid-management-api.html["${post_edited_translations.segment}"]。
+若要深入瞭解，請前往 link:../admin/using-grid-management-api.html["使用網格管理 API"]。
 
 
 
@@ -45,9 +45,9 @@ NOTE: 您可以繼續在 StorageGRID 12.0 中使用已淘汰版本的管理 API 
 
 
 [[new-private-endpoints-for-convert-to-data-only-node]]
-== ${post_edited_translations.segment}
+== 為「轉換為僅資料節點」新增新的私有端點
 
-已新增下列私有端點，可讓您link:../maintain/convert-to-data-only-node.html["${post_edited_translations.segment}"]將不包含 ADC 服務的節點轉換為僅資料節點。
+已新增下列私有端點，可讓您link:../maintain/convert-to-data-only-node.html["轉換一個或多個組合儲存節點"]將不包含 ADC 服務的節點轉換為僅資料節點。
 
 `/private/convert-to-data-only-node`
 

@@ -13,14 +13,14 @@ summary: 完成網格節點部署和組態後，請依照下列指南進行 DHCP
 [role="lead"]
 完成網格節點部署和組態後，請依照下列指南進行 DHCP 位址指派和網路組態變更。
 
-* ${post_edited_translations.segment}
+* 如果使用 DHCP 指派 IP 位址，請為所使用網路上的每個 IP 位址設定 DHCP 保留位址。
 +
 您只能在部署階段設定 DHCP。您無法在組態期間設定 DHCP。
 
 +
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 當 DHCP 變更網格網路組態時，節點會重新開機，若 DHCP 變更同時影響多個節點，可能導致服務中斷。
 
-* 如果要變更網格節點的 IP 位址、子網路遮罩和預設閘道，則必須使用「變更 IP」程序。請參閱link:../maintain/configuring-ip-addresses.html["${post_edited_translations.segment}"]。
+* 如果要變更網格節點的 IP 位址、子網路遮罩和預設閘道，則必須使用「變更 IP」程序。請參閱link:../maintain/configuring-ip-addresses.html["設定 IP 位址"]。
 * 如果您變更連網組態（包括路由和閘道變更），用戶端與主管理節點和其他網格節點的連線可能會遺失。根據所套用的連網變更，您可能需要重新建立這些連線。
 

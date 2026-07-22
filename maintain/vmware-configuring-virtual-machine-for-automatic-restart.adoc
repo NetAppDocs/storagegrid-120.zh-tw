@@ -13,7 +13,7 @@ summary: 如果虛擬機器在 VMware vSphere Hypervisor 重新啟動後沒有�
 [role="lead"]
 如果虛擬機器在 VMware vSphere Hypervisor 重新啟動後沒有重新啟動，您可能需要設定虛擬機器以進行自動重新啟動。
 
-${post_edited_translations.segment}
+如果您在恢復網格節點或執行其他維護程序時發現虛擬機器無法重新啟動，則應執行此程序。
 
 .步驟
 . 在 VMware vSphere Client 樹中，選擇未啟動的虛擬機器。

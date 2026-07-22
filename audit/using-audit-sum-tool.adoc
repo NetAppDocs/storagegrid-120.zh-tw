@@ -16,7 +16,7 @@ summary: 您可以使用 audit-sum 工具來統計寫入、讀取、head 和刪�
 .開始之前
 * 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
 * 您擁有  `Passwords.txt` 檔案。
-* ${post_edited_translations.segment}
+* 您知道主要管理節點的 IP 位址。
 
 
 .關於此任務
@@ -40,14 +40,14 @@ NOTE: 此 `audit-sum`工具主要供技術支援在進行疑難排解作業時�
 此  `audit-sum` 工具提供稽核日誌中下列 S3 和 ILM 稽核訊息的計數與時間。
 
 
-NOTE: 稽核代碼會隨著功能被取代而從產品和說明文件中移除。如果您遇到此處未列出的稽核代碼，請檢查此主題的先前版本以取得較舊的 StorageGRID 版本。例如， https://docs.netapp.com/us-en/storagegrid-118/audit/using-audit-sum-tool.html["${post_edited_translations.segment}"^]。
+NOTE: 稽核代碼會隨著功能被取代而從產品和說明文件中移除。如果您遇到此處未列出的稽核代碼，請檢查此主題的先前版本以取得較舊的 StorageGRID 版本。例如， https://docs.netapp.com/us-en/storagegrid-118/audit/using-audit-sum-tool.html["StorageGRID 11.8 使用稽核加總工具"^]。
 
 [cols="14,43,43"]
 |===
 | 程式碼 | 說明 | 請參閱 
 
 
-| IDEL | ${post_edited_translations.segment} | link:idel-ilm-initiated-delete.html["IDEL：ILM 發起的刪除"] 
+| IDEL | ILM 發起的刪除：記錄 ILM 開始刪除物件的過程。 | link:idel-ilm-initiated-delete.html["IDEL：ILM 發起的刪除"] 
 
 
 | SDEL | S3 DELETE：記錄成功刪除物件或儲存貯體的交易。 | link:sdel-s3-delete.html["SDEL：S3 DELETE"] 
@@ -189,7 +189,7 @@ If you want to read it using the  module first (though  is preferred and faster)
 `$ audit-sum -h`
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -200,7 +200,7 @@ If you want to read it using the  module first (though  is preferred and faster)
 
 
 
-. ${post_edited_translations.segment}
+. 如果要分析所有與寫入、讀取、head 和刪除操作相關的訊息，請按照以下步驟操作：
 +
 .. 輸入下列命令，其中  `/var/local/audit/export/audit.log` 代表您要分析之檔案的名稱與位置：
 +
@@ -221,7 +221,7 @@ If you want to read it using the  module first (though  is preferred and faster)
   SPUT                  1771398        0.011        1770.563           0.487
 ----
 +
-${post_edited_translations.segment}
+在這個範例中，SGET （S3 GET）作業平均速度最慢，為 1.13 秒，但 SGET 和 SPUT （S3 PUT）作業的最差情況時間都較長，約為 1,770 秒。
 
 .. 若要顯示速度最慢的 10 個擷取操作，請使用 grep 命令僅選擇 SGET 訊息，並新增 long 輸出選項(`-l`以包含物件路徑：
 +
@@ -320,7 +320,7 @@ Total:          201906 operations
   2019-09-05T09           27591        0.689        1481.867           1.354
 ----
 +
-${post_edited_translations.segment}
+這些結果表明，在整體擷取流量達到最大值時，發生了一些非常大的擷取。
 
 .. 若要查看更多詳細資訊，請使用 link:using-audit-explain-tool.html["audit-explain 工具"] 審查該小時內的所有 SGET 作業：
 +
@@ -331,7 +331,7 @@ ${post_edited_translations.segment}
 
 
 
-. ${post_edited_translations.segment}
+. 如果您想確定對儲存桶執行 SPUT 操作是否比對物件執行 SPUT 操作更慢：
 +
 .. 請先使用  `-go` 選項，此選項會分別將物件和儲存貯體作業的訊息進行分組：
 +
@@ -346,7 +346,7 @@ ${post_edited_translations.segment}
   SPUT.object                12        0.025           1.019           0.236
 ----
 +
-${post_edited_translations.segment}
+結果顯示，對儲存桶執行 SPUT 操作與對物件執行 SPUT 操作具有不同的效能特性。
 
 .. 若要確定哪些儲存桶的 SPUT 操作速度最慢，請使用 `-gb`選項，該選項可依儲存桶對訊息進行分組：
 +

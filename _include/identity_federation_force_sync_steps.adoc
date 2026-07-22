@@ -6,12 +6,12 @@ StorageGRID 系統會定期從識別來源同步聯盟群組與使用者。如�
 
 .步驟
 . 前往身分聯盟頁面。
-. ${post_edited_translations.segment}
+. 在頁面頂部選擇 *Sync server*。
 +
 同步程序可能需要一些時間，視您的環境而定。
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果從身分來源同步聯盟群組和使用者時出現問題，則會觸發「身分聯盟同步故障」警示。
 
 

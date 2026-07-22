@@ -16,32 +16,32 @@ summary: 如果系統磁碟機發生故障，則必須先更換儲存節點。
 您必須為您的平台選擇節點替換流程。所有類型的網格節點的替換步驟都相同。
 
 
-NOTE: 此流程僅適用於軟體型儲存節點。您必須遵循不同的流程來 link:recovering-storagegrid-appliance-storage-node.html["${post_edited_translations.segment}"]。
+NOTE: 此流程僅適用於軟體型儲存節點。您必須遵循不同的流程來 link:recovering-storagegrid-appliance-storage-node.html["恢復應用裝置儲存節點"]。
 
 *Linux：* 如果您不確定系統磁碟機是否發生故障，請依照指示更換節點，以確定需要哪些恢復步驟。
 
 [cols="1a,2a"]
 |===
-| 平台 | ${post_edited_translations.segment} 
+| 平台 | 程序 
 
 
  a| 
 VMware
  a| 
-link:all-node-types-replacing-vmware-node.html["${post_edited_translations.segment}"]
+link:all-node-types-replacing-vmware-node.html["替換 VMware 節點"]
 
 
 
  a| 
 Linux
  a| 
-link:all-node-types-replacing-linux-node.html["${post_edited_translations.segment}"]
+link:all-node-types-replacing-linux-node.html["替換 Linux 節點"]
 
 
 
  a| 
 OpenStack
  a| 
-NetApp 提供的 OpenStack 虛擬機器磁碟檔案和指令碼已不再支援恢復作業。如果您需要恢復在 OpenStack 部署中執行的節點，請下載適用於您的 Linux 作業系統的檔案。然後，按照 link:all-node-types-replacing-linux-node.html["${post_edited_translations.segment}"] 的步驟進行。
+NetApp 提供的 OpenStack 虛擬機器磁碟檔案和指令碼已不再支援恢復作業。如果您需要恢復在 OpenStack 部署中執行的節點，請下載適用於您的 Linux 作業系統的檔案。然後，按照 link:all-node-types-replacing-linux-node.html["替換 Linux 節點"] 的步驟進行。
 
 |===

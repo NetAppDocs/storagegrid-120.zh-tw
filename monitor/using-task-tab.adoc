@@ -15,7 +15,7 @@ summary: 所有節點均顯示「任務」標籤。您可以使用此標籤重�
 
 有關此標籤上每個選項的完整要求和說明，請參閱以下內容：
 
-* link:../maintain/rename-grid-site-node-overview.html["${post_edited_translations.segment}"]
+* link:../maintain/rename-grid-site-node-overview.html["重新命名網格、站台和節點"]
 * link:../maintain/rebooting-grid-node-from-grid-manager.html["重新開機網格節點"]
 * https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/placing-appliance-into-maintenance-mode.html["將應用裝置置於維護模式"^]
 * 在將直接連接或 SAN 磁碟區新增至儲存節點，或恢復儲存節點之後，您需要驗證或設定儲存節點的儲存設備狀態。相關說明可在介紹這些任務的主題中找到。

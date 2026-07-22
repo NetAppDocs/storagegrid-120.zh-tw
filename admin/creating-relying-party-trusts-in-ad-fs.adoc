@@ -21,9 +21,9 @@ summary: 您必須使用 Active Directory Federation Services （AD FS） 為系
 
 NOTE: 您必須為 StorageGRID 系統中的每個管理節點建立信賴憑證者信任。為每個管理節點建立信賴憑證者信任，可確保使用者能夠安全地登入和登出任何管理節點。
 
-* ${post_edited_translations.segment}
+* 您有在 AD FS 中建立信賴方信任的經驗，或者您可以存取 Microsoft AD FS 文件。
 * 您正在使用 AD FS Management 嵌入式管理單元，且您屬於 Administrators 群組。
-* ${post_edited_translations.segment}
+* 如果您是手動建立信賴方信任，則您擁有為 StorageGRID 管理介面上傳的自訂憑證，或者您知道如何從命令 Shell 登入管理節點。
 
 
 .關於此任務
@@ -54,33 +54,33 @@ Output:
 ** 針對  `_Admin_Node_FQDN_`，請輸入相同 Admin Node 的完整網域。（ 如有需要，您也可以改用該節點的 IP 位址。然而，如果您在此處輸入 IP 位址，請注意，如果該 IP 位址發生變更，您必須更新或重新建立此信賴憑證者信任。 ）
 
 
-. ${post_edited_translations.segment}
+. 從 Windows Server Manager 中，選取 *Tools* > *AD FS Management*。
 +
 AD FS 管理工具出現。
 
-. ${post_edited_translations.segment}
+. 選擇 *AD FS* > *Relying Party Trusts*。
 +
 信賴方信任清單隨即出現。
 
 . 為新建立的信賴方信任新增存取控制原則：
 +
 .. 找到您剛建立的信賴方信任。
-.. ${post_edited_translations.segment}
+.. 右鍵點選信任關係，然後選擇「編輯存取控制原則」。
 .. 選擇存取控制原則。
-.. ${post_edited_translations.segment}
+.. 選擇 *Apply*，然後選擇 *OK*。
 
 
 . 為新建立的信賴方信任新增宣告發行原則：
 +
 .. 找到您剛建立的信賴方信任。
-.. ${post_edited_translations.segment}
+.. 右鍵點選信任，然後選擇「編輯宣告發行原則」。
 .. 選擇 *新增規則*。
-.. ${post_edited_translations.segment}
+.. 在「選擇規則模板」頁面上，從清單中選擇「Send LDAP Attributes as Claims」，然後選擇「下一步」。
 .. 在「設定規則」頁面上，輸入該規則的顯示名稱。
 +
-${post_edited_translations.segment}
+例如，*ObjectGUID to Name ID* 或 *UPN to Name ID*。
 
-.. ${post_edited_translations.segment}
+.. 對於屬性存放區，請選擇 *Active Directory*。
 .. 在映射表的 LDAP 屬性欄中，鍵入 *objectGUID* 或選擇 *User-Principal-Name*。
 .. 在對應表的「傳出宣告類型」欄位中，從下拉清單中選擇「名稱 ID」。
 .. 選擇 *Finish*，然後選擇 *OK*。
@@ -102,9 +102,9 @@ ${post_edited_translations.segment}
 
 
 [[create-a-relying-party-trust-by-importing-federation-metadata]]
-== ${post_edited_translations.segment}
+== 透過匯入聯盟中繼資料建立信賴方信任
 
-${post_edited_translations.segment}
+您可以透過存取每個管理節點的 SAML 中繼資料來匯入每個信賴方信任的值。
 
 .步驟
 . 在 Windows Server 管理員中，選取 *工具*，然後選取 *AD FS Management*。
@@ -118,21 +118,21 @@ ${post_edited_translations.segment}
 +
 針對  `_Admin_Node_FQDN_`，請輸入相同 Admin Node 的完整網域。（ 如有需要，您也可以改用該節點的 IP 位址。然而，如果您在此處輸入 IP 位址，請注意，如果該 IP 位址發生變更，您必須更新或重新建立此信賴憑證者信任。 ）
 
-. ${post_edited_translations.segment}
+. 完成信賴方信任精靈，儲存信賴方信任，然後關閉精靈。
 +
 
 NOTE: 輸入顯示名稱時，請使用管理節點的信賴方識別碼，該識別碼必須與 Grid Manager 單一登入頁面上顯示的識別碼完全一致。例如， `SG-DC1-ADM1`。
 
 . 新增聲明規則：
 +
-.. ${post_edited_translations.segment}
+.. 右鍵點選信任，然後選擇「編輯宣告發行原則」。
 .. 選擇 *新增規則*：
-.. ${post_edited_translations.segment}
+.. 在「選擇規則模板」頁面上，從清單中選擇「Send LDAP Attributes as Claims」，然後選擇「下一步」。
 .. 在「設定規則」頁面上，輸入該規則的顯示名稱。
 +
-${post_edited_translations.segment}
+例如，*ObjectGUID to Name ID* 或 *UPN to Name ID*。
 
-.. ${post_edited_translations.segment}
+.. 對於屬性存放區，請選擇 *Active Directory*。
 .. 在映射表的 LDAP 屬性欄中，鍵入 *objectGUID* 或選擇 *User-Principal-Name*。
 .. 在對應表的「傳出宣告類型」欄位中，從下拉清單中選擇「名稱 ID」。
 .. 選擇 *Finish*，然後選擇 *OK*。
@@ -165,12 +165,12 @@ ${post_edited_translations.segment}
 . 選擇 *Enter data about the relying party manually*，然後選擇 *Next*。
 . 完成信賴方信任嚮導：
 +
-.. ${post_edited_translations.segment}
+.. 請輸入此管理節點的顯示名稱。
 +
 為保持一致性，請使用管理節點的信賴方識別碼，該識別碼應與 Grid Manager 單一登入頁面上顯示的識別碼完全一致。例如， `SG-DC1-ADM1`。
 
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 跳過設定選用權杖加密憑證的步驟。
+.. 在「設定 URL」頁面上，選取「啟用對 SAML 2.0 WebSSO 協定的支援」核取方塊。
 .. 輸入管理節點的 SAML 服務端點 URL：
 +
 `https://_Admin_Node_FQDN_/api/saml-response`
@@ -178,7 +178,7 @@ ${post_edited_translations.segment}
 +
 針對  `_Admin_Node_FQDN_`，請輸入 Admin Node 的完整網域。（如有需要，您也可以改用該節點的 IP 位址。然而，如果您在此處輸入 IP 位址，請注意，如果該 IP 位址發生變更，您必須更新或重新建立此信賴憑證者信任。）
 
-.. ${post_edited_translations.segment}
+.. 在「設定識別碼」頁面上，為相同管理節點指定信賴方識別碼：
 +
 `_Admin_Node_Identifier_`_
 
@@ -191,30 +191,30 @@ ${post_edited_translations.segment}
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果對話方塊未出現，請以滑鼠右鍵按一下信任，然後選取 *Edit claim issuance policy*。
 
 
 
-. ${post_edited_translations.segment}
+. 若要啟動「宣告規則」精靈，請選擇 *Add rule*：
 +
-.. ${post_edited_translations.segment}
+.. 在「選擇規則模板」頁面上，從清單中選擇「Send LDAP Attributes as Claims」，然後選擇「下一步」。
 .. 在「設定規則」頁面上，輸入該規則的顯示名稱。
 +
-${post_edited_translations.segment}
+例如，*ObjectGUID to Name ID* 或 *UPN to Name ID*。
 
-.. ${post_edited_translations.segment}
+.. 對於屬性存放區，請選擇 *Active Directory*。
 .. 在映射表的 LDAP 屬性欄中，鍵入 *objectGUID* 或選擇 *User-Principal-Name*。
 .. 在對應表的「傳出宣告類型」欄位中，從下拉清單中選擇「名稱 ID」。
 .. 選擇 *Finish*，然後選擇 *OK*。
 
 
 . 以滑鼠右鍵按一下信賴方信任，以開啟其屬性。
-. ${post_edited_translations.segment}
+. 在「端點」標籤上，設定單一登出 (SLO) 端點：
 +
 .. 選擇 *新增 SAML*。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 選擇 *Endpoint Type* > *SAML Logout*。
+.. 選取 *Binding* > *Redirect*。
+.. 在「受信任的 URL」欄位中，輸入用於從此管理節點單一登出 (SLO) 的 URL：
 +
 `https://_Admin_Node_FQDN_/api/saml-logout`
 
@@ -236,9 +236,9 @@ NOTE: 不建議使用管理節點的預設憑證 (`server.crt`。如果管理節
 
 
 
-.. ${post_edited_translations.segment}
+.. 選擇 *Apply* ，然後選擇 *OK* 。
 +
-${post_edited_translations.segment}
+信賴憑證者屬性已儲存並關閉。
 
 
 

@@ -171,11 +171,11 @@ CAUTION: 您提供的加密金鑰不會被儲存。如果您遺失加密金鑰�
 [[headobject-and-cross-grid-replication]]
 == HeadObject 以及跨網格複寫
 
-如果您正在使用 link:../admin/grid-federation-overview.html["${post_edited_translations.segment}"] 且已為儲存桶啟用 link:../tenant/grid-federation-manage-cross-grid-replication.html["${post_edited_translations.segment}"]，則 S3 用戶端可以透過發出 HeadObject 請求來驗證物件的複寫狀態。回應包含 StorageGRID 特有的  `x-ntap-sg-cgr-replication-status` 回應標頭，該標頭將具有下列其中一個值：
+如果您正在使用 link:../admin/grid-federation-overview.html["網格聯盟"] 且已為儲存桶啟用 link:../tenant/grid-federation-manage-cross-grid-replication.html["跨網格複寫"]，則 S3 用戶端可以透過發出 HeadObject 請求來驗證物件的複寫狀態。回應包含 StorageGRID 特有的  `x-ntap-sg-cgr-replication-status` 回應標頭，該標頭將具有下列其中一個值：
 
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 網格 | 複寫狀態 
 
 
  a| 
@@ -191,7 +191,7 @@ CAUTION: 您提供的加密金鑰不會被儲存。如果您遺失加密金鑰�
  a| 
 目的地
  a| 
-${post_edited_translations.segment}
+*REPLICA*：此物件是從來源網格複寫而來。
 
 |===
 

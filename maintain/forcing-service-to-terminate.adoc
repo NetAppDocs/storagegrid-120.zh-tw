@@ -17,7 +17,7 @@ summary: 如果需要立即停止某項服務，可以使用 force-stop 指令�
 您擁有  `Passwords.txt` 檔案。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -38,7 +38,7 @@ summary: 如果需要立即停止某項服務，可以使用 force-stop 指令�
 service ldr force-stop
 ----
 +
-${post_edited_translations.segment}
+系統會在終止服務前等待 30 秒。
 
 . 登出命令 shell： `exit`
 

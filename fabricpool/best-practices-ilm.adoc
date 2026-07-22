@@ -14,7 +14,7 @@ summary: 如果您正使用 FabricPool 將資料分層至 StorageGRID，您必�
 如果您正使用 FabricPool 將資料分層至 StorageGRID，您必須瞭解搭配 FabricPool 資料使用 StorageGRID 資訊生命週期管理 （ILM） 的需求。
 
 
-CAUTION: FabricPool 對 StorageGRID ILM 規則或原則一無所知。如果 StorageGRID ILM 原則設定錯誤，可能會導致資料遺失。如需詳細資訊，請參閱 link:../ilm/what-ilm-rule-is.html["${post_edited_translations.segment}"] 與 link:../ilm/creating-ilm-policy.html["建立 ILM 原則"]。
+CAUTION: FabricPool 對 StorageGRID ILM 規則或原則一無所知。如果 StorageGRID ILM 原則設定錯誤，可能會導致資料遺失。如需詳細資訊，請參閱 link:../ilm/what-ilm-rule-is.html["使用 ILM 規則管理物件"] 與 link:../ilm/creating-ilm-policy.html["建立 ILM 原則"]。
 
 
 

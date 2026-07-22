@@ -2,7 +2,7 @@
 permalink: maintain/starting-software-installation-on-services-appliance-recovery.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, services appliance, start software installation 
-summary: ${post_edited_translations.segment} 
+summary: 若要在服務應用裝置上安裝閘道節點或管理節點，您可以使用應用裝置中包含的 StorageGRID Appliance Installer。 
 ---
 = 在服務設備上啟動 StorageGRID 軟體安裝
 :allow-uri-read: 
@@ -11,10 +11,10 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+若要在服務應用裝置上安裝閘道節點或管理節點，您可以使用應用裝置中包含的 StorageGRID Appliance Installer。
 
 .開始之前
-* ${post_edited_translations.segment}
+* 應用裝置已安裝在機架中，連接至您的網路，並已開機。
 * 使用 StorageGRID Appliance Installer 為應用裝置設定網路連結和 IP 位址。
 * 如果您要安裝 Gateway Node 或非主要 Admin Node，您需要知道 StorageGRID 網格的主要 Admin Node 的 IP 位址。
 * StorageGRID 應用裝置安裝程式的 IP 組態頁面上列出的所有 Grid Network 子網路，均定義於主要管理節點的 Grid Network 子網路清單中。
@@ -48,9 +48,9 @@ NOTE: StorageGRID 軟體的最新版本已在製造過程中預先安裝到服�
 +
 StorageGRID 應用裝置安裝程式首頁隨即出現。
 
-. ${post_edited_translations.segment}
+. 安裝主要管理節點：
 +
-.. ${post_edited_translations.segment}
+.. 在「此節點」部分，對於 *Node Type*，選擇 *Primary Admin*。
 .. 在「節點名稱」欄位中，輸入與要恢復的節點相同的名稱，然後按一下「儲存」。
 .. 在「安裝」部分，檢查「目前狀態」下所列的軟體版本
 +
@@ -64,18 +64,18 @@ StorageGRID 應用裝置安裝程式首頁隨即出現。
 +
 您選擇檔案後，檔案將自動上傳。
 
-.. ${post_edited_translations.segment}
+.. 點選「首頁」以返回 StorageGRID 應用裝置安裝程式首頁。
 
 
 . 安裝 Gateway Node 或非主要 Admin Node：
 +
-.. ${post_edited_translations.segment}
+.. 在「This Node」部分，針對 *Node Type*，根據您要恢復的節點類型，選擇 *Gateway* 或 *Non-Primary Admin*。
 .. 在「節點名稱」欄位中，輸入與要恢復的節點相同的名稱，然後按一下「儲存」。
-.. ${post_edited_translations.segment}
+.. 在主要管理節點連線部分，確定是否需要指定主要管理節點的 IP 位址。
 +
 假設主要管理節點或至少一個已設定 ADMIN_IP 的其他網格節點位於相同子網路中，StorageGRID 應用裝置安裝程式可以自動探索此 IP 位址。
 
-.. ${post_edited_translations.segment}
+.. 如果未顯示此 IP 位址或需要變更此位址，請指定位址：
 
 
 +
@@ -85,10 +85,10 @@ StorageGRID 應用裝置安裝程式首頁隨即出現。
 
 
  a| 
-${post_edited_translations.segment}
+手動 IP 輸入
  a| 
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 取消選取「啟用管理節點探索」核取方塊。
+.. 請手動輸入 IP 位址。
 .. 按一下 *Save* 。
 .. 請等待新 IP 位址的連線狀態變成「就緒」。
 
@@ -96,9 +96,9 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+自動探索所有已連線的主要管理節點
  a| 
-.. ${post_edited_translations.segment}
+.. 選取「啟用管理節點探索」核取方塊。
 .. 從已發現的 IP 位址清單中，選擇要部署此服務應用裝置的網格的主要管理節點。
 .. 按一下 *Save* 。
 .. 請等待新 IP 位址的連線狀態變成「就緒」。
@@ -115,6 +115,6 @@ ${post_edited_translations.segment}
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果需要手動存取「監控安裝」頁面，請從功能表列按一下 *Monitor Installation*。
 
 

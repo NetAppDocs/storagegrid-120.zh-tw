@@ -2,7 +2,7 @@
 permalink: admin/what-storage-volume-watermarks-are.html 
 sidebar: sidebar 
 keywords: what are storage volume watermarks, storage volume soft read-only watermark, storage volume hard read-only watermark, storage volume read-write watermark 
-summary: ${post_edited_translations.segment} 
+summary: StorageGRID 使用三個儲存 Volume 浮水印來確保儲存節點在空間嚴重不足之前安全地轉換為唯讀狀態，並允許已轉換為唯讀狀態的儲存節點再次變為讀寫狀態。 
 ---
 = 了解 StorageGRID 中的儲存磁碟區浮水印
 :allow-uri-read: 
@@ -11,9 +11,9 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+StorageGRID 使用三個儲存 Volume 浮水印來確保儲存節點在空間嚴重不足之前安全地轉換為唯讀狀態，並允許已轉換為唯讀狀態的儲存節點再次變為讀寫狀態。
 
-image:storage_volume_watermarks.png["${post_edited_translations.segment}"]
+image:storage_volume_watermarks.png["儲存 Volume 浮水印"]
 
 
 NOTE: 儲存 Volume 水印僅適用於複製和銷除編碼物件資料所使用的空間。若要了解 Volume 0 上為物件中繼資料保留的空間，請前往 link:managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]。
@@ -21,9 +21,9 @@ NOTE: 儲存 Volume 水印僅適用於複製和銷除編碼物件資料所使用
 
 
 [[what-is-the-soft-read-only-watermark]]
-== ${post_edited_translations.segment}
+== 什麼是軟性唯讀水位標記？
 
-${post_edited_translations.segment}
+*儲存設備 Volume 軟唯讀浮水印*是第一個指示儲存節點物件資料可用空間即將滿的浮水印。
 
 如果儲存節點中每個 Volume 的可用空間少於該 Volume 的軟唯讀浮水印，則該儲存節點將進入唯讀模式。唯讀模式表示此儲存節點向 StorageGRID 系統的其他部分通告唯讀服務，但會處理所有待處理的寫入要求。
 
@@ -51,7 +51,7 @@ ${post_edited_translations.segment}
 
 例如，假設儲存節點已轉換為唯讀模式。同時假設每個 Volume 的讀寫浮水印為 30 GB。一旦任何 Volume 的可用空間增加到 30 GB，該節點將再次變為讀寫模式。
 
-${post_edited_translations.segment}
+讀寫浮水印一律大於軟唯讀浮水印和硬唯讀浮水印。
 
 
 
@@ -61,9 +61,9 @@ ${post_edited_translations.segment}
 您可以檢視目前的水位線設定與系統最佳化的值。如果未使用最佳化的水位線，您可以判定是否可以或應該調整設定。
 
 .開始之前
-* ${post_edited_translations.segment}
+* 您已完成升級至 StorageGRID 11.6 或更高版本。
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 
 
 
@@ -71,17 +71,17 @@ ${post_edited_translations.segment}
 [[view-current-watermark-settings]]
 === 檢視目前浮水印設定
 
-${post_edited_translations.segment}
+您可以在網格管理器中檢視目前的儲存設備浮水印設定。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Support* > *Other* > *Storage watermarks*。
+. 在「儲存浮水印」頁面上，檢視「使用最佳化的值」核取方塊。
 +
-** ${post_edited_translations.segment}
+** 如果選取該核取方塊，則會根據儲存節點的大小和 Volume 的相對容量，對每個儲存節點上的每個儲存設備 Volume 的所有三個浮水印進行最佳化。
 +
 這是預設設置，也是推薦設定。請勿更新這些值。您也可以選擇<<view-optimized-storage-watermarks,檢視最佳化的儲存設備浮水印>>。
 
-** 如果未選取「使用最佳化的值」複選框，則會使用自訂（非最佳化）浮水印。不建議使用自訂浮水印設定。請依照相關說明link:../troubleshoot/troubleshoot-low-watermark-alert.html["${post_edited_translations.segment}"]確定是否可以或應調整這些設定。
+** 如果未選取「使用最佳化的值」複選框，則會使用自訂（非最佳化）浮水印。不建議使用自訂浮水印設定。請依照相關說明link:../troubleshoot/troubleshoot-low-watermark-alert.html["疑難排解低唯讀浮水印置換警示"]確定是否可以或應調整這些設定。
 +
 指定自訂浮水印設定時，必須輸入大於 0 的值。
 

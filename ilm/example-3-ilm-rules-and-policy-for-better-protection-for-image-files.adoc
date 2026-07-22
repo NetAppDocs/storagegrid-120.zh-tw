@@ -19,7 +19,7 @@ CAUTION: 以下 ILM 規則和原則僅為範例。設定 ILM 規則的方法有�
 
 
 [[ilm-rule-1-for-example-3-use-ec-for-image-files-greater-than-1-mb]]
-== ${post_edited_translations.segment}
+== ILM 規則 1 （例 3）：對大於 1 MB 的映像檔案使用 EC
 
 此範例 ILM 規則使用進階篩選對所有大於 1 MB 的映像檔案進行銷毀編碼處理。
 
@@ -62,14 +62,14 @@ Key 的進階篩選器
 
 
  a| 
-${post_edited_translations.segment}
+放置位置
  a| 
-${post_edited_translations.segment}
+使用三個站台建立 2+1 銷毀編碼複本
 
 |===
-image:policy_3_rule_1_ec_images_adv_filtering.png["${post_edited_translations.segment}"]
+image:policy_3_rule_1_ec_images_adv_filtering.png["ILM 規則 1 （例 3）：對大於 1 MB 的映像檔案使用 EC"]
 
-${post_edited_translations.segment}
+由於此規則設定為原則中的第一條規則，因此銷毀編碼放置指令僅適用於大於 1 MB 的 .jpg 和 .png 檔案。
 
 
 
@@ -86,7 +86,7 @@ ${post_edited_translations.segment}
  a| 
 規則名稱
  a| 
-${post_edited_translations.segment}
+影像檔案副本 2 份
 
 
 
@@ -107,7 +107,7 @@ Key 的進階篩選器
 
 
  a| 
-${post_edited_translations.segment}
+放置位置
  a| 
 在兩個儲存資源池中建立 2 個複本
 
@@ -115,7 +115,7 @@ ${post_edited_translations.segment}
 
 
 [[ilm-policy-for-example-3-better-protection-for-image-files]]
-== ${post_edited_translations.segment}
+== ILM 原則範例 3：更好地保護映像檔案
 
 此範例 ILM 原則包含三條規則：
 
@@ -124,4 +124,4 @@ ${post_edited_translations.segment}
 * 預設規則適用於所有剩餘物件（即任何非映像檔案）。
 
 
-image:policy_3_configured_policy.png["${post_edited_translations.segment}"]
+image:policy_3_configured_policy.png["ILM 原則範例 3：更好地保護映像檔案"]

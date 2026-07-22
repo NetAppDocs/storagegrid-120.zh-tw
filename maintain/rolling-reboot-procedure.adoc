@@ -2,7 +2,7 @@
 permalink: maintain/rolling-reboot-procedure.html 
 sidebar: sidebar 
 keywords: reboot nodes, rolling reboot procedure 
-summary: ${post_edited_translations.segment} 
+summary: 您可以執行捲動重新開機，在不造成服務中斷的情況下重新開機多個網格節點。 
 ---
 = 執行 StorageGRID 滾動重新開機
 :allow-uri-read: 
@@ -11,37 +11,37 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以執行捲動重新開機，在不造成服務中斷的情況下重新開機多個網格節點。
 
 .開始之前
 * 您已登入主要 Admin 節點上的 Grid Manager，且您正在使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 您必須登入主要管理節點才能執行此程序。
 
 * 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
 
 
 .關於此任務
-如果您需要同時將多個節點重新開機，請使用此程序。例如，您可以在變更網格 link:../admin/manage-tls-ssh-policy.html["${post_edited_translations.segment}"] 的 FIPS 模式後使用此程序。當 FIPS 模式變更時，您必須將所有節點重新開機以使變更生效。
+如果您需要同時將多個節點重新開機，請使用此程序。例如，您可以在變更網格 link:../admin/manage-tls-ssh-policy.html["TLS 和 SSH 安全性原則"] 的 FIPS 模式後使用此程序。當 FIPS 模式變更時，您必須將所有節點重新開機以使變更生效。
 
 
-TIP: 如果您只需要將一個節點重新開機，您可以 link:../maintain/rebooting-grid-node-from-grid-manager.html["${post_edited_translations.segment}"]。
+TIP: 如果您只需要將一個節點重新開機，您可以 link:../maintain/rebooting-grid-node-from-grid-manager.html["從「任務」標籤重新開機節點"]。
 
 當 StorageGRID 重新開機網格節點時，它會在每個節點上發出  `reboot` 命令，這會導致節點關閉並重新啟動。所有服務都會自動重新啟動。
 
-* ${post_edited_translations.segment}
+* 重新開機 VMware 節點會重新開機虛擬機器。
 * 重新開機 Linux 節點會重新啟動 Container。
-* ${post_edited_translations.segment}
+* 重新開機 StorageGRID 應用裝置節點會重新開機運算控制器。
 
 
-${post_edited_translations.segment}
+滾動重新開機程式可以同時重新開機多個節點，但以下情況除外：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 同一類型的兩個節點不會同時重新開機。
+* 閘道節點和管理節點不會同時重新開機。
 
 
-${post_edited_translations.segment}
+相反，這些節點會依序重新開機，以確保 HA 群組、物件資料和關鍵節點服務始終可用。
 
 當您將主要 Admin 節點重新開機時，您的瀏覽器會暫時失去對 Grid Manager 的存取權，因此您無法再監控此程序。因此，主要 Admin 節點會最後重新開機。
 
@@ -55,23 +55,23 @@ ${post_edited_translations.segment}
 
 
 [[select-nodes]]
-=== ${post_edited_translations.segment}
+=== 選擇節點
 
-${post_edited_translations.segment}
+首先，存取 Rolling reboot 頁面，然後選取要重新開機的節點。
 
 .步驟
 . 選擇*維護* > *任務* > *滾動重新開機*。
-. ${post_edited_translations.segment}
+. 審查 *Node name* 欄中的連線狀態和警示圖示。
 +
 
-TIP: 如果節點與網格斷開連接，則無法重新啟動該節點。帶有以下圖示的節點的核取方塊將被停用：image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"] 或 image:icon_alarm_blue_unknown.png["藍色問號圖示"]。
+TIP: 如果節點與網格斷開連接，則無法重新啟動該節點。帶有以下圖示的節點的核取方塊將被停用：image:icon_alarm_gray_administratively_down.png["灰色問號圖示"] 或 image:icon_alarm_blue_unknown.png["藍色問號圖示"]。
 
 . 如果任何節點存在作用中警示，請審查 *警示摘要* 欄中的警示清單。
 +
 
-TIP: 若要查看節點的所有目前警示，您也可以選取 link:../monitor/viewing-overview-tab.html["${post_edited_translations.segment}"]。
+TIP: 若要查看節點的所有目前警示，您也可以選取 link:../monitor/viewing-overview-tab.html["節點 > 概覽標籤"]。
 
-. ${post_edited_translations.segment}
+. （可選）執行建議的動作，以解決任何目前的警示。
 . 或者，如果所有節點都已連接，且您想要重新開機所有節點，請選取表格標題中的核取方塊，然後選取 *全選*。否則，請選取您想要重新開機的每個節點。
 +
 您可以使用表格的篩選選項來檢視節點的子集。例如，您可以僅檢視並選取 Storage Nodes，或是特定站台上的所有節點。
@@ -82,14 +82,14 @@ TIP: 若要查看節點的所有目前警示，您也可以選取 link:../monito
 
 
 [[review-selection]]
-=== ${post_edited_translations.segment}
+=== 審查選擇
 
-${post_edited_translations.segment}
+在此步驟中，您可以確定整個重新開機程序可能需要多長時間，並確認您是否選擇了正確的節點。
 
 . 在「審查選擇」頁面上，審查摘要，其中指示將重新開機的節點數量以及所有節點重新開機的預計總時間。
-. ${post_edited_translations.segment}
+. （可選）若要從重新開機清單中移除特定節點，請選擇 *Remove*。
 . （可選）若要新增更多節點，請選擇 *Previous step*，選擇其他節點，然後選擇 *Review selection*。
-. ${post_edited_translations.segment}
+. 當您準備好對所有選定節點啟動滾動重新開機程序時，請選擇 *Reboot nodes*。
 . 如果您選擇重新開機主要管理節點，請閱讀資訊訊息，然後選取 *Yes*。
 +
 
@@ -100,28 +100,28 @@ NOTE: 主要 Admin 節點將是最後一個重新開機的節點。當此節點�
 
 
 [[monitor-a-rolling-reboot]]
-=== ${post_edited_translations.segment}
+=== 監控滾動重新開機
 
-${post_edited_translations.segment}
+在循環重新開機程序執行期間，您可以從主要管理節點監控該程序。
 
 .步驟
 . 審查作業的整體進度，其中包括以下資訊：
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 重新開機的節點數量
+** 正在重新開機的節點數量
 ** 待重新開機節點數量
 
 
 . 審查每種節點類型的表格。
 +
-${post_edited_translations.segment}
+表格提供每個節點上操作的進度列，並顯示該節點的重新開機階段，該階段可以是下列其中一種：
 
 +
 ** 等待重新開機
 ** 停止服務
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 重新開機系統
+** 開始服務
+** 重新開機完成
 
 
 
@@ -129,7 +129,7 @@ ${post_edited_translations.segment}
 
 
 [[stop-the-rolling-reboot-procedure]]
-== ${post_edited_translations.segment}
+== 停止滾動重新開機程序
 
 您可以從主要 Admin Node 停止輪流重新開機程序。當您停止程序時，任何狀態為「正在停止服務」、「正在重新開機系統」或「正在啟動服務」的節點都將完成重新開機作業。然而，這些節點將不再作為程序的一部分進行追蹤。
 

@@ -16,7 +16,7 @@ summary: 您必須了解套用 Hotfix 後 StorageGRID 系統將受到怎樣的�
 
 
 [[storagegrid-hotfixes-are-non-disruptive]]
-== ${post_edited_translations.segment}
+== StorageGRID Hotfix 不會造成中斷。
 
 StorageGRID 系統可以在 Hotfix 過程中從用戶端應用程式擷取和取得資料。如果您批准對所有相同類型的節點（例如，儲存節點）進行 Hotfix，則這些節點會逐一關閉，因此不會出現所有網格節點或特定類型的所有網格節點都無法使用的情況。
 
@@ -31,14 +31,14 @@ StorageGRID 系統可以在 Hotfix 過程中從用戶端應用程式擷取和取
 
 
 [[client-applications-might-experience-short-term-disruptions]]
-== ${post_edited_translations.segment}
+== 客戶端應用程式可能會出現短期中斷
 
 在整個 Hotfix 過程中，StorageGRID 系統可以從用戶端應用程式擷取和取回資料；但是，如果 Hotfix 需要重新啟動某些節點上的服務，則用戶端與個別 Gateway Node 或 Storage Node 的連線可能會暫時中斷。Hotfix 過程完成後，各節點上的服務恢復後，連線也將隨之恢復。
 
 如果短時間內的連線中斷不可接受，您可能需要安排停機來套用 Hotfix。您可以使用選擇性批准來安排特定節點的更新時間。
 
 
-NOTE: 您可以使用多個閘道和高可用度 （HA） 群組，以便在 Hotfix 過程中提供自動故障轉移。請參閱相關說明 link:../admin/configure-high-availability-group.html["${post_edited_translations.segment}"]。
+NOTE: 您可以使用多個閘道和高可用度 （HA） 群組，以便在 Hotfix 過程中提供自動故障轉移。請參閱相關說明 link:../admin/configure-high-availability-group.html["設定高可用度群組"]。
 
 
 
@@ -50,10 +50,10 @@ NOTE: 您可以使用多個閘道和高可用度 （HA） 群組，以便在 Hot
 
 
 [[configuration-changes-are-restricted]]
-== ${post_edited_translations.segment}
+== 組態變更受到限制
 
-${post_edited_translations.segment}
+將 Hotfix 套用至 StorageGRID 時：
 
-* ${post_edited_translations.segment}
+* 在 Hotfix 套用於所有節點之前，請勿進行任何網格組態變更（例如，指定 Grid Network 子網路或核准待處理的網格節點）。
 * 在 Hotfix 套用至所有節點之前，請勿更新 ILM 組態。
 

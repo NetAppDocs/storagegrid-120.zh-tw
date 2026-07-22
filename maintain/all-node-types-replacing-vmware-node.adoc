@@ -24,18 +24,18 @@ summary: 當您恢復託管在 VMware 上的故障 StorageGRID 節點時，您�
 .步驟
 . 登入 VMware vSphere Web Client。
 . 導覽至發生故障的網格節點虛擬機器。
-. ${post_edited_translations.segment}
+. 記下部署恢復節點所需的所有資訊。
 +
 .. 右鍵點選虛擬機器，選擇「編輯設定」索引標籤，並記下目前使用中的設定。
 .. 選取 *vApp 選項* 索引標籤，以檢視並記錄網格節點網路設定。
 
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 如果發生故障的網格節點是儲存節點，請確認用於資料儲存設備的虛擬硬碟是否未損壞，並保留這些虛擬硬碟以便重新連接至恢復的網格節點。
+. 關閉虛擬機器電源。
 . 選擇 *Actions* > *All vCenter Actions* > *Delete from Disk* 以刪除虛擬機器。
 . 部署一台新的虛擬機器作為取代節點，並將其連接到一個或多個 StorageGRID 網路。如需相關指示，請參閱 link:../swnodes/deploying-storagegrid-node-as-virtual-machine.html["將 StorageGRID 節點部署為虛擬機器"]。
 +
-${post_edited_translations.segment}
+部署節點時，您可以選擇重新對應節點連接埠或增加 CPU 或記憶體容量設定。
 
 +
 
@@ -45,20 +45,20 @@ NOTE: 部署新節點後，您可以根據儲存設備需求新增新的虛擬�
 +
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | 前往 
+| 節點類型 | 前往 
 
 
  a| 
 主管理節點
  a| 
-link:configuring-replacement-primary-admin-node.html["${post_edited_translations.segment}"]
+link:configuring-replacement-primary-admin-node.html["設定替換主要管理節點"]
 
 
 
  a| 
-${post_edited_translations.segment}
+非主要管理節點
  a| 
-link:selecting-start-recovery-to-configure-non-primary-admin-node.html["${post_edited_translations.segment}"]
+link:selecting-start-recovery-to-configure-non-primary-admin-node.html["選擇「開始恢復」以設定非主要管理節點"]
 
 
 

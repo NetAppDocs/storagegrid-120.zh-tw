@@ -15,7 +15,7 @@ summary: 此警示系統提供易於使用的介面，用於偵測、評估及�
 
 當警報規則條件評估為真時，系統會觸發特定嚴重程度的警報。警報觸發後，將執行以下操作：
 
-* ${post_edited_translations.segment}
+* 網格管理器的儀表板上會顯示警示嚴重性圖示，且目前警示的數量會遞增。
 * 警報顯示在「節點」摘要頁面和「節點」>「_node_」>「總覽」標籤上。
 * 假設您已設定 SMTP 伺服器並提供了收件者的電子郵件地址，則會傳送電子郵件通知。
 * 假設您已設定 StorageGRID SNMP 代理程式，則會傳送簡單網路管理協定 （SNMP） 通知。
@@ -23,14 +23,14 @@ summary: 此警示系統提供易於使用的介面，用於偵測、評估及�
 
 您可以建立自訂警報、編輯或停用警報以及管理警報通知。
 
-${post_edited_translations.segment}
+了解更多：
 
-* ${post_edited_translations.segment}
+* 觀看影片：
 +
-.${post_edited_translations.segment}
+.警報總覽
 video::2eea81c5-8323-417f-b0a0-b1ff008506c1[panopto]
 +
-.${post_edited_translations.segment}
+.自訂提醒
 video::54af90c4-9a38-4136-9621-b1ff008604a3[panopto]
-* 請參閱 link:alerts-reference.html["${post_edited_translations.segment}"]。
+* 請參閱 link:alerts-reference.html["警報參考"]。
 

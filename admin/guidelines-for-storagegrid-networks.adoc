@@ -2,7 +2,7 @@
 permalink: admin/guidelines-for-storagegrid-networks.html 
 sidebar: sidebar 
 keywords: admin network, client network, grid network, access interface, trunk interface 
-summary: ${post_edited_translations.segment} 
+summary: StorageGRID 每個網格節點最多支援三個網路介面，可讓您為每個個別的網格節點設定連網，以符合您的安全性和存取需求。 
 ---
 = StorageGRID 網路指南
 :allow-uri-read: 
@@ -11,18 +11,18 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以使用 Grid Manager 來設定和管理 StorageGRID 網路和連線。
 
-請參閱 link:configuring-client-connections.html["${post_edited_translations.segment}"] 以了解如何連接 S3 用戶端。
+請參閱 link:configuring-client-connections.html["設定 S3 用戶端連線"] 以了解如何連接 S3 用戶端。
 
 
 
 [[default-storagegrid-networks]]
 == 預設 StorageGRID 網路
 
-${post_edited_translations.segment}
+根據預設，StorageGRID 每個網格節點支援三個網路介面，可讓您為每個個別的網格節點設定連網，以符合您的安全性和存取需求。
 
-如需網路拓撲的詳細資訊，請參閱 link:../network/index.html["${post_edited_translations.segment}"]。
+如需網路拓撲的詳細資訊，請參閱 link:../network/index.html["網路連線準則"]。
 
 
 
@@ -34,7 +34,7 @@ ${post_edited_translations.segment}
 
 
 [[admin-network]]
-=== ${post_edited_translations.segment}
+=== 管理網路
 
 選用。Admin Network 通常用於系統管理和維護。它也可以用於用戶端傳輸協定存取。Admin Network 通常是私有網路，不需要在站台之間進行路由。
 
@@ -51,31 +51,31 @@ ${post_edited_translations.segment}
 == 準則
 
 * 每個 StorageGRID 節點都需要一個專用的網路介面、IP 位址、子網路遮罩和閘道，才能連接到它所分配的每個網路。
-* ${post_edited_translations.segment}
+* 一個網格節點在網路上只能有一個介面。
 * 每個網路、每個網格節點僅支援單一閘道，且該閘道必須與節點位於相同的子網路。如有需要，您可以在閘道中實作更複雜的路由。
-* ${post_edited_translations.segment}
+* 在每個節點上，每個網路都會對應到一個特定的網路介面。
 +
 [cols="1a,1a"]
 |===
-| 網路 | ${post_edited_translations.segment} 
+| 網路 | 介面名稱 
 
 
  a| 
-${post_edited_translations.segment}
+網格
  a| 
 eth0
 
 
 
  a| 
-${post_edited_translations.segment}
+管理員（選用）
  a| 
 eth1
 
 
 
  a| 
-${post_edited_translations.segment}
+用戶端（選用）
  a| 
 eth2
 
@@ -83,7 +83,7 @@ eth2
 * 如果節點已連線至 StorageGRID 應用裝置，則每個網路都會使用特定的連接埠。如需詳細資訊，請參閱您應用裝置的安裝說明。
 * 預設路由是針對每個節點自動產生的。如果已啟用 eth2，則 0.0.0.0/0 會使用 eth2 上的用戶端網路。如果未啟用 eth2，則 0.0.0.0/0 會使用 eth0 上的網格網路。
 * 只有當網格節點加入網格後，用戶端網路才能開始運作。
-* ${post_edited_translations.segment}
+* 在網格節點部署期間可以設定管理網路，以便在網格完全安裝之前存取安裝使用者介面。
 
 
 
@@ -91,14 +91,14 @@ eth2
 [[optional-interfaces]]
 == 選用介面
 
-您可以選擇性地向節點新增額外的介面。例如，您可以向管理節點或閘道節點新增一個中繼介面，以便使用link:../admin/configure-vlan-interfaces.html["VLAN 介面"]隔離屬於不同應用程式或租戶的流量。或者，您可以新增一個存取介面以在link:../admin/configure-high-availability-group.html["${post_edited_translations.segment}"]中使用。
+您可以選擇性地向節點新增額外的介面。例如，您可以向管理節點或閘道節點新增一個中繼介面，以便使用link:../admin/configure-vlan-interfaces.html["VLAN 介面"]隔離屬於不同應用程式或租戶的流量。或者，您可以新增一個存取介面以在link:../admin/configure-high-availability-group.html["高可用度 （HA） 群組"]中使用。
 
 若要新增主幹或存取介面，請參閱以下內容：
 
-* *VMware（節點安裝完成後）*：link:../maintain/vmware-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+* *VMware（節點安裝完成後）*：link:../maintain/vmware-adding-trunk-or-access-interfaces-to-node.html["VMware：為節點新增中繼或存取介面"]
 +
 ** *Linux （安裝節點之前）*: link:../swnodes/creating-node-configuration-files.html["建立節點組態檔"]
-** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["向節點新增幹線或存取介面"]
 
 
 

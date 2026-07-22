@@ -18,7 +18,7 @@ NOTE: 如果您的 StorageGRID 系統啟用了單一登入 （SSO），則本機
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
-* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 您屬於一個擁有 link:tenant-management-permissions.html["根目錄存取權限"] 的使用者群組。
 * 如果您的租戶帳戶具有「使用網格聯合連線」權限，您已查看link:grid-federation-account-clone.html["Clone 租戶群組和使用者"]的工作流程和注意事項，並且您已登入租戶的來源網格。
 
 
@@ -162,7 +162,7 @@ image:grid-federation-tenant-user-banner.png["如果這是租戶來源網格，�
 
 . 視需要編輯使用者設定。請參閱 <<create-user,建立本機使用者>> 以取得輸入內容的詳細資訊。
 +
-.. 在「概覽」部分，選擇名稱或編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"] 即可變更全名。
+.. 在「概覽」部分，選擇名稱或編輯圖示 image:icon_edit_tm.png["編輯圖示"] 即可變更全名。
 +
 您無法變更使用者名稱。
 
@@ -253,7 +253,7 @@ NOTE: 您必須使用同盟身分識別來源來刪除同盟使用者。
 . 選取要刪除的每個使用者的核取方塊。
 . 選擇 *Actions* > *Delete user* 或 *Actions* > *Delete users*。
 +
-${post_edited_translations.segment}
+出現確認對話框。
 
 . 選擇 *Delete user* 或 *Delete users*。
 

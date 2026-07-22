@@ -2,7 +2,7 @@
 permalink: maintain/selecting-start-recovery-to-configure-non-primary-admin-node.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, non-primary admin node 
-summary: ${post_edited_translations.segment} 
+summary: 替換非主要管理節點後，必須在 Grid Manager 中選擇「開始恢復」，將新節點設定為故障節點的替代節點。 
 ---
 = 選擇 Start Recovery 以設定非主要 StorageGRID Admin Node
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+替換非主要管理節點後，必須在 Grid Manager 中選擇「開始恢復」，將新節點設定為故障節點的替代節點。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
@@ -22,22 +22,22 @@ ${post_edited_translations.segment}
 
 .步驟
 . 從 Grid Manager 中，選擇 *Maintenance* > *Tasks* > *Recovery*。
-. ${post_edited_translations.segment}
+. 在「待恢復節點」清單中選擇要恢復的網格節點。
 +
-${post_edited_translations.segment}
+節點發生故障後會出現在清單中，但只有在節點重新安裝並準備好恢復後才能選擇該節點。
 
 . 請輸入*佈建密碼*。
-. ${post_edited_translations.segment}
+. 點選 *Start Recovery*。
 +
 image:4b_select_recovery_node.png["螢幕截圖顯示「維護 > 恢復」頁面"]
 
-. ${post_edited_translations.segment}
+. 在「正在恢復的網格節點」表中監控恢復進度。
 +
 
 NOTE: 恢復程序執行時，您可以按一下 *Reset* 以開始新的恢復。此時會出現一個對話方塊，提示若您重設程序，節點將處於不確定狀態。
 
 +
-image:recovery_reset_warning.gif["${post_edited_translations.segment}"]
+image:recovery_reset_warning.gif["快照顯示重設恢復警告對話框"]
 
 +
 如果您想在重置程序後重試恢復，則必須將節點還原至預先安裝狀態，如下所示：
@@ -45,7 +45,7 @@ image:recovery_reset_warning.gif["${post_edited_translations.segment}"]
 +
 ** *VMware*：刪除已部署的虛擬網格節點。然後，當您準備好重新啟動恢復時，請重新部署該節點。
 ** *Linux*：在 Linux 主機上執行此命令以重新啟動節點： `storagegrid node force-recovery _node-name_`
-** *應用裝置*：如果在重置流程後想要重試恢復，則必須透過在節點上執行 `sgareinstall`，將應用裝置節點還原至預安裝狀態。請參閱link:preparing-appliance-for-reinstallation-platform-replacement-only.html["${post_edited_translations.segment}"]。
+** *應用裝置*：如果在重置流程後想要重試恢復，則必須透過在節點上執行 `sgareinstall`，將應用裝置節點還原至預安裝狀態。請參閱link:preparing-appliance-for-reinstallation-platform-replacement-only.html["準備應用裝置進行重新安裝（僅限平台更換）"]。
 
 
 . 如果您的 StorageGRID 系統已啟用單一登入 （SSO），且您所恢復的管理節點的信賴方信任已設定為使用預設管理介面憑證，請在 Active Directory Federation Services （AD FS） 中更新（或刪除並重新建立）該節點的信賴方信任。使用在管理節點恢復程序期間產生的新預設伺服器憑證。

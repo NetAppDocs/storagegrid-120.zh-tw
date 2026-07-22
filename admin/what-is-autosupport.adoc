@@ -34,7 +34,7 @@ Active IQ 是一款雲端型數位顧問，利用預測分析和 NetApp 安裝�
 
 如果您想在 NetApp 支援網站上使用 Active IQ 儀表板和功能，則必須啟用 AutoSupport。
 
-https://docs.netapp.com/us-en/active-iq/index.html["${post_edited_translations.segment}"^]
+https://docs.netapp.com/us-en/active-iq/index.html["Active IQ Digital Advisor 說明文件"^]
 
 
 
@@ -58,7 +58,7 @@ AutoSupport 歷史檔案。
 
 
  a| 
-${post_edited_translations.segment}
+AUTOSUPPORT.XML
  a| 
 節點 + 聯絡技術支援的協定 + HTTP/HTTPS 的技術支援 URL + 技術支援地址 + AutoSupport OnDemand 狀態 + AutoSupport OnDemand 伺服器 URL + AutoSupport OnDemand 輪詢間隔
  a| 
@@ -69,18 +69,18 @@ AutoSupport 狀態檔案。提供所用協定、技術支援 URL 和地址、輪
  a| 
 BUCKETS.XML
  a| 
-${post_edited_translations.segment}
+儲存桶 ID + 帳戶 ID + 建置版本 + 位置約束設定 + 已啟用合規性 + 合規性設定 + 已啟用 S3 物件鎖定 + S3 物件鎖定設定 + 一致性設定 + 已啟用 CORS + CORS 設定 + 已啟用上次存取時間 + 已啟用原則 + 原則設定 + 已啟用通知 + 通知設定 + 已啟用 Cloud Mirror + Cloud Mirror 設定 + 已啟用搜尋 + 搜尋設定 + 已啟用儲存桶標記 + 儲存桶標記設定 + 版本控制設定
  a| 
 提供 Bucket 層級的組態詳細資料與統計資料。Bucket 組態的範例包括平台服務、法規遵循和 Bucket 一致性。
 
 
 
  a| 
-${post_edited_translations.segment}
+GRID-CONFIGURATIONS.XML
  a| 
-${post_edited_translations.segment}
+屬性 ID + 屬性名稱 + 值 + 索引 + 表格 ID + 表格名稱
  a| 
-整個網格的組態資訊檔案。包含關於網格憑證、中繼資料保留空間、整個網格的組態設定（法規遵循、S3 Object Lock、物件壓縮、警示、syslog 及 ILM 組態）、糾刪碼設定檔詳細資料、DNS 名稱以及 link:../primer/nodes-and-services.html#storagegrid-services["${post_edited_translations.segment}"] 的資訊。
+整個網格的組態資訊檔案。包含關於網格憑證、中繼資料保留空間、整個網格的組態設定（法規遵循、S3 Object Lock、物件壓縮、警示、syslog 及 ILM 組態）、糾刪碼設定檔詳細資料、DNS 名稱以及 link:../primer/nodes-and-services.html#storagegrid-services["NMS 名稱"] 的資訊。
 
 
 
@@ -94,7 +94,7 @@ GRID-SPEC.XML
 
 
  a| 
-${post_edited_translations.segment}
+GRID-TASKS.XML
  a| 
 節點 + 服務路徑 + 屬性 ID + 屬性名稱 + 值 + 索引 + 表格 ID + 表格名稱
  a| 
@@ -103,25 +103,25 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+GRID.JSON
  a| 
-${post_edited_translations.segment}
+網格 + 修訂 + 軟體版本 + 說明 + 授權 + 密碼 + DNS + NTP + 站台 + 節點
  a| 
 網格資訊。
 
 
 
  a| 
-${post_edited_translations.segment}
+ILM-CONFIGURATION.XML
  a| 
-${post_edited_translations.segment}
+屬性 ID + 屬性名稱 + 值 + 索引 + 表格 ID + 表格名稱
  a| 
-${post_edited_translations.segment}
+ILM 設定的屬性清單。
 
 
 
  a| 
-${post_edited_translations.segment}
+ILM-STATUS.XML
  a| 
 節點 + 服務路徑 + 屬性 ID + 屬性名稱 + 值 + 索引 + 表格 ID + 表格名稱
  a| 
@@ -148,7 +148,7 @@ _n/a_
 
 
  a| 
-${post_edited_translations.segment}
+MANIFEST.XML
  a| 
 收集順序 + 此資料的 AutoSupport 內容檔名 + 此資料項目的執行摘要 + 收集的位元組數 + 收集花費的時間 + 此資料項目的狀態 + 錯誤的執行摘要 + 此資料的 AutoSupport 內容類型 +
  a| 
@@ -166,7 +166,7 @@ link:../primer/nodes-and-services.html#storagegrid-services["NMS 樹"] 中的群
 
 
  a| 
-${post_edited_translations.segment}
+OBJECTS-STATUS.XML
  a| 
 節點 + 服務路徑 + 屬性 ID + 屬性名稱 + 值 + 索引 + 表格 ID + 表格名稱
  a| 
@@ -204,14 +204,14 @@ STORAGE-GRADES.XML
  a| 
 SUMMARY-ATTRIBUTES.XML
  a| 
-${post_edited_translations.segment}
+群組 OID + 群組路徑 + 摘要屬性 ID + 摘要屬性名稱 + 值 + 索引 + 表格 ID + 表格名稱
  a| 
 匯總 StorageGRID 使用資訊的進階系統狀態資料。提供諸如網格名稱、站點名稱、每個網格和每個站點的儲存節點數、授權類型、授權容量和使用情況、軟體支援條款以及 S3 作業詳情等詳細資訊。
 
 
 
  a| 
-${post_edited_translations.segment}
+SYSTEM-ALERTS.XML
  a| 
 名稱 + 嚴重性 + 節點名稱 + 警示狀態 + 站台名稱 + 警示觸發時間 + 警示解決時間 + 規則 ID + 節點 ID + 站台 ID + 已靜默 + 其他附註 + 其他標籤
  a| 
@@ -222,7 +222,7 @@ ${post_edited_translations.segment}
  a| 
 USERAGENTS.XML
  a| 
-${post_edited_translations.segment}
+使用者代理程式 + 天數 + HTTP 請求總數 + 接收的總位元組數 + 擷取的總位元組數 + PUT 請求數 + GET 請求數 + DELETE 請求數 + HEAD 請求數 + POST 請求數 + OPTIONS 請求數 + 平均請求時間（毫秒） + 平均 PUT 請求時間（毫秒） + 平均 GET 請求時間（毫秒） + 平均 DELETE 請求時間（毫秒） + 平均 HEAD 請求時間（毫秒） + 平均 POST 請求時間（毫秒） + 平均 OPTIONS 請求時間（毫秒）
  a| 
 基於應用程式使用者代理程式的統計資料。例如，每個使用者代理程式的 PUT/GET/DELETE/HEAD 操作次數以及每次操作的總位元組大小。
 

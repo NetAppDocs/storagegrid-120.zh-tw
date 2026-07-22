@@ -26,7 +26,7 @@ summary: '如果單一登入 (SSO) 系統發生故障，您可能無法登入 Gr
 TIP: 停用單一 Admin Node 的 SSO 並不會影響網格中任何其他 Admin Node 的 SSO 設定。Grid Manager 中「單一登入」頁面上的「*啟用 SSO*」核取方塊仍會保持選取狀態，且所有現有的 SSO 設定都會保留，除非您對其進行更新。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入管理節點：
 +
 .. 輸入以下命令： `ssh admin@Admin_Node_IP`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -39,42 +39,42 @@ TIP: 停用單一 Admin Node 的 SSO 並不會影響網格中任何其他 Admin 
 
 . 執行下列命令：``disable-saml``
 +
-${post_edited_translations.segment}
+訊息提示該命令僅適用於此管理節點。
 
-. ${post_edited_translations.segment}
+. 確認是否要停用單一登入。
 +
-${post_edited_translations.segment}
+一則訊息表示該節點上的單一登入已停用。
 
 . 透過網頁瀏覽器，存取同一管理節點上的 Grid Manager。
 +
 由於 SSO 已停用，現在將顯示 Grid Manager 登入頁面。
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 使用使用者名稱 root 和本機 root 使用者的密碼登入。
+. 如果您因為需要更正 SSO 組態而暫時停用了 SSO：
 +
 .. 選擇 *Configuration* > *Access control* > *Single sign-on*。
-.. ${post_edited_translations.segment}
+.. 更改錯誤或過時的 SSO 設定。
 .. 選取 *Save* 。
 +
-${post_edited_translations.segment}
+從單一登入頁面選擇「儲存」會自動重新啟用整個網格的 SSO。
 
 
 
 . 如果您因為需要存取 Grid Manager 而暫時停用了 SSO：
 +
 .. 執行您需要執行的任何工作。
-.. ${post_edited_translations.segment}
+.. 選擇*登出*，然後關閉 Grid Manager。
 .. 在 Admin 節點上重新啟用 SSO。您可以執行下列任一步驟：
 +
 *** 執行下列命令： `enable-saml`
 +
-${post_edited_translations.segment}
+訊息提示該命令僅適用於此管理節點。
 
 +
-${post_edited_translations.segment}
+確認是否要啟用單一登入 (SSO)。
 
 +
-${post_edited_translations.segment}
+訊息表示該節點已啟用單一登入。
 
 *** 重啟網格節點： `reboot`
 

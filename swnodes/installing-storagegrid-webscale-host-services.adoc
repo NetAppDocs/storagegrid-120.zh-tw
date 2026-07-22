@@ -52,7 +52,7 @@ NOTE: 如果您將軟體包放在 `/tmp`以外的目錄中，請修改命令以�
 
 
 --
-.${post_edited_translations.segment}
+.Ubuntu 或 Debian
 --
 您可以使用 StorageGRID DEB 套件為 Ubuntu 或 Debian 安裝 StorageGRID 主機服務。
 

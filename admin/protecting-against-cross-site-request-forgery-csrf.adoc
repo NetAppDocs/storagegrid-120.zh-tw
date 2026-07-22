@@ -13,7 +13,7 @@ summary: 您可以使用 CSRF 權杖來增強使用 cookie 的驗證，進而協
 [role="lead"]
 您可以使用 CSRF 令牌來增強基於 Cookie 的驗證，從而協助 StorageGRID 防範跨站請求偽造 （CSRF） 攻擊。Grid Manager 和 Tenant Manager 會自動啟用此安全性功能；其他 API 用戶端可以在登入時選擇是否啟用此功能。
 
-${post_edited_translations.segment}
+攻擊者可以觸發向其他站台發出的請求（例如使用 HTTP 表單 POST），從而利用已登入使用者的 Cookie 發出某些請求。
 
 StorageGRID 透過使用 CSRF 令牌來協助防範 CSRF 攻擊。啟用此功能後，特定 Cookie 的內容必須與特定標頭或特定 POST 請求體參數的內容相符。
 
@@ -30,13 +30,13 @@ curl -X POST --header "Content-Type: application/json" --header "Accept: applica
 ----
 設為 true 時，系統會為登入 Grid Manager 的作業設定具有隨機值的  `GridCsrfToken` Cookie，並為登入 Tenant Manager 的作業設定具有隨機值的  `AccountCsrfToken` Cookie。
 
-${post_edited_translations.segment}
+如果存在 Cookie，則所有可以修改系統狀態的請求（POST、PUT、PATCH、DELETE）必須包含下列內容之一：
 
 * 此 `X-Csrf-Token`標頭，且標頭的值設定為 CSRF token Cookie 的值。
 * 對於接受表單編碼主體的端點：A `csrfToken` 表單編碼的要求主體參數。
 
 
-${post_edited_translations.segment}
+有關更多範例和詳細資訊，請參閱線上 API 文件。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 設定了 CSRF 權杖 Cookie 的請求，也會針對任何需要 JSON 請求本文的請求強制執行「Content-Type: application/json」標頭，以提供對 CSRF 攻擊的額外保護。

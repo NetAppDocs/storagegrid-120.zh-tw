@@ -20,7 +20,7 @@ summary: 您可以使用 Grid Manager 還原故障儲存 Volume 或儲存節點�
 ** link:../maintain/remounting-and-reformatting-storage-volumes-manual-steps.html["重新掛載並重新格式化儲存設備 Volume （手動步驟）"]
 
 
-* 您已確認，在 Grid Manager 的 *Nodes* > *Overview* 標籤中，您正在還原物件的儲存節點的連線狀態為 *Connected* image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]。
+* 您已確認，在 Grid Manager 的 *Nodes* > *Overview* 標籤中，您正在還原物件的儲存節點的連線狀態為 *Connected* image:icon_alert_green_checkmark.png["圖示提示綠色對勾"]。
 * 您已確認以下內容：
 +
 ** 目前沒有進行增加儲存節點的網格擴充計畫。
@@ -41,11 +41,11 @@ summary: 您可以使用 Grid Manager 還原故障儲存 Volume 或儲存節點�
 * 如果 Volume 列在「維護」>「Volume 還原」>「要還原的節點」中，請依照下列步驟還原物件資料。Volume 將在以下情況下列出：
 +
 ** 節點中的部分儲存設備 Volume（但並非全部）發生故障
-** ${post_edited_translations.segment}
+** 節點中的所有儲存設備 Volume 均已發生故障，正在以相同數量或更多 Volume 進行替換。
 
 
 +
-網格管理器中的 Volume 還原頁面也可讓您 <<view-restoration-progress,${post_edited_translations.segment}>> 和 <<view-restoration-history,${post_edited_translations.segment}>>。
+網格管理器中的 Volume 還原頁面也可讓您 <<view-restoration-progress,監控 Volume 還原程序>> 和 <<view-restoration-history,檢視還原歷史>>。
 
 * 如果 Volume 未在 Grid Manager 中列為可還原的候選 Volume，請依照使用 `repair-data`指令碼還原物件資料的相應步驟進行操作：
 +
@@ -54,7 +54,7 @@ summary: 您可以使用 Grid Manager 還原故障儲存 Volume 或儲存節點�
 ** link:restoring-object-data-to-storage-volume-for-appliance.html["將物件資料還原至應用裝置的儲存設備 Volume"]
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。
 
 
 
@@ -63,11 +63,11 @@ NOTE: ${post_edited_translations.segment}
 
 
 
-${post_edited_translations.segment}
+您可以還原兩種類型的物件資料：
 
 * 複製的資料物件將從其他位置還原，前提是網格的 ILM 規則已設定為提供物件複本。
 +
-** ${post_edited_translations.segment}
+** 如果 ILM 規則設定為僅儲存一個複寫複本，而該複本存在於發生故障的儲存設備 Volume 上，則您將無法恢復該物件。
 ** 如果物件的唯一剩餘複本位於雲端儲存池中，StorageGRID 必須向雲端儲存池端點發出多個請求才能還原物件資料。
 
 
@@ -101,30 +101,30 @@ NOTE: Volume 還原取決於儲存物件複本的資源可用度。Volume 還原
 
 
 ====
-. ${post_edited_translations.segment}
+. 當您了解啟用自動還原模式的結果後，請在確認對話方塊中選擇 *Yes*。
 +
-${post_edited_translations.segment}
+您可以隨時停用自動還原模式。
 
 
 
 
 
 [[manually-restoremanually-restore-failed-volume-or-node]]
-== ${post_edited_translations.segment}
+== 手動還原故障 Volume 或節點
 
 請依照下列步驟還原故障的 Volume 或節點。
 
 .步驟
 . 在 Grid Manager 中，前往 *Maintenance* > *Volume restoration*。
-. ${post_edited_translations.segment}
+. 選取「要還原的節點」索引標籤，然後將「自動還原模式」的切換開關滑動至停用位置。
 +
-${post_edited_translations.segment}
+標籤頁上的數字表示含有需要還原之 Volume 的節點數量。
 
-. ${post_edited_translations.segment}
+. 展開每個節點，查看其中需要還原的 Volume 及其狀態。
 . 解決任何阻止還原各 Volume 的問題。如果 Volume 狀態顯示為「等待手動步驟」，選取該選項後會顯示問題所在。
 . 選擇要還原的節點，該節點上的所有 Volume 都顯示為「準備還原」狀態。
 +
-${post_edited_translations.segment}
+一次只能還原一個節點的 Volume。
 
 +
 節點中的每個 Volume 都必須表明它已準備好還原。
@@ -140,21 +140,21 @@ ${post_edited_translations.segment}
 
 
 [[view-restoration-progressview-restoration-progress]]
-== ${post_edited_translations.segment}
+== 檢視還原進度
 
-${post_edited_translations.segment}
+「恢復進度」標籤顯示 Volume 還原程序的狀態，以及正在還原之節點的 Volume 相關資訊。
 
 所有 Volume 中複寫和糾刪碼物件的資料修理率，是摘要所有進行中還原的平均值，包括使用  `repair-data` 指令碼所啟動的還原。同時也會指出這些 Volume 中完好無損且不需要還原的物件百分比。
 
 
 NOTE: 複寫資料還原取決於儲存複寫複本之處的資源可用度。複寫資料還原的進度是非線性的，且可能需要數天或數週才能完成。
 
-${post_edited_translations.segment}
+「還原工作」部分顯示有關從 Grid Manager 啟動的 Volume 還原的資訊。
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 「恢復作業」部分標題中的數字表示正在恢復或已排隊等待恢復的 Volume 數量。
+* 此表格顯示正在還原的節點中每個 Volume 的資訊及其還原進度。
 +
-** ${post_edited_translations.segment}
+** 每個節點的進度顯示每個任務的完成百分比。
 ** 展開「詳細資料」欄，顯示還原開始時間和作業 ID。
 
 
@@ -170,9 +170,9 @@ ${post_edited_translations.segment}
 
 
 [[view-restoration-historyview-restoration-history]]
-== ${post_edited_translations.segment}
+== 檢視還原歷史記錄
 
-${post_edited_translations.segment}
+「還原歷史記錄」索引標籤顯示所有已成功完成的 Volume 還原資訊。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 大小不適用於複寫物件，且僅出現在包含銷除編碼 （EC） 資料物件的還原中。

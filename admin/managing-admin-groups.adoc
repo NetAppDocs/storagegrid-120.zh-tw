@@ -29,17 +29,17 @@ summary: 您可以建立管理員群組來管理一個或多個管理員使用�
 
 
 [[access-the-wizard]]
-=== ${post_edited_translations.segment}
+=== 存取精靈
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Access control* > *Admin groups*。
+. 選擇 *Create group*。
 
 
 
 
 [[choose-a-group-type]]
-=== ${post_edited_translations.segment}
+=== 選擇群組類型
 
 您可以建立本機群組或匯入聯合群組。
 
@@ -59,10 +59,10 @@ summary: 您可以建立管理員群組來管理一個或多個管理員使用�
 
 
 --
-.${post_edited_translations.segment}
+.聯合群組
 --
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Federated group*。
 . 請輸入要匯入的群組名稱，務必與已設定的身分識別來源中顯示的名稱完全一致。
 +
 ** 對於 Active Directory 和 Microsoft Entra ID，請使用 sAMAccountName。
@@ -78,12 +78,12 @@ summary: 您可以建立管理員群組來管理一個或多個管理員使用�
 
 
 [[manage-group-permissions]]
-=== ${post_edited_translations.segment}
+=== 管理群組權限
 
 .步驟
 . 對於*存取模式*，選擇群組中的使用者是否可以變更 Grid Manager 和 Grid Management API 中的設定並執行操作，或者他們是否只能檢視設定和功能。
 +
-** ${post_edited_translations.segment}
+** *讀寫*（預設）：使用者可以變更設定並執行其管理權限所允許的操作。
 ** *唯讀*：使用者只能檢視設定和功能。無法對 Grid Manager 或 Grid Management API 進行任何變更或執行任何操作。本機唯讀使用者可以變更自己的密碼。
 +
 
@@ -93,7 +93,7 @@ NOTE: 如果使用者屬於多個群組，且其中任何一個群組設定為*�
 
 . 選取一或多個 link:admin-group-permissions.html["管理員群組權限"]。
 +
-${post_edited_translations.segment}
+您必須為每個群組指派至少一個權限；否則，屬於該群組的使用者將無法登入 StorageGRID。
 
 . 如果要建立本機群組，請選擇「繼續」。如果要建立聯合群組，請選擇「建立群組」和「完成」。
 
@@ -104,11 +104,11 @@ ${post_edited_translations.segment}
 === 新增使用者（僅限本地群組）
 
 .步驟
-. ${post_edited_translations.segment}
+. （可選）為該群組選擇一個或多個本機使用者。
 +
 如果您尚未建立本機使用者，則可以在不新增使用者的情況下儲存該群組。您可以在「使用者」頁面上將此群組新增至使用者。如需詳細資訊、請參閱 link:managing-users.html["管理使用者"]。
 
-. ${post_edited_translations.segment}
+. 選擇 *Create group* 和 *Finish*。
 
 
 
@@ -129,7 +129,7 @@ ${post_edited_translations.segment}
  a| 
 檢視群組詳細資料
  a| 
-.. ${post_edited_translations.segment}
+.. 選取群組的核取方塊。
 .. 選取 *Actions* > *View group details*。
 
  a| 
@@ -140,14 +140,14 @@ ${post_edited_translations.segment}
  a| 
 編輯顯示名稱（僅限本機群組）
  a| 
-.. ${post_edited_translations.segment}
+.. 選取群組的核取方塊。
 .. 選擇 *Actions* > *Edit group name*。
 .. 請輸入新名稱。
 .. 選擇 *Save changes* 。
 
  a| 
 .. 選擇群組名稱以顯示詳細資訊。
-.. 選擇編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"]。
+.. 選擇編輯圖示 image:icon_edit_tm.png["編輯圖示"]。
 .. 請輸入新名稱。
 .. 選擇 *Save changes* 。
 
@@ -157,15 +157,15 @@ ${post_edited_translations.segment}
  a| 
 編輯存取模式或權限
  a| 
-.. ${post_edited_translations.segment}
+.. 選取群組的核取方塊。
 .. 選取 *Actions* > *View group details*。
-.. ${post_edited_translations.segment}
+.. （可選）變更群組的存取模式。
 .. （可選）選擇或清除 link:admin-group-permissions.html["管理員群組權限"]。
 .. 選擇 *Save changes* 。
 
  a| 
 .. 選擇群組名稱以顯示詳細資訊。
-.. ${post_edited_translations.segment}
+.. （可選）變更群組的存取模式。
 .. （可選）選擇或清除 link:admin-group-permissions.html["管理員群組權限"]。
 .. 選擇 *Save changes* 。
 
@@ -179,9 +179,9 @@ ${post_edited_translations.segment}
 == 複製群組
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選取群組的核取方塊。
+. 選取 *Actions* > *Duplicate group*。
+. 完成複製群組精靈。
 
 
 
@@ -193,6 +193,6 @@ ${post_edited_translations.segment}
 
 .步驟
 . 在「群組」頁面中，選取要移除的每個群組的核取方塊。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Actions* > *Delete group*。
+. 選擇 *Delete groups*。
 

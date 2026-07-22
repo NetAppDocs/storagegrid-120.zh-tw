@@ -2,7 +2,7 @@
 permalink: audit/audit-log-file-format.html 
 sidebar: sidebar 
 keywords: storagegrid, audit, log file formats, log formats, log file format, log format 
-summary: ${post_edited_translations.segment} 
+summary: 稽核日誌檔案存在於每個管理節點上，其中包含一系列個別的稽核訊息。 
 ---
 = 了解 StorageGRID 中稽核記錄檔的格式
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+稽核日誌檔案存在於每個管理節點上，其中包含一系列個別的稽核訊息。
 
 每個稽核訊息都包含以下內容：
 

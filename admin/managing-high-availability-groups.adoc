@@ -30,10 +30,10 @@ summary: 高可用度 （HA） 群組為 S3 用戶端提供高可用度的資料
 . 您可以為一個或多個管理節點或閘道節點選擇網路介面。您可以使用 Grid Network （eth0） 介面、Client Network （eth2） 介面、VLAN 介面或您已新增至節點的存取介面。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果介面具有 DHCP 指派的 IP 位址，則無法將其新增至 HA 群組。
 
 . 您可以將一個介面指定為主要介面。除非發生故障，否則主要介面為作用中介面。
-. ${post_edited_translations.segment}
+. 您可以自行決定所有備份介面的優先順序。
 . 您可以為該群組指派 1 到 10 個虛擬 IP （VIP） 位址。用戶端應用程式可以使用這些 VIP 位址中的任何一個連線至 StorageGRID。
 
 
@@ -51,19 +51,19 @@ NOTE: ${post_edited_translations.segment}
 
 
 [[view-the-current-ha-group-status-of-a-node]]
-== ${post_edited_translations.segment}
+== 查看節點的目前 HA 群組狀態
 
-${post_edited_translations.segment}
+若要查看節點是否已指派給 HA 群組並確定其目前狀態，請選擇 *Nodes* > *_node_*。
 
 如果「概覽」標籤包含「HA 群組」條目，則表示該節點已指派到所列的 HA 群組。群組名稱後面的值表示該節點在 HA 群組中的目前狀態：
 
 * *Active*：HA 群組目前託管在此節點上。
 * *備份*：HA 群組目前未使用此節點；這是一個備份介面。
 * *已停止*：由於高可用度（keepalived）服務已手動停止，因此無法在此節點上託管 HA 群組。
-* ${post_edited_translations.segment}
+* *故障*：由於以下一個或多個原因，HA 群組無法在此節點上託管：
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 節點上未執行負載平衡器 (nginx-gw) 服務。
+** 節點的 eth0 或 VIP 介面已關閉。
 ** 節點已關閉。
 
 
@@ -76,22 +76,22 @@ image:ha_group_primary_interface.png["HA 群組主要介面"]
 
 
 [[what-happens-when-the-active-interface-fails]]
-== ${post_edited_translations.segment}
+== 當作用中介面發生故障時會發生什麼？
 
 目前裝載 VIP 位址的介面即為作用中介面。如果 HA 群組包含多個介面，且作用中介面發生故障，則 VIP 位址會依優先順序移至第一個可用的備份介面。如果該介面發生故障，則 VIP 位址會移至下一個可用的備份介面，依此類推。
 
-${post_edited_translations.segment}
+以下任何原因都可能觸發故障轉移：
 
 * 設定該介面的節點發生故障。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 設定了該介面的節點與所有其他節點失去連線至少 2 分鐘。
+* 作用中的介面出現故障。
+* 負載平衡器服務已停止。
 * 高可用度服務停止運作。
 
 
 
 NOTE: 裝載作用中介面的節點外部若發生網路故障，可能不會觸發容錯移轉。同樣地，Grid Manager 或 Tenant Manager 的服務也不會觸發容錯移轉。
 
-${post_edited_translations.segment}
+故障轉移程序通常只需幾秒鐘，速度足夠快，用戶端應用程式受到的影響很小，可以依靠正常的重試行為繼續運作。
 
-${post_edited_translations.segment}
+當故障解決且更高優先權的介面再次可用時，VIP 位址會自動移至可用的最高優先權介面。

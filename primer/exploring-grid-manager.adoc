@@ -2,7 +2,7 @@
 permalink: primer/exploring-grid-manager.html 
 sidebar: sidebar 
 keywords: StorageGRID, what is the grid manager, grid manager dashboard 
-summary: ${post_edited_translations.segment} 
+summary: Grid Manager 是瀏覽器型圖形介面，可讓您設定、管理及監控 StorageGRID 系統。 
 ---
 = 探索 StorageGRID Grid Manager
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+Grid Manager 是瀏覽器型圖形介面，可讓您設定、管理及監控 StorageGRID 系統。
 
 
 NOTE: Grid Manager 會隨著每個版本更新，可能與此頁面上的範例螢幕截圖不符。
@@ -31,7 +31,7 @@ NOTE: Grid Manager 會隨著每個版本更新，可能與此頁面上的範例�
 
 image:grid_manager_dashboard_and_menu.png["網格管理器中的儀表板"]
 
-若要了解每張卡片上顯示的資訊，請選擇該卡片的說明圖示 image:icon_nms_question.png["${post_edited_translations.segment}"]。
+若要了解每張卡片上顯示的資訊，請選擇該卡片的說明圖示 image:icon_nms_question.png["問號圖示"]。
 
 
 
@@ -45,7 +45,7 @@ image:grid_manager_dashboard_and_menu.png["網格管理器中的儀表板"]
 
 
 [[help-menu]]
-== ${post_edited_translations.segment}
+== 說明功能表
 
 說明選單 image:icon-help-menu-bar.png["選單列上的說明圖示"] 提供以下項目的存取：
 
@@ -62,10 +62,10 @@ image:grid_manager_dashboard_and_menu.png["網格管理器中的儀表板"]
 
 「警報」選單提供易於使用的介面，用於偵測、評估及解決 StorageGRID 運作期間可能發生的問題。
 
-在「提醒」功能表中，您可以執行以下操作link:../monitor/managing-alerts.html["${post_edited_translations.segment}"]：
+在「提醒」功能表中，您可以執行以下操作link:../monitor/managing-alerts.html["管理警報"]：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 檢閱目前警示
+* 查看已解決的警報
 * 設定靜默模式以抑制警示通知
 * 定義觸發警示的條件警示規則
 * 設定電子郵件伺服器以接收警報通知
@@ -90,17 +90,17 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 
 
 [[ilm-menu]]
-== ${post_edited_translations.segment}
+== ILM 選單
 
-此link:using-information-lifecycle-management.html["${post_edited_translations.segment}"]功能可讓您link:../ilm/index.html["設定資訊生命週期管理 （ILM） 規則和策略"]治理資料的持久性和可用度。您也可以輸入物件識別碼來檢視該物件的中繼資料。
+此link:using-information-lifecycle-management.html["ILM 選單"]功能可讓您link:../ilm/index.html["設定資訊生命週期管理 （ILM） 規則和策略"]治理資料的持久性和可用度。您也可以輸入物件識別碼來檢視該物件的中繼資料。
 
 透過 ILM 選單，您可以檢視和管理 ILM：
 
 * 規則
-* ${post_edited_translations.segment}
+* 政策
 * 原則標籤
 * 儲存池
-* ${post_edited_translations.segment}
+* 儲存等級
 * 地區
 * 物件中繼資料查詢
 
@@ -108,7 +108,7 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 
 
 [[configuration-menu]]
-== ${post_edited_translations.segment}
+== 組態選單
 
 設定選單可讓您指定網路設定、安全性設定、系統設定、監控選項和存取控制選項。
 
@@ -120,7 +120,7 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 網路任務包括：
 
 * link:../admin/managing-high-availability-groups.html["管理高可用度群組"]
-* link:../admin/managing-load-balancing.html["${post_edited_translations.segment}"]
+* link:../admin/managing-load-balancing.html["管理負載平衡器端點"]
 * link:../admin/configuring-s3-api-endpoint-domain-names.html["設定 S3 端點網域名稱"]
 * link:../admin/managing-traffic-classification-policies.html["管理流量分類原則"]
 * link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]
@@ -130,15 +130,15 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 
 
 [[security-tasks]]
-=== ${post_edited_translations.segment}
+=== 安全性工作
 
 安全性任務包括：
 
 * link:../admin/using-storagegrid-security-certificates.html["管理安全性證書"]
 * link:../admin/manage-firewall-controls.html["管理內部防火牆控制"]
-* link:../admin/kms-configuring.html["${post_edited_translations.segment}"]
-* 設定安全性設定，包括 link:../admin/manage-tls-ssh-policy.html["${post_edited_translations.segment}"]、link:../admin/changing-network-options-object-encryption.html["網路和物件安全性選項"]、link:../admin/changing-browser-session-timeout-interface.html["${post_edited_translations.segment}"] 和 link:../admin/manage-external-ssh-access.html["SSH 存取選項"]
-* 設定 link:../admin/configuring-storage-proxy-settings.html["${post_edited_translations.segment}"] 或 link:../admin/configuring-admin-proxy-settings.html["管理員 Proxy"] 的設定
+* link:../admin/kms-configuring.html["設定金鑰管理伺服器"]
+* 設定安全性設定，包括 link:../admin/manage-tls-ssh-policy.html["TLS 和 SSH 原則"]、link:../admin/changing-network-options-object-encryption.html["網路和物件安全性選項"]、link:../admin/changing-browser-session-timeout-interface.html["介面安全性設定"] 和 link:../admin/manage-external-ssh-access.html["SSH 存取選項"]
+* 設定 link:../admin/configuring-storage-proxy-settings.html["儲存設備 Proxy"] 或 link:../admin/configuring-admin-proxy-settings.html["管理員 Proxy"] 的設定
 
 
 
@@ -148,9 +148,9 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 
 系統任務包括：
 
-* 使用 link:../admin/grid-federation-overview.html["${post_edited_translations.segment}"] 來 Clone 租戶帳戶資訊，並在兩個 StorageGRID 系統之間複寫物件資料
+* 使用 link:../admin/grid-federation-overview.html["網格聯盟"] 來 Clone 租戶帳戶資訊，並在兩個 StorageGRID 系統之間複寫物件資料
 * （可選）啟用 link:../admin/configuring-stored-object-compression.html["壓縮儲存物件"] 選項
-* （選填）設定 link:../s3/consistency.html["${post_edited_translations.segment}"]
+* （選填）設定 link:../s3/consistency.html["預設儲存桶一致性設定"]
 * link:../ilm/managing-objects-with-s3-object-lock.html["管理 S3 物件鎖定"]
 * 了解儲存設備設定，例如link:../admin/what-storage-volume-watermarks-are.html["儲存設備 Volume 浮水印"]
 * link:../ilm/manage-erasure-coding-profiles.html["管理糾刪碼設定檔"]
@@ -163,7 +163,7 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 
 監控任務包括：
 
-* link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]
+* link:../monitor/configure-log-management.html["設定日誌管理"]
 * link:../monitor/using-snmp-monitoring.html["使用 SNMP 監控"]
 
 
@@ -174,10 +174,10 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 
 存取控制任務包括：
 
-* link:../admin/managing-admin-groups.html["${post_edited_translations.segment}"]
+* link:../admin/managing-admin-groups.html["管理管理員群組"]
 * link:../admin/managing-users.html["管理系統管理員使用者"]
 * 更改 link:../admin/changing-provisioning-passphrase.html["佈建密碼"] 或 link:../admin/change-node-console-password.html["節點主控台密碼"]
-* link:../admin/using-identity-federation.html["${post_edited_translations.segment}"]
+* link:../admin/using-identity-federation.html["使用身分聯盟"]
 * link:../admin/how-sso-works.html["設定 SSO"]
 
 
@@ -201,7 +201,7 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 * link:../maintain/rename-grid-site-node-overview.html["重新命名程序"]變更網格、站台和節點的顯示名稱
 * link:../troubleshoot/verifying-object-integrity.html["物件存在檢查作業"] 以驗證物件資料的存在性（雖然並非其正確性）
 * 執行link:../maintain/rolling-reboot-procedure.html["滾動重新開機"]以重新啟動多個網格節點
-* link:../maintain/restoring-volume.html["${post_edited_translations.segment}"]
+* link:../maintain/restoring-volume.html["Volume 還原作業"]
 
 
 
@@ -209,14 +209,14 @@ link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、
 [[system]]
 === 系統
 
-${post_edited_translations.segment}
+您可以執行的系統維護任務包括：
 
 * link:../admin/viewing-storagegrid-license-information.html["檢視 StorageGRID 授權資訊"] 或 link:../admin/updating-storagegrid-license-information.html["更新授權資訊"]
-* 產生並下載 link:../maintain/downloading-recovery-package.html["${post_edited_translations.segment}"]
-* ${post_edited_translations.segment}
+* 產生並下載 link:../maintain/downloading-recovery-package.html["恢復套件"]
+* 對選定應用裝置執行 StorageGRID 軟體更新，包括軟體升級、Hotfix 及 SANtricity 作業系統軟體更新
 +
 ** link:../upgrade/index.html["升級程序"]
-** link:../maintain/storagegrid-hotfix-procedure.html["${post_edited_translations.segment}"]
+** link:../maintain/storagegrid-hotfix-procedure.html["Hotfix 程序"]
 ** https://docs.netapp.com/us-en/storagegrid-appliances/sg6000/upgrading-santricity-os-on-storage-controllers-using-grid-manager-sg6000.html["使用 Grid Manager 升級 SG6000 儲存控制器上的 SANtricity OS"^]
 ** https://docs.netapp.com/us-en/storagegrid-appliances/sg5700/upgrading-santricity-os-on-storage-controllers-using-grid-manager-sg5700.html["使用 Grid Manager 升級 SG5700 儲存控制器上的 SANtricity OS"^]
 
@@ -230,7 +230,7 @@ ${post_edited_translations.segment}
 
 您可以執行的網路維護任務包括：
 
-* link:../maintain/configuring-dns-servers.html["${post_edited_translations.segment}"]
+* link:../maintain/configuring-dns-servers.html["設定 DNS 伺服器"]
 * link:../maintain/updating-subnets-for-grid-network.html["更新網格網路子網路"]
 * link:../maintain/configuring-ntp-servers.html["管理 NTP 伺服器"]
 

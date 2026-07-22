@@ -10,17 +10,17 @@ indexpage:
   tiles:
   - title: 開始使用
     links:
-    - title: "${post_edited_translations.segment}"
+    - title: 登入 Grid Manager
       url: "../admin/signing-in-to-grid-manager.html"
     - title: 設定 AutoSupport
       url: "../admin/configure-autosupport-grid-manager.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 使用網格管理 API
       url: "../admin/using-grid-management-api.html"
   - title: 管理管理員群組和使用者
     links:
-    - title: "${post_edited_translations.segment}"
+    - title: 使用身分聯盟
       url: "../admin/using-identity-federation.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 管理管理員群組
       url: "../admin/managing-admin-groups.html"
     - title: 管理員群組權限
       url: "../admin/admin-group-permissions.html"
@@ -34,7 +34,7 @@ indexpage:
       url: "../admin/grid-federation-compare-cgr-to-cloudmirror.html"
     - title: 建立網格聯盟連線
       url: "../admin/grid-federation-create-connection.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 管理獲準租戶
       url: "../admin/grid-federation-manage-tenants.html"
   - title: 管理用戶端連線和租戶
     links:

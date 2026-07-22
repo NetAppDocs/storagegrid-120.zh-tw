@@ -109,7 +109,7 @@ summary: 您可以根據需要，變更整個網格、每個站台和每個節�
  a| 
 始終顯示在第二列
  a| 
-${post_edited_translations.segment}
+當項目重新命名時，顯示在第四欄。
 
 
 
@@ -135,12 +135,12 @@ ${post_edited_translations.segment}
 
 節點的顯示名稱必須遵循以下規則：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 在您的 StorageGRID 系統中必須是唯一的。
+* 不能與 StorageGRID 系統中任何其他項目的系統名稱相同。
+* 必須包含至少 1 個字元，且不超過 32 個字元。
+* 可以包含數字、連字符（-）以及大寫和小寫字母。
+* 可以以字母或數字開頭或結尾，但不能以連字號開頭或結尾。
+* 不能全是數字。
 * 不區分大小寫。例如， `DC1-ADM` 與  `dc1-adm` 被視為複製。
 
 
@@ -156,7 +156,7 @@ ${post_edited_translations.segment}
 * 可以包含空格。
 * 可包含以下特殊字元： `= - _ : , . @ !`
 * 可以以特殊字元開頭和結尾，包括連字號。
-* ${post_edited_translations.segment}
+* 可以是全數字或特殊字元。
 
 
 

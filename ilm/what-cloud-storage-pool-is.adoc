@@ -15,7 +15,7 @@ summary: 雲端儲存資源池可讓您使用 ILM 將物件資料移出 StorageG
 
 從 ILM 的角度來看，Cloud Storage Pool 類似於儲存資源池。若要將物件儲存在任一位置，您可以在為 ILM 規則建立放置指示時選擇該資源池。然而，儲存資源池是由 StorageGRID 系統內的 Storage Node 組成，而 Cloud Storage Pool 則是由外部 Bucket (S3) 或 Container (Azure Blob storage) 組成。
 
-${post_edited_translations.segment}
+此表格將儲存資源池與雲端儲存資源池進行比較，並顯示高階相似之處和不同之處。
 
 [cols="1a,2a,5a"]
 |===
@@ -23,9 +23,9 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+它是如何產生的？
  a| 
-${post_edited_translations.segment}
+在 Grid Manager 中使用 *ILM* > *儲存資源池* 選項。
  a| 
 在 Grid Manager 中使用 *ILM* > *Storage pools* > *Cloud Storage Pools* 選項。
 
@@ -34,25 +34,25 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+最多可以建立多少個資源池？
  a| 
-${post_edited_translations.segment}
+無限。
  a| 
-${post_edited_translations.segment}
+最多 10 個。
 
 
 
  a| 
-${post_edited_translations.segment}
+物件儲存在哪裡？
  a| 
 在 StorageGRID 中的一個或多個儲存節點上。
  a| 
-${post_edited_translations.segment}
+在 Amazon S3 儲存桶、Azure Blob 儲存 Container 或 StorageGRID 系統外部的 Google Cloud 中。
 
 如果雲端儲存資源池是 Amazon S3 儲存桶：
 
 * 您可以選擇設定儲存桶生命週期，將物件遷移到低成本的長期儲存設備，例如 Amazon S3 Glacier 或 S3 Glacier Deep Archive。外部儲存系統必須支援 Glacier 儲存設備類別和 S3 RestoreObject API。
-* ${post_edited_translations.segment}
+* 您可以建立雲端儲存資源池，以搭配支援 AWS Secret 區域的 AWS Commercial Cloud Services （C2S） 使用。
 
 
 如果雲端儲存資源池是 Azure Blob 儲存 Container，StorageGRID 會將物件轉換到 Archive 分層。
@@ -71,31 +71,31 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+採用哪種資料保護方法？
  a| 
-${post_edited_translations.segment}
+複寫或銷毀編碼。
  a| 
-${post_edited_translations.segment}
+複寫。
 
 
 
  a| 
-${post_edited_translations.segment}
+每個物件允許有多少個複本？
  a| 
 多種的。
  a| 
-${post_edited_translations.segment}
+在 Cloud Storage Pool 中儲存一份複本，並可選擇在 StorageGRID 中儲存一份或多份複本。
 
-${post_edited_translations.segment}
+*附註：*您不能同時將一個物件儲存在多個雲端儲存資源池中。
 
 
 
  a| 
 有哪些優勢？
  a| 
-${post_edited_translations.segment}
+可以隨時快速存取物件。
  a| 
-${post_edited_translations.segment}
+低成本儲存設備。
 
 *注意*：FabricPool 資料無法分層至雲端儲存資源池。
 

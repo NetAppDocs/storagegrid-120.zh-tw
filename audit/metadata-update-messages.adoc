@@ -2,7 +2,7 @@
 permalink: audit/metadata-update-messages.html 
 sidebar: sidebar 
 keywords: storagegrid, audit, message, Metadata update, S3 metadata update, SUPD 
-summary: ${post_edited_translations.segment} 
+summary: 當 S3 用戶端更新物件的中繼資料時，會產生稽核訊息。 
 ---
 = StorageGRID 中 S3 物件中繼資料更新的稽核訊息
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+當 S3 用戶端更新物件的中繼資料時，會產生稽核訊息。
 
 
 
@@ -20,17 +20,17 @@ ${post_edited_translations.segment}
 
 [cols="1a,1a,2a,1a,2a"]
 |===
-| 程式碼 | Name | 說明 | ${post_edited_translations.segment} | 請參閱 
+| 程式碼 | Name | 說明 | 追蹤 | 請參閱 
 
 
  a| 
 SUPD
  a| 
-${post_edited_translations.segment}
+S3 中繼資料已更新
  a| 
 當 S3 用戶端更新已擷取物件的中繼資料時產生。
  a| 
-${post_edited_translations.segment}
+CBID、S3KY、HTRH
  a| 
 link:supd-s3-metadata-updated.html["SUPD：S3 中繼資料已更新"]
 
@@ -38,7 +38,7 @@ link:supd-s3-metadata-updated.html["SUPD：S3 中繼資料已更新"]
 
 
 [[example-s3-metadata-update]]
-== ${post_edited_translations.segment}
+== 範例：S3 中繼資料更新
 
 此範例展示了更新現有 S3 物件中繼資料的成功交易。
 
@@ -47,7 +47,7 @@ link:supd-s3-metadata-updated.html["SUPD：S3 中繼資料已更新"]
 [[supd-s3-metadata-update]]
 === SUPD：S3 中繼資料更新
 
-S3 用戶端發出要求 （SUPD） 以更新 S3 物件 （S3KY） 的指定中繼資料 (`x-amz-meta-\*`）。在此範例中，要求標頭包含在欄位 HTRH 中，因為它已設定為稽核協定標頭 （*Configuration* > *Monitoring* > *Audit and syslog server*）。請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+S3 用戶端發出要求 （SUPD） 以更新 S3 物件 （S3KY） 的指定中繼資料 (`x-amz-meta-\*`）。在此範例中，要求標頭包含在欄位 HTRH 中，因為它已設定為稽核協定標頭 （*Configuration* > *Monitoring* > *Audit and syslog server*）。請參閱 link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]。
 
 [listing]
 ----

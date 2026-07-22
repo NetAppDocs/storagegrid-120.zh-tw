@@ -37,7 +37,7 @@ summary: 如果您使用自訂的儲存設備 Volume 浮水印值，則可能需
 
 
  a| 
-${post_edited_translations.segment}
+Volume 0
  a| 
 12 GB
 
@@ -73,9 +73,9 @@ Volume 3
 如果觸發了一個或多個「低唯讀浮水印置換」警示，請依照下列步驟操作。即使未觸發任何警示，如果您目前使用的是自訂浮水印設定，並希望開始使用最佳化的設定，也可以使用這些說明。
 
 .開始之前
-* ${post_edited_translations.segment}
+* 您已完成升級至 StorageGRID 11.6 或更高版本。
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:../admin/admin-group-permissions.html["根目錄存取權限"]。
 
 
 .關於此任務
@@ -144,7 +144,7 @@ StorageGRID 使用兩個 Prometheus 計量來顯示其為儲存 Volume 軟唯讀
 
 . 如果每個線上儲存節點上至少有一個 Volume 的可用空間大於該節點的最大最佳化浮水印，則前往 <<use-optimized-watermarks,使用最佳化的浮水印>> 開始使用最佳化浮水印。
 +
-否則，請盡快擴充網格。可以link:../expand/adding-storage-volumes-to-storage-nodes.html["新增儲存 Volume"]至現有節點，也可以link:../expand/adding-grid-nodes-to-existing-site-or-adding-new-site.html["${post_edited_translations.segment}"]。然後，前往<<use-optimized-watermarks,使用最佳化的浮水印>>更新浮水印設定。
+否則，請盡快擴充網格。可以link:../expand/adding-storage-volumes-to-storage-nodes.html["新增儲存 Volume"]至現有節點，也可以link:../expand/adding-grid-nodes-to-existing-site-or-adding-new-site.html["新增儲存節點"]。然後，前往<<use-optimized-watermarks,使用最佳化的浮水印>>更新浮水印設定。
 
 . 如果您需要繼續使用自訂儲存設備 Volume 浮水印值，link:../monitor/silencing-alert-notifications.html["沉默"]或link:../monitor/disabling-alert-rules.html["停用"] *低唯讀浮水印置換*警報。
 +

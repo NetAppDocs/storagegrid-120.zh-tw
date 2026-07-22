@@ -15,7 +15,7 @@ summary: 屬於 ILM 稽核類別的稽核訊息用於與資訊生命週期作業
 
 [cols="1a,3a,1a"]
 |===
-| 程式碼 | ${post_edited_translations.segment} | 請參閱 
+| 程式碼 | 訊息標題和執行摘要 | 請參閱 
 
 
  a| 
@@ -32,7 +32,7 @@ LKCU
  a| 
 已覆寫物件清理。當已覆寫物件自動移除以釋放儲存空間時，將產生此稽核訊息。
  a| 
-link:lkcu-overwritten-object-cleanup.html["${post_edited_translations.segment}"]
+link:lkcu-overwritten-object-cleanup.html["LKCU：覆蓋物件清理"]
 
 
 

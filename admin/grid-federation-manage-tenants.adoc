@@ -15,9 +15,9 @@ summary: 您可以允許 S3 租戶帳戶使用兩個 StorageGRID 系統之間的
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入任一網格上的 Grid Manager。
-* 您擁有link:admin-group-permissions.html["${post_edited_translations.segment}"]您目前登入的網格的權限。
+* 您擁有link:admin-group-permissions.html["根目錄存取權限"]您目前登入的網格的權限。
 * 您位於link:grid-federation-create-connection.html["建立網格聯盟連線"]兩個網格之間。
-* 您已檢閱 link:grid-federation-what-is-account-clone.html["帳戶 Clone"] 與 link:grid-federation-what-is-cross-grid-replication.html["${post_edited_translations.segment}"] 的工作流程。
+* 您已檢閱 link:grid-federation-what-is-account-clone.html["帳戶 Clone"] 與 link:grid-federation-what-is-cross-grid-replication.html["跨網格複寫"] 的工作流程。
 * 根據需求，您已為連線中的兩個網格設定單一登入（SSO）或身分識別同盟。請參閱 link:grid-federation-what-is-account-clone.html["什麼是帳戶 Clone"]。
 
 
@@ -26,7 +26,7 @@ summary: 您可以允許 S3 租戶帳戶使用兩個 StorageGRID 系統之間的
 [[create-a-permitted-tenant]]
 == 建立允許的租戶
 
-如果您希望允許新的或現有的租戶帳戶使用網格聯合連線進行帳戶 Clone 和跨網格複寫，請按照一般說明 link:creating-tenant-account.html["${post_edited_translations.segment}"] 或 link:editing-tenant-account.html["${post_edited_translations.segment}"]，並注意以下事項：
+如果您希望允許新的或現有的租戶帳戶使用網格聯合連線進行帳戶 Clone 和跨網格複寫，請按照一般說明 link:creating-tenant-account.html["建立新的 S3 租戶"] 或 link:editing-tenant-account.html["編輯租戶帳戶"]，並注意以下事項：
 
 * 您可以從連線中的任一網格建立租戶。建立租戶的網格稱為該租戶的來源網格。
 * 連線狀態必須為「已連線」。
@@ -51,7 +51,7 @@ TIP: 在本機 root 使用者可以登入目的地網格上的複寫租戶之前
 [[view-a-permitted-tenant]]
 == 檢視獲准租戶
 
-${post_edited_translations.segment}
+您可以查看獲准使用網格聯盟連線的租戶詳細資訊。
 
 .步驟
 . 選擇*租戶*。
@@ -60,9 +60,9 @@ ${post_edited_translations.segment}
 如果這是租戶的來源網格（即，如果租戶是在此網格上建立的），則會顯示橫幅，提醒您該租戶已 Clone 到另一個網格。如果您編輯或刪除此租戶，您的變更將不會同步到另一個網格。
 
 +
-image:grid-federation-tenant-detail.png["${post_edited_translations.segment}"]
+image:grid-federation-tenant-detail.png["租戶詳細資料頁面中的「網格聯盟」標籤"]
 
-. （可選）選擇 *Grid federation* 索引標籤以 link:../monitor/grid-federation-monitor-connections.html["${post_edited_translations.segment}"]。
+. （可選）選擇 *Grid federation* 索引標籤以 link:../monitor/grid-federation-monitor-connections.html["監控網格聯盟連線"]。
 
 
 
@@ -70,11 +70,11 @@ image:grid-federation-tenant-detail.png["${post_edited_translations.segment}"]
 [[edit-a-permitted-tenant]]
 == 編輯已獲許可的租戶
 
-如果您需要編輯具有 *使用網格同盟連線* 權限的租戶，請遵循 link:editing-tenant-account.html["${post_edited_translations.segment}"] 的一般說明，並注意以下事項：
+如果您需要編輯具有 *使用網格同盟連線* 權限的租戶，請遵循 link:editing-tenant-account.html["編輯租戶帳戶"] 的一般說明，並注意以下事項：
 
 * 如果租戶具有 *Use grid federation connection* 權限，您可以從連線中的任一網格編輯租戶詳細資料。然而，您所做的任何變更將不會複製到另一個網格。如果您想在網格之間保持租戶詳細資料同步，則必須在兩個網格上進行相同的編輯。
 * 編輯租戶時，無法清除「使用網格聯合連線」權限。
-* ${post_edited_translations.segment}
+* 編輯租戶時，無法選擇不同的網格聯盟連線。
 
 
 
@@ -82,13 +82,13 @@ image:grid-federation-tenant-detail.png["${post_edited_translations.segment}"]
 [[delete-a-permitted-tenant]]
 == 刪除已獲許可的租戶
 
-如果您需要移除擁有「使用網格聯合連線」權限的租戶，請按照一般說明操作 link:deleting-tenant-account.html["${post_edited_translations.segment}"]，並附註以下事項：
+如果您需要移除擁有「使用網格聯合連線」權限的租戶，請按照一般說明操作 link:deleting-tenant-account.html["刪除租戶帳戶"]，並附註以下事項：
 
 * 在移除來源網格上的原始租戶之前，必須先移除來源網格上該帳戶的所有儲存桶。
 * 在目的地網格上移除 Clone 租戶之前，必須先移除目的地網格上該帳戶的所有儲存桶。
 * 如果移除原始租戶或 Clone 租戶，則帳戶將無法再用於跨網格複寫。
 * 如果您要移除來源網格上的原始租戶，則複製到目的地網格的任何租戶群組、使用者或金鑰將不受影響。您可以刪除複製的租戶，或允許其管理自己的群組、使用者、存取金鑰和貯體。
-* ${post_edited_translations.segment}
+* 如果您要從目的地網格中移除已 Clone 的租戶，則向原始租戶新增群組或使用者時會發生 Clone 錯誤。
 +
 為避免這些錯誤，請在從該網格中刪除租戶之前，移除租戶使用網格同盟連線的權限。
 
@@ -97,7 +97,7 @@ image:grid-federation-tenant-detail.png["${post_edited_translations.segment}"]
 
 
 [[remove-grid-federation-connection-permissionremove-use-grid-federation-connection-permission]]
-== ${post_edited_translations.segment}
+== [[remove-grid-federation-connection-permission]]移除使用網格聯盟連線權限
 
 若要防止租戶使用網格同盟連線，您必須移除「使用網格同盟連線」權限。
 
@@ -107,7 +107,7 @@ image:grid-federation-remove-permission.png["移除網格同盟連線的步驟"]
 
 * 如果租戶的任何儲存桶已啟用跨網格複寫，則無法移除 *Use grid federation connection* 權限。租戶帳戶必須先為其所有儲存桶停用跨網格複寫。
 * 移除「使用網格同盟連線」權限不會刪除已在網格之間複寫的任何項目。例如，當移除租戶的權限時，存在於兩個網格上的任何租戶使用者、群組和物件都不會從任何一個網格中刪除。如果您想要刪除這些項目，您必須手動從兩個網格中將其刪除。
-* ${post_edited_translations.segment}
+* 如果要使用相同的網格聯盟連線重新啟用此權限，請先刪除目的地網格上的此租戶；否則，重新啟用此權限將導致錯誤。
 
 
 
@@ -115,18 +115,18 @@ NOTE: 重新啟用「使用網格同盟連線」權限後，本機網格將成�
 
 .開始之前
 * 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
-* 您已擁有兩個網格的 link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您已擁有兩個網格的 link:admin-group-permissions.html["根目錄存取權限"]。
 
 
 
 
 [[disable-replication-for-tenant-buckets]]
-=== ${post_edited_translations.segment}
+=== 停用租戶儲存桶的複寫
 
-${post_edited_translations.segment}
+首先，停用所有租戶儲存桶的跨網格複寫。
 
 .步驟
-. ${post_edited_translations.segment}
+. 從任一網格開始，從主要管理節點登入 Grid Manager。
 . 選擇 *Configuration* > *System* > *Grid federation*。
 . 選取連線名稱以顯示其詳細資訊。
 . 在「允許的租戶」標籤上，確定租戶是否正在使用該連線。
@@ -146,11 +146,11 @@ TIP: 如果任何租戶儲存桶已啟用跨網格複寫，則無法移除「使
 
 .步驟
 . 從主要管理節點登入 Grid Manager。
-. ${post_edited_translations.segment}
+. 從 Grid 聯盟頁面或租戶頁面移除權限。
 +
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.網格聯盟頁面
 --
 .. 選擇 *Configuration* > *System* > *Grid federation*。
 .. 選取連線名稱以顯示其詳細資訊頁面。
@@ -172,12 +172,12 @@ TIP: 如果任何租戶儲存桶已啟用跨網格複寫，則無法移除「使
 . 查看確認對話方塊中的警告，然後選擇 *移除*。
 +
 ** 如果可以移除該權限，您將返回詳細資訊頁面並顯示成功訊息。此租戶將無法再使用網格聯合連線。
-** ${post_edited_translations.segment}
+** 如果一個或多個租戶儲存桶仍啟用跨網格複寫，則會顯示錯誤。
 +
 image:grid-federation-remove-permission-error.png["如果租戶為儲存桶啟用了 CGR，則會顯示錯誤訊息。"]
 
 +
-${post_edited_translations.segment}
+您可以選擇以下兩種方式之一：
 
 +
 *** （建議。）登入 Tenant Manager，停用每個租戶儲存桶的複寫。請參閱 link:../tenant/grid-federation-manage-cross-grid-replication.html["管理跨網格複寫"]。然後，重複上述步驟以移除 *Use grid connection* 權限。
@@ -186,7 +186,7 @@ ${post_edited_translations.segment}
 
 
 
-. ${post_edited_translations.segment}
+. 前往另一個網格並重複這些步驟，以移除另一個網格上相同租戶的權限。
 
 
 
@@ -194,7 +194,7 @@ ${post_edited_translations.segment}
 [[forceremovepermissionremove-the-permission-by-force]]
 == [[force_remove_permission]]強制移除權限
 
-${post_edited_translations.segment}
+如有必要，即使租戶儲存桶已啟用跨網格複寫，您也可以強制移除租戶使用網格聯盟連線的權限。
 
 在強制移除租戶的權限之前，請注意 <<remove-grid-federation-connection-permission,移除權限>> 的一般注意事項，以及以下其他注意事項：
 
@@ -208,7 +208,7 @@ ${post_edited_translations.segment}
 . 選取連線名稱以顯示其詳細資訊頁面。
 . 在「允許的租戶」索引標籤上，選取租戶的選項按鈕。
 . 選擇 *移除權限*。
-. ${post_edited_translations.segment}
+. 審查確認對話方塊中的警告，然後選擇 *Force remove*。
 +
 系統會顯示成功訊息。此租戶將無法再使用網格同盟連線。
 

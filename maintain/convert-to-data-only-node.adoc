@@ -2,7 +2,7 @@
 permalink: maintain/convert-to-data-only-node.html 
 sidebar: sidebar 
 keywords: storagegrid, convert node, data-only node 
-summary: ${post_edited_translations.segment} 
+summary: 為了提高效能，您可以將速度較慢的非 ADC 儲存節點轉換為僅資料儲存節點。 
 ---
 = 將 StorageGRID Storage Node 轉換為僅資料節點
 :allow-uri-read: 
@@ -11,25 +11,25 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+為了提高效能，您可以將速度較慢的非 ADC 儲存節點轉換為僅資料儲存節點。
 
 如果您的儲存節點效能各異，那麼將某個儲存節點專門用於資料就很有意義。例如，為了潛在地提高效能，您可以配置僅用於儲存資料的大容量機械硬碟儲存節點，以及僅用於儲存中繼資料的高效能儲存節點。
 
 此外，您也可以透過從 Cassandra 移除低 RAM 節點來取得更多中繼資料容量，這會增加每個節點的中繼資料容量限制。請參閱 link:../admin/managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]。
 
-${post_edited_translations.segment}
+轉換僅包含資料的節點時，每個站台的網格必須至少包含三個組合或僅包含中繼資料的儲存節點。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 * 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
 * 您要轉換的儲存節點不包含 ADC 服務，或者您已 link:../maintain/move-adc-service.html["移動了 ADC 服務"] 至另一個節點。
-* ${post_edited_translations.segment}
+* 儲存節點既不是僅中繼資料節點，也不是僅資料節點。
 * 您要轉換的儲存節點不包含 ADC 服務，或者您已 link:../maintain/move-adc-service.html["移動了 ADC 服務"] 至另一個節點。
-* 該站台的其他節點上有足夠的中繼資料空間（或者您已 link:../expand/index.html["${post_edited_translations.segment}"]），以容納將從您正在轉換的 Storage Node 移轉的中繼資料。
+* 該站台的其他節點上有足夠的中繼資料空間（或者您已 link:../expand/index.html["擴充您的網格"]），以容納將從您正在轉換的 Storage Node 移轉的中繼資料。
 +
 [CAUTION]
 ====
-** 如果移轉到同一站台上其他節點的中繼資料超過 link:../admin/managing-object-metadata-storage.html["${post_edited_translations.segment}"] 的大小，網格將變得不穩定。
+** 如果移轉到同一站台上其他節點的中繼資料超過 link:../admin/managing-object-metadata-storage.html["中繼資料保留空間"] 的大小，網格將變得不穩定。
 ** 開始轉換後，您將無法擴充網格。
 
 
@@ -45,13 +45,13 @@ ${post_edited_translations.segment}
 TIP: 通常情況下，如果每個節點的中繼資料使用量小於 1 TB，則可以一次轉換最多 10 個節點。如果每個節點的中繼資料使用量大於 1 TB，則每次最多轉換 5 個節點。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 記錄要轉換的非 ADC 儲存節點的節點 ID。
+. 從 Grid Manager 頂部，選擇說明圖示，然後選擇 *API documentation*。
 . 選擇「前往私有 API 文件」。
 . 選擇 `POST /private/convert-to-data-only-node/start`操作。如需更多資訊、請參閱link:../admin/using-grid-management-api.html#issue-api-requests["發出 API 請求"]。
 +
-${post_edited_translations.segment}
+在此過程中，每個節點都會重新開機。
 
 . 您可以使用  `GET /private/convert-to-data-only-node` 來監控程序。如果發生錯誤，請選取  `POST /private/convert-to-data-only-node/retry` 以重試程序。
-. link:../maintain/downloading-recovery-package.html["${post_edited_translations.segment}"] 完成此程序後。
+. link:../maintain/downloading-recovery-package.html["下載恢復套件"] 完成此程序後。
 

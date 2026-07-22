@@ -29,13 +29,13 @@ image:object_conceptual_drawing.png["物件"]
 
 
 [[what-is-object-metadata]]
-== ${post_edited_translations.segment}
+== 什麼是物件中繼資料？
 
 物件中繼資料是指描述物件的任何資訊。StorageGRID 使用物件中繼資料來追蹤網格中所有物件的位置，並管理每個物件隨時間的生命週期。
 
 物件中繼資料包含以下資訊：
 
-* ${post_edited_translations.segment}
+* 系統中繼資料，包括每個物件的唯一 ID （UUID）、物件名稱、S3 儲存桶名稱、租戶帳戶名稱或 ID、物件的邏輯大小、物件首次建立的日期和時間，以及物件最後修改的日期和時間。
 * 每個物件複本或銷毀編碼片段的目前儲存設備位置。
 * 與物件關聯的任何使用者中繼資料。
 
@@ -65,7 +65,7 @@ image:ilm_replication_make_2_copies.png["製作 2 份複本規則"]
 
 
 [[erasure-coding]]
-=== ${post_edited_translations.segment}
+=== 糾刪碼
 
 當 StorageGRID 將物件與設定為建立銷毀編碼複本的 ILM 規則相符時，它會將物件資料切片成資料片段，計算額外的同位元檢查片段，並將每個片段儲存在不同的儲存節點上。存取物件時，會使用儲存的片段重新組裝物件。如果資料片段或同位元檢查片段毀損或遺失，銷毀編碼演算法可以使用剩餘資料片段和同位元檢查片段的子集來重建該片段。ILM 規則和銷毀編碼設定檔決定所使用的銷毀編碼方案。
 

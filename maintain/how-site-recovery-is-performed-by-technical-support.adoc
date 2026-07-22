@@ -14,7 +14,7 @@ summary: 如果整個 StorageGRID 站台故障，或多個 Storage Node 故障�
 如果整個 StorageGRID 站台故障，或多個 Storage Node 故障，您必須聯絡技術支援。技術支援將評估您的狀況、制定恢復計畫，然後以符合您業務目標、最佳化恢復時間並防止不必要資料遺失的方式，恢復故障的節點或站台。
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 站台恢復只能由技術支援執行。
 
 StorageGRID 系統對各種故障都具有恢復能力的，您可以自己成功執行許多恢復和維護程序。然而，由於詳細步驟取決於您特定情況的因素，因此很難建立一個簡單、通用的站台恢復程序。例如：
 
@@ -23,26 +23,26 @@ StorageGRID 系統對各種故障都具有恢復能力的，您可以自己成�
 * *作用中 ILM 原則*：您網格中物件複本的數量、類型和位置是由您的作用中 ILM 原則所控制。您的 ILM 原則詳細資訊可能會影響可恢復的資料量，以及恢復所需的特定技術。
 +
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 如果一個站台包含某個物件的唯一複本，而該站台遺失，則該物件也遺失。
 
 * *儲存桶（或 Container）一致性*：應用於儲存桶（或 Container）的一致性會影響 StorageGRID 是否在通知用戶端物件擷取成功之前，將物件中繼資料完全複製到所有節點和站台。如果一致性值允許最終一致性，則站台故障可能會導致部分物件中繼資料遺失。這會影響可恢復的資料量，並可能影響恢復程序的細節。
 * *近期變更歷史記錄*：您的恢復程序詳細資料可能會受到故障發生時是否正在進行任何維護程序、或您的 ILM 原則是否近期進行過任何變更的影響。技術支援必須評估您網格的近期歷史記錄及其當前狀況，才能開始進行站台恢復。
 
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 站台恢復只能由技術支援執行。
 
-${post_edited_translations.segment}
+以下是技術支援用於恢復故障站台的一般流程總覽：
 
 . 技術支援：
 +
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 對故障進行詳細評估。
+.. 與您一起審查您的業務目標。
+.. 制定一套適合您情況的恢復計畫。
 
 
 . 如果主要管理節點發生故障，技術支援會進行恢復。
-. ${post_edited_translations.segment}
+. 技術支援將按照以下步驟恢復所有儲存節點：
 +
 .. 根據需要更換儲存節點硬體或虛擬機器。
 .. 將物件中繼資料還原至故障站台。
@@ -57,9 +57,9 @@ NOTE: 當整個站台發生故障時，技術支援會使用專門的命令來�
 
 
 
-. ${post_edited_translations.segment}
+. 技術支援會恢復其他故障節點。
 +
-${post_edited_translations.segment}
+在恢復物件中繼資料和資料之後，技術支援會使用標準程序來恢復發生故障的 Gateway Node 或非主要 Admin Node。
 
 
 

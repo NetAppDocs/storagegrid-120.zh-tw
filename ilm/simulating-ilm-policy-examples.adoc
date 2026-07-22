@@ -2,7 +2,7 @@
 permalink: ilm/simulating-ilm-policy-examples.html 
 sidebar: sidebar 
 keywords: simulate ilm policy 
-summary: ${post_edited_translations.segment} 
+summary: ILM 原則模擬範例提供了建構和修改適用於您環境之模擬的指導方針。 
 ---
 = StorageGRID 中的 ILM 原則模擬範例
 :allow-uri-read: 
@@ -11,18 +11,18 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+ILM 原則模擬範例提供了建構和修改適用於您環境之模擬的指導方針。
 
 
 
 [[example-1-verify-rules-when-simulating-an-ilm-policy]]
 == 範例 1：模擬 ILM 原則時驗證規則
 
-${post_edited_translations.segment}
+本範例描述了在模擬原則時如何驗證規則。
 
 在此範例中，系統正針對兩個 bucket 中內嵌的物件，模擬 *Example ILM policy*。該原則包含以下三條規則：
 
-* ${post_edited_translations.segment}
+* 第一條規則，*兩個複本，兩年儲存桶 a*，僅適用於儲存桶 a 中的物件。
 * 第二條規則，*EC 物件 > 1 MB*，適用於所有儲存桶，但篩選大於 1 MB 的物件。
 * 第三條規則 *兩個複本，兩個資料中心* 是預設規則。它不包含任何篩選器，且不使用 Noncurrent 參考時間。
 
@@ -31,7 +31,7 @@ ${post_edited_translations.segment}
 
 image:simulate_policy_screen.png["模擬原則結果"]
 
-${post_edited_translations.segment}
+在此範例中：
 
 * `bucket-a/bucket-a object.pdf`正確配對了第一條規則，該規則篩選 `bucket-a`中的物件。
 * `bucket-b/test object greater than 1 MB.pdf` 位於  `bucket-b`，因此不符合第一條規則。而是正確符合第二條規則，該規則會篩選大於 1 MB 的物件。
@@ -41,7 +41,7 @@ ${post_edited_translations.segment}
 
 
 [[example-2-reorder-rules-when-simulating-an-ilm-policy]]
-== ${post_edited_translations.segment}
+== 範例 2：模擬 ILM 原則時重新排序規則
 
 此範例展示如何重新排列規則以在模擬原則時改變結果。
 
@@ -49,7 +49,7 @@ ${post_edited_translations.segment}
 
 * 第一條規則 *PNGs* 會篩選以 `.png`結尾的鍵名。
 * 第二個規則 *X-men* 僅適用於租戶 A 的物件，並篩選 `series=x-men`使用者中繼資料。
-* ${post_edited_translations.segment}
+* 最後一條規則「Two copies two data centers」是預設規則，符合任何不符合前兩條規則的物件。
 
 
 .步驟
@@ -59,7 +59,7 @@ ${post_edited_translations.segment}
 模擬結果顯示，該 `Havok.png`物件符合 *PNGs* 規則。
 
 +
-image:simulate_reorder_rules_pngs_result.png["${post_edited_translations.segment}"]
+image:simulate_reorder_rules_pngs_result.png["範例 2：模擬 ILM 原則時的規則重排序"]
 
 +
 然而， `Havok.png`其目的是為了測試《X戰警》規則。
@@ -67,8 +67,8 @@ image:simulate_reorder_rules_pngs_result.png["${post_edited_translations.segment
 . 若要解決此問題，請重新排列規則。
 +
 .. 選擇 *Finish* 以結案「模擬 ILM 原則」視窗。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 選擇 *Edit* 以編輯原則。
+.. 將「X-men」規則拖曳到清單頂部。
 .. 選取 *Save* 。
 
 
@@ -77,40 +77,40 @@ image:simulate_reorder_rules_pngs_result.png["${post_edited_translations.segment
 您先前測試的物件會針對更新後的原則重新進行評估，並顯示新的模擬結果。在此範例中，「Rule matched」欄顯示  `Havok.png` 物件現在如預期般符合 X-men 中繼資料規則。「Previous match」欄顯示在先前的模擬中，PNGs 規則與該物件相符。
 
 +
-image:simulate_reorder_rules_correct_result.png["${post_edited_translations.segment}"]
+image:simulate_reorder_rules_correct_result.png["範例 2：模擬 ILM 原則時的規則重排序"]
 
 
 
 
 
 [[example-3-correct-a-rule-when-simulating-an-ilm-policy]]
-== ${post_edited_translations.segment}
+== 範例 3：在模擬 ILM 原則時修正規則
 
-${post_edited_translations.segment}
+本範例展示如何模擬原則、更正原則中的規則並繼續模擬。
 
 在此範例中，正在模擬 *Demo* 原則。此原則旨在尋找包含 `series=x-men`使用者中繼資料的物件。然而，在對 `Beast.jpg`物件模擬此原則時，出現了意料之外的結果。該物件並未符合 X-men 中繼資料規則，而是符合了預設規則 Two copies two data centers。
 
-image:simulate_results_for_object_wrong_metadata.png["${post_edited_translations.segment}"]
+image:simulate_results_for_object_wrong_metadata.png["範例 3：模擬 ILM 原則時修正規則"]
 
-${post_edited_translations.segment}
+當測試物件與原則中的預期規則不符時，您必須檢查原則中的每個規則並修正任何錯誤。
 
 .步驟
 . 選擇 *完成* 以關閉 模擬原則 對話方塊。在原則的詳細資料頁面上，選取 *保留圖表*。然後視需要為每個規則選取 *全部展開* 或 *檢視詳細資料*。
-. ${post_edited_translations.segment}
+. 審查規則的租戶帳戶、參考時間和篩選條件。
 +
-${post_edited_translations.segment}
+例如，假設 X 戰警規則的中繼資料輸入為「x-men01」而不是「x-men」。
 
-. ${post_edited_translations.segment}
+. 若要解決此錯誤，請按如下方式修正規則：
 +
 ** 如果該規則是原則的一部分，您可以 Clone 該規則，或將該規則從原則中移除，然後對其進行編輯。
 ** 如果此規則是作用中原則的一部分，您必須 Clone 該規則。您無法編輯作用中原則中的規則，也無法從中移除規則。
 
 
-. ${post_edited_translations.segment}
+. 再次進行模擬。
 +
 在此範例中，修正後的 X-men 規則現在正如預期，會根據  `series=x-men` 使用者中繼資料比對  `Beast.jpg` 物件。
 
 +
-image:simulate_results_for_object_corrected_metadata.png["${post_edited_translations.segment}"]
+image:simulate_results_for_object_corrected_metadata.png["範例 3：模擬 ILM 原則時修正規則"]
 
 

@@ -22,15 +22,15 @@ summary: 在將 StorageGRID 作為 FabricPool 的雲端分層附加之前，您�
 
 [cols="1a,1a,1a"]
 |===
-| 價值 | ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 價值 | 其中值已設定 | 值使用處 
 
 
  a| 
 虛擬 IP（VIP）位址
  a| 
-${post_edited_translations.segment}
+StorageGRID > HA 群組
  a| 
-${post_edited_translations.segment}
+DNS 項目
 
 
 
@@ -53,11 +53,11 @@ ONTAP System Manager > 新增雲端層
 
 
  a| 
-${post_edited_translations.segment}
+伺服器名稱（FQDN）
  a| 
 StorageGRID > 負載平衡器端點
  a| 
-${post_edited_translations.segment}
+DNS 項目
 
 
 
@@ -81,9 +81,9 @@ ONTAP System Manager > 新增雲端層
 
 
 [[how-do-i-get-these-values]]
-== ${post_edited_translations.segment}
+== 我該如何取得這些值？
 
-${post_edited_translations.segment}
+根據您的需求，您可以透過以下任一方式取得所需資訊：
 
 * 請使用 link:use-fabricpool-setup-wizard.html["FabricPool 設定精靈"]。FabricPool 設定精靈可協助您在 StorageGRID 中快速設定所需的數值，並輸出可用於設定 ONTAP System Manager 的檔案。此精靈會引導您完成必要的步驟，並協助確保您的設定符合 StorageGRID 和 FabricPool 的最佳實務做法。
 * 手動設定每個項目。然後，將這些值輸入 ONTAP System Manager 或 ONTAP CLI 中。請依照以下步驟操作：

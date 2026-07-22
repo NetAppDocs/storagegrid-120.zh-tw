@@ -18,11 +18,11 @@ TIP: 如果租戶擁有「使用網格聯合連線」權限，則可以從連線
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您擁有 link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您擁有 link:admin-group-permissions.html["root 存取權或租戶帳戶權限"]。
 
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 根據網路連線、節點狀態和 Cassandra 操作情況，在整個網格中套用租戶設定可能需要 15 分鐘或更長時間。
 
 .步驟
 . 選擇*租戶*。
@@ -59,8 +59,8 @@ image:tenant_accounts_page.png["租戶帳戶頁面"]
 *** 已停用且未選取，StorageGRID 系統已啟用 SSO。租戶必須使用為 Grid Manager 設定的身分識別來源。
 
 
-** 根據需要選擇或清除「允許 S3 Select」權限。請參閱link:manage-s3-select-for-tenant-accounts.html["${post_edited_translations.segment}"]。
-** ${post_edited_translations.segment}
+** 根據需要選擇或清除「允許 S3 Select」權限。請參閱link:manage-s3-select-for-tenant-accounts.html["管理租戶帳戶的 S3 Select"]。
+** 若要移除「使用網格聯盟連線」權限：
 +
 ... 選擇 *Grid federation* 索引標籤。
 ... 選擇 *移除權限*。

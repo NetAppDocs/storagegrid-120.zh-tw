@@ -24,7 +24,7 @@ summary: 請依照以下說明設定和管理 StorageGRID 系統。
 * 建立租戶帳戶，以允許 S3 用戶端應用程式儲存和擷取物件
 * 設定與管理 StorageGRID 網路
 * 設定 AutoSupport
-* ${post_edited_translations.segment}
+* 管理節點設定
 
 
 
@@ -33,5 +33,5 @@ summary: 請依照以下說明設定和管理 StorageGRID 系統。
 == 開始之前
 
 * 您對 StorageGRID 系統有基本的了解。
-* ${post_edited_translations.segment}
+* 您對 Linux 命令 shell、連網以及伺服器硬體設定和組態有相當詳細的了解。
 

@@ -2,7 +2,7 @@
 permalink: maintain/starting-storagegrid-appliance-installation.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, appliance, appliance install 
-summary: ${post_edited_translations.segment} 
+summary: 若要在應用裝置儲存節點上安裝 StorageGRID，您可以使用應用裝置中隨附的 StorageGRID Appliance Installer。 
 ---
 = 開始安裝 StorageGRID 應用裝置
 :allow-uri-read: 
@@ -11,11 +11,11 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+若要在應用裝置儲存節點上安裝 StorageGRID，您可以使用應用裝置中隨附的 StorageGRID Appliance Installer。
 
 .開始之前
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 應用裝置已安裝在機架中、連接至您的網路、並已開機。
+* 已使用 StorageGRID Appliance Installer 為應用裝置設定網路連結和 IP 位址。
 * 您知道 StorageGRID 網格的主要管理節點的 IP 位址。
 * StorageGRID 應用裝置安裝程式的 IP 組態頁面上所列的所有網格網路子網路都已在主要管理節點的網格網路子網路清單中定義。
 * 您已按照儲存應用裝置的安裝說明完成這些先決條件工作。請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["硬體安裝快速入門"^]。
@@ -26,7 +26,7 @@ ${post_edited_translations.segment}
 .關於此任務
 在應用裝置儲存節點上安裝 StorageGRID：
 
-* ${post_edited_translations.segment}
+* 您指定或確認主要管理節點的 IP 位址和節點的主機名稱（系統名稱）。
 * 啟動安裝，等待磁碟區配置完成和軟體安裝完成。
 +
 
@@ -44,7 +44,7 @@ NOTE: 恢復應用裝置儲存節點時，請使用與原始應用裝置相同�
 +
 StorageGRID 應用裝置安裝程式首頁隨即出現。
 
-. ${post_edited_translations.segment}
+. 在主要管理節點連線部分，確定是否需要指定主要管理節點的 IP 位址。
 +
 假設主要管理節點或至少一個已設定 ADMIN_IP 的其他網格節點位於相同子網路中，StorageGRID 應用裝置安裝程式可以自動探索此 IP 位址。
 
@@ -56,9 +56,9 @@ StorageGRID 應用裝置安裝程式首頁隨即出現。
 
 
  a| 
-${post_edited_translations.segment}
+手動 IP 輸入
  a| 
-.. ${post_edited_translations.segment}
+.. 取消選取「啟用管理節點探索」核取方塊。
 .. 手動輸入 IP 位址。
 
 
@@ -71,13 +71,13 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+自動探索所有已連線的主要管理節點
  a| 
-.. ${post_edited_translations.segment}
+.. 選取「啟用管理節點探索」核取方塊。
 .. 從已發現的 IP 位址清單中，選擇要部署此應用裝置儲存節點的網格的管理節點。
 
 
-${post_edited_translations.segment}
+*注意*：恢復時，如果主要管理節點的 IP 位址可用，請使用該 IP 位址；否則，請使用非主要管理節點的 IP 位址。
 
 .. 選取 *Save* 。
 .. 請等待新 IP 位址的連線狀態變成「就緒」。

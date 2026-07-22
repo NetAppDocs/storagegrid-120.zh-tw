@@ -19,16 +19,16 @@ summary: 您可以在管理節點和閘道節點上建立虛擬區域網路 （V
 == VLAN 介面注意事項
 
 * 您可以透過輸入 VLAN ID 並選擇一個或多個節點上的父介面來建立 VLAN 介面。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 必須在交換器上將父介面設定為主幹介面。
+* 父介面可以是 Grid Network （eth0）、Client Network （eth2），或是虛擬機器或裸機主機的附加中繼介面（例如，ens256）。
 * 對於每個 VLAN 介面，您只能為指定的節點選取一個父介面。例如，您無法在同一個閘道節點上，將網格網路介面和用戶端網路介面同時用作同一個 VLAN 的父介面。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 如果 VLAN 介面用於管理節點流量（包括與 Grid Manager 和 Tenant Manager 相關的流量），則僅選擇管理節點上的介面。
+* 如果 VLAN 介面用於 S3 用戶端流量，請選擇管理節點或閘道節點上的介面。
 * 如果需要新增主幹介面，詳情請參閱以下內容：
 +
-** *VMware（節點安裝完成後）*：link:../maintain/vmware-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+** *VMware（節點安裝完成後）*：link:../maintain/vmware-adding-trunk-or-access-interfaces-to-node.html["VMware：為節點新增中繼或存取介面"]
 ** *Linux （安裝節點之前）*: link:../swnodes/creating-node-configuration-files.html["建立節點組態檔"]
-** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["向節點新增幹線或存取介面"]
 
 
 
@@ -43,7 +43,7 @@ NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 * 網路中已設定主幹介面，並將其連接至 VM 或 Linux 節點。您知道該主幹介面的名稱。
 * 您知道您正在設定的 VLAN 的 ID。
 
@@ -56,7 +56,7 @@ NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本�
 
 
 [[access-the-wizard]]
-=== ${post_edited_translations.segment}
+=== 存取精靈
 
 .步驟
 . 選擇 *Configuration* > *Network* > *VLAN interfaces*。

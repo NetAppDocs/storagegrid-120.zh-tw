@@ -23,15 +23,15 @@ summary: '管理金鑰管理伺服器 (KMS) 包括檢視或編輯詳細資訊、
 [[view-kms-details]]
 == 檢視 KMS 詳細資料
 
-${post_edited_translations.segment}
+您可以檢視 StorageGRID 系統中每個金鑰管理伺服器 （KMS） 的相關資訊，包括金鑰詳細資訊以及伺服器和用戶端憑證的目前狀態。
 
 .步驟
 . 選擇 *組態* > *安全性* > *金鑰管理伺服器*。
 +
-${post_edited_translations.segment}
+金鑰管理伺服器頁面隨即顯示，並顯示以下資訊：
 
 +
-** ${post_edited_translations.segment}
+** 「組態詳細資料」標籤列出所有已設定的金鑰管理伺服器。
 ** 「加密節點」標籤列出所有已啟用節點加密的節點。
 
 
@@ -43,27 +43,27 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+管理金鑰，適用於
  a| 
-${post_edited_translations.segment}
+與 KMS 關聯的 StorageGRID 站台。
 
-${post_edited_translations.segment}
+此欄位顯示特定 StorageGRID 站台的名稱，或*未由其他 KMS 代管的站台（預設 KMS）*。
 
 
 
  a| 
 主機名稱
  a| 
-${post_edited_translations.segment}
+KMS 的完整網域名稱或 IP 位址。
 
 如果存在由兩個金鑰管理伺服器組成的叢集，則會列出這兩個伺服器的完整網域或 IP 位址。如果叢集中有兩個以上的金鑰管理伺服器，則會列出第一個 KMS 的完整網域或 IP 位址，以及叢集中其他金鑰管理伺服器的數量。
 
 例如： `10.10.10.10 and 10.10.10.11` 或  `10.10.10.10 and 2 others`。
 
-${post_edited_translations.segment}
+若要檢視叢集中的所有主機名稱，請選取 KMS，然後選取 * 編輯 * 或 * 動作 * > * 編輯 *。
 
 |===
-. ${post_edited_translations.segment}
+. 在 KMS 詳細資料頁面上選取索引標籤，即可檢視下列資訊：
 +
 [cols="1a,1a,3a"]
 |===
@@ -71,23 +71,23 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+關鍵細節
  a| 
 金鑰名稱
  a| 
-${post_edited_translations.segment}
+KMS 中 StorageGRID 用戶端的金鑰別名。
 
 
 
  a| 
-${post_edited_translations.segment}
+金鑰 UID
  a| 
 最新版本金鑰的唯一識別碼。
 
 
 
  a| 
-${post_edited_translations.segment}
+最後修改時間
  a| 
 金鑰最新版本的日期和時間。
 
@@ -96,7 +96,7 @@ ${post_edited_translations.segment}
  a| 
 伺服器憑證
  a| 
-${post_edited_translations.segment}
+中繼資料
  a| 
 憑證的中繼資料，例如序號、到期日期和時間，以及憑證 PEM。
 
@@ -112,7 +112,7 @@ ${post_edited_translations.segment}
  a| 
 用戶端憑證
  a| 
-${post_edited_translations.segment}
+中繼資料
  a| 
 憑證的中繼資料，例如序號、到期日期和時間，以及憑證 PEM。
 
@@ -146,32 +146,32 @@ ${post_edited_translations.segment}
 及時解決任何伺服器或用戶端憑證問題。如果可能，請在憑證過期前更換。
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 為了保持資料存取，您必須盡快解決任何憑證問題。
 
 .步驟
 . 選擇 *組態* > *安全性* > *金鑰管理伺服器*。
 . 在表格中，查看每個 KMS 的憑證到期值。
-. ${post_edited_translations.segment}
+. 如果任何 KMS 的憑證到期時間未知，請等待最多 30 分鐘，然後重新整理您的網頁瀏覽器。
 . 如果「憑證到期」欄位顯示憑證已過期或即將過期，請選擇 KMS 以前往 KMS 詳細資料頁面。
 +
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 選擇 *Server certificate* 並驗證「Expires on」欄位的值。
+.. 若要更換憑證，請選擇 *Edit certificate* 以上傳新憑證。
 .. 重複這些子步驟，並選擇「用戶端憑證」而不是「伺服器憑證」。
 
 
-. ${post_edited_translations.segment}
+. 當觸發 *KMS CA 憑證過期*、*KMS 用戶端憑證過期* 和 *KMS 伺服器憑證過期* 警示時，請記下每個警示的執行摘要並執行建議的動作。
 +
 StorageGRID 可能需要長達 30 分鐘才能更新憑證到期資訊。請重新整理網頁瀏覽器以查看目前值。
 
 
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果收到「*伺服器憑證狀態未知*」的狀態，請確保您的 KMS 允許在不需要用戶端憑證的情況下取得伺服器憑證。
 
 
 
 [[view-encrypted-nodes]]
-== ${post_edited_translations.segment}
+== 檢視加密節點
 
 您可以檢視 StorageGRID 系統中已啟用 *節點加密* 設定的應用裝置節點的相關資訊。
 
@@ -219,12 +219,12 @@ KMS 名稱
 
 如果沒有列出 KMS，請選擇「組態詳細資料」標籤新增 KMS。
 
-link:kms-adding.html["${post_edited_translations.segment}"]
+link:kms-adding.html["新增金鑰管理伺服器（KMS）"]
 
 
 
  a| 
-${post_edited_translations.segment}
+金鑰 UID
  a| 
 用於加密和解密應用裝置節點上資料的加密金鑰的唯一 ID。若要檢視完整的金鑰 UID，請選擇該文字。
 
@@ -237,32 +237,32 @@ ${post_edited_translations.segment}
  a| 
 KMS 與應用裝置節點之間的連線狀態。如果節點已連接，時間戳記每 30 分鐘更新一次。KMS 組態變更後，連線狀態可能需要幾分鐘才能更新。
 
-${post_edited_translations.segment}
+*附註：*請重新整理網頁瀏覽器以檢視新值。
 
 |===
-. ${post_edited_translations.segment}
+. 如果「狀態」欄位指示有 KMS 問題，請立即解決該問題。
 +
 在 KMS 正常運作期間，狀態將顯示為「已連線至 KMS」。如果節點與網格中斷連線，則會顯示節點連線狀態（管理性故障或未知）。
 
 +
-${post_edited_translations.segment}
+其他狀態訊息與同名的 StorageGRID 警示相對應：
 
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** KMS 組態載入失敗
+** KMS 連線錯誤
+** 找不到 KMS 加密金鑰名稱
+** KMS 加密金鑰輪替失敗
 ** KMS 金鑰無法解密應用裝置 Volume
 ** KMS 未設定
 
 
 +
-${post_edited_translations.segment}
+針對這些警報執行建議的操作。
 
 
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 您必須立即解決任何問題，以確保您的資料受到完整保護。
 
 
 
@@ -272,9 +272,9 @@ CAUTION: ${post_edited_translations.segment}
 例如，如果憑證即將過期，您可能需要編輯金鑰管理伺服器的組態。
 
 .開始之前
-* 如果您計劃更新為 KMS 選擇的站台，您已審查過link:kms-considerations-for-changing-for-site.html["${post_edited_translations.segment}"]。
+* 如果您計劃更新為 KMS 選擇的站台，您已審查過link:kms-considerations-for-changing-for-site.html["更改站台 KMS 的注意事項"]。
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 
 
 .步驟
@@ -310,7 +310,7 @@ KMS 中 StorageGRID 用戶端的確切金鑰別名。長度必須介於 1 到 25
 
 
  a| 
-${post_edited_translations.segment}
+管理金鑰，適用於
  a| 
 如果您正在編輯網站特定的 KMS，且尚未設定預設 KMS，您可以選擇「未由其他 KMS 管理的網站（預設 KMS）」選項。此選項會將網站特定的 KMS 轉換為預設 KMS，該預設 KMS 將套用於所有沒有專用 KMS 的網站以及在擴充功能中新增的任何網站。
 
@@ -338,7 +338,7 @@ KMS 的完整網域名稱或 IP 位址。
 +
 編輯金鑰管理伺服器精靈的第 2 步（上傳伺服器憑證）出現。
 
-. ${post_edited_translations.segment}
+. 如果需要更換伺服器憑證，請選擇 *Browse* 並上傳新檔案。
 . 選擇 *Continue* 。
 +
 編輯金鑰管理伺服器精靈的步驟 3（上傳用戶端憑證）出現。
@@ -362,27 +362,27 @@ KMS 組態已儲存。
 
 . 審查確認警告，如果您確定要強制儲存組態，請選擇「確定」。
 +
-${post_edited_translations.segment}
+KMS 組態已儲存，但與 KMS 的連線尚未測試。
 
 
 
 
 
 [[remove-a-key-management-server-kms]]
-== ${post_edited_translations.segment}
+== 移除金鑰管理伺服器（KMS）
 
 在某些情況下，您可能需要移除金鑰管理伺服器。例如，如果您已停用某個站台，則可能需要移除該站台特定的 KMS。
 
 .開始之前
-* 您已審閱 link:kms-considerations-and-requirements.html["${post_edited_translations.segment}"]。
+* 您已審閱 link:kms-considerations-and-requirements.html["使用金鑰管理伺服器的注意事項和要求"]。
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 
 
 .關於此任務
 在以下情況下，您可以移除 KMS：
 
-* ${post_edited_translations.segment}
+* 如果站台已停用，或站台不包含已啟用節點加密的應用裝置節點，則可以移除站台專屬的 KMS。
 * 如果每個站台都已存在特定於站台的 KMS，且每個站台都有啟用了節點加密的應用裝置節點，則可以移除預設 KMS。
 
 
@@ -393,15 +393,15 @@ ${post_edited_translations.segment}
 
 . 選擇要移除的 KMS，然後選擇 *Actions* > *Remove*。
 +
-${post_edited_translations.segment}
+您也可以透過在表格中選擇 KMS 名稱，然後在 KMS 詳細資料頁面中選擇 *Remove* 來移除 KMS。
 
-. ${post_edited_translations.segment}
+. 請確認以下資訊屬實：
 +
 ** 您正在移除一個網站特定的 KMS，該網站沒有啟用節點加密的應用裝置節點。
-** ${post_edited_translations.segment}
+** 您正在移除預設的 KMS，但每個具有節點加密的站台都已存在站台特定的 KMS。
 
 
-. ${post_edited_translations.segment}
+. 選取 *Yes*。
 +
 KMS 組態已移除。
 

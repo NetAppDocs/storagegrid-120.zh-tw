@@ -2,7 +2,7 @@
 permalink: admin/configuring-s3-api-endpoint-domain-names.html 
 sidebar: sidebar 
 keywords: s3 endpoint domain names, virtual-hosted-style requests 
-summary: ${post_edited_translations.segment} 
+summary: 若要支援 S3 虛擬託管風格的請求，您必須使用 Grid Manager 來設定 S3 用戶端連線到的 S3 端點網域名稱清單。 
 ---
 = 在 StorageGRID 中設定 S3 端點網域名稱
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+若要支援 S3 虛擬託管風格的請求，您必須使用 Grid Manager 來設定 S3 用戶端連線到的 S3 端點網域名稱清單。
 
 
 CAUTION: 不支援使用 IP 位址作為端點網域名稱。未來的版本將禁止這種組態。
@@ -29,7 +29,7 @@ CAUTION: 網格升級進行期間，請勿對網域名稱組態進行任何變�
 .關於此任務
 若要讓用戶端能夠使用 S3 端點網域名稱，您必須執行下列所有操作：
 
-* ${post_edited_translations.segment}
+* 使用 Grid Manager 將 S3 端點網域名稱新增至 StorageGRID 系統。
 * 確保link:../admin/configuring-administrator-client-certificates.html["用戶端用於與 StorageGRID 建立 HTTPS 連線的憑證"]已對用戶端要求的所有網域名稱進行簽署。
 +
 例如，如果端點是 `s3.company.com`，則必須確保用於 HTTPS 連線的憑證包含 `s3.company.com`端點和端點的萬用字元主體替代名稱 （SAN）： `*.s3.company.com`。
@@ -61,11 +61,11 @@ NOTE: 如果您不新增 S3 端點網域名稱且清單為空，則會停用對 
 . 選取 *Save* 。
 . 確保用戶端使用的伺服器憑證與所需的 S3 端點網域名稱相符。
 +
-** 如果用戶端連接到使用自身憑證的負載平衡器端點，link:../admin/configuring-load-balancer-endpoints.html["${post_edited_translations.segment}"]。
-** 如果用戶端連接到使用全域 S3 API 憑證的負載平衡器端點或直接連接到儲存節點，link:../admin/use-s3-setup-wizard-steps.html["${post_edited_translations.segment}"]。
+** 如果用戶端連接到使用自身憑證的負載平衡器端點，link:../admin/configuring-load-balancer-endpoints.html["更新與端點關聯的憑證"]。
+** 如果用戶端連接到使用全域 S3 API 憑證的負載平衡器端點或直接連接到儲存節點，link:../admin/use-s3-setup-wizard-steps.html["更新全球 S3 API 憑證"]。
 
 
-. ${post_edited_translations.segment}
+. 新增必要的 DNS 記錄，以確保可以解析端點網域名稱請求。
 
 
 .結果
@@ -74,13 +74,13 @@ NOTE: 如果您不新增 S3 端點網域名稱且清單為空，則會停用對 
 
 
 [[rename-an-s3-endpoint-domain-name]]
-== ${post_edited_translations.segment}
+== 重新命名 S3 端點網域名稱
 
 如果變更 S3 應用程式使用的名稱，虛擬託管式請求將會失敗。
 
 .步驟
 . 選擇 *Configuration* > *Network* > *S3 endpoint domain names*。
-. ${post_edited_translations.segment}
+. 選擇要編輯的網域名稱欄位，並進行必要的變更。
 . 選取 *Save* 。
 . 選取 *Yes* 以確認您的變更。
 
@@ -90,16 +90,16 @@ NOTE: 如果您不新增 S3 端點網域名稱且清單為空，則會停用對 
 [[delete-an-s3-endpoint-domain-name]]
 == 刪除 S3 端點網域名稱
 
-${post_edited_translations.segment}
+如果移除 S3 應用程式使用的名稱，虛擬託管式請求將會失敗。
 
 .步驟
 . 選擇 *Configuration* > *Network* > *S3 endpoint domain names*。
 . 選擇網域名稱旁邊的刪除圖示 image:icon-x-to-remove.png["刪除圖示"]。
-. ${post_edited_translations.segment}
+. 選取 *Yes* 以確認刪除。
 
 
 .相關資訊
 * link:../s3/index.html["使用 S3 REST API"]
-* link:viewing-ip-addresses.html["${post_edited_translations.segment}"]
+* link:viewing-ip-addresses.html["檢視 IP 位址"]
 * link:configure-high-availability-group.html["設定高可用度群組"]
 

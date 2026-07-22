@@ -21,7 +21,7 @@ summary: 您可以使用租戶管理 REST API 而非租戶管理器使用者介�
 
 若要存取租戶管理 API 的 Swagger 文件：
 
-. ${post_edited_translations.segment}
+. 登入 Tenant Manager。
 . 在 Tenant Manager 頂端，選取說明圖示，然後選取 *API documentation*。
 
 
@@ -79,8 +79,8 @@ CAUTION: 您透過 API 文件網頁執行的任何 API 操作都是即時操作�
 . 選擇 HTTP 行動以查看請求詳細資料。
 . 確定請求是否需要其他參數，例如群組 ID 或使用者 ID。然後，取得這些值。您可能需要先發出另一個 API 請求，才能獲得所需資訊。
 . 確定是否需要修改範例要求本文。如果需要，您可以選取 *Model* 來瞭解每個欄位的需求。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Try it out*。
+. 請提供任何必要的參數，或視需要修改要求本文。
 . 選擇 *Execute*。
-. ${post_edited_translations.segment}
+. 查看回應代碼以確定請求是否成功。
 

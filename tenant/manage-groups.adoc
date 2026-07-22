@@ -15,7 +15,7 @@ summary: 根據需要管理租戶群組，以檢視、編輯或複製群組等�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
-* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 您屬於一個擁有 link:tenant-management-permissions.html["根目錄存取權限"] 的使用者群組。
 
 
 
@@ -38,7 +38,7 @@ summary: 根據需要管理租戶群組，以檢視、編輯或複製群組等�
 
 . 如果您想要變更群組名稱：
 +
-.. ${post_edited_translations.segment}
+.. 選取群組的核取方塊。
 .. 選擇 *Actions* > *Edit group name*。
 .. 請輸入新名稱。
 .. 選取 *儲存變更*。
@@ -69,7 +69,7 @@ summary: 根據需要管理租戶群組，以檢視、編輯或複製群組等�
 
 . 根據需要編輯群組設定。有關輸入內容的詳細資訊，請參閱 link:creating-groups-for-s3-tenant.html["為 S3 租戶建立群組"]。
 +
-.. 在「概覽」部分，選擇名稱或編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"] 即可變更顯示名稱。
+.. 在「概覽」部分，選擇名稱或編輯圖示 image:icon_edit_tm.png["編輯圖示"] 即可變更顯示名稱。
 .. 在「群組權限」標籤上，更新權限，然後選擇「儲存變更」。
 .. 在「群組原則」索引標籤上，進行任何變更，然後選取「儲存變更」。
 +
@@ -116,9 +116,9 @@ NOTE: 如果您的租戶帳戶具有「使用網格聯合連線」權限，並�
 .步驟
 . 選擇 *Access Management* > *Groups*。
 . 選取要複製的群組的核取方塊。
-. ${post_edited_translations.segment}
+. 選取 *Actions* > *Duplicate group*。
 . 請參閱 link:creating-groups-for-s3-tenant.html["為 S3 租戶建立群組"] 以取得輸入內容的詳細資訊。
-. ${post_edited_translations.segment}
+. 選擇 *Create group*。
 
 
 
@@ -150,7 +150,7 @@ NOTE: 如果您的租戶帳戶擁有 *Use grid federation connection* 權限，�
 . 選取要刪除的每個群組的核取方塊。
 . 選取 *Actions* > *Delete group* 或 *Actions* > *Delete groups*。
 +
-${post_edited_translations.segment}
+出現確認對話框。
 
 . 選擇*刪除群組*或*刪除群組*。
 

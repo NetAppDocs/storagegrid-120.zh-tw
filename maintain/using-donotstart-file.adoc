@@ -31,7 +31,7 @@ CAUTION: 只有在技術支援人員指示的情況下，您才能新增或移�
 您擁有  `Passwords.txt` 檔案。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -71,7 +71,7 @@ touch /etc/sv/ldr/DoNotStart
 您擁有  `Passwords.txt` 檔案。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。

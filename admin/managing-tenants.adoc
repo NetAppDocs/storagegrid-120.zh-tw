@@ -14,9 +14,9 @@ summary: 租戶帳戶可讓您使用 Simple Storage Service （S3） REST API �
 租戶帳戶可讓您使用 Simple Storage Service （S3） REST API 在 StorageGRID 系統中儲存和擷取物件。
 
 
-TIP: 此版本的說明文件網站已移除 Swift 詳細資訊。請參閱 https://docs.netapp.com/us-en/storagegrid-118/admin/managing-tenants.html["${post_edited_translations.segment}"^]。
+TIP: 此版本的說明文件網站已移除 Swift 詳細資訊。請參閱 https://docs.netapp.com/us-en/storagegrid-118/admin/managing-tenants.html["StorageGRID 11.8：管理租戶"^]。
 
-${post_edited_translations.segment}
+身為網格系統管理員，您可以建立和管理 S3 用戶端用於儲存和擷取物件的租戶帳戶。
 
 每個租戶帳戶都有聯合群組或本機群組、使用者、S3 儲存桶和物件。
 
@@ -35,13 +35,13 @@ NOTE: 如果您使用 S3 用戶端協定，可以使用 S3 儲存貯體和儲存
 
 
 [[how-do-i-create-a-tenant-account]]
-== ${post_edited_translations.segment}
+== 如何建立租戶帳戶？
 
 使用 Grid 管理程式建立租戶帳戶。建立租戶帳戶時，您需要指定以下資訊：
 
 * 基本資訊包括租戶名稱、用戶端類型（S3）和選用的儲存設備配額。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 租戶帳戶的權限，例如租戶帳戶是否可以使用 S3 平台服務、設定自己的身分來源、使用 S3 Select 或使用網格聯盟連線。
+* 根據 StorageGRID 系統是否使用本機群組和使用者、身分聯盟或單一登入 （SSO），確定租戶的初始 root 存取權。
 
 
 此外，如果 S3 租戶帳戶需要符合法規要求，您可以為 StorageGRID 系統啟用 S3 物件鎖定設定。啟用 S3 物件鎖定後，所有 S3 租戶帳戶都可以建立和管理符合法規的儲存桶。
@@ -53,12 +53,12 @@ NOTE: 如果您使用 S3 用戶端協定，可以使用 S3 儲存貯體和儲存
 
 建立租戶帳戶後，租戶使用者可以登入 Tenant Manager 執行下列工作：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 設定身分識別聯盟（除非身分識別來源與網格共享）
+* 管理群組和使用者
 * 使用網格聯合進行帳戶 Clone 和跨網格複寫
-* ${post_edited_translations.segment}
+* 管理 S3 存取金鑰
 * 建立和管理 S3 儲存桶
-* ${post_edited_translations.segment}
+* 使用 S3 平台服務
 * 使用 S3 Select
 * 監控儲存設備使用情況
 

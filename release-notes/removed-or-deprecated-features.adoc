@@ -49,7 +49,7 @@ NOTE: 在某些情況下，NetApp 可能會比預期更早停止對特定功能�
  a| 
 11.9
  a| 
-https://docs.netapp.com/us-en/storagegrid-118/monitor/alarms-reference.html["${post_edited_translations.segment}"^]
+https://docs.netapp.com/us-en/storagegrid-118/monitor/alarms-reference.html["警報參考（StorageGRID 11.8）"^]
 
 
 
@@ -73,7 +73,7 @@ https://docs.netapp.com/us-en/storagegrid-118/maintain/considerations-for-decomm
 
 
  a| 
-${post_edited_translations.segment}
+透過 CIFS/Samba 匯出稽核
  a| 
 11.1
  a| 
@@ -123,7 +123,7 @@ https://docs.netapp.com/us-en/storagegrid-118/monitor/managing-alarms.html#confi
 
 
  a| 
-${post_edited_translations.segment}
+NFS 稽核匯出
  a| 
 11.8
  a| 
@@ -131,7 +131,7 @@ ${post_edited_translations.segment}
  a| 
 12.0
  a| 
-https://docs.netapp.com/us-en/storagegrid-118/admin/configuring-audit-client-access.html["${post_edited_translations.segment}"^]
+https://docs.netapp.com/us-en/storagegrid-118/admin/configuring-audit-client-access.html["設定 NFS 的稽核用戶端存取（StorageGRID 11.8）"^]
 
 
 
@@ -156,7 +156,7 @@ Swift API 支援
  a| 
 12.0
  a| 
-https://docs.netapp.com/us-en/storagegrid-118/swift/index.html["${post_edited_translations.segment}"^]
+https://docs.netapp.com/us-en/storagegrid-118/swift/index.html["使用 Swift REST API （StorageGRID 11.8）"^]
 
 
 

@@ -2,7 +2,7 @@
 permalink: ilm/what-erasure-coding-schemes-are.html 
 sidebar: sidebar 
 keywords: erasure-coding scheme 
-summary: ${post_edited_translations.segment} 
+summary: 銷毀編碼方案控制每個物件建立多少個資料片段和多少個同位元檢查片段。 
 ---
 = 了解 StorageGRID 中的抹除編碼方案
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+銷毀編碼方案控制每個物件建立多少個資料片段和多少個同位元檢查片段。
 
 當您建立或編輯 ILM 規則時，您可以選擇可用的銷毀編碼配置。StorageGRID 會根據構成您計劃使用之儲存資源池的儲存節點和站台數量，自動建立銷毀編碼配置。
 
@@ -43,7 +43,7 @@ StorageGRID 系統使用 Reed-Solomon 銷毀編碼演算法。此演算法將一
 
 選擇符合您需求且具有最低  `k+m` 總值的銷毀編碼配置。片段數量較少的銷毀編碼配置具有更高的運算效率，因為：
 
-* ${post_edited_translations.segment}
+* 每個物件所建立和分散（或擷取）的片段數量較少
 * 由於片段大小較大，因此效能較佳。
 * 它們可能需要在 link:../expand/index.html["當需要更多儲存設備時進行擴展"] 中新增較少的節點
 
@@ -51,11 +51,11 @@ StorageGRID 系統使用 Reed-Solomon 銷毀編碼演算法。此演算法將一
 
 
 [[guidelines-for-storage-pools]]
-== ${post_edited_translations.segment}
+== 儲存資源池準則
 
 在選擇用於建立銷毀編碼複本之規則的儲存資源池時，請遵循下列儲存資源池準則：
 
-* ${post_edited_translations.segment}
+* 儲存資源池必須包含三個或更多站台，或恰好包含一個站台。
 +
 
 NOTE: 如果儲存資源池包含兩個站台，則無法使用銷毀編碼。
@@ -65,11 +65,11 @@ NOTE: 如果儲存資源池包含兩個站台，則無法使用銷毀編碼。
 ** <<單一站台儲存資源池的銷毀編碼方案,單一站台儲存資源池的銷毀編碼方案>>
 
 
-* ${post_edited_translations.segment}
+* 不要使用包含「所有站台」站台的儲存資源池。
 * 儲存資源池應至少包含  `_k+m_ +1` 個可儲存物件資料的 Storage Node。
 +
 
-NOTE: 儲存節點可在安裝期間進行設定，以包含物件資料與中繼資料（「結合」儲存節點）、僅包含物件中繼資料，或僅包含物件資料。如需詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+NOTE: 儲存節點可在安裝期間進行設定，以包含物件資料與中繼資料（「結合」儲存節點）、僅包含物件中繼資料，或僅包含物件資料。如需詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["儲存節點類型"]。
 
 +
 所需的最小 Storage Node 數為 `k+m`。但是，如果所需的 Storage Node 暫時無法使用，則至少配備一個額外的 Storage Node 可協助防止擷取失敗或 ILM 積壓。
@@ -87,7 +87,7 @@ NOTE: 儲存節點可在安裝期間進行設定，以包含物件資料與中�
 
 [cols="1a,1a,1a,1a,1a,1a"]
 |===
-| 銷毀編碼方案（_k+m_） | ${post_edited_translations.segment} | 每個站點建議的儲存節點數量 | ${post_edited_translations.segment} | 站台遺失保護？ | 儲存負荷 
+| 銷毀編碼方案（_k+m_） | 已部署站台的最低數量 | 每個站點建議的儲存節點數量 | 建議的儲存節點總數 | 站台遺失保護？ | 儲存負荷 
 
 
  a| 
@@ -211,7 +211,7 @@ NOTE: 儲存節點可在安裝期間進行設定，以包含物件資料與中�
 
 
  a| 
-${post_edited_translations.segment}
+7+5
  a| 
 3
  a| 
@@ -251,7 +251,7 @@ NOTE: 如果您不確定要使用哪種方案，請選擇 4+2 或 6+3，或聯�
 
 [cols="1a,1a,1a,1a"]
 |===
-| 銷毀編碼方案（_k+m_） | ${post_edited_translations.segment} | 建議的儲存節點數量 | 儲存負荷 
+| 銷毀編碼方案（_k+m_） | 儲存節點的最小數量 | 建議的儲存節點數量 | 儲存負荷 
 
 
  a| 
@@ -343,7 +343,7 @@ NOTE: 如果您不確定要使用哪種方案，請選擇 4+2 或 6+3，或聯�
 
 
  a| 
-${post_edited_translations.segment}
+7+5
  a| 
 12
  a| 

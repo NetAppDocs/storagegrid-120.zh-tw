@@ -26,7 +26,7 @@ summary: 新增 Admin Node 之後，您可以選擇性地將 Prometheus 維護�
 NOTE: 複製 Prometheus 資料庫可能需要一個小時或更長時間。在來源管理節點上停止服務時，某些 Grid Manager 功能將無法使用。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入來源管理節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -35,9 +35,9 @@ NOTE: 複製 Prometheus 資料庫可能需要一個小時或更長時間。在�
 
 
 . 從來源 Admin Node 停止 Prometheus 服務： `service prometheus stop`
-. ${post_edited_translations.segment}
+. 在新管理節點上完成以下步驟：
 +
-.. ${post_edited_translations.segment}
+.. 登入新的管理節點：
 +
 ... 請輸入以下命令： `ssh admin@_grid_node_IP_`
 ... 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -49,7 +49,7 @@ NOTE: 複製 Prometheus 資料庫可能需要一個小時或更長時間。在�
 .. 將 SSH 私鑰新增至 SSH 代理程式。輸入：``ssh-add``
 .. 輸入 `Passwords.txt`檔案中列出的 SSH 存取密碼。
 .. 將 Prometheus 資料庫從來源 Admin Node 複製到新的 Admin Node： `/usr/local/prometheus/bin/prometheus-clone-db.sh _Source_Admin_Node_IP_`
-.. ${post_edited_translations.segment}
+.. 出現提示時，按下 *Enter* 鍵確認要毀損新管理節點上的新 Prometheus 資料庫。
 +
 原始 Prometheus 資料庫及其歷史資料會複製到新的 Admin Node。當複本作業完成時，指令碼會啟動新的 Admin Node。出現以下狀態：
 
@@ -62,7 +62,7 @@ NOTE: 複製 Prometheus 資料庫可能需要一個小時或更長時間。在�
 
 
 
-. ${post_edited_translations.segment}
+. 在來源管理節點上重新啟動 Prometheus 服務。
 +
 `service prometheus start`
 

@@ -88,7 +88,7 @@ summary: 了解三種資料擷取保護選項（平衡、嚴格或雙重提交�
 
 
 +
-如果需要，您可以 https://kb.netapp.com/hybrid/StorageGRID/Object_Mgmt/Configuring_StorageGRID_quorum_semantics_for_strong-global_consistency["${post_edited_translations.segment}"^]。
+如果需要，您可以 https://kb.netapp.com/hybrid/StorageGRID/Object_Mgmt/Configuring_StorageGRID_quorum_semantics_for_strong-global_consistency["設定 StorageGRID 仲裁語意以實現強全域一致性"^]。
 
 * *Strong-site*：物件中繼資料會立即分發至站台內的其他節點。保證站台內所有用戶端請求的寫後讀一致性。
 * *Read-after-new-write*：為新物件提供寫入後讀取一致性，並為物件更新提供最終一致性。提供高可用度和資料保護保證。建議在大多數情況下使用。

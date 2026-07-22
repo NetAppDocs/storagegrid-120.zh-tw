@@ -19,14 +19,14 @@ StorageGRID 使用負載平衡器來管理來自用戶端應用程式（例如 F
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:../admin/admin-group-permissions.html["根目錄存取權限"]。
 * 您已審閱了總覽link:../admin/managing-load-balancing.html["負載平衡的考量因素"]以及link:best-practices-for-load-balancing.html["適用於 FabricPool 的負載平衡最佳實務做法"]。
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Network* > *Load balancer endpoints*。
 . 選擇 *Create* 。
-. ${post_edited_translations.segment}
+. 在「輸入端點詳細資料」步驟中，請填寫以下欄位。
 +
 [cols="1a,2a"]
 |===
@@ -63,7 +63,7 @@ Name
  a| 
 選擇 *HTTPS* 。
 
-${post_edited_translations.segment}
+*附註*：雖然支援在不使用 TLS 加密的情況下與 StorageGRID 通訊，但不建議這樣做。
 
 |===
 . 在「選擇綁定模式」步驟中，指定綁定模式。綁定模式控制如何存取端點，是使用任意 IP 位址，還是使用特定的 IP 位址和網路介面。
@@ -114,7 +114,7 @@ HA 群組的虛擬 IP
  a| 
 允許所有租戶（預設）
  a| 
-${post_edited_translations.segment}
+所有租戶帳戶都可以使用此端點存取其儲存桶。
 
 對於用於 FabricPool 的負載平衡器端點，*允許所有租戶*幾乎總是合適的選項。
 
@@ -123,14 +123,14 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+允許選定的租戶
  a| 
-${post_edited_translations.segment}
+只有選定的租戶帳戶才能使用此端點存取其儲存桶。
 
 
 
  a| 
-${post_edited_translations.segment}
+封鎖選定的租戶
  a| 
 選定的租戶帳戶無法使用此端點存取其儲存桶。所有其他租戶均可使用此端點。
 
@@ -145,7 +145,7 @@ ${post_edited_translations.segment}
  a| 
 上傳憑證（建議）
  a| 
-${post_edited_translations.segment}
+使用此選項可上傳 CA 簽署的伺服器憑證、憑證私密金鑰和選用的 CA 套裝組合。
 
 
 
@@ -166,4 +166,4 @@ ${post_edited_translations.segment}
 
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 端點憑證的變更可能需要長達 15 分鐘才能套用到所有節點。

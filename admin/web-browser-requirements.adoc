@@ -2,7 +2,7 @@
 permalink: admin/web-browser-requirements.html 
 sidebar: sidebar 
 keywords: web browser requirements, supported browser, chrome, edge, firefox 
-summary: ${post_edited_translations.segment} 
+summary: 您必須使用受支援的瀏覽器。 
 ---
 = StorageGRID 的 Web 瀏覽器需求
 :allow-uri-read: 
@@ -11,11 +11,11 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您必須使用受支援的瀏覽器。
 
 [cols="2a,2a"]
 |===
-| ${post_edited_translations.segment} | 最低支援版本 
+| 網路瀏覽器 | 最低支援版本 
 
 
  a| 
@@ -46,7 +46,7 @@ Mozilla Firefox
 
 
  a| 
-${post_edited_translations.segment}
+最低限度
  a| 
 1024
 

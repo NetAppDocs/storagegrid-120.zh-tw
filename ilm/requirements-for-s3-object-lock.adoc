@@ -58,7 +58,7 @@ link:example-7-compliant-ilm-policy-for-s3-object-lock.html["符合法規的 S3 
 [[requirements-for-buckets-with-s3-object-lock-enabled]]
 == 啟用 S3 Object Lock 的儲存桶要求
 
-* ${post_edited_translations.segment}
+* 如果 StorageGRID 系統已啟用全域 S3 物件鎖定設定，您可以使用 Tenant Manager、租戶管理 API 或 S3 REST API 建立已啟用 S3 物件鎖定的儲存桶。
 * 如果您計劃使用 S3 Object Lock，則必須在建立儲存格時啟用 S3 Object Lock。您無法為現有的儲存格啟用 S3 Object Lock。
 * 為儲存桶啟用 S3 Object Lock 後，StorageGRID 會自動為該儲存桶啟用版本控制。您無法停用 S3 Object Lock 或暫停該儲存桶的版本控制。
 * 您也可以選擇使用 Tenant Manager、租戶管理 API 或 S3 REST API 為每個儲存桶指定預設保留模式和保留期間。儲存桶的預設保留設定僅適用於新增至儲存桶且沒有自身保留設定的新物件。您可以透過在上傳每個物件版本時為其指定保留模式和保留截止日期來置換這些預設設定。
@@ -69,7 +69,7 @@ link:example-7-compliant-ilm-policy-for-s3-object-lock.html["符合法規的 S3 
 
 
 [[requirements-for-objects-in-buckets-with-s3-object-lock-enabled]]
-== ${post_edited_translations.segment}
+== 啟用 S3 物件鎖定的儲存桶中的物件要求
 
 * 若要保護物件版本，您可以為儲存桶指定預設保留設定，也可以為每個物件版本指定保留設定。可以使用 S3 用戶端應用程式或 S3 REST API 指定物件層級的保留設定。
 * 保留設定適用於各個物件版本。一個物件版本可以同時擁有保留截止日期和合法持有設定，也可以只擁有其中一項，或者兩者都沒有。為物件指定保留截止日期或合法持有設定僅保護請求中指定的版本。您可以建立物件的新版本，而物件的先前版本仍保持鎖定狀態。
@@ -82,14 +82,14 @@ link:example-7-compliant-ilm-policy-for-s3-object-lock.html["符合法規的 S3 
 
 啟用 S3 Object Lock 後，儲存到儲存桶中的每個物件都會經歷以下階段：
 
-. ${post_edited_translations.segment}
+. *物件擷取*
 +
 當物件版本新增至已啟用 S3 Object Lock 的儲存桶時，保留設定的套用方式如下：
 
 +
 ** 如果為物件指定了保留設定，則套用物件層級的設定。任何預設儲存貯體設定都將被忽略。
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 如果未為物件指定保留設定，則套用預設儲存桶設定（如果存在）。
+** 如果未為物件或儲存貯體指定保留設定，則該物件不受 S3 Object Lock 保護。
 
 
 +

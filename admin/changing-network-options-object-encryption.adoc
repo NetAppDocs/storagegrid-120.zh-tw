@@ -62,7 +62,7 @@ summary: 您可以設定網路和物件安全性，以加密儲存的物件、�
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Security* > *Security settings*。
 . 選擇「網路和物件」索引標籤。
 . 對於儲存物件加密，如果您不希望對儲存物件進行加密，請使用 *None*（預設）設定；或選擇 *AES-128* 或 *AES-256* 來加密儲存物件。
 . 如果您想防止 S3 用戶端發出特定請求，可以選擇性地選取 *Prevent client modification*。

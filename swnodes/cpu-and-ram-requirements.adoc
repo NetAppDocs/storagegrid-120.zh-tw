@@ -26,17 +26,17 @@ summary: 安裝 StorageGRID 軟體之前，請先驗證並設定硬體，使其�
 
 基於軟體的純中繼資料節點資源必須與現有儲存節點資源相符。例如：
 
-* ${post_edited_translations.segment}
+* 如果現有 StorageGRID 站台使用的是 SG6000 或 SG6100 應用裝置，則基於軟體的純中繼資料節點必須符合以下最低要求：
 +
 ** 128 GB RAM
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 8 核心 CPU
+** 8 TB SSD 或等效儲存設備，用於 Cassandra 資料庫 （rangedb/0）
 
 
-* ${post_edited_translations.segment}
+* 如果現有的 StorageGRID 站台使用具有 24 GB RAM、8 核心 CPU 和 3 TB 或 4 TB 中繼資料儲存設備的虛擬儲存節點，則基於軟體的純中繼資料節點應使用類似的資源（24 GB RAM、8 核心 CPU 和 4 TB 中繼資料儲存設備 (rangedb/0)）。
 
 
-${post_edited_translations.segment}
+新增新的 StorageGRID 站台時，新站台的總中繼資料容量應至少與現有 StorageGRID 站台相符，且新站台的資源應與現有 StorageGRID 站台的儲存節點相符。
 
 
 NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。

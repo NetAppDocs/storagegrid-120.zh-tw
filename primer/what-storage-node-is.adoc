@@ -13,17 +13,17 @@ summary: 儲存設備節點管理並儲存物件資料和中繼資料。儲存�
 [role="lead"]
 儲存設備節點管理並儲存物件資料和中繼資料。儲存設備節點包含在磁碟上儲存、移動、驗證及擷取物件資料和中繼資料所需的服務與程序。
 
-${post_edited_translations.segment}
+StorageGRID 系統中的每個站台必須至少有三個儲存節點。
 
 
 
 [[types-of-storage-nodes]]
-== ${post_edited_translations.segment}
+== 儲存節點類型
 
 在安裝期間，您可以選擇要安裝的 Storage Node 類型。這些類型適用於軟體型 Storage Node，以及支援此功能的硬體設備型 Storage Node：
 
 * 合併資料和中繼資料儲存節點
-* ${post_edited_translations.segment}
+* 僅中繼資料儲存節點
 * 僅資料儲存節點
 
 
@@ -36,14 +36,14 @@ ${post_edited_translations.segment}
 
 
 [[data-and-metadata-storage-node-combined]]
-=== ${post_edited_translations.segment}
+=== 資料和中繼資料儲存節點（合併）
 
 預設情況下，所有新建的儲存節點都會同時儲存物件資料和中繼資料。這種類型的儲存節點稱為_組合_儲存節點。
 
 
 
 [[metadata-only-storage-node]]
-=== ${post_edited_translations.segment}
+=== 僅中繼資料儲存節點
 
 如果您的網格儲存了極大數量的微小物件，那麼專門將儲存節點用於中繼資料可能是有意義的。安裝專用的中繼資料容量，可在極大數量微小物件所需的空間與這些物件的中繼資料所需的空間之間，提供更好的平衡。此外，託管在高效能應用裝置上的僅限中繼資料儲存節點可以提升效能。
 
@@ -52,14 +52,14 @@ ${post_edited_translations.segment}
 * 使用 StorageGRID 應用裝置時，僅中繼資料節點只能在配備十二個 1.9 TB 或十二個 3.8 TB 磁碟的 SGF6112 應用裝置上設定。
 * 使用軟體型節點時，僅中繼資料節點資源必須與現有儲存節點資源相符。例如：
 +
-** ${post_edited_translations.segment}
+** 如果現有 StorageGRID 站台使用的是 SG6000 或 SG6100 應用裝置，則基於軟體的純中繼資料節點必須符合以下最低要求：
 +
 *** 128 GB RAM
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
+*** 8 核心 CPU
+*** 8 TB SSD 或等效儲存設備，用於 Cassandra 資料庫 （rangedb/0）
 
 
-** ${post_edited_translations.segment}
+** 如果現有的 StorageGRID 站台使用具有 24 GB RAM、8 核心 CPU 和 3 TB 或 4 TB 中繼資料儲存設備的虛擬儲存節點，則基於軟體的純中繼資料節點應使用類似的資源（24 GB RAM、8 核心 CPU 和 4 TB 中繼資料儲存設備 (rangedb/0)）。
 
 
 * 新增新的 StorageGRID 站台時，新站台的中繼資料總容量至少應與現有站台相符。新站台的資源應與現有站台的儲存節點相符。
@@ -84,11 +84,11 @@ NOTE: 雖然僅限中繼資料的 Storage Nodes 包含 <<ldr-service,LDR 服務>
 [[required-storage-nodes-per-grid-and-per-site]]
 == 每個網格和每個站台所需的儲存節點數
 
-${post_edited_translations.segment}
+在選擇拓撲中使用的儲存節點時，請記住，網格或網格中的每個站台必須包含以下內容：
 
-* 每個站台（在單一或多站台網格中）：三個 <<adc-service,${post_edited_translations.segment}>> 儲存節點（可以是組合式與僅限中繼資料儲存節點的任何組合）
+* 每個站台（在單一或多站台網格中）：三個 <<adc-service,ADC>> 儲存節點（可以是組合式與僅限中繼資料儲存節點的任何組合）
 * 單一站台網格：至少兩個物件儲存節點（可以是組合式和僅資料式的任意組合）
-* ${post_edited_translations.segment}
+* 多站台網格：每個站台至少一個物件儲存節點（可以是組合式，也可以是僅用於資料）
 
 
 
@@ -99,11 +99,11 @@ ${post_edited_translations.segment}
 下表列出儲存節點的主要服務；但是，此表並未列出所有節點服務。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 有些服務，例如 ADC 服務和 RSM 服務，通常只存在於每個站台的三個儲存節點上。
 
 [cols="1a,3a"]
 |===
-| 服務 | ${post_edited_translations.segment} 
+| 服務 | 關鍵功能 
 
 
  a| 
@@ -186,9 +186,9 @@ DDS 服務追蹤導入 StorageGRID 系統的物件總數，以及透過系統支
 
 
  a| 
-${post_edited_translations.segment}
+身份（idnt）
  a| 
-${post_edited_translations.segment}
+聯合來自 LDAP 和 Active Directory 的使用者身分。
 
 僅資料儲存節點不託管此服務。
 
@@ -197,7 +197,7 @@ ${post_edited_translations.segment}
  a| 
 [[ldr-service]]本機分發路由器 (LDR)
  a| 
-${post_edited_translations.segment}
+處理物件儲存協定請求並管理磁碟上的物件資料。
 
 .詳細資料
 [%collapsible]
@@ -207,17 +207,17 @@ ${post_edited_translations.segment}
 LDR 服務處理以下任務：
 
 * 查詢
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 資訊生命週期管理（ILM）活動
+* 物件刪除
 * 物件資料儲存設備
 * 從另一個 LDR 服務（儲存節點）傳輸物件資料
-* ${post_edited_translations.segment}
+* 資料儲存管理
 * S3 協定介面
 
 
-${post_edited_translations.segment}
+LDR 服務也會將每個 S3 物件對應到其唯一的 UUID。
 
-${post_edited_translations.segment}:: LDR 服務的底層資料儲存設備分為固定數量的物件存放區（也稱為儲存 Volume）。每個物件存放區都是一個分隔的安裝點。
+物件儲存:: LDR 服務的底層資料儲存設備分為固定數量的物件存放區（也稱為儲存 Volume）。每個物件存放區都是一個分隔的安裝點。
 +
 --
 Storage Node 中的物件存放區是由 0000 到 002F 的十六進位數字來識別，這稱為 Volume ID。第一個物件存放區（Volume 0）中已保留空間，用於 Cassandra 資料庫中的物件中繼資料；該 Volume 上的任何剩餘空間都會用於物件資料。所有其他物件存放區則專門用於物件資料，其中包括複寫的複本和糾刪編碼片段。
@@ -225,7 +225,7 @@ Storage Node 中的物件存放區是由 0000 到 002F 的十六進位數字來�
 為了確保複寫複本的空間使用量均勻，特定物件的物件資料會根據可用儲存空間儲存至一個物件存放區。當某個物件存放區裝滿時，其餘的物件存放區會繼續儲存物件，直到 Storage Node 上沒有更多空間為止。
 
 --
-中繼資料保護:: ${post_edited_translations.segment}
+中繼資料保護:: StorageGRID 將物件中繼資料儲存在 Cassandra 資料庫中，該資料庫與 LDR 服務互動。
 +
 --
 為確保備援並防止遺失，每個站台都維護三份物件中繼資料副本。此複寫不可設定，且自動執行。如需詳細資訊，請參閱 link:../admin/managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]。
@@ -237,16 +237,16 @@ Storage Node 中的物件存放區是由 0000 到 002F 的十六進位數字來�
 
 
  a| 
-${post_edited_translations.segment}
+複製狀態機（RSM）
  a| 
-${post_edited_translations.segment}
+確保將 S3 平台服務請求傳送到各自的端點。
 
 僅資料儲存節點不託管此服務。
 
 
 
  a| 
-${post_edited_translations.segment}
+伺服器狀態監控器 (SSM)
  a| 
 監控作業系統和底層硬體。
 

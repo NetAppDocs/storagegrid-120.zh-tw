@@ -2,7 +2,7 @@
 permalink: audit/object-retrieve-transactions.html 
 sidebar: sidebar 
 keywords: object retrieve, transactions, SGET, WGET 
-summary: ${post_edited_translations.segment} 
+summary: 您可以透過尋找 S3 API 特定的稽核訊息，在稽核日誌中識別物件擷取交易。 
 ---
 = StorageGRID 中物件擷取交易的稽核訊息
 :allow-uri-read: 
@@ -11,18 +11,18 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以透過尋找 S3 API 特定的稽核訊息，在稽核日誌中識別物件擷取交易。
 
 下表並未列出擷取交易期間產生的所有稽核訊息。表中僅包含追蹤擷取交易所需的訊息。
 
 
 
 [[s3-retrieval-audit-messages]]
-== ${post_edited_translations.segment}
+== S3 擷取稽核訊息
 
 [cols="1a,1a,2a,1a,1a"]
 |===
-| 程式碼 | Name | 說明 | ${post_edited_translations.segment} | 請參閱 
+| 程式碼 | Name | 說明 | 追蹤 | 請參閱 
 
 
  a| 
@@ -30,7 +30,7 @@ SGET
  a| 
 S3 GET
  a| 
-${post_edited_translations.segment}
+從儲存桶中擷取物件的請求。
  a| 
 CBID、S3BK、S3KY
  a| 
@@ -40,9 +40,9 @@ link:sget-s3-get.html["SGET：S3 GET"]
 
 
 [[example-s3-object-retrieval]]
-== ${post_edited_translations.segment}
+== 範例：S3 物件擷取
 
-${post_edited_translations.segment}
+當 S3 用戶端從儲存節點（LDR 服務）擷取物件時，會產生一則稽核訊息並儲存至稽核日誌。
 
 請注意，以下範例並未列出事務期間產生的所有稽核訊息。僅列出與 S3 擷取事務 （SGET） 相關的稽核訊息。
 
@@ -70,11 +70,11 @@ ${post_edited_translations.segment}
 [[example-s3-select-on-an-object]]
 == 範例：對物件執行 S3 Select
 
-${post_edited_translations.segment}
+當 S3 用戶端對物件發出 S3 Select 查詢時，會產生稽核訊息並儲存到稽核日誌。
 
 請注意，並非交易期間產生的所有稽核訊息都會列在以下範例中。僅列出與 S3 Select 交易（SelectObjectContent）相關的稽核訊息。
 
-${post_edited_translations.segment}
+每個查詢都會產生兩個稽核訊息：一個用於執行 S3 Select 請求的授權（S3SR 欄位設定為「select」），另一個是後續的標準 GET 操作，該操作在處理期間從儲存設備擷取資料。
 
 [listing, subs="specialcharacters,quotes"]
 ----

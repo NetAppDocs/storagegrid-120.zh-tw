@@ -15,18 +15,18 @@ summary: 物件資料由目前有效的 ILM 原則及其 ILM 規則進行管理�
 
 在物件生命週期的不同階段，可能需要不同類型或不同位置的物件複本。ILM 規則會定期評估，以確保物件按要求放置。
 
-${post_edited_translations.segment}
+物件資料由 LDR 服務管理。
 
 
 
 [[content-protection-replication]]
-== ${post_edited_translations.segment}
+== 內容保護：複寫
 
-${post_edited_translations.segment}
+如果 ILM 規則的內容放置指令需要物件資料的複寫副本，則由構成已設定儲存資源池的儲存節點建立副本並將其儲存到磁碟。
 
 LDR 服務中的 ILM 引擎控制複寫，並確保將正確數量的複本儲存在正確的位置，並保存正確的時間。
 
-image:replication_data_flow.png["${post_edited_translations.segment}"]
+image:replication_data_flow.png["圖示展示了周圍文字中描述的過程"]
 
 . ILM 引擎查詢 ADC 服務，以決定 ILM 規則指定的儲存資源池中最佳的目的地 LDR 服務。然後，它向該 LDR 服務傳送命令以啟動複寫。
 . 目的地 LDR 服務向 ADC 服務查詢最佳來源位置。然後，它會向來源 LDR 服務發送複寫請求。
@@ -67,6 +67,6 @@ image:cloud_storage_pool_data_flow.png["雲端儲存池資料流"]
 
 . ILM 引擎選擇 Data Mover 服務以複寫到雲端儲存池。
 . 資料移動服務將物件資料傳送至雲端儲存池。
-. ${post_edited_translations.segment}
+. 資料移動器服務通知 ILM 引擎物件資料已儲存。
 . ILM 引擎使用物件位置中繼資料更新中繼資料儲存。
 

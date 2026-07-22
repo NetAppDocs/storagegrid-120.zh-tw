@@ -22,7 +22,7 @@ summary: 如果資料中心站台或站台中的多個 Storage Node 無法使用
 503: Service Unavailable
 Unable to update compliance settings because the settings can't be consistently applied on enough storage services. Contact your grid administrator for assistance.
 ----
-${post_edited_translations.segment}
+若要解決此錯誤，請按照以下步驟操作：
 
 . 盡快恢復所有儲存節點或網站的可用性。
 . 如果無法讓每個站台的儲存節點達到足夠數量，請聯絡技術支援，他們可以協助您恢復節點，並確保變更在整個網格中一致套用。

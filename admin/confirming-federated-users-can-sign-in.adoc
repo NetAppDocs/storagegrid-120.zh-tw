@@ -2,7 +2,7 @@
 permalink: admin/confirming-federated-users-can-sign-in.html 
 sidebar: sidebar 
 keywords: sso configuration 
-summary: ${post_edited_translations.segment} 
+summary: 在啟用單一登入 （SSO） 之前，必須確認至少有一個聯盟使用者可以登入 Grid Manager 和 Tenant Manager，以管理任何現有的租戶帳戶。 
 ---
 = 確認聯合使用者可以登入 StorageGRID
 :allow-uri-read: 
@@ -11,12 +11,12 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+在啟用單一登入 （SSO） 之前，必須確認至少有一個聯盟使用者可以登入 Grid Manager 和 Tenant Manager，以管理任何現有的租戶帳戶。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 * 您有link:admin-group-permissions.html["特定存取權限"]。
-* ${post_edited_translations.segment}
+* 您已設定身分識別聯盟。
 
 
 .步驟
@@ -26,36 +26,36 @@ ${post_edited_translations.segment}
 TIP: 啟用單一登入 （SSO） 後，租戶管理員中設定的身分來源將會被 Grid Manager 中設定的身分來源覆寫。除非擁有 Grid Manager 身分來源的帳戶，否則屬於租戶身分來源的使用者將無法再登入。
 
 +
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 登入每個租戶帳戶的 Tenant Manager。
+.. 選擇「存取管理」>「身分聯盟」。
+.. 確認未選取「啟用身分聯盟」核取方塊。
+.. 如果是，請確認此租戶帳戶可能正在使用的任何聯盟群組不再需要，清除核取方塊，然後選擇 *儲存*。
 
 
-. ${post_edited_translations.segment}
+. 確認聯盟使用者可以存取 Grid Manager：
 +
 .. 從 Grid Manager 中，選擇 *Configuration* > *Access control* > *Admin groups*。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 確保至少有一個聯盟群組已從 Active Directory 身分識別來源匯入，並且已為其指派 Root 存取權限。
+.. 登出。
 .. 確認您可以以聯合群組使用者的身分重新登入 Grid Manager。
 
 
-. ${post_edited_translations.segment}
+. 如果存在租戶帳戶，請確認具有 Root 存取權限的聯盟使用者可以登入：
 +
 .. 從 Grid Manager 中選擇 *租戶*。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 選取租戶帳戶，然後選取 *Actions* > *Edit*。
+.. 在「輸入詳細資料」標籤上，選擇 *Continue*。
+.. 如果選取了「使用自己的身分來源」核取方塊，請取消選取該核取方塊並選擇「儲存」。
 
 
 +
-${post_edited_translations.segment}
+顯示租戶頁面。
 
 +
-.. ${post_edited_translations.segment}
+.. 選擇租戶帳戶，選擇 *Sign in*，然後以本機 root 使用者身分登入租戶帳戶。
 .. 從 Tenant Manager 中選擇 *Access Management* > *Groups*。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 確保 Grid Manager 中至少有一個聯盟群組已被指派此租戶的 Root 存取權限。
+.. 登出。
 .. 請確認您可以以聯合群組中的使用者身分重新登入租戶。
 
 
@@ -63,6 +63,6 @@ ${post_edited_translations.segment}
 
 .相關資訊
 * link:requirements-for-sso.html["單一登入的要求和注意事項"]
-* link:managing-admin-groups.html["${post_edited_translations.segment}"]
+* link:managing-admin-groups.html["管理管理員群組"]
 * link:../tenant/index.html["使用租戶帳戶"]
 

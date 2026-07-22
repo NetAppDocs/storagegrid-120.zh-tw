@@ -39,21 +39,21 @@ CAUTION: 以下 ILM 規則和原則僅為範例。設定 ILM 規則的方法有�
  a| 
 租戶帳戶名稱
  a| 
-${post_edited_translations.segment}
+ABC銀行
 
 
 
  a| 
-${post_edited_translations.segment}
+儲存桶名稱
  a| 
-${post_edited_translations.segment}
+銀行記錄
 
 
 
  a| 
-${post_edited_translations.segment}
+Bucket 區域
  a| 
-${post_edited_translations.segment}
+us-east-1（預設）
 
 |===
 新增至 bank-records 儲存桶中的每個物件和物件版本都將使用下列值 `retain-until-date`和 `legal hold`設定。
@@ -102,12 +102,12 @@ ${post_edited_translations.segment}
  a| 
 租戶帳戶
  a| 
-${post_edited_translations.segment}
+ABC銀行
 
 
 
  a| 
-${post_edited_translations.segment}
+儲存桶名稱
  a| 
 `bank-records`
 
@@ -134,14 +134,14 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+放置位置
  a| 
 從第 0 天起永久儲存
 
 
 
  a| 
-${post_edited_translations.segment}
+銷毀編碼設定檔
  a| 
 * 在三個資料中心站點的 Storage Nodes 上建立銷毀編碼複本
 * 採用 6+3 銷毀編碼方案
@@ -177,7 +177,7 @@ ${post_edited_translations.segment}
  a| 
 儲存桶名稱
  a| 
-${post_edited_translations.segment}
+未指定，但僅適用於未啟用 S3 Object Lock （或舊版合規性功能）的儲存桶。
 
 
 
@@ -200,10 +200,10 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+放置位置
  a| 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 在第 0 天，在資料中心 1 和資料中心 2 的儲存節點上保留兩個複本，持續 365 天。
+* 一年後，在 Cloud Storage Pool 中永久保留一份複本。
 
 
 |===
@@ -227,7 +227,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+租戶帳戶
  a| 
 未指定
 
@@ -259,22 +259,22 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+放置位置
  a| 
-${post_edited_translations.segment}
+從第 0 天起，永遠保留兩個複本——一個位於資料中心 1 的 Storage Nodes 上，一個位於資料中心 2 的 Storage Nodes 上。
 
 |===
 
 
 [[compliant-ilm-policy-for-s3-object-lock-example]]
-== ${post_edited_translations.segment}
+== 符合 S3 Object Lock 範例的 ILM 原則
 
 若要建立能夠有效保護系統中所有物件（包括已啟用 S3 物件鎖定的儲存桶中的物件）的 ILM 原則，您必須選擇符合所有物件儲存設備要求的 ILM 規則。然後，您必須模擬並啟動該原則。
 
 
 
 [[add-rules-to-the-policy]]
-=== ${post_edited_translations.segment}
+=== 在原則中新增規則
 
 在本例中，ILM 原則包含三條 ILM 規則，順序如下：
 
@@ -286,7 +286,7 @@ ${post_edited_translations.segment}
 
 
 [[simulate-the-policy]]
-=== ${post_edited_translations.segment}
+=== 模擬該原則
 
 在您將規則新增至原則、選擇預設符合法規規則並排列其他規則之後，您應該透過測試已啟用 S3 Object Lock 的儲存桶以及其他儲存桶中的物件來模擬原則。例如，當您模擬範例原則時，您會預期測試物件的評估如下：
 
@@ -294,7 +294,7 @@ ${post_edited_translations.segment}
 * 第二條規則將符合所有其他租戶帳戶中所有不符合法規的儲存桶中的所有物件。
 * 預設規則將符合以下物件：
 +
-** ${post_edited_translations.segment}
+** ABC 銀行租戶的 bank-records 儲存桶中小於或等於 1 MB 的物件。
 ** 任何其他已為所有其他租戶帳戶啟用 S3 物件鎖定的儲存桶中的物件。
 
 

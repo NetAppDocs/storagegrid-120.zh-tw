@@ -28,7 +28,7 @@ CBID
 
 
  a| 
-${post_edited_translations.segment}
+NOID
  a| 
 節點 ID
  a| 

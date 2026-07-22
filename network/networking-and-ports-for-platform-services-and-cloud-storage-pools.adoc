@@ -16,13 +16,13 @@ summary: 如果您打算使用 StorageGRID 平台服務或雲端儲存池，則�
 
 
 [[networking-for-platform-services]]
-== ${post_edited_translations.segment}
+== 平台服務的連網
 
-如 link:../admin/manage-platform-services-for-tenants.html["管理租戶平台服務"] 和 link:../tenant/considerations-for-platform-services.html["${post_edited_translations.segment}"] 中所述，平台服務包括提供搜尋整合、事件通知和 CloudMirror 複寫的外部服務。
+如 link:../admin/manage-platform-services-for-tenants.html["管理租戶平台服務"] 和 link:../tenant/considerations-for-platform-services.html["管理平台服務"] 中所述，平台服務包括提供搜尋整合、事件通知和 CloudMirror 複寫的外部服務。
 
 平台服務需要託管 StorageGRID ADC 服務的儲存節點存取外部服務端點。提供存取的範例包括：
 
-* ${post_edited_translations.segment}
+* 在具有 ADC 服務的儲存節點上，設定具有 AESL 項目的唯一管理網路，這些項目會路由至目標端點。
 * 使用用戶端網路提供的預設路由。如果使用預設路由，則可以使用link:../admin/manage-firewall-controls.html["不受信任的用戶端網路功能"]來限制傳入連線。
 
 
@@ -31,7 +31,7 @@ summary: 如果您打算使用 StorageGRID 平台服務或雲端儲存池，則�
 [[networking-for-cloud-storage-pools]]
 == 雲端儲存池的連網
 
-雲端儲存池也需要儲存節點存取所用外部服務（例如 Amazon S3 Glacier 或 Microsoft Azure Blob 儲存設備）提供的端點。如需相關資訊，請參閱link:../ilm/what-cloud-storage-pool-is.html["${post_edited_translations.segment}"]。
+雲端儲存池也需要儲存節點存取所用外部服務（例如 Amazon S3 Glacier 或 Microsoft Azure Blob 儲存設備）提供的端點。如需相關資訊，請參閱link:../ilm/what-cloud-storage-pool-is.html["什麼是雲端儲存資源池"]。
 
 
 
@@ -51,6 +51,6 @@ summary: 如果您打算使用 StorageGRID 平台服務或雲端儲存池，則�
 
 
 [[vlans-and-platform-services-and-cloud-storage-pools]]
-== ${post_edited_translations.segment}
+== VLAN、平台服務和 Cloud Storage Pool
 
 您無法將 VLAN 網路用於平台服務或 Cloud Storage Pools。目的地端點必須可透過網格、管理或用戶端網路存取。

@@ -23,7 +23,7 @@ OVWR
  a| 
 物件覆寫：記錄用另一個物件覆寫一個物件的交易。
  a| 
-${post_edited_translations.segment}
+S3 用戶端
  a| 
 link:ovwr-object-overwrite.html["OVWR：物件覆寫"]
 
@@ -36,7 +36,7 @@ S3 DELETE：記錄成功刪除物件或儲存貯體的交易。
 
 *注意：*如果交易操作的是子資源，則稽核訊息將包含欄位 S3SR。
  a| 
-${post_edited_translations.segment}
+S3 用戶端
  a| 
 link:sdel-s3-delete.html["SDEL：S3 DELETE"]
 
@@ -47,7 +47,7 @@ SPOS
  a| 
 S3 POST：記錄將物件從 AWS Glacier 儲存設備還原到雲端儲存池的成功交易。
  a| 
-${post_edited_translations.segment}
+S3 用戶端
  a| 
 link:spos-s3-post.html["SPOS：S3 POST"]
 
@@ -60,7 +60,7 @@ S3 PUT：記錄建立新物件或儲存桶的成功交易。
 
 *注意：*如果交易操作的是子資源，則稽核訊息將包含欄位 S3SR。
  a| 
-${post_edited_translations.segment}
+S3 用戶端
  a| 
 link:sput-s3-put.html["SPUT：S3 PUT"]
 
@@ -71,7 +71,7 @@ SUPD
  a| 
 S3 中繼資料已更新：記錄成功更新現有物件或儲存貯體中繼資料的交易。
  a| 
-${post_edited_translations.segment}
+S3 用戶端
  a| 
 link:supd-s3-metadata-updated.html["SUPD：S3 中繼資料已更新"]
 

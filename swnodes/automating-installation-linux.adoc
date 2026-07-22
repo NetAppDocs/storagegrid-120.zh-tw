@@ -65,7 +65,7 @@ NOTE: 範例腳本不包含在啟動 StorageGRID 主機服務之前建立網路�
 
 
 --
-.${post_edited_translations.segment}
+.Ubuntu 或 Debian
 --
 對於 Ubuntu 或 Debian 系統，提供的 `storagegrid`角色範例中的安裝任務使用 `ansible.builtin.apt`模組從本機 DEB 檔案或遠端 apt 儲存庫執行安裝。如果該模組無法使用或不受支援，您可能需要編輯以下檔案中的相應 Ansible 任務，以使用 `ansible.builtin.apt`模組：
 

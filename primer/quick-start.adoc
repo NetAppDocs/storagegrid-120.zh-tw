@@ -2,16 +2,16 @@
 permalink: primer/quick-start.html 
 sidebar: sidebar 
 keywords: StorageGRID, quick start, tasks 
-summary: ${post_edited_translations.segment} 
+summary: 請依照以下高階步驟設定和使用任何 StorageGRID 系統。 
 ---
-= ${post_edited_translations.segment}
+= StorageGRID 快速入門
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-${post_edited_translations.segment}
+請依照以下高階步驟設定和使用任何 StorageGRID 系統。
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一"] 學習、規劃和收集資料
 [role="quick-margin-para"]
@@ -21,7 +21,7 @@ ${post_edited_translations.segment}
 * 您預計初始階段和後續階段分別儲存多少物件資料？
 * 您需要多少個站點？
 * 每個站台需要多少個節點以及哪些類型的節點？
-* ${post_edited_translations.segment}
+* 您將使用哪些 StorageGRID 網路？
 * 誰會使用您的網格來儲存物件？他們會使用哪些應用程式？
 * 您對安全性或儲存設備有任何特殊要求嗎？
 * 您是否需要遵守任何法律或監管要求？
@@ -31,7 +31,7 @@ ${post_edited_translations.segment}
 您也可以選擇與您的 NetApp 專業諮詢服務顧問合作，存取 NetApp ConfigBuilder 工具以完成組態工作簿，以便在安裝和部署新系統時使用。您也可以使用此工具來協助自動化任何 StorageGRID 應用裝置的組態。請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/automating-appliance-installation-and-configuration.html["自動化應用裝置安裝與組態"^]。
 
 [role="quick-margin-para"]
-審查 link:index.html["了解 StorageGRID"] 和 link:../network/index.html["${post_edited_translations.segment}"]。
+審查 link:index.html["了解 StorageGRID"] 和 link:../network/index.html["網路連線準則"]。
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["二"] 安裝節點
 [role="quick-margin-para"]
@@ -41,7 +41,7 @@ StorageGRID 系統由獨立的硬體節點和軟體節點組成。首先，您�
 若要完成安裝，您必須在每個應用裝置或軟體主機上安裝 StorageGRID 軟體，並將節點連線至網格。在此步驟中，您需要提供站台與節點名稱、子網路詳細資料，以及 NTP 和 DNS 伺服器的 IP 位址。
 
 [role="quick-margin-para"]
-${post_edited_translations.segment}
+了解詳情：
 
 [role="quick-margin-list"]
 * https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["安裝應用裝置硬體"^]
@@ -53,10 +53,10 @@ ${post_edited_translations.segment}
 網格安裝完成後，您可以登入 Grid Manager。登入後，您可以審查新系統的整體健全狀況、啟用 AutoSupport 和警報電子郵件，以及設定 S3 端點網域名稱。
 
 [role="quick-margin-para"]
-${post_edited_translations.segment}
+了解詳情：
 
 [role="quick-margin-list"]
-* link:../admin/signing-in-to-grid-manager.html["${post_edited_translations.segment}"]
+* link:../admin/signing-in-to-grid-manager.html["登入 Grid Manager"]
 * link:../monitor/monitoring-system-health.html["監控系統健全狀況"]
 * link:../admin/configure-autosupport-grid-manager.html["設定 AutoSupport"]
 * link:../monitor/email-alert-notifications.html["設定電子郵件通知以接收提醒"]
@@ -68,14 +68,14 @@ ${post_edited_translations.segment}
 您需要為新 StorageGRID 系統執行的組態工作，取決於您將如何使用您的網格。您至少需要設定系統存取；使用 FabricPool 和 S3 精靈；以及管理各種儲存設備與安全性設定。
 
 [role="quick-margin-para"]
-${post_edited_translations.segment}
+了解詳情：
 
 [role="quick-margin-list"]
-* link:../admin/controlling-storagegrid-access.html["${post_edited_translations.segment}"]
+* link:../admin/controlling-storagegrid-access.html["控制 StorageGRID 存取"]
 * link:../admin/use-s3-setup-wizard.html["使用 S3 設定精靈"]
 * link:../fabricpool/use-fabricpool-setup-wizard.html["使用 FabricPool 設定精靈"]
-* link:../admin/manage-security.html["${post_edited_translations.segment}"]
-* link:../harden/index.html["${post_edited_translations.segment}"]
+* link:../admin/manage-security.html["管理安全性"]
+* link:../harden/index.html["系統強化"]
 
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png["五"] 設定 ILM
@@ -87,14 +87,14 @@ ${post_edited_translations.segment}
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-6.png["六"] 使用 StorageGRID
 [role="quick-margin-para"]
-${post_edited_translations.segment}
+初始組態完成後，StorageGRID 租戶帳戶可以使用 S3 用戶端應用程式來擷取、取得和刪除物件。
 
 [role="quick-margin-para"]
-${post_edited_translations.segment}
+了解詳情：
 
 [role="quick-margin-list"]
 * link:../tenant/index.html["使用租戶帳戶"]
-* link:../s3/index.html["${post_edited_translations.segment}"]
+* link:../s3/index.html["使用 S3 REST API"]
 
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-7.png["七"] 監控和疑難排解
@@ -102,7 +102,7 @@ ${post_edited_translations.segment}
 當您的系統啟動並執行時，您應該定期監控其活動，並疑難排解與解決任何警示。您可能也想要設定外部 syslog 伺服器、使用 SNMP 監控或收集額外資料。
 
 [role="quick-margin-para"]
-${post_edited_translations.segment}
+了解詳情：
 
 [role="quick-margin-list"]
 * link:../monitor/index.html["監控 StorageGRID"]
@@ -114,10 +114,10 @@ ${post_edited_translations.segment}
 您可以新增節點或站台來擴充系統的容量或功能。您也可以執行各種維護程序，以從故障中恢復，或使 StorageGRID 系統保持最新狀態並有效運作。
 
 [role="quick-margin-para"]
-${post_edited_translations.segment}
+了解詳情：
 
 [role="quick-margin-list"]
-* link:../landing-expand/index.html["${post_edited_translations.segment}"]
+* link:../landing-expand/index.html["展開網格"]
 * link:../landing-maintain/index.html["維護您的網格"]
 * link:../maintain/warnings-and-considerations-for-grid-node-recovery.html["恢復節點"]
 

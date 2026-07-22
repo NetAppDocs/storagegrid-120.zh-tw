@@ -22,7 +22,7 @@ summary: 如果您需要變更網格中所有節點的 Grid Network IP 位址，
 
 NOTE: 此步驟僅適用於 Grid Network。您不能使用此步驟變更管理網路或用戶端網路上的 IP 位址。
 
-如果您只想變更單一站台節點的 IP 位址和 MTU，請按照 link:changing-nodes-network-configuration.html["${post_edited_translations.segment}"] 說明進行操作。
+如果您只想變更單一站台節點的 IP 位址和 MTU，請按照 link:changing-nodes-network-configuration.html["更改節點網路組態"] 說明進行操作。
 
 .步驟
 . 提前規劃好需要在「變更 IP」工具之外進行的變更，例如 DNS 或 NTP 的變更，以及單一登入 （SSO） 組態的變更（如果使用）。
@@ -32,7 +32,7 @@ NOTE: 如果現有 NTP 伺服器在新 IP 位址上無法供網格存取，請�
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果現有 DNS 伺服器在新 IP 位址上無法供網格存取，請在執行 change-ip 程序之前新增新的 DNS 伺服器。
 
 +
 
@@ -43,7 +43,7 @@ NOTE: 如果您的 StorageGRID 系統啟用了 SSO，並且任何信賴方信任
 NOTE: 如有必要，請為新的 IP 位址新增新的子網路。
 
 . 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -62,11 +62,11 @@ NOTE: 如有必要，請為新的 IP 位址新增新的子網路。
 +
 image:change_ip_tool_main_menu.png["快照顯示變更 IP 工具的歡迎畫面"]
 
-. ${post_edited_translations.segment}
+. 在主選單中，選擇 *2* 來編輯所有節點的 IP/子網路遮罩、閘道和 MTU 資訊。
 +
-.. ${post_edited_translations.segment}
+.. 選擇 *1* 以變更網格網路。
 +
-${post_edited_translations.segment}
+選擇完成後，提示資訊將顯示節點名稱、網格網路名稱、資料類型（IP/遮罩、閘道或 MTU）和目前值。
 
 +
 編輯 DHCP 設定介面的 IP 位址、前綴長度、閘道或 MTU 會將該介面變更為靜態。每個由 DHCP 設定的介面之前都會顯示警告。
@@ -77,7 +77,7 @@ ${post_edited_translations.segment}
 .. 若要設定新值，請按目前值顯示的格式輸入。
 .. 編輯完所有要變更的節點後，輸入 *q* 返回主選單。
 +
-${post_edited_translations.segment}
+您的變更將保留，直到清除或套用為止。
 
 
 
@@ -99,7 +99,7 @@ NOTE: 某些命令列介面可能會使用刪除線格式顯示新增和刪除�
 此驗證可確保網格網路的規則（例如不使用重疊子網路）不會遭到違反。
 
 +
-${post_edited_translations.segment}
+在這個例子中，驗證回傳了錯誤。
 
 +
 image:change_ip_tool_validate_sample_error_messages.gif["快照由周圍文字描述"]
@@ -111,27 +111,27 @@ image:change_ip_tool_validate_sample_error_messages.gif["快照由周圍文字�
 image:change_ip_tool_validate_sample_passed_messages.gif["快照由周圍文字描述"]
 
 . 驗證通過後，選取 *10* 以套用新的網路組態。
-. ${post_edited_translations.segment}
+. 選擇 *stage* 以便在下次重啟節點時套用變更。
 +
 
 NOTE: 您必須選擇 *stage*。請勿執行滾動重新啟動，無論是手動重新啟動還是選擇 *apply* 而不是 *stage*；否則網格將無法成功啟動。
 
 . 更改完成後，選擇 *0* 以結束「變更 IP」工具。
-. ${post_edited_translations.segment}
+. 同時關閉所有節點。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 必須關閉整個網格，使所有節點同時停止運作。
 
 . 進行必要的實體或虛擬連網變更。
 . 確認所有網格節點均已關閉。
 . 打開所有節點的電源。
-. ${post_edited_translations.segment}
+. 網格成功啟動後：
 +
 .. 如果您新增了新的 NTP 伺服器，請刪除舊的 NTP 伺服器值。
 .. 如果您新增了新的 DNS 伺服器，請刪除舊的 DNS 伺服器值。
 
 
-. ${post_edited_translations.segment}
+. 從 Grid Manager 下載新的恢復套件。
 +
 .. 選擇 *Maintenance* > *System* > *Recovery package*。
 .. 請輸入佈建密碼。
@@ -141,6 +141,6 @@ NOTE: ${post_edited_translations.segment}
 
 
 .相關資訊
-* link:adding-to-or-changing-subnet-lists-on-grid-network.html["${post_edited_translations.segment}"]
+* link:adding-to-or-changing-subnet-lists-on-grid-network.html["在網格網路上新增或變更子網路列表"]
 * link:shutting-down-grid-node.html["關閉網格節點"]
 

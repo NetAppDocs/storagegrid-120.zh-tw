@@ -17,7 +17,7 @@ summary: 您可能需要啟動已停止的服務，或者您可能需要停止�
 您擁有  `Passwords.txt` 檔案。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -28,7 +28,7 @@ summary: 您可能需要啟動已停止的服務，或者您可能需要停止�
 +
 當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
 
-. ${post_edited_translations.segment}
+. 根據服務目前是正在運作還是已停止，決定要發出哪個命令。
 +
 ** 如果服務目前已停止，請使用  `start` 命令手動啟動服務： `service _servicename_ start`
 +

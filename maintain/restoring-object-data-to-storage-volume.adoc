@@ -16,11 +16,11 @@ summary: 在恢復非應用裝置 Storage Node 的儲存 Volume 之後，您可�
 
 
 [[which-procedure-should-i-use]]
-== ${post_edited_translations.segment}
+== 我該採用哪一種方法？
 
 盡可能使用 Grid Manager 中的「Volume 還原」頁面來還原物件資料。
 
-* 如果 Volume 列在 *維護* > *Volume 還原* > *要還原的節點*，請使用 link:../maintain/restoring-volume.html["${post_edited_translations.segment}"] 還原物件資料。
+* 如果 Volume 列在 *維護* > *Volume 還原* > *要還原的節點*，請使用 link:../maintain/restoring-volume.html["網格管理器中的 Volume 還原頁面"] 還原物件資料。
 * 如果 Volume 未列在「維護」>「Volume 還原」>「要還原的節點」中，請依照下列步驟使用 `repair-data`指令碼還原物件資料。
 +
 如果恢復的儲存節點包含的磁碟區比它要替換的節點少，則必須使用 `repair-data`指令碼。
@@ -28,7 +28,7 @@ summary: 在恢復非應用裝置 Storage Node 的儲存 Volume 之後，您可�
 
 
 
-NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["${post_edited_translations.segment}"]。
+NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["Grid Manager 中的 Volume 還原程序"]。
 
 
 
@@ -36,7 +36,7 @@ NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請�
 == 使用 `repair-data`指令碼還原物件資料
 
 .開始之前
-* 您已確認，在 Grid Manager 的「節點」>「概覽」標籤中，已復原的儲存節點的連線狀態為「已連線」image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]。
+* 您已確認，在 Grid Manager 的「節點」>「概覽」標籤中，已復原的儲存節點的連線狀態為「已連線」image:icon_alert_green_checkmark.png["圖示提示綠色對勾"]。
 
 
 .關於此任務
@@ -44,7 +44,7 @@ NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請�
 
 請注意下列事項：
 
-* ${post_edited_translations.segment}
+* 如果 ILM 規則設定為僅儲存一個複寫複本，而該複本存在於發生故障的儲存設備 Volume 上，則您將無法恢復該物件。
 * 如果物件唯一剩餘的複本位於 Cloud Storage Pool 中，則 StorageGRID 必須向 Cloud Storage Pool 端點發出多個要求，以還原物件資料。執行此程序之前，請聯絡技術支援以協助估算恢復時間範圍及相關成本。
 
 
@@ -61,26 +61,26 @@ NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請�
 NOTE: 如需更多關於  `repair-data` 指令碼的資訊，請在主要 Admin Node 的命令列輸入  `repair-data --help`。
 
 
-NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["${post_edited_translations.segment}"]。
+NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["Grid Manager 中的 Volume 還原程序"]。
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.複製資料
 --
-${post_edited_translations.segment}
+根據您需要修理的是整個節點還是節點上的某些 Volume，可以使用兩個命令來恢復複寫資料：
 
 `repair-data start-replicated-node-repair`
 
 `repair-data start-replicated-volume-repair`
 
-${post_edited_translations.segment}
+您可以使用以下命令追蹤複製資料的修理情況：
 
 `repair-data show-replicated-repair-status`
 
 --
 .糾刪碼（EC）資料
 --
-${post_edited_translations.segment}
+根據您需要修復的是整個節點還是節點上的某些 Volume，可使用兩個命令來恢復銷毀編碼資料：
 
 `repair-data start-ec-node-repair`
 
@@ -101,7 +101,7 @@ NOTE: EC 修理作業會暫時佔用大量儲存設備。可能會觸發儲存�
 
 
 [[find-hostname-for-storage-node]]
-== ${post_edited_translations.segment}
+== 尋找儲存節點的主機名稱
 
 . 登入任意管理節點：
 +
@@ -124,14 +124,14 @@ NOTE: EC 修理作業會暫時佔用大量儲存設備。可能會觸發儲存�
 
 如果所有儲存設備 Volume 均已故障，請修理整個節點。請根據您使用的是複寫資料、糾刪碼（EC）資料或兩者，按照 *複寫資料*、*糾刪碼（EC）資料* 或兩者的說明進行操作。
 
-如果只有部分 Volume 故障，請前往 <<${post_edited_translations.segment}>>。
+如果只有部分 Volume 故障，請前往 <<如果只有部分磁碟區故障，請修理資料>>。
 
 
 NOTE: 您無法同時為多個節點執行  `repair-data` 作業。若要恢復多個節點，請聯絡技術支援。
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.複製資料
 --
 如果您的網格包含複寫資料，請使用 `repair-data start-replicated-node-repair`命令搭配 `--nodes`選項，其中 `--nodes`是主機名稱（系統名稱），以修理整個儲存節點。
 
@@ -140,7 +140,7 @@ NOTE: 您無法同時為多個節點執行  `repair-data` 作業。若要恢復�
 `repair-data start-replicated-node-repair --nodes SG-DC-SN3`
 
 
-NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複寫的物件資料，則會觸發 *Objects Lost* 警示。整個系統中的儲存節點都可能會觸發警示。您應該確定遺失的原因，以及是否可以進行恢復。請參閱 link:../troubleshoot/investigating-potentially-lost-objects.html["${post_edited_translations.segment}"]。
+NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複寫的物件資料，則會觸發 *Objects Lost* 警示。整個系統中的儲存節點都可能會觸發警示。您應該確定遺失的原因，以及是否可以進行恢復。請參閱 link:../troubleshoot/investigating-potentially-lost-objects.html["調查可能遺失的物件"]。
 
 --
 .糾刪碼（EC）資料
@@ -160,7 +160,7 @@ NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複�
 
 
 [[repair-data-if-only-some-volumes-have-failed]]
-== ${post_edited_translations.segment}
+== 如果只有部分磁碟區故障，請修理資料
 
 如果只有部分 Volume 故障，請修理受影響的 Volume。請根據您使用的是複寫資料、糾刪碼（EC）資料或兩者，按照 *複寫資料*、*糾刪碼（EC）資料* 或兩者的說明進行操作。
 
@@ -172,7 +172,7 @@ NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複�
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.複製資料
 --
 如果您的網格包含複寫的資料，請使用  `start-replicated-volume-repair` 命令搭配  `--nodes` 選項來識別節點（其中  `--nodes` 為該節點的主機名稱）。然後加入  `--volumes` 或  `--volume-range` 選項，如下列範例所示。
 
@@ -226,7 +226,7 @@ NOTE: 當某些 Storage 節點離線時，即可開始修理糾刪碼資料。�
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.複製資料
 --
 * 若要取得複寫修理的預估完成百分比，請將  `show-replicated-repair-status` 選項新增至 repair-data 命令。
 +
@@ -234,20 +234,20 @@ NOTE: 當某些 Storage 節點離線時，即可開始修理糾刪碼資料。�
 
 * 確定修理是否完成：
 +
-.. ${post_edited_translations.segment}
+.. 選擇 *節點* > *_正在修理的儲存節點_* > *ILM*。
 .. 請查看「評估」區段中的屬性。修理完成後，*Awaiting - All* 屬性將顯示 0 個物件。
 
 
 * 如需更詳細地監控修理：
 +
 .. 選取 *Nodes* 。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 選擇 *_grid name_* > *ILM*。
+.. 將遊標停留在 ILM 佇列圖上，即可查看 *掃描速率（物件/秒）* 屬性的值，該屬性表示網格中的物件被掃描並排入 ILM 佇列的速率。
 .. 在 ILM 佇列部分，查看以下屬性：
 +
 *** *掃描週期 - 估計值*：完成所有物件的完整 ILM 掃描的估計時間。
 +
-${post_edited_translations.segment}
+完整掃描並不能保證 ILM 已套用至所有物件。
 
 *** *修復嘗試次數*：指對被視為高風險的複製資料嘗試進行物件修理操作的總次數。高風險物件是指僅剩一個複本的物件，無論該複本是由 ILM 原則指定，或是由於複本遺失所造成。每次儲存節點嘗試修理高風險物件時，此計數都會遞增。如果網格繁忙，則會優先處理高風險 ILM 修復作業。
 +
@@ -263,7 +263,7 @@ ${post_edited_translations.segment}
 --
 .糾刪碼（EC）資料
 --
-${post_edited_translations.segment}
+若要監控銷毀編碼資料的修理，並重試任何可能失敗的要求：
 
 . 確定糾刪碼資料修理的狀態：
 +

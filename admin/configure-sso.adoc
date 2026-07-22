@@ -15,13 +15,13 @@ summary: 您可以依照「設定 SSO」精靈的步驟進入沙盒模式，在�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 * 您已為 StorageGRID 系統設定身分識別聯盟。
 * 對於身分識別聯合 *LDAP 服務類型*，您可以根據計畫使用的 SSO 身分識別供應商選擇 Active Directory 或 Entra ID。
 +
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 已設定 LDAP 服務類型 | 單一登入身分供應商選項 
 
 
  a| 
@@ -61,7 +61,7 @@ Entra ID
 
 
 [[access-the-wizard]]
-== ${post_edited_translations.segment}
+== 存取精靈
 
 .步驟
 . 選擇 *Configuration* > *Access control* > *Single sign-on*。「單一登入」頁面隨即出現。
@@ -79,22 +79,22 @@ NOTE: 如果「設定 SSO 設定」按鈕處於停用狀態，請確認您已將
 
 .步驟
 . 從下拉清單中選取 *SSO 類型*。
-. ${post_edited_translations.segment}
+. 如果您選擇 Active Directory 作為 SSO 類型，請輸入身分識別供應商的*聯盟服務名稱*，與 Active Directory Federation Service （AD FS） 中顯示的名稱完全一致。
 +
 
 NOTE: 若要尋找同盟服務名稱，請前往 Windows Server Manager。選取 *Tools* > *AD FS Management*。從 Action 功能表中，選取 *Edit Federation Service Properties*。同盟服務名稱會顯示在第二個欄位中。
 
-. ${post_edited_translations.segment}
+. 指定身分供應商在回應 StorageGRID 請求時傳送 SSO 組態資訊時，將使用哪個 TLS 憑證來保護連線的安全。
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** *使用作業系統 CA 憑證*：使用作業系統上安裝的預設 CA 憑證來保護連線的安全。
+** *使用自訂 CA 憑證*：使用自訂 CA 憑證來保護連線安全。
 +
-${post_edited_translations.segment}
+如果選取此設定，請複製自訂憑證的文字，並將其貼上到 *CA 憑證* 文字方塊中。
 
-** ${post_edited_translations.segment}
+** *請勿使用 TLS*：請勿使用 TLS 憑證來保護連線安全。
 +
 
-CAUTION: 如果變更 CA 憑證，請立即 link:../maintain/starting-or-restarting-service.html["${post_edited_translations.segment}"] 並測試是否能成功單一登入 Grid Manager。
+CAUTION: 如果變更 CA 憑證，請立即 link:../maintain/starting-or-restarting-service.html["在管理節點上重新啟動 mgmt-api 服務"] 並測試是否能成功單一登入 Grid Manager。
 
 
 
@@ -104,7 +104,7 @@ CAUTION: 如果變更 CA 憑證，請立即 link:../maintain/starting-or-restart
 
 
 [[enter-sandbox-modeprovide-relying-party-identifier]]
-== ${post_edited_translations.segment}
+== [[enter-sandbox-mode]]提供信賴方識別碼
 
 . 根據您選擇的 SSO 類型，填寫「提供信賴方識別碼」頁面上的欄位。
 +
@@ -122,7 +122,7 @@ NOTE: 您必須為 StorageGRID 系統中的每個管理節點建立信賴憑證�
 
 
 
-.. ${post_edited_translations.segment}
+.. 選擇 *Save and enter sandbox mode*。
 
 
 --
@@ -156,16 +156,16 @@ NOTE: 您必須為 StorageGRID 系統中的每個管理節點建立一個 SP 連
 
 
 
-.. ${post_edited_translations.segment}
+.. 在 *Federation metadata URL* 欄位中，為每個管理節點指定聯盟中繼資料 URL。
 +
-${post_edited_translations.segment}
+請使用以下格式：
 
 +
 [listing]
 ----
 https://<Federation Service Name>:<port>/pf/federation_metadata.ping?PartnerSpId=<SP Connection ID>
 ----
-.. ${post_edited_translations.segment}
+.. 選擇 *Save and enter sandbox mode*。
 
 
 --
@@ -189,10 +189,10 @@ StorageGRID 可依需求保持在沙盒模式下。但是，只有同盟使用�
 . 前往 Active Directory Federation Services （AD FS）。
 . 使用「設定 SSO」頁面上表格中顯示的每個信賴方識別碼，為 StorageGRID 建立一個或多個信賴方信任。
 +
-${post_edited_translations.segment}
+您必須為表格中顯示的每個管理節點建立一個信任關係。
 
 +
-如需說明，請前往 link:../admin/creating-relying-party-trusts-in-ad-fs.html["${post_edited_translations.segment}"]。
+如需說明，請前往 link:../admin/creating-relying-party-trusts-in-ad-fs.html["在 AD FS 中建立信賴方信任"]。
 
 
 
@@ -200,7 +200,7 @@ ${post_edited_translations.segment}
 .Entra ID
 --
 .步驟
-. ${post_edited_translations.segment}
+. 從您目前登入的管理節點的單一登入頁面，選擇按鈕下載並儲存 SAML 中繼資料。
 . 然後，對網格中的任何其他管理節點重複這些步驟：
 +
 .. 登入節點。
@@ -208,7 +208,7 @@ ${post_edited_translations.segment}
 .. 下載並儲存該節點的 SAML 中繼資料。
 
 
-. ${post_edited_translations.segment}
+. 前往 Azure 入口網站。
 . 請依照 link:../admin/creating-enterprise-application-entra-id.html["在 Entra ID 中建立企業應用程式"] 中的步驟，將每個管理節點的 SAML 中繼資料檔案上傳至其對應的 Entra ID 企業應用程式。
 
 
@@ -216,7 +216,7 @@ ${post_edited_translations.segment}
 .PingFederate
 --
 .步驟
-. ${post_edited_translations.segment}
+. 從您目前登入的管理節點的單一登入頁面，選擇按鈕下載並儲存 SAML 中繼資料。
 . 然後，對網格中的任何其他管理節點重複這些步驟：
 +
 .. 登入節點。
@@ -289,7 +289,7 @@ URL 源自於您在「聯合服務名稱」欄位中輸入的值。
 ** 如果 SSO 作業未成功，則會出現錯誤訊息。請修正此問題，清除瀏覽器的 Cookie，然後重試。
 
 
-. ${post_edited_translations.segment}
+. 選擇下一個連結以驗證網格中每個管理節點的 SSO 連線。
 +
 如果看到「頁面已過期」訊息，請選擇瀏覽器中的「後退」按鈕，然後重新提交您的憑證。
 
@@ -302,7 +302,7 @@ URL 源自於您在「聯合服務名稱」欄位中輸入的值。
 [[enable-single-sign-on]]
 == 啟用單一登入
 
-${post_edited_translations.segment}
+當您確認可以使用 SSO 登入每個管理節點後，即可為整個 StorageGRID 系統啟用 SSO。
 
 
 TIP: 當啟用 SSO 時，所有使用者都必須使用 SSO 來存取 Grid Manager、Tenant Manager、Grid Management API 及 Tenant Management API。本機使用者無法再存取 StorageGRID。
@@ -313,8 +313,8 @@ TIP: 當啟用 SSO 時，所有使用者都必須使用 SSO 來存取 Grid Manag
 +
 現在已啟用單一登入。單一登入頁面隨即出現，且現在包含您剛才設定的 SSO 詳細資料。
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 若要編輯組態，請選擇*編輯*。
+. 若要停用單一登入，請選擇 *Disable SSO*。
 
 
 

@@ -2,7 +2,7 @@
 permalink: maintain/preparing-appliance-for-reinstallation-platform-replacement-only.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, appliance, reinstallation appliance, reinstall appliance 
-summary: ${post_edited_translations.segment} 
+summary: 恢復託管在服務應用裝置上的網格節點時，必須先準備好該應用裝置以重新安裝 StorageGRID 軟體。 
 ---
 = 準備 StorageGRID 設備以進行重新安裝 （僅限平台更換）
 :allow-uri-read: 
@@ -11,12 +11,12 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+恢復託管在服務應用裝置上的網格節點時，必須先準備好該應用裝置以重新安裝 StorageGRID 軟體。
 
 僅當要替換託管在服務應用裝置上的故障節點時，才執行此程序。如果故障節點最初託管在 VMware 或 Linux 主機上，請勿執行這些步驟。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入故障的網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。

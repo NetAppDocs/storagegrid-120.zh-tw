@@ -2,7 +2,7 @@
 permalink: monitor/silencing-alert-notifications.html 
 sidebar: sidebar 
 keywords: how to disable alert rules, how to remove a custom alert rule 
-summary: ${post_edited_translations.segment} 
+summary: 您也可以設定靜音功能，暫時抑制警報通知。 
 ---
 = 在 StorageGRID 中靜音警示通知
 :allow-uri-read: 
@@ -11,11 +11,11 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您也可以設定靜音功能，暫時抑制警報通知。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您擁有 link:../admin/admin-group-permissions.html["管理警報或 Root 存取權限"]。
 
 
 .關於此任務
@@ -41,7 +41,7 @@ image:alerts_silences_page.png["Alerts > Silences 頁面"]
 +
 image:alerts_create_silence.png["警報 > 建立靜默"]
 
-. ${post_edited_translations.segment}
+. 請選擇或輸入以下資訊：
 +
 [cols="1a,3a"]
 |===
@@ -53,7 +53,7 @@ image:alerts_create_silence.png["警報 > 建立靜默"]
  a| 
 您要靜音的警示規則名稱。您可以選擇任何預設或自訂警示規則，即使該警示規則已停用。
 
-${post_edited_translations.segment}
+*注意：* 如果要使用此對話方塊中指定的條件靜音所有警示規則，請選擇 *All rules*。
 
 
 
@@ -65,7 +65,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+期間
  a| 
 您希望此靜音維持生效的時間，以分鐘、小時或天為單位。靜音的生效時間可介於 5 分鐘到 1,825 天（5 年）之間。
 
@@ -74,7 +74,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+嚴重程度
  a| 
 應將哪些警示嚴重性層級靜音。如果警示是在其中一個選取的嚴重性層級觸發，則不會傳送任何通知。
 
@@ -97,11 +97,11 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+編輯靜音
  a| 
 .. 選擇 *Alerts* > *Silences*。
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 從表格中，選擇要編輯的靜音的選項按鈕。
+.. 選擇 *Edit*。
 .. 變更執行摘要、剩餘時間、選定的嚴重程度或受影響的節點。
 .. 選取 *Save* 。
 
@@ -114,7 +114,7 @@ ${post_edited_translations.segment}
 .. 選擇 *Alerts* > *Silences*。
 .. 從表格中，選擇要移除的靜音的單選按鈕。
 .. 選擇 *Remove* 。
-.. ${post_edited_translations.segment}
+.. 選擇 *OK* 以確認要移除此靜音。
 +
 *附註*：觸發此警示時，現在將會傳送通知（除非被另一個靜音抑制）。如果此警示目前已觸發，可能需要幾分鐘的時間才能傳送電子郵件或 SNMP 通知，且「警示」頁面才會更新。
 

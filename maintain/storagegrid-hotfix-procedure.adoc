@@ -2,7 +2,7 @@
 permalink: maintain/storagegrid-hotfix-procedure.html 
 sidebar: sidebar 
 keywords: apply hotfix, install hotfix, replace primary admin node 
-summary: ${post_edited_translations.segment} 
+summary: 如果在功能版本發行之間偵測到並解決了軟體問題，則可能需要對 StorageGRID 系統套用 Hotfix。 
 ---
 = StorageGRID Hotfix 程序
 :allow-uri-read: 
@@ -11,14 +11,14 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+如果在功能版本發行之間偵測到並解決了軟體問題，則可能需要對 StorageGRID 系統套用 Hotfix。
 
 StorageGRID Hotfix 包含在功能或修補程式版本之外提供的軟體變更。相同的變更將包含在未來的版本中。此外，每個 Hotfix 版本都包含該功能或修補程式版本中所有先前 Hotfix 的彙總。
 
 
 
 [[considerations-for-applying-a-hotfix]]
-== ${post_edited_translations.segment}
+== 應用 Hotfix 的注意事項
 
 當其他維護程序正在運作時，您無法套用 StorageGRID Hotfix。例如，在退役、擴充或恢復程序執行時，您無法套用 Hotfix。
 
@@ -34,22 +34,22 @@ NOTE: 如果節點或站台退役程序已暫停，您可以安全地套用 Hotf
 
 
 [[how-hotfixes-are-applied-for-recovery-and-expansion]]
-== ${post_edited_translations.segment}
+== 如何套用 Hotfix 進行恢復和擴充
 
 將 Hotfix 套用至網格後，主要管理節點會自動將相同的 Hotfix 版本安裝到透過恢復作業還原或在擴充中新增的任何節點。
 
 但是，如果您需要恢復主管理節點，則必須手動安裝正確的 StorageGRID 版本，然後套用 Hotfix。主管理節點的最終 StorageGRID 版本必須與網格中其他節點的版本相符。
 
-${post_edited_translations.segment}
+以下範例說明在恢復主要管理節點時如何套用 Hotfix：
 
 . 假設網格正在執行裝有最新 Hotfix 的 StorageGRID 11._A.B_ 版本。"網格版本" 為 11._A.B.y_。
 . 主管理節點故障。
-. ${post_edited_translations.segment}
+. 使用 StorageGRID 11._A.B_ 重新部署主要管理節點，並執行恢復程序。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 為了與網格版本相符，部署節點時可以使用次要版本；無需先部署主要版本。
 
 . 然後，將 Hotfix 11._A.B.y_ 套用至主要管理節點。
 
 
-如需詳細資訊，請參閱 link:configuring-replacement-primary-admin-node.html["${post_edited_translations.segment}"]。
+如需詳細資訊，請參閱 link:configuring-replacement-primary-admin-node.html["設定替換主要管理節點"]。

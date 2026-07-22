@@ -25,7 +25,7 @@ image:ilm_replication_make_2_copies.png["製作 2 份複本規則"]
 NOTE: StorageGRID 在任何給定的 Storage Node 上只能儲存物件的單一複本。如果您的網格包含三個 Storage Node，而您建立了一個 4 複本 ILM 規則，則只會建立三個複本－每個 Storage Node 一個複本。此時會觸發 *ILM placement unachievable* 警示，表示 ILM 規則無法完全套用。
 
 .相關資訊
-* link:what-erasure-coding-is.html["${post_edited_translations.segment}"]
+* link:what-erasure-coding-is.html["什麼是銷毀編碼"]
 * link:what-storage-pool-is.html["什麼是儲存資源池"]
 * link:using-multiple-storage-pools-for-cross-site-replication.html["啟用複寫和銷毀編碼以保護站台免於遺失"]
 

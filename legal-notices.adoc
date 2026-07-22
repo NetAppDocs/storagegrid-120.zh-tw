@@ -48,7 +48,7 @@ link:https://www.netapp.com/company/legal/privacy-policy/["https://www.netapp.co
 
 
 [[api-license]]
-== ${post_edited_translations.segment}
+== API 授權
 
 本文件未授予 StorageGRID S3 REST API 的任何授權或其他權利。任何對 StorageGRID S3 REST API 的使用或存取，均需要且受與 NetApp 簽署的分隔授權合約所約束。
 

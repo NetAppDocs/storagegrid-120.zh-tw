@@ -18,24 +18,24 @@ summary: 為了提高效率、可靠性與安全性，StorageGRID 系統在 Linu
 
 CAUTION: 請勿直接將 bond 或橋接裝置用作 Container 網路介面。這樣做可能會因為在 Container 命名空間中將 macvlan 與 bond 和橋接裝置搭配使用時的核心問題，而導致節點無法啟動。
 
-請參閱 link:../swnodes/index.html["${post_edited_translations.segment}"]。
+請參閱 link:../swnodes/index.html["安裝說明"]。
 
 
 
 [[host-network-configuration-for-container-engine-deployments]]
-== ${post_edited_translations.segment}
+== Container 引擎部署的主機網路組態
 
 在 Container 引擎平台上開始部署 StorageGRID 之前，請先確定每個節點將使用哪些網路（Grid、Admin、Client）。您必須確保每個節點的網路介面都設定在正確的虛擬或實體主機介面上，且每個網路都有足夠的頻寬。
 
 
 
 [[physical-hosts]]
-=== ${post_edited_translations.segment}
+=== 實體主機
 
-${post_edited_translations.segment}
+如果您使用實體主機來支援網格節點：
 
 * 請確保所有主機針對每個節點介面使用相同的主機介面。此策略可簡化主機組態，並支援未來的節點移轉。
-* ${post_edited_translations.segment}
+* 取得實體主機本身的 IP 位址。
 +
 
 NOTE: 主機上的實體介面可供主機本身以及執行在該主機上的一個或多個節點使用。指派給使用此介面的主機或節點的任何 IP 位址都必須是唯一的。主機和節點不能共享 IP 位址。
@@ -44,7 +44,7 @@ NOTE: 主機上的實體介面可供主機本身以及執行在該主機上的�
 * 如果您打算在 StorageGRID 中使用 VLAN 介面，則主機必須具有一個或多個主幹介面，以提供對所需 VLAN 的存取。這些介面可以作為 eth0、eth2 或附加介面傳遞到節點 Container 中。若要新增主幹或存取介面，請參閱以下內容：
 +
 ** *Linux （安裝節點之前）*: link:../swnodes/creating-node-configuration-files.html["建立節點組態檔"]
-** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["向節點新增幹線或存取介面"]
 
 
 
@@ -61,12 +61,12 @@ NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本�
 
 [cols="1a,1a,1a,1a"]
 |===
-| ${post_edited_translations.segment} 3+| 網路類型 
+| 節點類型 3+| 網路類型 
 
 
  a| 
  a| 
-${post_edited_translations.segment}
+網格
  a| 
 管理員
  a| 
@@ -114,7 +114,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+封存
  a| 
 10 Gbps
  a| 
@@ -128,13 +128,13 @@ NOTE: 此表未包含 SAN 頻寬，而 SAN 頻寬是存取共享儲存設備所�
 
 根據您計劃在該主機上執行的 StorageGRID 節點數量和類型，使用下表確定每個主機上所需佈建的最小網路介面數量。
 
-${post_edited_translations.segment}
+例如，要在單一主機上執行一個管理節點、一個閘道節點和一個儲存節點：
 
 * 在管理節點上連接網格網路和管理網路（需要 10 + 1 = 11 Gbps）
 * 在閘道節點上連接網格和用戶端網路（需要 10 + 10 = 20 Gbps）
-* ${post_edited_translations.segment}
+* 在儲存節點上連接網格網路（需要 10 Gbps）
 
 
 在這種情況下，您應該提供至少 11 + 20 + 10 = 41 Gbps 的網路頻寬，這可以透過兩個 40 Gbps 介面或五個 10 Gbps 介面來滿足，這些介面可以聚合到中繼線中，然後由三個或更多 VLAN 共享，這些 VLAN 承載包含主機的實體資料中心本地的 Grid、Admin 和 Client 子網路。
 
-如需在 StorageGRID 叢集中的主機上設定實體與網路資源以準備進行 StorageGRID 部署的一些建議方法，請參閱 link:../swnodes/configuring-host-network.html["${post_edited_translations.segment}"]。
+如需在 StorageGRID 叢集中的主機上設定實體與網路資源以準備進行 StorageGRID 部署的一些建議方法，請參閱 link:../swnodes/configuring-host-network.html["設定主機網路"]。

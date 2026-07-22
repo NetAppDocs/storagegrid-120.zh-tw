@@ -13,7 +13,7 @@ summary: 在退役網格節點之前，必須確認沒有正在進行的資料�
 [role="lead"]
 在退役或擴充網格節點之前，必須確認沒有正在進行的資料修理作業。如果任何修理作業失敗，必須重新啟動這些作業並等待其完成，然後再執行退役程序。
 
-關於如何擴充網格節點的詳細資訊，請參閱 link:../expand/index.html["${post_edited_translations.segment}"]。
+關於如何擴充網格節點的詳細資訊，請參閱 link:../expand/index.html["擴充類型"]。
 
 .關於此任務
 如果需要退役已中斷連線的儲存節點，請在退役程序完成後執行下列步驟，以確保資料修理作業已完成。您必須確保已移除節點上的所有銷毀編碼片段已恢復。
@@ -21,7 +21,7 @@ summary: 在退役網格節點之前，必須確認沒有正在進行的資料�
 這些步驟僅適用於具有銷毀編碼物件的系統。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -48,7 +48,7 @@ TIP: （選填）您可以使用 Grid Manager 監控進行中的恢復程序，�
 . 如果所有修理的「狀態」為 `Completed`，您就不需要重新啟動任何修理工作。
 . 如果任何修理的狀態為 `Stopped`，您必須重新啟動該修理。
 +
-.. ${post_edited_translations.segment}
+.. 從輸出結果中取得失敗修理的修理 ID。
 .. 執行  `repair-data start-ec-node-repair` 命令。
 +
 使用 `--repair-id`選項可指定修復 ID。例如，如果您想重試修復 ID 為 949292 的修復，請執行下列命令： `repair-data start-ec-node-repair --repair-id 949292`

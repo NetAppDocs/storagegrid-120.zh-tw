@@ -24,7 +24,7 @@ summary: 執行擴充時，新的網格節點將會新增到現有的 StorageGRI
 
 
 .關於此任務
-${post_edited_translations.segment}
+執行擴充作業主要包括以下使用者任務：
 
 . 設定擴充。
 . 開始擴充。
@@ -55,9 +55,9 @@ image:grid_expansion_page.png["快照顯示網格擴充頁面"]
 
 
 . 選取 *Save* 。
-. ${post_edited_translations.segment}
+. 審查 *Pending Nodes* 清單，並確認其中顯示了您部署的所有網格節點。
 +
-${post_edited_translations.segment}
+如有需要，您可以將遊標懸停在節點的*Grid Network MAC Address*上，以查看有關該節點的詳細資訊。
 
 +
 image:grid_node_details.png["網格節點詳細資訊快照"]
@@ -66,14 +66,14 @@ image:grid_node_details.png["網格節點詳細資訊快照"]
 
 NOTE: 如果缺少節點，請確認該節點已成功部署。
 
-. ${post_edited_translations.segment}
+. 從待處理節點清單中，核准要在此擴充中新增的節點。
 +
-.. ${post_edited_translations.segment}
+.. 選擇要核准的第一個待處理網格節點旁的選項按鈕。
 .. 選擇 *Approve*。
 +
 顯示網格節點組態表單。
 
-.. ${post_edited_translations.segment}
+.. 根據需要修改一般設定：
 +
 [cols="1a,2a"]
 |===
@@ -97,9 +97,9 @@ Name
  a| 
 儲存類型（僅限儲存節點）
  a| 
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
+*** *資料和中繼資料*（「組合」）：物件資料和中繼資料儲存節點
+*** *僅資料*：僅包含物件資料的儲存節點（不含中繼資料）
+*** *僅中繼資料*：僅包含中繼資料的儲存節點（不包含物件資料）
 
 
 
@@ -123,10 +123,10 @@ ADC 服務（合併式或僅中繼資料儲存節點）
 
 *** 如果要替換的儲存節點包含 ADC 服務，請選擇「是」。因為如果剩餘的 ADC 服務過少，則無法退役儲存節點，所以此設定可確保在移除舊服務之前，新的 ADC 服務可用。
 *** 您可以link:../maintain/move-adc-service.html["將 ADC 服務移至同一站台上的另一個儲存節點"]以確保 ADC 服務達到法定人數。
-*** ${post_edited_translations.segment}
+*** 選擇 *Automatic* 讓系統決定此節點是否需要 ADC 服務。
 
 
-了解 link:../maintain/understanding-adc-service-quorum.html["${post_edited_translations.segment}"]。
+了解 link:../maintain/understanding-adc-service-quorum.html["ADC 仲裁"]。
 
 
 
@@ -151,7 +151,7 @@ NOTE: 如果在核准節點時發現網格網路上的節點有重複的 IP 位�
 
 .. 選取 *Save* 。
 +
-${post_edited_translations.segment}
+已核准的網格節點將移至已核准節點清單。
 
 +
 *** 若要修改已核准的網格節點的屬性，請選擇其單選按鈕，然後選擇 *Edit*。
@@ -159,7 +159,7 @@ ${post_edited_translations.segment}
 *** 若要永久移除已核准的網格節點，請先關閉該節點的電源。然後，選擇其單選按鈕，並選擇 *Remove*。
 
 
-.. ${post_edited_translations.segment}
+.. 對每個待核准的網格節點重複這些步驟。
 +
 
 NOTE: 如果可能，您應該核准所有待處理的網格附註並執行單一擴充。如果您執行多次小擴充，則需要更多時間。
@@ -183,8 +183,8 @@ NOTE: 網站擴充還包括為新網站設定 Cassandra 的額外工作。
 在對 StorageGRID 系統進行網格拓撲變更後，您必須儘快下載恢復套件檔案的更新複本。如果發生故障，恢復套件檔案可讓您還原系統。
 
 +
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 選擇下載連結。
+.. 輸入佈建密碼，然後選擇 *Start Download*。
 .. 下載完成後，開啟 `.zip`檔案，並確認您可以存取其中的內容，包括 `Passwords.txt`檔案。
 .. 將下載的恢復套件檔案 (`.zip`) 複製至兩個安全、安全的且分隔的位置。
 +
@@ -201,14 +201,14 @@ CAUTION: 在「擴充 Cassandra 叢集」或「啟動 Cassandra 並串流資料�
 +
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.新增儲存節點
 --
 如果您要為現有站台新增儲存節點，請審查「正在啟動 Cassandra 和串流資料」狀態訊息中顯示的百分比。
 
 此百分比根據可用的 Cassandra 資料總量和已寫入新節點的資料量，來估計 Cassandra 串流作業的完成程度。
 
 --
-.${post_edited_translations.segment}
+.新增站台
 --
 如果您要新增網站，請使用  `nodetool status` 監控 Cassandra 串流的進度，並在「擴充 Cassandra 叢集」階段檢視已複製到新網站的中繼資料量。新網站上的總資料負載應在目前網站總載入量的 20% 左右。
 
@@ -218,4 +218,4 @@ CAUTION: 在「擴充 Cassandra 叢集」或「啟動 Cassandra 並串流資料�
 
 
 .完成後
-根據您新增的網格節點類型，執行額外的整合和組態步驟。請參閱link:configuring-expanded-storagegrid-system.html["${post_edited_translations.segment}"]。
+根據您新增的網格節點類型，執行額外的整合和組態步驟。請參閱link:configuring-expanded-storagegrid-system.html["擴充後的設定步驟"]。

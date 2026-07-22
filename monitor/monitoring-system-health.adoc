@@ -16,7 +16,7 @@ summary: 每日監測 StorageGRID 系統的整體健全狀況。
 .關於此任務
 即使部分網格無法使用，StorageGRID 系統也能繼續運作。警示所指出的潛在問題不一定是系統運作的問題。請調查 Grid Manager 儀表板健全狀況卡片上彙總的問題。
 
-若要在警報觸發時立即收到通知，您可以 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/setting-up-email-notifications-for-alerts.html["${post_edited_translations.segment}"^]或link:using-snmp-monitoring.html["設定 SNMP 陷阱"]。
+若要在警報觸發時立即收到通知，您可以 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/setting-up-email-notifications-for-alerts.html["設定電子郵件提醒通知"^]或link:using-snmp-monitoring.html["設定 SNMP 陷阱"]。
 
 image:health_status_card.png["健全狀況卡 - 儀表板"]
 
@@ -30,7 +30,7 @@ image:health_status_card.png["健全狀況卡 - 儀表板"]
  a| 
 網格詳細資料
  a| 
-${post_edited_translations.segment}
+任何節點已中斷連線（連線狀態為「未知」或「管理關閉」）。
 
 
 
@@ -42,7 +42,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+最近解決的警報
  a| 
 過去一週內觸發的警示 <<檢視目前及已解決的警示,現已解決>>。
 
@@ -57,7 +57,7 @@ ${post_edited_translations.segment}
 
 
 [[monitor-node-connection-states]]
-== ${post_edited_translations.segment}
+== 監控節點連線狀態
 
 如果有一或多個節點與網格中斷連線，可能會影響關鍵的 StorageGRID 作業。請監控節點連線狀態並立即解決任何問題。
 
@@ -69,7 +69,7 @@ ${post_edited_translations.segment}
  a| 
 image:icon_alarm_blue_unknown.png["藍色問號圖示"]
  a| 
-${post_edited_translations.segment}
+*未連線 - 未知*
 
 由於不明原因，節點已中斷連線，或節點上的服務意外停止運作。例如，節點上的服務可能已停止，或者節點可能因為電力故障或非預期停電而失去網路連線。
 
@@ -77,7 +77,7 @@ ${post_edited_translations.segment}
  a| 
 需要立即注意。<<檢視目前及已解決的警示,選擇每個警報>>並遵循建議的措施。
 
-${post_edited_translations.segment}
+例如，您可能需要重新啟動已停止的服務或重新啟動節點的主機。
 
 *注意*：在受管關機操作期間，節點可能顯示為「未知」。在這種情況下，您可以忽略「未知」狀態。
 
@@ -88,11 +88,11 @@ image:icon_alarm_gray_administratively_down.png["灰色問號圖示"]
  a| 
 *未連線 - 管理員已關閉*
 
-${post_edited_translations.segment}
+由於預期的原因，節點未連接到網格。
 
 例如，節點或其上的服務已正常關閉、節點正在重新開機，或軟體正在升級。也可能有一個或多個警示處於作用中狀態。
 
-${post_edited_translations.segment}
+根據根本問題，這些節點通常無需干預即可恢復線上。
  a| 
 確定是否有任何警報影響此節點。
 
@@ -101,13 +101,13 @@ ${post_edited_translations.segment}
 
 
  a| 
-image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]
+image:icon_alert_green_checkmark.png["圖示提示綠色對勾"]
  a| 
 *已連線*
 
 該節點已連接到網格。
  a| 
-${post_edited_translations.segment}
+無需採取任何行動。
 
 |===
 
@@ -117,13 +117,13 @@ ${post_edited_translations.segment}
 
 *目前警報*：當警報觸發時，儀表板上會顯示警報圖示。節點頁面上的節點也會顯示警報圖示。如果link:email-alert-notifications.html["已配置警報電子郵件通知"]，系統也會發送電子郵件通知，除非該警報已被靜音。
 
-${post_edited_translations.segment}
+*已解決警報*：您可以搜尋並檢視已解決警報的記錄。
 
 （可選）觀看影片：
 
-.${post_edited_translations.segment}
+.警報總覽
 video::2eea81c5-8323-417f-b0a0-b1ff008506c1[panopto]
-${post_edited_translations.segment}
+下表說明 Grid Manager 中針對目前及已解決警示所顯示的資訊。
 
 [cols="1a,3a"]
 |===
@@ -131,14 +131,14 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+姓名或頭銜
  a| 
-${post_edited_translations.segment}
+警報名稱及其執行摘要。
 
 
 
  a| 
-${post_edited_translations.segment}
+嚴重程度
  a| 
 警報的嚴重程度。對於目前警報，如果多個警報分組顯示，標題行會顯示每個嚴重程度下該警報的發生次數。
 
@@ -160,7 +160,7 @@ image:icon_alert_yellow_minor.png["圖示警告 黃色次要"] *Minor*：系統�
 
 
  a| 
-${post_edited_translations.segment}
+站台/節點
  a| 
 發生或曾經發生警示的站台和節點名稱。
 
@@ -201,9 +201,9 @@ ${post_edited_translations.segment}
 預設情況下，目前警報顯示如下：
 
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 最近觸發的警示會優先顯示。
+** 同一類型的多個警報將以群組的形式顯示。
+** 已靜音的警報不會顯示。
 ** 對於特定節點上的特定警示，如果多個嚴重性等級的閾值都已達到，則僅顯示最嚴重的警示。也就是說，如果輕微、重大和關鍵三個嚴重性等級的閾值都已達到，則僅顯示關鍵警示。
 +
 目前警報頁面每兩分鐘重新整理一次。
@@ -226,14 +226,14 @@ ${post_edited_translations.segment}
 +
 ** 從 *觸發時* 下拉式選單中選取時間段。
 ** 從 *Severity* 下拉式選單中選取一個或多個嚴重程度。
-** ${post_edited_translations.segment}
+** 從 *Alert rule* 下拉式功能表中選擇一個或多個預設或自訂警報規則，以篩選與特定警報規則相關的已解決警報。
 ** 從「節點」下拉式選單中選擇一個或多個節點，以篩選與特定節點相關的已解決警報。
 
 
 . 若要檢視特定警示的詳細資料，請選取該警示。對話方塊會提供您所選警示的詳細資料與建議行動。
 . （可選）對於特定警報，選擇「靜音此警報」可使觸發此警報的警報規則靜音。
 +
-您必須擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"] 才能靜音警報規則。
+您必須擁有 link:../admin/admin-group-permissions.html["管理警報或 Root 存取權限"] 才能靜音警報規則。
 
 +
 
@@ -243,14 +243,14 @@ CAUTION: 決定將警示規則靜音時，請務必小心。如果警示規則�
 +
 .. 從警報詳細資料中選取 *View conditions*。
 +
-${post_edited_translations.segment}
+彈出一個視窗，列出每個已定義嚴重程度對應的 Prometheus 表示式。
 
-.. ${post_edited_translations.segment}
+.. 若要關閉彈出視窗，請點選彈出視窗外的任意位置。
 
 
 . （可選）選擇*編輯規則*來編輯觸發此警報的警報規則。
 +
-您必須擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"] 才能編輯警報規則。
+您必須擁有 link:../admin/admin-group-permissions.html["管理警報或 Root 存取權限"] 才能編輯警報規則。
 
 +
 

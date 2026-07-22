@@ -2,7 +2,7 @@
 permalink: admin/supported-ciphers-for-outgoing-tls-connections.html 
 sidebar: sidebar 
 keywords: tls cipher suites, transport layer security connections 
-summary: ${post_edited_translations.segment} 
+summary: StorageGRID 系統支援有限的密碼套件，用於與外部系統建立傳輸層安全性 （TLS） 連線，這些外部系統用於身分識別聯盟和雲端儲存池。 
 ---
 = StorageGRID 中支援的用於出站 TLS 連線的加密套件
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+StorageGRID 系統支援有限的密碼套件，用於與外部系統建立傳輸層安全性 （TLS） 連線，這些外部系統用於身分識別聯盟和雲端儲存池。
 
 
 

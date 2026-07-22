@@ -15,7 +15,7 @@ summary: 恢復儲存設備磁碟區後，必須驗證儲存節點的期望狀�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* ${post_edited_translations.segment}
+* 儲存節點已恢復，資料恢復已完成。
 
 
 .步驟

@@ -1,15 +1,15 @@
-= ${post_edited_translations.segment}
+= 我該採用哪一種方法？
 :allow-uri-read: 
 
 
 
 
 [[which-procedure-should-i-use]]
-== ${post_edited_translations.segment}
+== 我該採用哪一種方法？
 
 盡可能使用 Grid Manager 中的「Volume 還原」頁面來還原物件資料。
 
-* 如果 Volume 列在 *維護* > *Volume 還原* > *要還原的節點*，請使用 link:../maintain/restoring-volume.html["${post_edited_translations.segment}"] 還原物件資料。
+* 如果 Volume 列在 *維護* > *Volume 還原* > *要還原的節點*，請使用 link:../maintain/restoring-volume.html["網格管理器中的 Volume 還原頁面"] 還原物件資料。
 * 如果 Volume 未列在「維護」>「Volume 還原」>「要還原的節點」中，請依照下列步驟使用 `repair-data`指令碼還原物件資料。
 +
 如果恢復的儲存節點包含的磁碟區比它要替換的節點少，則必須使用 `repair-data`指令碼。
@@ -17,7 +17,7 @@
 
 
 
-NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["${post_edited_translations.segment}"]。
+NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["Grid Manager 中的 Volume 還原程序"]。
 
 
 
@@ -25,7 +25,7 @@ NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請�
 == 使用 `repair-data`指令碼還原物件資料
 
 .開始之前
-* 您已確認，在 Grid Manager 的「節點」>「概覽」標籤中，已復原的儲存節點的連線狀態為「已連線」image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]。
+* 您已確認，在 Grid Manager 的「節點」>「概覽」標籤中，已復原的儲存節點的連線狀態為「已連線」image:icon_alert_green_checkmark.png["圖示提示綠色對勾"]。
 
 
 .關於此任務
@@ -33,7 +33,7 @@ NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請�
 
 請注意下列事項：
 
-* ${post_edited_translations.segment}
+* 如果 ILM 規則設定為僅儲存一個複寫複本，而該複本存在於發生故障的儲存設備 Volume 上，則您將無法恢復該物件。
 * 如果物件唯一剩餘的複本位於 Cloud Storage Pool 中，則 StorageGRID 必須向 Cloud Storage Pool 端點發出多個要求，以還原物件資料。執行此程序之前，請聯絡技術支援以協助估算恢復時間範圍及相關成本。
 
 
@@ -50,26 +50,26 @@ NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請�
 NOTE: 如需更多關於  `repair-data` 指令碼的資訊，請在主要 Admin Node 的命令列輸入  `repair-data --help`。
 
 
-NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["${post_edited_translations.segment}"]。
+NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["Grid Manager 中的 Volume 還原程序"]。
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.複製資料
 --
-${post_edited_translations.segment}
+根據您需要修理的是整個節點還是節點上的某些 Volume，可以使用兩個命令來恢復複寫資料：
 
 `repair-data start-replicated-node-repair`
 
 `repair-data start-replicated-volume-repair`
 
-${post_edited_translations.segment}
+您可以使用以下命令追蹤複製資料的修理情況：
 
 `repair-data show-replicated-repair-status`
 
 --
 .糾刪碼（EC）資料
 --
-${post_edited_translations.segment}
+根據您需要修復的是整個節點還是節點上的某些 Volume，可使用兩個命令來恢復銷毀編碼資料：
 
 `repair-data start-ec-node-repair`
 

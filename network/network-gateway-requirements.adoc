@@ -2,7 +2,7 @@
 permalink: network/network-gateway-requirements.html 
 sidebar: sidebar 
 keywords: network gateway requirements 
-summary: ${post_edited_translations.segment} 
+summary: 請遵循以下網路閘道或路由器的要求和準則。 
 ---
 = StorageGRID 的網路閘道需求
 :allow-uri-read: 
@@ -11,9 +11,9 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+請遵循以下網路閘道或路由器的要求和準則。
 
 * 如果已設定，則指定網路的閘道必須位於該特定網路的子網路內。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 如果使用靜態位址設定介面，則必須指定除 0.0.0.0 之外的閘道位址。
+* 如果沒有閘道，最佳實務做法是將閘道位址設定為網路介面的 IP 位址。
 

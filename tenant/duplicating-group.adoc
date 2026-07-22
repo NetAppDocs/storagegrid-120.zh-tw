@@ -36,5 +36,5 @@ summary: 複製現有群組可以更快建立新群組。
 . 視需要修改此群組的權限。
 . 選擇 *Continue* 。
 . 如有需要，如果您要為 S3 租戶複製群組，可以從 *新增 S3 原則* 單選按鈕中選擇不同的原則。如果您選擇了自訂原則，請視需要更新 JSON 字串。
-. ${post_edited_translations.segment}
+. 選擇 *Create group*。
 

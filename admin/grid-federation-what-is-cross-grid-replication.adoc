@@ -16,23 +16,23 @@ summary: 跨網格複寫是指在透過網格聯合連接所連接的兩個 Stor
 
 
 [[workflow-for-cross-grid-replication]]
-== ${post_edited_translations.segment}
+== 跨網格複寫的工作流程
 
-${post_edited_translations.segment}
+工作流程圖總結了在兩個網格上的儲存貯體之間設定跨網格複寫的步驟。
 
 image:grid-federation-cgr-workflow.png["跨網格複寫工作流程"]
 
 
 
 [[requirements-for-cross-grid-replication]]
-== ${post_edited_translations.segment}
+== 跨網格複寫的要求
 
 如果租戶帳戶擁有*使用網格聯合連線*權限，可使用一或多個 link:grid-federation-overview.html["網格同盟連線"]，則具有 Root 存取權限的租戶使用者可以在每個網格的對應租戶帳戶中建立儲存桶。這些儲存桶：
 
 * 可以擁有彼此不同的名稱
 * 可以有不同的區域
 * 必須啟用版本控制
-* ${post_edited_translations.segment}
+* 必須為空
 
 
 建立完兩個儲存桶後，可以為其中一個或兩個儲存桶設定跨網格複寫。
@@ -43,7 +43,7 @@ link:../tenant/grid-federation-manage-cross-grid-replication.html["管理跨網�
 
 
 [[how-cross-grid-replication-works]]
-== ${post_edited_translations.segment}
+== 跨網格複寫的工作原理
 
 您可以設定跨網格複寫以單向或雙向進行。
 
@@ -68,7 +68,7 @@ image:grid-federation-cross-grid-replication.png["\"映像\"顯示單向複寫�
 
 
 [[what-happens-when-objects-are-ingested]]
-=== ${post_edited_translations.segment}
+=== 物件擷取時會發生什麼事？
 
 當 S3 用戶端為已啟用跨網格複寫的儲存桶新增物件時，會發生下列情況：
 
@@ -79,7 +79,7 @@ S3 用戶端可以透過發出 GetObject 或 HeadObject 要求，來驗證物件
 +
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 網格 | 複寫狀態 
 
 
  a| 
@@ -95,7 +95,7 @@ S3 用戶端可以透過發出 GetObject 或 HeadObject 要求，來驗證物件
  a| 
 目的地
  a| 
-${post_edited_translations.segment}
+*REPLICA*：此物件是從來源網格複寫而來。
 
 |===
 +
@@ -108,19 +108,19 @@ NOTE: StorageGRID 不支援  `x-amz-replication-status` 標頭。
 
 
 [[what-happens-when-objects-are-deleted]]
-=== ${post_edited_translations.segment}
+=== 刪除物件會發生什麼事？
 
 如前所述link:../primer/delete-data-flow.html["刪除資料流"]，StorageGRID 可以基於以下任何原因刪除物件：
 
 * S3 用戶端發出刪除請求。
 * Tenant Manager 使用者選取 link:../tenant/deleting-s3-bucket-objects.html["刪除儲存桶中的物件"] 選項，以從儲存貯體中移除所有物件。
 * 此儲存桶具有生命週期組態，會過期。
-* ${post_edited_translations.segment}
+* 物件的 ILM 規則中最後一個時間段已結束，且未指定進一步的放置位置。
 
 
 當 StorageGRID 因為「刪除貯體中的物件」作業、貯體生命週期過期或 ILM 放置位置過期而刪除物件時，絕不會從網格同盟連線中的另一個網格刪除複寫的物件。不過，S3 用戶端刪除作業新增至來源貯體的刪除標記，可以選擇性地複寫到目的地貯體。
 
-${post_edited_translations.segment}
+若要了解當 S3 用戶端從已啟用跨網格複寫的儲存桶中刪除物件時會發生什麼情況，請審查 S3 用戶端如何從已啟用版本控制的儲存桶中刪除物件，如下所示：
 
 * 如果 S3 用戶端發出包含版本 ID 的刪除要求，該版本的物件將會被永久移除。系統不會將刪除標記新增至儲存貯體。
 * 如果 S3 用戶端發出不包含版本 ID 的刪除要求，StorageGRID 就不會刪除任何物件版本。相反地，它會在貯體中新增一個刪除標記。刪除標記會使 StorageGRID 表現得像是該物件已被刪除一樣：
@@ -131,10 +131,10 @@ ${post_edited_translations.segment}
 
 
 
-${post_edited_translations.segment}
+當 S3 用戶端從啟用了跨網格複寫的儲存桶中刪除物件時，StorageGRID 會決定是否將刪除請求複寫到目的地，如下所示：
 
 * 如果刪除要求包含版本 ID，該物件版本將會從來源網格中永久移除。然而，StorageGRID 不會複寫包含版本 ID 的刪除要求，因此不會從目的地刪除相同的物件版本。
-* ${post_edited_translations.segment}
+* 如果刪除請求不包含版本 ID，StorageGRID 可以根據儲存桶的跨網格複寫組態方式，選擇性地複寫刪除標記：
 +
 ** 如果選擇複寫刪除標記（預設），則會在來源儲存桶中新增刪除標記，並將其複寫到目的地桶。實際上，該物件在兩個網格中都顯示為已刪除。
 ** 如果您選擇不複寫刪除標記，則刪除標記會新增至來源儲存桶，但不會複寫到目的地儲存桶。實際上，在來源網格中刪除的物件不會在目的地網格中刪除。
@@ -181,7 +181,7 @@ StorageGRID 在決定如何加密來源物件時，會套用下列規則：
 . 使用與來源物件相同的加密，除非該物件使用 AES-128 加密。
 . 如果來源物件未加密或使用 AES-128，則使用目的地儲存桶的預設加密設定（如果已設定）。
 . 如果目的地儲存桶沒有加密設定，則使用目的地的網格範圍加密設定（如果已設定）。
-. ${post_edited_translations.segment}
+. 如果沒有網格範圍的設定，則不要加密目的地物件。
 
 
 

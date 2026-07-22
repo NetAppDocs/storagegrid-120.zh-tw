@@ -16,7 +16,7 @@ summary: 如果您的租戶帳戶擁有「使用網格聯合連線」權限，�
 .開始之前
 * 租戶帳戶擁有「使用網格聯合連線」權限。
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
-* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 您屬於一個擁有 link:tenant-management-permissions.html["根目錄存取權限"] 的使用者群組。
 
 
 .步驟

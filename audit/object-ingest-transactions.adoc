@@ -2,7 +2,7 @@
 permalink: audit/object-ingest-transactions.html 
 sidebar: sidebar 
 keywords: object ingest transaction, S3 ingest, SPUT, ORLM, WPUT 
-summary: ${post_edited_translations.segment} 
+summary: 您可以透過尋找 S3 API 特定的稽核訊息，在稽核日誌中識別用戶端擷取交易。 
 ---
 = StorageGRID 中物件擷取交易的稽核訊息
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以透過尋找 S3 API 特定的稽核訊息，在稽核日誌中識別用戶端擷取交易。
 
 下表並未列出擷取交易期間產生的所有稽核訊息。其中僅包含追蹤擷取交易所需的訊息。
 
@@ -22,13 +22,13 @@ ${post_edited_translations.segment}
 
 [cols="1a,1a,2a,1a,2a"]
 |===
-| 程式碼 | Name | 說明 | ${post_edited_translations.segment} | 請參閱 
+| 程式碼 | Name | 說明 | 追蹤 | 請參閱 
 
 
  a| 
 SPUT
  a| 
-${post_edited_translations.segment}
+S3 PUT 交易
  a| 
 S3 PUT 擷取交易已成功完成。
  a| 
@@ -55,14 +55,14 @@ link:orlm-object-rules-met.html["ORLM：物件規則已符合"]
 [[example-s3-object-ingest]]
 == 範例：S3 物件擷取
 
-${post_edited_translations.segment}
+以下這一系列稽核訊息是當 S3 用戶端將物件擷取至儲存節點（LDR 服務）時產生並儲存至稽核日誌中的稽核訊息範例。
 
 在這個例子中，有效的 ILM 原則包括 Make 2 Copies ILM 規則。
 
 
 NOTE: 並非交易期間產生的所有稽核訊息都會列在以下範例中。僅列出與 S3 擷取交易 （SPUT） 相關的訊息。
 
-${post_edited_translations.segment}
+本範例假設已預先建立了 S3 儲存桶。
 
 
 
@@ -82,19 +82,19 @@ SPUT 訊息用於指示已發出 S3 PUT 交易，以在特定儲存貯體中建�
 
 ORLM 訊息表示此物件已滿足 ILM 原則。此訊息包含該物件的 CBID 以及所套用的 ILM 規則名稱。
 
-${post_edited_translations.segment}
+對於複製物件，LOCS 欄位包含物件位置的 LDR 節點 ID 和 Volume ID。
 
 [listing, subs="specialcharacters,quotes"]
 ----
 2019-07-17T21:18:31.230669[AUDT:[CBID\(UI64\):0x50C4F7AC2BC8EDF7][RULE(CSTR):"Make 2 Copies"][STAT(FC32):DONE][CSIZ(UI64):0][UUID(CSTR):"0B344E18-98ED-4F22-A6C8-A93ED68F8D3F"][LOCS(CSTR):"CLDI 12828634 2148730112, CLDI 12745543 2147552014"][RSLT(FC32):SUCS][AVER(UI32):10][ATYP\(FC32\):ORLM][ATIM(UI64):1563398230669][ATID(UI64):15494889725796157557][ANID(UI32):13100453][AMID(FC32):BCMS]]
 ----
-${post_edited_translations.segment}
+對於銷毀編碼物件，LOCS 欄位包含銷毀編碼設定檔 ID 和銷毀編碼群組 ID。
 
 [listing, subs="specialcharacters,quotes"]
 ----
 2019-02-23T01:52:54.647537 [AUDT:[CBID(UI64):0xFA8ABE5B5001F7E2][RULE(CSTR):"EC_2_plus_1"][STAT(FC32):DONE][CSIZ(UI64):10000][UUID(CSTR):"E291E456-D11A-4701-8F51-D2F7CC9AFECA"][LOCS(CSTR):"CLEC 1 A471E45D-A400-47C7-86AC-12E77F229831"][RSLT(FC32):SUCS][AVER(UI32):10][ATIM(UI64):1550929974537]\[ATYP\(FC32\):ORLM\][ANID(UI32):12355278][AMID(FC32):ILMX][ATID(UI64):4168559046473725560]]
 ----
-${post_edited_translations.segment}
+PATH 欄位包含 S3 儲存桶和金鑰資訊。
 
 [listing]
 ----

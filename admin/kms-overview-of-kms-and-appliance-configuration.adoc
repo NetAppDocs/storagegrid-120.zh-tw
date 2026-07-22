@@ -22,9 +22,9 @@ image:kms_configuration_overview.png["KMS 組態工作流程，如下所述。"]
 
 
 [[set-up-the-key-management-server-kms]]
-== ${post_edited_translations.segment}
+== 設定金鑰管理伺服器（KMS）
 
-${post_edited_translations.segment}
+設定金鑰管理伺服器包括以下高階步驟。
 
 [cols="1a,1a"]
 |===
@@ -48,7 +48,7 @@ link:kms-configuring-storagegrid-as-client.html["在 KMS 中將 StorageGRID 設�
  a| 
 將 KMS 新增至 Grid Manager，將其指派給單一網站或預設網站群組，上傳所需的憑證，然後儲存 KMS 組態。
  a| 
-link:kms-adding.html["${post_edited_translations.segment}"]
+link:kms-adding.html["新增金鑰管理伺服器（KMS）"]
 
 |===
 

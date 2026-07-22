@@ -2,7 +2,7 @@
 permalink: admin/using-identity-federation.html 
 sidebar: sidebar 
 keywords: how to use identity federation, how to use federated groups with Grid Manager 
-summary: ${post_edited_translations.segment} 
+summary: 使用身分聯盟可以更快速地設定群組和使用者，並允許使用者使用熟悉的憑證登入 StorageGRID。 
 ---
 = 在 StorageGRID 中使用身分識別聯盟
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+使用身分聯盟可以更快速地設定群組和使用者，並允許使用者使用熟悉的憑證登入 StorageGRID。
 
 
 
@@ -29,7 +29,7 @@ ${post_edited_translations.segment}
 NOTE: 如果您想使用未列出的 LDAP v3 服務，請聯絡技術支援。
 
 * 如果您打算使用 OpenLDAP，則必須設定 OpenLDAP 伺服器。請參閱<<OpenLDAP 伺服器設定指南>>。
-* 如果您打算啟用單一登入 （SSO），您已經查看了link:requirements-for-sso.html["${post_edited_translations.segment}"]。
+* 如果您打算啟用單一登入 （SSO），您已經查看了link:requirements-for-sso.html["單一登入的要求和注意事項"]。
 * 如果您打算使用傳輸層安全性協定 (TLS) 與 LDAP 伺服器進行通訊，則身分識別供應商將使用 TLS 1.2 或 1.3。請參閱link:supported-ciphers-for-outgoing-tls-connections.html["支援的傳出 TLS 連線加密套件"]。
 
 
@@ -50,7 +50,7 @@ NOTE: 如果您想使用未列出的 LDAP v3 服務，請聯絡技術支援。
 . 選取 *啟用身分識別聯盟*。
 . 在 LDAP 服務類型部分，選擇要設定的 LDAP 服務類型。
 +
-image:ldap_service_type.png["${post_edited_translations.segment}"]
+image:ldap_service_type.png["身分聯盟頁面顯示 LDAP 服務類型選項"]
 
 +
 選擇「其他」以設定使用 Oracle Directory Server 的 LDAP 伺服器的值。
@@ -76,7 +76,7 @@ NOTE: STARTTLS 的預設 port 為 389，而 LDAPS 的預設 port 為 636。不�
 對於 Active Directory，您也可以指定下級登入名稱或使用者主體名稱。
 
 +
-${post_edited_translations.segment}
+指定使用者必須擁有列出群組和使用者以及存取以下屬性的權限：
 
 +
 *** `sAMAccountName` 或  `uid`
@@ -87,7 +87,7 @@ ${post_edited_translations.segment}
 *** *Entra ID*: `accountEnabled` 與  `userPrincipalName`
 
 
-** ${post_edited_translations.segment}
+** *密碼*：與使用者名稱關聯的密碼。
 +
 
 NOTE: 如果將來更改密碼，您必須在此頁面上更新密碼。
@@ -95,12 +95,12 @@ NOTE: 如果將來更改密碼，您必須在此頁面上更新密碼。
 ** *群組基本 DN*：您要搜尋群組之 LDAP 子樹狀結構的辨識名稱 （DN） 完整路徑。在 Active Directory 範例 （如下） 中，其辨識名稱相對於基本 DN （DC=storagegrid,DC=example,DC=com） 的所有群組，都可以用作同盟群組。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: *群組唯一名稱* 值在其所屬的 *群組基本 DN* 內必須是唯一的。
 
 ** *使用者基本 DN*：要搜尋使用者的 LDAP 子樹的專有名稱 (DN) 的完整路徑。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: *User unique name* 值在其所屬的 *User Base DN* 內必須是唯一的。
 
 ** *Bind username format*（選用）：如果無法自動判斷模式，StorageGRID 應使用的預設使用者名稱模式。
 +
@@ -114,13 +114,13 @@ NOTE: ${post_edited_translations.segment}
 *** *Down-level logon name pattern （AD 和 Entra ID）*： `_example_\[USERNAME]`
 *** *辨別名稱模式*： `CN=[USERNAME],CN=Users,DC=_example_,DC=com`
 +
-${post_edited_translations.segment}
+請按原樣填寫 *[USERNAME]*。
 
 
 
 
 
-. ${post_edited_translations.segment}
+. 在傳輸層安全性 (TLS) 部分，選擇一項安全性設定。
 +
 ** *使用 STARTTLS*：使用 STARTTLS 來保護與 LDAP 伺服器的通訊。對於 Active Directory、OpenLDAP 或其他 LDAP 伺服器，這是建議選項，但此選項不支援 Microsoft Entra ID。
 ** *使用 LDAPS*：LDAPS （LDAP over SSL） 選項會使用 TLS 建立與 LDAP 伺服器的連線。您必須為 Microsoft Entra ID 選擇此選項。
@@ -131,12 +131,12 @@ NOTE: 如果您的 Active Directory 伺服器強制執行 LDAP 簽名，則不�
 
 
 
-. ${post_edited_translations.segment}
+. 如果您選擇了 STARTTLS 或 LDAPS，請選擇用於保護連線安全的憑證。
 +
 ** *使用作業系統 CA 憑證*：使用作業系統上安裝的預設 Grid CA 憑證來保護連線安全。
 ** *Use custom CA certificate*：使用自訂安全性憑證。
 +
-${post_edited_translations.segment}
+如果選擇此設定，請將自訂安全性憑證複製並貼上到 CA 憑證文字方塊中。
 
 
 
@@ -145,13 +145,13 @@ ${post_edited_translations.segment}
 
 
 [[test-the-connection-and-save-the-configuration]]
-=== ${post_edited_translations.segment}
+=== 測試連線並儲存組態
 
 輸入所有值後，必須先測試連線才能儲存組態。StorageGRID 會驗證 LDAP 伺服器的連線設定以及連結使用者名稱格式（如果您已提供）。
 
 .步驟
 . 選擇 *Test connection*。
-. ${post_edited_translations.segment}
+. 如果您未提供連結使用者名稱格式：
 +
 ** 如果連線設定有效，則會顯示「測試連線成功」訊息。選擇*儲存*以儲存組態。
 ** 如果連線設定無效，則會顯示「無法建立測試連線」訊息。選擇*關閉*。然後，解決所有問題並再次測試連線。
@@ -162,7 +162,7 @@ ${post_edited_translations.segment}
 例如，請輸入您自己的使用者名稱和密碼。使用者名稱中請勿包含任何特殊字元，例如 @ 或 /。
 
 +
-image:identity_federation_test_connection.png["${post_edited_translations.segment}"]
+image:identity_federation_test_connection.png["身分識別聯盟提示驗證連結使用者名稱格式"]
 
 +
 ** 如果連線設定有效，則會顯示「測試連線成功」訊息。選擇*儲存*以儲存組態。
@@ -180,20 +180,20 @@ StorageGRID 系統會定期從識別來源同步聯盟群組與使用者。如�
 
 .步驟
 . 前往身分聯盟頁面。
-. ${post_edited_translations.segment}
+. 在頁面頂部選擇 *Sync server*。
 +
 同步程序可能需要一些時間，視您的環境而定。
 
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果從身分來源同步聯盟群組和使用者時出現問題，則會觸發「身分聯盟同步故障」警示。
 
 
 
 
 
 [[disable-identity-federation]]
-== ${post_edited_translations.segment}
+== 停用身分識別聯盟
 
 您可以暫時或永久停用群組和使用者的身分聯合。停用身分聯合後，StorageGRID 與身分來源之間將不再通訊。但是，您已設定的所有設定都將保留，以便您日後可以輕鬆重新啟用身分聯合。
 
@@ -201,14 +201,14 @@ NOTE: ${post_edited_translations.segment}
 在停用身分聯合之前，您應該注意以下事項：
 
 * 已加入聯盟的用戶將無法登入。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* 如果單一登入 （SSO） 狀態為 *已啟用* 或 *沙箱模式*，則 *啟用身分識別同盟* 核取方塊會停用。您必須先將單一登入頁面上的 SSO 狀態設為 *已停用*，才能停用身分識別同盟。請參閱 link:../admin/disabling-single-sign-on.html["${post_edited_translations.segment}"]。
+* 目前已登入的聯盟使用者將保留對 StorageGRID 系統的存取，直到其工作階段過期，但工作階段過期後將無法再次登入。
+* StorageGRID 系統與身分來源之間將不會進行同步，也不會對未同步的帳戶發出警示。
+* 如果單一登入 （SSO） 狀態為 *已啟用* 或 *沙箱模式*，則 *啟用身分識別同盟* 核取方塊會停用。您必須先將單一登入頁面上的 SSO 狀態設為 *已停用*，才能停用身分識別同盟。請參閱 link:../admin/disabling-single-sign-on.html["停用單一登入"]。
 
 
 .步驟
 . 前往身分聯盟頁面。
-. ${post_edited_translations.segment}
+. 取消選取「啟用身分聯盟」核取方塊。
 
 
 
@@ -216,7 +216,7 @@ NOTE: ${post_edited_translations.segment}
 [[guidelines-for-configuring-an-openldap-server]]
 == OpenLDAP 伺服器設定指南
 
-${post_edited_translations.segment}
+如果要使用 OpenLDAP 伺服器進行身分聯盟，則必須在 OpenLDAP 伺服器上設定特定設定。
 
 
 CAUTION: 對於非 Active Directory 或 Microsoft Entra ID 的身分識別來源，StorageGRID 不會自動封鎖在外部被停用之使用者的 S3 存取。若要封鎖 S3 存取，請刪除該使用者的任何 S3 金鑰，或將該使用者從所有群組中移除。
@@ -224,16 +224,16 @@ CAUTION: 對於非 Active Directory 或 Microsoft Entra ID 的身分識別來源
 
 
 [[memberof-and-refint-overlays]]
-=== ${post_edited_translations.segment}
+=== Memberof 和 refint overlays
 
 應啟用 memberof 與 refint 重疊。如需詳細資訊，請參閱 http://www.openldap.org/doc/admin24/index.html["OpenLDAP 文件：版本 2.4 管理員指南"^] 中的反向群組成員資格維護說明。
 
 
 
 [[indexing]]
-=== ${post_edited_translations.segment}
+=== 索引
 
-${post_edited_translations.segment}
+您必須使用指定的索引關鍵字設定下列 OpenLDAP 屬性：
 
 * `olcDbIndex: objectClass eq`
 * `olcDbIndex: uid eq,pres,sub`
@@ -241,6 +241,6 @@ ${post_edited_translations.segment}
 * `olcDbIndex: entryUUID eq`
 
 
-${post_edited_translations.segment}
+此外，為了獲得最佳效能，請確保「使用者名稱」說明中提到的欄位已建立索引。
 
 請參閱 http://www.openldap.org/doc/admin24/index.html["OpenLDAP 文件：版本 2.4 管理員指南"^] 中關於反向群組成員資格維護的資訊。

@@ -39,11 +39,11 @@ link:../ilm/verifying-ilm-policy-with-object-metadata-lookup.html["物件中繼�
 
 +
 ** 系統中繼資料，包括物件 ID （UUID）、版本 ID （選用）、物件名稱、Container 名稱、租戶帳戶名稱或 ID、物件的邏輯大小、物件首次建立的日期和時間，以及物件上次修改的日期和時間。
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 與物件關聯的任何自訂使用者中繼資料索引鍵值組。
+** 對於 S3 物件，任何與該物件關聯的物件標籤索引鍵值組。
+** 對於複製的物件複本，每個複本的目前儲存設備位置。
 ** 對於銷毀編碼物件複本，每個片段的目前儲存設備位置。
-** ${post_edited_translations.segment}
+** 對於 Cloud Storage Pool 中的物件複本，物件的位置，包括外部儲存桶的名稱和物件的唯一識別碼。
 ** 對於分段物件和多部分物件，為物件分段清單，包括分段識別碼和資料大小。對於超過 100 個分段的物件，僅顯示前 100 個分段。
 ** 所有未處理之內部儲存設備格式的物件中繼資料。此原始中繼資料包含無法保證在各版本之間持續保留的內部系統中繼資料。
 +

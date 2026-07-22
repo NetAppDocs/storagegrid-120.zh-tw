@@ -16,7 +16,7 @@ summary: 平台服務中使用的端點由租用戶使用者在 Tenant Manager �
 
 
 [[issues-with-new-endpoints]]
-== ${post_edited_translations.segment}
+== 新端點存在問題
 
 租戶必須先使用租戶管理器建立一個或多個終端節點，才能使用平台服務。每個終端節點代表一個平台服務的外部目的地，例如 StorageGRID S3 儲存桶、Amazon Web Services 儲存桶、Amazon Simple Notification Service 主題、Kafka 主題或託管在本機或 AWS 上的 Elasticsearch 叢集。每個終端節點都包含外部資源的位置以及存取該資源所需的憑證。
 
@@ -25,7 +25,7 @@ summary: 平台服務中使用的端點由租用戶使用者在 Tenant Manager �
 如果端點驗證失敗，系統會出現錯誤訊息說明端點驗證失敗的原因。租戶使用者應解決該問題，然後嘗試重新建立端點。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果租戶帳戶未啟用平台服務，端點建立將會失敗。
 
 
 
@@ -34,11 +34,11 @@ NOTE: ${post_edited_translations.segment}
 
 如果 StorageGRID 嘗試連線到現有端點時發生錯誤，則會在 Tenant Manager 的儀表板上顯示一則訊息。
 
-image:tenant_dashboard_endpoint_error.png["${post_edited_translations.segment}"]
+image:tenant_dashboard_endpoint_error.png["儀表板的端點錯誤訊息"]
 
 租用戶使用者可以前往「端點」頁面，查看每個端點的最新錯誤訊息，並確認錯誤發生的時間。「上次錯誤」欄位顯示每個端點的最新錯誤訊息，並指示錯誤發生的時間。包含 image:icon_alert_red_critical.png["紅色 X 圖示"] 圖示的錯誤表示過去 7 天內發生的錯誤。
 
-image:endpoints_last_error.png["${post_edited_translations.segment}"]
+image:endpoints_last_error.png["端點頁面快照，顯示「上次錯誤」列"]
 
 
 NOTE: 「上次錯誤」欄位中的某些錯誤訊息可能包含括號內的日誌 ID。網格系統管理員或技術支援可以使用此 ID 在 bycast.log 中找到有關該錯誤的更多詳細資訊。
@@ -48,7 +48,7 @@ NOTE: 「上次錯誤」欄位中的某些錯誤訊息可能包含括號內的�
 [[issues-related-to-proxy-servers]]
 == 與 Proxy 伺服器相關的問題
 
-如果您已在儲存節點和平台服務端點之間設定了 link:configuring-storage-proxy-settings.html["${post_edited_translations.segment}"]，則當您的 Proxy 服務不允許來自 StorageGRID 的訊息時，可能會發生錯誤。若要解決這些問題，請檢查 Proxy 伺服器的設定，確保與平台服務相關的訊息未被封鎖。
+如果您已在儲存節點和平台服務端點之間設定了 link:configuring-storage-proxy-settings.html["儲存設備 Proxy"]，則當您的 Proxy 服務不允許來自 StorageGRID 的訊息時，可能會發生錯誤。若要解決這些問題，請檢查 Proxy 伺服器的設定，確保與平台服務相關的訊息未被封鎖。
 
 
 
@@ -60,7 +60,7 @@ NOTE: 「上次錯誤」欄位中的某些錯誤訊息可能包含括號內的�
 
 
 [[client-operations-fail]]
-== ${post_edited_translations.segment}
+== 用戶端操作失敗
 
 某些平台服務問題可能會導致用戶端對 S3 儲存桶的操作失敗。例如，如果內部複製狀態機 (RSM) 服務停止運行，或待發送的平台服務訊息佇列過長，則 S3 用戶端操作將會失敗。
 
@@ -79,15 +79,15 @@ NOTE: 「上次錯誤」欄位中的某些錯誤訊息可能包含括號內的�
 建立端點之後，可能會因為各種原因而發生平台服務要求錯誤。某些錯誤可在使用者介入後恢復。例如，可能會因為下列原因而發生可恢復的錯誤：
 
 * 使用者的憑證已刪除或已過期。
-* ${post_edited_translations.segment}
+* 目的地儲存桶不存在。
 * 通知無法送達。
 
 
-${post_edited_translations.segment}
+如果 StorageGRID 遇到可恢復的錯誤，平台服務請求將重試，直到成功為止。
 
 其他類型的錯誤則無法恢復。例如，以下原因可能導致無法復原的錯誤：
 
-* ${post_edited_translations.segment}
+* 端點已刪除。
 * webhook 端點目的地對通知請求的回應出現 `400 Bad Request`錯誤。
 
 
@@ -101,7 +101,7 @@ ${post_edited_translations.segment}
 
 
 [[platform-services-messages-cant-be-delivered]]
-== ${post_edited_translations.segment}
+== 平台服務訊息無法送達
 
 如果目的地遇到無法接收平台服務訊息的問題，則用戶端對儲存桶的操作會成功，但平台服務訊息無法送達。例如，如果目的地上的憑證更新，導致 StorageGRID 無法再向目的地服務進行驗證，則可能會發生此錯誤。
 
@@ -136,7 +136,7 @@ image:nodes_page_site_level_platform_services.gif["節點頁面網站層級平�
 
 
 [[platform-services-unavailable-alert]]
-== ${post_edited_translations.segment}
+== 平台服務無法使用警示
 
 *平台服務無法使用*警示表示由於執行或可用的含 RSM 服務的儲存節點太少，因此無法在站台上執行任何平台服務操作。
 
@@ -145,14 +145,14 @@ RSM 服務確保平台服務請求傳送至各自的端點。
 若要解決此警示，請確定站台中哪些儲存節點包含 RSM 服務。（RSM 服務存在於也包含 ADC 服務的儲存節點上。）然後，確保這些儲存節點中的簡單多數正在運作且可用。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果站台上有多個包含 RSM 服務的 Storage Node 發生故障，該站台所有待處理的平台服務要求都將遺失。
 
 
 
 [[additional-troubleshooting-guidance-for-platform-services-endpoints]]
 == 平台服務端點的其他疑難排解指南
 
-更多資訊請參閱link:../tenant/troubleshooting-platform-services-endpoint-errors.html["${post_edited_translations.segment}"]。
+更多資訊請參閱link:../tenant/troubleshooting-platform-services-endpoint-errors.html["使用租戶帳戶 > 排除平台服務端點的故障"]。
 
 .相關資訊
-link:../troubleshoot/index.html["${post_edited_translations.segment}"]
+link:../troubleshoot/index.html["StorageGRID 系統故障排除"]

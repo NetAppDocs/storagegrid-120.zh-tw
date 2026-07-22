@@ -54,11 +54,11 @@ image:link_costs.gif["資料中心間連結成本的概念圖"]
 
 
  a| 
-${post_edited_translations.segment}
+同一實體位置的邏輯資料中心站台之間
  a| 
 0
  a| 
-${post_edited_translations.segment}
+位於同一實體建築物或園區內，並透過區域網路連接的邏輯資料中心。
 
 |===
 
@@ -76,7 +76,7 @@ ${post_edited_translations.segment}
 .步驟
 . 選擇 *Support* > *Other* > *Link cost*。
 +
-image:configuring_link_costs.png["${post_edited_translations.segment}"]
+image:configuring_link_costs.png["連結成本"]
 
 . 在「連結來源」下選擇一個站台，然後在「連結目的地」下輸入 0 到 100 之間的成本值。
 +
@@ -85,5 +85,5 @@ image:configuring_link_costs.png["${post_edited_translations.segment}"]
 +
 若要取消變更，請選擇 image:nms_revert.gif["復原圖示"]*Revert*。
 
-. ${post_edited_translations.segment}
+. 選擇 *Apply Changes*。
 

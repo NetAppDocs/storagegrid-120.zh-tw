@@ -18,7 +18,7 @@ summary: 您可以使用 S3 SelectObjectContent 請求根據簡單的 SQL 聲明
 .開始之前
 * 租戶帳戶擁有 S3 Select 權限。
 * 您擁有 `s3:GetObject`查詢物件的權限。
-* ${post_edited_translations.segment}
+* 要查詢的物件必須採用以下格式之一：
 +
 ** *CSV*。可直接使用，也可壓縮成 GZIP 或 BZIP2 壓縮包。
 ** *Parquet*。Parquet 物件的其他需求：

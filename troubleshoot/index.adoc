@@ -94,7 +94,7 @@ StorageGRID 系統正在做什麼或沒有做什麼？它有哪些症狀？
  a| 
 StorageGRID 系統可以擷取內容嗎？
  a| 
-${post_edited_translations.segment}
+否。
 
 
 
@@ -108,7 +108,7 @@ ${post_edited_translations.segment}
  a| 
 資料是否有風險？
  a| 
-${post_edited_translations.segment}
+否。
 
 
 
@@ -191,7 +191,7 @@ StorageGRID 系統、其組態或其環境的變更可能會導致新的行為�
  a| 
 * link:../monitor/monitoring-object-verification-operations.html["監控物件驗證作業"]
 * link:../troubleshoot/confirming-object-data-locations.html["確認物件資料位置"]
-* link:../troubleshoot/verifying-object-integrity.html["${post_edited_translations.segment}"]
+* link:../troubleshoot/verifying-object-integrity.html["驗證物件完整性"]
 
 
 

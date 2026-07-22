@@ -22,7 +22,7 @@ summary: 某些維護程序要求您停止單一服務，同時保持網格節�
 如果您需要停止儲存節點上的 LDR 服務，請注意，如果存在活動連線，停止該服務可能需要一段時間。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。

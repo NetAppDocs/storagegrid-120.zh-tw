@@ -21,6 +21,6 @@ summary: 您可以從系統中刪除一個群組。任何僅屬於該群組的�
 .步驟
 . 選擇 *Access Management* > *Groups*。
 . 選取要刪除的每個群組的核取方塊。
-. ${post_edited_translations.segment}
+. 選擇 *Actions* > *Delete group*。
 . 選擇 *刪除群組*。
 

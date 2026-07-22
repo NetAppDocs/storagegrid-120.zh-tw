@@ -26,7 +26,7 @@ summary: 您可以檢視銷毀編碼設定檔的詳細資訊，並可根據需�
 您可以檢視銷毀編碼設定檔的詳細資訊，以確定其狀態、使用的銷毀編碼方案及其他資訊。
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *組態* > *系統* > *銷毀編碼*。
 . 選取設定檔。設定檔的詳細資訊頁面隨即出現。
 . （可選）檢視 ILM 規則索引標籤，以取得使用該設定檔的 ILM 規則清單，以及使用這些規則的 ILM 原則。
 . （可選）檢視 Storage Nodes 索引標籤，以了解設定檔儲存資源池中每個 Storage Node 的詳細資訊，例如其所在站台和儲存設備使用情況。
@@ -40,7 +40,7 @@ summary: 您可以檢視銷毀編碼設定檔的詳細資訊，並可根據需�
 您可能需要重新命名銷毀編碼設定檔，以便更清楚地說明該設定檔的功能。
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *組態* > *系統* > *銷毀編碼*。
 . 選擇要重新命名的個人資料。
 . 選取 *重新命名*。
 . 請輸入糾刪碼設定檔的唯一名稱。
@@ -72,56 +72,56 @@ TIP: 請確認沒有正在進行中的糾刪碼資料修理作業或退役程序
 
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *組態* > *系統* > *銷毀編碼*。
+. 在「作用中」索引標籤上，審查 *Status* 欄，以確認要停用的銷毀編碼設定檔未用於任何 ILM 規則中。
 +
 如果糾刪碼設定檔已用於任何資訊生命週期管理規則中，則無法將其停用。在此範例中，2+1 Data Center 1 設定檔已用於至少一個資訊生命週期管理規則中。
 
 +
-image:ec_profile_used_in_ilm_rule.png["${post_edited_translations.segment}"]
+image:ec_profile_used_in_ilm_rule.png["ILM 規則中使用的 EC 設定檔"]
 
 . 如果該設定檔用於 ILM 規則，請按照下列步驟操作：
 +
 .. 選擇 *ILM* > *規則*。
 .. 選擇每個規則並審查保留圖表，以確定該規則是否使用了要停用的銷毀編碼設定檔。
 .. 如果 ILM 規則使用了要停用的銷毀編碼設定檔，請確定該規則是否用於任何 ILM 原則中。
-.. ${post_edited_translations.segment}
+.. 根據銷毀編碼設定檔的使用位置，完成表格中的其他步驟。
 +
 [cols="2a,4a,1a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} | 請參閱以下附加說明 
+| 該個人資料在哪些地方使用過？ | 停用個人資料前需執行的其他步驟 | 請參閱以下附加說明 
 
 
  a| 
-${post_edited_translations.segment}
+從未在任何 ILM 規則中使用過
  a| 
 不需要執行其他步驟。請繼續執行此程序。
  a| 
-${post_edited_translations.segment}
+_無_
 
 
 
  a| 
-${post_edited_translations.segment}
+一項從未在任何 ILM 原則中使用過的 ILM 規則
  a| 
 ... 編輯或刪除所有受影響的 ILM 規則。如果您編輯該規則，請移除所有使用該糾刪碼設定檔的放置位置。
 ... 繼續執行此程序。
 
  a| 
-link:working-with-ilm-rules-and-ilm-policies.html["${post_edited_translations.segment}"]
+link:working-with-ilm-rules-and-ilm-policies.html["使用 ILM 規則和 ILM 原則"]
 
 
 
  a| 
-${post_edited_translations.segment}
+在目前作用中的 ILM 原則中的 ILM 規則
  a| 
-... ${post_edited_translations.segment}
+... 複製原則。
 ... 移除使用銷毀編碼設定檔的 ILM 規則。
 ... 新增一或多條新的 ILM 規則，以確保物件受到保護。
 ... 儲存、模擬並啟動新原則。
 ... 等待新原則生效，現有物件將根據您新增的規則移至新位置。
 +
-${post_edited_translations.segment}
+*注意：*根據物件數量和 StorageGRID 系統的大小，ILM 操作可能需要數週甚至數月的時間，才能根據新的 ILM 規則將物件移至新位置。
 
 +
 雖然您可以嘗試在糾刪碼設定檔仍與資料關聯的情況下將其停用，但停用操作將會失敗。如果設定檔尚未準備好停用，系統會顯示錯誤訊息。
@@ -132,7 +132,7 @@ ${post_edited_translations.segment}
  a| 
 link:creating-ilm-policy.html["建立 ILM 原則"]
 
-link:working-with-ilm-rules-and-ilm-policies.html["${post_edited_translations.segment}"]
+link:working-with-ilm-rules-and-ilm-policies.html["使用 ILM 規則和 ILM 原則"]
 
 
 
@@ -149,7 +149,7 @@ link:working-with-ilm-rules-and-ilm-policies.html["${post_edited_translations.se
  a| 
 link:creating-ilm-policy.html["建立 ILM 原則"]
 
-link:working-with-ilm-rules-and-ilm-policies.html["${post_edited_translations.segment}"]
+link:working-with-ilm-rules-and-ilm-policies.html["使用 ILM 規則和 ILM 原則"]
 
 |===
 .. 重新整理「糾刪碼設定檔」頁面，確保該設定檔未在 ILM 規則中使用。

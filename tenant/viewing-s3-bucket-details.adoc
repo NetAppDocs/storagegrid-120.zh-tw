@@ -19,7 +19,7 @@ summary: 您可以在租戶帳戶中檢視儲存桶。
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 +
 顯示「儲存桶」頁面。
 
@@ -75,7 +75,7 @@ S3 物件鎖定:: 儲存桶是否已啟用 S3 物件鎖定。
 ====
 選擇每個選項時，請密切注意出現的警告訊息。如需更多資訊，請參閱：
 
-*** link:deleting-s3-bucket-objects.html["${post_edited_translations.segment}"]
+*** link:deleting-s3-bucket-objects.html["刪除儲存貯體中的所有物件"]
 *** link:deleting-s3-bucket.html["刪除儲存區"]（儲存桶必須為空）
 
 
@@ -95,7 +95,7 @@ S3 物件鎖定:: 儲存桶是否已啟用 S3 物件鎖定。
 **** link:grid-federation-manage-cross-grid-replication.html["管理跨網格複寫"]（如果租戶允許）
 
 
-*** *平台服務*：link:considerations-for-platform-services.html["${post_edited_translations.segment}"]（如果租戶允許）
+*** *平台服務*：link:considerations-for-platform-services.html["管理平台服務"]（如果租戶允許）
 *** *Bucket access*：檢視或變更選項設定。您必須擁有特定的存取權限。
 +
 **** 配置 link:configuring-cross-origin-resource-sharing-for-buckets-and-objects.html["用於儲存桶和物件的 CORS"] 使儲存桶及其中的物件可供其他網域中的 Web 應用程式存取。

@@ -17,7 +17,7 @@ summary: 預設情況下，首次安裝 StorageGRID 時會啟用 StorageGRID Aut
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:admin-group-permissions.html["根目錄存取權限"]。
 * 如果您使用 HTTPS 傳送 AutoSupport 套件，則您已向主要管理節點提供傳出網際網路存取，可以直接提供，也可以透過 link:configuring-admin-proxy-settings.html["使用 Proxy 伺服器"]（不需要傳入連線）。
 * 如果在 StorageGRID AutoSupport 頁面上選擇了 HTTP，則必須link:configuring-admin-proxy-settings.html["設定 Proxy 伺服器"]以 HTTPS 方式轉送 AutoSupport 封包。NetApp 的 AutoSupport 伺服器將拒絕使用 HTTP 傳送的封包。
 * 如果您使用 SMTP 作為 AutoSupport 套件的傳輸協定，則需要設定 SMTP 郵件伺服器。
@@ -104,7 +104,7 @@ AutoSupport on Demand 可協助解決技術支援正積極處理的問題。
 
 .步驟
 . 選擇 *Support* > *Tools* > *AutoSupport* > *Settings*。
-. ${post_edited_translations.segment}
+. 選取通訊協定的 *HTTPS*。
 . 選取 *啟用每週 AutoSupport* 核取方塊。
 . 選取 *啟用隨選 AutoSupport* 核取方塊。
 . 選取 *Save* 。
@@ -116,7 +116,7 @@ AutoSupport on Demand 已啟用，且技術支援可以向 StorageGRID 傳送 Au
 
 
 [[disable-checks-for-software-updates]]
-== ${post_edited_translations.segment}
+== 停用軟體更新檢查
 
 預設情況下，StorageGRID 會聯絡 NetApp 以確定是否有適用於您系統的軟體更新。如果有可用的 StorageGRID Hotfix 或新版本，新版本將會顯示在 StorageGRID 升級頁面上。
 
@@ -124,7 +124,7 @@ AutoSupport on Demand 已啟用，且技術支援可以向 StorageGRID 傳送 Au
 
 .步驟
 . 選擇 *Support* > *Tools* > *AutoSupport* > *Settings*。
-. ${post_edited_translations.segment}
+. 取消勾選「檢查軟體更新」核取方塊。
 . 選取 *Save* 。
 
 
@@ -168,10 +168,10 @@ NOTE: 您只能輸入一個附加目的地。
 
 . 如果您選擇了*驗證憑證*，請執行以下操作：
 +
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 瀏覽到 CA 憑證所在的位置。
+.. 上傳 CA 憑證檔案。
 +
-${post_edited_translations.segment}
+CA 憑證中繼資料隨即顯示。
 
 
 

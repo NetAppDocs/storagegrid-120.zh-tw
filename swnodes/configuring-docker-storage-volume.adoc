@@ -38,7 +38,7 @@ NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本�
 sudo mkfs.ext4 container-engine-storage-volume-device
 ----
 --
-.${post_edited_translations.segment}
+.Ubuntu 或 Debian
 --
 [listing]
 ----
@@ -69,7 +69,7 @@ sudo mount container-storage-volume-device /var/lib/containers
 
 
 --
-.${post_edited_translations.segment}
+.Ubuntu 或 Debian
 --
 [listing]
 ----

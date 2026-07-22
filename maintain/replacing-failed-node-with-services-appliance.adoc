@@ -14,14 +14,14 @@ summary: 您可以使用服務應用裝置來恢復故障的 Gateway Node、故�
 您可以使用服務應用裝置來恢復故障的 Gateway Node、故障的非主要 Admin Node 或故障的主要 Admin Node，這些節點可能託管在 VMware、Linux 主機或服務應用裝置上。此程序是網格節點恢復程序的其中一個步驟。
 
 .開始之前
-* ${post_edited_translations.segment}
+* 您已確定以下情況之一屬實：
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 託管該節點的虛擬機器無法還原。
+** 網格節點的實體或虛擬 Linux 主機發生故障，必須更換。
 ** 必須更換承載網格節點的服務應用裝置。
 
 
-* 您已確認服務應用裝置上的 StorageGRID 應用裝置安裝程式版本與 StorageGRID 系統的軟體版本相符。請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/verifying-and-upgrading-storagegrid-appliance-installer-version.html["${post_edited_translations.segment}"^]。
+* 您已確認服務應用裝置上的 StorageGRID 應用裝置安裝程式版本與 StorageGRID 系統的軟體版本相符。請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/verifying-and-upgrading-storagegrid-appliance-installer-version.html["驗證並升級 StorageGRID 應用裝置安裝程式版本"^]。
 
 
 

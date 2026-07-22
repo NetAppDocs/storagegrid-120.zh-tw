@@ -22,7 +22,7 @@ summary: 您可以擷取 StorageGRID 日誌檔和系統資料（包括組態資�
 .關於此任務
 使用 Grid Manager 收集link:logs-files-reference.html["日誌檔"]、系統資料及組態資料，資料來源為您所選時間段內的任何網格節點。資料將被收集並歸檔至 `.tar.gz`檔案，您可以將其下載至本機電腦或傳送給技術支援。
 
-您可以選擇變更稽核日誌的目的地，並將稽核資訊傳送至外部 syslog 伺服器。設定外部 syslog 伺服器後，本機稽核記錄日誌仍會繼續產生和儲存。請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+您可以選擇變更稽核日誌的目的地，並將稽核資訊傳送至外部 syslog 伺服器。設定外部 syslog 伺服器後，本機稽核記錄日誌仍會繼續產生和儲存。請參閱 link:../monitor/configure-log-management.html["設定日誌管理和外部 syslog 伺服器"]。
 
 .步驟
 . 選取 *Support* > *Tools* > *Log collection*。節點表隨即顯示。

@@ -56,7 +56,7 @@ sidebar:
     - section: upgrade
     - title: 套用 StorageGRID Hotfix
       entries:
-      - title: "${post_edited_translations.segment}"
+      - title: Hotfix 程序
         url: "/maintain/storagegrid-hotfix-procedure.html"
       - title: 套用 Hotfix 時對系統的影響
         url: "/maintain/how-your-system-is-affected-when-you-apply-hotfix.html"
@@ -109,11 +109,11 @@ sidebar:
           entries:
           - title: 一般性考慮
             url: "/maintain/considerations-for-decommissioning-storage-nodes.html"
-          - title: "${post_edited_translations.segment}"
+          - title: ADC 仲裁
             url: "/maintain/understanding-adc-service-quorum.html"
           - title: 檢閱 ILM 原則和儲存組態
             url: "/maintain/reviewing-ilm-policy-and-storage-configuration.html"
-          - title: "${post_edited_translations.segment}"
+          - title: 整合儲存節點
             url: "/maintain/consolidating-storage-nodes.html"
           - title: 退役多個儲存節點
             url: "/maintain/decommissioning-multiple-storage-nodes.html"
@@ -125,7 +125,7 @@ sidebar:
           url: "/maintain/accessing-decommission-nodes-page.html"
         - title: 退役已中斷連線的網格節點
           url: "/maintain/decommissioning-disconnected-grid-nodes.html"
-        - title: "${post_edited_translations.segment}"
+        - title: 退役已連線的網格節點
           url: "/maintain/decommissioning-connected-grid-nodes.html"
         - title: 暫停和恢復儲存節點的退役流程
           url: "/maintain/pausing-and-resuming-decommission-process-for-storage-nodes.html"
@@ -178,7 +178,7 @@ sidebar:
           url: "/maintain/powering-off-and-on-all-nodes-in-grid.html"
       - title: 連接埠重映射程序
         entries:
-        - title: "${post_edited_translations.segment}"
+        - title: 移除 StorageGRID 應用裝置上的連接埠重映射
           url: "/maintain/removing-port-remaps.html"
         - title: 移除裸機主機上的連接埠重映射
           url: "/maintain/removing-port-remaps-on-bare-metal-hosts.html"
@@ -210,15 +210,15 @@ sidebar:
       entries:
       - title: 更新網格網路的子網路
         url: "/maintain/updating-subnets-for-grid-network.html"
-      - title: "${post_edited_translations.segment}"
+      - title: 設定 IP 位址
         entries:
         - title: IP 位址指南
           url: "/maintain/configuring-ip-addresses.html"
-        - title: "${post_edited_translations.segment}"
+        - title: 更改節點網路組態
           url: "/maintain/changing-nodes-network-configuration.html"
         - title: 在管理網路上新增或變更子網路列表
           url: "/maintain/adding-to-or-changing-subnet-lists-on-admin-network.html"
-        - title: "${post_edited_translations.segment}"
+        - title: 在網格網路上新增或變更子網路列表
           url: "/maintain/adding-to-or-changing-subnet-lists-on-grid-network.html"
         - title: 更改網格中所有節點的 IP 位址
           url: "/maintain/changing-ip-addresses-and-mtu-values-for-all-nodes-in-grid.html"
@@ -230,9 +230,9 @@ sidebar:
           url: "/maintain/linux-adding-trunk-or-access-interfaces-to-node.html"
         - title: VMware：新增中繼或存取介面
           url: "/maintain/vmware-adding-trunk-or-access-interfaces-to-node.html"
-      - title: "${post_edited_translations.segment}"
+      - title: 設定 DNS 伺服器
         url: "/maintain/configuring-dns-servers.html"
-      - title: "${post_edited_translations.segment}"
+      - title: 修改單一網格節點的 DNS 組態
         url: "/maintain/modifying-dns-configuration-for-single-grid-node.html"
       - title: 管理 NTP 伺服器
         url: "/maintain/configuring-ntp-servers.html"
@@ -283,7 +283,7 @@ sidebar:
           url: "/maintain/recovering-from-storage-volume-failure-where-system-drive-is-intact.html"
         - title: 儲存設備 Volume 恢復警告
           url: "/maintain/reviewing-warnings-about-storage-volume-recovery.html"
-        - title: "${post_edited_translations.segment}"
+        - title: 識別並取下故障儲存設備 Volume
           url: "/maintain/identifying-and-unmounting-failed-storage-volumes.html"
         - title: 恢復故障儲存設備 Volume 並重新建置 Cassandra 資料庫
           url: "/maintain/recovering-failed-storage-volumes-and-rebuilding-cassandra-database.html"
@@ -291,7 +291,7 @@ sidebar:
           url: "/maintain/restoring-object-data-to-storage-volume-where-system-drive-is-intact.html"
         - title: 恢復儲存設備磁碟區後檢查儲存設備狀態
           url: "/maintain/checking-storage-state-after-recovering-storage-volumes.html"
-      - title: "${post_edited_translations.segment}"
+      - title: 從系統磁碟機故障中恢復
         entries:
         - title: 儲存節點系統磁碟機恢復警告
           url: "/maintain/reviewing-warnings-for-system-drive-recovery.html"
@@ -323,7 +323,7 @@ sidebar:
           url: "/maintain/copying-audit-logs-from-failed-primary-admin-node.html"
         - title: 替換主管理節點
           url: "/maintain/replacing-primary-admin-node.html"
-        - title: "${post_edited_translations.segment}"
+        - title: 設定替換主要管理節點
           url: "/maintain/configuring-replacement-primary-admin-node.html"
         - title: 確定主要管理節點的 Hotfix 要求
           url: "/maintain/assess-hotfix-requirement-during-primary-admin-node-recovery.html"
@@ -342,7 +342,7 @@ sidebar:
           url: "/maintain/copying-audit-logs-from-failed-non-primary-admin-node.html"
         - title: 替換非主要管理節點
           url: "/maintain/replacing-non-primary-admin-node.html"
-        - title: "${post_edited_translations.segment}"
+        - title: 選擇「開始恢復」以設定非主要管理節點
           url: "/maintain/selecting-start-recovery-to-configure-non-primary-admin-node.html"
         - title: 在已恢復的非主要管理節點上恢復稽核日誌
           url: "/maintain/restoring-audit-log-on-recovered-non-primary-admin-node.html"
@@ -350,7 +350,7 @@ sidebar:
           url: "/maintain/restoring-admin-node-database-non-primary-admin-node.html"
         - title: 恢復非主要管理節點時，恢復 Prometheus 計量
           url: "/maintain/restoring-prometheus-metrics-non-primary-admin-node.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 從閘道節點故障中恢復
       entries:
       - title: 更換閘道節點
         url: "/maintain/replacing-gateway-node.html"
@@ -381,13 +381,13 @@ sidebar:
         url: "/maintain/replacing-failed-node-with-services-appliance.html"
       - title: 安裝服務應用裝置（僅限平台變更）
         url: "/maintain/installing-services-appliance-platform-change-only.html"
-      - title: "${post_edited_translations.segment}"
+      - title: 準備應用裝置進行重新安裝（僅限平台更換）
         url: "/maintain/preparing-appliance-for-reinstallation-platform-replacement-only.html"
       - title: 在服務應用裝置上開始軟體安裝
         url: "/maintain/starting-software-installation-on-services-appliance-recovery.html"
       - title: 監控服務應用裝置安裝
         url: "/maintain/monitoring-services-appliance-installation.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 技術支援如何恢復站台
       url: "/maintain/how-site-recovery-is-performed-by-technical-support.html"
   - title: StorageGRID 解決方案和資源
     url: "/storagegrid-enable.html"

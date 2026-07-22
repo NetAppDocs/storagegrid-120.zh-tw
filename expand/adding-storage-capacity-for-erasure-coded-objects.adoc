@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: erasure coding, capacity, storage nodes, ec, expand, expansion, StorageGRID 
 summary: 如果您的資訊生命週期管理原則包含建立銷毀編碼複本的規則，您必須規劃要在何處新增額外儲存容量，以及何時新增額外儲存容量。您新增的儲存設備數量以及新增的時間點，可能會影響網格的可使用儲存容量。 
 ---
-= ${post_edited_translations.segment}
+= StorageGRID 中銷毀編碼（EC）資料的擴充規劃
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -15,15 +15,15 @@ summary: 如果您的資訊生命週期管理原則包含建立銷毀編碼複�
 
 規劃儲存擴充的第一步是檢視 ILM 原則中建立銷毀編碼物件的規則。由於 StorageGRID 會為每個銷毀編碼物件建立 _k+m_ 個片段，並將每個片段儲存在不同的儲存節點上，因此您必須確保擴充後至少有 _k+m_ 個儲存節點有足夠的空間來儲存新的銷毀編碼資料。如果銷毀編碼設定檔提供站台遺失保護，則必須為每個站台新增儲存設備。如需銷毀編碼設定檔的相關資訊，請參閱 link:../ilm/what-erasure-coding-schemes-are.html["什麼是銷毀編碼方案？"]。
 
-${post_edited_translations.segment}
+需要新增的節點數量也取決於執行擴充時現有節點的填充程度。
 
 
 
 [[general-recommendation-for-adding-storage-capacity-for-erasure-coded-objects]]
-== ${post_edited_translations.segment}
+== 關於增加銷毀編碼物件儲存容量的一般建議
 
-${post_edited_translations.segment}
+如果想要避免進行詳細的運算，可以在現有儲存節點達到 70% 容量時，為每個站台新增兩個儲存節點。
 
-${post_edited_translations.segment}
+對於單一站台網格和銷毀編碼提供站台遺失保護的網格，此一般建議在各種銷毀編碼方案中都能提供合理的結果。
 
 若要更深入瞭解導致此建議的因素，或為您的站台制定更精確的計劃，請參閱 link:considerations-for-rebalancing-erasure-coded-data.html["重新平衡銷毀編碼資料的注意事項"]。如需針對您的情況進行最佳化的自訂建議，請聯絡您的 NetApp 專業諮詢服務顧問。

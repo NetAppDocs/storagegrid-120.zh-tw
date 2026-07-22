@@ -19,7 +19,7 @@ summary: 恢復主要管理節點後，確定是否需要套用 Hotfix。
 .步驟
 . 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 . 選取 *Nodes* 。
-. ${post_edited_translations.segment}
+. 從左側清單中選取主要管理節點。
 . 在「概覽」標籤上，記下「軟體版本」欄位中顯示的版本。
 . 選擇其他任意網格節點。
 . 在「概覽」標籤上，記下「軟體版本」欄位中顯示的版本。

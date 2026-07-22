@@ -11,7 +11,7 @@ summary: 如果您使用的是 S3 租戶並且擁有相應的權限，則可以�
 
 
 [role="lead"]
-如果您使用的是 S3 租戶並且擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"]，則可以檢視您的 S3 存取金鑰清單。您可以按過期時間對清單進行排序，以便確定哪些金鑰即將過期。如有需要，您可以 link:creating-your-own-s3-access-keys.html["建立新密鑰"] 或 link:deleting-your-own-s3-access-keys.html["刪除鍵"] 不再使用的金鑰。
+如果您使用的是 S3 租戶並且擁有 link:tenant-management-permissions.html["適當權限"]，則可以檢視您的 S3 存取金鑰清單。您可以按過期時間對清單進行排序，以便確定哪些金鑰即將過期。如有需要，您可以 link:creating-your-own-s3-access-keys.html["建立新密鑰"] 或 link:deleting-your-own-s3-access-keys.html["刪除鍵"] 不再使用的金鑰。
 
 
 CAUTION: 您可以使用租戶管理員中顯示的帳戶存取金鑰 ID 和秘密存取金鑰存取屬於您帳戶的 S3 儲存桶和物件。因此，請像保護密碼一樣保護存取金鑰。定期輪換存取金鑰，從您的帳戶中移除任何未使用的金鑰，並且切勿與其他使用者共享。

@@ -15,7 +15,7 @@ summary: 您可以控制使用者對 S3 儲存桶及其中物件的存取。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
-* 您屬於擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。「View all buckets」和「Manage all buckets」權限僅允許檢視。
+* 您屬於擁有 link:tenant-management-permissions.html["根目錄存取權限"] 的使用者群組。「View all buckets」和「Manage all buckets」權限僅允許檢視。
 * 您已確認所需數量的 Storage Nodes 和站點均可用。如果任何站點中有兩個或兩個以上的 Storage Nodes 無法使用，或某個站點無法使用，則可能無法變更這些設定。
 
 

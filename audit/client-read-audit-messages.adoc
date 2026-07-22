@@ -23,7 +23,7 @@ S3SL
  a| 
 S3 Select 請求：在 S3 Select 請求回傳給用戶端後記錄完成情況。S3SL 訊息可能包含錯誤訊息和錯誤代碼詳細資訊。該請求可能未成功。
  a| 
-${post_edited_translations.segment}
+S3 用戶端
  a| 
 link:s3-select-request.html["S3SL：S3 Select 請求"]
 
@@ -36,7 +36,7 @@ S3 GET：記錄成功擷取物件或列出儲存貯體中物件的交易。
 
 *注意：*如果交易操作的是子資源，則稽核訊息將包含欄位 S3SR。
  a| 
-${post_edited_translations.segment}
+S3 用戶端
  a| 
 link:sget-s3-get.html["SGET：S3 GET"]
 
@@ -47,7 +47,7 @@ SHEA
  a| 
 S3 HEAD：記錄成功的交易，以檢查物件或儲存貯體是否存在。
  a| 
-${post_edited_translations.segment}
+S3 用戶端
  a| 
 link:shea-s3-head.html["SHEA：S3 HEAD"]
 

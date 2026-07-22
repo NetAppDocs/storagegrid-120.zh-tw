@@ -19,7 +19,7 @@ summary: 當您開始使用雲端儲存資源池時，了解雲端儲存資源�
 
 
  a| 
-${post_edited_translations.segment}
+主要目的是什麼？
  a| 
 充當歸檔目標。雲端儲存資源池中的物件複本可以是該物件的唯一複本，也可以是額外的複本。也就是說，您無需在本機上保留兩個複本，只需在 StorageGRID 中保留一個複本，並將另一個複本傳送到雲端儲存資源池即可。
  a| 
@@ -46,7 +46,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+目的地是哪裡？
  a| 
 * 任何相容的 S3 基礎架構（包括 Amazon S3）
 * Azure Blob 歸檔分層

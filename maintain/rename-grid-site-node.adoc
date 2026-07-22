@@ -17,24 +17,24 @@ summary: 您可以使用此程序來新增或更新用於網格、站台和節�
 * 從任何管理節點，您都可以使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 * 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
 * 您擁有佈建密碼。
-* 您了解顯示名稱的要求和最佳實務。請參閱link:../maintain/rename-grid-site-node-overview.html["${post_edited_translations.segment}"]。
+* 您了解顯示名稱的要求和最佳實務。請參閱link:../maintain/rename-grid-site-node-overview.html["重新命名網格、站台和節點"]。
 
 
 
 
 [[how-to-rename-grid-sites-or-nodes]]
-== ${post_edited_translations.segment}
+== 如何重新命名網格、網站或節點
 
 您可以重新命名 StorageGRID 系統、一個或多個站台或一個或多個節點。
 
-${post_edited_translations.segment}
+您可以使用先前由其他節點使用的顯示名稱，只要重新命名不會導致重複的顯示名稱或系統名稱即可。
 
 
 
 [[select-items-to-rename]]
-=== ${post_edited_translations.segment}
+=== 選擇要重新命名的項目
 
-${post_edited_translations.segment}
+首先，選擇要重新命名的項目。
 
 .步驟
 . 選擇 *Maintenance* > *Tasks* > *Rename grid, sites, and nodes*。
@@ -42,22 +42,22 @@ ${post_edited_translations.segment}
 +
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 要變更的項目 | 操作說明 
 
 
  a| 
 系統中所有（或幾乎所有）事物的名稱
  a| 
-.. ${post_edited_translations.segment}
+.. 選擇*全選*。
 .. 您可以選擇清除任何不想重新命名的項目。
 
 
 
 
  a| 
-${post_edited_translations.segment}
+網格名稱
  a| 
-${post_edited_translations.segment}
+選取網格的核取方塊。
 
 
 
@@ -65,7 +65,7 @@ ${post_edited_translations.segment}
 網站名稱及其部分或全部節點
  a| 
 .. 選取網站表格標題中的核取方塊。
-.. ${post_edited_translations.segment}
+.. （可選）清除任何您不想重新命名的節點。
 
 
 
@@ -80,7 +80,7 @@ ${post_edited_translations.segment}
  a| 
 節點名稱
  a| 
-${post_edited_translations.segment}
+選取該節點的核取方塊。
 
 |===
 . 選擇 *Continue* 。
@@ -88,7 +88,7 @@ ${post_edited_translations.segment}
 +
 ** *顯示名稱* 欄位會顯示每個項目的目前名稱。如果該項目從未被重新命名，其顯示名稱將與其系統名稱相同。
 ** 「*系統名稱*」欄位會顯示您在安裝期間為每個項目輸入的名稱。系統名稱用於內部 StorageGRID 作業，且無法變更。例如，節點的系統名稱可能是其主機名稱。
-** ${post_edited_translations.segment}
+** *類型* 欄指示項目的類型：網格、站台或特定類型的節點。
 
 
 
@@ -98,24 +98,24 @@ ${post_edited_translations.segment}
 [[propose-new-names]]
 === 提出新名稱
 
-${post_edited_translations.segment}
+在「建議新名稱」步驟中，您可以為每個項目單獨輸入顯示名稱，也可以批次重新命名項目。
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.單獨重新命名項目
 --
 請依照下列步驟為每個要重新命名的項目輸入顯示名稱。
 
 .步驟
-. ${post_edited_translations.segment}
+. 在「顯示名稱」欄位中，為清單中的每個項目輸入建議的顯示名稱。
 +
-請參閱 link:../maintain/rename-grid-site-node-overview.html["${post_edited_translations.segment}"] 以了解命名要求。
+請參閱 link:../maintain/rename-grid-site-node-overview.html["重新命名網格、站台和節點"] 以了解命名要求。
 
 . 若要移除任何您不想重新命名的項目，請在「從清單中移除」欄中選取 image:icon-x-to-remove.png["X 圖示"]。
 +
 如果您不打算為某個項目提出新名稱，則必須將其從表格中移除。
 
-. ${post_edited_translations.segment}
+. 當您為表格中的所有項目提出新名稱後，請選擇 *Rename*。
 +
 系統會顯示成功訊息。新的顯示名稱現在已在整個 Grid Manager 中使用。
 
@@ -127,7 +127,7 @@ ${post_edited_translations.segment}
 如果項目名稱共用一個共同的字串，而您想要將其取代為另一個字串，請使用批次重新命名工具。
 
 .步驟
-. ${post_edited_translations.segment}
+. 在「建議新名稱」步驟中，選擇「使用批次重新命名工具」。
 +
 「*重新命名預覽*」包含「*建議新名稱*」步驟中所顯示的所有項目。您可以使用預覽來查看取代共享字串後，顯示名稱的外觀。
 
@@ -144,7 +144,7 @@ image:rename-bulk-rename-tool.png["批次重命名工具之前"]
 
 . 在「*New string*」欄位中，輸入您要改用的替代字串。例如，輸入 *DC1*。
 +
-請參閱 link:../maintain/rename-grid-site-node-overview.html["${post_edited_translations.segment}"] 以了解命名要求。
+請參閱 link:../maintain/rename-grid-site-node-overview.html["重新命名網格、站台和節點"] 以了解命名要求。
 
 +
 輸入替換字串後，左側的名稱會更新，以便驗證新名稱是否正確。
@@ -171,7 +171,7 @@ image:rename-bulk-rename-tool-after.png["批次重命名工具之後"]
 
 .步驟
 . 請輸入佈建密碼。
-. ${post_edited_translations.segment}
+. 選擇 *Download recovery package*。
 +
 下載立即開始。
 
@@ -181,13 +181,13 @@ image:rename-bulk-rename-tool-after.png["批次重命名工具之後"]
 
 CAUTION: 恢復套件檔案必須受到保護，因為它包含可用於從 StorageGRID 系統取得資料的加密金鑰和密碼。
 
-. ${post_edited_translations.segment}
+. 選擇 *Finish* 以返回第一步。
 
 
 
 
 [[revert-display-names-back-to-system-names]]
-== ${post_edited_translations.segment}
+== 將顯示名稱還原為系統名稱
 
 您可以將已重新命名的網格、網站或節點回復為其原始系統名稱。將項目回復為其系統名稱後，Grid Manager 頁面和其他 StorageGRID 位置將不再顯示該項目的 *Display name*。僅顯示該項目的系統名稱。
 
@@ -199,7 +199,7 @@ CAUTION: 恢復套件檔案必須受到保護，因為它包含可用於從 Stor
 +
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.個別還原為系統名稱
 --
 .. 複製每個項目的原始系統名稱並將其貼上到 *顯示名稱* 欄位中，或選擇 image:icon-x-to-remove.png["X 圖示"] 以移除任何您不想還原的項目。
 +
@@ -214,10 +214,10 @@ CAUTION: 恢復套件檔案必須受到保護，因為它包含可用於從 Stor
 --
 .批次回復系統名稱
 --
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 在「建議新名稱」步驟中，選擇「使用批次重新命名工具」。
+.. 在「現有字串」欄位中，輸入要取代的顯示名稱字串。
 .. 在「新字串」欄位中，輸入您要使用的系統名稱字串。
-.. ${post_edited_translations.segment}
+.. 選擇 *Add names* 以將名稱新增至 *Propose new names* 步驟的表格中。
 .. 確認「顯示名稱」欄位中的每個條目都與「系統名稱」欄位中的名稱一致。進行任何更改，或選擇 image:icon-x-to-remove.png["X 圖示"] 以移除任何您不想還原的項目。
 +
 若要回復顯示名稱，系統名稱必須出現在「顯示名稱」欄位中，但名稱不區分大小寫。
@@ -230,7 +230,7 @@ CAUTION: 恢復套件檔案必須受到保護，因為它包含可用於從 Stor
 
 --
 ====
-. <<download-recovery-package,${post_edited_translations.segment}>>。
+. <<download-recovery-package,下載並儲存新的恢復套件>>。
 +
 已回復項目的顯示名稱不再包含在 `Passwords.txt`檔案中。
 

@@ -16,20 +16,20 @@ summary: 當儲存節點達到容量上限時，您必須透過新增儲存空�
 
 
 [[add-storage-volumes]]
-== ${post_edited_translations.segment}
+== 新增儲存設備磁碟區
 
 每個 Storage Node 均支援最大數量的儲存磁碟區。定義的最大值視平台而異。如果 Storage Node 包含的儲存磁碟區數量少於最大數量，您可以新增磁碟區以增加其容量。請參閱 link:../expand/index.html["擴充 StorageGRID 系統"] 的說明。
 
 
 
 [[add-storage-expansion-shelves]]
-== ${post_edited_translations.segment}
+== 增加儲存擴充架
 
 部分 StorageGRID 應用裝置儲存節點（例如 SG6060 或 SG6160）支援額外儲存容量架。如果您擁有的 StorageGRID 應用裝置具有擴充功能，但尚未擴充至最大容量，則可以新增儲存設備架來增加容量。請參閱相關說明 link:../expand/index.html["擴充 StorageGRID 系統"]。
 
 
 
 [[add-storage-nodes]]
-== ${post_edited_translations.segment}
+== 新增儲存節點
 
 您可以透過新增儲存節點來增加儲存容量。新增儲存設備時，必須仔細考慮目前作用中的 ILM 規則和容量需求。請參閱相關說明 link:../expand/index.html["擴充 StorageGRID 系統"]。

@@ -18,10 +18,10 @@ summary: 如果要 Clone 租戶詳細資料並複寫物件資料，可以在兩�
 image:grid-federation-create-connection.png["在兩個網格上建立連線步驟的圖形總覽"]
 
 .開始之前
-* 您已檢閱設定網格聯合連線的link:grid-federation-overview.html["${post_edited_translations.segment}"]。
+* 您已檢閱設定網格聯合連線的link:grid-federation-overview.html["考慮因素和要求"]。
 * 如果您打算為每個網格使用完整網域名稱 (FQDN) 而不是 IP 或 VIP 位址，您就知道要使用哪些名稱，並且您已確認每個網格的 DNS 伺服器都有適當的項目。
 * 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
-* ${post_edited_translations.segment}
+* 您擁有兩個網格的 root 存取權限和佈建密碼。
 
 
 
@@ -35,7 +35,7 @@ image:grid-federation-create-connection.png["在兩個網格上建立連線步�
 . 從任一網格上的主要管理節點登入 Grid Manager。
 . 選擇 *Configuration* > *System* > *Grid federation*。
 . 選擇 *Add connection*。
-. ${post_edited_translations.segment}
+. 輸入連線的詳細資料。
 +
 [cols="1a,2a"]
 |===
@@ -50,12 +50,12 @@ image:grid-federation-create-connection.png["在兩個網格上建立連線步�
 
 
  a| 
-${post_edited_translations.segment}
+此網格的 FQDN 或 IP
  a| 
-${post_edited_translations.segment}
+以下選項之一：
 
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 您目前登入的網格的完全限定網域名稱 (FQDN)
+** 此網格上 HA 群組的 VIP 位址
 ** 此網格上管理節點或閘道節點的 IP 位址。該 IP 可以位於目的地網格可到達的任何網路上。
 
 
@@ -71,16 +71,16 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+此網格的證書有效天數
  a| 
 此連接中該網格的安全性憑證有效天數。預設值為 730 天（2 年），但您可以輸入 1 到 762 天之間的任何值。
 
-${post_edited_translations.segment}
+StorageGRID 在您儲存連線時自動為每個網格產生用戶端和伺服器憑證。
 
 
 
  a| 
-${post_edited_translations.segment}
+此網格的佈建複雜密碼
  a| 
 您目前登入的網格的佈建密碼。
 
@@ -89,18 +89,18 @@ ${post_edited_translations.segment}
  a| 
 另一個網格的 FQDN 或 IP 位址
  a| 
-${post_edited_translations.segment}
+以下選項之一：
 
-** ${post_edited_translations.segment}
+** 您要連線之網格的完整網域名稱 （FQDN）
 ** 另一個網格上 HA 群組的 VIP 位址
 ** 另一個網格上管理節點或閘道節點的 IP 位址。此 IP 可以位於來源網格可連達的任何網路上。
 
 
 |===
 . 選擇 *Save and continue*。
-. ${post_edited_translations.segment}
+. 在「下載驗證檔案」步驟中，選取 *Download verification file*。
 +
-${post_edited_translations.segment}
+在另一個網格上完成連接後，您將無法再從任何一個網格下載驗證檔案。
 
 . 找出下載的檔案 (`_connection-name_.grid-federation`)，並將其儲存到安全的位置。
 +
@@ -108,16 +108,16 @@ ${post_edited_translations.segment}
 CAUTION: 此檔案包含機密（遮罩為  `***`）與其他敏感詳細資訊，且必須安全地儲存與傳輸。
 
 . 選擇 *Close* 以返回 Grid federation 頁面。
-. ${post_edited_translations.segment}
+. 確認已顯示新連線，且其*連線狀態*為*等待連線*。
 . 將 `_connection-name_.grid-federation`檔案提供給另一個網格的網格管理員。
 
 
 
 
 [[complete-connection]]
-== ${post_edited_translations.segment}
+== 完全連接
 
-${post_edited_translations.segment}
+在您要連接的 StorageGRID 系統（另一個網格）上執行這些步驟。
 
 .步驟
 . 從主要管理節點登入 Grid Manager。
@@ -125,7 +125,7 @@ ${post_edited_translations.segment}
 . 選擇 *Upload verification file* 以存取上傳頁面。
 . 選取 *上傳驗證檔案*。然後，瀏覽並選取從第一個網格下載的檔案 (`_connection-name_.grid-federation`）。
 +
-${post_edited_translations.segment}
+連線詳細資料如下所示。
 
 . 您也可以為該網格的安全性憑證輸入不同的有效天數。*憑證有效天數*項目預設為您在第一個網格中輸入的值，但每個網格可以使用不同的到期日。
 +
@@ -133,10 +133,10 @@ ${post_edited_translations.segment}
 
 +
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 如果連線兩端的憑證過期，連線將停止運作，複寫作業將處於擱置狀態，直到憑證更新為止。
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 請輸入您目前登入的網格的佈建密碼。
+. 選擇 *Save and test*。
 +
 憑證已產生，且連線已測試。如果連線有效，則會顯示成功訊息，且新連線將列在網格聯盟頁面上。*連線狀態* 將顯示為 *已連線*。
 
@@ -144,14 +144,14 @@ CAUTION: ${post_edited_translations.segment}
 如果出現錯誤訊息，請解決任何問題。參見link:grid-federation-troubleshoot.html["排除網格同盟錯誤"]。
 
 . 前往第一個網格上的網格同盟頁面，然後重新整理瀏覽器。確認「連線狀態」目前為「已連線」。
-. ${post_edited_translations.segment}
+. 連線建立後，安全地刪除驗證檔案的所有副本。
 +
 如果您編輯此連線，系統將建立一個新的驗證檔案。原始檔案將無法重複使用。
 
 
 
 .完成後
-* 檢視以下方面的考量事項link:grid-federation-manage-tenants.html["${post_edited_translations.segment}"]。
+* 檢視以下方面的考量事項link:grid-federation-manage-tenants.html["管理獲準租戶"]。
 * link:creating-tenant-account.html["建立一個或多個新的租戶帳戶"]，指派 *使用網格同盟連線* 權限，並選取新的連線。
 * link:grid-federation-manage-connection.html["管理連線"]（視需要）。您可以編輯連線值、測試連線、輪換連線憑證或移除連線。
 * link:../monitor/grid-federation-monitor-connections.html["監控連線"]作為您日常 StorageGRID 監控活動的一部分。

@@ -18,7 +18,7 @@ summary: 在實作搭配 StorageGRID 使用的 S3 REST API 時，您應該遵循
 [[recommendations-for-heads-to-non-existent-objects]]
 == 針對不存在物件的 HEAD 建議
 
-如果您的應用程式會例行檢查某個物件是否存在於預期該物件實際上不存在的路徑，則應使用「Available」link:consistency.html["${post_edited_translations.segment}"]一致性。例如，如果您的應用程式在向某個位置執行 PUT 操作之前先執行 HEAD 操作，則應使用「Available」一致性。
+如果您的應用程式會例行檢查某個物件是否存在於預期該物件實際上不存在的路徑，則應使用「Available」link:consistency.html["一致性"]一致性。例如，如果您的應用程式在向某個位置執行 PUT 操作之前先執行 HEAD 操作，則應使用「Available」一致性。
 
 否則，如果 HEAD 操作找不到物件，當同一站台的兩個或多個儲存節點無法使用或遠端站台無法連線時，您可能會收到大量 500 內部伺服器錯誤。
 

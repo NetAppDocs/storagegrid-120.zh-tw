@@ -23,7 +23,7 @@ CLOC
  a| 
 區塊位置
  a| 
-${post_edited_translations.segment}
+已刪除之洩漏區塊的檔案路徑。
 
 
 
@@ -41,11 +41,11 @@ CTYP
 
 
  a| 
-${post_edited_translations.segment}
+LTYP
  a| 
-${post_edited_translations.segment}
+洩漏類型
  a| 
-${post_edited_translations.segment}
+可偵測到的五種洩漏類型：
 
 `object_leaked: Object doesn’t exist in the grid`
 
@@ -60,7 +60,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+CTIM
  a| 
 區塊建立時間
  a| 
@@ -73,7 +73,7 @@ UUID
  a| 
 通用唯一識別符
  a| 
-${post_edited_translations.segment}
+該資料塊所屬物件的識別碼。
 
 
 
@@ -82,7 +82,7 @@ CBID
  a| 
 內容區塊識別碼
  a| 
-${post_edited_translations.segment}
+洩漏資料塊所屬物件的 CBID。
 
 
 

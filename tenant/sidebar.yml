@@ -31,9 +31,9 @@ entries:
     url: "/tenant/grid-federation-manage-cross-grid-replication.html"
   - title: 檢視網格同盟連線
     url: "/tenant/grid-federation-view-connections-tenant.html"
-- title: "${post_edited_translations.segment}"
+- title: 管理群組和使用者
   entries:
-  - title: "${post_edited_translations.segment}"
+  - title: 使用身分聯盟
     url: "/tenant/using-identity-federation.html"
   - title: 管理租戶群組
     entries:
@@ -45,10 +45,10 @@ entries:
       url: "/tenant/manage-groups.html"
   - title: 管理使用者
     url: "/tenant/manage-users.html"
-- title: "${post_edited_translations.segment}"
+- title: 管理 S3 存取金鑰
   entries:
   - title: 租戶存取金鑰
-    pdf-filename: "${post_edited_translations.segment}"
+    pdf-filename: 管理 S3 存取金鑰
     url: "/tenant/managing-s3-access-keys.html"
   - title: 建立您的 S3 存取金鑰
     url: "/tenant/creating-your-own-s3-access-keys.html"

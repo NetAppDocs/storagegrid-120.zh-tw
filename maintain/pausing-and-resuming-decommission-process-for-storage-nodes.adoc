@@ -14,7 +14,7 @@ summary: 如果您需要執行第二個維護程序，可以在特定階段暫�
 如果您需要執行第二個維護程序，可以在特定階段暫停 Storage Node 的退役程序。在另一個程序完成後，您可以恢復退役。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 只有在達到 ILM 評估或糾刪碼資料退役階段時，才會啟用 *Pause* 按鈕；然而，ILM 評估（資料移轉）將繼續在背景執行。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
@@ -22,9 +22,9 @@ NOTE: ${post_edited_translations.segment}
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Maintenance* > *Tasks* > *Decommission*。
 +
-${post_edited_translations.segment}
+顯示「退役」頁面。
 
 . 選擇 *Decommission Nodes*。
 +
@@ -35,12 +35,12 @@ ${post_edited_translations.segment}
 ** 退役抹除編碼資料
 
 
-. ${post_edited_translations.segment}
+. 選擇 *Pause* 以暫停程序。
 +
-${post_edited_translations.segment}
+目前階段已暫停，*Resume* 按鈕已啟用。
 
 +
 image:decommission_nodes_procedure_paused.png["節點退役程序暫停"]
 
-. ${post_edited_translations.segment}
+. 其他維護程序完成後，選擇 *Resume* 以繼續進行退役。
 

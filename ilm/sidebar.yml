@@ -17,11 +17,11 @@ entries:
       url: "/ilm/advantages-disadvantages-of-ingest-options.html"
   - title: 物件的儲存方式（複寫或銷毀編碼）
     entries:
-    - title: "${post_edited_translations.segment}"
+    - title: 什麼是複寫
       url: "/ilm/what-replication-is.html"
     - title: 為什麼不應該使用單一複本複寫
       url: "/ilm/why-you-should-not-use-single-copy-replication.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 什麼是銷毀編碼
       url: "/ilm/what-erasure-coding-is.html"
     - title: 什麼是銷毀編碼方案？
       url: "/ilm/what-erasure-coding-schemes-are.html"
@@ -29,7 +29,7 @@ entries:
       url: "/ilm/advantages-disadvantages-and-requirements-for-ec.html"
   - title: 如何確定物件保留
     url: "/ilm/how-object-retention-is-determined.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 物件如何刪除
     url: "/ilm/how-objects-are-deleted.html"
 - title: 建立並分配儲存設備等級
   url: "/ilm/creating-and-assigning-storage-grades.html"
@@ -43,7 +43,7 @@ entries:
     url: "/ilm/using-multiple-storage-pools-for-cross-site-replication.html"
   - title: 建立儲存資源池
     url: "/ilm/creating-storage-pool.html"
-  - title: "${post_edited_translations.segment}"
+  - title: 檢視儲存資源池詳細資料
     url: "/ilm/viewing-storage-pool-details.html"
   - title: 編輯儲存資源池
     url: "/ilm/editing-storage-pool.html"
@@ -51,7 +51,7 @@ entries:
     url: "/ilm/removing-storage-pool.html"
 - title: 使用雲端儲存資源池
   entries:
-  - title: "${post_edited_translations.segment}"
+  - title: 什麼是雲端儲存資源池
     url: "/ilm/what-cloud-storage-pool-is.html"
   - title: 雲端儲存資源池物件的生命週期
     url: "/ilm/lifecycle-of-cloud-storage-pool-object.html"
@@ -93,7 +93,7 @@ entries:
     url: "/ilm/creating-default-ilm-rule.html"
 - title: 管理 ILM 策略
   entries:
-  - title: "${post_edited_translations.segment}"
+  - title: 使用 ILM 原則
     url: "/ilm/ilm-policy-overview.html"
   - title: 建立 ILM 原則
     url: "/ilm/creating-ilm-policy.html"

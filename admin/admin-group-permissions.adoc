@@ -13,22 +13,22 @@ summary: 建立管理使用者群組時，您可以選取一或多個權限，�
 [role="lead"]
 建立管理使用者群組時，您可以選取一或多個權限，以控制對 Grid Manager 特定功能的存取。接著，您可以將每個使用者指派給一或多個此類管理群組，以決定該使用者可以執行的工作。
 
-${post_edited_translations.segment}
+您必須為每個群組指派至少一個權限；否則，屬於該群組的使用者將無法登入 Grid Manager 或 Grid Management API。
 
-${post_edited_translations.segment}
+預設情況下，任何屬於至少擁有一項權限的使用者群組的使用者都可以執行以下操作：
 
-* ${post_edited_translations.segment}
+* 登入 Grid Manager
 * 檢視儀表板
 * 檢視節點頁面
 * 檢視目前及已解決的警示
 * 變更自己的密碼（僅限本機使用者）
-* ${post_edited_translations.segment}
+* 檢視組態和維護頁面上提供的特定資訊
 
 
 
 
 [[interaction-between-permissions-and-access-mode]]
-== ${post_edited_translations.segment}
+== 權限與存取模式之間的互動
 
 對於所有權限，群組的 *存取模式* 設定會決定使用者是否可以變更設定並執行作業，或者他們是否只能檢視相關的設定和功能。如果使用者屬於多個群組，且有任何群組設定為 *唯讀*，則該使用者將對所有選取的設定和功能具有唯讀存取權限。
 
@@ -39,12 +39,12 @@ ${post_edited_translations.segment}
 [[root-access]]
 == Root 存取
 
-${post_edited_translations.segment}
+此權限提供對所有網格管理功能的存取。
 
 
 
 [[change-tenant-root-password]]
-== ${post_edited_translations.segment}
+== 更改租戶根目錄密碼
 
 此權限可讓您存取 Tenants 頁面上的 *Change root password* 選項，從而控制哪些使用者可以變更租戶本機 root 使用者的密碼。啟用 S3 金鑰匯入功能時，此權限也用於移轉 S3 金鑰。沒有此權限的使用者將無法看到 *Change root password* 選項。
 
@@ -56,24 +56,24 @@ NOTE: 若要授予包含「變更 root 密碼」選項的「租戶」頁面的�
 [[ilm]]
 == ILM
 
-${post_edited_translations.segment}
+此權限允許存取以下 *ILM* 選單選項：
 
 * 規則
-* ${post_edited_translations.segment}
+* 政策
 * 原則標籤
 * 儲存池
-* ${post_edited_translations.segment}
+* 儲存等級
 * 地區
 * 物件中繼資料查詢
 
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 使用者必須擁有「其他網格組態」權限才能管理儲存設備等級。
 
 
 
 [[maintenance]]
-== ${post_edited_translations.segment}
+== 維護
 
 使用者必須擁有維護權限才能使用這些選項：
 
@@ -84,15 +84,15 @@ NOTE: ${post_edited_translations.segment}
 
 * *組態* > *網路*：
 +
-** ${post_edited_translations.segment}
+** S3 端點域名
 
 
-* ${post_edited_translations.segment}
+* *維護* > *任務*：
 +
 ** 取消委任
 ** 擴充
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 物件存在性檢查
+** 恢復
 
 
 * *維護* > *系統*：
@@ -103,14 +103,14 @@ NOTE: ${post_edited_translations.segment}
 
 * *支援* > *工具*：
 +
-** ${post_edited_translations.segment}
+** 紀錄
 
 
 
 
 沒有維護權限的使用者可以檢視這些頁面，但不能編輯：
 
-* ${post_edited_translations.segment}
+* *維護* > *網路*：
 +
 ** DNS 伺服器
 ** Grid 網路
@@ -124,7 +124,7 @@ NOTE: ${post_edited_translations.segment}
 
 * *組態* > *網路*：
 +
-** ${post_edited_translations.segment}
+** S3 端點域名
 
 
 * *組態* > *安全性*：
@@ -154,7 +154,7 @@ NOTE: ${post_edited_translations.segment}
 此權限允許存取：
 
 * *支援* > *工具* > *計量* 頁面
-* ${post_edited_translations.segment}
+* 使用網格管理 API 的 *Metrics* 部分進行自訂 Prometheus 計量查詢
 * 包含計量的網格管理器儀表板卡片
 
 
@@ -168,17 +168,17 @@ NOTE: ${post_edited_translations.segment}
 
 
 [[other-grid-configuration]]
-== ${post_edited_translations.segment}
+== 其他網格組態
 
 此權限允許存取以下額外的網格組態選項：
 
-* ${post_edited_translations.segment}
+* *ILM*：
 +
-** ${post_edited_translations.segment}
+** 儲存等級
 
 
 * *組態* > *系統*：
-* ${post_edited_translations.segment}
+* *支援* > *其他*：
 +
 ** 連結成本
 
@@ -188,12 +188,12 @@ NOTE: ${post_edited_translations.segment}
 
 
 [[storage-appliance-administrator]]
-== ${post_edited_translations.segment}
+== 儲存應用裝置系統管理員
 
-${post_edited_translations.segment}
+此權限提供：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 透過 Grid Manager 存取儲存應用裝置上的 E 系列 SANtricity System Manager。
+* 在支援這些作業的應用裝置上，在「管理磁碟機」索引標籤上執行疑難排解和維護任務的功能。
 
 
 
@@ -204,6 +204,6 @@ ${post_edited_translations.segment}
 此權限賦予您以下能力：
 
 * 存取「租戶」頁面，您可以在此建立、編輯和移除租戶帳戶。
-* ${post_edited_translations.segment}
+* 檢視現有的流量分類原則
 * 檢視包含租戶詳細資訊的 Grid Manager 儀表板卡片
 

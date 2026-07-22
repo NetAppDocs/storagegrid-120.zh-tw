@@ -13,7 +13,7 @@ indexpage:
       url: "/release-notes/whats-new.html"
     - title: 了解 StorageGRID
       url: "/primer/index.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 網路連線準則
       url: "/network/index.html"
     - title: StorageGRID 快速入門
       url: "/primer/quick-start.html"
@@ -33,7 +33,7 @@ indexpage:
       url: "/admin/index.html"
     - title: 使用 ILM 管理物件
       url: "/ilm/index.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 系統強化
       url: "/harden/index.html"
     - title: 設定 StorageGRID 以供 FabricPool 使用
       url: "/fabricpool/index.html"
@@ -51,7 +51,7 @@ indexpage:
       url: "/monitor/index.html"
     - title: 排除網格故障
       url: "/troubleshoot/index.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 審查稽核日誌
       url: "/audit/index.html"
   - title: 擴展和維護您的網格
     links:

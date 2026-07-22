@@ -1,11 +1,11 @@
-= ${post_edited_translations.segment}
+= 測試連線並儲存組態
 :allow-uri-read: 
 
 
 . 選取 *啟用身分識別聯盟*。
 . 在 LDAP 服務類型部分，選擇要設定的 LDAP 服務類型。
 +
-image:ldap_service_type.png["${post_edited_translations.segment}"]
+image:ldap_service_type.png["身分聯盟頁面顯示 LDAP 服務類型選項"]
 
 +
 選擇「其他」以設定使用 Oracle Directory Server 的 LDAP 伺服器的值。
@@ -31,7 +31,7 @@ NOTE: STARTTLS 的預設 port 為 389，而 LDAPS 的預設 port 為 636。不�
 對於 Active Directory，您也可以指定下級登入名稱或使用者主體名稱。
 
 +
-${post_edited_translations.segment}
+指定使用者必須擁有列出群組和使用者以及存取以下屬性的權限：
 
 +
 *** `sAMAccountName` 或  `uid`
@@ -42,7 +42,7 @@ ${post_edited_translations.segment}
 *** *Entra ID*: `accountEnabled` 與  `userPrincipalName`
 
 
-** ${post_edited_translations.segment}
+** *密碼*：與使用者名稱關聯的密碼。
 +
 
 NOTE: 如果將來更改密碼，您必須在此頁面上更新密碼。
@@ -50,12 +50,12 @@ NOTE: 如果將來更改密碼，您必須在此頁面上更新密碼。
 ** *群組基本 DN*：您要搜尋群組之 LDAP 子樹狀結構的辨識名稱 （DN） 完整路徑。在 Active Directory 範例 （如下） 中，其辨識名稱相對於基本 DN （DC=storagegrid,DC=example,DC=com） 的所有群組，都可以用作同盟群組。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: *群組唯一名稱* 值在其所屬的 *群組基本 DN* 內必須是唯一的。
 
 ** *使用者基本 DN*：要搜尋使用者的 LDAP 子樹的專有名稱 (DN) 的完整路徑。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: *User unique name* 值在其所屬的 *User Base DN* 內必須是唯一的。
 
 ** *Bind username format*（選用）：如果無法自動判斷模式，StorageGRID 應使用的預設使用者名稱模式。
 +
@@ -69,13 +69,13 @@ NOTE: ${post_edited_translations.segment}
 *** *Down-level logon name pattern （AD 和 Entra ID）*： `_example_\[USERNAME]`
 *** *辨別名稱模式*： `CN=[USERNAME],CN=Users,DC=_example_,DC=com`
 +
-${post_edited_translations.segment}
+請按原樣填寫 *[USERNAME]*。
 
 
 
 
 
-. ${post_edited_translations.segment}
+. 在傳輸層安全性 (TLS) 部分，選擇一項安全性設定。
 +
 ** *使用 STARTTLS*：使用 STARTTLS 來保護與 LDAP 伺服器的通訊。對於 Active Directory、OpenLDAP 或其他 LDAP 伺服器，這是建議選項，但此選項不支援 Microsoft Entra ID。
 ** *使用 LDAPS*：LDAPS （LDAP over SSL） 選項會使用 TLS 建立與 LDAP 伺服器的連線。您必須為 Microsoft Entra ID 選擇此選項。
@@ -86,12 +86,12 @@ NOTE: 如果您的 Active Directory 伺服器強制執行 LDAP 簽名，則不�
 
 
 
-. ${post_edited_translations.segment}
+. 如果您選擇了 STARTTLS 或 LDAPS，請選擇用於保護連線安全的憑證。
 +
 ** *使用作業系統 CA 憑證*：使用作業系統上安裝的預設 Grid CA 憑證來保護連線安全。
 ** *Use custom CA certificate*：使用自訂安全性憑證。
 +
-${post_edited_translations.segment}
+如果選擇此設定，請將自訂安全性憑證複製並貼上到 CA 憑證文字方塊中。
 
 
 
@@ -100,13 +100,13 @@ ${post_edited_translations.segment}
 
 
 [[test-the-connection-and-save-the-configuration]]
-=== ${post_edited_translations.segment}
+=== 測試連線並儲存組態
 
 輸入所有值後，必須先測試連線才能儲存組態。StorageGRID 會驗證 LDAP 伺服器的連線設定以及連結使用者名稱格式（如果您已提供）。
 
 .步驟
 . 選擇 *Test connection*。
-. ${post_edited_translations.segment}
+. 如果您未提供連結使用者名稱格式：
 +
 ** 如果連線設定有效，則會顯示「測試連線成功」訊息。選擇*儲存*以儲存組態。
 ** 如果連線設定無效，則會顯示「無法建立測試連線」訊息。選擇*關閉*。然後，解決所有問題並再次測試連線。
@@ -117,7 +117,7 @@ ${post_edited_translations.segment}
 例如，請輸入您自己的使用者名稱和密碼。使用者名稱中請勿包含任何特殊字元，例如 @ 或 /。
 
 +
-image:identity_federation_test_connection.png["${post_edited_translations.segment}"]
+image:identity_federation_test_connection.png["身分識別聯盟提示驗證連結使用者名稱格式"]
 
 +
 ** 如果連線設定有效，則會顯示「測試連線成功」訊息。選擇*儲存*以儲存組態。

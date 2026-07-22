@@ -45,8 +45,8 @@ TIP: 如果要變更網格中所有節點的網格網路 IP 位址，請使用li
 [[high-availability-ha-groups]]
 == 高可用度 （HA） 群組
 
-* ${post_edited_translations.segment}
+* 如果用戶端網路介面包含在 HA 群組中，則無法將該介面的用戶端網路 IP 位址變更為 HA 群組設定的子網路以外的位址。
 * 您無法將用戶端網路 IP 位址變更為指派給在用戶端網路介面上設定的 HA 群組的現有虛擬 IP 位址的值。
-* ${post_edited_translations.segment}
+* 如果 Grid 網路介面包含在 HA 群組中，則無法將該介面的 Grid 網路 IP 位址變更為 HA 群組設定的子網路之外的位址。
 * 您無法將網格網路 IP 位址變更為指派給在網格網路介面上設定的 HA 群組的現有虛擬 IP 位址的值。
 

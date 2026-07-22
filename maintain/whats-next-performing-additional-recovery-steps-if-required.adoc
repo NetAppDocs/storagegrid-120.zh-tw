@@ -18,34 +18,34 @@ summary: 根據您為了讓 StorageGRID 節點在替換主機上執行所採取�
 
 
 [[corrective-actions-and-next-steps]]
-== ${post_edited_translations.segment}
+== 修正措施與後續步驟
 
 在節點更換過程中，您可能需要採取以下其中一項修正措施：
 
 * 您必須使用該 `--force`旗標來匯入節點。
 * 對於任何 `<PURPOSE>`， `BLOCK_DEVICE_<PURPOSE>`組態檔案變數的值是指一個區塊裝置，該裝置不包含主機故障之前的相同資料。
 * 您已為節點發出 `storagegrid node force-recovery _node-name_`命令。
-* ${post_edited_translations.segment}
+* 您新增了一個新的區塊設備。
 
 
 如果您採取了*任何*這些修正措施，則必須執行額外的恢復步驟。
 
 [cols="2a,1a"]
 |===
-| ${post_edited_translations.segment} | 下一步 
+| 恢復類型 | 下一步 
 
 
  a| 
 主管理節點
  a| 
-link:configuring-replacement-primary-admin-node.html["${post_edited_translations.segment}"]
+link:configuring-replacement-primary-admin-node.html["設定替換主要管理節點"]
 
 
 
  a| 
-${post_edited_translations.segment}
+非主要管理節點
  a| 
-link:selecting-start-recovery-to-configure-non-primary-admin-node.html["${post_edited_translations.segment}"]
+link:selecting-start-recovery-to-configure-non-primary-admin-node.html["選擇「開始恢復」以設定非主要管理節點"]
 
 
 
@@ -70,7 +70,7 @@ link:selecting-start-recovery-to-configure-storage-node.html["選擇「開始恢
  a| 
 儲存節點（軟體型）：
 
-* ${post_edited_translations.segment}
+* 如果您新增了新的區塊設備。
 * 如果因為任何 `<PURPOSE>`， `BLOCK_DEVICE_<PURPOSE>` 組態檔案變數的值所指向的區塊裝置，未包含與主機故障前相同的資料。
 
  a| 

@@ -14,7 +14,7 @@ summary: 在關閉主機電源之前，必須停止該主機上所有網格節�
 在關閉主機電源之前，必須停止該主機上所有網格節點的服務。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -29,10 +29,10 @@ summary: 在關閉主機電源之前，必須停止該主機上所有網格節�
 +
 服務關閉可能需要長達 15 分鐘的時間，您可能需要遠端登入系統來監控關閉過程。
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 對主機上的每個節點重複步驟 1 和 2。
+. 如果您使用的是 Linux 主機：
 +
-.. ${post_edited_translations.segment}
+.. 登入主機作業系統。
 .. 停止節點： `storagegrid node stop`
 .. 關閉主機作業系統。
 
@@ -54,7 +54,7 @@ NOTE: 在應用裝置節點上下達  `shutdown -h now` 命令之後，您必須
 ====
 .SG6160
 --
-.. ${post_edited_translations.segment}
+.. 關閉 SG6100-CN 儲存控制器的電源。
 .. 等待 SG6100-CN 儲存控制器上的藍色電源 LED 熄滅。
 
 
@@ -68,29 +68,29 @@ NOTE: 在應用裝置節點上下達  `shutdown -h now` 命令之後，您必須
 --
 .SG6000
 --
-.. ${post_edited_translations.segment}
+.. 等待儲存控制器背面的綠色快取作用中 LED 熄滅。
 +
 當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
 
-.. ${post_edited_translations.segment}
+.. 關閉應用裝置的電源，並等待藍色電源指示燈熄滅。
 
 
 --
 .SG5800
 --
-.. ${post_edited_translations.segment}
+.. 等待儲存控制器背面的綠色快取作用中 LED 熄滅。
 +
 當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
 
 .. 從 SANtricity System Manager 的首頁，選擇「檢視正在進行的動作」。
 .. 請確認所有操作均已完成，然後再進行下一步。
-.. ${post_edited_translations.segment}
+.. 關閉控制器機櫃的兩個電源開關，並等待控制器機櫃的所有 LED 指示燈熄滅。
 
 
 --
 .SG5700
 --
-.. ${post_edited_translations.segment}
+.. 等待儲存控制器背面的綠色快取作用中 LED 熄滅。
 +
 當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
 

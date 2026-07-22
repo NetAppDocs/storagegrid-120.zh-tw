@@ -49,7 +49,7 @@ SNMPv2c 和 SNMPv3 都支援 Inform 訊息。
 
 * 預設警報或自訂警報可在任何嚴重層級觸發。若要抑制警報的 SNMP 通知，您必須link:silencing-alert-notifications.html["設定靜音"]為該警報進行設定。警報通知由link:../primer/what-admin-node-is.html["慣用寄件者管理節點"]傳送。
 +
-每個警報都會根據其嚴重層級映射到三種陷阱類型之一：activeMinorAlert、activeMajorAlert 和 activeCriticalAlert。如需可觸發這些陷阱的警報清單，請參閱 link:alerts-reference.html["${post_edited_translations.segment}"]。
+每個警報都會根據其嚴重層級映射到三種陷阱類型之一：activeMinorAlert、activeMajorAlert 和 activeCriticalAlert。如需可觸發這些陷阱的警報清單，請參閱 link:alerts-reference.html["警報參考"]。
 
 
 

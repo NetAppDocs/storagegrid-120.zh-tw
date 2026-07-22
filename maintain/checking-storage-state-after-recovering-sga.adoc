@@ -2,7 +2,7 @@
 permalink: maintain/checking-storage-state-after-recovering-sga.html 
 sidebar: sidebar 
 keywords: storagegrid, recovery, node recovery, storage state 
-summary: ${post_edited_translations.segment} 
+summary: 恢復應用裝置儲存節點後，必須驗證應用裝置儲存節點的期望狀態是否設定為線上，並確保每次重新啟動儲存節點伺服器時，該狀態預設為線上。 
 ---
 = 恢復 StorageGRID 設備儲存節點後、檢查儲存狀態
 :allow-uri-read: 
@@ -11,11 +11,11 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+恢復應用裝置儲存節點後，必須驗證應用裝置儲存節點的期望狀態是否設定為線上，並確保每次重新啟動儲存節點伺服器時，該狀態預設為線上。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* ${post_edited_translations.segment}
+* 儲存節點已恢復，資料恢復已完成。
 
 
 .步驟

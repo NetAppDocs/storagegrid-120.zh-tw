@@ -1,8 +1,8 @@
-= ${post_edited_translations.segment}
+= Memberof 和 refint overlays
 :allow-uri-read: 
 
 
-${post_edited_translations.segment}
+如果要使用 OpenLDAP 伺服器進行身分聯盟，則必須在 OpenLDAP 伺服器上設定特定設定。
 
 
 CAUTION: 對於非 Active Directory 或 Microsoft Entra ID 的身分識別來源，StorageGRID 不會自動封鎖在外部被停用之使用者的 S3 存取。若要封鎖 S3 存取，請刪除該使用者的任何 S3 金鑰，或將該使用者從所有群組中移除。
@@ -10,16 +10,16 @@ CAUTION: 對於非 Active Directory 或 Microsoft Entra ID 的身分識別來源
 
 
 [[memberof-and-refint-overlays]]
-=== ${post_edited_translations.segment}
+=== Memberof 和 refint overlays
 
 應啟用 memberof 與 refint 重疊。如需詳細資訊，請參閱 http://www.openldap.org/doc/admin24/index.html["OpenLDAP 文件：版本 2.4 管理員指南"^] 中的反向群組成員資格維護說明。
 
 
 
 [[indexing]]
-=== ${post_edited_translations.segment}
+=== 索引
 
-${post_edited_translations.segment}
+您必須使用指定的索引關鍵字設定下列 OpenLDAP 屬性：
 
 * `olcDbIndex: objectClass eq`
 * `olcDbIndex: uid eq,pres,sub`
@@ -27,6 +27,6 @@ ${post_edited_translations.segment}
 * `olcDbIndex: entryUUID eq`
 
 
-${post_edited_translations.segment}
+此外，為了獲得最佳效能，請確保「使用者名稱」說明中提到的欄位已建立索引。
 
 請參閱 http://www.openldap.org/doc/admin24/index.html["OpenLDAP 文件：版本 2.4 管理員指南"^] 中關於反向群組成員資格維護的資訊。

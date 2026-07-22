@@ -21,6 +21,6 @@ NOTE: 您可以在 StorageGRID 12.0 中繼續使用已棄用的租用戶管理 A
 
 
 [[new-api-for-object-replication]]
-== ${post_edited_translations.segment}
+== 用於物件複寫的新 API
 
 您可以使用 `/org/cross-grid-replication/{versionId}/replicate` API 手動複寫已新設定跨網格複寫的現有儲存桶中的物件。

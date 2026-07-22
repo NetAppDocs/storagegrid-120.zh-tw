@@ -2,25 +2,25 @@
 permalink: expand/configuring-expanded-storagegrid-system.html 
 sidebar: sidebar 
 keywords: expansion, configuration, StorageGRID 
-summary: ${post_edited_translations.segment} 
+summary: 完成擴充後，您必須執行額外的整合和組態步驟。 
 ---
-= ${post_edited_translations.segment}
+= 在 StorageGRID 中設定新增的節點和站台
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-${post_edited_translations.segment}
+完成擴充後，您必須執行額外的整合和組態步驟。
 
 .關於此任務
 您必須為擴充中新增的網格節點或站台，完成下列列出的組態工作。某些工作可能是選用的，具體取決於安裝和管理系統時選取的選項，以及您要如何設定擴充期間新增的節點和站台。
 
 .步驟
-. ${post_edited_translations.segment}
+. 如果您新增了一個站台：
 +
 ** link:../ilm/creating-storage-pool.html["建立儲存池"]針對網站以及您為新儲存節點選擇的每個儲存設備等級。
-** 確認 ILM 原則符合新要求。如果需要變更規則，link:../ilm/access-create-ilm-rule-wizard.html["${post_edited_translations.segment}"] 並進行相應變更 link:../ilm/creating-ilm-policy.html["${post_edited_translations.segment}"]。如果規則已正確，link:../ilm/creating-ilm-policy.html#activate-ilm-policy["啟動新原則"] 無需變更規則即可確保 StorageGRID 使用新節點。
+** 確認 ILM 原則符合新要求。如果需要變更規則，link:../ilm/access-create-ilm-rule-wizard.html["建立新規則"] 並進行相應變更 link:../ilm/creating-ilm-policy.html["更新 ILM 原則"]。如果規則已正確，link:../ilm/creating-ilm-policy.html#activate-ilm-policy["啟動新原則"] 無需變更規則即可確保 StorageGRID 使用新節點。
 ** 確認該網站可以存取網路時間協定 (NTP) 伺服器。參見link:../maintain/configuring-ntp-servers.html["管理 NTP 伺服器"]。
 +
 
@@ -28,11 +28,11 @@ CAUTION: 確保每個站台至少有兩個節點可以存取至少四個外部 N
 
 
 
-. ${post_edited_translations.segment}
+. 如果您為現有站台新增了一個或多個儲存節點：
 +
-** link:../ilm/viewing-storage-pool-details.html["${post_edited_translations.segment}"] 以確認您新增的每個節點都已包含在預期的儲存資源池中，並用於預期的 ILM 規則中。
-** 確認 ILM 原則符合新要求。如果需要變更規則，link:../ilm/access-create-ilm-rule-wizard.html["${post_edited_translations.segment}"] 並進行相應變更 link:../ilm/creating-ilm-policy.html["${post_edited_translations.segment}"]。如果規則已正確，link:../ilm/creating-ilm-policy.html#activate-ilm-policy["啟動新原則"] 無需變更規則即可確保 StorageGRID 使用新節點。
-** link:verifying-storage-node-is-active.html["${post_edited_translations.segment}"] 且能夠擷取物件。
+** link:../ilm/viewing-storage-pool-details.html["檢視儲存資源池詳細資料"] 以確認您新增的每個節點都已包含在預期的儲存資源池中，並用於預期的 ILM 規則中。
+** 確認 ILM 原則符合新要求。如果需要變更規則，link:../ilm/access-create-ilm-rule-wizard.html["建立新規則"] 並進行相應變更 link:../ilm/creating-ilm-policy.html["更新 ILM 原則"]。如果規則已正確，link:../ilm/creating-ilm-policy.html#activate-ilm-policy["啟動新原則"] 無需變更規則即可確保 StorageGRID 使用新節點。
+** link:verifying-storage-node-is-active.html["確認儲存節點處於作用中"] 且能夠擷取物件。
 ** 如果未能新增建議數量的儲存節點，請重新平衡銷毀編碼資料。請參閱link:rebalancing-erasure-coded-data-after-adding-storage-nodes.html["新增儲存節點後重新平衡銷毀編碼資料"]。
 
 
@@ -41,13 +41,13 @@ CAUTION: 確保每個站台至少有兩個節點可以存取至少四個外部 N
 ** 如果用戶端連線使用高可用度 （HA） 群組，可選擇將 Gateway 節點新增至 HA 群組。選取 *組態* > *網路* > *高可用度群組* 以審查現有 HA 群組的清單，並新增新節點。請參閱 link:../admin/configure-high-availability-group.html["設定高可用度群組"]。
 
 
-. ${post_edited_translations.segment}
+. 如果您新增了一個管理節點：
 +
 .. 如果您的 StorageGRID 系統已啟用單一登入 （SSO），請為新的管理節點建立信賴方信任。在建立此信賴方信任之前，您無法登入該節點。請參閱 link:../admin/configure-sso.html["設定單一登入"]。
 .. 如果您計劃在 Admin Nodes 上使用 Load Balancer 服務，可以選擇將新的 Admin Node 新增至 HA 群組。選取 *Configuration* > *Network* > *High availability groups* 以審查現有 HA 群組的清單並新增新節點。請參閱 link:../admin/configure-high-availability-group.html["設定高可用度群組"]。
-.. 如果您希望保持每個管理節點上的屬性和稽核資訊一致，可以選擇將管理節點資料庫從主要管理節點複製到擴充管理節點。請參閱link:copying-admin-node-database.html["${post_edited_translations.segment}"]。
-.. （選填）如果您想要讓每個 Admin 節點上的歷程記錄計量保持一致，請將 Prometheus 資料庫從主要 Admin 節點複製到擴充 Admin 節點。請參閱 link:copying-prometheus-metrics.html["${post_edited_translations.segment}"]。
-.. （選用）如果您想要讓每個 Admin Node 上的歷程記錄資訊保持一致，請將現有的稽核記錄從主要 Admin Node 複本到擴充 Admin Node。請參閱 link:copying-audit-logs.html["${post_edited_translations.segment}"]。
+.. 如果您希望保持每個管理節點上的屬性和稽核資訊一致，可以選擇將管理節點資料庫從主要管理節點複製到擴充管理節點。請參閱link:copying-admin-node-database.html["複製管理節點資料庫"]。
+.. （選填）如果您想要讓每個 Admin 節點上的歷程記錄計量保持一致，請將 Prometheus 資料庫從主要 Admin 節點複製到擴充 Admin 節點。請參閱 link:copying-prometheus-metrics.html["複製 Prometheus 計量"]。
+.. （選用）如果您想要讓每個 Admin Node 上的歷程記錄資訊保持一致，請將現有的稽核記錄從主要 Admin Node 複本到擴充 Admin Node。請參閱 link:copying-audit-logs.html["複製稽核日誌"]。
 
 
 . 若要檢查是否新增了不受信任用戶端網路的擴充節點，或是要變更節點的用戶端網路是不受信任還是受信任，請前往 *Configuration* > *Security* > *Firewall control*。
@@ -56,7 +56,7 @@ CAUTION: 確保每個站台至少有兩個節點可以存取至少四個外部 N
 
 . 設定 DNS。
 +
-如果您一直為每個網格節點個別指定 DNS 設定，則必須為新節點新增自訂的每節點 DNS 設定。請參閱 link:../maintain/modifying-dns-configuration-for-single-grid-node.html["${post_edited_translations.segment}"]。
+如果您一直為每個網格節點個別指定 DNS 設定，則必須為新節點新增自訂的每節點 DNS 設定。請參閱 link:../maintain/modifying-dns-configuration-for-single-grid-node.html["修改單一網格節點的 DNS 組態"]。
 
 
 

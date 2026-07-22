@@ -21,29 +21,29 @@ summary: 您可以檢視儲存資源池的詳細資訊，以確定儲存資源�
 .步驟
 . 選擇 *ILM* > *儲存資源池*。
 +
-${post_edited_translations.segment}
+儲存資源池表格包含每個含有儲存節點的儲存資源池的下列資訊：
 
 +
-** ${post_edited_translations.segment}
+** *名稱*：儲存資源池的唯一顯示名稱。
 ** *節點數*：儲存資源池的節點數量。
 ** *儲存使用情況*：此節點上用於物件資料的總可用空間百分比。此值不包括物件中繼資料。
-** ${post_edited_translations.segment}
+** *總容量*：儲存資源池的大小，等於儲存資源池所有節點可用於物件資料的總空間量。
 ** *ILM 使用量*：儲存資源池目前的使用方式。儲存資源池可能未使用，或者可能用於一或多個 ILM 規則、銷毀編碼設定檔，或兩者皆有。
 
 
-. ${post_edited_translations.segment}
+. 若要檢視特定儲存資源池的詳細資訊，請選擇其名稱。
 +
 顯示儲存資源池的詳細資訊頁面。
 
 . 檢視 *Nodes* 索引標籤，以了解儲存資源池中包含的儲存節點。
 +
-${post_edited_translations.segment}
+表格中包含每個節點的以下資訊：
 
 +
 ** 節點名稱
 ** 網站名稱
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 儲存級
+** 儲存使用率：Storage Node 已使用的物件資料總可用空間百分比。
 +
 
 NOTE: 每個 Storage Node 的儲存使用率 (%) 值也顯示在「Storage Used - Object Data」圖表中（選擇 *Nodes* > *_Storage Node_* > *Storage*）。

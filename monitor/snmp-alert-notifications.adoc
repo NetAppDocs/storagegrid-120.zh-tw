@@ -17,7 +17,7 @@ summary: 如果您希望 StorageGRID 在發生警報時傳送 SNMP 通知，則�
 
 若要瞭解如何設定 SNMP 代理程式，請參閱 link:using-snmp-monitoring.html["使用 SNMP 監控"]。
 
-${post_edited_translations.segment}
+設定 StorageGRID SNMP 代理程式後，可以傳送兩種類型的事件驅動型通知：
 
 * 陷阱是由 SNMP 代理程式發送的通知，無需管理系統確認。陷阱用於通知管理系統 StorageGRID 中發生了某些事件，例如觸發了警報。所有三個版本的 SNMP 都支援陷阱。
 * Inform 與 trap 類似，但其需要管理系統的確認。如果 SNMP 代理程式在特定時間內未收到確認，它會重新傳送 Inform，直到收到確認或達到最大重試值為止。SNMPv2c 和 SNMPv3 支援 Inform。

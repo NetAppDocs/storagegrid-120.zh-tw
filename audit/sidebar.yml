@@ -1,6 +1,6 @@
 ---
 section: audit
-title: "${post_edited_translations.segment}"
+title: 審查稽核日誌
 entries:
 - title: 稽核訊息和日誌檔
   pdf-filename: 查看 StorageGRID 稽核日誌
@@ -76,7 +76,7 @@ entries:
       url: "/audit/cbsb-object-send-begin.html"
     - title: CBSE：物件發送結束
       url: "/audit/cbse-object-send-end.html"
-    - title: "${post_edited_translations.segment}"
+    - title: CGRR：跨網格複製請求
       url: "/audit/cgrr-cross-grid-replication-request.html"
     - title: EBDL：Empty Bucket Delete
       url: "/audit/ebdl-empty-bucket-delete.html"
@@ -100,13 +100,13 @@ entries:
       url: "/audit/gtsu-grid-task-submitted.html"
     - title: IDEL：ILM 發起的刪除
       url: "/audit/idel-ilm-initiated-delete.html"
-    - title: "${post_edited_translations.segment}"
+    - title: LKCU：覆蓋物件清理
       url: "/audit/lkcu-overwritten-object-cleanup.html"
     - title: LKDM：洩漏物件清理
       url: "/audit/lkdm-leaked-object-cleanup.html"
     - title: LLST：位置遺失
       url: "/audit/llst-location-lost.html"
-    - title: "${post_edited_translations.segment}"
+    - title: MGAU：管理稽核訊息
       url: "/audit/mgau-management-audit-message.html"
     - title: OLST：系統偵測到遺失物件
       url: "/audit/olst-system-detected-lost-object.html"

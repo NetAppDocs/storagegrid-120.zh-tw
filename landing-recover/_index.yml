@@ -35,5 +35,5 @@ indexpage:
       url: https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/how-appliance-node-cloning-works.html
   - title: 恢復站台
     links:
-    - title: "${post_edited_translations.segment}"
+    - title: 技術支援如何恢復站台
       url: "../maintain/how-site-recovery-is-performed-by-technical-support.html"

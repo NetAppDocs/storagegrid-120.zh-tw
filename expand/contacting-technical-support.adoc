@@ -2,18 +2,18 @@
 permalink: expand/contacting-technical-support.html 
 sidebar: sidebar 
 keywords: troubleshoot expansion, contact technical support, StorageGRID 
-summary: ${post_edited_translations.segment} 
+summary: 如果在網格擴充過程中遇到無法解決的錯誤，或網格工作失敗，請收集日誌檔案並聯絡技術支援。 
 ---
-= ${post_edited_translations.segment}
+= 疑難排解 StorageGRID 中的擴充錯誤
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-${post_edited_translations.segment}
+如果在網格擴充過程中遇到無法解決的錯誤，或網格工作失敗，請收集日誌檔案並聯絡技術支援。
 
-${post_edited_translations.segment}
+在聯絡技術支援之前，請收集必要的日誌檔案以協助進行疑難排解。
 
 .步驟
 . 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
@@ -31,11 +31,11 @@ ${post_edited_translations.segment}
 +
 在您以 root 登入之後，提示字元會從 `$`變更為 `#`。
 
-. ${post_edited_translations.segment}
+. 根據安裝所處的階段，擷取網格節點上可用的以下任何日誌：
 +
 [cols="1a,2a"]
 |===
-| 平台 | ${post_edited_translations.segment} 
+| 平台 | 紀錄 
 
 
  a| 

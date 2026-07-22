@@ -30,12 +30,12 @@ S3BK（儲存桶）、S3KY（密鑰）或兩者
  a| 
 連結內部作業
  a| 
-${post_edited_translations.segment}
+CBID（物件的內部識別碼）
 
 |===
 
 
 [[timing-of-audit-messages]]
-== ${post_edited_translations.segment}
+== 稽核訊息的發送時間
 
-${post_edited_translations.segment}
+由於網格節點之間的時間差異、物件大小和網路延遲等因素，不同服務產生的稽核訊息順序可能與本節範例中顯示的順序有所不同。

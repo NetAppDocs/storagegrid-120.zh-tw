@@ -36,7 +36,7 @@ image:tenant_group_details.png["檢視群組詳細資料"]
 TIP: 若要確保變更儲存，請在每部分變更完成後選擇 *Save changes*。變更儲存後，頁面右上角會顯示確認訊息。
 
 +
-.. （可選）選擇顯示名稱或編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"] 以更新顯示名稱。
+.. （可選）選擇顯示名稱或編輯圖示 image:icon_edit_tm.png["編輯圖示"] 以更新顯示名稱。
 +
 您無法變更群組的唯一名稱。您無法編輯聯合群組的顯示名稱。
 

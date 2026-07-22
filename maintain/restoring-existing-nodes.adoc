@@ -14,8 +14,8 @@ summary: 若要將故障的網格節點還原到新的 Linux 主機，您需要�
 若要將故障的網格節點還原到新的 Linux 主機，您需要執行下列步驟來還原節點組態檔案。
 
 . <<restore-validate-grid-nodes,恢復並驗證節點>>透過恢復節點組態檔案。對於全新安裝，您需要為主機上要安裝的每個網格節點建立一個節點組態檔案。將網格節點還原到替換主機時，您需要還原或取代所有故障網格節點的節點組態檔案。
-. <<start-storagegrid-host-service,${post_edited_translations.segment}>>。
-. 視需要，<<recover-nodes-fail-start,${post_edited_translations.segment}>>。
+. <<start-storagegrid-host-service,啟動 StorageGRID 主機服務>>。
+. 視需要，<<recover-nodes-fail-start,恢復所有啟動失敗的節點>>。
 
 
 如果從先前的主機保留了任何區塊儲存設備 Volume，則可能需要執行額外的恢復步驟。本節中的命令可協助您確定需要哪些額外的步驟。
@@ -26,7 +26,7 @@ summary: 若要將故障的網格節點還原到新的 Linux 主機，您需要�
 [[restore-validate-grid-nodes]]
 == 恢復並驗證網格節點
 
-${post_edited_translations.segment}
+您必須還原所有故障網格節點的網格組態檔案，然後驗證網格組態檔案並解決任何錯誤。
 
 .關於此任務
 只要某個網格節點的 `/var/local` Volume 沒有因為前一個主機的故障而遺失，您就可以匯入該主機上應該存在的任何網格節點。例如，如果您按照適用於您的 Linux 作業系統的 StorageGRID 安裝說明中的描述，為 StorageGRID 系統資料 Volume 使用了共享儲存設備，則 `/var/local` Volume 可能仍然存在。匯入節點會將其節點組態檔案還原到主機。
@@ -53,7 +53,7 @@ dc1-sn1            /dev/mapper/sgws-sn1-var-local
 dc1-arc1           /dev/mapper/sgws-arc1-var-local
 ----
 +
-${post_edited_translations.segment}
+如果主機上應設定的部分或全部網格節點未列出，則需要還原遺失的網格節點。
 
 . 若要匯入具有  `/var/local` Volume 的網格節點：
 +
@@ -81,7 +81,7 @@ NOTE: 當您為節點重新建立組態檔案時，替代節點必須使用與�
 
 +
 
-NOTE: 如果您在為節點重新建立組態檔案時，使用任何新的區塊裝置（StorageGRID 節點先前未使用的裝置）作為以 `BLOCK_DEVICE_`開頭的任何組態變數的值，請遵循<<fix-block-errors,${post_edited_translations.segment}>>中的指南。
+NOTE: 如果您在為節點重新建立組態檔案時，使用任何新的區塊裝置（StorageGRID 節點先前未使用的裝置）作為以 `BLOCK_DEVICE_`開頭的任何組態變數的值，請遵循<<fix-block-errors,修復遺失區塊裝置錯誤>>中的指南。
 
 . 在恢復的主機上執行以下命令，列出所有 StorageGRID 節點。
 +
@@ -99,7 +99,7 @@ NOTE: 如果您在為節點重新建立組態檔案時，使用任何新的區�
 
 
 [[fix-missing-network-interface-errors]]
-=== ${post_edited_translations.segment}
+=== 修復缺少的網路介面錯誤
 
 如果主機網路設定不正確或名稱拼字錯誤，則 StorageGRID 檢查 `/etc/storagegrid/nodes/_node-name_.conf`檔案中指定的對應時會發生錯誤。
 
@@ -115,7 +115,7 @@ ERROR: <node-name>: GRID_NETWORK_TARGET = <host-interface-name>
 
 如果您收到此錯誤，請驗證您已完成 link:deploying-new-linux-hosts.html["部署新的 Linux 主機"] 中的步驟。所有主機介面請使用與原始主機上所使用的相同名稱。
 
-${post_edited_translations.segment}
+如果無法命名主機介面以符合節點組態檔案，您可以編輯節點組態檔案，並將 GRID_NETWORK_TARGET、ADMIN_NETWORK_TARGET 或 CLIENT_NETWORK_TARGET 的值變更為與現有主機介面相符。
 
 確保主機介面能夠存取正確的實體網路連接埠或 VLAN，且該介面沒有直接引用綁定或橋接設備。您必須在主機上的綁定設備之上設定 VLAN （或其他虛擬介面），或使用橋接和虛擬乙太網路 （veth） 對。
 
@@ -123,11 +123,11 @@ ${post_edited_translations.segment}
 
 [[fix-missing-block-device-errors]]
 [[fix-block-errors]]
-=== ${post_edited_translations.segment}
+=== 修復遺失區塊裝置錯誤
 
 系統會檢查每個恢復的節點是否對應至有效的區塊裝置特殊檔案，或指向區塊裝置特殊檔案的有效軟連結。如果 StorageGRID 在 `/etc/storagegrid/nodes/_node-name_.conf` 檔案中發現無效的對應，則會顯示遺失區塊裝置錯誤。
 
-${post_edited_translations.segment}
+如果您發現符合以下模式的錯誤：
 
 [listing]
 ----
@@ -158,7 +158,7 @@ NOTE: 如果由於原始區塊裝置隨故障主機遺失，您必須為任何�
 
 
 [[start-storagegrid-host-service]]
-== ${post_edited_translations.segment}
+== 啟動 StorageGRID 主機服務
 
 若要啟動 StorageGRID 節點，並確保它們在主機重新開機後重新啟動，您必須啟用並啟動 StorageGRID 主機服務。
 
@@ -182,7 +182,7 @@ sudo storagegrid node status node-name
 ----
 sudo storagegrid node start node-name
 ----
-. ${post_edited_translations.segment}
+. 如果您之前已啟用並啟動 StorageGRID 主機服務（或如果您不確定該服務是否已啟用並啟動），請同時執行以下命令：
 +
 [listing]
 ----

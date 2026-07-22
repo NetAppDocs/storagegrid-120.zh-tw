@@ -2,7 +2,7 @@
 permalink: maintain/recovering-storagegrid-appliance-storage-node.html 
 sidebar: sidebar 
 keywords: recover, appliance storage node failure, workflow 
-summary: ${post_edited_translations.segment} 
+summary: 無論您是從系統磁碟機遺失中恢復，還是僅從儲存 Volume 遺失中恢復，恢復發生故障的 StorageGRID 應用裝置儲存節點的步驟都是相同的。 
 ---
 = 恢復 StorageGRID 應用裝置儲存節點的警告
 :allow-uri-read: 
@@ -11,10 +11,10 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+無論您是從系統磁碟機遺失中恢復，還是僅從儲存 Volume 遺失中恢復，恢復發生故障的 StorageGRID 應用裝置儲存節點的步驟都是相同的。
 
 
-CAUTION: 如果多個儲存節點發生故障（或離線），請聯絡技術支援。請勿執行以下恢復程序。可能會發生資料遺失。如需更多資訊，請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+CAUTION: 如果多個儲存節點發生故障（或離線），請聯絡技術支援。請勿執行以下恢復程序。可能會發生資料遺失。如需更多資訊，請參閱 link:how-site-recovery-is-performed-by-technical-support.html["技術支援如何恢復站台"]。
 
 
 CAUTION: 如果 ILM 規則設定為僅儲存一個複寫複本，且該複本存在於發生故障的儲存 Volume 上，則您將無法恢復該物件。

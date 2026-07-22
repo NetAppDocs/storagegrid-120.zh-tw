@@ -16,17 +16,17 @@ summary: '輸入/輸出 (I/O) 優先權可讓您變更網格上 I/O 作業的相
 預設情況下，用戶端的 PUT 和 GET I/O 流量優先權高於背景活動，例如清除糾刪碼 （EC） 資料和 EC 修理。提高清除糾刪碼 （EC） 資料和 EC 修理活動的優先順序，可能可以加快這些工作的完成速度。I/O 優先順序變更的效果受用戶端請求速率、網路流量波動及其他後續網路工作的影響。
 
 .開始之前
-* ${post_edited_translations.segment}
+* 查看 I/O 優先頁面，以確定哪些選項可能會影響您的網格。
 * 評估後續的用戶端流量是否能夠安全地處理更長的等待時間或用戶端逾時。
 * 請做好準備，監控優先順序變更的影響，並視需要進行調整。這些變更會迅速實施，但其效果可能需要數小時才能顯現。
 
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *Support* > *I/O prioritization*。
+. （可選）變更清除 EC 資料的背景操作的 EC 清除和修理優先權，使其與預設值不同。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 對於具有 RAID 型節點的網格，請使用預設的低 EC 清除和修理優先順序。
 
 . 選取 *Save* 。
 . 監控 link:../monitor/commonly-used-prometheus-metrics.html#where-are-prometheus-metrics-used["計量"] 以評估優先順序變更的影響。

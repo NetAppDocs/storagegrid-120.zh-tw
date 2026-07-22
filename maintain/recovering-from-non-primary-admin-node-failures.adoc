@@ -17,7 +17,7 @@ summary: '若要從非主管理節點故障中恢復，您必須完成下列任�
 
 . link:copying-audit-logs-from-failed-non-primary-admin-node.html["從發生故障的非主管理節點複製稽核日誌"]
 . link:replacing-non-primary-admin-node.html["替換非主要管理節點"]
-. link:selecting-start-recovery-to-configure-non-primary-admin-node.html["${post_edited_translations.segment}"]
+. link:selecting-start-recovery-to-configure-non-primary-admin-node.html["選擇「開始恢復」以設定非主要管理節點"]
 . link:restoring-audit-log-on-recovered-non-primary-admin-node.html["在已恢復的非主要管理節點上還原稽核日誌"]
 . link:restoring-admin-node-database-non-primary-admin-node.html["恢復非主要管理節點時，還原管理節點資料庫"]
 . link:restoring-prometheus-metrics-non-primary-admin-node.html["恢復非主要管理節點時，還原 Prometheus 計量"]

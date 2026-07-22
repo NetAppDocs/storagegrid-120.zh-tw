@@ -21,14 +21,14 @@ summary: 隨著儲存設備需求的變化，您可能需要實施不同的原�
 
 
 [[view-ilm-policies]]
-== ${post_edited_translations.segment}
+== 檢視 ILM 原則
 
 檢視作用中和非作用中的 ILM 原則及原則啟動歷史記錄：
 
 . 選擇 *ILM* > *原則*。
 . 選擇 *Policies* 以檢視作用中與非作用中原則的清單。此表格列出每個原則的名稱、原則所指派的標籤，以及該原則為作用中或非作用中。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇「啟動記錄」以檢視原則的啟動開始日期和結束日期清單。
+. 選擇原則名稱以檢視原則詳情。
 +
 
 NOTE: 如果您檢視狀態為「已編輯」或「已刪除」的原則的詳細資訊，則會顯示一則訊息，說明您正在檢視的是在指定時間範圍內處於作用中狀態、但此後已被編輯或刪除的原則版本。
@@ -43,7 +43,7 @@ NOTE: 如果您檢視狀態為「已編輯」或「已刪除」的原則的詳�
 
 您只能編輯停用的原則。如果您想編輯啟動的原則，請將其停用，或建立 Clone 並編輯該 Clone。
 
-${post_edited_translations.segment}
+編輯原則：
 
 . 選擇 *ILM* > *原則*。
 . 選取要編輯的原則對應的核取方塊，然後選取 *Edit*。
@@ -79,7 +79,7 @@ CAUTION: 組態設定錯誤的 ILM 原則可能會導致無法復原的資料遺
 您只能在 ILM 原則處於停用狀態時將其移除。若要移除原則：
 
 . 選擇 *ILM* > *原則*。
-. ${post_edited_translations.segment}
+. 選取要移除的非作用中原則對應的核取方塊。
 . 選擇 *Remove* 。
 
 
@@ -88,12 +88,12 @@ CAUTION: 組態設定錯誤的 ILM 原則可能會導致無法復原的資料遺
 [[view-ilm-rule-details]]
 == 檢視 ILM 規則詳細資料
 
-${post_edited_translations.segment}
+要檢視 ILM 規則的詳細資訊，包括規則的保留圖和放置說明：
 
 . 選擇 *ILM* > *規則*。
 . 選擇您要檢視其詳細資料的規則名稱。範例：
 +
-image:ilm_rule_details_page.png["${post_edited_translations.segment}"]
+image:ilm_rule_details_page.png["ILM 規則詳細資料頁面"]
 
 
 
@@ -103,7 +103,7 @@ image:ilm_rule_details_page.png["${post_edited_translations.segment}"]
 
 [[clone-an-ilm-rule]]
 [[clone-ilm-rule]]
-== ${post_edited_translations.segment}
+== Clone ILM 規則
 
 如果您想要建立使用現有規則某些設定的新規則，可以 Clone 現有規則。如果您需要編輯任何原則中使用的規則，請改為 Clone 該規則，並對該 Clone 進行變更。對 Clone 進行變更後，您可以視需要從原則中移除原始規則，並將其取代為修改後的版本。
 
@@ -113,20 +113,20 @@ NOTE: 如果 ILM 規則是使用 StorageGRID 版本 10.2 或更早版本建立�
 .步驟
 . 選擇 *ILM* > *規則*。
 . 選取您要 Clone 的規則核取方塊，然後選取 *Clone*。或者，選取規則名稱，然後從規則詳細資料頁面選取 *Clone*。
-. 請按照 <<${post_edited_translations.segment},編輯 ILM 規則>> 和 link:create-ilm-rule-enter-details.html#use-advanced-filters-in-ilm-rules["${post_edited_translations.segment}"] 的步驟來更新複製的規則。
+. 請按照 <<編輯 ILM 規則,編輯 ILM 規則>> 和 link:create-ilm-rule-enter-details.html#use-advanced-filters-in-ilm-rules["在 ILM 規則中使用進階過濾器"] 的步驟來更新複製的規則。
 +
-${post_edited_translations.segment}
+Clone ILM 規則時，必須輸入新名稱。
 
 
 
 
 
 [[edit-an-ilm-rule]]
-== ${post_edited_translations.segment}
+== 編輯 ILM 規則
 
 您可能需要編輯 ILM 規則來變更篩選器或放置指令。
 
-如果規則已在任何 ILM 原則中使用，則無法進行編輯。但您可以 <<clone-ilm-rule,${post_edited_translations.segment}>> 並對 Clone 複本進行任何必要的變更。
+如果規則已在任何 ILM 原則中使用，則無法進行編輯。但您可以 <<clone-ilm-rule,Clone 規則>> 並對 Clone 複本進行任何必要的變更。
 
 
 CAUTION: 組態設定錯誤的 ILM 原則可能會導致無法復原的資料遺失。在啟動 ILM 原則之前，請仔細審查 ILM 原則及其 ILM 規則，然後模擬該 ILM 原則。務必確認 ILM 原則能夠如預期運作。
@@ -135,7 +135,7 @@ CAUTION: 組態設定錯誤的 ILM 原則可能會導致無法復原的資料遺
 . 選擇 *ILM* > *規則*。
 . 確認您要編輯的規則未在任何 ILM 原則中使用。
 . 如果您要編輯的規則未在使用中，請選取該規則的核取方塊，然後選取 *動作* > *編輯*。或者，選取該規則的名稱，然後在規則詳細資料頁面上選取 *編輯*。
-. 完成「編輯 ILM 規則」精靈的步驟。如有必要，請按照 link:create-ilm-rule-enter-details.html["${post_edited_translations.segment}"] 和 link:create-ilm-rule-enter-details.html#use-advanced-filters-in-ilm-rules["${post_edited_translations.segment}"] 的步驟操作。
+. 完成「編輯 ILM 規則」精靈的步驟。如有必要，請按照 link:create-ilm-rule-enter-details.html["建立 ILM 規則"] 和 link:create-ilm-rule-enter-details.html#use-advanced-filters-in-ilm-rules["在 ILM 規則中使用進階過濾器"] 的步驟操作。
 +
 編輯 ILM 規則時，無法變更其名稱。
 
@@ -144,23 +144,23 @@ CAUTION: 組態設定錯誤的 ILM 原則可能會導致無法復原的資料遺
 
 
 [[remove-an-ilm-rule]]
-== ${post_edited_translations.segment}
+== 移除 ILM 規則
 
-${post_edited_translations.segment}
+為了保持目前 ILM 規則清單的可管理性，請移除任何您不太可能使用的 ILM 規則。
 
 .步驟
 若要移除目前在有效原則中使用的 ILM 規則：
 
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 複製原則。
+. 從原則 Clone 中移除 ILM 規則。
 . 儲存、模擬並啟動新原則，以確保物件按預期受到保護。
-. ${post_edited_translations.segment}
+. 前往移除目前在非作用中原則中使用的 ILM 規則的步驟。
 
 
 若要移除目前在非作用中原則中使用的 ILM 規則：
 
 . 選取非作用中的原則。
-. 從原則中移除 ILM 規則，或<<remove-ilm-policy,${post_edited_translations.segment}>>。
+. 從原則中移除 ILM 規則，或<<remove-ilm-policy,移除該原則>>。
 . 請依照下列步驟移除目前未使用的 ILM 規則。
 
 
@@ -175,19 +175,19 @@ ${post_edited_translations.segment}
 
 
 [[view-ilm-metrics]]
-== ${post_edited_translations.segment}
+== 檢視 ILM 計量
 
 您可以檢視 ILM 的計量，例如佇列中的物件數量和評估率。您可以監控這些計量來確定系統效能。較大的佇列或評估率可能表示系統無法跟上擷取速度、用戶端應用程式的負載過高，或存在某些異常情況。
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Dashboard* > *ILM*。
 +
 
 NOTE: 由於儀表板可以自訂，因此 ILM 索引標籤可能無法使用。
 
 . 監控 ILM 索引標籤上的計量。
 +
-您可以選取問號 image:icon_nms_question.png["${post_edited_translations.segment}"] 以查看 ILM 索引標籤上的項目說明。
+您可以選取問號 image:icon_nms_question.png["問號圖示"] 以查看 ILM 索引標籤上的項目說明。
 
 +
 image:ilm_metrics_on_dashboard.png["Grid Manager 儀表板上的 ILM 計量"]

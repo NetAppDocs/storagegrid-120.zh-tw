@@ -20,18 +20,18 @@ summary: 解決跨網格複寫永久故障警報後，您應該確定是否有�
 [[determine-if-any-objects-failed-to-be-replicated]]
 == 確定是否有任何物件複製失敗
 
-若要確定是否有任何物件或刪除標記未複寫到其他網格，您可以搜尋稽核日誌中的link:../audit/cgrr-cross-grid-replication-request.html["${post_edited_translations.segment}"]訊息。當 StorageGRID 無法將物件、多部分物件或刪除標記複寫到目的地儲存桶時，此訊息會新增至日誌中。
+若要確定是否有任何物件或刪除標記未複寫到其他網格，您可以搜尋稽核日誌中的link:../audit/cgrr-cross-grid-replication-request.html["CGRR（跨網格複寫請求）"]訊息。當 StorageGRID 無法將物件、多部分物件或刪除標記複寫到目的地儲存桶時，此訊息會新增至日誌中。
 
 您可以使用 link:../audit/using-audit-explain-tool.html["audit-explain 工具"] 將結果轉換為更易讀的格式。
 
 .開始之前
 * 您擁有根目錄存取權限。
 * 您擁有  `Passwords.txt` 檔案。
-* ${post_edited_translations.segment}
+* 您知道主要管理節點的 IP 位址。
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -42,9 +42,9 @@ summary: 解決跨網格複寫永久故障警報後，您應該確定是否有�
 
 
 
-. ${post_edited_translations.segment}
+. 在 audit.log 中搜尋 CGRR 訊息，並使用 audit-explain 工具格式化結果。
 +
-${post_edited_translations.segment}
+例如，此命令會搜尋過去 30 分鐘內的所有 CGRR 訊息，並使用 audit-explain 工具。
 
 +
 `# awk -vdate=$(date -d "30 minutes ago" '+%Y-%m-%dT%H:%M:%S') '$1$2 >= date { print }' audit.log | grep CGRR | audit-explain`
@@ -69,18 +69,18 @@ CGRR Cross-Grid Replication Request tenant:50736445269627437748 connection:44789
 | 欄位 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
+| CGRR 跨網格複寫要求  a| 
 請求的名稱
 
 
 
 | 租戶  a| 
-${post_edited_translations.segment}
+租戶的帳戶 ID
 
 
 
 | 連線  a| 
-${post_edited_translations.segment}
+網格聯盟連線的 ID
 
 
 
@@ -88,8 +88,8 @@ ${post_edited_translations.segment}
 嘗試執行的複寫操作類型：
 
 ** 複寫物件
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 複寫刪除標記
+** 複寫多部分物件
 
 
 
@@ -99,7 +99,7 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
+| 物件  a| 
 物件名稱
 
 
@@ -127,7 +127,7 @@ ${post_edited_translations.segment}
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 從 Grid Manager 頂部，選擇說明圖示，然後選擇 *API documentation*。
 . 選擇「前往私有 API 文件」。
 +
 
@@ -137,13 +137,13 @@ NOTE: 標記為「Private」的 StorageGRID API 端點如有變更，恕不另�
 +
 `POST /private/cross-grid-replication-retry-failed`
 
-. ${post_edited_translations.segment}
+. 選擇 *Try it out*。
 . 在 *body* 文字方塊中，將 *versionID* 的範例條目替換為 audit.log 中與失敗的跨網格複寫請求對應的版本 ID。
 +
 請務必保留字串周圍的雙引號。
 
 . 選擇 *Execute*。
-. ${post_edited_translations.segment}
+. 確認伺服器回應代碼為 *204*，表示物件或刪除標記已標記為待跨網格複寫至另一個網格。
 +
 
 NOTE: 待處理狀態表示跨網格複寫請求已新增至內部佇列中進行處理。
@@ -153,9 +153,9 @@ NOTE: 待處理狀態表示跨網格複寫請求已新增至內部佇列中進�
 
 
 [[monitor-replication-retries]]
-== ${post_edited_translations.segment}
+== 監控複寫重試次數
 
-${post_edited_translations.segment}
+您應該監控複寫重試作業，以確保其能夠完成。
 
 
 TIP: 將物件或刪除標記複寫到另一個網格可能需要幾個小時或更長時間。
@@ -166,7 +166,7 @@ TIP: 將物件或刪除標記複寫到另一個網格可能需要幾個小時或
 +
 [cols="1a,2a"]
 |===
-| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+| 網格 | 複寫狀態 
 
 
  a| 
@@ -182,22 +182,22 @@ TIP: 將物件或刪除標記複寫到另一個網格可能需要幾個小時或
  a| 
 目的地
  a| 
-${post_edited_translations.segment}
+*REPLICA*：此物件是從來源網格複寫而來。
 
 |===
 * 依照指示使用 Grid Management 私有 API。
 
 
 .步驟
-. ${post_edited_translations.segment}
+. 在私有 API 文件的 *cross-grid-replication-advanced* 部分，選擇下列端點：
 +
 `GET /private/cross-grid-replication-object-status/{id}`
 
-. ${post_edited_translations.segment}
+. 選擇 *Try it out*。
 . 在「參數」部分，輸入您在 `cross-grid-replication-retry-failed`請求中使用的版本 ID。
 . 選擇 *Execute*。
 . 確認伺服器回應代碼為 *200*。
-. ${post_edited_translations.segment}
+. 審查複寫狀態，狀態將為以下幾種之一：
 +
 ** *PENDING*：該物件尚未複寫。
 ** *COMPLETED*: 複寫成功。

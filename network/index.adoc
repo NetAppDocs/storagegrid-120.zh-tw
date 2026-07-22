@@ -23,19 +23,19 @@ summary: 使用以下指南了解 StorageGRID 架構和連網拓撲，以及網�
 外部用戶端和外部服務需要連線至 StorageGRID 網路，才能執行下列功能：
 
 * 儲存和擷取物件資料
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 接收電子郵件通知
+* 存取 StorageGRID 管理介面（Grid Manager 和 Tenant Manager）
 * 存取稽核共享（選用）
-* ${post_edited_translations.segment}
+* 提供以下服務：
 +
 ** 網路時間協定（NTP）
 ** 網域名稱系統（DNS）
-** ${post_edited_translations.segment}
+** 金鑰管理伺服器（KMS）
 
 
 
 
-${post_edited_translations.segment}
+StorageGRID 連網必須進行適當設定，以處理這些功能及其他功能的網路流量。
 
 
 
@@ -48,7 +48,7 @@ ${post_edited_translations.segment}
 
 確定要使用的 StorageGRID 網路以及如何設定這些網路後，您可以按照對應的說明安裝和設定 StorageGRID 節點。
 
-.${post_edited_translations.segment}
+.安裝應用裝置節點
 * https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["安裝應用裝置硬體"^]
 
 

@@ -16,36 +16,36 @@ summary: 您可以使用節點退役程序來移除一或多個站台的一或�
 
 
 [[when-to-decommission-a-node]]
-== ${post_edited_translations.segment}
+== 何時退役節點
 
-${post_edited_translations.segment}
+當滿足下列任一條件時，請使用節點退役程式：
 
 * 您在擴充功能中新增了一個較大的儲存節點，現在想要移除一個或多個較小的儲存節點，同時保留物件。
 +
 
-TIP: 如果您想用新應用裝置取代舊應用裝置，請考慮 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/how-appliance-node-cloning-works.html["${post_edited_translations.segment}"^]而非在擴充過程中新增應用裝置，然後再退役舊應用裝置。
+TIP: 如果您想用新應用裝置取代舊應用裝置，請考慮 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/how-appliance-node-cloning-works.html["複製應用裝置節點"^]而非在擴充過程中新增應用裝置，然後再退役舊應用裝置。
 
 * 您需要的總儲存設備更少。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 您不再需要閘道節點。
+* 您不再需要非主要管理節點。
+* 您的網格中包含一個無法恢復或重新上線的已中斷連線節點。
+* 您的網格包含一個存檔節點。
 
 
 
 
 [[how-to-decommission-a-node]]
-== ${post_edited_translations.segment}
+== 如何退役節點
 
 您可以退役已連線的網格節點或已斷線的網格節點。
 
-退役已連接的節點:: ${post_edited_translations.segment}
+退役已連接的節點:: 一般來說，只有當網格節點連接到 StorageGRID 系統且所有節點都處於正常健全狀況（在 *節點* 頁面和 *退役節點* 頁面上顯示綠色圖示）時，才應該退役網格節點。
 +
 --
-如需相關指示，請參閱 link:decommissioning-connected-grid-nodes.html["${post_edited_translations.segment}"]。
+如需相關指示，請參閱 link:decommissioning-connected-grid-nodes.html["退役已連線的網格節點"]。
 
 --
-${post_edited_translations.segment}:: ${post_edited_translations.segment}
+退役已中斷連線的節點:: 在某些情況下，您可能需要退役目前未連接到網格的網格節點（健全狀況為「未知」或「管理關閉」的節點）。
 +
 --
 如需相關指示，請參閱 link:decommissioning-disconnected-grid-nodes.html["退役已中斷連線的網格節點"]。
@@ -56,10 +56,10 @@ ${post_edited_translations.segment}:: ${post_edited_translations.segment}
 
 
 [[what-to-consider-before-decommissioning-a-node]]
-== ${post_edited_translations.segment}
+== 節點退役前需要考慮哪些因素
 
-${post_edited_translations.segment}
+在執行任一程序之前，請審查每種節點類型的注意事項：
 
-* link:considerations-for-decommissioning-admin-or-gateway-nodes.html["${post_edited_translations.segment}"]
-* link:considerations-for-decommissioning-storage-nodes.html["${post_edited_translations.segment}"]
+* link:considerations-for-decommissioning-admin-or-gateway-nodes.html["管理節點或閘道節點退役注意事項"]
+* link:considerations-for-decommissioning-storage-nodes.html["儲存節點退役注意事項"]
 

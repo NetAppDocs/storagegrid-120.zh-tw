@@ -15,7 +15,7 @@ summary: 如果您希望可以使用管理 API 從另一個網域存取 StorageG
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* link:../tenant/tenant-management-permissions.html["${post_edited_translations.segment}"] 提供對所有 CORS 組態請求的存取。
+* link:../tenant/tenant-management-permissions.html["根目錄存取權限"] 提供對所有 CORS 組態請求的存取。
 
 
 .關於此任務
@@ -27,7 +27,7 @@ Management API (mgmt-api) 請求，包含 `application/json`或 `multipart/formd
 . 在 Grid Manager 中，前往 *組態* > *網路* > *管理介面 CORS 設定*。
 . 選擇 *Grid Manager*、*Tenant Manager* 或同時選擇這兩個選項。
 +
-** ${post_edited_translations.segment}
+** *Grid Manager*：為跨域網格管理 API 請求啟用 CORS。
 ** *Tenant Manager*：為跨網域租戶管理 API 請求啟用 CORS。
 
 

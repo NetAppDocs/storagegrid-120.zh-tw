@@ -14,7 +14,7 @@ summary: 如果您使用平台服務或雲端儲存池，則可以在儲存節�
 如果您使用平台服務或雲端儲存池，則可以在儲存節點和外部 S3 端點之間設定非透明 Proxy。例如，您可能需要非透明 Proxy 來允許平台服務訊息傳送到外部端點，例如網際網路上的端點。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 已設定的儲存設備 Proxy 設定不適用於 Kafka 平台服務端點。
 
 .開始之前
 * 您有link:admin-group-permissions.html["特定存取權限"]。
@@ -26,12 +26,12 @@ NOTE: ${post_edited_translations.segment}
 
 .步驟
 . 選取 *Configuration* > *Security* > *Proxy settings*。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 在「儲存設備」標籤上，選取「啟用儲存設備 Proxy」核取方塊。
+. 選擇儲存設備 Proxy 的協定。
 . 輸入 Proxy 伺服器的主機名稱或 IP 位址。
 . （可選）輸入用於連線至 Proxy 伺服器的連接埠。
 +
-${post_edited_translations.segment}
+將此欄位留空以使用協定的預設連接埠：HTTP 為 80，SOCKS5 為 1080。
 
 . 選取 *Save* 。
 +

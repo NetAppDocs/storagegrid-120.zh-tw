@@ -29,7 +29,7 @@ summary: 您可以選擇保留已發生故障的主要管理節點上由 Prometh
 NOTE: 複製 Prometheus 資料庫可能需要一個小時或更長時間。在來源管理節點上停止服務時，某些 Grid Manager 功能將無法使用。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入來源管理節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。

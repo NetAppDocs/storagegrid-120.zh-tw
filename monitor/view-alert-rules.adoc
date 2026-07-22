@@ -17,10 +17,10 @@ summary: 告警規則定義了觸發特定告警的條件。StorageGRID 包含�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您擁有 link:../admin/admin-group-permissions.html["管理警報或 Root 存取權限"]。
 * （可選）觀看影片：
 +
-.${post_edited_translations.segment}
+.警報總覽
 video::2eea81c5-8323-417f-b0a0-b1ff008506c1[panopto]
 
 

@@ -36,7 +36,7 @@ sudo storagegrid node status node-name
 ----
 sudo storagegrid node start node-name
 ----
-. ${post_edited_translations.segment}
+. 如果您之前已啟用並啟動 StorageGRID 主機服務（或如果您不確定該服務是否已啟用並啟動），請同時執行以下命令：
 +
 [listing]
 ----

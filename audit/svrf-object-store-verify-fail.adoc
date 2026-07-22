@@ -38,7 +38,7 @@ CRCF：循環冗餘校驗（CRC）失敗。
 
 HMAC：基於雜湊的訊息驗證碼 (HMAC) 檢查失敗。
 
-${post_edited_translations.segment}
+EHSH：意外的加密內容雜湊值。
 
 PHSH：意外的原始內容雜湊值。
 

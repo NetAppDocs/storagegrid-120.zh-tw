@@ -11,14 +11,14 @@ summary: 在恢復儲存節點的故障儲存 Volume 之前，必須審查以下
 
 
 [role="lead"]
-${post_edited_translations.segment}
+在恢復儲存節點的故障儲存設備磁碟區之前，請審查以下警告。
 
 Storage Node 中的儲存 Volume （或 rangedbs）是由十六進位數字識別，這稱為 Volume ID。例如，0000 是第一個 Volume，而 000F 是第十六個 Volume。每個 Storage Node 上的第一個物件存放區 （Volume 0）會使用最多 4 TB 的空間進行物件中繼資料和 Cassandra 資料庫作業；該 Volume 上的任何剩餘空間都會用於物件資料。所有其他儲存 Volume 都專門用於物件資料。
 
 如果出現以下情況，Cassandra 資料庫可能會作為 Volume 恢復程序的一部分進行重建：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* Volume 0 發生故障並已恢復。
+* 系統磁碟機和一個或多個儲存 Volume 發生故障，但已恢復。
 
 
 當 Cassandra 重建時，系統會使用來自其他儲存節點的資訊。如果 Cassandra 最近重建過，Cassandra 資料在整個網格中可能尚未一致。如果有太多儲存節點離線：
@@ -28,10 +28,10 @@ Storage Node 中的儲存 Volume （或 rangedbs）是由十六進位數字識�
 
 
 
-CAUTION: 如果多個儲存節點發生故障（或離線），請聯絡技術支援。請勿執行以下恢復程序。可能會發生資料遺失。如需更多資訊，請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+CAUTION: 如果多個儲存節點發生故障（或離線），請聯絡技術支援。請勿執行以下恢復程序。可能會發生資料遺失。如需更多資訊，請參閱 link:how-site-recovery-is-performed-by-technical-support.html["技術支援如何恢復站台"]。
 
 
-CAUTION: ${post_edited_translations.segment}
+CAUTION: 如果 ILM 規則設定為僅儲存單一複製複本，且該複本存在於發生故障的儲存 Volume 上，則您將無法恢復該物件。
 
 .相關資訊
 link:warnings-and-considerations-for-grid-node-recovery.html["網格節點恢復的警告和注意事項"]

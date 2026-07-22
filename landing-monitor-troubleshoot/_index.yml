@@ -13,7 +13,7 @@ indexpage:
       url: "../monitor/viewing-nodes-page.html"
     - title: 監控系統健全狀況
       url: "../monitor/monitoring-system-health.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 監控儲存容量
       url: "../monitor/monitoring-storage-capacity.html"
   - title: 管理警報和通知
     links:
@@ -27,11 +27,11 @@ indexpage:
       url: "../monitor/using-snmp-monitoring.html"
   - title: 使用稽核訊息和其他日誌
     links:
-    - title: "${post_edited_translations.segment}"
+    - title: 設定日誌管理
       url: "../monitor/configure-log-management.html"
     - title: 使用外部 syslog 伺服器
       url: "../monitor/considerations-for-external-syslog-server.html"
-    - title: "${post_edited_translations.segment}"
+    - title: 審查稽核日誌
       url: "../audit/index.html"
     - title: 日誌檔參考
       url: "../monitor/logs-files-reference.html"

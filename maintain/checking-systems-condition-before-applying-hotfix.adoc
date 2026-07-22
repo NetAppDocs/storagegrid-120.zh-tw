@@ -16,18 +16,18 @@ summary: 您必須確認系統已準備好容納此 Hotfix。
 . 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 . 如果可能，請確保系統正常運作，且所有網格節點均已連接至網格。
 +
-已連線的節點在「節點」頁面上會顯示綠色對勾 image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]。
+已連線的節點在「節點」頁面上會顯示綠色對勾 image:icon_alert_green_checkmark.png["圖示提示綠色對勾"]。
 
 . 檢查並儘可能解決所有當前警報。
 . 確保沒有其他維護程序正在進行，例如升級、恢復、擴充或退役程序。
 +
-${post_edited_translations.segment}
+在套用 Hotfix 之前，應等待所有作用中的維護程序完成。
 
 +
 當其他維護程序正在運作時，您無法套用 StorageGRID Hotfix。例如，在退役、擴充或恢復程序執行時，您無法套用 Hotfix。
 
 +
 
-NOTE: 如果節點或站點link:pausing-and-resuming-decommission-process-for-storage-nodes.html["${post_edited_translations.segment}"]，您可以安全地套用 Hotfix。此外，您或許可以在 StorageGRID 升級程序的最後階段套用 Hotfix。請參閱link:../upgrade/index.html["${post_edited_translations.segment}"]的說明。
+NOTE: 如果節點或站點link:pausing-and-resuming-decommission-process-for-storage-nodes.html["退役程序暫停"]，您可以安全地套用 Hotfix。此外，您或許可以在 StorageGRID 升級程序的最後階段套用 Hotfix。請參閱link:../upgrade/index.html["升級 StorageGRID 軟體"]的說明。
 
 

@@ -14,18 +14,18 @@ summary: 您可以使用 FabricPool 設定精靈將 StorageGRID 設定為 Fabric
 您可以使用 FabricPool 設定精靈將 StorageGRID 設定為 FabricPool 雲端分層的物件儲存系統。
 
 .開始之前
-* 您已查看了link:../fabricpool/use-fabricpool-setup-wizard.html["${post_edited_translations.segment}"]有關使用 FabricPool 設定精靈的資訊。
+* 您已查看了link:../fabricpool/use-fabricpool-setup-wizard.html["考慮因素和要求"]有關使用 FabricPool 設定精靈的資訊。
 +
 
 NOTE: 如果要設定 StorageGRID 以便與任何其他 S3 用戶端應用程式搭配使用，請前往link:../admin/use-s3-setup-wizard.html["使用 S3 設定精靈"]。
 
-* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:../admin/admin-group-permissions.html["根目錄存取權限"]。
 
 
 
 
 [[access-the-wizard]]
-== ${post_edited_translations.segment}
+== 存取精靈
 
 您可以在開始使用 StorageGRID Grid Manager 時完成 FabricPool 設定精靈，也可以在之後的任何時間存取並完成該精靈。
 
@@ -58,10 +58,10 @@ image:help_menu.png["說明功能表"]
 +
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.建立 HA 群組
 --
-.. ${post_edited_translations.segment}
-.. ${post_edited_translations.segment}
+.. 若要建立新的 HA 群組，請選擇 *Create HA group*。
+.. 在「輸入詳細資料」步驟中，請填寫以下欄位。
 +
 [cols="1a,3a"]
 |===
@@ -71,19 +71,19 @@ image:help_menu.png["說明功能表"]
  a| 
 HA 組名
  a| 
-${post_edited_translations.segment}
+此 HA 群組的唯一顯示名稱。
 
 
 
  a| 
-${post_edited_translations.segment}
+執行摘要（可選）
  a| 
 此 HA 群組的執行摘要。
 
 |===
 .. 在「新增介面」步驟中，選擇要在此 HA 群組中使用的節點介面。
 +
-${post_edited_translations.segment}
+使用欄標題對列進行排序，或輸入搜尋字詞以更快找到介面。
 
 +
 您可以選擇一個或多個節點，但每個節點只能選擇一個介面。
@@ -108,7 +108,7 @@ ${post_edited_translations.segment}
  a| 
 子網路 CIDR
  a| 
-${post_edited_translations.segment}
+VIP 子網路的位址（CIDR 表示法）—IPv4 位址後面接著一個斜槓和子網路長度（0-32）。
 
 網路位址不得設定任何主機位元。例如  `192.16.0.0/22`。
 
@@ -130,14 +130,14 @@ ${post_edited_translations.segment}
 
 |===
 .. 選擇「建立 HA 群組」，然後選擇「完成」以返回 FabricPool 設定精靈。
-.. ${post_edited_translations.segment}
+.. 選擇 *Continue* 以前往負載平衡器步驟。
 
 
 --
-.${post_edited_translations.segment}
+.使用現有的 HA 群組
 --
 .. 若要使用現有的 HA 群組，請從「選擇 HA 群組」下拉式清單中選擇 HA 群組名稱。
-.. ${post_edited_translations.segment}
+.. 選擇 *Continue* 以前往負載平衡器步驟。
 
 
 --
@@ -163,7 +163,7 @@ StorageGRID 使用負載平衡器來管理來自用戶端應用程式（例如 F
 .建立端點
 --
 .. 選擇 *建立端點*。
-.. ${post_edited_translations.segment}
+.. 在「輸入端點詳細資料」步驟中，請填寫以下欄位。
 +
 [cols="1a,3a"]
 |===
@@ -198,7 +198,7 @@ Name
  a| 
 選擇 *HTTPS* 。
 
-${post_edited_translations.segment}
+*附註*：雖然支援在不使用 TLS 加密的情況下與 StorageGRID 通訊，但不建議這樣做。
 
 |===
 .. 在「選擇綁定模式」步驟中，指定綁定模式。綁定模式控制如何存取端點，是使用任意 IP 位址，還是使用特定的 IP 位址和網路介面。
@@ -249,7 +249,7 @@ HA 群組的虛擬 IP
  a| 
 允許所有租戶（預設）
  a| 
-${post_edited_translations.segment}
+所有租戶帳戶都可以使用此端點存取其儲存桶。
 
 對於用於 FabricPool 的負載平衡器端點，*允許所有租戶*幾乎總是合適的選項。
 
@@ -258,14 +258,14 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+允許選定的租戶
  a| 
-${post_edited_translations.segment}
+只有選定的租戶帳戶才能使用此端點存取其儲存桶。
 
 
 
  a| 
-${post_edited_translations.segment}
+封鎖選定的租戶
  a| 
 選定的租戶帳戶無法使用此端點存取其儲存桶。所有其他租戶均可使用此端點。
 
@@ -280,7 +280,7 @@ ${post_edited_translations.segment}
  a| 
 上傳憑證（建議）
  a| 
-${post_edited_translations.segment}
+使用此選項可上傳 CA 簽署的伺服器憑證、憑證私密金鑰和選用的 CA 套裝組合。
 
 
 
@@ -302,7 +302,7 @@ ${post_edited_translations.segment}
 
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 端點憑證的變更可能需要長達 15 分鐘才能套用到所有節點。
 
 --
 .使用現有的負載平衡器端點
@@ -324,7 +324,7 @@ NOTE: ${post_edited_translations.segment}
  a| 
 FQDN
  a| 
-${post_edited_translations.segment}
+外部負載平衡器的完整網域名稱（FQDN）。
 
 
 
@@ -338,7 +338,7 @@ FabricPool 用於連線至外部負載平衡器的連接埠號碼。
  a| 
 證書
  a| 
-${post_edited_translations.segment}
+複製外部負載平衡器的伺服器憑證，並將其貼到此欄位中。
 
 |===
 .. 選擇 *Continue* 以前往租戶和儲存桶步驟。
@@ -369,22 +369,22 @@ ${post_edited_translations.segment}
 .新租戶和儲存貯體
 --
 . 若要建立新的租戶和儲存桶，請輸入*租戶名稱*。例如， `FabricPool tenant`。
-. 根據您的 StorageGRID 系統是否使用 link:../admin/using-identity-federation.html["${post_edited_translations.segment}"]、link:../admin/how-sso-works.html["單一登入 (SSO)"] 或兩者，為租戶帳戶定義 root 存取權。
+. 根據您的 StorageGRID 系統是否使用 link:../admin/using-identity-federation.html["身分聯盟"]、link:../admin/how-sso-works.html["單一登入 (SSO)"] 或兩者，為租戶帳戶定義 root 存取權。
 +
 [cols="1a,3a"]
 |===
-| 選項 | ${post_edited_translations.segment} 
+| 選項 | 這樣做 
 
 
  a| 
-${post_edited_translations.segment}
+如果未啟用身分聯盟
  a| 
-${post_edited_translations.segment}
+指定以本機 root 使用者身分登入租戶時要使用的密碼。
 
 
 
  a| 
-${post_edited_translations.segment}
+如果已啟用身分聯盟
  a| 
 .. 選取現有的聯合群組，使其擁有租戶的 root 存取權。
 .. （可選）指定以本機 root 使用者身分登入租戶時要使用的密碼。
@@ -393,7 +393,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+如果身分聯盟和單一登入（SSO）都已啟用
  a| 
 選取現有的聯合群組，以取得租戶的 root 存取權限。本機使用者無法登入。
 
@@ -624,6 +624,6 @@ CAUTION: ILM 原則中的錯誤可能導致無法挽回的資料遺失。啟動�
 
 .步驟
 . 請前往 link:configure-ontap.html["設定 ONTAP System Manager"] 輸入已儲存的數值，並完成 ONTAP 端的連線。您必須將 StorageGRID 新增為雲端分層，將雲端分層附加到本機分層以建立 FabricPool，並設定 Volume 分層原則。
-. 請前往 link:configure-dns-server.html["${post_edited_translations.segment}"] 並確保 DNS 包含一筆記錄，將 StorageGRID 伺服器名稱（完整網域名稱）與您將使用的每個 StorageGRID IP 位址關聯。
+. 請前往 link:configure-dns-server.html["設定 DNS 伺服器"] 並確保 DNS 包含一筆記錄，將 StorageGRID 伺服器名稱（完整網域名稱）與您將使用的每個 StorageGRID IP 位址關聯。
 . 前往 link:other-best-practices-for-storagegrid-and-fabricpool.html["StorageGRID 和 FabricPool 的其他最佳實務做法"] 了解 StorageGRID 稽核日誌和其他全域組態選項的最佳實務做法。
 

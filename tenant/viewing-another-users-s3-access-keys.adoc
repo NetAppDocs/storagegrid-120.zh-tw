@@ -15,7 +15,7 @@ summary: 如果您使用的是 S3 租戶並且擁有相應的權限，則可以�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
-* 您有link:tenant-management-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:tenant-management-permissions.html["根目錄存取權限"]。
 
 
 

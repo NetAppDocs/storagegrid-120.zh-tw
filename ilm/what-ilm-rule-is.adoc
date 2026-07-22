@@ -35,7 +35,7 @@ ILM 規則包含三個要素：
 [[ilm-rule-filtering]]
 == ILM 規則過濾
 
-${post_edited_translations.segment}
+建立 ILM 規則時，需要指定篩選條件來識別規則適用的物件。
 
 在最簡單的情況下，規則可能不會使用任何篩選器。任何不使用篩選器的規則都會套用至所有物件，因此它必須是 ILM 原則中的最後一個（預設）規則。預設規則會為不符合其他規則中篩選器的物件提供儲存設備指示。
 
@@ -84,13 +84,13 @@ ${post_edited_translations.segment}
 
 image:ilm_rule_multiple_placements_in_single_time_period.png["網格管理器中的 ILM 位置畫面"]
 
-第一個放置指令 image:icon_number_1.png["${post_edited_translations.segment}"] 針對第一年有兩行：
+第一個放置指令 image:icon_number_1.png["圖示編號 1"] 針對第一年有兩行：
 
 * 第一行在兩個資料中心站點建立兩個複寫物件複本。
 * 第二行使用所有資料中心站台建立 6+3 銷毀編碼複本。
 
 
-第二項安置指示image:icon_number_2.png["${post_edited_translations.segment}"]會在一年後建立兩份副本，並永久保留這些副本。
+第二項安置指示image:icon_number_2.png["圖示編號 1"]會在一年後建立兩份副本，並永久保留這些副本。
 
 在定義規則的放置指令集時，必須確保至少有一條放置指令從第 0 天開始、所定義的時間段之間沒有間隙，且最後一條放置指令應永久持續，或持續至不再需要任何物件複本為止。
 
@@ -122,9 +122,9 @@ image:ilm_rule_multiple_placements_in_single_time_period.png["網格管理器中
 例如，ILM 規則可以規定以下內容：
 
 * 僅適用於屬於租戶 A 的物件。
-* ${post_edited_translations.segment}
+* 製作這些物件的兩個複本，並將每個複本儲存在不同的站台。
 * 將這兩個複本「永久」保留，這意味著 StorageGRID 不會自動刪除它們。StorageGRID 將保留這些物件，直到用戶端發出刪除請求或儲存桶生命週期到期為止。
-* ${post_edited_translations.segment}
+* 使用「平衡」選項進行擷取行為：當租用戶 A 將物件儲存到 StorageGRID 時，將立即套用雙站台放置指令，除非無法立即建立兩個所需的複本。
 +
 例如，如果租戶 A 儲存物件時站點 2 無法存取，StorageGRID 將在站點 1 的儲存節點上建立兩個臨時複本。一旦站點 2 可用，StorageGRID 將在該站點建立所需的複本。
 
@@ -132,5 +132,5 @@ image:ilm_rule_multiple_placements_in_single_time_period.png["網格管理器中
 
 .相關資訊
 * link:what-storage-pool-is.html["什麼是儲存資源池"]
-* link:what-cloud-storage-pool-is.html["${post_edited_translations.segment}"]
+* link:what-cloud-storage-pool-is.html["什麼是雲端儲存資源池"]
 

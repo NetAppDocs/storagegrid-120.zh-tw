@@ -35,7 +35,7 @@ NOTE: 如果啟用了單一登入 （SSO），則本機使用者無法登入 Sto
 
 
 [[access-the-wizard]]
-=== ${post_edited_translations.segment}
+=== 存取精靈
 
 .步驟
 . 選擇 *Configuration* > *Access control* > *Admin users*。
@@ -64,7 +64,7 @@ NOTE: 如果啟用了單一登入 （SSO），則本機使用者無法登入 Sto
 如果您尚未建立群組，則可以在不選擇群組的情況下儲存使用者。您可以在「群組」頁面上將此使用者新增至群組。
 
 +
-如果使用者屬於多個使用者群組，則權限會累積。詳情請參閱link:managing-admin-groups.html["${post_edited_translations.segment}"]。
+如果使用者屬於多個使用者群組，則權限會累積。詳情請參閱link:managing-admin-groups.html["管理管理員群組"]。
 
 . 選擇 *Create user* ，然後選擇 *Finish* 。
 
@@ -114,7 +114,7 @@ NOTE: 本機使用者可以使用 Grid Manager 橫幅中的「變更密碼」選
 
  a| 
 .. 選擇使用者名稱以顯示詳細資訊。
-.. 選擇編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"]。
+.. 選擇編輯圖示 image:icon_edit_tm.png["編輯圖示"]。
 .. 請輸入新名稱。
 .. 選擇 *Save changes* 。
 

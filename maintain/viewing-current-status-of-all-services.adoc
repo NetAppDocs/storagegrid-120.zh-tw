@@ -2,7 +2,7 @@
 permalink: maintain/viewing-current-status-of-all-services.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, service, status 
-summary: ${post_edited_translations.segment} 
+summary: 您可以隨時檢視網格節點上執行的所有服務的目前狀態。 
 ---
 = 查看所有 StorageGRID 服務的目前狀態
 :allow-uri-read: 
@@ -11,13 +11,13 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以隨時檢視網格節點上執行的所有服務的目前狀態。
 
 .開始之前
 您擁有  `Passwords.txt` 檔案。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入網格節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -35,10 +35,10 @@ ${post_edited_translations.segment}
 +
 image:storagegrid_status_output.gif["StorageGRID 命令輸出的畫面截圖"]
 
-. ${post_edited_translations.segment}
+. 返回命令列，按 *Ctrl*+*C*。
 . （可選）檢視網格節點上執行的所有服務的靜態報告： `/usr/local/servermanager/reader.rb`
 +
-${post_edited_translations.segment}
+本報告包含與持續更新報告相同的資訊，但如果服務狀態發生變更，則不會更新。
 
 . 登出命令 shell： `exit`
 

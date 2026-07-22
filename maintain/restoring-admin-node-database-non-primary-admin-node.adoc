@@ -23,7 +23,7 @@ summary: 如果要保留有關已發生故障的非主要管理節點上的屬�
 .關於此任務
 如果管理節點發生故障，儲存在其管理節點資料庫中的歷史資料將會遺失。該資料庫包含以下資訊：
 
-* ${post_edited_translations.segment}
+* 警報歷史記錄
 * 歷史屬性資料，用於「節點」頁面上的傳統樣式圖表
 
 
@@ -35,7 +35,7 @@ summary: 如果要保留有關已發生故障的非主要管理節點上的屬�
 NOTE: 複製管理節點資料庫可能需要幾個小時。在來源節點上的服務停止期間，部分 Grid Manager 功能將無法使用。
 
 .步驟
-. ${post_edited_translations.segment}
+. 登入來源管理節點：
 +
 .. 請輸入以下命令： `ssh admin@_grid_node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。

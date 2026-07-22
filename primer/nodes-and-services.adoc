@@ -178,7 +178,7 @@ CMN（組態管理節點）
  a| 
 DDS（分散式資料儲存）
  a| 
-${post_edited_translations.segment}
+與 Cassandra 資料庫互動以管理物件中繼資料。
  a| 
 儲存節點
 
@@ -196,7 +196,7 @@ DMV （Data Mover）
  a| 
 動態 IP（dynip）
  a| 
-${post_edited_translations.segment}
+監控網格的動態 IP 變更並更新本機組態。
  a| 
 所有節點
 
@@ -205,14 +205,14 @@ ${post_edited_translations.segment}
  a| 
 Grafana
  a| 
-${post_edited_translations.segment}
+用於 Grid Manager 中的計量視覺化。
  a| 
 管理節點
 
 
 
  a| 
-${post_edited_translations.segment}
+高可用性
  a| 
 在「高可用度群組」頁面上設定的節點上管理高可用度虛擬 IP。此服務也稱為 keepalived 服務。
  a| 
@@ -221,16 +221,16 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+身份（idnt）
  a| 
-${post_edited_translations.segment}
+管理本機使用者和群組、驗證，並聯合來自 LDAP 和 Active Directory 的使用者身分。
  a| 
 使用 ADC 服務的儲存節點
 
 
 
  a| 
-${post_edited_translations.segment}
+Lambda Arbitrator
  a| 
 管理 S3 Select SelectObjectContent 請求。
  a| 
@@ -248,16 +248,16 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+LDR（本地分送路由器）
  a| 
-${post_edited_translations.segment}
+管理網格內的內容儲存設備和傳輸。
  a| 
 儲存節點
 
 
 
  a| 
-${post_edited_translations.segment}
+MISCd 資訊服務控制精靈
  a| 
 提供用於查詢和管理其他節點上服務的介面，以及管理節點上的環境組態，例如查詢在其他節點上執行的服務狀態。
  a| 
@@ -266,7 +266,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+nginx
  a| 
 可作為各種網格服務（如 Prometheus 和 Dynamic IP）的驗證和安全通訊機制，使其能夠透過 HTTPS API 與其他節點上的服務進行通訊。
  a| 
@@ -293,7 +293,7 @@ NMS （Network Management System）
 
 
  a| 
-${post_edited_translations.segment}
+Node Exporter （Prometheus 資料收集）
  a| 
 發布 Prometheus 時間序列計量收集的系統級統計資料。
  a| 
@@ -311,7 +311,7 @@ ntp
 
 
  a| 
-${post_edited_translations.segment}
+持久性
  a| 
 管理根目錄磁碟上需要在重新開機後保留的檔案。
  a| 
@@ -329,7 +329,7 @@ Prometheus
 
 
  a| 
-${post_edited_translations.segment}
+RSM（複製狀態機）
  a| 
 確保平台服務請求發送到各自的端點。
  a| 
@@ -340,7 +340,7 @@ ${post_edited_translations.segment}
  a| 
 SSM (Server Status Monitor)
  a| 
-${post_edited_translations.segment}
+監控硬體狀況並向 NMS 服務報告。
  a| 
 每個網格節點上都存在一個執行個體
 
@@ -365,7 +365,7 @@ SNMP 代理程式
 
 
  a| 
-${post_edited_translations.segment}
+SNMP 連接埠管理服務
  a| 
 負責 SNMP 連接埠的動態管理。
  a| 
@@ -374,18 +374,18 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+SSH（安全外殼協定）
  a| 
-${post_edited_translations.segment}
+處理安全的存取和遠端系統管理。
  a| 
 所有節點
 
 
 
  a| 
-${post_edited_translations.segment}
+SSM （System Status Monitor）
  a| 
-${post_edited_translations.segment}
+監控硬體狀況並向 NMS 服務報告。
  a| 
 所有節點
 
@@ -394,7 +394,7 @@ ${post_edited_translations.segment}
  a| 
 統計
  a| 
-${post_edited_translations.segment}
+記錄與 S3 儲存桶相關的其他計量。
  a| 
 儲存節點
 

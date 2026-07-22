@@ -37,34 +37,34 @@ MDNA
 
 
  a| 
-${post_edited_translations.segment}
+MPAT
  a| 
-${post_edited_translations.segment}
+請求 PATH
  a| 
-${post_edited_translations.segment}
+請求路徑。
 
 
 
  a| 
 MPQP
  a| 
-${post_edited_translations.segment}
+請求查詢參數
  a| 
 要求的查詢參數。
 
 
 
  a| 
-${post_edited_translations.segment}
+MRBD
  a| 
 請求本文
  a| 
 要求本文的內容。雖然預設會記錄回應本文，但在某些情況下，當回應本文為空時，也會記錄要求本文。由於以下資訊在回應本文中不可用，因此對於以下 POST 方法，這些資訊會從要求本文中取得：
 
 * *POST authorize* 中的使用者名稱和帳戶 ID
-* ${post_edited_translations.segment}
+* 在 *POST /grid/grid-networks/update* 中組態新的子網路
 * 在 *POST /grid/ntp-servers/update* 中新增 NTP 伺服器
-* ${post_edited_translations.segment}
+* *POST /grid/servers/decommission* 中已退役的伺服器 ID
 
 
 *注意：*敏感資訊會被刪除（例如，S3 存取金鑰）或以星號遮罩（例如，密碼）。
@@ -72,11 +72,11 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+MRMD
  a| 
-${post_edited_translations.segment}
+請求方法
  a| 
-${post_edited_translations.segment}
+HTTP 請求方法：
 
 * POST
 * PUT
@@ -87,20 +87,20 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+MRSC
  a| 
-${post_edited_translations.segment}
+回應代碼
  a| 
-${post_edited_translations.segment}
+回應代碼。
 
 
 
  a| 
-${post_edited_translations.segment}
+MRSP
  a| 
 回應本文
  a| 
-${post_edited_translations.segment}
+預設情況下，回應內容（回應正文）會記錄於日誌中。
 
 *注意：*敏感資訊會被刪除（例如，S3 存取金鑰）或以星號遮罩（例如，密碼）。
 
@@ -109,18 +109,18 @@ ${post_edited_translations.segment}
  a| 
 MSIP
  a| 
-${post_edited_translations.segment}
+來源 IP 位址
  a| 
-${post_edited_translations.segment}
+用戶端（來源） IP 位址。
 
 
 
  a| 
-${post_edited_translations.segment}
+MUUN
  a| 
-${post_edited_translations.segment}
+使用者 URN
  a| 
-${post_edited_translations.segment}
+傳送請求之使用者的 URN （統一資源名稱）。
 
 
 
@@ -129,6 +129,6 @@ RSLT
  a| 
 結果
  a| 
-${post_edited_translations.segment}
+傳回成功（SUCS）或後端報告的錯誤。
 
 |===

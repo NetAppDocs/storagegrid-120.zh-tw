@@ -2,7 +2,7 @@
 permalink: admin/use-api-if-sso-is-enabled-entra-id.html 
 sidebar: sidebar 
 keywords: how to access storagegrid API if SSO is enabled with Entra ID 
-summary: ${post_edited_translations.segment} 
+summary: 如果您已設定並啟用單一登入 （SSO），並且使用 Entra ID 作為 SSO 供應商，則可以使用兩個範例指令碼來取得對 Grid Management API 或 Tenant Management API 有效的驗證權杖。 
 ---
 = 如果啟用了單一登入 （Entra ID），請使用 StorageGRID API
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-如果您有 link:../admin/how-sso-works.html["${post_edited_translations.segment}"] 且使用 Entra ID 作為 SSO 供應商，您可以使用兩個範例指令碼來取得適用於 Grid Management API 或 Tenant Management API 的有效驗證權杖。
+如果您有 link:../admin/how-sso-works.html["設定並啟用單一登入（SSO）"] 且使用 Entra ID 作為 SSO 供應商，您可以使用兩個範例指令碼來取得適用於 Grid Management API 或 Tenant Management API 的有效驗證權杖。
 
 
 
@@ -50,15 +50,15 @@ SSO 作業可以使用一系列 API 要求來執行，但這樣做並不簡單�
 
 
 
-. ${post_edited_translations.segment}
+. 將 Python 指令碼傳遞給 Python 直譯器以執行該指令碼。
 +
 然後，Python 指令碼將呼叫對應的 Node.js 指令碼來執行 Entra ID SSO 互動。
 
 . 出現提示時，請輸入以下參數的值（或使用參數傳遞它們）：
 +
 ** 用於登入 Entra ID 的 SSO 電子郵件地址
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** StorageGRID 的位址
+** 如果您想存取租戶管理 API，則需要提供租戶帳戶 ID。
 
 
 . 出現提示時，輸入密碼，並準備好在 Entra ID 要求時提供 MFA 授權。

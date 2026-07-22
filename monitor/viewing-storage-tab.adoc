@@ -18,7 +18,7 @@ summary: 「儲存」標籤匯總了儲存可用度和其他儲存設備計量�
 
 
 [[storage-used-graphs]]
-== ${post_edited_translations.segment}
+== 儲存使用圖表
 
 對於儲存節點、每個站台和整個網格，「儲存」標籤包含圖表，顯示物件資料和物件中繼資料隨時間推移使用了多少儲存設備。
 
@@ -37,4 +37,4 @@ image:nodes_storage_node_storage_tab.png["節點 > 儲存節點 > 儲存索引�
 image:nodes_page_storage_tables.png["節點頁儲存表"]
 
 .相關資訊
-link:monitoring-storage-capacity.html["${post_edited_translations.segment}"]
+link:monitoring-storage-capacity.html["監控儲存容量"]

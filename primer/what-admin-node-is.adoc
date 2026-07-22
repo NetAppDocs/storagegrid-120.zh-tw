@@ -24,7 +24,7 @@ Admin Nodes 提供管理服務，例如系統組態、監控和記錄。Admin No
 
 [cols="2a,1a,1a"]
 |===
-| 功能 | 主管理節點 | ${post_edited_translations.segment} 
+| 功能 | 主管理節點 | 非主要管理節點 
 
 
  a| 
@@ -64,7 +64,7 @@ Admin Nodes 提供管理服務，例如系統組態、監控和記錄。Admin No
 
 
  a| 
-包含 <<ssm,${post_edited_translations.segment}>> 服務
+包含 <<ssm,SSM>> 服務
  a| 
 是的
  a| 
@@ -73,7 +73,7 @@ Admin Nodes 提供管理服務，例如系統組態、監控和記錄。Admin No
 
 
  a| 
-包括 <<load-balancer,負載平衡器>> 和 <<high-availability,${post_edited_translations.segment}>> 服務
+包括 <<load-balancer,負載平衡器>> 和 <<high-availability,高可用性>> 服務
  a| 
 是的
  a| 
@@ -82,7 +82,7 @@ Admin Nodes 提供管理服務，例如系統組態、監控和記錄。Admin No
 
 
  a| 
-支援 <<mgmt-api,${post_edited_translations.segment}>> （mgmt-api）
+支援 <<mgmt-api,管理應用程式介面>> （mgmt-api）
  a| 
 是的
  a| 
@@ -91,7 +91,7 @@ Admin Nodes 提供管理服務，例如系統組態、監控和記錄。Admin No
 
 
  a| 
-${post_edited_translations.segment}
+可用於所有與網路相關的維護任務，例如 IP 位址變更和更新 NTP 伺服器
  a| 
 是的
  a| 
@@ -109,7 +109,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+儲存節點擴充後可執行 EC 重新平衡
  a| 
 是的
  a| 
@@ -170,7 +170,7 @@ ${post_edited_translations.segment}
 
 在系統正常運作情況下，只有首選發送節點才會發送通知。但是，所有其他管理節點會監控首選發送節點。如果偵測到問題，其他管理節點將作為備用發送節點運作。
 
-${post_edited_translations.segment}
+這些情況下可能會發送多條通知：
 
 * 如果管理節點彼此「隔離」，則慣用發送方和備用發送方都會嘗試發送通知，因此可能會收到多個通知複本。
 * 如果備用發送器偵測到首選發送器出現問題並開始發送通知，則首選發送器可能會恢復發送通知的能力。如果發生這種情況，可能會發送重複通知。當備用發送器不再偵測到首選發送器發生錯誤時，它將停止發送通知。
@@ -183,13 +183,13 @@ NOTE: 當您測試 AutoSupport 套件時，所有 Admin 節點都會傳送測試
 
 
 [[primary-services-for-admin-nodes]]
-== ${post_edited_translations.segment}
+== 管理節點的主要服務
 
-${post_edited_translations.segment}
+下表顯示管理節點的主要服務；但是，此表並未列出所有節點服務。
 
 [cols="1a,2a"]
 |===
-| 服務 | ${post_edited_translations.segment} 
+| 服務 | 關鍵功能 
 
 
  a| 
@@ -202,7 +202,7 @@ ${post_edited_translations.segment}
  a| 
 [[cmn]]組態管理節點 (CMN)
  a| 
-${post_edited_translations.segment}
+管理全系統組態。
 
 
 
@@ -216,7 +216,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+[[load-balancer]] 負載平衡器
  a| 
 提供從用戶端到儲存節點的 S3 流量負載平衡。
 
@@ -234,14 +234,14 @@ ${post_edited_translations.segment}
  a| 
 網路管理系統（NMS）
  a| 
-${post_edited_translations.segment}
+為 Grid Manager 提供功能。
 
 
 
  a| 
 [[prometheus]]Prometheus
  a| 
-${post_edited_translations.segment}
+收集並儲存所有節點上服務的時間序列計量。
 
 
 

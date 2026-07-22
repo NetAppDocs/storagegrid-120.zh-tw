@@ -16,18 +16,18 @@ StorageGRID 系統的物件中繼資料容量控制著此系統可儲存的最�
 
 
 [[what-is-object-metadata]]
-== ${post_edited_translations.segment}
+== 什麼是物件中繼資料？
 
 物件中繼資料是指描述物件的任何資訊。StorageGRID 使用物件中繼資料來追蹤網格中所有物件的位置，並管理每個物件隨時間的生命週期。
 
 對於 StorageGRID 中的物件，物件中繼資料包括以下類型的資訊：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 系統中繼資料，包括每個物件的唯一 ID （UUID）、物件名稱、S3 儲存桶名稱、租戶帳戶名稱或 ID、物件的邏輯大小、物件首次建立的日期和時間，以及物件最後修改的日期和時間。
+* 與物件關聯的任何自訂使用者中繼資料索引鍵值組。
+* 對於 S3 物件，任何與該物件關聯的物件標籤索引鍵值組。
+* 對於複製的物件複本，每個複本的目前儲存設備位置。
 * 對於銷毀編碼物件複本，每個片段的目前儲存設備位置。
-* ${post_edited_translations.segment}
+* 對於 Cloud Storage Pool 中的物件複本，物件的位置，包括外部儲存桶的名稱和物件的唯一識別碼。
 * 對於分段物件和多部分物件，分段識別碼和資料大小。
 
 
@@ -40,16 +40,16 @@ StorageGRID 將物件中繼資料維護在 Cassandra 資料庫中，該資料庫
 
 此圖表示兩個站台的儲存節點。每個站台擁有相同數量的物件中繼資料，且每個站台的中繼資料會分散至該站台的所有儲存節點。
 
-image:metadata_space_across_sites.png["${post_edited_translations.segment}"]
+image:metadata_space_across_sites.png["跨站台的中繼資料空間"]
 
 
 
 [[where-is-object-metadata-stored]]
 == 物件中繼資料儲存在哪裡？
 
-${post_edited_translations.segment}
+此圖表示單一儲存節點的儲存設備 Volume。
 
-image:metadata_space_storage_node.png["${post_edited_translations.segment}"]
+image:metadata_space_storage_node.png["中繼資料空間儲存節點"]
 
 如圖所示，StorageGRID 在每個儲存節點的儲存設備 Volume 0 上保留空間，用於存放物件中繼資料。它利用保留空間來儲存物件中繼資料並執行必要的資料庫操作。儲存設備 Volume 0 以及儲存節點中所有其他儲存設備磁碟區上的剩餘空間，則專門用於存放物件資料（複本和銷除編碼片段）。
 
@@ -68,7 +68,7 @@ image:metadata_space_storage_node.png["${post_edited_translations.segment}"]
 
 [cols="1a,1a,1a"]
 |===
-| 用於初始 StorageGRID 安裝的版本 | 儲存節點上的記憶體容量 | ${post_edited_translations.segment} 
+| 用於初始 StorageGRID 安裝的版本 | 儲存節點上的記憶體容量 | 預設中繼資料保留空間設定 
 
 
  a| 
@@ -76,13 +76,13 @@ image:metadata_space_storage_node.png["${post_edited_translations.segment}"]
  a| 
 網格中每個儲存節點的容量為 128 GB 或更多
  a| 
-${post_edited_translations.segment}
+8 TB（8,000 GB）
 
 
 
  a| 
  a| 
-${post_edited_translations.segment}
+網格中任何儲存節點上的容量均小於 128 GB
  a| 
 3 TB（3,000 GB）
 
@@ -99,26 +99,26 @@ ${post_edited_translations.segment}
 
  a| 
  a| 
-${post_edited_translations.segment}
+每個站台的任何儲存節點上的容量均小於 128 GB
  a| 
 3 TB（3,000 GB）
 
 
 
  a| 
-${post_edited_translations.segment}
+11.0 或更早版本
  a| 
-${post_edited_translations.segment}
+任何金額
  a| 
-${post_edited_translations.segment}
+2 TB (2,000 GB)
 
 |===
 
 
 [[view-metadata-reserved-space-setting]]
-=== ${post_edited_translations.segment}
+=== 檢視中繼資料保留空間設定
 
-${post_edited_translations.segment}
+請依照以下步驟檢視 StorageGRID 系統的中繼資料保留空間設定。
 
 .步驟
 . 選擇 *Configuration* > *System* > *Storage settings*。
@@ -138,41 +138,41 @@ ${post_edited_translations.segment}
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 中繼資料實際保留空間 
+| 節點的 Volume 0 大小 | 中繼資料實際保留空間 
 
 
  a| 
-${post_edited_translations.segment}
+小於 500 GB（非生產用途）
  a| 
-${post_edited_translations.segment}
+10% 的 Volume 0
 
 
 
  a| 
-${post_edited_translations.segment}
+500 GB 或更多 + 或 + 僅中繼資料儲存節點
  a| 
-${post_edited_translations.segment}
+這兩個值中較小的那個：
 
-* ${post_edited_translations.segment}
+* Volume 0
 * 中繼資料保留空間設定
 
 
-${post_edited_translations.segment}
+*注意*：僅中繼資料儲存節點只需要一個 rangedb。
 
 |===
 
 
 [[view-actual-reserved-space-for-metadata]]
-=== ${post_edited_translations.segment}
+=== 檢視中繼資料的實際保留空間
 
-${post_edited_translations.segment}
+請依照下列步驟檢視特定儲存節點上中繼資料的實際保留空間。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 從 Grid Manager 中選擇 *節點* > *_儲存節點_*。
+. 選擇 *Storage* 索引標籤。
+. 將遊標停留在「已使用儲存設備 - 物件中繼資料」圖表上，找到「實際保留空間」值。
 +
-image:storage_used_object_metadata_actual_reserved.png["${post_edited_translations.segment}"]
+image:storage_used_object_metadata_actual_reserved.png["已使用儲存設備 - 物件中繼資料 - 實際保留空間"]
 
 
 
@@ -181,7 +181,7 @@ image:storage_used_object_metadata_actual_reserved.png["${post_edited_translatio
 
 
 [[example-for-actual-reserved-metadata-space]]
-=== ${post_edited_translations.segment}
+=== 實際保留中繼資料空間範例
 
 假設您使用 11.7 或更新版本安裝新的 StorageGRID 系統。在此範例中，假設每個儲存節點（Storage Node）具有超過 128 GB 的 RAM，且儲存節點 1（SN1）的 Volume 0 為 6 TB。根據這些數值：
 
@@ -215,7 +215,7 @@ image:metadata_allowed_space_volume_0.png["中繼資料允許的空間 Volume �
  a| 
  a| 
  a| 
-${post_edited_translations.segment}
+< 128 GB
  a| 
 >= 128 GB
 
@@ -243,30 +243,30 @@ ${post_edited_translations.segment}
 
 
 [[view-allowed-metadata-space]]
-=== ${post_edited_translations.segment}
+=== 檢視允許的中繼資料空間
 
-${post_edited_translations.segment}
+請依照以下步驟檢視 Storage Node 的允許中繼資料空間。
 
 .步驟
 . 從 Grid Manager 中選擇 *Nodes* 。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇儲存節點。
+. 選擇 *Storage* 索引標籤。
 . 將遊標停留在「儲存設備使用情況 - 物件中繼資料」圖表上，找到 *Allowed* 值。
 +
-image:storage_used_object_metadata_allowed.png["${post_edited_translations.segment}"]
+image:storage_used_object_metadata_allowed.png["已使用儲存設備 - 物件中繼資料 - 允許"]
 
 
 
-${post_edited_translations.segment}
+在快照中，*允許* 值為 3.96 TB，這是儲存節點的最大值，該儲存節點的實際中繼資料保留空間超過 4 TB。
 
-${post_edited_translations.segment}
+*允許* 值對應於以下 Prometheus 指標：
 
 `storagegrid_storage_utilization_metadata_allowed_bytes`
 
 
 
 [[example-for-allowed-metadata-space]]
-== ${post_edited_translations.segment}
+== 允許的中繼資料空間範例
 
 假設您使用 11.6 版本安裝 StorageGRID 系統。在此範例中，假設每個 Storage Node 的記憶體容量都大於 128 GB，且 Storage Node 1 （SN1） 的 Volume 0 為 6 TB。根據這些值：
 
@@ -282,11 +282,11 @@ ${post_edited_translations.segment}
 
 如上所述，StorageGRID 將物件中繼資料均勻分佈到每個站台的各個儲存節點上。因此，如果一個站台包含大小不同的儲存節點，則該站台中最小的節點決定了該站台的中繼資料容量。
 
-${post_edited_translations.segment}
+請看以下範例：
 
 * 您有一個單站台網格，其中包含三個不同大小的儲存節點。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* *中繼資料保留空間* 設定為 4 TB。
+* 儲存節點的實際保留中繼資料空間和允許中繼資料空間具有下列值。
 +
 [cols="1a,1a,1a,1a"]
 |===
@@ -329,13 +329,13 @@ SN3
 
 由於物件中繼資料均勻分佈在站台內的各個 Storage Node 上，因此本例中每個節點只能容納 1.32 TB 的中繼資料。SN2 和 SN3 額外允許的 0.66 TB 中繼資料空間無法使用。
 
-image:metadata_space_three_storage_nodes.png["${post_edited_translations.segment}"]
+image:metadata_space_three_storage_nodes.png["中繼資料空間三個儲存節點"]
 
-${post_edited_translations.segment}
+同樣地，由於 StorageGRID 在每個站台維護 StorageGRID 系統的所有物件中繼資料，因此 StorageGRID 系統的整體中繼資料容量取決於最小站台的物件中繼資料容量。
 
 由於物件中繼資料容量控制著最大物件數量，因此當一個節點的中繼資料容量耗盡時，網格實際上就滿了。
 
 .相關資訊
-* 若要了解如何監控每個 Storage 節點的物件中繼資料容量，請參閱 link:../monitor/index.html["${post_edited_translations.segment}"] 的說明。
-* 若要增加系統的物件中繼資料容量，link:../expand/index.html["${post_edited_translations.segment}"]請新增儲存節點。
+* 若要了解如何監控每個 Storage 節點的物件中繼資料容量，請參閱 link:../monitor/index.html["監控 StorageGRID"] 的說明。
+* 若要增加系統的物件中繼資料容量，link:../expand/index.html["擴充網格"]請新增儲存節點。
 

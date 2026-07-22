@@ -15,7 +15,7 @@ entries:
     url: "/fabricpool/use-fabricpool-setup-wizard-steps.html"
 - title: 手動設定 StorageGRID
   entries:
-  - title: "${post_edited_translations.segment}"
+  - title: 建立 HA 群組
     url: "/fabricpool/creating-ha-group-for-fabricpool.html"
   - title: 建立負載平衡器端點
     url: "/fabricpool/creating-load-balancer-endpoint-for-fabricpool.html"

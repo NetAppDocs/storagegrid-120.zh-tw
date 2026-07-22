@@ -65,7 +65,7 @@ NOTE: 當您變更儲存桶的一致性時，只有在變更之後攝取的物�
 
 * link:deleting-s3-bucket-objects.html["背景空桶刪除"]
 * link:enabling-or-disabling-last-access-time-updates.html["最後存取時間"]
-* link:../s3/create-s3-lifecycle-configuration.html["${post_edited_translations.segment}"]
+* link:../s3/create-s3-lifecycle-configuration.html["儲存桶生命週期"]
 * link:../s3/use-access-policies.html["儲存桶原則"]
 * link:../s3/operations-on-buckets.html["儲存桶標記"]
 * link:changing-bucket-versioning.html["儲存桶版本控制"]

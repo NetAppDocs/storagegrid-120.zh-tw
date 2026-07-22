@@ -2,7 +2,7 @@
 permalink: fabricpool/configure-dns-server.html 
 sidebar: sidebar 
 keywords: fabricPool, StorageGRID, dns, vip, virtual ip, fqdn, server name 
-summary: ${post_edited_translations.segment} 
+summary: 配置高可用度群組、負載平衡器端點和 S3 網域名稱後，必須確保 DNS 包含 StorageGRID 的必要項目。 
 ---
 = 使用 FabricPool 為 StorageGRID 配置 DNS 伺服器項目
 :allow-uri-read: 
@@ -22,7 +22,7 @@ summary: ${post_edited_translations.segment}
 
 新增 DNS 條目，將 StorageGRID 伺服器名稱（完整網域名稱）與您將使用的每個 StorageGRID IP 位址關聯。您在 DNS 中輸入的 IP 位址取決於您是否使用負載平衡節點的 HA 群組：
 
-* ${post_edited_translations.segment}
+* 如果您已設定 HA 群組，ONTAP 將連線至該 HA 群組的虛擬 IP 位址。
 * 如果您未使用 HA 群組，ONTAP 可以使用任何閘道節點或管理節點的 IP 位址連線至 StorageGRID 負載平衡器服務。
 * 如果伺服器名稱解析到多個 IP 位址，ONTAP 會與所有 IP 位址（最多 16 個 IP 位址）建立用戶端連線。建立連線時，IP 位址會以輪詢方式隨機選擇。
 
@@ -30,6 +30,6 @@ summary: ${post_edited_translations.segment}
 
 
 [[dns-entries-for-virtual-hosted-style-requests]]
-== ${post_edited_translations.segment}
+== 虛擬託管式請求的 DNS 項目
 
-如果您已定義link:../admin/configuring-s3-api-endpoint-domain-names.html["${post_edited_translations.segment}"]並將使用虛擬託管風格的請求，請為所有必要的 S3 端點網域名稱（包括任何萬用字元名稱）新增 DNS 條目。
+如果您已定義link:../admin/configuring-s3-api-endpoint-domain-names.html["S3 端點域名"]並將使用虛擬託管風格的請求，請為所有必要的 S3 端點網域名稱（包括任何萬用字元名稱）新增 DNS 條目。

@@ -2,7 +2,7 @@
 permalink: maintain/modifying-dns-configuration-for-single-grid-node.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, dns, modify dns 
-summary: ${post_edited_translations.segment} 
+summary: 與其為整個部署全域設定 DNS，不如執行指令碼為每個網格節點單獨設定 DNS。 
 ---
 = 修改單一 StorageGRID 節點的 DNS 組態
 :allow-uri-read: 
@@ -11,13 +11,13 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+與其為整個部署全域設定 DNS，不如執行指令碼為每個網格節點單獨設定 DNS。
 
 一般而言，您應在 Grid Manager 中使用 *Maintenance* > *Network* > *DNS servers* 選項來設定 DNS 伺服器。只有在需要為不同的網格節點使用不同的 DNS 伺服器時，才使用下列指令碼。
 
 .步驟
 . 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -33,7 +33,7 @@ ${post_edited_translations.segment}
 . [[log_in_to_node]]登入要使用自訂 DNS 組態更新的節點： `ssh _node_IP_address_`
 . 執行 DNS 設定指令碼： `setup_resolv.rb.`
 +
-${post_edited_translations.segment}
+指令碼會傳回支援的命令清單。
 
 +
 [listing]
@@ -73,10 +73,10 @@ Enter command [`add search <domain>|remove search <domain>|add nameserver <ip>`]
 ----
 . 新增為您的網路提供網域名稱服務的伺服器 IPv4 位址： `add <nameserver IP_address>`
 . 重複該 `add nameserver`命令以新增名稱伺服器。
-. ${post_edited_translations.segment}
+. 依照提示執行其他命令。
 . 儲存您的變更並結束應用程式： `save`
 . [[close_cmd_shell]]關閉伺服器上的命令 shell： `exit`
-. 針對每個網格節點，重複步驟 <<log_in_to_node,${post_edited_translations.segment}>> 至 <<close_cmd_shell,關閉命令 Shell>>。
+. 針對每個網格節點，重複步驟 <<log_in_to_node,登入節點>> 至 <<close_cmd_shell,關閉命令 Shell>>。
 . 當您不再需要無密碼存取其他伺服器時，請從 SSH 代理程式中移除私密金鑰。輸入： `ssh-add -D`
 . 如果您已允許外部 SSH 存取，link:../admin/manage-external-ssh-access.html["區塊存取"]當您完成 DNS 組態修改後。
 

@@ -30,9 +30,9 @@ StorageGRID 具有內建的憑證授權單位 （CA），可在系統安裝期�
 
 在非正式作業環境中，請使用 Grid CA 憑證。若是正式作業環境，請使用由外部憑證授權單位簽署的自訂憑證。支援不使用憑證的非安全連線，但不建議使用。
 
-* ${post_edited_translations.segment}
-* 所有自訂憑證都必須符合 link:../harden/hardening-guideline-for-server-certificates.html["${post_edited_translations.segment}"]。
-* ${post_edited_translations.segment}
+* 自訂 CA 憑證不會移除內部憑證；但是，自訂憑證應該是用於驗證伺服器連線的憑證。
+* 所有自訂憑證都必須符合 link:../harden/hardening-guideline-for-server-certificates.html["伺服器憑證系統強化指南"]。
+* StorageGRID 支援將 CA 的憑證捆綁到單一檔案中（稱為 CA 憑證套裝組合）。
 
 
 
@@ -48,20 +48,20 @@ NOTE: StorageGRID 亦包含在所有網格上均相同的作業系統 CA 憑證�
 您可以在單一位置存取所有 StorageGRID 憑證的資訊，以及每個憑證組態工作流程的連結。
 
 .步驟
-. ${post_edited_translations.segment}
+. 從 Grid Manager 中選擇 *Configuration* > *Security* > *Certificates*。
 +
 image:security_certificates.png["憑證頁面"]_
 
-. 在「憑證」頁面上選取索引標籤，即可檢視每個憑證類別的資訊並存取憑證設定。如果您擁有 link:admin-group-permissions.html["${post_edited_translations.segment}"]，則可以存取索引標籤。
+. 在「憑證」頁面上選取索引標籤，即可檢視每個憑證類別的資訊並存取憑證設定。如果您擁有 link:admin-group-permissions.html["適當權限"]，則可以存取索引標籤。
 +
 ** *全域*：保護來自 Web 瀏覽器和外部 API 用戶端的 StorageGRID 存取。
 ** *Grid CA*：保護 StorageGRID 內部流量。
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** *用戶端*：確保外部用戶端與 StorageGRID Prometheus 資料庫之間的連線安全。
+** *負載平衡器端點*：保護 S3 用戶端與 StorageGRID 負載平衡器之間的連線。
 ** *租戶*：保護與身分識別聯合伺服器的連線，或從平台服務端點到 S3 儲存資源的連線。
-** ${post_edited_translations.segment}
+** *其他*：保護需要特定憑證的 StorageGRID 連線。
 +
-${post_edited_translations.segment}
+以下說明每個索引標籤，並提供更多憑證詳細資訊的連結。
 
 +
 [role="tabbed-block"]
@@ -71,44 +71,44 @@ ${post_edited_translations.segment}
 全域憑證可保護 Web 瀏覽器和外部 S3 API 用戶端對 StorageGRID 的存取安全性。StorageGRID 憑證授權單位會在安裝期間初始產生兩個全域憑證。正式作業環境的最佳實務做法是使用由外部憑證授權單位簽署的自訂憑證。
 
 *** <<管理介面憑證>>: 保護用戶端網頁瀏覽器至 StorageGRID 管理介面的連線。
-*** <<${post_edited_translations.segment}>>：保護用戶端 API 與儲存節點、管理節點和閘道節點之間的連線，S3 用戶端應用程式使用這些連線來上傳和下載物件資料。
+*** <<S3 API 憑證>>：保護用戶端 API 與儲存節點、管理節點和閘道節點之間的連線，S3 用戶端應用程式使用這些連線來上傳和下載物件資料。
 
 
-${post_edited_translations.segment}
+已安裝的全域憑證的相關資訊包括：
 
-*** ${post_edited_translations.segment}
+*** *名稱*：憑證名稱，並附有管理憑證的連結。
 *** *說明*
 *** *類型*：自訂或預設。+ 為了提高網格安全性，您應該始終使用自訂憑證。
-*** ${post_edited_translations.segment}
+*** *到期日*：如果使用預設憑證，則不顯示到期日。
 
 
 您可以：
 
 *** 為了提高網格安全性，請將預設憑證替換為由外部憑證授權單位簽署的自訂憑證：
 +
-**** link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html["${post_edited_translations.segment}"] 用於 Grid Manager 和 Tenant Manager 連線。
+**** link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html["取代預設的 StorageGRID 產生的管理介面憑證"] 用於 Grid Manager 和 Tenant Manager 連線。
 **** link:configuring-custom-server-certificate-for-storage-node.html["替換 S3 API 憑證"]用於儲存節點和負載平衡器端點（選用）連線。
 
 
 *** link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html#restore-the-default-management-interface-certificate["還原預設管理介面憑證"]。
-*** link:configuring-custom-server-certificate-for-storage-node.html#restore-the-default-s3-api-certificate["${post_edited_translations.segment}"]。
-*** link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html#use-a-script-to-generate-a-new-self-signed-management-interface-certificate["${post_edited_translations.segment}"]。
-*** 複製或下載 link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html#download-or-copy-the-management-interface-certificate["管理介面憑證"] 或 link:configuring-custom-server-certificate-for-storage-node.html#download-or-copy-the-s3-api-certificate["${post_edited_translations.segment}"]。
+*** link:configuring-custom-server-certificate-for-storage-node.html#restore-the-default-s3-api-certificate["還原預設 S3 API 憑證"]。
+*** link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html#use-a-script-to-generate-a-new-self-signed-management-interface-certificate["使用指令碼產生新的自簽名管理介面憑證"]。
+*** 複製或下載 link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html#download-or-copy-the-management-interface-certificate["管理介面憑證"] 或 link:configuring-custom-server-certificate-for-storage-node.html#download-or-copy-the-s3-api-certificate["S3 API 憑證"]。
 
 
 --
 .網格 CA
 --
-由 StorageGRID 憑證授權單位在安裝 StorageGRID 期間產生的 <<gridca_details,${post_edited_translations.segment}>>，可保護所有內部 StorageGRID 流量。
+由 StorageGRID 憑證授權單位在安裝 StorageGRID 期間產生的 <<gridca_details,網格 CA 憑證>>，可保護所有內部 StorageGRID 流量。
 
-${post_edited_translations.segment}
+憑證資訊包括憑證到期日和憑證內容。
 
-您可以 link:copying-storagegrid-system-ca-certificate.html["${post_edited_translations.segment}"]，但無法變更它。
+您可以 link:copying-storagegrid-system-ca-certificate.html["複製或下載 Grid CA 憑證"]，但無法變更它。
 
 --
 .用戶端
 --
-<<adminclientcert_details,${post_edited_translations.segment}>>由外部憑證授權單位產生，可保護外部監控工具與 StorageGRID Prometheus 資料庫之間連線的安全。
+<<adminclientcert_details,用戶端憑證>>由外部憑證授權單位產生，可保護外部監控工具與 StorageGRID Prometheus 資料庫之間連線的安全。
 
 憑證表中每個已設定的用戶端憑證各有一列記錄，並指示該憑證是否可用於 Prometheus 資料庫存取，以及憑證的到期日期。
 
@@ -118,38 +118,38 @@ ${post_edited_translations.segment}
 *** 選取憑證名稱以顯示憑證詳細資料，您可以在其中執行以下操作：
 +
 **** link:configuring-administrator-client-certificates.html#edit-client-certificates["變更用戶端憑證名稱。"]
-**** link:configuring-administrator-client-certificates.html#edit-client-certificates["${post_edited_translations.segment}"]
+**** link:configuring-administrator-client-certificates.html#edit-client-certificates["設定 Prometheus 存取權限。"]
 **** link:configuring-administrator-client-certificates.html#edit-client-certificates["上傳並替換用戶端憑證。"]
 **** link:configuring-administrator-client-certificates.html#download-or-copy-client-certificates["複製或下載用戶端憑證。"]
-**** link:configuring-administrator-client-certificates.html#remove-client-certificates["${post_edited_translations.segment}"]
+**** link:configuring-administrator-client-certificates.html#remove-client-certificates["移除用戶端憑證。"]
 
 
-*** 選擇 *Actions* 可快速link:configuring-administrator-client-certificates.html#edit-client-certificates["編輯"]、link:configuring-administrator-client-certificates.html#attach-new-client-certificate["${post_edited_translations.segment}"]或link:configuring-administrator-client-certificates.html#remove-client-certificates["移除"]用戶端憑證。您最多可以選擇 10 個用戶端憑證，並使用 *Actions* > *Remove* 一次移除它們。
+*** 選擇 *Actions* 可快速link:configuring-administrator-client-certificates.html#edit-client-certificates["編輯"]、link:configuring-administrator-client-certificates.html#attach-new-client-certificate["附加"]或link:configuring-administrator-client-certificates.html#remove-client-certificates["移除"]用戶端憑證。您最多可以選擇 10 個用戶端憑證，並使用 *Actions* > *Remove* 一次移除它們。
 
 
 --
 .負載平衡器端點
 --
-<<負載平衡器端點憑證,${post_edited_translations.segment}>> 保護 S3 用戶端與 Gateway Nodes 和 Admin Nodes 上的 StorageGRID 負載平衡器服務之間的連線安全。
+<<負載平衡器端點憑證,負載平衡器端點憑證>> 保護 S3 用戶端與 Gateway Nodes 和 Admin Nodes 上的 StorageGRID 負載平衡器服務之間的連線安全。
 
 負載平衡器端點表格中，每個已設定的負載平衡器端點各有一列，並指示該端點使用的是全域 S3 API 憑證還是自訂負載平衡器端點憑證。每個憑證的到期日期也會顯示於表格中。
 
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 端點憑證的變更可能需要長達 15 分鐘才能套用到所有節點。
 
 您可以：
 
-*** link:configuring-load-balancer-endpoints.html["${post_edited_translations.segment}"]，包括其憑證詳細資料。
+*** link:configuring-load-balancer-endpoints.html["檢視負載平衡器端點"]，包括其憑證詳細資料。
 *** link:../fabricpool/creating-load-balancer-endpoint-for-fabricpool.html["為 FabricPool 指定負載平衡器端點憑證。"]
-*** link:configuring-load-balancer-endpoints.html["${post_edited_translations.segment}"]而不是產生新的負載平衡器端點憑證。
+*** link:configuring-load-balancer-endpoints.html["使用全域 S3 API 憑證"]而不是產生新的負載平衡器端點憑證。
 
 
 --
-.${post_edited_translations.segment}
+.租戶
 --
-租戶可以使用 <<身分聯合憑證,${post_edited_translations.segment}>> 或 <<平台服務端點憑證,平台服務端點憑證>> 來保護其與 StorageGRID 的連線安全。
+租戶可以使用 <<身分聯合憑證,身分識別聯盟伺服器憑證>> 或 <<平台服務端點憑證,平台服務端點憑證>> 來保護其與 StorageGRID 的連線安全。
 
-${post_edited_translations.segment}
+租戶表中的每一列代表一個租戶，並指示每個租戶是否有權限使用自己的身分來源或平台服務。
 
 您可以：
 
@@ -170,13 +170,13 @@ StorageGRID 使用其他安全性憑證來實現特定用途。這些憑證依�
 *** <<grid-federation-certificate,網格同盟連線憑證>>
 *** <<身分聯合憑證,身分聯合憑證>>
 *** <<金鑰管理伺服器 (KMS) 憑證,金鑰管理伺服器 (KMS) 憑證>>
-*** <<${post_edited_translations.segment},單一登入憑證>>
+*** <<單一登入 (SSO) 憑證,單一登入憑證>>
 
 
 資訊顯示函數使用的憑證類型及其伺服器和用戶端憑證到期日期（如適用）。選擇函數名稱會開啟瀏覽器索引標籤，您可以在其中檢視和編輯憑證詳細資訊。
 
 
-NOTE: 只有擁有 link:admin-group-permissions.html["${post_edited_translations.segment}"]，才能檢視和存取其他憑證的資訊。
+NOTE: 只有擁有 link:admin-group-permissions.html["適當權限"]，才能檢視和存取其他憑證的資訊。
 
 您可以：
 
@@ -230,7 +230,7 @@ link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html[
 
 
 [[s3-api-certificate]]
-=== ${post_edited_translations.segment}
+=== S3 API 憑證
 
 [cols="1a,1a,1a,1a"]
 |===
@@ -250,7 +250,7 @@ link:configuring-custom-server-certificate-for-storage-node.html["設定 S3 API 
 
 
 [[grid-ca-certificate]]
-=== ${post_edited_translations.segment}
+=== 網格 CA 憑證
 
 請參閱 <<gridca_details,預設網格 CA 憑證執行摘要>>。
 
@@ -293,7 +293,7 @@ link:configuring-administrator-client-certificates.html["設定用戶端憑證"]
  a| 
 用於驗證 S3 用戶端與 Gateway Nodes 和 Admin Nodes 上的 StorageGRID Load Balancer 服務之間的連線。您可以在設定負載平衡器端點時上傳或產生負載平衡器憑證。用戶端應用程式在連線至 StorageGRID 以儲存和擷取物件資料時，會使用此負載平衡器憑證。
 
-您也可以使用自訂版本的全域 <<${post_edited_translations.segment}>> 憑證來驗證與負載平衡器服務的連線。如果使用全域憑證來驗證負載平衡器連線，則無需為每個負載平衡器端點上傳或產生個別的憑證。
+您也可以使用自訂版本的全域 <<S3 API 憑證>> 憑證來驗證與負載平衡器服務的連線。如果使用全域憑證來驗證負載平衡器連線，則無需為每個負載平衡器端點上傳或產生個別的憑證。
 
 *注意：*用於負載平衡器驗證的憑證是 StorageGRID 正常運作期間最常用的憑證。
  a| 
@@ -409,7 +409,7 @@ link:../monitor/configure-log-management.html#use-external-syslog-server["使用
  a| 
 *設定* > *存取控制* > *身分識別同盟*
  a| 
-link:using-identity-federation.html["${post_edited_translations.segment}"]
+link:using-identity-federation.html["使用身分聯盟"]
 
 |===
 
@@ -447,17 +447,17 @@ link:kms-adding.html["新增金鑰管理伺服器（KMS）"]
  a| 
 對 StorageGRID 平台服務與 S3 儲存設備資源之間的連線進行驗證。
  a| 
-${post_edited_translations.segment}
+*租戶* > *儲存設備 (S3)* > *平台服務端點*
  a| 
-link:../tenant/creating-platform-services-endpoint.html["${post_edited_translations.segment}"]
+link:../tenant/creating-platform-services-endpoint.html["建立平台服務端點"]
 
-link:../tenant/editing-platform-services-endpoint.html["${post_edited_translations.segment}"]
+link:../tenant/editing-platform-services-endpoint.html["編輯平台服務端點"]
 
 |===
 
 
 [[single-sign-on-sso-certificate]]
-=== ${post_edited_translations.segment}
+=== 單一登入 (SSO) 憑證
 
 [cols="1a,1a,1a,1a"]
 |===
@@ -469,7 +469,7 @@ link:../tenant/editing-platform-services-endpoint.html["${post_edited_translatio
  a| 
 驗證用於單一登入 （SSO） 請求的身分識別聯合服務（例如 Active Directory Federation Services （AD FS））與 StorageGRID 之間的連線。
  a| 
-${post_edited_translations.segment}
+*設定* > *存取控制* > *單一登入*
  a| 
 link:how-sso-works.html["設定單一登入"]
 
@@ -484,26 +484,26 @@ link:how-sso-works.html["設定單一登入"]
 [[example-1-load-balancer-service]]
 === 範例 1：負載平衡器服務
 
-${post_edited_translations.segment}
+在此範例中，StorageGRID 作為伺服器。
 
 . 您可以在 StorageGRID 中設定負載平衡器端點並上傳或產生伺服器憑證。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 您設定 S3 用戶端連線至負載平衡器端點，並將相同憑證上傳至用戶端。
+. 當用戶端想要儲存或擷取資料時，它會使用 HTTPS 連接到負載平衡器端點。
+. StorageGRID 會回應伺服器憑證（其中包含公開金鑰）以及根據私密金鑰所產生的簽署。
 . 用戶端會比較伺服器簽署與其憑證複本上的簽署。如果簽署符合，用戶端會使用相同的公開金鑰啟動工作階段。
-. ${post_edited_translations.segment}
+. 用戶端將物件資料傳送至 StorageGRID。
 
 
 
 
 [[example-2-external-key-management-server-kms]]
-=== ${post_edited_translations.segment}
+=== 範例 2：外部金鑰管理伺服器 (KMS)
 
-${post_edited_translations.segment}
+在這個範例中，StorageGRID 充當用戶端。
 
 . 使用外部金鑰管理伺服器軟體，您可以將 StorageGRID 設定為 KMS 用戶端，並取得 CA 簽署的伺服器憑證、公用用戶端憑證和用戶端憑證的私密金鑰。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 使用 Grid Manager，您可以設定 KMS 伺服器並上傳伺服器和用戶端憑證以及用戶端私鑰。
+. 當 StorageGRID 節點需要加密金鑰時，它會向 KMS 伺服器發出請求，其中包含憑證中的資料和基於私密金鑰的簽署。
 . KMS 伺服器驗證憑證簽署，並決定信任 StorageGRID。
-. ${post_edited_translations.segment}
+. KMS 伺服器使用已驗證的連線進行回應。
 

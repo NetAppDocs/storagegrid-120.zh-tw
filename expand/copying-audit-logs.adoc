@@ -14,7 +14,7 @@ summary: 透過擴充流程新增新的管理節點時，其 AMS 服務僅記錄
 透過擴充流程新增新的管理節點時，其 AMS 服務僅記錄加入系統後發生的事件和動作。如有需要，您可以將先前安裝的管理節點的稽核日誌複製到新擴充的管理節點，使其與 StorageGRID 系統的其餘部分保持同步。
 
 .開始之前
-* ${post_edited_translations.segment}
+* 您已完成新增管理節點所需的擴充步驟。
 * 您擁有  `Passwords.txt` 檔案。
 
 
@@ -25,15 +25,15 @@ summary: 透過擴充流程新增新的管理節點時，其 AMS 服務僅記錄
 ====
 預設情況下，稽核資訊會傳送到 `localaudit`每個節點的日誌中。若要使用此程序，您必須依照下列方式將管理節點設定為稽核目的地：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 您已將 *管理節點/本機節點* 設定為日誌目的地。
+* 您已將*管理節點和外部 syslog 伺服器*設定為稽核日誌目的地。
 
 
 詳情請參閱 link:../monitor/configure-audit-messages.html["設定稽核訊息和外部 syslog 伺服器"]。
 
 ====
 .步驟
-. ${post_edited_translations.segment}
+. 登入主要管理節點：
 +
 .. 輸入下列命令： `ssh _admin@_primary_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -45,7 +45,7 @@ summary: 透過擴充流程新增新的管理節點時，其 AMS 服務僅記錄
 
 
 . 停止 AMS 服務以防止其建立新檔案： `service ams stop`
-. ${post_edited_translations.segment}
+. 導航至稽核匯出目錄：
 +
 `cd /var/local/audit/export/`
 
@@ -56,7 +56,7 @@ summary: 透過擴充流程新增新的管理節點時，其 AMS 服務僅記錄
 ls -l
 mv audit.log _new_name_.txt
 ----
-. ${post_edited_translations.segment}
+. 將所有稽核日誌檔案複製到擴充管理節點上的目的地位置：
 +
 `scp -p * _IP_address_:/var/local/audit/export/`
 
@@ -65,15 +65,15 @@ mv audit.log _new_name_.txt
 +
 `mv _new_name_.txt audit.log`
 
-. ${post_edited_translations.segment}
+. 啟動 AMS 服務：
 +
 `service ams start`
 
-. ${post_edited_translations.segment}
+. 從伺服器登出：
 +
 `exit`
 
-. ${post_edited_translations.segment}
+. 登入擴充管理節點：
 +
 .. 請輸入以下命令： `ssh admin@_expansion_Admin_Node_IP_`
 .. 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -91,7 +91,7 @@ mv audit.log _new_name_.txt
 +
 `chown ams-user:bycast *`
 
-. ${post_edited_translations.segment}
+. 從伺服器登出：
 +
 `exit`
 

@@ -7,15 +7,15 @@ NOTE: 對於應用裝置安裝，僅當您需要避免網路流量時才需要�
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/storagegrid-webscale-images-version-SHA.deb  a| 
+用於在您的應用裝置上安裝 StorageGRID 節點映像的 DEB 套件。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/storagegrid-webscale-images-version-SHA.deb.md5  a| 
 檔案的 MD5 Checksum `/debs/storagegridwebscale-
 images-version-SHA.deb`。
 

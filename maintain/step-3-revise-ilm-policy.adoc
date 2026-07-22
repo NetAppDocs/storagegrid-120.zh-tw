@@ -2,7 +2,7 @@
 permalink: maintain/step-3-revise-ilm-policy.html 
 sidebar: sidebar 
 keywords: storagegrid, recover, revise ilm policies 
-summary: ${post_edited_translations.segment} 
+summary: 從退役站台精靈的步驟 3（修改 ILM 原則）中，您可以確定該站台是否被任何 ILM 原則引用。 
 ---
 = 修訂 StorageGRID 中站台停用的 ILM 原則
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+從退役站台精靈的步驟 3（修改 ILM 原則）中，您可以確定該站台是否被任何 ILM 原則引用。
 
 .開始之前
 您已充分瞭解如何 link:../ilm/index.html["使用 ILM 管理物件"]。您熟悉建立儲存資源池與 ILM 規則，以及模擬和啟動 ILM 原則。
@@ -22,9 +22,9 @@ ${post_edited_translations.segment}
 如果任何 ILM 原則引用了您要退役的站台，則必須移除這些原則或對其進行編輯，使其符合以下要求：
 
 * 全面保護所有物件資料。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 不要提及您正在退役的站台。
+* 不要使用引用站台的儲存資源池，也不要使用「所有站台」選項。
+* 不要使用指向該站台的糾刪碼設定檔。
 * 不要使用 StorageGRID 11.6 或更早版本中的「建立 2 個副本」規則。
 
 
@@ -37,29 +37,29 @@ TIP: 如果您要執行_已連線網站退役_操作，則必須考慮 StorageGR
 如果您在設計新原則時需要協助，請聯絡技術支援。
 
 .步驟
-. ${post_edited_translations.segment}
+. 從步驟 3 （修改 ILM 原則）中，確定是否有任何 ILM 原則提及您選擇退役的站台。
 . 如果沒有列出任何原則，請選擇「下一步」進入link:step-4-remove-ilm-references.html["步驟 4：移除 ILM 引用"]。
 . 如果列出了一個或多個 _active_ ILM 原則，請 Clone 每個現有原則或建立不參照要退役網站的新原則：
 +
-.. ${post_edited_translations.segment}
+.. 在「原則名稱」欄中選取原則的連結。
 +
 該原則的 ILM 原則詳細資料頁面會顯示在新的瀏覽器分頁中。退役站台頁面將在另一個分頁中保持開啟。
 
-.. ${post_edited_translations.segment}
+.. 請根據實際情況遵循以下指南和說明：
 +
-*** ${post_edited_translations.segment}
+*** 使用 ILM 規則：
 +
 **** link:../ilm/creating-storage-pool.html["建立一個或多個儲存資源池"] 未指向該站台。
 **** link:../ilm/working-with-ilm-rules-and-ilm-policies.html["編輯或替換規則"] 參照該站台。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 不要選擇「建立 2 個副本」規則，因為該規則使用「所有儲存節點」儲存資源池，這是不允許的。
 
 
 
 *** 使用 ILM 原則：
 +
-**** link:../ilm/working-with-ilm-rules-and-ilm-policies.html#clone-ilm-policy["Clone 現有的 ILM 原則"] 或 link:../ilm/creating-ilm-policy.html["${post_edited_translations.segment}"]。
+**** link:../ilm/working-with-ilm-rules-and-ilm-policies.html#clone-ilm-policy["Clone 現有的 ILM 原則"] 或 link:../ilm/creating-ilm-policy.html["建立新的 ILM 原則"]。
 **** 確保預設規則和其他規則不引用該網站。
 +
 
@@ -89,8 +89,8 @@ CAUTION: 啟動新的 ILM 原則後，StorageGRID 會使用此原則管理所有
 
 . 對於每個_非活動_原則，請先依照前述步驟選取每個原則的連結，然後對其進行編輯或移除。
 +
-** link:../ilm/working-with-ilm-rules-and-ilm-policies.html#edit-ilm-policy["${post_edited_translations.segment}"] 因此它不會指向要退役的站台。
-** link:../ilm/working-with-ilm-rules-and-ilm-policies.html#remove-ilm-policy["${post_edited_translations.segment}"]。
+** link:../ilm/working-with-ilm-rules-and-ilm-policies.html#edit-ilm-policy["編輯原則"] 因此它不會指向要退役的站台。
+** link:../ilm/working-with-ilm-rules-and-ilm-policies.html#remove-ilm-policy["移除原則"]。
 
 
 . 當您完成對 ILM 規則和原則的變更時，步驟 3 （ 審查 ILM 原則 ） 中不應再列出任何原則。選取 *下一步*。

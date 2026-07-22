@@ -15,7 +15,7 @@ summary: 您可以透過匯入聯合群組或建立本機群組來管理 S3 使�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
-* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 您屬於一個擁有 link:tenant-management-permissions.html["根目錄存取權限"] 的使用者群組。
 * 如果您計劃匯入聯合群組，您必須已 link:using-identity-federation.html["已設定身分識別聯盟"]，且該聯合群組已存在於已設定的識別來源中。
 * 如果您的租戶帳戶具有「使用網格聯合連線」權限，您已查看link:grid-federation-account-clone.html["Clone 租戶群組和使用者"]的工作流程和注意事項，並且您已登入租戶的來源網格。
 
@@ -33,13 +33,13 @@ summary: 您可以透過匯入聯合群組或建立本機群組來管理 S3 使�
 +
 image:grid-federation-tenant-group-banner.png["租戶來源網格的「群組」頁面上的藍色橫幅映像"]
 
-. ${post_edited_translations.segment}
+. 選擇 *Create group*。
 
 
 
 
 [[choose-a-group-type]]
-== ${post_edited_translations.segment}
+== 選擇群組類型
 
 您可以建立本機群組或匯入聯合群組。
 
@@ -64,7 +64,7 @@ NOTE: 如果您的租戶帳戶具有「使用 grid federation 連線」權限，
 
 
 [[manage-group-permissions]]
-== ${post_edited_translations.segment}
+== 管理群組權限
 
 群組權限控制使用者在租戶管理員和租戶管理 API 中可以執行哪些工作。
 
@@ -155,8 +155,8 @@ NOTE: 如果使用者屬於多個群組，且其中任何一個群組設定為�
 NOTE: 如果您的租戶帳戶擁有「使用網格聯合連線」權限，則在來源網格上建立本機群組時選擇的任何使用者都不會包含在複製到目的地網格的群組中。因此，在建立群組時請勿選擇使用者。而應在建立使用者時選擇群組。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. （可選）為該群組選擇一個或多個本機使用者。
+. 選擇 *Create group* 和 *Finish*。
 +
 您建立的群組會出現在群組清單中。
 

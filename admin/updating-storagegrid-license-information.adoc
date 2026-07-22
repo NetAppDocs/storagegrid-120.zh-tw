@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: storagegrid license, update license, add storage capacity 
 summary: 如果您的授權條款發生變更，您必須更新 StorageGRID 系統的授權資訊。例如，如果您為網格購買了額外儲存容量，則必須更新授權資訊。 
 ---
-= ${post_edited_translations.segment}
+= 更新 StorageGRID 授權資訊
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -20,8 +20,8 @@ summary: 如果您的授權條款發生變更，您必須更新 StorageGRID 系�
 
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選取 *Maintenance* > *System* > *License*。
+. 在「更新授權」部分，選擇 *Browse*。
 . 找到並選取新的授權檔案(`.txt`）。
 +
 新的授權檔案已驗證並顯示。

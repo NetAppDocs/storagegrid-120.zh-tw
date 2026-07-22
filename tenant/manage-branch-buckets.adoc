@@ -36,7 +36,7 @@ CAUTION: 設定並建立分支儲存桶後，就無法變更其組態。
 == 建立分支儲存桶
 
 .步驟
-. ${post_edited_translations.segment}
+. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 . 選擇要從中建立分支的儲存桶（「基礎儲存桶」）。
 . 在儲存桶詳細資料頁面上，選擇 *Branches* > *Create branch bucket*。
 +
@@ -47,7 +47,7 @@ CAUTION: 設定並建立分支儲存桶後，就無法變更其組態。
 
 
 [[enter-details]]
-== ${post_edited_translations.segment}
+== 請輸入詳細資料
 
 .步驟
 . 請輸入分支儲存桶的詳細資訊。
@@ -142,7 +142,7 @@ NOTE: 您的網格系統管理員必須授予您權限以 link:../tenant/using-s
 治理
  a| 
 *** 擁有 `s3:BypassGovernanceRetention`權限的使用者可以使用 `x-amz-bypass-governance-retention: true`請求標頭繞過保留設定。
-*** ${post_edited_translations.segment}
+*** 這些使用者可以在物件版本的保留截止日期到期之前將其刪除。
 *** 這些使用者可以增加、減少或移除物件的保留截止日期。
 
 
@@ -152,8 +152,8 @@ NOTE: 您的網格系統管理員必須授予您權限以 link:../tenant/using-s
 合規性
  a| 
 *** 物件只有在達到其保留期限後才能刪除。
-*** ${post_edited_translations.segment}
-*** ${post_edited_translations.segment}
+*** 物件的保留截止日期可以增加，但不能減少。
+*** 在達到保留截止日期之前，無法移除該物件的保留截止日期。
 
 
 *注意*：您的網格系統管理員必須允許您使用法規遵循模式。

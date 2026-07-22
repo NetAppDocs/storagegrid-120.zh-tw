@@ -25,7 +25,7 @@ summary: 您可能需要疑難排解與網格聯合連線、帳戶 Clone 和跨�
 
 
 [[grid-federation-connection-failure-alert]]
-=== ${post_edited_translations.segment}
+=== 網格聯盟連線故障警示
 
 .問題
 已觸發「網格聯盟連線故障」警報。
@@ -46,7 +46,7 @@ summary: 您可能需要疑難排解與網格聯合連線、帳戶 Clone 和跨�
 === 網格聯盟憑證到期警示
 
 .問題
-${post_edited_translations.segment}
+已觸發「網格聯盟憑證過期」警報。
 
 .詳細資料
 此警報表示一個或多個網格聯盟憑證即將過期。
@@ -60,7 +60,7 @@ ${post_edited_translations.segment}
 === 編輯網格同盟連線時發生錯誤
 
 .問題
-${post_edited_translations.segment}
+編輯網格聯盟連線時，選取 *Save and test* 後，您會看到以下警告訊息：「Failed to create a candidate configuration file on one or more nodes.」
 
 .詳細資料
 編輯網格聯合連線時，StorageGRID 會嘗試在第一個網格的所有管理節點上儲存「候選組態」檔案。如果無法將此檔案儲存到所有管理節點（例如，由於某個管理節點離線），則會顯示警告訊息。
@@ -98,7 +98,7 @@ ${post_edited_translations.segment}
 === 建立租戶時未使用 Clone
 
 .問題
-${post_edited_translations.segment}
+使用 *使用網格聯盟連線* 權限建立新租戶後，您會看到訊息「租戶已建立，但未 Clone」。
 
 .詳細資料
 如果連線狀態的更新延遲，則可能會出現此問題，這可能會導致不正常的連線被列為 *Connected*。
@@ -106,8 +106,8 @@ ${post_edited_translations.segment}
 .建議採取的措施
 . 查看錯誤訊息中列出的原因，並解決可能導致連線失敗的任何連網或其他問題。參見<<grid-federation-errors,網格聯盟連接警報和錯誤>>。
 . 按照說明測試 link:grid-federation-manage-connection.html["管理網格同盟連線"] 中的網格聯盟連線，以確認問題已解決。
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 從租戶的來源網格中選取 *Tenants*。
+. 找到 Clone 失敗的租戶帳戶。
 . 選擇租戶名稱以顯示詳細資訊頁面。
 . 選擇 *Retry account clone*。
 +
@@ -128,7 +128,7 @@ image:grid-federation-retry-account-clone.png["快照顯示錯誤訊息和「重
 .問題
 當 link:../monitor/grid-federation-monitor-connections.html["檢視網格聯盟連線"] 時（或當 link:grid-federation-manage-tenants.html["管理獲準租戶"] 為某個連線時），您會在連線詳細資料頁面的「上次錯誤」欄中發現錯誤。例如：
 
-image:grid-federation-last-error.png["${post_edited_translations.segment}"]
+image:grid-federation-last-error.png["螢幕截圖顯示網格聯盟連線的「上次錯誤」欄中的訊息"]
 
 .詳細資料
 對於每個網格聯合連接，「上次錯誤」欄顯示租戶資料複寫到其他網格時發生的最新錯誤（如有）。此欄僅顯示上次跨網格複寫錯誤；之前可能發生的錯誤不會顯示。此欄中的錯誤可能由以下原因之一引起：
@@ -181,11 +181,11 @@ TIP: 清除錯誤後，如果將物件擷取到另一個也存在錯誤的儲存
 . 要深入瞭解此故障，請參閱link:../monitor/grid-federation-monitor-connections.html["監控網格聯盟連線"]中審查跨網格複寫計量的說明。
 . 對於每個受影響的租戶帳戶：
 +
-.. 請參閱 link:../monitor/monitoring-tenant-activity.html["${post_edited_translations.segment}"] 中的說明，以確認租戶未超過目的地網格上用於跨網格複寫的配額。
-.. ${post_edited_translations.segment}
+.. 請參閱 link:../monitor/monitoring-tenant-activity.html["監控租戶活動"] 中的說明，以確認租戶未超過目的地網格上用於跨網格複寫的配額。
+.. 根據需要，增加租戶在目的地網格上的配額，以允許儲存新物件。
 
 
-. ${post_edited_translations.segment}
+. 對於每個受影響的租戶，在兩個網格上登入 Tenant Manager，以便比較儲存桶清單。
 . 對於每個啟用了跨網格複寫的儲存桶，請確認以下內容：
 +
 ** 在另一個網格中，同一租戶有一個對應的儲存桶（必須使用確切的名稱）。
@@ -224,7 +224,7 @@ NOTE: 警報解決後，可能需要一天才能清除。
 此警示表示跨網格複寫要求因資源無法使用而處於擱置狀態。例如，可能發生網路錯誤。
 
 .建議採取的措施
-. ${post_edited_translations.segment}
+. 監控警示，查看問題是否會自行解決。
 . 如果問題仍然存在，請確定任一網格是否針對相同連線發出 *Grid federation connection failure* 警報，或針對某個節點發出 *Unable to communicate with node* 警報。解決這些警報後，此警報可能也會解決。
 . 要深入瞭解此故障，請參閱link:../monitor/grid-federation-monitor-connections.html["監控網格聯盟連線"]中審查跨網格複寫計量的說明。
 . 如果無法解決警報問題，請聯絡技術支援。

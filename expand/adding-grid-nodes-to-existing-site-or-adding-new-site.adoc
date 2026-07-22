@@ -14,7 +14,7 @@ summary: 請按照此程序將網格節點新增至現有站台，或新增新�
 請按照此程序將網格節點新增至現有站台，或新增新站台。您一次只能執行一種擴充類型。
 
 .開始之前
-* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:../admin/admin-group-permissions.html["Root 存取或維護權限"]。
 * 網格中所有現有節點在所有站台均已啟動並執行。
 * 之前的所有擴建、升級、退役或恢復程序均已完成。
 +

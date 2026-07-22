@@ -34,7 +34,7 @@ TIP: StorageGRID 系統管理員必須使用 Grid Manager 或 Grid Management AP
 [[how-platform-services-are-configured]]
 == 平台服務的設定方式
 
-平台服務透過您使用 link:configuring-platform-services-endpoints.html["${post_edited_translations.segment}"] 或 link:understanding-tenant-management-api.html["租戶管理 API"] 設定的外部端點進行通訊。每個端點代表一個外部目的地，例如 StorageGRID S3 儲存桶、Amazon Web Services 儲存桶、Amazon SNS 主題、webhook 端點或託管在本機、AWS 或其他位置的 Elasticsearch 叢集。
+平台服務透過您使用 link:configuring-platform-services-endpoints.html["租戶管理員"] 或 link:understanding-tenant-management-api.html["租戶管理 API"] 設定的外部端點進行通訊。每個端點代表一個外部目的地，例如 StorageGRID S3 儲存桶、Amazon Web Services 儲存桶、Amazon SNS 主題、webhook 端點或託管在本機、AWS 或其他位置的 Elasticsearch 叢集。
 
 建立外部端點後，您可以透過向儲存桶新增 XML 組態來為該儲存桶啟用平台服務。XML 組態用於識別儲存桶應操作的物件、儲存桶應執行的行動，以及儲存桶應用於該服務的端點。
 
@@ -162,7 +162,7 @@ Kafka 端點的驗證使用下列幾種驗證類型。這些類型與其他端�
 
 
  a| 
-${post_edited_translations.segment}
+複寫狀態
  a| 
 StorageGRID 不支援 `x-amz-replication-status`標頭。
 

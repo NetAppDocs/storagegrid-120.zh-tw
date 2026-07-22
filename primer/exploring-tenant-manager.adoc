@@ -11,7 +11,7 @@ summary: 租戶管理器是以瀏覽器為基礎的圖形介面，租戶使用�
 
 
 [role="lead"]
-link:../tenant/index.html["${post_edited_translations.segment}"] 是租戶使用者透過瀏覽器存取的圖形介面，用於設定、管理和監控其儲存設備帳戶。
+link:../tenant/index.html["租戶管理員"] 是租戶使用者透過瀏覽器存取的圖形介面，用於設定、管理和監控其儲存設備帳戶。
 
 
 NOTE: 租戶管理員會隨著每次版本更新，可能與此頁面上的範例螢幕截圖不符。
@@ -72,15 +72,15 @@ NOTE: 其他使用者的存取金鑰管理在「存取管理」選單中進行�
 * 啟用和停用上次存取時間更新
 * 啟用或暫停物件版本控制
 * 更新 S3 物件鎖定預設保留
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 設定跨來源資源共用 (CORS)
+* 刪除儲存貯體中的所有物件
+* 刪除空儲存桶
 * 使用 link:../tenant/use-s3-console.html["S3 主控台"] 管理儲存桶物件
 
 
-${post_edited_translations.segment}
+如果網格系統管理員已為租戶帳戶啟用平台服務，則具有相應權限的 S3 租戶使用者也可以執行下列任務：
 
-* ${post_edited_translations.segment}
+* 設定 S3 事件通知，此通知可傳送至支援 Amazon Simple Notification Service 的目的地服務。
 * 設定 CloudMirror 複寫，讓租戶能夠自動將物件複寫到外部 S3 貯存格。
 * 設定搜尋整合，當物件建立、刪除或其中繼資料或標籤更新時，將物件中繼資料傳送至目的地搜尋索引。
 
@@ -88,7 +88,7 @@ ${post_edited_translations.segment}
 
 
 [[platform-services-endpoints]]
-=== ${post_edited_translations.segment}
+=== 平台服務端點
 
 如果網格系統管理員已為租戶帳戶啟用平台服務的使用，則具有「管理端點」權限的 S3 租戶使用者可以為每個平台服務設定目的地端點。
 

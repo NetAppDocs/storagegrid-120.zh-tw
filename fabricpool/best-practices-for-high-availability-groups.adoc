@@ -22,12 +22,12 @@ summary: 在將 StorageGRID 附加為 FabricPool 雲端分層之前，請先了�
 
 每個 HA 群組都提供對相關節點上共享服務的高可用度存取。例如，僅由 Gateway 節點上的介面組成，或同時由 Admin 節點和 Gateway 節點上的介面組成的 HA 群組，可提供對共享 Load Balancer 服務的高可用度存取。
 
-若要深入瞭解高可用度群組，請參閱 link:../admin/managing-high-availability-groups.html["${post_edited_translations.segment}"]。
+若要深入瞭解高可用度群組，請參閱 link:../admin/managing-high-availability-groups.html["管理高可用度 （HA） 群組"]。
 
 
 
 [[using-ha-groups]]
-== ${post_edited_translations.segment}
+== 使用 HA 群組
 
 為 FabricPool 建立 StorageGRID HA 群組的最佳實務做法取決於工作負載。
 

@@ -22,7 +22,7 @@ image:11_gmi_installer_summary_page.gif["Grid Manager 安裝程式摘要頁面"]
 . 點選 *Install*。
 +
 
-NOTE: 如果某個節點設定為使用用戶端網路，則按一下 *Install* 時，該節點的預設閘道將從 Grid Network 切換到 Client Network。如果連線中斷，您必須確保透過可存取的子網路存取主要管理節點。如需詳細資訊、請參閱 link:../network/index.html["${post_edited_translations.segment}"]。
+NOTE: 如果某個節點設定為使用用戶端網路，則按一下 *Install* 時，該節點的預設閘道將從 Grid Network 切換到 Client Network。如果連線中斷，您必須確保透過可存取的子網路存取主要管理節點。如需詳細資訊、請參閱 link:../network/index.html["網路連線準則"]。
 
 . 按一下 *Download Recovery Package*。
 +

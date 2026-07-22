@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: storagegrid, installation files, download 
 summary: 在恢復 StorageGRID 節點之前，您必須下載軟體並擷取檔案。 
 ---
-= ${post_edited_translations.segment}
+= 下載並擷取 StorageGRID 安裝檔案
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -23,7 +23,7 @@ https://mysupport.netapp.com/site/products/all/details/storagegrid/downloads-tab
 
 . 選擇目前在網格上執行的 StorageGRID 版本。
 +
-${post_edited_translations.segment}
+StorageGRID 軟體版本格式為：11.x.y。
 
 . 使用您 NetApp 帳戶的用戶名和密碼登入。
 . 閱讀終端使用者授權合約，選取核取方塊，然後選取 *Accept & Continue*。
@@ -37,7 +37,7 @@ ${post_edited_translations.segment}
 +
 [cols="1a,2a"]
 |===
-| 平台 | ${post_edited_translations.segment} 
+| 平台 | 安裝歸檔 
 
 
  a| 
@@ -47,7 +47,7 @@ RHEL
 
 
  a| 
-${post_edited_translations.segment}
+Ubuntu、Debian 或應用裝置
 | `StorageGRID-Webscale-_version_-DEB-_uniqueID_.zip` 
 `StorageGRID-Webscale-_version_-DEB-_uniqueID_.tgz` 
 
@@ -58,11 +58,11 @@ VMware
 `StorageGRID-Webscale-_version_-VMware-_uniqueID_.tgz` 
 |===
 . 下載並擷取歸檔檔案。
-. ${post_edited_translations.segment}
+. 根據您的平台以及您需要恢復的網格節點，請按照適用於您平台的步驟選擇所需的檔案。
 +
 每個平台步驟中列出的路徑，均相對於歸檔檔案所安裝的頂層目錄。
 
-. 如果您要恢復 link:../swnodes/index.html["${post_edited_translations.segment}"]，請選擇適當的檔案：
+. 如果您要恢復 link:../swnodes/index.html["軟體型節點"]，請選擇適當的檔案：
 +
 [role="tabbed-block"]
 ====
@@ -70,11 +70,11 @@ VMware
 --
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./rpms/README  a| 
+描述 StorageGRID 下載檔案中所包含的所有檔案的文字檔案。
 
 
 
@@ -83,8 +83,8 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./rpms/StorageGRID-Webscale-Images-_version_-SHA.rpm  a| 
+用於在 RHEL 主機上安裝 StorageGRID 節點映像的 RPM 套件。
 
 
 
@@ -93,11 +93,11 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment} | 說明 
+| 部署指令碼工具 | 說明 
 
 
 | ./rpms/configure-storagegrid.py  a| 
-${post_edited_translations.segment}
+用於自動化 StorageGRID 系統組態的 Python 指令碼。
 
 
 
@@ -116,56 +116,56 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./rpms/configure-storagegrid.blank.json  a| 
 一個用於搭配  `configure-storagegrid.py` 指令碼使用的空白組態檔案。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./rpms/extras/ansible  a| 
 用於為 StorageGRID Container 部署設定 RHEL 主機的範例 Ansible 角色與 Playbook。您可以根據需要自訂角色或 Playbook。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./rpms/storagegrid-ssoauth-azure.py  a| 
 這是一個範例 Python 指令碼，當使用 Active Directory 或 Ping Federate 啟用單一登入 （SSO） 時，您可以使用該指令碼登入 Grid Management API。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./rpms/storagegrid-ssoauth-azure.js  a| 
 由隨附的  `storagegrid-ssoauth-azure.py` Python 指令碼所呼叫的輔助指令碼，用於與 Azure 進行 SSO 互動。
 
 
 
 | ./rpms/extras/api-schemas  a| 
-${post_edited_translations.segment}
+StorageGRID 的 API 架構。
 
-${post_edited_translations.segment}
+*注意*：在執行升級之前，如果您沒有用於升級相容性測試的非生產性 StorageGRID 環境，可以使用這些架構來確認您編寫的任何使用 StorageGRID 管理 API 的程式碼是否與新的 StorageGRID 版本相容。
 
 |===
 --
-.${post_edited_translations.segment}
+.Ubuntu 或 Debian
 --
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/README  a| 
+描述 StorageGRID 下載檔案中所包含的所有檔案的文字檔案。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/NLF000000.txt  a| 
 您可用於測試和概念驗證部署的非生產 NetApp 授權檔案。
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/storagegrid-webscale-images-version-SHA.deb  a| 
+用於在 Ubuntu 或 Debian 主機上安裝 StorageGRID 節點映像的 DEB 軟體套件。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/storagegrid-webscale-images-version-SHA.deb.md5  a| 
 檔案的 MD5 Checksum `/debs/storagegrid-webscale-images-version-SHA.deb`。
 
 
@@ -175,11 +175,11 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment} | 說明 
+| 部署指令碼工具 | 說明 
 
 
 | ./debs/configure-storagegrid.py  a| 
-${post_edited_translations.segment}
+用於自動化 StorageGRID 系統組態的 Python 指令碼。
 
 
 
@@ -219,9 +219,9 @@ ${post_edited_translations.segment}
 
 
 | ./debs/extras/api-schemas  a| 
-${post_edited_translations.segment}
+StorageGRID 的 API 架構。
 
-${post_edited_translations.segment}
+*注意*：在執行升級之前，如果您沒有用於升級相容性測試的非生產性 StorageGRID 環境，可以使用這些架構來確認您編寫的任何使用 StorageGRID 管理 API 的程式碼是否與新的 StorageGRID 版本相容。
 
 |===
 --
@@ -229,11 +229,11 @@ ${post_edited_translations.segment}
 --
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
 | ./vsphere/README  a| 
-${post_edited_translations.segment}
+描述 StorageGRID 下載檔案中所包含的所有檔案的文字檔案。
 
 
 
@@ -267,7 +267,7 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment} | 說明 
+| 部署指令碼工具 | 說明 
 
 
 | ./vsphere/deploy-vsphere-ovftool.sh  a| 
@@ -281,7 +281,7 @@ ${post_edited_translations.segment}
 
 
 | ./vsphere/configure-storagegrid.py  a| 
-${post_edited_translations.segment}
+用於自動化 StorageGRID 系統組態的 Python 指令碼。
 
 
 
@@ -316,9 +316,9 @@ ${post_edited_translations.segment}
 
 
 | ./vsphere/extras/api-schemas  a| 
-${post_edited_translations.segment}
+StorageGRID 的 API 架構。
 
-${post_edited_translations.segment}
+*注意*：在執行升級之前，如果您沒有用於升級相容性測試的非生產性 StorageGRID 環境，可以使用這些架構來確認您編寫的任何使用 StorageGRID 管理 API 的程式碼是否與新的 StorageGRID 版本相容。
 
 |===
 --
@@ -333,15 +333,15 @@ NOTE: 對於應用裝置安裝，僅當您需要避免網路流量時才需要�
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/storagegrid-webscale-images-version-SHA.deb  a| 
+用於在您的應用裝置上安裝 StorageGRID 節點映像的 DEB 套件。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/storagegrid-webscale-images-version-SHA.deb.md5  a| 
 檔案的 MD5 Checksum `/debs/storagegridwebscale-
 images-version-SHA.deb`。
 

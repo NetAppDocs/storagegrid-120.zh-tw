@@ -24,4 +24,4 @@ image:grid_client_networks.png["網格用戶端網路"]
 image:grid_client_networks_ips.png["網格用戶端網路 IP"]
 
 .相關資訊
-link:../maintain/changing-nodes-network-configuration.html["${post_edited_translations.segment}"]
+link:../maintain/changing-nodes-network-configuration.html["更改節點網路組態"]

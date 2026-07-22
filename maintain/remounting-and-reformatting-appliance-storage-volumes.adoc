@@ -14,7 +14,7 @@ summary: 您必須手動執行兩個指令碼，以重新掛載保留的儲存�
 您必須手動執行兩個指令碼，以重新掛載保留的儲存設備 Volume 並重新格式化任何故障的儲存設備 Volume。第一個指令碼會重新掛載已正確格式化為 StorageGRID 儲存設備 Volume 的 Volume。第二個指令碼會重新格式化任何未掛載的 Volume、視需要重新建置 Cassandra 資料庫，並啟動服務。
 
 .開始之前
-* ${post_edited_translations.segment}
+* 對於所有已知需要更換的故障儲存 Volume，您已完成硬體更換。
 +
 執行  `sn-remount-volumes` 指令碼可能有助於您識別其他故障的儲存設備 Volume。
 
@@ -26,13 +26,13 @@ summary: 您必須手動執行兩個指令碼，以重新掛載保留的儲存�
 CAUTION: 如果有一個以上的儲存節點離線，請聯絡技術支援。請勿執行 `sn-recovery-postinstall.sh`指令碼。
 
 .關於此任務
-${post_edited_translations.segment}
+要完成此流程，您需要執行以下高階任務：
 
-* ${post_edited_translations.segment}
+* 登入已恢復的儲存節點。
 * 執行  `sn-remount-volumes` 指令碼以重新掛載格式化正確的儲存 Volume。此指令碼執行時，會執行以下操作：
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 掛載和取下每個儲存設備 Volume，以重播 XFS 日誌。
+** 執行 XFS 檔案一致性檢查。
 ** 如果檔案系統一致，則確定儲存 Volume 是否為格式正確的 StorageGRID 儲存 Volume。
 ** 如果儲存設備 Volume 格式正確，則重新掛載儲存設備 Volume。Volume 上的所有現有資料均保持不變。
 
@@ -67,17 +67,17 @@ NOTE: 如果將儲存 Volume 重新格式化，該 Volume 上的任何資料都�
 +
 當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
 
-. ${post_edited_translations.segment}
+. 執行第一個指令碼以重新掛載任何格式正確的儲存設備 Volume。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 如果所有儲存設備 Volume 都是新的且需要格式化，或者所有儲存設備 Volume 都已損壞，則可以跳過此步驟並執行第二個指令碼來重新格式化所有未掛載的儲存設備 Volume。
 
 +
 .. 執行指令碼： `sn-remount-volumes`
 +
 此指令碼在包含資料的儲存設備 Volume 上執行可能需要數小時。
 
-.. ${post_edited_translations.segment}
+.. 執行指令碼時，審查輸出結果並回答任何提示。
 +
 
 NOTE: 視需要，您可以使用  `tail -f` 命令來監控指令碼的日誌檔內容 (`/var/local/log/sn-remount-volumes.log`）。此日誌檔包含比命令列輸出更詳細的資訊。
@@ -132,7 +132,7 @@ Found LDR node id 12000078, volume number 9 in the volID file
 Error: This volume does not belong to this node. Fix the attached volume and re-run this script.
 ----
 +
-${post_edited_translations.segment}
+在範例輸出中，一個儲存 Volume 已成功重新掛載，三個儲存 Volume 出現錯誤。
 
 +
 *** `/dev/sdb` 通過了 XFS 檔案系統一致性檢查，且具有有效的 Volume 結構，因此已成功重新掛載。由指令碼重新掛載的裝置上的資料會予以保留。
@@ -157,7 +157,7 @@ CAUTION: 如果儲存設備 Volume 未能通過 XFS 檔案系統一致性檢查�
 .. 檢查以確保結果中包含您預期之所有 Volume 的項目。如果有任何 Volume 未列出，請重新執行指令碼。
 .. 審查所有已裝載裝置的訊息。請確保沒有任何錯誤指出儲存設備 Volume 不屬於此儲存設備節點。
 +
-${post_edited_translations.segment}
+在本例中，/dev/sde 的輸出包含下列錯誤訊息：
 
 +
 [listing]
@@ -171,7 +171,7 @@ CAUTION: 如果儲存 Volume 被回報為屬於另一個 Storage Node ，請聯�
 .. 如果任何儲存設備無法裝載，請記下設備名稱，並修理或更換該設備。
 +
 
-NOTE: ${post_edited_translations.segment}
+NOTE: 您必須修理或更換任何無法掛載的儲存設備。
 
 +
 您將使用裝置名稱來尋找 Volume ID，這是執行 `repair-data`指令碼將物件資料還原至 Volume 時所需的輸入（下一個程序）。
@@ -192,13 +192,13 @@ CAUTION: 如果您認為故障儲存設備 Volume 上剩餘的資料無法從網
 此指令碼會重新格式化任何無法裝載或格式不正確的儲存 Volume；如有需要，在節點上重新建置 Cassandra 資料庫；並啟動儲存節點上的服務。
 
 +
-${post_edited_translations.segment}
+請注意以下事項：
 
 +
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
-** ${post_edited_translations.segment}
+** 指令碼可能需要幾個小時才能執行完畢。
+** 通常情況下，指令碼執行時，您應該讓 SSH 工作階段保持不變。
+** SSH 工作階段處於作用中時，請勿按 *Ctrl+C* 鍵。
+** 如果發生網路中斷並終止 SSH 工作階段，指令碼將在背景執行，但您可以從「恢復」頁面檢視進度。
 ** 如果 Storage 節點使用 RSM 服務，當節點服務重新啟動時，指令碼可能會出現停滯 5 分鐘的情況。每當 RSM 服務首次開機時，預期都會出現此 5 分鐘的延遲。
 +
 
@@ -215,7 +215,7 @@ NOTE: 某些 StorageGRID 恢復程序使用 Reaper 來處理 Cassandra 的修復
 恢復頁面上的進度列和階段欄提供  `sn-recovery-postinstall.sh` 指令碼的高階狀態。
 
 +
-image:recovering_cassandra.png["${post_edited_translations.segment}"]
+image:recovering_cassandra.png["快照顯示網格管理介面中的恢復進度"]
 
 . 在  `sn-recovery-postinstall.sh` 指令碼啟動節點上的服務之後，您可以將物件資料還原至該指令碼所格式化的任何儲存設備 Volume。
 +

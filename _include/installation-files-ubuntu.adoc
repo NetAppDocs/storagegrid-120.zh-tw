@@ -4,25 +4,25 @@
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/README  a| 
+描述 StorageGRID 下載檔案中所包含的所有檔案的文字檔案。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/NLF000000.txt  a| 
 您可用於測試和概念驗證部署的非生產 NetApp 授權檔案。
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/storagegrid-webscale-images-version-SHA.deb  a| 
+用於在 Ubuntu 或 Debian 主機上安裝 StorageGRID 節點映像的 DEB 軟體套件。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/storagegrid-webscale-images-version-SHA.deb.md5  a| 
 檔案的 MD5 Checksum `/debs/storagegrid-webscale-images-version-SHA.deb`。
 
 
@@ -32,11 +32,11 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment} | 說明 
+| 部署指令碼工具 | 說明 
 
 
 | ./debs/configure-storagegrid.py  a| 
-${post_edited_translations.segment}
+用於自動化 StorageGRID 系統組態的 Python 指令碼。
 
 
 
@@ -76,8 +76,8 @@ ${post_edited_translations.segment}
 
 
 | ./debs/extras/api-schemas  a| 
-${post_edited_translations.segment}
+StorageGRID 的 API 架構。
 
-${post_edited_translations.segment}
+*注意*：在執行升級之前，如果您沒有用於升級相容性測試的非生產性 StorageGRID 環境，可以使用這些架構來確認您編寫的任何使用 StorageGRID 管理 API 的程式碼是否與新的 StorageGRID 版本相容。
 
 |===

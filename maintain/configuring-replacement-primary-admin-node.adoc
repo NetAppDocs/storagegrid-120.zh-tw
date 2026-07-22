@@ -14,8 +14,8 @@ summary: 替換節點必須設定為 StorageGRID 系統的主要管理節點。
 替換節點必須設定為 StorageGRID 系統的主要管理節點。
 
 .開始之前
-* ${post_edited_translations.segment}
-* 對於裝載在服務應用裝置上的主要 Admin Node ，您已更換該應用裝置並已安裝軟體。請參閱  https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["${post_edited_translations.segment}"^]。
+* 對於託管在虛擬機器上的主管理節點，虛擬機器已部署、啟動並初始化。
+* 對於裝載在服務應用裝置上的主要 Admin Node ，您已更換該應用裝置並已安裝軟體。請參閱  https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["您的應用裝置安裝說明"^]。
 * 您擁有恢復套件檔案的最新備份 (`sgws-recovery-package-_id-revision_.zip`）。
 * 您擁有佈建密碼。
 
@@ -24,11 +24,11 @@ summary: 替換節點必須設定為 StorageGRID 系統的主要管理節點。
 . 開啟您的網頁瀏覽器並導覽至 `\https://primary_admin_node_ip`。
 . 視需要管理臨時安裝程式密碼：
 +
-** ${post_edited_translations.segment}
+** 如果已使用上述其中一種方法設定密碼，請輸入密碼以繼續。
 +
 *** 使用者先前在存取安裝程式時設定了密碼。
 *** 對於裸機系統，密碼會自動從節點組態檔案匯入，位於 `/etc/storagegrid/nodes/_<node_name>_.conf`
-*** ${post_edited_translations.segment}
+*** 對於虛擬機器，SSH/主控台密碼會自動從 OVF 屬性匯入。
 
 
 ** 如果尚未設定密碼，可選擇設定密碼來保護 StorageGRID 安裝程式。
@@ -36,16 +36,16 @@ summary: 替換節點必須設定為 StorageGRID 系統的主要管理節點。
 
 . 點選 *Recover a failed primary Admin Node*。
 +
-image:install_or_recover_primary_admin_node.png["${post_edited_translations.segment}"]
+image:install_or_recover_primary_admin_node.png["安裝或恢復主管理節點"]
 
-. ${post_edited_translations.segment}
+. 上傳恢復套件的最新備份：
 +
 .. 點選 *Browse*。
 .. 找到 StorageGRID 系統的最新恢復套件檔案，然後按一下 *Open*。
 
 
 . 請輸入佈建密碼。
-. ${post_edited_translations.segment}
+. 點選 *Start Recovery*。
 +
 恢復程序隨即開始。當所需的服務啟動時，Grid Manager 可能會暫時無法使用幾分鐘。當恢復完成時，系統會顯示登入頁面。
 
@@ -57,4 +57,4 @@ NOTE: 若要設定信賴方信任，請參閱link:../admin/configure-sso.html["�
 
 
 
-CAUTION: 恢復主管理節點後，link:assess-hotfix-requirement-during-primary-admin-node-recovery.html["${post_edited_translations.segment}"]。
+CAUTION: 恢復主管理節點後，link:assess-hotfix-requirement-during-primary-admin-node-recovery.html["確定是否需要套用 Hotfix"]。

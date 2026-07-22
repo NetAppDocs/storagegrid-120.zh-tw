@@ -21,8 +21,8 @@ NOTE: 此清單僅包含公用 API 中可用的操作。
 * *alert-receivers*：對警報通知接收器（電子郵件）的操作。
 * *alert-rules*：對警報規則的操作。
 * *alert-silences*：對警報靜默的操作。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* *alerts*：對警報進行操作。
+* *稽核*：列出並更新稽核組態的操作。
 * *auth*：執行使用者工作階段驗證的操作。
 +
 Grid Management API 支援 Bearer Token 驗證機制。若要登入，您必須在驗證要求的 JSON 本文中提供使用者名稱與密碼（也就是  `POST /api/v3/authorize`）。如果使用者成功通過驗證，系統將會傳回安全性權杖。必須在後續 API 要求的標頭中提供此權杖（"Authorization: Bearer _token_"）。此權杖將在 16 小時後逾期。
@@ -32,7 +32,7 @@ Grid Management API 支援 Bearer Token 驗證機制。若要登入，您必須�
 NOTE: 如果 StorageGRID 系統啟用了單一登入，則必須執行不同的驗證步驟。請參閱「如果啟用了單一登入，如何對 API 進行驗證」。
 
 +
-${post_edited_translations.segment}
+有關提高身分驗證安全性的資訊，請參閱「防止跨站請求偽造」。
 
 * *client-certificates*：設定用戶端憑證的操作，以便使用外部監控工具安全地存取 StorageGRID。
 * *config*：與產品版本及網格管理 API 版本相關的作業。您可以列出產品版本以及該版本支援的網格管理 API 主要版本，也可以停用已過時的 API 版本。
@@ -41,35 +41,35 @@ ${post_edited_translations.segment}
 * *drive-details*：針對特定儲存應用裝置型號的磁碟機操作。
 * *endpoint-domain-names*：列出並變更 S3 端點網域名稱的操作。
 * *erasure-coding*：對糾刪碼設定檔進行操作。
-* ${post_edited_translations.segment}
+* *擴充*：擴充操作（程序層級）。
 * *expansion-nodes*：擴展操作（節點層級）。
 * *expansion-sites*：擴充作業（站台層級）。
 * *grid-networks*: 列出並變更網格網路清單的操作。
 * *grid-passwords*：網格密碼管理操作。
-* ${post_edited_translations.segment}
+* *群組*：管理本機網格管理員群組的操作，以及從外部 LDAP 伺服器擷取聯盟網格管理員群組的操作。
 * *identity-source*：設定外部身分來源並手動同步聯合群組和使用者資訊的操作。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* *ilm*：資訊生命週期管理（ILM）的操作。
+* *in-progress-procedures*：擷取目前正在進行的維護程序。
+* *license*：擷取並更新 StorageGRID 授權的操作。
+* *logs*：用於收集和下載日誌檔案的操作。
 * *metrics*：針對 StorageGRID 計量執行的作業，包括單一時間點的即時計量查詢，以及一段時間範圍內的範圍計量查詢。Grid Management API 使用 Prometheus 系統監控工具作為後端資料來源。如需建構 Prometheus 查詢的相關資訊，請參閱 Prometheus 網站。
 +
 
 NOTE: 名稱中包含 ``_private_`` 的計量僅供內部使用。這些計量可能會在不同的 StorageGRID 版本之間變更，恕不另行通知。
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* *node-details*：對節點詳細資料進行操作。
+* *node-health*：對節點健全狀況狀態進行操作。
+* *node-storage-state*：對節點儲存設備狀態進行操作。
 * *ntp-servers*：列出或更新外部網路時間協定 (NTP) 伺服器的作業。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* *物件*：對物件和物件中繼資料進行操作。
+* *恢復*：恢復程序的操作。
 * *recovery-package*：下載恢復套件的操作。
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* *區域*：檢視和建立區域的操作。
+* *s3-object-lock*：對全域 S3 物件鎖定設定進行操作。
+* *server-certificate*：檢視並更新 Grid Manager 伺服器憑證的操作。
+* *snmp*：對目前 SNMP 組態的操作。
+* *storage-watermarks*：儲存節點浮水印。
+* *traffic-classes*：流量分類原則的操作。
 * *untrusted-client-network*: 對不受信任的用戶端網路組態執行操作。
-* ${post_edited_translations.segment}
+* *使用者*：檢視和管理 Grid Manager 使用者的操作。
 

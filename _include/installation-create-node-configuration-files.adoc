@@ -9,28 +9,28 @@
 
 將每個 StorageGRID 節點的組態檔案放置在節點將執行之主機上的 `/etc/storagegrid/nodes`目錄中。例如、如果您計畫在 HostA 上執行一個管理節點、一個閘道節點和一個儲存節點、則必須在 HostA 上的 `/etc/storagegrid/nodes`中放置三個節點組態檔案。
 
-${post_edited_translations.segment}
+您可以使用文字編輯器（例如 vim 或 nano）直接在每台主機上建立組態檔，或者在其他地方建立後再移至每台主機。
 
 
 
 [[naming-of-node-configuration-files]]
-== ${post_edited_translations.segment}
+== 節點組態檔命名
 
 組態檔案的名稱非常重要。格式為  `node-name.conf`，其中  `node-name` 是您指派給節點的名稱。此名稱會顯示在 StorageGRID 安裝程式中，並用於節點維護作業（例如節點移轉）。
 
-${post_edited_translations.segment}
+節點名稱必須遵循以下規則：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 必須是唯一的
+* 必須以字母開頭
+* 可以包含字元 A 到 Z 和 a 到 z
+* 可以包含數字 0 到 9
 * 可以包含一個或多個連字符（-）
 * 必須不超過 32 個字元，不包括  `.conf` 副檔名
 
 
 任何 `/etc/storagegrid/nodes`中不符合這些命名慣例的檔案，都不會由主機服務進行解析。
 
-${post_edited_translations.segment}
+如果您打算為網格採用多站點拓撲，則典型的節點命名規則可能是：
 
 `site-nodetype-nodenumber.conf`
 
@@ -44,14 +44,14 @@ ${post_edited_translations.segment}
 組態檔案包含鍵值對，每行包含一個鍵和一個值。對於每個鍵值對，請遵循以下規則：
 
 * 金鑰與值必須以等號 (`=`）和選用的空格隔開。
-* ${post_edited_translations.segment}
+* 金鑰中不能包含空格。
 * 這些值可以包含內嵌空格。
-* ${post_edited_translations.segment}
+* 任何開頭或結尾的空白字元都將被忽略。
 
 
 下表定義了所有受支援鍵的值。每個鍵都有以下幾種表示方式之一：
 
-* ${post_edited_translations.segment}
+* *必填*：每個節點或指定節點類型均需填寫
 * *最佳實務*：可選，但建議執行
 * *Optional*：所有節點均可選擇
 
@@ -77,12 +77,12 @@ link:how-grid-nodes-discover-primary-admin-node.html["網格節點如何發現�
 
 *注意*：此值在主要管理節點上將被忽略，且可能被禁止。
  a| 
-${post_edited_translations.segment}
+最佳實務
 
 |===
 
 
-==== ${post_edited_translations.segment}
+==== ADMIN_NETWORK_CONFIG
 
 [cols="4a,2a"]
 |===
@@ -114,7 +114,7 @@ DHCP、STATIC 或 DISABLED
 |===
 
 
-==== ${post_edited_translations.segment}
+==== ADMIN_NETWORK_GATEWAY
 
 [cols="4a,2a"]
 |===
@@ -247,7 +247,7 @@ StorageGRID 節點用於管理網路存取的主機設備名稱。僅支援網�
 
 `ens256`
  a| 
-${post_edited_translations.segment}
+最佳實務
 
 |===
 
@@ -283,7 +283,7 @@ ${post_edited_translations.segment}
 
 有關 Linux 系統下 MAC 位址複製的更多詳細資訊，請參閱link:../swnodes/configuring-host-network.html#considerations-and-recommendations-for-mac-address-cloning["MAC 位址複製的注意事項與建議"]
  a| 
-${post_edited_translations.segment}
+最佳實務
 
 |===
 
@@ -607,7 +607,7 @@ StorageGRID 節點用於用戶端網路存取的主機設備名稱。僅支援�
 
 `ens423`
  a| 
-${post_edited_translations.segment}
+最佳實務
 
 |===
 
@@ -643,7 +643,7 @@ ${post_edited_translations.segment}
 
 有關 Linux 系統下 MAC 位址複製的更多詳細資訊，請參閱link:../swnodes/configuring-host-network.html#considerations-and-recommendations-for-mac-address-cloning["MAC 位址複製的注意事項與建議"]
  a| 
-${post_edited_translations.segment}
+最佳實務
 
 |===
 
@@ -665,7 +665,7 @@ ${post_edited_translations.segment}
 
 如果未指定，則預設為 STATIC。
  a| 
-${post_edited_translations.segment}
+最佳實務
 
 |===
 
@@ -747,14 +747,14 @@ Container 中網格網路介面的 MAC 位址。
 
 `255.255.248.0`
  a| 
-${post_edited_translations.segment}
+當指定 GRID_NETWORK_IP 且 GRID_NETWORK_CONFIG = STATIC 時，此為必填項。
 
 否則為可選。
 
 |===
 
 
-==== ${post_edited_translations.segment}
+==== GRID_NETWORK_MTU
 
 [cols="4a,2a"]
 |===
@@ -781,7 +781,7 @@ ${post_edited_translations.segment}
 |===
 
 
-==== ${post_edited_translations.segment}
+==== GRID_NETWORK_TARGET
 
 [cols="4a,2a"]
 |===
@@ -804,7 +804,7 @@ ${post_edited_translations.segment}
 |===
 
 
-==== ${post_edited_translations.segment}
+==== GRID_NETWORK_TARGET_TYPE
 
 [cols="4a,2a"]
 |===
@@ -819,7 +819,7 @@ ${post_edited_translations.segment}
 |===
 
 
-==== ${post_edited_translations.segment}
+==== GRID_NETWORK_TARGET_TYPE_INTERFACE_CLONE_MAC
 
 [cols="4a,2a"]
 |===
@@ -835,17 +835,17 @@ ${post_edited_translations.segment}
 
 有關 Linux 系統下 MAC 位址複製的更多詳細資訊，請參閱link:../swnodes/configuring-host-network.html#considerations-and-recommendations-for-mac-address-cloning["MAC 位址複製的注意事項與建議"]
  a| 
-${post_edited_translations.segment}
+最佳實務
 
 |===
 
 
 [[installation-password-key-temporary]]
-=== ${post_edited_translations.segment}
+=== 安裝密碼金鑰（臨時）
 
 
 
-==== ${post_edited_translations.segment}
+==== CUSTOM_TEMPORARY_PASSWORD_HASH
 
 [cols="4a,2a"]
 |===
@@ -853,11 +853,11 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+對於主要管理節點，在安裝期間為 StorageGRID 安裝 API 設定預設臨時密碼。
 
 *注意*：僅在主要管理節點上設定安裝密碼。如果嘗試在其他類型的節點上設定密碼，節點組態檔案驗證將會失敗。
 
-${post_edited_translations.segment}
+設定此值在安裝完成後將不會有任何效果。
 
 如果省略此鍵，則預設不會設定臨時密碼。或者，您可以使用 StorageGRID 安裝 API 設定臨時密碼。
 
@@ -865,13 +865,13 @@ ${post_edited_translations.segment}
 
 可以使用 CLI 工具產生此雜湊值，例如在 SHA-512 模式下的 `openssl passwd`命令。
  a| 
-${post_edited_translations.segment}
+最佳實務
 
 |===
 
 
 [[interfaces-key]]
-=== ${post_edited_translations.segment}
+=== 介面金鑰
 
 
 
@@ -903,7 +903,7 @@ ${post_edited_translations.segment}
 
 
 
-==== ${post_edited_translations.segment}
+==== 最大記憶體容量
 
 [cols="4a,2a"]
 |===
@@ -923,7 +923,7 @@ ${post_edited_translations.segment}
 
 `38654705664b`
 
-${post_edited_translations.segment}
+*注意*：如果要使用此選項，必須啟用核心對記憶體容量 cgroups 的支援。
  a| 
 選用
 
@@ -931,11 +931,11 @@ ${post_edited_translations.segment}
 
 
 [[node-type-keys]]
-=== ${post_edited_translations.segment}
+=== 節點類型鍵
 
 
 
-==== ${post_edited_translations.segment}
+==== NODE_TYPE
 
 [cols="4a,2a"]
 |===
@@ -943,11 +943,11 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+節點類型：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* VM_Admin_Node
+* VM 儲存設備節點
+* VM_Archive_Node
 * VM_API_Gateway
 
  a| 
@@ -956,7 +956,7 @@ ${post_edited_translations.segment}
 |===
 
 
-==== ${post_edited_translations.segment}
+==== STORAGE_TYPE
 
 [cols="4a,2a"]
 |===
@@ -964,7 +964,7 @@ ${post_edited_translations.segment}
 
 
  a| 
-定義儲存節點所包含的物件類型。如需詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。只有當節點的 NODE_TYPE = VM_Storage_Node 時，才需要此鍵值；請勿針對其他節點類型指定此鍵值。儲存類型：
+定義儲存節點所包含的物件類型。如需詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["儲存節點類型"]。只有當節點的 NODE_TYPE = VM_Storage_Node 時，才需要此鍵值；請勿針對其他節點類型指定此鍵值。儲存類型：
 
 * 合併
 * 資料
@@ -979,7 +979,7 @@ ${post_edited_translations.segment}
 
 
 [[port-remap-keys]]
-=== ${post_edited_translations.segment}
+=== 連接埠重映射鍵
 
 
 NOTE: 已取代對連接埠重新對應的支援，且將在未來的版本中移除。若要移除重新對應的連接埠，請參閱 link:../maintain/removing-port-remaps-on-bare-metal-hosts.html["移除裸機主機上的連接埠重映射"]。
@@ -994,7 +994,7 @@ NOTE: 已取代對連接埠重新對應的支援，且將在未來的版本中�
 
 
  a| 
-重新映射節點用於內部網格節點通訊或外部通訊的任何連接埠。如果企業連網政策限制了 StorageGRID 使用的一個或多個連接埠（如 link:../network/internal-grid-node-communications.html["${post_edited_translations.segment}"] 或 link:../network/external-communications.html["${post_edited_translations.segment}"] 所述），則必須重新映射連接埠。
+重新映射節點用於內部網格節點通訊或外部通訊的任何連接埠。如果企業連網政策限制了 StorageGRID 使用的一個或多個連接埠（如 link:../network/internal-grid-node-communications.html["內部網格節點通訊"] 或 link:../network/external-communications.html["對外溝通"] 所述），則必須重新映射連接埠。
 
 *重要提示*：請勿重新對應您規劃用於設定負載平衡器端點的連接埠。
 
@@ -1004,7 +1004,7 @@ NOTE: 已取代對連接埠重新對應的支援，且將在未來的版本中�
 
 範例： `PORT_REMAP = client/tcp/18082/443`
 
-${post_edited_translations.segment}
+您也可以使用逗號分隔的清單重新對應多個連接埠。
 
 範例： `PORT_REMAP = client/tcp/18082/443, client/tcp/18083/80`
  a| 
@@ -1029,7 +1029,7 @@ ${post_edited_translations.segment}
 
 範例： `PORT_REMAP_INBOUND = grid/tcp/3022/22`
 
-${post_edited_translations.segment}
+您也可以使用逗號分隔的清單重新對應多個傳入連接埠。
 
 範例： `PORT_REMAP_INBOUND = grid/tcp/3022/22, admin/tcp/3022/22`
  a| 

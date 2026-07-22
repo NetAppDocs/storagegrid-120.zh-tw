@@ -15,9 +15,9 @@ summary: 物件分割是指將一個物件分割成一組較小且固定大小�
 
 當物件擷取至 StorageGRID 系統時，LDR 服務會將物件分割成多個區段，並建立一個區段 Container，該 Container 會將所有區段的標頭資訊列為內容。
 
-image:object_segmentation_diagram.gif["${post_edited_translations.segment}"]
+image:object_segmentation_diagram.gif["物件分割工作流程"]
 
-${post_edited_translations.segment}
+擷取區段 Container 時，LDR 服務會從其區段組裝原始物件，並將該物件傳回給用戶端。
 
 Container 和區段不一定儲存在同一個儲存節點上。Container 和區段可以儲存在 ILM 規則指定的儲存資源池中的任何儲存節點上。
 

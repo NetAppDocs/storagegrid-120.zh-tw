@@ -42,7 +42,7 @@ NOTE: 當您為聯合使用者 Clone S3 存取金鑰時，使用者和 S3 存取
 +
 image:grid-federation-post-current-user-replicate.png["用於複製自身存取金鑰的 POST 端點"]
 
-. ${post_edited_translations.segment}
+. 選擇 *Try it out*。
 . 在 *body* 文字方塊中，將 *accessKey* 和 *secretAccessKey* 的範例條目替換為您下載的 *.csv* 檔案中的值。
 +
 請務必保留每個字串周圍的雙引號。
@@ -71,7 +71,7 @@ image:grid-federation-clone-access-key.png["租戶管理員 API 輸入值以 Clo
 +
 `GET /org/users`
 
-.. ${post_edited_translations.segment}
+.. 選擇 *Try it out*。
 .. 指定查找使用者時要使用的任何參數。
 .. 選擇 *Execute*。
 .. 找到要 Clone 其金鑰的使用者，並複製 *id* 欄位中的數字。
@@ -84,7 +84,7 @@ image:grid-federation-clone-access-key.png["租戶管理員 API 輸入值以 Clo
 +
 image:grid-federation-post-other-user.png["用於複製其他使用者存取金鑰的 POST 端點"]
 
-. ${post_edited_translations.segment}
+. 選擇 *Try it out*。
 . 在 *userId* 文字方塊中，貼上您複製的使用者 ID。
 . 在 *body* 文字方塊中，將 *example access key* 和 *secret access key* 的範例項目替換為該使用者的 *.csv* 檔案中的值。
 +

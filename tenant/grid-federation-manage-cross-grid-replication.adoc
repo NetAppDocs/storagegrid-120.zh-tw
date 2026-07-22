@@ -16,7 +16,7 @@ summary: 如果您的租用戶帳戶在建立時被指派了 Use grid federation
 
 
 [[workflow-for-cross-grid-replication]]
-== ${post_edited_translations.segment}
+== 跨網格複寫的工作流程
 
 工作流程圖概述了在兩個網格的儲存桶之間設定跨網格複寫的步驟。這些步驟的詳細說明如下圖所示。
 
@@ -33,7 +33,7 @@ image:grid-federation-cgr-workflow.png["跨網格複寫工作流程"]
 * 您已審查跨網格複寫的要求。請參閱link:../admin/grid-federation-what-is-cross-grid-replication.html["什麼是跨網格複寫"]。
 * 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
 * 租戶帳戶擁有「使用網格聯合連線」權限，且兩個網格上都存在相同的租戶帳戶。請參閱link:../admin/grid-federation-manage-tenants.html["管理網格同盟連線的允許租戶"]。
-* 您登入的租戶使用者已存在於兩個網格中，並且屬於具有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 您登入的租戶使用者已存在於兩個網格中，並且屬於具有 link:tenant-management-permissions.html["根目錄存取權限"] 的使用者群組。
 * 如果您以本機使用者身分登入租戶的目的地網格，則租戶帳戶的 root 使用者已在該網格上為您的使用者帳戶設定了密碼。
 
 
@@ -80,7 +80,7 @@ TIP: 視需要，每個儲存桶可以使用不同的區域。
 . 從要複寫其物件的網格開始，啟用link:../admin/grid-federation-what-is-cross-grid-replication.html["單向跨網格複寫"]：
 +
 .. 登入儲存桶的租戶帳戶。
-.. ${post_edited_translations.segment}
+.. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 .. 從表格中選擇儲存桶名稱，即可存取儲存桶詳細資訊頁面。
 .. 選擇*跨網格複寫*索引標籤。
 .. 選擇 *Enable*，並審查要求清單。
@@ -126,12 +126,12 @@ NOTE: 如果刪除請求包含版本 ID，則該物件版本將從來源儲存�
 
 .開始之前
 * 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
-* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 您屬於一個擁有 link:tenant-management-permissions.html["根目錄存取權限"] 的使用者群組。
 
 
 .步驟
 . 登入儲存桶的租戶帳戶。
-. ${post_edited_translations.segment}
+. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 . 從表格中選擇儲存桶名稱，即可存取儲存桶詳細資訊頁面。
 . 選擇*跨網格複寫*索引標籤。
 . 選擇 *Test connection*。
@@ -152,7 +152,7 @@ NOTE: 如果刪除請求包含版本 ID，則該物件版本將從來源儲存�
 
 * 停用跨網格複寫不會移除已在網格間複製的物件。例如，Grid 1 上 `my-bucket`中已複製到 Grid 2 上 `my-bucket`的物件，在您停用該儲存桶的跨網格複寫後並不會被移除。如果您想要刪除這些物件，必須手動移除。
 * 如果每個儲存桶都啟用了跨網格複寫（即雙向複寫），您可以停用其中一個或兩個儲存桶的跨網格複寫。例如，您可能想要停用從 `my-bucket`在 Grid 1 到 `my-bucket`在 Grid 2 的物件複寫，同時繼續從 `my-bucket`在 Grid 2 到 `my-bucket`在 Grid 1 的物件複寫。
-* 必須先停用跨網格複寫，然後才能移除租戶使用網格聯合連線的權限。請參閱 link:../admin/grid-federation-manage-tenants.html["${post_edited_translations.segment}"]。
+* 必須先停用跨網格複寫，然後才能移除租戶使用網格聯合連線的權限。請參閱 link:../admin/grid-federation-manage-tenants.html["管理獲準租戶"]。
 * 如果停用包含物件的儲存桶的跨網格複寫，除非從來源桶和目的地桶中刪除所有物件，否則將無法重新啟用跨網格複寫。
 +
 
@@ -162,14 +162,14 @@ CAUTION: 除非兩個儲存桶都是空的，否則無法重新啟用複寫。
 
 .開始之前
 * 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
-* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 您屬於一個擁有 link:tenant-management-permissions.html["根目錄存取權限"] 的使用者群組。
 
 
 .步驟
 . 從您不再希望複寫其物件的網格開始，停止該儲存桶的跨網格複寫：
 +
 .. 登入儲存桶的租戶帳戶。
-.. ${post_edited_translations.segment}
+.. 從儀表板中選取 *View buckets*，或選取 *STORAGE (S3)* > *Buckets*。
 .. 從表格中選擇儲存桶名稱，即可存取儲存桶詳細資訊頁面。
 .. 選擇*跨網格複寫*索引標籤。
 .. 選取*停用複寫*。

@@ -2,7 +2,7 @@
 permalink: maintain/preparing-to-decommission-grid-nodes.html 
 sidebar: sidebar 
 keywords: storagegrid, decommission 
-summary: ${post_edited_translations.segment} 
+summary: 您必須審查移除網格節點的注意事項，並確認沒有針對銷毀編碼資料的修理作業處於作用中。 
 ---
 = 準備解除委任 StorageGRID 節點
 :allow-uri-read: 
@@ -11,4 +11,4 @@ summary: ${post_edited_translations.segment}
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您必須審查移除網格節點的注意事項，並確認沒有針對銷毀編碼資料的修理作業處於作用中。

@@ -32,7 +32,7 @@ summary: 您可以使用 Grid Manager 來定義設定 StorageGRID 系統所需�
 
 . 視需要管理臨時安裝程式密碼：
 +
-** ${post_edited_translations.segment}
+** 如果已使用上述其中一種方法設定密碼，請輸入密碼以繼續。
 +
 *** 使用者先前在存取安裝程式時設定了密碼。
 *** 對於 Linux 系統，密碼會自動從節點組態檔案匯入，路徑為 `/etc/storagegrid/nodes/_<node_name>_.conf`

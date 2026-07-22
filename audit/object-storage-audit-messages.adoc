@@ -31,16 +31,16 @@ link:bror-bucket-read-only-request.html["BROR：Bucket 唯讀請求"]
 
 
  a| 
-${post_edited_translations.segment}
+CBSE
  a| 
-${post_edited_translations.segment}
+物件傳送結束：來源實體已完成網格節點到網格節點的資料傳輸作業。
  a| 
 link:cbse-object-send-end.html["CBSE：物件發送結束"]
 
 
 
  a| 
-${post_edited_translations.segment}
+CBRE
  a| 
 物件接收結束：目的地實體已完成網格節點到網格節點的資料傳輸作業。
  a| 
@@ -53,14 +53,14 @@ CGRR
  a| 
 跨網格複寫請求： StorageGRID 嘗試執行跨網格複寫操作，以在網格聯合連線中的儲存桶之間複寫物件。
  a| 
-link:cgrr-cross-grid-replication-request.html["${post_edited_translations.segment}"]
+link:cgrr-cross-grid-replication-request.html["CGRR：跨網格複製請求"]
 
 
 
  a| 
-${post_edited_translations.segment}
+EBDL
  a| 
-${post_edited_translations.segment}
+空桶刪除：ILM 掃描器刪除了正在刪除所有物件的儲存桶中的物件（執行清空儲存桶作業）。
  a| 
 link:ebdl-empty-bucket-delete.html["EBDL：Empty Bucket Delete"]
 

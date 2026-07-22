@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: expand, expansion, planning, storagegrid files, StorageGRID 
 summary: 在執行擴充作業之前，請收集材料並安裝和設定任何新的硬體和網路。 
 ---
-= ${post_edited_translations.segment}
+= 準備擴充您的 StorageGRID 系統
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -19,11 +19,11 @@ summary: 在執行擴充作業之前，請收集材料並安裝和設定任何�
 
 
  a| 
-${post_edited_translations.segment}
+StorageGRID 安裝歸檔
  a| 
 如果您要新增網格節點或新站台，則必須下載並擷取 StorageGRID 安裝歸檔。您必須使用與目前在網格上執行之版本相同的版本。
 
-如需詳細資訊，請參閱 <<download-and-extract-install-files,${post_edited_translations.segment}>> 的說明。
+如需詳細資訊，請參閱 <<download-and-extract-install-files,下載並解壓縮 StorageGRID 安裝檔案>> 的說明。
 
 *注意：*如果您要將新的儲存設備磁碟區新增至現有的儲存節點或安裝新的 StorageGRID 應用裝置，則無需下載檔案。
 
@@ -34,8 +34,8 @@ ${post_edited_translations.segment}
  a| 
 此維修用筆記型電腦具備以下配置：
 
-* ${post_edited_translations.segment}
-* ${post_edited_translations.segment}
+* 網路連接埠
+* SSH 用戶端（例如 PuTTY）
 * link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]
 
 
@@ -56,7 +56,7 @@ StorageGRID 系統首次安裝時會建立並記錄佈建密碼短語。佈建�
 
 
  a| 
-${post_edited_translations.segment}
+StorageGRID 文件
  a| 
 * link:../admin/index.html["管理 StorageGRID"]_
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP3351267["版本資訊"^]。您必須登入現有 NetApp 帳戶或建立帳戶才能存取發行說明。
@@ -74,7 +74,7 @@ ${post_edited_translations.segment}
 
 
 [[download-and-extract-the-storagegrid-installation-files]]
-== ${post_edited_translations.segment}
+== 下載並擷取 StorageGRID 安裝檔案
 
 .[[download-and-extract-install-files]]
 在新增新的網格節點或新網站之前，必須下載對應的 StorageGRID 安裝歸檔並擷取檔案。
@@ -97,7 +97,7 @@ ${post_edited_translations.segment}
 +
 [cols="1a,2a"]
 |===
-| 平台 | ${post_edited_translations.segment} 
+| 平台 | 安裝歸檔 
 
 
  a| 
@@ -107,7 +107,7 @@ RHEL
 
 
  a| 
-${post_edited_translations.segment}
+Ubuntu、Debian 或應用裝置
 | `StorageGRID-Webscale-_version_-DEB-_uniqueID_.zip` 
 `StorageGRID-Webscale-_version_-DEB-_uniqueID_.tgz` 
 
@@ -125,20 +125,20 @@ OpenStack/其他 Hypervisor
 
 |===
 . 下載並擷取歸檔檔案。
-. ${post_edited_translations.segment}
+. 根據您的平台、計劃的網格拓撲以及您將如何擴充 StorageGRID 系統，按照適合您平台的步驟選擇所需的檔案。
 +
 每個平台步驟中列出的路徑，均相對於歸檔檔案所安裝的頂層目錄。
 
-. ${post_edited_translations.segment}
+. 如果您正在擴充 RHEL 系統，請選擇適當的檔案。
 
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./rpms/README  a| 
+描述 StorageGRID 下載檔案中所包含的所有檔案的文字檔案。
 
 
 
@@ -147,8 +147,8 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./rpms/StorageGRID-Webscale-Images-_version_-SHA.rpm  a| 
+用於在 RHEL 主機上安裝 StorageGRID 節點映像的 RPM 套件。
 
 
 
@@ -157,11 +157,11 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment} | 說明 
+| 部署指令碼工具 | 說明 
 
 
 | ./rpms/configure-storagegrid.py  a| 
-${post_edited_translations.segment}
+用於自動化 StorageGRID 系統組態的 Python 指令碼。
 
 
 
@@ -180,56 +180,56 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./rpms/configure-storagegrid.blank.json  a| 
 一個用於搭配  `configure-storagegrid.py` 指令碼使用的空白組態檔案。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./rpms/extras/ansible  a| 
 用於為 StorageGRID Container 部署設定 RHEL 主機的範例 Ansible 角色與 Playbook。您可以根據需要自訂角色或 Playbook。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./rpms/storagegrid-ssoauth-azure.py  a| 
 這是一個範例 Python 指令碼，當使用 Active Directory 或 Ping Federate 啟用單一登入 （SSO） 時，您可以使用該指令碼登入 Grid Management API。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./rpms/storagegrid-ssoauth-azure.js  a| 
 由隨附的  `storagegrid-ssoauth-azure.py` Python 指令碼所呼叫的輔助指令碼，用於與 Azure 進行 SSO 互動。
 
 
 
 | ./rpms/extras/api-schemas  a| 
-${post_edited_translations.segment}
+StorageGRID 的 API 架構。
 
-${post_edited_translations.segment}
+*注意*：在執行升級之前，如果您沒有用於升級相容性測試的非生產性 StorageGRID 環境，可以使用這些架構來確認您編寫的任何使用 StorageGRID 管理 API 的程式碼是否與新的 StorageGRID 版本相容。
 
 |===
-. ${post_edited_translations.segment}
+. 如果您要擴充 Ubuntu 或 Debian 系統，請選擇相應的檔案。
 
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/README  a| 
+描述 StorageGRID 下載檔案中所包含的所有檔案的文字檔案。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/NLF000000.txt  a| 
 您可用於測試和概念驗證部署的非生產 NetApp 授權檔案。
 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/storagegrid-webscale-images-version-SHA.deb  a| 
+用於在 Ubuntu 或 Debian 主機上安裝 StorageGRID 節點映像的 DEB 軟體套件。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/storagegrid-webscale-images-version-SHA.deb.md5  a| 
 檔案的 MD5 Checksum `/debs/storagegrid-webscale-images-version-SHA.deb`。
 
 
@@ -239,11 +239,11 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment} | 說明 
+| 部署指令碼工具 | 說明 
 
 
 | ./debs/configure-storagegrid.py  a| 
-${post_edited_translations.segment}
+用於自動化 StorageGRID 系統組態的 Python 指令碼。
 
 
 
@@ -283,9 +283,9 @@ ${post_edited_translations.segment}
 
 
 | ./debs/extras/api-schemas  a| 
-${post_edited_translations.segment}
+StorageGRID 的 API 架構。
 
-${post_edited_translations.segment}
+*注意*：在執行升級之前，如果您沒有用於升級相容性測試的非生產性 StorageGRID 環境，可以使用這些架構來確認您編寫的任何使用 StorageGRID 管理 API 的程式碼是否與新的 StorageGRID 版本相容。
 
 |===
 . 如果要擴充 VMware 系統，請選擇對應的檔案。
@@ -293,11 +293,11 @@ ${post_edited_translations.segment}
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
 | ./vsphere/README  a| 
-${post_edited_translations.segment}
+描述 StorageGRID 下載檔案中所包含的所有檔案的文字檔案。
 
 
 
@@ -331,7 +331,7 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment} | 說明 
+| 部署指令碼工具 | 說明 
 
 
 | ./vsphere/deploy-vsphere-ovftool.sh  a| 
@@ -345,7 +345,7 @@ ${post_edited_translations.segment}
 
 
 | ./vsphere/configure-storagegrid.py  a| 
-${post_edited_translations.segment}
+用於自動化 StorageGRID 系統組態的 Python 指令碼。
 
 
 
@@ -380,12 +380,12 @@ ${post_edited_translations.segment}
 
 
 | ./vsphere/extras/api-schemas  a| 
-${post_edited_translations.segment}
+StorageGRID 的 API 架構。
 
-${post_edited_translations.segment}
+*注意*：在執行升級之前，如果您沒有用於升級相容性測試的非生產性 StorageGRID 環境，可以使用這些架構來確認您編寫的任何使用 StorageGRID 管理 API 的程式碼是否與新的 StorageGRID 版本相容。
 
 |===
-. ${post_edited_translations.segment}
+. 如果您要擴充以 StorageGRID 應用裝置為基礎的系統，請選擇對應的檔案。
 
 
 
@@ -393,15 +393,15 @@ NOTE: 對於應用裝置安裝，僅當您需要避免網路流量時才需要�
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
-| ${post_edited_translations.segment}  a| 
-${post_edited_translations.segment}
+| ./debs/storagegrid-webscale-images-version-SHA.deb  a| 
+用於在您的應用裝置上安裝 StorageGRID 節點映像的 DEB 套件。
 
 
 
-| ${post_edited_translations.segment}  a| 
+| ./debs/storagegrid-webscale-images-version-SHA.deb.md5  a| 
 檔案的 MD5 Checksum `/debs/storagegridwebscale-
 images-version-SHA.deb`。
 
@@ -409,9 +409,9 @@ images-version-SHA.deb`。
 
 
 [[verify-hardware-and-networking]]
-== ${post_edited_translations.segment}
+== 檢查硬體和連網
 
-${post_edited_translations.segment}
+在開始擴充 StorageGRID 系統之前，請確保以下事項：
 
 * 支援新網格節點或新站台所需的硬體已安裝並設定完成。
 * 所有新節點都與所有現有節點和新節點建立雙向通訊路徑（這是 Grid Network 的要求）。尤其需要確認，在擴充功能中新增的節點與主管理節點之間，以下 TCP 連接埠已開啟：
@@ -423,7 +423,7 @@ ${post_edited_translations.segment}
 
 
 +
-請參閱 link:../network/internal-grid-node-communications.html["${post_edited_translations.segment}"]。
+請參閱 link:../network/internal-grid-node-communications.html["內部網格節點通訊"]。
 
 * 主管理節點可以與所有用於託管 StorageGRID 系統的擴充伺服器進行通訊。
 * 如果任何新節點的網格網路 IP 位址位於先前未使用的子網路中，則您已將其link:updating-subnets-for-grid-network.html["新增了新的子網路"]新增至網格網路子網路清單中。否則，您必須取消擴充，新增子網路，然後重新開始此程序。

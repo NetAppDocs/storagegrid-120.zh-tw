@@ -134,7 +134,7 @@ SUCS：ILM 行動成功。
 
 
  a| 
-${post_edited_translations.segment}
+SGRP
  a| 
 網站（組）
  a| 

@@ -1,11 +1,11 @@
-= ${post_edited_translations.segment}
+= 尋找儲存節點的主機名稱
 :allow-uri-read: 
 
 
 
 
 [[find-hostname-for-storage-node]]
-== ${post_edited_translations.segment}
+== 尋找儲存節點的主機名稱
 
 . 登入任意管理節點：
 +
@@ -28,14 +28,14 @@
 
 如果所有儲存設備 Volume 均已故障，請修理整個節點。請根據您使用的是複寫資料、糾刪碼（EC）資料或兩者，按照 *複寫資料*、*糾刪碼（EC）資料* 或兩者的說明進行操作。
 
-如果只有部分 Volume 故障，請前往 <<${post_edited_translations.segment}>>。
+如果只有部分 Volume 故障，請前往 <<如果只有部分磁碟區故障，請修理資料>>。
 
 
 NOTE: 您無法同時為多個節點執行  `repair-data` 作業。若要恢復多個節點，請聯絡技術支援。
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.複製資料
 --
 如果您的網格包含複寫資料，請使用 `repair-data start-replicated-node-repair`命令搭配 `--nodes`選項，其中 `--nodes`是主機名稱（系統名稱），以修理整個儲存節點。
 
@@ -44,7 +44,7 @@ NOTE: 您無法同時為多個節點執行  `repair-data` 作業。若要恢復�
 `repair-data start-replicated-node-repair --nodes SG-DC-SN3`
 
 
-NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複寫的物件資料，則會觸發 *Objects Lost* 警示。整個系統中的儲存節點都可能會觸發警示。您應該確定遺失的原因，以及是否可以進行恢復。請參閱 link:../troubleshoot/investigating-potentially-lost-objects.html["${post_edited_translations.segment}"]。
+NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複寫的物件資料，則會觸發 *Objects Lost* 警示。整個系統中的儲存節點都可能會觸發警示。您應該確定遺失的原因，以及是否可以進行恢復。請參閱 link:../troubleshoot/investigating-potentially-lost-objects.html["調查可能遺失的物件"]。
 
 --
 .糾刪碼（EC）資料
@@ -64,7 +64,7 @@ NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複�
 
 
 [[repair-data-if-only-some-volumes-have-failed]]
-== ${post_edited_translations.segment}
+== 如果只有部分磁碟區故障，請修理資料
 
 如果只有部分 Volume 故障，請修理受影響的 Volume。請根據您使用的是複寫資料、糾刪碼（EC）資料或兩者，按照 *複寫資料*、*糾刪碼（EC）資料* 或兩者的說明進行操作。
 
@@ -76,7 +76,7 @@ NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複�
 
 [role="tabbed-block"]
 ====
-.${post_edited_translations.segment}
+.複製資料
 --
 如果您的網格包含複寫的資料，請使用  `start-replicated-volume-repair` 命令搭配  `--nodes` 選項來識別節點（其中  `--nodes` 為該節點的主機名稱）。然後加入  `--volumes` 或  `--volume-range` 選項，如下列範例所示。
 

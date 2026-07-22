@@ -15,14 +15,14 @@ summary: 您可以停用 SNMP 通知、更新團體字串，或新增或移除�
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
-* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您有link:../admin/admin-group-permissions.html["根目錄存取權限"]。
 
 
 .關於此任務
 有關 SNMP 代理程式頁面上每個欄位的詳細資訊，請參閱 link:configuring-snmp-agent.html["設定 SNMP 代理程式"]。您必須在頁面底部選取 *Save*，才能提交在每個索引標籤上所做的變更。
 
 .步驟
-. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *Monitoring* > *SNMP agent*。
 +
 顯示 SNMP 代理程式頁面。
 

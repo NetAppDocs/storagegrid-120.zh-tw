@@ -25,27 +25,27 @@ summary: 更換儲存節點後，必須在 Grid Manager 中選擇「開始恢復
 如果儲存節點以 Container 安裝在 Linux 主機上，則僅當滿足下列條件之一時才需要執行此步驟：
 
 * 您必須使用 `--force`旗標來匯入節點，或者您發出了 `storagegrid node force-recovery _node-name_`
-* ${post_edited_translations.segment}
+* 您需要重新安裝整個節點，或需要還原 /var/local。
 
 
 .步驟
 . 從 Grid Manager 中，選擇 *Maintenance* > *Tasks* > *Recovery*。
-. ${post_edited_translations.segment}
+. 在「待恢復節點」清單中選擇要恢復的網格節點。
 +
-${post_edited_translations.segment}
+節點發生故障後會出現在清單中，但只有在節點重新安裝並準備好恢復後才能選擇該節點。
 
 . 請輸入*佈建密碼*。
-. ${post_edited_translations.segment}
+. 點選 *Start Recovery*。
 +
 image:4b_select_recovery_node.png["螢幕截圖顯示「維護 > 恢復」頁面"]
 
-. ${post_edited_translations.segment}
+. 在「正在恢復的網格節點」表中監控恢復進度。
 +
 
 NOTE: 恢復程序執行時，您可以按一下 *Reset* 以開始新的恢復。此時會出現一個對話方塊，提示若您重設程序，節點將處於不確定狀態。
 
 +
-image:recovery_reset_warning.gif["${post_edited_translations.segment}"]
+image:recovery_reset_warning.gif["快照顯示重設恢復警告對話框"]
 
 +
 如果您想在重置程序後重試恢復，則必須將節點還原至預先安裝狀態，如下所示：

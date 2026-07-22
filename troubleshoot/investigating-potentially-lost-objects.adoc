@@ -36,7 +36,7 @@ CAUTION: 如果報告遺失的物件超過 10 個，請聯絡技術支援。請�
 
 . 從管理節點，link:../audit/accessing-audit-log-file.html["存取稽核日誌"]以判斷觸發「物件可能遺失」警示的物件的唯一識別碼 （UUID）：
 +
-.. ${post_edited_translations.segment}
+.. 登入網格節點：
 +
 ... 輸入下列命令： `ssh admin@grid_node_IP`
 ... 請輸入 `Passwords.txt`檔案中列出的密碼。
@@ -101,7 +101,7 @@ Admin: # grep OLST audit.log
 +
 [cols="2a,4a"]
 |===
-| ${post_edited_translations.segment} | 結論 
+| 中繼資料 | 結論 
 
 
  a| 

@@ -17,15 +17,15 @@ summary: 您可以檢視 StorageGRID 系統中每個網格節點的 IP 位址。
 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
 
 .關於此任務
-如需變更 IP 位址的相關資訊，請參閱 link:../maintain/configuring-ip-addresses.html["${post_edited_translations.segment}"]。
+如需變更 IP 位址的相關資訊，請參閱 link:../maintain/configuring-ip-addresses.html["設定 IP 位址"]。
 
 .步驟
-. ${post_edited_translations.segment}
-. ${post_edited_translations.segment}
+. 選擇 *節點* > *_grid 節點_* > *概覽*。
+. 在「IP 位址」標題右側選擇 *Show more*。
 +
 此網格節點的 IP 位址列於下表中。
 
 +
-image:nodes_page_overview_tab_extended.png["${post_edited_translations.segment}"]
+image:nodes_page_overview_tab_extended.png["節點頁面 IP 位址"]
 
 

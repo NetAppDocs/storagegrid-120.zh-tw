@@ -4,11 +4,11 @@
 
 [cols="1a,1a"]
 |===
-| ${post_edited_translations.segment} | 說明 
+| 路徑和檔案名稱 | 說明 
 
 
 | ./vsphere/README  a| 
-${post_edited_translations.segment}
+描述 StorageGRID 下載檔案中所包含的所有檔案的文字檔案。
 
 
 
@@ -42,7 +42,7 @@ ${post_edited_translations.segment}
 
 
 
-| ${post_edited_translations.segment} | 說明 
+| 部署指令碼工具 | 說明 
 
 
 | ./vsphere/deploy-vsphere-ovftool.sh  a| 
@@ -56,7 +56,7 @@ ${post_edited_translations.segment}
 
 
 | ./vsphere/configure-storagegrid.py  a| 
-${post_edited_translations.segment}
+用於自動化 StorageGRID 系統組態的 Python 指令碼。
 
 
 
@@ -91,8 +91,8 @@ ${post_edited_translations.segment}
 
 
 | ./vsphere/extras/api-schemas  a| 
-${post_edited_translations.segment}
+StorageGRID 的 API 架構。
 
-${post_edited_translations.segment}
+*注意*：在執行升級之前，如果您沒有用於升級相容性測試的非生產性 StorageGRID 環境，可以使用這些架構來確認您編寫的任何使用 StorageGRID 管理 API 的程式碼是否與新的 StorageGRID 版本相容。
 
 |===

@@ -21,6 +21,6 @@ StorageGRID 系統使用物件中繼資料中的位置資訊來決定從哪個�
 * 對於糾刪碼複本，如果無法從預期位置擷取複本，則在嘗試從其他位置擷取複本之前，「偵測到損壞複本 (ECOR)」屬性會加一。如果仍未找到其他複本，則會觸發警報。
 
 
-您應立即調查所有「物件可能遺失」警報，以確定遺失的根本原因，並確定物件是否可能仍存在於離線或目前無法使用的儲存節點中。請參閱 link:../troubleshoot/investigating-potentially-lost-objects.html["${post_edited_translations.segment}"]。出於注意，遺失物件警報可能會被誤觸發。
+您應立即調查所有「物件可能遺失」警報，以確定遺失的根本原因，並確定物件是否可能仍存在於離線或目前無法使用的儲存節點中。請參閱 link:../troubleshoot/investigating-potentially-lost-objects.html["調查可能遺失的物件"]。出於注意，遺失物件警報可能會被誤觸發。
 
 如果遺失的是沒有複本的物件資料，則沒有恢復解決方案。但是，您必須link:../troubleshoot/investigating-potentially-lost-objects.html#reset-lost-obj-count["重置可能遺失的物件計數器"]以防止已知遺失的物件掩蓋任何新遺失的物件。

@@ -19,7 +19,7 @@ summary: 當儲存桶進入或退出唯讀模式時，LDR 服務會產生此稽�
 
 
  a| 
-${post_edited_translations.segment}
+BKHD
  a| 
 儲存桶 UUID
  a| 

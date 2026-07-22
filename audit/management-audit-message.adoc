@@ -15,7 +15,7 @@ summary: 管理類別會記錄使用者向管理 API 發出的請求。
 
 [cols="1a,3a,1a"]
 |===
-| 程式碼 | ${post_edited_translations.segment} | 請參閱 
+| 程式碼 | 訊息標題和執行摘要 | 請參閱 
 
 
  a| 
@@ -23,6 +23,6 @@ MGAU
  a| 
 管理 API 稽核訊息：使用者請求的日誌檔。
  a| 
-link:mgau-management-audit-message.html["${post_edited_translations.segment}"]
+link:mgau-management-audit-message.html["MGAU：管理稽核訊息"]
 
 |===

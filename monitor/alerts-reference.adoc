@@ -198,19 +198,19 @@ StorageGRID 應用裝置的運算控制器中偵測到硬體故障。
  a| 
 偵測到應用裝置風扇故障
  a| 
-${post_edited_translations.segment}
+偵測到該應用裝置中的風扇裝置有問題。
 
 
 
  a| 
-${post_edited_translations.segment}
+偵測到應用裝置 Fibre Channel 故障
  a| 
 偵測到應用裝置儲存控制器和運算控制器之間存在 Fibre Channel 連結問題。
 
 
 
  a| 
-${post_edited_translations.segment}
+應用裝置 Fibre Channel HBA 連接埠故障
  a| 
 Fibre Channel HBA 連接埠故障或已發生故障。
 
@@ -238,7 +238,7 @@ StorageGRID 應用裝置上的連接埠未參與 LACP 綁定。
 
 
  a| 
-${post_edited_translations.segment}
+偵測到應用裝置 NIC 故障
  a| 
 偵測到應用裝置中的網路介面卡 （NIC） 存在問題。
 
@@ -254,7 +254,7 @@ StorageGRID 應用裝置的電源已偏離建議的工作電壓。
  a| 
 需要更新應用裝置 SANtricity 作業系統軟體
  a| 
-${post_edited_translations.segment}
+SANtricity 軟體版本低於此 StorageGRID 版本建議的最低版本。
 
 
 
@@ -268,14 +268,14 @@ ${post_edited_translations.segment}
  a| 
 應用裝置儲存控制器 A 故障
  a| 
-${post_edited_translations.segment}
+StorageGRID 應用裝置中的儲存控制器 A 發生故障。
 
 
 
  a| 
-${post_edited_translations.segment}
+應用裝置儲存控制器 B 故障
  a| 
-${post_edited_translations.segment}
+StorageGRID 應用裝置中的儲存控制器 B 發生故障。
 
 
 
@@ -294,21 +294,21 @@ SANtricity 軟體回報 StorageGRID 應用裝置中的某個元件「需要注�
 
 
  a| 
-${post_edited_translations.segment}
+應用裝置儲存控制器電源供應 A 故障
  a| 
 StorageGRID 應用裝置中的電源供應 A 偏離了建議的工作電壓。
 
 
 
  a| 
-${post_edited_translations.segment}
+應用裝置儲存控制器電源供應 B 故障
  a| 
 StorageGRID 應用裝置中的電源供應 B 偏離了建議的工作電壓。
 
 
 
  a| 
-${post_edited_translations.segment}
+應用裝置儲存硬體監控服務停止
  a| 
 監控儲存設備硬體狀態的服務已停止運作。
 
@@ -317,14 +317,14 @@ ${post_edited_translations.segment}
  a| 
 應用裝置儲存機櫃降級
  a| 
-${post_edited_translations.segment}
+儲存應用裝置儲存機櫃中的某個元件狀態已降級。
 
 
 
  a| 
-${post_edited_translations.segment}
+應用裝置溫度過高
  a| 
-${post_edited_translations.segment}
+應用裝置的儲存控制器額定溫度或最高溫度已超過。
 
 
 
@@ -336,23 +336,23 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+應用裝置 UEFI 安全開機錯誤
  a| 
-${post_edited_translations.segment}
+應用裝置未安全開機。
 
 
 
  a| 
 磁碟 I/O 速度非常慢
  a| 
-${post_edited_translations.segment}
+磁碟 I/O 速度過慢可能會影響網格效能。
 
 
 
  a| 
-${post_edited_translations.segment}
+偵測到儲存應用裝置風扇故障
  a| 
-${post_edited_translations.segment}
+偵測到某應用裝置儲存控制器中的風扇單元發生問題。
 
 
 
@@ -372,7 +372,7 @@ ${post_edited_translations.segment}
 
 
 [[audit-and-syslog-alerts]]
-== ${post_edited_translations.segment}
+== 稽核和 syslog 警示
 
 [cols="1a,2a"]
 |===
@@ -380,14 +380,14 @@ ${post_edited_translations.segment}
 
 
  a| 
-${post_edited_translations.segment}
+稽核日誌正在新增至記憶體佇列中。
  a| 
-${post_edited_translations.segment}
+節點無法將日誌傳送至本機 syslog 伺服器，且記憶體內佇列正在填滿。
 
 
 
  a| 
-${post_edited_translations.segment}
+外部 syslog 伺服器轉送錯誤
  a| 
 節點無法將日誌轉送到外部 syslog 伺服器。
 
@@ -432,7 +432,7 @@ FabricPool 貯體已啟用版本控制或 S3 物件鎖定，但系統並不支�
 
 
 [[cassandra-alerts]]
-== ${post_edited_translations.segment}
+== Cassandra 警示
 
 [cols="1a,2a"]
 |===
@@ -456,12 +456,12 @@ Cassandra 自動壓縮器計量已過時
  a| 
 Cassandra 通訊錯誤
  a| 
-${post_edited_translations.segment}
+執行 Cassandra 服務的節點之間通訊出現問題。
 
 
 
  a| 
-${post_edited_translations.segment}
+Cassandra 壓縮過載
  a| 
 Cassandra 資料精簡程序過載。
 
@@ -470,7 +470,7 @@ Cassandra 資料精簡程序過載。
  a| 
 Cassandra 寫入過大錯誤
  a| 
-${post_edited_translations.segment}
+StorageGRID 內部程序向 Cassandra 發送了一個過大的寫入請求。
 
 
 
@@ -482,7 +482,7 @@ Cassandra 修理計量已過時
 
 
  a| 
-${post_edited_translations.segment}
+Cassandra 修理進度緩慢
  a| 
 Cassandra 資料庫修理進度緩慢。
 
@@ -496,7 +496,7 @@ Cassandra 修理服務無法使用。
 
 
  a| 
-${post_edited_translations.segment}
+Cassandra 表毀損
  a| 
 Cassandra 已偵測到資料表毀損。如果偵測到資料表毀損，Cassandra 會自動重新啟動。
 
@@ -504,7 +504,7 @@ Cassandra 已偵測到資料表毀損。如果偵測到資料表毀損，Cassand
 
 
 [[cloud-storage-pool-alerts]]
-== ${post_edited_translations.segment}
+== 雲端儲存池警報
 
 [cols="1a,2a"]
 |===
@@ -512,7 +512,7 @@ Cassandra 已偵測到資料表毀損。如果偵測到資料表毀損，Cassand
 
 
  a| 
-${post_edited_translations.segment}
+雲端儲存池連接錯誤
  a| 
 雲端儲存池的資訊健檢偵測到一個或多個新錯誤。
 
@@ -542,7 +542,7 @@ IAM Roles Anywhere 終端實體憑證即將過期。
 
 
  a| 
-${post_edited_translations.segment}
+跨網格複寫資源無法使用
  a| 
 由於資源無法使用，跨網格複寫請求處於待處理狀態。
 
@@ -550,7 +550,7 @@ ${post_edited_translations.segment}
 
 
 [[dhcp-alerts]]
-== ${post_edited_translations.segment}
+== DHCP 警報
 
 [cols="1a,2a"]
 |===
@@ -560,21 +560,21 @@ ${post_edited_translations.segment}
  a| 
 DHCP 租約已過期
  a| 
-${post_edited_translations.segment}
+網路介面上的 DHCP 租約已過期。
 
 
 
  a| 
-${post_edited_translations.segment}
+DHCP 租約即將到期
  a| 
-${post_edited_translations.segment}
+網路介面上的 DHCP 租約即將到期。
 
 
 
  a| 
 DHCP 伺服器不可用
  a| 
-${post_edited_translations.segment}
+DHCP 伺服器無法使用。
 
 |===
 
@@ -893,28 +893,28 @@ KMS 用戶端憑證到期
 
 
  a| 
-${post_edited_translations.segment}
+KMS 組態載入失敗
  a| 
 金鑰管理伺服器的組態存在，但載入失敗。
 
 
 
  a| 
-${post_edited_translations.segment}
+KMS 連線錯誤
  a| 
 應用裝置節點無法連線至其站台的金鑰管理伺服器。
 
 
 
  a| 
-${post_edited_translations.segment}
+找不到 KMS 加密金鑰名稱
  a| 
 已設定的金鑰管理伺服器沒有與提供的名稱相符的加密金鑰。
 
 
 
  a| 
-${post_edited_translations.segment}
+KMS 加密金鑰輪替失敗
  a| 
 所有應用裝置磁碟區已成功解密，但一個或多個磁碟區無法輪替到最新金鑰。
 

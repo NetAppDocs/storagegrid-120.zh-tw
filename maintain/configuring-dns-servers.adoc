@@ -11,7 +11,7 @@ summary: '您可以新增、刪除和更新 DNS 伺服器，以便使用完整�
 
 
 [role="lead"]
-${post_edited_translations.segment}
+您可以新增、更新和移除 DNS 伺服器，以便使用完整網域名稱 （FQDN） 主機名稱，而非 IP 位址。
 
 若要在指定外部目的地的執行主機名稱時，使用完整網域（FQDN）而非 IP 位址，請指定您將使用的每個 DNS 伺服器的 IP 位址。這些項目可用於 AutoSupport、警示電子郵件、SNMP 通知、平台服務端點、Cloud Storage Pools 等。
 
@@ -31,7 +31,7 @@ ${post_edited_translations.segment}
 [[add-a-dns-server]]
 == 新增 DNS 伺服器
 
-${post_edited_translations.segment}
+請依照以下步驟新增 DNS 伺服器。
 
 .步驟
 . 選擇 *Maintenance* > *Network* > *DNS 伺服器*。
@@ -44,7 +44,7 @@ ${post_edited_translations.segment}
 [[modify-a-dns-server]]
 == 修改 DNS 伺服器
 
-${post_edited_translations.segment}
+請依照下列步驟修改 DNS 伺服器。
 
 .步驟
 . 選擇 *Maintenance* > *Network* > *DNS 伺服器*。
@@ -57,7 +57,7 @@ ${post_edited_translations.segment}
 [[delete-a-dns-server]]
 == 刪除 DNS 伺服器
 
-${post_edited_translations.segment}
+請依照以下步驟刪除 DNS 伺服器的 IP 位址。
 
 .步驟
 . 選擇 *Maintenance* > *Network* > *DNS 伺服器*。

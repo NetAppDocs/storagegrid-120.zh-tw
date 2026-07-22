@@ -16,9 +16,9 @@ summary: 如果您在使用 Web 瀏覽器、S3 用戶端或外部監控工具嘗
 .關於此任務
 當您嘗試使用 Grid Manager、Grid Management API、Tenant Manager 或 Tenant Management API 連線至 StorageGRID 時，憑證錯誤可能會導致問題。當您嘗試使用 S3 用戶端或外部監控工具連線時，也可能出現憑證錯誤。
 
-${post_edited_translations.segment}
+如果您使用網域名稱而非 IP 位址存取 Grid Manager 或 Tenant Manager，則在發生下列任一情況時，瀏覽器會顯示憑證錯誤，且沒有繞過選項：
 
-* ${post_edited_translations.segment}
+* 您的自訂管理介面憑證已過期。
 * 您將自訂管理介面憑證回復為預設伺服器憑證。
 
 
