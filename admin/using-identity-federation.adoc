@@ -1,0 +1,246 @@
+---
+permalink: admin/using-identity-federation.html 
+sidebar: sidebar 
+keywords: how to use identity federation, how to use federated groups with Grid Manager 
+summary: ${post_edited_translations.segment} 
+---
+= 在 StorageGRID 中使用身分識別聯盟
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+
+[[configure-identity-federation-for-grid-manager]]
+== 為 Grid Manager 設定身分識別聯盟
+
+如果您希望在其他系統（例如 Active Directory、Microsoft Entra ID、OpenLDAP 或 Oracle Directory Server）中管理管理員群組和使用者，可以在 Grid Manager 中設定身分識別聯盟。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您已link:admin-group-permissions.html["特定存取權限"]。
+* 您使用的是 Active Directory、Microsoft Entra ID、OpenLDAP 或 Oracle Directory Server 作為身分供應商。
++
+
+NOTE: 如果您想使用未列出的 LDAP v3 服務，請聯絡技術支援。
+
+* 如果您打算使用 OpenLDAP，則必須設定 OpenLDAP 伺服器。請參閱<<OpenLDAP 伺服器設定指南>>。
+* 如果您打算啟用單一登入 （SSO），您已經查看了link:requirements-for-sso.html["${post_edited_translations.segment}"]。
+* 如果您打算使用傳輸層安全性協定 (TLS) 與 LDAP 伺服器進行通訊，則身分識別供應商將使用 TLS 1.2 或 1.3。請參閱link:supported-ciphers-for-outgoing-tls-connections.html["支援的傳出 TLS 連線加密套件"]。
+
+
+.關於此任務
+如果您想要從其他系統（例如 Active Directory、Microsoft Entra ID、OpenLDAP 或 Oracle Directory Server）匯入群組，可以為 Grid Manager 設定身分識別來源。您可以匯入以下類型的群組：
+
+* 管理群組。管理群組中的使用者可以根據指派給該群組的管理權限，登入 Grid Manager 並執行工作。
+* 租戶使用者群組適用於不使用自有身分來源的租戶。租戶群組中的使用者可以登入 Tenant Manager 並執行任務，具體任務取決於 Tenant Manager 中指派給該群組的權限。如需詳細資訊、請參閱 link:creating-tenant-account.html["建立租戶帳戶"] 和 link:../tenant/index.html["使用租戶帳戶"]。
+
+
+
+
+[[enter-the-configuration]]
+=== 輸入組態
+
+.步驟
+. 選擇 *組態* > *存取控制* > *身分識別聯盟*。
+. 選取 *啟用身分識別聯盟*。
+. 在 LDAP 服務類型部分，選擇要設定的 LDAP 服務類型。
++
+image:ldap_service_type.png["${post_edited_translations.segment}"]
+
++
+選擇「其他」以設定使用 Oracle Directory Server 的 LDAP 伺服器的值。
+
+. 如果您選擇了 *Other*，請填寫 LDAP 屬性區段中的欄位。否則，請前往下一步。
++
+** *使用者唯一名稱*：包含 LDAP 使用者唯一識別碼的屬性名稱。此屬性等效於 Active Directory 的 `sAMAccountName`和 OpenLDAP 的 `uid`。如果您正在設定 Oracle Directory Server，請輸入 `uid`。
+** *使用者 UUID*：包含 LDAP 使用者永久唯一識別碼的屬性名稱。此屬性相當於 Active Directory 的  `objectGUID` 和 OpenLDAP 的  `entryUUID`。如果您正在設定 Oracle Directory Server，請輸入  `nsuniqueid`。指定屬性的每個使用者值必須是 16 位元組或字串格式的 32 位數十六進位數字，其中會忽略連字號。
+** *群組唯一名稱*：包含 LDAP 群組唯一識別碼的屬性名稱。此屬性相當於 Active Directory 的  `sAMAccountName` 和 OpenLDAP 的  `cn`。如果您正在設定 Oracle Directory Server，請輸入  `cn`。
+** *群組 UUID*：包含 LDAP 群組永久唯一識別碼的屬性名稱。此屬性等效於 Active Directory 的 `objectGUID`和 OpenLDAP 的 `entryUUID`。如果您正在設定 Oracle Directory Server，請輸入 `nsuniqueid`。每個群組的指定屬性值必須為 32 位元十六進位數，格式可以是 16 個位元組或字串，其中連字元將被忽略。
+
+
+. 對於所有 LDAP 服務類型，請在「設定 LDAP 伺服器」部分輸入所需的 LDAP 伺服器和網路連線資訊。
++
+** *主機名稱*：LDAP 伺服器的完整網域名稱（FQDN）或 IP 位址。
+** *連接埠*：用於連接到 LDAP 伺服器的連接埠。
++
+
+NOTE: STARTTLS 的預設 port 為 389，而 LDAPS 的預設 port 為 636。不過，只要您的防火牆設定正確，您可以使用任何 port。
+
+** *使用者名稱*：將連接到 LDAP 伺服器的使用者辨別名稱 (DN) 完整路徑。
++
+對於 Active Directory，您也可以指定下級登入名稱或使用者主體名稱。
+
++
+${post_edited_translations.segment}
+
++
+*** `sAMAccountName` 或  `uid`
+*** `objectGUID`、 `entryUUID` 或  `nsuniqueid`
+*** `cn`
+*** `memberOf` 或  `isMemberOf`
+*** *Active Directory*： `objectSid`、 `primaryGroupID`、 `userAccountControl` 和 `userPrincipalName`
+*** *Entra ID*: `accountEnabled` 與  `userPrincipalName`
+
+
+** ${post_edited_translations.segment}
++
+
+NOTE: 如果將來更改密碼，您必須在此頁面上更新密碼。
+
+** *群組基本 DN*：您要搜尋群組之 LDAP 子樹狀結構的辨識名稱 （DN） 完整路徑。在 Active Directory 範例 （如下） 中，其辨識名稱相對於基本 DN （DC=storagegrid,DC=example,DC=com） 的所有群組，都可以用作同盟群組。
++
+
+NOTE: ${post_edited_translations.segment}
+
+** *使用者基本 DN*：要搜尋使用者的 LDAP 子樹的專有名稱 (DN) 的完整路徑。
++
+
+NOTE: ${post_edited_translations.segment}
+
+** *Bind username format*（選用）：如果無法自動判斷模式，StorageGRID 應使用的預設使用者名稱模式。
++
+建議提供 *Bind username format*，因為如果 StorageGRID 無法與服務帳戶連結，可允許使用者登入。
+
++
+請輸入以下模式之一：
+
++
+*** *UserPrincipalName 模式（AD 與 Entra ID）*: `[USERNAME]@_example_.com`
+*** *Down-level logon name pattern （AD 和 Entra ID）*： `_example_\[USERNAME]`
+*** *辨別名稱模式*： `CN=[USERNAME],CN=Users,DC=_example_,DC=com`
++
+${post_edited_translations.segment}
+
+
+
+
+
+. ${post_edited_translations.segment}
++
+** *使用 STARTTLS*：使用 STARTTLS 來保護與 LDAP 伺服器的通訊。對於 Active Directory、OpenLDAP 或其他 LDAP 伺服器，這是建議選項，但此選項不支援 Microsoft Entra ID。
+** *使用 LDAPS*：LDAPS （LDAP over SSL） 選項會使用 TLS 建立與 LDAP 伺服器的連線。您必須為 Microsoft Entra ID 選擇此選項。
+** *請勿使用 TLS*：StorageGRID 系統與 LDAP 伺服器之間的網路流量將不受保護。此選項不支援 Microsoft Entra ID。
++
+
+NOTE: 如果您的 Active Directory 伺服器強制執行 LDAP 簽名，則不支援使用「*不使用 TLS*」選項。您必須使用 STARTTLS 或 LDAPS。
+
+
+
+. ${post_edited_translations.segment}
++
+** *使用作業系統 CA 憑證*：使用作業系統上安裝的預設 Grid CA 憑證來保護連線安全。
+** *Use custom CA certificate*：使用自訂安全性憑證。
++
+${post_edited_translations.segment}
+
+
+
+
+
+
+
+[[test-the-connection-and-save-the-configuration]]
+=== ${post_edited_translations.segment}
+
+輸入所有值後，必須先測試連線才能儲存組態。StorageGRID 會驗證 LDAP 伺服器的連線設定以及連結使用者名稱格式（如果您已提供）。
+
+.步驟
+. 選擇 *Test connection*。
+. ${post_edited_translations.segment}
++
+** 如果連線設定有效，則會顯示「測試連線成功」訊息。選擇*儲存*以儲存組態。
+** 如果連線設定無效，則會顯示「無法建立測試連線」訊息。選擇*關閉*。然後，解決所有問題並再次測試連線。
+
+
+. 如果您提供了連結使用者名稱格式，請輸入有效聯合使用者的使用者名稱和密碼。
++
+例如，請輸入您自己的使用者名稱和密碼。使用者名稱中請勿包含任何特殊字元，例如 @ 或 /。
+
++
+image:identity_federation_test_connection.png["${post_edited_translations.segment}"]
+
++
+** 如果連線設定有效，則會顯示「測試連線成功」訊息。選擇*儲存*以儲存組態。
+** 如果連線設定、連結使用者名稱格式或測試使用者名稱和密碼無效，則會顯示錯誤訊息。請解決所有問題並再次測試連線。
+
+
+
+
+
+
+[[force-synchronization-with-the-identity-source]]
+== 強制與身分來源同步
+
+StorageGRID 系統會定期從識別來源同步聯盟群組與使用者。如果您想儘快啟用或限制使用者權限，可以強制開始同步。
+
+.步驟
+. 前往身分聯盟頁面。
+. ${post_edited_translations.segment}
++
+同步程序可能需要一些時間，視您的環境而定。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+
+
+[[disable-identity-federation]]
+== ${post_edited_translations.segment}
+
+您可以暫時或永久停用群組和使用者的身分聯合。停用身分聯合後，StorageGRID 與身分來源之間將不再通訊。但是，您已設定的所有設定都將保留，以便您日後可以輕鬆重新啟用身分聯合。
+
+.關於此任務
+在停用身分聯合之前，您應該注意以下事項：
+
+* 已加入聯盟的用戶將無法登入。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 如果單一登入 （SSO） 狀態為 *已啟用* 或 *沙箱模式*，則 *啟用身分識別同盟* 核取方塊會停用。您必須先將單一登入頁面上的 SSO 狀態設為 *已停用*，才能停用身分識別同盟。請參閱 link:../admin/disabling-single-sign-on.html["${post_edited_translations.segment}"]。
+
+
+.步驟
+. 前往身分聯盟頁面。
+. ${post_edited_translations.segment}
+
+
+
+
+[[guidelines-for-configuring-an-openldap-server]]
+== OpenLDAP 伺服器設定指南
+
+${post_edited_translations.segment}
+
+
+CAUTION: 對於非 Active Directory 或 Microsoft Entra ID 的身分識別來源，StorageGRID 不會自動封鎖在外部被停用之使用者的 S3 存取。若要封鎖 S3 存取，請刪除該使用者的任何 S3 金鑰，或將該使用者從所有群組中移除。
+
+
+
+[[memberof-and-refint-overlays]]
+=== ${post_edited_translations.segment}
+
+應啟用 memberof 與 refint 重疊。如需詳細資訊，請參閱 http://www.openldap.org/doc/admin24/index.html["OpenLDAP 文件：版本 2.4 管理員指南"^] 中的反向群組成員資格維護說明。
+
+
+
+[[indexing]]
+=== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* `olcDbIndex: objectClass eq`
+* `olcDbIndex: uid eq,pres,sub`
+* `olcDbIndex: cn eq,pres,sub`
+* `olcDbIndex: entryUUID eq`
+
+
+${post_edited_translations.segment}
+
+請參閱 http://www.openldap.org/doc/admin24/index.html["OpenLDAP 文件：版本 2.4 管理員指南"^] 中關於反向群組成員資格維護的資訊。

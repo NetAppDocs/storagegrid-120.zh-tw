@@ -1,0 +1,404 @@
+---
+permalink: admin/configuring-administrator-client-certificates.html 
+sidebar: sidebar 
+keywords: client certificates, prometheus 
+summary: 用戶端憑證可讓授權的外部用戶端存取 StorageGRID Prometheus 資料庫，為外部工具監控 StorageGRID 提供安全的方式。 
+---
+= 在 StorageGRID 中設定用戶端憑證
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+用戶端憑證可讓授權的外部用戶端存取 StorageGRID Prometheus 資料庫，為外部工具監控 StorageGRID 提供安全的方式。
+
+如果您需要使用外部監控工具存取 StorageGRID，則必須使用 Grid Manager 上傳或產生用戶端憑證，並將憑證資訊複製到外部工具。
+
+參見 link:using-storagegrid-security-certificates.html["管理安全性證書"] 和 link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html["設定自訂伺服器憑證"]。
+
+
+NOTE: 為確保伺服器憑證失效不會中斷執行，當伺服器憑證即將過期時，系統會觸發*憑證頁面上設定的用戶端憑證過期*警報。如有需要，您可以透過選擇 *Configuration* > *Security* > *Certificates*，然後在 Client 標籤上查看用戶端憑證的過期日期，來檢視目前憑證的到期時間。
+
+
+NOTE: 如果您使用金鑰管理伺服器 (KMS) 來保護特殊設定的應用裝置節點上的資料，請參閱有關 link:kms-adding.html["上傳 KMS 用戶端憑證"] 的具體資訊。
+
+.開始之前
+* 您擁有根目錄存取權限。
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 設定用戶端憑證：
++
+** 您擁有管理節點的 IP 位址或網域名稱。
+** 如果您已設定 StorageGRID 管理介面憑證，則您擁有用於設定管理介面憑證的 CA、用戶端憑證和私密金鑰。
+** 若要上傳您自己的憑證，憑證的私密金鑰必須存放在您的本機電腦上。
+** 私鑰必須在建立時儲存或記錄。如果您沒有原始私鑰，則必須建立新的私鑰。
+
+
+* 編輯用戶端憑證：
++
+** 您擁有管理節點的 IP 位址或網域名稱。
+** 若要上傳您自己的憑證或新憑證，私密金鑰、用戶端憑證和 CA （如果使用）都位於您的本機電腦上。
+
+
+
+
+
+
+[[add-client-certificates]]
+== 新增用戶端證書
+
+若要新增用戶端憑證，請使用下列其中一個程序：
+
+* <<管理介面憑證已設定>>
+* <<CA 核發的用戶端證書>>
+* <<從 Grid Manager 產生的憑證>>
+
+
+
+
+[[management-interface-certificate-already-configured]]
+=== 管理介面憑證已設定
+
+如果已使用客戶提供的 CA、用戶端憑證和私密金鑰設定了管理介面憑證，請使用此程序新增用戶端憑證。
+
+.步驟
+. 在 Grid Manager 中，選擇 *Configuration* > *Security* > *Certificates*，然後選擇 *Client* 索引標籤。
+. 選擇 *Add* 。
+. 請輸入憑證名稱。
+. 若要使用外部監控工具存取 Prometheus 計量，請選擇 * 允許 prometheus*。
+. 選擇 *Continue* 。
+. 在「附加憑證」步驟中，上傳管理介面憑證。
++
+.. 選擇 *Upload certificate*。
+.. 選擇 *Browse* ，然後選擇管理介面憑證檔案(`.pem`）。
++
+*** 選擇「用戶端憑證詳細資料」以顯示憑證中繼資料和憑證 PEM。
+*** 選擇 *Copy certificate PEM* 以複製憑證內容並貼到其他位置。
+
+
+.. 選擇 *Create* 以將憑證儲存在 Grid Manager 中。
++
+新證書會顯示在「用戶端」標籤上。
+
+
+
+. <<configure-external-monitoring-tool,設定外部監控工具>>，例如 Grafana。
+
+
+
+
+[[ca-issued-client-certificate]]
+=== CA 核發的用戶端證書
+
+如果未設定管理介面憑證，且您計劃為 Prometheus 新增使用 CA 頒發的用戶端憑證和私密金鑰的用戶端憑證，請使用此程序新增系統管理員用戶端憑證。
+
+.步驟
+. 執行以下步驟link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html["設定管理介面憑證"]。
+. 在 Grid Manager 中，選擇 *Configuration* > *Security* > *Certificates*，然後選擇 *Client* 索引標籤。
+. 選擇 *Add* 。
+. 請輸入憑證名稱。
+. 若要使用外部監控工具存取 Prometheus 計量，請選擇 * 允許 prometheus*。
+. 選擇 *Continue* 。
+. 在「附加憑證」步驟中，上傳用戶端憑證、私鑰和 CA 套裝組合檔案：
++
+.. 選擇 *Upload certificate*。
+.. 選擇 *Browse* ，然後選擇用戶端憑證、私鑰和 CA 套裝組合檔案(`.pem`）。
++
+*** 選擇「用戶端憑證詳細資料」以顯示憑證中繼資料和憑證 PEM。
+*** 選擇 *Copy certificate PEM* 以複製憑證內容並貼到其他位置。
+
+
+.. 選擇 *Create* 以將憑證儲存在 Grid Manager 中。
++
+新證書會顯示在「用戶端」標籤上。
+
+
+
+. <<configure-external-monitoring-tool,設定外部監控工具>>，例如 Grafana。
+
+
+
+
+[[generated-certificate-from-grid-manager]]
+=== 從 Grid Manager 產生的憑證
+
+如果未設定管理介面憑證，且您計劃為 Prometheus 新增用戶端憑證（此憑證使用 Grid Manager 中的產生憑證功能），請使用此程序新增系統管理員用戶端憑證。
+
+.步驟
+. 在 Grid Manager 中，選擇 *Configuration* > *Security* > *Certificates*，然後選擇 *Client* 索引標籤。
+. 選擇 *Add* 。
+. 請輸入憑證名稱。
+. 若要使用外部監控工具存取 Prometheus 計量，請選擇 * 允許 prometheus*。
+. 選擇 *Continue* 。
+. 在「附加憑證」步驟中，選取「產生憑證」。
+. 請提供憑證資訊：
++
+** *主旨*（可選）：憑證擁有者的 X.509 主旨或可分辨名稱 (DN)。
+** *有效天數*：產生的憑證自產生時起有效的天數。
+** *新增金鑰用途擴充*：如果選取（預設且建議），則會將金鑰用途和擴充金鑰用途擴充功能新增至產生的憑證。
++
+這些擴充定義了憑證中包含的金鑰的用途。
+
++
+
+NOTE: 除非您在使用包含這些擴充功能的憑證時，舊版用戶端發生連線問題，否則請保持選取此核取方塊。
+
+
+
+. 選擇 *Generate* 。
+. [[client_cert_details]] 選擇 *用戶端憑證詳細資料* 以顯示憑證中繼資料和憑證 PEM。
++
+
+TIP: 關閉對話方塊後，您將無法檢視憑證私鑰。請將金鑰複製或下載到安全位置。
+
++
+** 選擇 *Copy certificate PEM* 以複製憑證內容並貼到其他位置。
+** 選取 *Download certificate* 以儲存憑證檔案。
++
+指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
+
++
+例如： `storagegrid_certificate.pem`
+
+** 選擇 *Copy private key* 以複製憑證私鑰，以便貼上到其他位置。
+** 選擇 *Download private key* 將私密金鑰儲存為檔案。
++
+指定私鑰檔案名稱和下載位置。
+
+
+
+. 選擇 *Create* 以將憑證儲存在 Grid Manager 中。
++
+新證書會顯示在「用戶端」標籤上。
+
+. 在 Grid Manager 中，選擇 *Configuration* > *Security* > *Certificates*，然後選擇 *Global* 索引標籤。
+. 選擇 *Management Interface certificate*。
+. 選擇 *Use custom certificate*。
+. 從<<client_cert_details,用戶端憑證詳細資料>>步驟上傳 certificate.pem 和 private_key.pem 檔案。無需上傳 CA 套裝組合。
++
+.. 選擇 *Upload certificate*，然後選擇 *Continue*。
+.. 上傳每個憑證檔案 (`.pem`）。
+.. 選擇 *Save* 以將憑證儲存至 Grid Manager 中。
++
+新證書將顯示在管理介面證書頁面上。
+
+
+
+. <<configure-external-monitoring-tool,設定外部監控工具>>，例如 Grafana。
+
+
+
+
+[[configure-external-monitoring-toolconfigure-an-external-monitoring-tool]]
+=== [[configure-external-monitoring-tool]]設定外部監控工具
+
+.步驟
+. 請在外部監控工具（例如 Grafana）上設定以下設定。
++
+.. *名稱*：請輸入連線的名稱。
++
+StorageGRID 不需要此資訊，但您必須提供名稱才能測試連線。
+
+.. *URL*：輸入管理節點的網域名稱或 IP 位址。請指定 HTTPS 和連接埠 9091。
++
+例如： `+https://admin-node.example.com:9091+`
+
+.. 啟用 *TLS Client Auth* 和 *With CA Cert*。
+.. 在 TLS/SSL 驗證詳細資訊下，複製並貼上：+
++
+*** 管理介面 CA 憑證到 **CA Cert**
+*** 用戶端憑證至 **Client Cert**
+*** **Client Key** 的私鑰
+
+
+.. *ServerName*：請輸入管理節點的網域名稱。
++
+ServerName 必須與管理介面憑證中顯示的網域名稱一致。
+
+
+
+. 儲存並測試從 StorageGRID 或本機檔案複製的憑證和私密金鑰。
++
+現在您可以使用外部監控工具存取 StorageGRID 中的 Prometheus 計量。
+
++
+有關計量的資訊，請參閱 link:../monitor/index.html["監控 StorageGRID 的說明"]。
+
+
+
+
+
+[[edit-client-certificates]]
+== 編輯用戶端憑證
+
+您可以編輯系統管理員用戶端憑證以變更其名稱、啟用或停用 Prometheus 存取，或在目前憑證過期時上傳新憑證。
+
+.步驟
+. 選擇 *Configuration* > *Security* > *Certificates*，然後選擇 *Client* 索引標籤。
++
+憑證到期日和 Prometheus 存取權限列於表中。如果憑證即將到期或已過期，表中將顯示一則訊息，並觸發警示。
+
+. 選擇要編輯的憑證。
+. 選擇*編輯*，然後選擇*編輯名稱和權限*。
+. 請輸入憑證名稱。
+. 若要使用外部監控工具存取 Prometheus 計量，請選擇 * 允許 prometheus*。
+. 選擇 *Continue* 以將憑證儲存在 Grid Manager 中。
++
+更新後的憑證顯示在「用戶端」索引標籤上。
+
+
+
+
+
+[[attach-new-client-certificate]]
+== 附加新用戶端證書
+
+當現有憑證過期時，您可以上傳新憑證。
+
+.步驟
+. 選擇 *Configuration* > *Security* > *Certificates*，然後選擇 *Client* 索引標籤。
++
+憑證到期日和 Prometheus 存取權限列於表中。如果憑證即將到期或已過期，表中將顯示一則訊息，並觸發警示。
+
+. 選擇要編輯的憑證。
+. 選擇 *Edit*，然後選擇編輯選項。
++
+[role="tabbed-block"]
+====
+.上傳證書
+--
+複製證書文字並貼上到其他位置。
+
+.. 選擇 *Upload certificate*，然後選擇 *Continue*。
+.. 上傳用戶端憑證名稱(`.pem`）。
++
+選擇「用戶端憑證詳細資料」以顯示憑證中繼資料和憑證 PEM。
+
++
+*** 選取 *Download certificate* 以儲存憑證檔案。
++
+指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
+
++
+例如： `storagegrid_certificate.pem`
+
+*** 選擇 *Copy certificate PEM* 以複製憑證內容並貼到其他位置。
+
+
+.. 選擇 *Create* 以將憑證儲存在 Grid Manager 中。
++
+更新後的憑證顯示在「用戶端」索引標籤上。
+
+
+
+--
+.產生證書
+--
+產生憑證文字，以便貼到其他位置。
+
+.. 選擇 *Generate certificate*。
+.. 請提供憑證資訊：
++
+*** *主旨*（可選）：憑證擁有者的 X.509 主旨或可分辨名稱 (DN)。
+*** *有效天數*：產生的憑證自產生時起有效的天數。
+*** *新增金鑰用途擴充*：如果選取（預設且建議），則會將金鑰用途和擴充金鑰用途擴充功能新增至產生的憑證。
++
+這些擴充定義了憑證中包含的金鑰的用途。
+
++
+
+NOTE: 除非您在使用包含這些擴充功能的憑證時，舊版用戶端發生連線問題，否則請保持選取此核取方塊。
+
+
+
+.. 選擇 *Generate* 。
+.. 選擇「用戶端憑證詳細資料」以顯示憑證中繼資料和憑證 PEM。
++
+
+TIP: 關閉對話方塊後，您將無法檢視憑證私鑰。請將金鑰複製或下載到安全位置。
+
++
+*** 選擇 *Copy certificate PEM* 以複製憑證內容並貼到其他位置。
+*** 選取 *Download certificate* 以儲存憑證檔案。
++
+指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
+
++
+例如： `storagegrid_certificate.pem`
+
+*** 選擇 *Copy private key* 以複製憑證私鑰，以便貼上到其他位置。
+*** 選擇 *Download private key* 將私密金鑰儲存為檔案。
++
+指定私鑰檔案名稱和下載位置。
+
+
+
+.. 選擇 *Create* 以將憑證儲存在 Grid Manager 中。
++
+新證書會顯示在「用戶端」標籤上。
+
+
+
+--
+====
+
+
+
+
+[[download-or-copy-client-certificates]]
+== 下載或複製用戶端憑證
+
+您可以下載或複製用戶端憑證以供其他地方使用。
+
+.步驟
+. 選擇 *Configuration* > *Security* > *Certificates*，然後選擇 *Client* 索引標籤。
+. 選取要複製或下載的憑證。
+. 下載或複製憑證。
++
+[role="tabbed-block"]
+====
+.下載憑證檔案
+--
+下載憑證 `.pem`檔案。
+
+.. 選取 *Download certificate*。
+.. 指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
++
+例如： `storagegrid_certificate.pem`
+
+
+
+--
+.複製憑證
+--
+複製證書文字並貼上到其他位置。
+
+.. 選擇 *Copy certificate PEM*。
+.. 將複製的憑證貼到文字編輯器中。
+.. 將文字檔案以副檔名 `.pem`儲存。
++
+例如： `storagegrid_certificate.pem`
+
+
+
+--
+====
+
+
+
+
+[[remove-client-certificates]]
+== 移除用戶端憑證
+
+如果您不再需要系統管理員用戶端憑證，可以將其移除。
+
+.步驟
+. 選擇 *Configuration* > *Security* > *Certificates*，然後選擇 *Client* 索引標籤。
+. 選取要移除的憑證。
+. 選取 *Delete* ，然後確認。
+
+
+
+NOTE: 若要移除最多 10 個憑證，請在「用戶端」索引標籤上選擇要移除的每個憑證，然後選擇 *Actions* > *Delete*。
+
+憑證移除後，使用該憑證的用戶端必須指定新的用戶端憑證，才能存取 StorageGRID Prometheus 資料庫。

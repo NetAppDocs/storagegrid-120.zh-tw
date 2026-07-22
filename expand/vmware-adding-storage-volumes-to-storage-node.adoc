@@ -1,0 +1,102 @@
+---
+permalink: expand/vmware-adding-storage-volumes-to-storage-node.html 
+sidebar: sidebar 
+keywords: expand, expansion, storage node, add storage volumes, VMware, StorageGRID 
+summary: 如果儲存節點包含的儲存 Volume 少於 16 個，則可以使用 VMware vSphere 新增 Volume 來增加其容量。 
+---
+= 在 StorageGRID 中為 VMware 儲存節點新增儲存設備 Volume
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果儲存節點包含的儲存 Volume 少於 16 個，則可以使用 VMware vSphere 新增 Volume 來增加其容量。
+
+.開始之前
+* 您有權存取 link:../swnodes/index.html["VMware 部署中 StorageGRID 的安裝說明"]。
+* 您擁有  `Passwords.txt` 檔案。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+
+CAUTION: 在軟體升級、恢復程序或其他擴充程序進行期間，請勿嘗試將儲存 Volume 新增至儲存節點。
+
+.關於此任務
+當您新增儲存 Volume 時，儲存節點將會短暫無法使用。您應該一次在一個儲存節點上執行此程序，以避免影響面向用戶端的網格服務。
+
+.步驟
+. 如有必要，安裝新的儲存設備硬體並建立新的 VMware 資料儲存。
+. ${post_edited_translations.segment}
++
+.. 開啟 VMware vSphere Client。
+.. ${post_edited_translations.segment}
+
+
++
+硬碟通常設定為虛擬機器磁碟 (VMDK)。VMDK 更常用且更易於管理，而 RDM 可能為使用較大物件大小（例如，大於 100 MB）的工作負載提供更好的效能。有關向虛擬機器新增硬碟的詳細資訊，請參閱 VMware vSphere 文件。
+
+. 使用 VMware vSphere Client 中的 *Restart Guest OS* 選項重新啟動虛擬機器，或在虛擬機器的 ssh 工作階段中輸入下列命令：``sudo reboot``
++
+
+NOTE: 不要使用 *Power Off* 或 *Reset* 來重新啟動虛擬機器。
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
++
+... 請輸入以下命令： `ssh admin@_grid_node_IP_`
+... 請輸入 `Passwords.txt`檔案中列出的密碼。
+... 輸入以下命令以切換至根目錄： `su -`
+... 輸入 `Passwords.txt`檔案中列出的密碼。當您以 root 身分登入時，提示符號將從 `$`變為 `#`。
+
+
+.. 設定新的儲存設備磁碟區：
++
+`sudo add_rangedbs.rb`
+
++
+${post_edited_translations.segment}
+
+.. ${post_edited_translations.segment}
+.. 如果之前已對任何磁碟區進行過格式化，請決定是否要重新格式化它們。
++
+*** ${post_edited_translations.segment}
+*** 輸入 *n* 可跳過重新格式化。
+
+
+
+
++
+The `setup_rangedbs.sh` 指令碼會自動運作。
+
+. 檢查服務是否正常啟動：
++
+.. ${post_edited_translations.segment}
++
+`sudo storagegrid-status`
+
++
+狀態會自動更新。
+
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
++
+`Ctrl+C`
+
+
+
+. 確認儲存節點已線上：
++
+.. 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+.. 選擇 *節點* > *_儲存節點_* > *工作*。
+.. 如果 *Storage state* 下拉清單設定為「唯讀」或「離線」，請選擇 *Online*。
+.. 選取 *Save* 。
+
+
+. ${post_edited_translations.segment}
+. 請查看 *Volumes* 表中的詳細資訊。
+
+
+.結果
+您可以利用儲存節點的擴充容量來保存物件資料。

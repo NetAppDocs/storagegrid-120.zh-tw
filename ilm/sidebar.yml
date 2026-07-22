@@ -1,0 +1,137 @@
+---
+section: ilm
+title: 使用 ILM 管理物件
+entries:
+- title: 使用 ILM
+  pdf-filename: 使用 ILM 管理 StorageGRID 物件
+  url: "/ilm/index.html"
+- title: ILM 和物件生命週期
+  entries:
+  - title: ILM 如何在物件的整個生命週期中運作
+    url: "/ilm/how-ilm-operates-throughout-objects-life.html"
+  - title: 物件的擷取方式
+    entries:
+    - title: 擷取選項
+      url: "/ilm/data-protection-options-for-ingest.html"
+    - title: 擷取選項的優點、缺點和限制
+      url: "/ilm/advantages-disadvantages-of-ingest-options.html"
+  - title: 物件的儲存方式（複寫或銷毀編碼）
+    entries:
+    - title: "${post_edited_translations.segment}"
+      url: "/ilm/what-replication-is.html"
+    - title: 為什麼不應該使用單一複本複寫
+      url: "/ilm/why-you-should-not-use-single-copy-replication.html"
+    - title: "${post_edited_translations.segment}"
+      url: "/ilm/what-erasure-coding-is.html"
+    - title: 什麼是銷毀編碼方案？
+      url: "/ilm/what-erasure-coding-schemes-are.html"
+    - title: 銷毀編碼的優點、缺點和要求
+      url: "/ilm/advantages-disadvantages-and-requirements-for-ec.html"
+  - title: 如何確定物件保留
+    url: "/ilm/how-object-retention-is-determined.html"
+  - title: "${post_edited_translations.segment}"
+    url: "/ilm/how-objects-are-deleted.html"
+- title: 建立並分配儲存設備等級
+  url: "/ilm/creating-and-assigning-storage-grades.html"
+- title: 使用儲存資源池
+  entries:
+  - title: 什麼是儲存資源池
+    url: "/ilm/what-storage-pool-is.html"
+  - title: 建立儲存資源池的準則
+    url: "/ilm/guidelines-for-creating-storage-pools.html"
+  - title: 啟用站台遺失保護
+    url: "/ilm/using-multiple-storage-pools-for-cross-site-replication.html"
+  - title: 建立儲存資源池
+    url: "/ilm/creating-storage-pool.html"
+  - title: "${post_edited_translations.segment}"
+    url: "/ilm/viewing-storage-pool-details.html"
+  - title: 編輯儲存資源池
+    url: "/ilm/editing-storage-pool.html"
+  - title: 移除儲存資源池
+    url: "/ilm/removing-storage-pool.html"
+- title: 使用雲端儲存資源池
+  entries:
+  - title: "${post_edited_translations.segment}"
+    url: "/ilm/what-cloud-storage-pool-is.html"
+  - title: 雲端儲存資源池物件的生命週期
+    url: "/ilm/lifecycle-of-cloud-storage-pool-object.html"
+  - title: 何時使用雲端儲存資源池
+    url: "/ilm/when-to-use-cloud-storage-pools.html"
+  - title: 雲端儲存池的注意事項
+    url: "/ilm/considerations-for-cloud-storage-pools.html"
+  - title: 比較雲端儲存資源池和 CloudMirror 複寫
+    url: "/ilm/comparing-cloud-storage-pools-to-cloudmirror-replication.html"
+  - title: 建立雲端儲存池
+    url: "/ilm/creating-cloud-storage-pool.html"
+  - title: 檢視雲端儲存資源池詳細資料
+    url: "/ilm/view-cloud-storage-pool-details.html"
+  - title: 編輯雲端儲存資源池
+    url: "/ilm/editing-cloud-storage-pool.html"
+  - title: 移除雲端儲存資源池
+    url: "/ilm/removing-cloud-storage-pool.html"
+  - title: 雲端儲存資源池疑難排解
+    url: "/ilm/troubleshooting-cloud-storage-pools.html"
+- title: 管理糾刪碼設定檔
+  url: "/ilm/manage-erasure-coding-profiles.html"
+- title: 設定 S3 區域
+  url: "/ilm/configuring-regions-optional-and-s3-only.html"
+- title: 建立 ILM 規則
+  entries:
+  - title: 使用規則來管理物件
+    url: "/ilm/what-ilm-rule-is.html"
+  - title: 存取建立 ILM 規則精靈
+    url: "/ilm/access-create-ilm-rule-wizard.html"
+  - title: 步驟 1（共 3 步）：輸入詳細資料
+    url: "/ilm/create-ilm-rule-enter-details.html"
+  - title: 步驟 2（共 3 步）：定義放置位置
+    url: "/ilm/create-ilm-rule-define-placements.html"
+  - title: 在 ILM 規則中使用最後存取時間
+    url: "/ilm/using-last-access-time-in-ilm-rules.html"
+  - title: 步驟 3（共 3 步驟）：選擇擷取行為
+    url: "/ilm/create-ilm-rule-select-ingest-behavior.html"
+  - title: 建立預設 ILM 規則
+    url: "/ilm/creating-default-ilm-rule.html"
+- title: 管理 ILM 策略
+  entries:
+  - title: "${post_edited_translations.segment}"
+    url: "/ilm/ilm-policy-overview.html"
+  - title: 建立 ILM 原則
+    url: "/ilm/creating-ilm-policy.html"
+  - title: ILM 原則模擬範例
+    url: "/ilm/simulating-ilm-policy-examples.html"
+  - title: 管理 ILM 原則標籤
+    url: "/ilm/manage-ilm-policy-tags.html"
+  - title: 使用物件中繼資料尋找驗證 ILM 原則
+    url: "/ilm/verifying-ilm-policy-with-object-metadata-lookup.html"
+- title: 使用 ILM 原則和規則
+  url: "/ilm/working-with-ilm-rules-and-ilm-policies.html"
+- title: 使用 S3 物件鎖定
+  entries:
+  - title: 使用 S3 Object Lock 管理物件
+    url: "/ilm/managing-objects-with-s3-object-lock.html"
+  - title: S3 物件鎖定任務
+    url: "/ilm/workflow-for-s3-object-lock.html"
+  - title: S3 物件鎖定的要求
+    url: "/ilm/requirements-for-s3-object-lock.html"
+  - title: 全域啟用 S3 物件鎖定
+    url: "/ilm/enabling-s3-object-lock-globally.html"
+  - title: 解決更新 S3 物件鎖定或舊版合規性組態時出現的一致性錯誤
+    url: "/ilm/resolving-consistency-errors-when-updating-bucket-s3-object-lock-configuration.html"
+- title: ILM 規則和原則範例
+  entries:
+  - title: 範例 1：物件儲存的 ILM 規則和原則
+    url: "/ilm/example-1-ilm-rules-and-policy-for-object-storage.html"
+  - title: 範例 2：EC 物件大小過濾的 ILM 規則和原則
+    url: "/ilm/example-2-ilm-rules-and-policy-for-ec-object-size-filtering.html"
+  - title: 範例 3：ILM 規則和原則，以更好地保護映像檔案
+    url: "/ilm/example-3-ilm-rules-and-policy-for-better-protection-for-image-files.html"
+  - title: 範例 4：S3 版本化物件的 ILM 規則和原則
+    url: "/ilm/example-4-ilm-rules-and-policy-for-s3-versioned-objects.html"
+  - title: 範例 5：ILM 嚴格擷取行為的規則和原則
+    url: "/ilm/example-5-ilm-rules-and-policy-for-strict-ingest-behavior.html"
+  - title: 範例 6：變更 ILM 原則
+    url: "/ilm/example-6-changing-ilm-policy.html"
+  - title: 範例 7：符合 S3 物件鎖定要求的 ILM 原則
+    url: "/ilm/example-7-compliant-ilm-policy-for-s3-object-lock.html"
+  - title: 範例 8：S3 儲存桶生命週期和 ILM 原則的優先順序
+    url: "/ilm/example-8-priorities-for-s3-bucket-lifecycle-and-ilm-policy.html"

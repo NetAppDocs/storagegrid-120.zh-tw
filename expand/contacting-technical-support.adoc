@@ -1,0 +1,61 @@
+---
+permalink: expand/contacting-technical-support.html 
+sidebar: sidebar 
+keywords: troubleshoot expansion, contact technical support, StorageGRID 
+summary: ${post_edited_translations.segment} 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+.步驟
+. 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
+. 連接到發生故障的擴展節點：
++
+.. 輸入以下命令：``ssh -p 8022 admin@_grid_node_IP_``
++
+連接埠 8022 是基礎作業系統的 SSH 連接埠，而連接埠 22 是執行 StorageGRID 的 Container 引擎的 SSH 連接埠。
+
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
++
+在您以 root 登入之後，提示字元會從 `$`變更為 `#`。
+
+. ${post_edited_translations.segment}
++
+[cols="1a,2a"]
+|===
+| 平台 | ${post_edited_translations.segment} 
+
+
+ a| 
+VMware
+ a| 
+** `/var/log/daemon.log`
+** `/var/log/storagegrid/daemon.log`
+** `/var/log/storagegrid/nodes/<node-name>.log`
+
+
+
+
+ a| 
+Linux
+ a| 
+** `/var/log/storagegrid/daemon.log`
+** `/etc/storagegrid/nodes/<node-name>.conf`（針對每個故障節點）
+** `/var/log/storagegrid/nodes/<node-name>.log` （針對每個故障節點；可能不存在）
+
+
+|===
+. 如果您已允許外部 SSH 存取，請在完成工作時 link:../admin/manage-external-ssh-access.html["區塊存取"]。
+

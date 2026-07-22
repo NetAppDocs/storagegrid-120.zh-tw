@@ -1,0 +1,41 @@
+---
+indexpage:
+  title: 安裝、升級和 Hotfix StorageGRID
+  summary: StorageGRID 系統由獨立的硬體型節點和軟體型節點組成。首先，您需要為每個應用裝置節點安裝硬體，並設定每個 Linux 或 VMware
+    主機。然後，在每個應用裝置或軟體主機上安裝 StorageGRID 軟體，並將這些節點連接成一個網格。
+  keywords: install, upgrade, hotfix
+  lead: StorageGRID 系統由獨立的硬體型節點和軟體型節點組成。首先，您需要為每個應用裝置節點安裝硬體，並設定每個 Linux 或 VMware 主機。然後，在每個應用裝置或軟體主機上安裝
+    StorageGRID 軟體，並將這些節點連接成一個網格。
+  tiles:
+  - title: 快速入門
+    links:
+    - title: 應用裝置硬體
+      url: https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html
+    - title: 基於軟體的節點
+      url: "../swnodes/index.html"
+  - title: 基於軟體的節點
+    links:
+    - title: 準備材料
+      url: "../swnodes/required-materials.html"
+    - title: 自動化 Linux 安裝
+      url: "../swnodes/automating-installation-linux.html"
+    - title: 自動化 VMware 安裝
+      url: "../swnodes/automating-grid-node-deployment-in-vmware-vsphere.html"
+    - title: 部署 Linux
+      url: "../swnodes/creating-node-configuration-files.html"
+    - title: 部署 VMware
+      url: "../swnodes/collecting-information-about-your-deployment-environment.html"
+    - title: 完整的軟體型節點安裝
+      url: "../swnodes/navigating-to-grid-manager.html"
+  - title: 升級或 Hotfix
+    links:
+    - title: 新增功能
+      url: "../release-notes/whats-new.html"
+    - title: 預估完成時間
+      url: "../upgrade/estimating-time-to-complete-upgrade.html"
+    - title: 升級過程中系統會受到哪些影響
+      url: "../upgrade/how-your-system-is-affected-during-upgrade.html"
+    - title: 升級快速入門
+      url: "../upgrade/upgrade-workflow.html"
+    - title: 套用 Hotfix
+      url: "../maintain/storagegrid-hotfix-procedure.html"

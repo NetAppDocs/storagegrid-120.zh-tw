@@ -1,0 +1,114 @@
+---
+permalink: s3/deprecated-put-bucket-compliance-request.html 
+sidebar: sidebar 
+keywords: S3 REST API, S3 operations, PUT deprecated compliance requests 
+summary: PUT Bucket 法規遵循請求已棄用。但是，您仍然可以使用此請求來修改現有舊版符合法規儲存桶的法規遵循設定。 
+---
+= StorageGRID 中已棄用的 PUT Bucket 合規性要求
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+PUT Bucket 法規遵循請求已棄用。但是，您仍然可以使用此請求來修改現有舊版符合法規儲存桶的法規遵循設定。例如，您可以將現有儲存桶置於合法持有或增加其保留期間。
+
+[NOTE]
+====
+先前 StorageGRID 版本中提供的 StorageGRID 法規遵循功能已過時，並已由 S3 Object Lock 取代。如需詳細資訊，請參閱下列內容：
+
+* link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Hybrid_Cloud_Infrastructure/StorageGRID/How_to_manage_legacy_Compliant_buckets_in_StorageGRID_11.5["NetApp 知識庫：如何在 StorageGRID 11.5 中管理舊版符合法規的儲存桶"^]
+
+
+====
+您必須擁有 s3:PutBucketCompliance 權限，或者是帳戶根目錄使用者，才能完成此操作。
+
+發出 PUT Bucket 法規遵循請求時，必須為法規遵循設定的每個欄位指定一個值。
+
+
+
+[[request-example]]
+== 請求範例
+
+此範例請求修改名為 `mybucket`的儲存貯體的法規遵循設定。在此範例中， `mybucket`中的物件將從物件擷取至網格時起保留兩年（1,051,200 分鐘），而非一年。此儲存貯體沒有合法持有。每個物件將在兩年後自動刪除。
+
+[listing, subs="specialcharacters,quotes"]
+----
+PUT /mybucket/?x-ntap-sg-compliance HTTP/1.1
+Date: _date_
+Authorization: _authorization name_
+Host: _host_
+Content-Length: 152
+
+<SGCompliance>
+  <RetentionPeriodMinutes>1051200</RetentionPeriodMinutes>
+  <LegalHold>false</LegalHold>
+  <AutoDelete>true</AutoDelete>
+</SGCompliance>
+----
+[cols="1a,2a"]
+|===
+| Name | 說明 
+
+
+ a| 
+RetentionPeriodMinutes
+ a| 
+新增至此儲存桶中的物件的保留期間，以分鐘為單位。保留期間從物件納入網格時開始計算。
+
+*重要提示* 為 RetentionPeriodMinutes 指定新值時，必須指定等於或大於儲存桶目前保留期間的值。儲存桶的保留期間設定後，無法減少該值，只能增加。
+
+
+
+ a| 
+LegalHold
+ a| 
+* True：此儲存桶目前處於合法持有狀態。即使物件的保留期間已過，在合法持有解除之前，也無法刪除此儲存桶中的物件。
+* False：此儲存桶目前未處於合法持有。此儲存桶中的物件可在其保留期間到期後刪除。
+
+
+
+
+ a| 
+AutoDelete
+ a| 
+* 正確：除非儲存桶受到合法持有，否則此儲存桶中的物件將在其保留期間到期時自動刪除。
+* 錯誤：此儲存桶中的物件不會在保留期間到期後自動刪除。如果您需要刪除這些物件，則必須手動刪除。
+
+
+|===
+
+
+[[consistency-for-compliance-settings]]
+== 法規遵循設定的一致性
+
+當您使用 PUT Bucket 法規遵循要求更新 S3 儲存桶的法規遵循設定時，StorageGRID 會嘗試在整個網格中更新該儲存桶的中繼資料。預設情況下，StorageGRID 使用 *Strong-global* 一致性來確保所有資料中心站台和所有包含儲存桶中繼資料的儲存節點，對於已變更的法規遵循設定都具有寫入後讀取一致性。
+
+如果由於資料中心站台或站台上的多個 Storage Node 無法使用，StorageGRID 無法達到 *Strong-global* 一致性，則回應的 HTTP 狀態碼為 `503 Service Unavailable.`
+
+如果您收到此回應，則必須聯絡網格系統管理員，以確保盡快提供所需的儲存設備服務。如果網格系統管理員無法在每個站台提供足夠的儲存節點，技術支援可能會指導您透過強制執行 *Strong-site* 一致性來重試失敗的請求。
+
+
+CAUTION: 除非技術支援人員指示您這樣做，並且您了解使用此層級可能造成的後果，否則切勿強制 PUT bucket 法規遵循採用 *Strong-site* 一致性。
+
+當一致性降低至「強站台」時，StorageGRID 僅保證更新後的法規遵循設定對站台內的用戶端請求具有寫入後讀取一致性。這意味著在所有站台和儲存節點可用之前，StorageGRID 系統可能會暫時為該儲存桶設定多個不一致的設定。這些不一致的設定可能會導致意外且不希望出現的行為。例如，如果您將儲存桶置於合法持有狀態，並強制降低一致性，則該儲存桶先前的法規遵循設定（即關閉合法持有）可能在某些資料中心站台仍然有效。因此，您認為處於合法持有狀態的物件，可能會在其保留期間到期時遭使用者刪除，或在啟用 AutoDelete 的情況下遭其刪除。
+
+若要強制使用 *Strong-site* 一致性，請重新發出 PUT Bucket 法規遵循請求，並包含 `Consistency-Control` HTTP 請求標頭，如下所示：
+
+[listing]
+----
+PUT /mybucket/?x-ntap-sg-compliance HTTP/1.1
+Consistency-Control: strong-site
+----
+
+
+[[error-responses]]
+== 錯誤回應
+
+* 如果儲存桶的建立不符合法規，則回應的 HTTP 狀態代碼為 `404 Not Found`。
+* 如果 `RetentionPeriodMinutes`請求中的值小於儲存桶的目前保留期間，則 HTTP 狀態碼為 `400 Bad Request`。
+
+
+.相關資訊
+link:deprecated-put-bucket-request-modifications-for-compliance.html["已棄用：為法規遵循而對 PUT Bucket 請求進行的修改"]

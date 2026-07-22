@@ -1,0 +1,47 @@
+---
+permalink: audit/sade-security-audit-enable.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, SADE, Security Audit Enable 
+summary: 此訊息表示來源服務（節點 ID）已還原稽核訊息日誌記錄。StorageGRID 再次收集和傳遞稽核訊息。 
+---
+= StorageGRID 中安全稽核啟用的 SADE 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+此訊息表示來源服務（節點 ID）已還原稽核訊息日誌記錄。StorageGRID 再次收集和傳遞稽核訊息。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+AETM
+ a| 
+啟用方法
+ a| 
+用於啟用稽核的方法。
+
+
+
+ a| 
+AEUN
+ a| 
+使用者名稱
+ a| 
+執行啟用稽核記錄命令的使用者名稱。
+
+
+
+ a| 
+RSLT
+ a| 
+結果
+ a| 
+此欄位值為 NONE。RSLT 是必填訊息欄位，但與此訊息無關。之所以使用 NONE 而不是 SUCS，是為了避免此訊息被過濾。
+
+|===
+該訊息表明記錄之前已停用（SADD），但現在已恢復。這通常僅在批次擷取期間使用，以改善系統效能。批量活動結束後，稽核功能將恢復，且停用稽核的功能將被永久封鎖。

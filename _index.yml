@@ -1,0 +1,87 @@
+---
+indexpage:
+  title: StorageGRID 12.0 軟體文件
+  summary: NetApp StorageGRID 是一套軟體定義物件儲存套件，支援公有雲、私有雲和混合多雲環境中的各種使用案例。StorageGRID 提供對
+    Amazon S3 API 的原生支援，並提供業界領先的創新功能，例如自動化生命週期管理，能夠長期且經濟高效地儲存、保護及保存非結構化資料。
+  keywords: storagegrid documentation
+  lead: NetApp StorageGRID 是一套軟體定義物件儲存套件，支援公有雲、私有雲和混合多雲環境中的各種使用案例。StorageGRID 提供對
+    Amazon S3 API 的原生支援，並提供業界領先的創新功能，例如自動化生命週期管理，能夠長期且經濟高效地儲存、保護及保存非結構化資料。
+  tiles:
+  - title: 開始使用
+    links:
+    - title: 新增功能
+      url: "/release-notes/whats-new.html"
+    - title: 了解 StorageGRID
+      url: "/primer/index.html"
+    - title: "${post_edited_translations.segment}"
+      url: "/network/index.html"
+    - title: StorageGRID 快速入門
+      url: "/primer/quick-start.html"
+  - title: 安裝、升級和 Hotfix
+    links:
+    - title: 安裝 StorageGRID 設備
+      url: https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html
+    - title: 在基於軟體的節點上安裝 StorageGRID
+      url: "/swnodes/index.html"
+    - title: 升級至新的 StorageGRID 版本
+      url: "/upgrade/index.html"
+    - title: 套用 Hotfix
+      url: "/maintain/storagegrid-hotfix-procedure.html"
+  - title: 設定網格
+    links:
+    - title: 管理 StorageGRID
+      url: "/admin/index.html"
+    - title: 使用 ILM 管理物件
+      url: "/ilm/index.html"
+    - title: "${post_edited_translations.segment}"
+      url: "/harden/index.html"
+    - title: 設定 StorageGRID 以供 FabricPool 使用
+      url: "/fabricpool/index.html"
+  - title: 管理物件
+    links:
+    - title: 使用租戶帳戶
+      url: "/tenant/index.html"
+    - title: 使用 S3 REST API
+      url: "/s3/index.html"
+    - title: 使用 Swift REST API （已停止維護）
+      url: "/swift/index.html"
+  - title: 監控和故障排除
+    links:
+    - title: 監控您的網格
+      url: "/monitor/index.html"
+    - title: 排除網格故障
+      url: "/troubleshoot/index.html"
+    - title: "${post_edited_translations.segment}"
+      url: "/audit/index.html"
+  - title: 擴展和維護您的網格
+    links:
+    - title: 新增磁碟區、節點和站台
+      url: "/expand/index.html"
+    - title: 維護您的網格
+      url: "/maintain/index.html"
+    - title: 恢復或替換節點
+      url: "/maintain/warnings-and-considerations-for-grid-node-recovery.html"
+    - title: 維護 StorageGRID 設備
+      url: https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/index.html
+  - title: 附加說明
+    links:
+    - title: StorageGRID 解決方案和資源
+      url: https://docs.netapp.com/us-en/storagegrid-enable/index.html
+    - title: StorageGRID 視訊程式庫
+      url: https://www.youtube.com/playlist?list=PLdXI3bZJEw7nh2wGRA65iulXhtXwLiqrY
+    - title: NetApp 學習服務
+      url: https://www.netapp.com/support-and-training/netapp-university/
+    - title: 使用 NetApp Console 管理 StorageGRID
+      url: https://docs.netapp.com/us-en/storage-management-storagegrid/index.html
+  - title: 更多資源
+    links:
+    - title: StorageGRID 支援頁面
+      url: https://mysupport.netapp.com/site/products/all/details/5d9f1107e01d9c0001ee50f6/guideme-tab
+    - title: NetApp 互作業性矩陣工具（IMT）
+      url: https://imt.netapp.com/matrix/#welcome
+    - title: StorageGRID 知識庫
+      url: https://kb.netapp.com/Advice_and_Troubleshooting/Hybrid_Cloud_Infrastructure/StorageGRID
+    - title: NetApp 部落格
+      url: https://netapp.com/blog/
+    - title: NetApp 社群
+      url: https://community.netapp.com/

@@ -1,0 +1,39 @@
+---
+permalink: tenant/testing-connection-for-platform-services-endpoint.html 
+sidebar: sidebar 
+keywords: how to test platform services endpoint connection 
+summary: 如果與平台服務的連線已變更，您可以測試端點的連線，以驗證目的地資源是否存在，以及是否可以使用您指定的憑證存取該資源。 
+---
+= 測試 StorageGRID 平台服務端點的連線
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果與平台服務的連線已變更，您可以測試端點的連線，以驗證目的地資源是否存在，以及是否可以使用您指定的憑證存取該資源。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於一個擁有 link:tenant-management-permissions.html["管理端點或根存取權限"] 的使用者群組。
+
+
+.關於此任務
+StorageGRID 不會驗證憑證是否具有正確的權限。
+
+.步驟
+. 選擇 *STORAGE (S3)* > *Platform services endpoints*。
++
+「平台服務端點」頁面隨即出現，並顯示已設定的平台服務端點清單。
+
+. 選擇要測試其連線的端點。
++
+顯示端點詳情頁面。
+
+. 選擇 *Test connection*。
++
+** 如果使用指定的憑證可以存取端點，則會顯示成功訊息。每個站台上的一個節點都會驗證與端點的連線。
+** 如果端點驗證失敗，則會顯示錯誤訊息。如果需要修改端點以修正錯誤，請選擇「組態」並更新資訊。然後，選擇「測試並儲存變更」。
+
+
+

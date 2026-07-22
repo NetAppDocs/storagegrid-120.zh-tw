@@ -1,0 +1,52 @@
+---
+permalink: maintain/selecting-start-recovery-to-configure-appliance-storage-node.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, appliance storage node 
+summary: ${post_edited_translations.segment} 
+---
+= 選擇 Start Recovery 以配置 StorageGRID 應用裝置儲存節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 您擁有佈建密碼。
+* ${post_edited_translations.segment}
+* 您擁有所有銷毀編碼資料修復工作的開始日期。
+
+
+.步驟
+. 從 Grid Manager 中，選擇 *Maintenance* > *Tasks* > *Recovery*。
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. 請輸入*佈建密碼*。
+. ${post_edited_translations.segment}
++
+image:4b_select_recovery_node.png["螢幕截圖顯示「維護 > 恢復」頁面"]
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
++
+image:recovery_reset_button.gif["顯示階段等待手動步驟的螢幕截圖"]
+
++
+
+NOTE: 在恢復過程中的任何階段，您都可以按一下 *Reset* 以開始新的恢復。此時會出現一個對話框，提示若您重設程序，節點將處於不確定狀態。
+
++
+image:recovery_reset_warning.gif["${post_edited_translations.segment}"]
+
++
+如果要在重置程序後重試恢復，則必須透過在節點上執行 `sgareinstall`，將應用裝置節點還原至預安裝狀態。
+
+

@@ -1,0 +1,24 @@
+---
+permalink: upgrade/checking-systems-condition-before-upgrading-software.html 
+sidebar: sidebar 
+keywords: upgrade, grid tasks, firewall, ports 
+summary: 在升級 StorageGRID 系統之前，請確認系統已準備好容納升級。確保系統運作正常，並且所有網格節點均可正常運作。 
+---
+= 在升級之前、請檢查 StorageGRID 系統的狀況
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在升級 StorageGRID 系統之前，請確認系統已準備好容納升級。確保系統運作正常，並且所有網格節點均可正常運作。
+
+.步驟
+. 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+. 檢查並解決所有未解決的警報。
+. 請參閱 link:../network/internal-grid-node-communications.html["${post_edited_translations.segment}"] 和 link:../network/external-communications.html["${post_edited_translations.segment}"]，以確保在升級之前已開啟 StorageGRID 12.0 所需的所有連接埠。
++
+
+NOTE: 升級至 StorageGRID 12.0 時，不需要額外的連接埠。
+
+

@@ -1,0 +1,181 @@
+---
+permalink: maintain/adding-to-or-changing-subnet-lists-on-grid-network.html 
+sidebar: sidebar 
+keywords: storagegrid, subnet list, grid network 
+summary: ${post_edited_translations.segment} 
+---
+= 在 StorageGRID 中新增或變更 Grid Network 上的子網路清單
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您擁有  `Passwords.txt` 檔案。
+
+
+您可以在 Grid Network Subnet List 中新增、刪除或變更子網路。變更將會影響網格中所有節點的路由。
+
+
+NOTE: 如果您僅需變更 Grid Network Subnet List，請使用 Grid Manager 新增或變更網路組態。否則，如果由於網路組態問題導致無法存取 Grid Manager，或者您同時執行 Grid Network 路由變更和其他網路變更，請使用 Change IP 工具。
+
+[NOTE]
+====
+${post_edited_translations.segment}
+
+* 192,168,130,101
+* 192,168,130,121
+* 192,168,131,101
+* 192,168,131,121
+* 192,168,130,102
+* 192,168,130,122
+* 192,168,131,102
+* 192,168,131,122
+* 198.51.100.2
+* 198.51.100.4
+
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 198.51.100.0/24，因為此子網路範圍包含 IP 位址 198.51.100.2 和 198.51.100.4
+
+
+====
+.步驟
+. 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+. 輸入以下命令啟動 Change IP 工具： `change-ip`
+. 依照提示輸入配置密碼。
++
+主選單出現。
+
++
+image:change_ip_tool_main_menu.png["快照顯示變更 IP 工具的歡迎畫面"]
+
+. 在主選單中，選擇編輯 Grid Network 子網路的選項（選項 *4*）。
++
+
+NOTE: 網格網路子網路清單的變更為全網格範圍。
+
+. 請選擇以下其中一項：
++
+--
+** 輸入以下命令新增子網路： `add CIDR`
+** 輸入以下命令刪除子網路： `del CIDR`
+** 輸入以下命令設定子網路清單： `set CIDR`
+
+
+--
++
+--
+
+NOTE: 對於所有命令，您可以使用以下格式輸入多個位址： `add CIDR, CIDR`
+
+範例： `add 172.14.0.0/16, 172.15.0.0/16, 172.16.0.0/16`
+
+
+TIP: 您可以使用「向上箭頭」將先前輸入的值調回目前的輸入提示符，然後視需要進行編輯，從而減少所需的輸入量。
+
+${post_edited_translations.segment}
+
+image:change_ip_tool_gnsl_sample_input.gif["快照由周圍文字描述"]
+
+--
+. 準備好後，輸入 *q* 返回主選單畫面。您的變更將保留，直到清除或套用為止。
+. 請選擇以下其中一項：
++
+** 選擇選項 *5* 可在輸出中顯示編輯內容，該輸出為隔離的，僅顯示已變更的項目。變更內容將以綠色（新增）或紅色（刪除）醒目提示，如下方範例輸出所示：
++
+image:change_ip_tool_gnsl_sample_output.gif["快照由周圍文字描述"]
+
+** 選擇選項 *6* 可在顯示完整組態的輸出中顯示編輯內容。變更內容以綠色（新增）或紅色（刪除）醒目提示。
++
+
+NOTE: 某些命令列介面可能會使用刪除線格式顯示新增和刪除的內容。
+
+
+
+. 選擇選項 *7* 以驗證所有階段性變更。
++
+此驗證可確保遵守網格、管理網路和用戶端網路的規則，例如使用重疊子網路。
+
+. （可選）選擇選項 *8* 以儲存所有接移的變更，稍後返回繼續進行變更。
++
+此選項可讓您退出 Change IP 工具，並在稍後再次啟動，而不會遺失任何未套用的變更。
+
+. 執行下列其中一項作業：
++
+** 如果要清除所有變更而不儲存或套用新的網路組態，請選擇選項 *9*。
+** 如果您已準備好套用變更並資源配置新的網路組態，請選擇選項 *10*。在資源配置期間，輸出會顯示套用更新時的狀態，如下列範例輸出所示：
++
+[listing]
+----
+Generating new grid networking description file...
+
+Running provisioning...
+
+Updating grid network configuration on Name
+----
+
+
+. ${post_edited_translations.segment}
++
+** *apply*：立即套用變更，並在必要時自動重新啟動每個節點。
++
+如果新的網路組態無需任何外部變更即可與舊的網路組態同時運行，則可以使用 *apply* 選項進行完全自動化的組態變更。
+
+** ${post_edited_translations.segment}
++
+如果要使新的網路組態生效，需要對實體或虛擬連網組態進行變更，則必須使用 *stage* 選項，關閉受影響的節點，進行必要的實體連網變更，然後重新啟動受影響的節點。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+** *取消*：此時請勿進行任何網路變更。
++
+如果您之前不知道建議的變更需要重新啟動節點，您可以推遲變更以盡量減少對使用者的影響。選取 *cancel* 將返回主選單並保留您的變更，以便您稍後套用。
+
+
+
++
+${post_edited_translations.segment}
+
+. 如果組態因錯誤而停止，則可以使用下列選項：
++
+** 若要終止 IP 變更程序並返回主選單，請輸入 *a*。
+** 若要重試失敗的作業，請輸入 *r*。
+** 若要繼續進行下一步操作，請輸入 *c*。
++
+失敗的作業稍後可以透過從主功能表選取選項 *10* （套用變更）來重試。在所有作業成功完成之前，IP 變更程序將不會完成。
+
+** ${post_edited_translations.segment}
+
+
+. ${post_edited_translations.segment}
++
+.. 選擇 *Maintenance* > *System* > *Recovery package*。
+.. 請輸入佈建密碼。
+
+
++
+
+CAUTION: 恢復套件檔案必須受到保護，因為它包含可用於從 StorageGRID 系統取得資料的加密金鑰和密碼。
+
+. 如果您已允許外部 SSH 存取，link:../admin/manage-external-ssh-access.html["區塊存取"]請在完成新增或變更子網路清單後執行此操作。
+

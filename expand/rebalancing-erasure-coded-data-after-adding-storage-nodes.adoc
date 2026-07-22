@@ -1,0 +1,140 @@
+---
+permalink: expand/rebalancing-erasure-coded-data-after-adding-storage-nodes.html 
+sidebar: sidebar 
+keywords: erasure coding, EC, rebalancing, site rebalance procedure, StorageGRID 
+summary: 新增 Storage Nodes 後，您可以使用銷除編碼重新平衡程序，在現有和新的 Storage Nodes 之間重新分配銷除編碼片段。 
+---
+= 在 StorageGRID 系統新增節點後，重新平衡銷毀編碼資料。
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* ${post_edited_translations.segment}
+* 您已審閱 link:considerations-for-rebalancing-erasure-coded-data.html["${post_edited_translations.segment}"]。
+* 您瞭解此程序不會移動複寫的物件資料，且 EC 重新平衡程序也不會移動複寫的資料。然而，在決定要將 EC 資料移動到何處時，會將複寫的資料納入考量。
+* 您擁有  `Passwords.txt` 檔案。
+
+
+.${post_edited_translations.segment}
+開始程序之前，請注意以下事項：
+
+* ${post_edited_translations.segment}
+* EC 重新平衡程序會暫時預留大量儲存設備。可能會觸發儲存警報，但會在重新平衡完成後解除警報。如果預留的儲存設備不足，EC 重新平衡程序將會失敗。無論 EC 重新平衡程序成功與否，預留的儲存空間都會在程序完成後釋放。
+* 如果在 EC 重新平衡過程中某個 Volume 離線，則重新平衡程序將會終止。任何已移動的資料片段都將保留在新位置，不會遺失任何資料。
++
+所有 Volume 恢復線上後，您可以重新執行程序。
+
+* 當 EC 重新平衡程序運作時，ILM 作業和 S3 用戶端作業的效能可能會受到影響。
++
+
+NOTE: 如果上傳物件（或物件部分）的 S3 API 作業需要超過 24 小時才能完成，則在 EC 重新平衡程序期間可能會失敗。如果適用的 ILM 規則在擷取時使用 Balanced 或 Strict 放置，則長時間的 PUT 作業將會失敗。將會回報下列錯誤： `500 Internal Server Error`。
+
+* *工作完成條件*。當符合下列任一條件時，即視為 EC 重新平衡程序已完成：
++
+** ${post_edited_translations.segment}
+** 所有節點中的資料與目標資料分區之間的偏差均在 5% 以內。
+** ${post_edited_translations.segment}
+
+
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 選取 *Nodes* 。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 重複這些步驟以檢視網站上的其他儲存節點。
+
+
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 開始操作：
++
+${post_edited_translations.segment}
+
++
+對於 "_site-name_"，指定您新增一個或多個 Storage Node 的第一個站台。將  `site-name` 括在雙引號中。
+
++
+${post_edited_translations.segment}
+
+. 複製作業 ID。
+. ${post_edited_translations.segment}
++
+** 若要檢視單一 EC 重新平衡程序的狀態：
++
+`rebalance-data status --job-id _job-id_`
+
++
+對於 `_job-id_`，請指定啟動該程序時傳回的 ID。
+
+** ${post_edited_translations.segment}
++
+`rebalance-data status`
+
++
+[NOTE]
+====
+如需有關 rebalance-data 命令的協助：
+
+`rebalance-data --help`
+
+====
+
+
+. 根據傳回的狀態執行其他步驟：
++
+** 如果  `State` 為  `In progress`，則 EC 重新平衡作業仍在執行中。您應該定期監控此程序，直到其完成為止。
++
+${post_edited_translations.segment}
+
++
+${post_edited_translations.segment}
+
+** 如果 `State`是 `Success`，可以選擇<<review_object_storage,${post_edited_translations.segment}>>查看網站的更新詳細資料。
++
+站台上各個儲存節點之間的銷毀編碼資料現在應該更加平衡。
+
+** 如果  `State` 為  `Failure`:
++
+... 確認站台的所有儲存節點均已連線至網格。
+... 檢查並解決可能影響這些儲存節點的任何警報。
+... 重新啟動 EC 重新平衡程序：
++
+`rebalance-data start –-job-id _job-id_`
+
+... <<view-status,${post_edited_translations.segment}>>新程序。如果 `State`仍然 `Failure`，請聯絡技術支援。
+
+
+
+
+. 如果 EC 重新平衡程序產生過多的負載（例如，影響擷取作業），請暫停此程序。
++
+`rebalance-data pause --job-id _job-id_`
+
+. ${post_edited_translations.segment}
++
+`rebalance-data terminate --job-id _job-id_`
+
++
+
+NOTE: 當您終止 EC 重新平衡程序時，任何已移動的資料片段都會保留在新的位置。資料不會移回原始位置。
+
+. ${post_edited_translations.segment}
+

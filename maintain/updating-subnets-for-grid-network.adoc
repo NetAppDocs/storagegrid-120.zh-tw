@@ -1,0 +1,110 @@
+---
+permalink: maintain/updating-subnets-for-grid-network.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, subnet, grid network, update subnets 
+summary: StorageGRID 維護一個用於在網格網路 （eth0） 上進行網格節點間通訊的網路子網路清單。這些項目包括 StorageGRID 系統中每個站台用於網格網路的子網路，以及用於 NTP、DNS、LDAP 或其他透過網格網路閘道存取的外部伺服器的任何子網路。當您新增網格節點或在擴充中新增站台時，可能需要更新或為網格網路新增子網路。 
+---
+= 更新 StorageGRID Grid Network 的子網路
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 維護一個用於在網格網路 （eth0） 上進行網格節點間通訊的網路子網路清單。這些項目包括 StorageGRID 系統中每個站台用於網格網路的子網路，以及用於 NTP、DNS、LDAP 或其他透過網格網路閘道存取的外部伺服器的任何子網路。當您新增網格節點或在擴充中新增站台時，可能需要更新或為網格網路新增子網路。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 您擁有佈建密碼。
+* 您擁有要設定的子網路的網路位址（CIDR 表示法）。
+
+
+.關於此任務
+如果您要執行包含新增子網路的擴充活動，則必須先將新子網路新增至 Grid Network 子網路清單中，然後再開始擴充程序。否則，您將必須取消擴充、新增新子網路，然後重新開始擴充。
+
+[NOTE]
+====
+${post_edited_translations.segment}
+
+* 192,168,130,101
+* 192,168,130,121
+* 192,168,131,101
+* 192,168,131,121
+* 192,168,130,102
+* 192,168,130,122
+* 192,168,131,102
+* 192,168,131,122
+* 198.51.100.2
+* 198.51.100.4
+
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 198.51.100.0/24，因為此子網路範圍包含 IP 位址 198.51.100.2 和 198.51.100.4
+
+
+====
+
+
+[[add-a-subnet]]
+== 新增子網路
+
+.步驟
+. 選擇 *Maintenance* > *Network* > *Grid Network*。
+. 選擇「新增另一個子網路」以新增 CIDR 表示法的新子網路。
++
+例如，輸入 `10.96.104.0/22`。
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+.. 選擇 *Maintenance* > *System* > *Recovery package*。
+.. 請輸入*佈建密碼*。
++
+
+CAUTION: 恢復套件檔案必須妥善保管，因為它包含可用於從 StorageGRID 系統取得資料的加密金鑰和密碼。它也用於恢復主要管理節點。
+
+
+
+
+
+您指定的子網路將自動為您的 StorageGRID 系統進行設定。
+
+
+
+[[edit-a-subnet]]
+== 編輯子網路
+
+.步驟
+. 選擇 *Maintenance* > *Network* > *Grid Network*。
+. 選擇要編輯的子網路並進行必要的變更。
+. 輸入佈建複雜密碼，然後選擇 *Save*。
+. 在確認對話方塊中選擇「是」。
+. ${post_edited_translations.segment}
++
+.. 選擇 *Maintenance* > *System* > *Recovery package*。
+.. 請輸入*佈建密碼*。
+
+
+
+
+
+
+[[delete-a-subnet]]
+== 刪除子網路
+
+.步驟
+. 選擇 *Maintenance* > *Network* > *Grid Network*。
+. 選擇子網路旁的刪除圖示 image:icon-x-to-remove.png["刪除圖示"]。
+. 輸入佈建複雜密碼，然後選擇 *Save*。
+. 在確認對話方塊中選擇「是」。
+. ${post_edited_translations.segment}
++
+.. 選擇 *Maintenance* > *System* > *Recovery package*。
+.. 請輸入*佈建密碼*。
+
+
+

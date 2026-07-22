@@ -1,0 +1,52 @@
+---
+permalink: upgrade/verifying-installed-version-of-storagegrid.html 
+sidebar: sidebar 
+keywords: storagegrid, version, current version, previous version 
+summary: 在開始升級之前，請確認已安裝先前版本的 StorageGRID，並且已套用最新的可用 Hotfix。 
+---
+= 在升級前驗證已安裝的 StorageGRID 版本
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在開始升級之前，請確認已安裝先前版本的 StorageGRID，並且已套用最新的可用 Hotfix。
+
+.關於此任務
+在升級至 StorageGRID 12.0 之前，您的網格必須已安裝 StorageGRID 11.9.0.8 或更新版本。如果您目前使用的是舊版 StorageGRID，則必須安裝所有先前的升級檔案及其最新的 Hotfix（強烈建議），直到您的網格目前版本至少為 StorageGRID 11.9.0.8。
+
+其中一種可能的升級途徑如圖所示<<example-upgrade-path,範例>>。
+
+
+CAUTION: NetApp 強烈建議您在升級至下一個版本之前，先為每個 StorageGRID 版本套用最新的 Hotfix，並在安裝每個新版本時也套用最新的 Hotfix。在某些情況下，您必須套用 Hotfix 才能避免資料遺失的風險。請參閱 https://mysupport.netapp.com/site/products/all/details/storagegrid/downloads-tab["NetApp 下載：StorageGRID"^]及每個 Hotfix 的版本說明以深入瞭解。
+
+
+
+[[verify-installed-version]]
+== 驗證已安裝版本
+
+.步驟
+. 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+. 從 Grid Manager 頂部，選擇 *Help* > *About*。
+. 請確認 *Version* 為 11.9.0.8 或更高版本。
+. 如果 *Version* 不是 11.9.0.8 或更高版本，請前往 https://mysupport.netapp.com/site/products/all/details/storagegrid/downloads-tab["NetApp 下載：StorageGRID"^]下載所需的升級和 Hotfix 檔案。
+. link:../upgrade/index.html["請依照升級說明進行操作"]對於您下載的每個版本。link:../maintain/storagegrid-hotfix-procedure.html["套用最新 Hotfix"]對於每個版本（強烈建議）。
+
+
+請參考以下升級範例。
+
+
+
+[[example-upgrade-pathexample-upgrade-to-storagegrid-12-0-from-version-11-8]]
+== [[example-upgrade-path]]範例：從 StorageGRID 11.8 版升級至 12.0 版
+
+以下範例說明從 StorageGRID 版本 11.8 升級至版本 11.9 的步驟，以準備進行 StorageGRID 12.0 升級。
+
+請依照以下順序下載並安裝軟體，為系統升級做好準備：
+
+. 升級至 StorageGRID 11.8.0 主要版本。
+. 套用最新的 StorageGRID 11.8.0._y_ Hotfix。
+. 升級至 StorageGRID 11.9.0 主要版本。
+. 套用 StorageGRID 11.9.0.8 或更新版本的 Hotfix。
+

@@ -1,0 +1,100 @@
+---
+permalink: ilm/lifecycle-of-cloud-storage-pool-object.html 
+sidebar: sidebar 
+keywords: lifecycle of cloud storage pool object 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID 中雲端儲存資源池物件的生命週期
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+
+[[s3-lifecycle-of-a-cloud-storage-pool-object]]
+== ${post_edited_translations.segment}
+
+這些步驟說明儲存在 S3 雲端儲存資源池中物件的生命週期階段。
+
+
+NOTE: 「Glacier」是指 Glacier 儲存類別和 Glacier Deep Archive 儲存類別，但有一個例外：Glacier Deep Archive 儲存類別不支援 Expedited 還原分層。僅支援 Bulk 或 Standard 擷取。
+
+
+NOTE: ${post_edited_translations.segment}
+
+. *儲存在 StorageGRID 中的物件*
++
+若要啟動生命週期，用戶端應用程式會將物件儲存在 StorageGRID 中。
+
+. *物件已移至 S3 雲端儲存資源池*
++
+** 當物件與使用 S3 雲端儲存資源池作為其放置位置的 ILM 規則相符時，StorageGRID 會將物件移至雲端儲存資源池指定的外部 S3 儲存桶。
+** 當物件移至 S3 雲端儲存資源池時，用戶端應用程式可以使用來自 StorageGRID 的 S3 GetObject 請求擷取該物件，除非該物件已轉換至 Glacier 儲存設備。
+
+
+. *物件已轉換至 Glacier （不可擷取狀態）*
++
+** 物件也可以選擇性地遷移到 Glacier 儲存設備。例如，外部 S3 儲存桶可以使用生命週期組態，將物件立即遷移到 Glacier 儲存設備，或在一定天數後遷移。
++
+
+NOTE: 如果要轉換物件，必須為外部 S3 儲存桶建立生命週期組態，並且必須使用實作 Glacier 儲存設備類別並支援 S3 RestoreObject API 的儲存解決方案。
+
+** 在過渡期間，用戶端應用程式可以使用 S3 HeadObject 請求來監控物件的狀態。
+
+
+. *從 Glacier 儲存設備還原的物件*
++
+如果物件已遷移至 Glacier 儲存設備，用戶端應用程式可以向 S3 發出 RestoreObject 請求，將可擷取複本還原至 S3 雲端儲存資源池。此請求指定複本在雲端儲存資源池中應保留的天數，以及還原作業要使用的資料存取分層（Expedited、Standard 或 Bulk）。當可擷取複本的到期日到達時，該複本將自動恢復為不可擷取狀態。
+
++
+
+NOTE: 如果 StorageGRID 中的儲存節點上也存在該物件的一個或多個複本，則無需透過發出 RestoreObject 請求從 Glacier 還原該物件。而是可以直接使用 GetObject 請求擷取本機複本。
+
+. *物件已擷取*
++
+物件還原後，用戶端應用程式可以發出 GetObject 請求來擷取已還原的物件。
+
+
+
+
+
+[[azure-lifecycle-of-a-cloud-storage-pool-object]]
+== Azure：雲端儲存資源池物件的生命週期
+
+這些步驟說明儲存在 Azure 雲端儲存資源池中物件的生命週期階段。
+
+. *儲存在 StorageGRID 中的物件*
++
+若要啟動生命週期，用戶端應用程式會將物件儲存在 StorageGRID 中。
+
+. ${post_edited_translations.segment}
++
+當物件與使用 Azure 雲端儲存資源池作為其放置位置的 ILM 規則相符時，StorageGRID 會將物件移至雲端儲存資源池指定的外部 Azure Blob 儲存 Container。
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. *從歸檔分層還原的物件*
++
+如果物件已轉換至封存分層，用戶端應用程式可以發出 S3 RestoreObject 要求，以將可擷取的複本還原至 Azure 雲端儲存資源池。
+
++
+當 StorageGRID 收到 RestoreObject 時，它會將物件暫時轉換至 Azure Blob 儲存設備的 Cool 分層。一旦達到 RestoreObject 要求中的到期日，StorageGRID 就會將物件轉換回 Archive 分層。
+
++
+
+NOTE: 如果 StorageGRID 內的儲存節點上也存在一個或多個物件複本，則無需透過發出 RestoreObject 請求來從封存存取分層還原物件。相反地，可以直接使用 GetObject 請求來擷取本機複本。
+
+. *物件已擷取*
++
+一旦物件已還原至 Azure 雲端儲存資源池，用戶端應用程式即可發出 GetObject 請求來擷取已還原的物件。
+
+
+
+.相關資訊
+link:../s3/index.html["使用 S3 REST API"]

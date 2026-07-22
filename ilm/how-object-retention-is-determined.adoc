@@ -1,0 +1,104 @@
+---
+permalink: ilm/how-object-retention-is-determined.html 
+sidebar: sidebar 
+keywords: how object retention is determined 
+summary: StorageGRID 為網格系統管理員和個別租戶使用者提供指定物件儲存時間長度的選項。一般而言，租戶使用者提供的任何保留指示優先於網格系統管理員提供的保留指示。 
+---
+= StorageGRID 如何確定物件保留
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 為網格系統管理員和個別租戶使用者提供指定物件儲存時間長度的選項。一般而言，租戶使用者提供的任何保留指示優先於網格系統管理員提供的保留指示。
+
+
+
+[[how-tenant-users-control-object-retention]]
+== 租戶使用者如何控制物件保留
+
+租戶使用者可以使用下列方法來控制其物件在 StorageGRID 中的儲存時間：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
++
+** ${post_edited_translations.segment}
+** 在物件版本的保留截止日期到達之前，任何方法都無法刪除該版本。
+** 在啟用 S3 Object Lock 的儲存貯器中，物件會由 ILM 「永久」保留。然而，在達到其保留截止日期之後，物件版本可以透過用戶端要求或儲存貯器生命週期過期來刪除。請參閱 link:managing-objects-with-s3-object-lock.html["使用 S3 Object Lock 管理物件"]。
+
+
+* S3 租戶使用者可以為其儲存桶新增生命週期組態，以指定過期行動。如果儲存桶生命週期存在，StorageGRID 會將物件儲存到過期行動中指定的日期或天數為止，除非用戶端先刪除該物件。請參閱link:../s3/create-s3-lifecycle-configuration.html["建立 S3 生命週期組態"]。
+* S3 用戶端可以發出刪除物件請求。StorageGRID 在決定刪除或保留物件時，一律優先處理用戶端刪除請求，而非 S3 儲存桶生命週期或 ILM。
+
+
+
+
+[[how-grid-administrators-control-object-retention]]
+== ${post_edited_translations.segment}
+
+網格管理員可以使用以下方法來控制物件保留：
+
+* 為每個租戶設定 S3 物件鎖定的最大保留期間。然後，租戶使用者可以為其每個儲存桶設定預設保留期間。最大保留期間也適用於該儲存桶中新擷取的任何物件（物件的保留截止日期）。
+* 建立 ILM 放置指令以控制物件的儲存時長。當物件與 ILM 規則相符時，StorageGRID 會儲存這些物件，直到 ILM 規則中的最後一個時間段結束為止。如果放置指令中指定了「永久」，則物件將無限期保留。
+* ${post_edited_translations.segment}
+
+
+
+
+[[how-s3-bucket-lifecycle-and-ilm-interact]]
+== ${post_edited_translations.segment}
+
+設定 S3 bucket 生命週期時，生命週期到期行動會置換與生命週期篩選器相符之物件的 ILM 原則。因此，即使放置物件的任何 ILM 指令已失效，物件仍可能會保留在網格上。
+
+
+
+[[examples-for-object-retention]]
+== 物件保留範例
+
+為了更好地瞭解 S3 Object Lock、儲存桶生命週期設定、用戶端刪除請求和 ILM 之間的互動，請參閱以下範例。
+
+
+
+[[example-1-s3-bucket-lifecycle-keeps-objects-longer-than-ilm]]
+=== ${post_edited_translations.segment}
+
+ILM:: 保存兩份複本一年（365 天）
+${post_edited_translations.segment}:: 物件有效期限為 2 年（730 天）
+結果:: StorageGRID 將物件儲存 730 天。StorageGRID 使用儲存貯體生命週期設定來決定要刪除還是保留物件。
+
+
+
+NOTE: 如果貯存庫生命週期指定物件的保留時間應長於 ILM 所指定的時間，則 StorageGRID 在決定要儲存的複本數量和類型時，會繼續使用 ILM 放置指示。在此範例中，該物件的兩個複本在第 366 天到第 730 天將繼續儲存在 StorageGRID 中。
+
+
+
+[[example-2-s3-bucket-lifecycle-expires-objects-before-ilm]]
+=== 範例 2：S3 儲存桶生命週期在 ILM 之前使物件過期
+
+ILM:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
+結果:: ${post_edited_translations.segment}
+
+
+
+
+[[example-3-client-delete-overrides-bucket-lifecycle-and-ilm]]
+=== 範例 3：用戶端刪除置換儲存貯體生命週期和 ILM
+
+ILM:: 在儲存節點上「永久」儲存兩份複本
+${post_edited_translations.segment}:: 物件有效期限為 2 年（730 天）
+用戶端刪除要求:: 於第 400 天發布
+結果:: StorageGRID 在第 400 天回應用戶端刪除請求，刪除物件的兩個複本。
+
+
+
+
+[[example-4-s3-object-lock-overrides-client-delete-request]]
+=== 範例 4：S3 物件鎖定置換用戶端刪除請求
+
+S3 物件鎖定:: 物件版本的保留截止日期為 2026 年 3 月 31 日。合法持有未生效。
+${post_edited_translations.segment}:: 在儲存節點上「永久」儲存兩份複本
+用戶端刪除要求:: 發售日期：2024年3月31日
+結果:: ${post_edited_translations.segment}
+

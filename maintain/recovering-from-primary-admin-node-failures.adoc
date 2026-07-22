@@ -1,0 +1,28 @@
+---
+permalink: maintain/recovering-from-primary-admin-node-failures.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, primary admin node failure 
+summary: '您必須完成一組特定的工作，才能從主要 Admin 節點故障中恢復。主要 Admin 節點裝載了網格的 Configuration Management Node (CMN) 服務。' 
+---
+= 從主 StorageGRID 管理節點故障中恢復
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您必須完成一組特定的工作，才能從主要 Admin 節點故障中恢復。主要 Admin 節點裝載了網格的 Configuration Management Node (CMN) 服務。
+
+
+CAUTION: 您必須及時修復或更換故障的主要管理節點，否則可能無法執行某些維護程序。
+
+${post_edited_translations.segment}
+
+. link:copying-audit-logs-from-failed-primary-admin-node.html["從故障的主管理節點複製稽核日誌"]
+. link:replacing-primary-admin-node.html["替換主管理節點"]
+. link:configuring-replacement-primary-admin-node.html["設定替換的主要管理節點"]
+. link:assess-hotfix-requirement-during-primary-admin-node-recovery.html["確定已恢復的主要管理節點是否有 Hotfix 要求。"]
+. link:restoring-audit-log-on-recovered-primary-admin-node.html["在已恢復的主要管理節點上還原稽核日誌"]
+. link:restoring-admin-node-database-primary-admin-node.html["恢復主管理節點時，還原管理節點資料庫"]
+. link:restoring-prometheus-metrics-primary-admin-node.html["恢復主要管理節點時，還原 Prometheus 計量"]
+

@@ -1,0 +1,33 @@
+---
+permalink: swnodes/specifying-storagegrid-license-information.html 
+sidebar: sidebar 
+keywords: how to specify StorageGRID license information 
+summary: 您必須指定 StorageGRID 系統的名稱，並上傳 NetApp 提供的授權檔案。 
+---
+= 指定 StorageGRID 授權資訊
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您必須指定 StorageGRID 系統的名稱，並上傳 NetApp 提供的授權檔案。
+
+.步驟
+. 在「授權」頁面上，在 *Grid Name* 欄位中輸入 StorageGRID 系統的有意義名稱。
++
+安裝完成後，名稱將顯示在「節點」功能表的頂端。
+
+. 選取 *瀏覽*，找到 NetApp 授權檔案 (`NLF-_unique-id_.txt`），然後選取 *開啟*。
++
+授權檔案已驗證，並顯示序號。
+
++
+
+NOTE: StorageGRID 安裝歸檔包含免費授權，但不提供任何產品支援服務。您可以在安裝後更新為提供支援的授權。
+
++
+image:2_gmi_installer_license_page.png["StorageGRID 安裝程式授權頁面"]
+
+. 選擇 *Next* 。
+

@@ -1,0 +1,134 @@
+---
+permalink: ilm/considerations-for-cloud-storage-pools.html 
+sidebar: sidebar 
+keywords: what is a cloud storage pool, considerations for a cloud storage pool 
+summary: 如果您打算使用雲端儲存池將物件移出 StorageGRID 系統，則必須審查設定和使用雲端儲存池的注意事項。 
+---
+= StorageGRID 中的雲端儲存資源池需求與限制
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您打算使用雲端儲存池將物件移出 StorageGRID 系統，則必須審查設定和使用雲端儲存池的注意事項。
+
+
+
+[[general-considerations]]
+== 一般性考慮
+
+* 一般來說，雲端歸檔儲存設備（例如 Amazon S3 Glacier 或 Azure Blob 儲存設備）是儲存物件資料的一種經濟實惠的方式。然而，從雲端歸檔儲存設備中擷取資料的成本相對較高。為了實現最低的總體成本，您必須考慮何時以及多久存取一次雲端儲存池中的物件。建議僅將雲端儲存池用於您預計存取頻率較低的內容。
+* 由於從雲端儲存池目標擷取物件會增加延遲，因此不支援將雲端儲存池與 FabricPool 搭配使用。
+* 啟用了 S3 物件鎖定的物件無法放置在雲端儲存池中。
+* 以下平台、驗證和協定組合與 S3 物件鎖定不適用於雲端儲存池：
++
+** *平台*：Google Cloud Platform 和 Azure
+** *驗證類型*：匿名存取
+** *協定*：HTTP
+
+
+
+
+
+
+[[considerations-for-the-ports-used-for-cloud-storage-pools]]
+== 雲端儲存池所用連接埠的注意事項
+
+為確保 ILM 規則能夠將物件移入和移出指定的雲端儲存池，您必須設定包含系統 Storage Nodes 的網路。您必須確保以下連接埠可以與雲端儲存池通訊。
+
+預設情況下，雲端儲存池使用下列連接埠：
+
+* *80*：適用於以 http 開頭的端點 URI
+* *443*：用於以 https 開頭的端點 URI
+
+
+建立或編輯雲端儲存池時，您可以指定不同的連接埠。
+
+如果您使用非透明 Proxy 伺服器，則也必須link:../admin/configuring-storage-proxy-settings.html["設定儲存設備 Proxy"]允許將訊息傳送至外部端點（例如網際網路上的端點）。
+
+
+
+[[considerations-for-costs]]
+== 成本方面的考量
+
+使用雲端儲存池存取雲端儲存設備需要與雲端建立網路連線。您必須考慮存取雲端所需的網路基礎架構成本，並根據預計使用雲端儲存池在 StorageGRID 和雲端之間傳輸的資料量進行相應的資源配置。
+
+當 StorageGRID 連接到外部雲端儲存池端點時，它會發出各種請求來監控連線並確保能夠執行所需操作。雖然這些請求會產生一些額外費用，但監控雲端儲存池的成本應該只佔在 S3 或 Azure 中儲存物件總成本的一小部分。
+
+如果您需要將物件從外部 Cloud Storage Pool 端點移回 StorageGRID，則可能會產生更高的成本。在以下任一情況下，物件都可能需要移回 StorageGRID：
+
+* 該物件的唯一複本位於雲端儲存池中，而您決定將物件儲存到 StorageGRID 中。在這種情況下，您需要重新設定 ILM 規則和原則。當 ILM 評估發生時，StorageGRID 會發出多個請求，從雲端儲存池擷取該物件。然後，StorageGRID 會在本機建立指定數量的複寫複本或銷毀編碼複本。物件移回 StorageGRID 後，雲端儲存池中的複本將被刪除。
+* 由於儲存節點故障，物件會遺失。如果物件的唯一剩餘複本位於雲端儲存池中，StorageGRID 會暫時還原該物件，並在復原的儲存節點上建立新複本。
+
+
+
+NOTE: 當物件從 Cloud Storage Pool 移回 StorageGRID 時，StorageGRID 會針對每個物件向 Cloud Storage Pool 端點發出多個請求。在移動大量物件之前，請聯絡技術支援，以取得有關預估所需時間和相關成本的協助。
+
+
+
+[[s3-permissions-required-for-the-cloud-storage-pool-bucket]]
+== S3：雲端儲存池儲存桶所需的權限
+
+用於 Cloud Storage Pool 的外部 S3 儲存桶的原則必須授予 StorageGRID 將物件移至該儲存桶、取得物件狀態、在需要時從 Glacier 儲存設備還原物件等權限。理想情況下，StorageGRID 應擁有對該儲存桶的完全控制存取 (`s3:*`）；但是，如果無法做到這一點，則儲存桶原則必須授予 StorageGRID 以下 S3 權限：
+
+* `s3:AbortMultipartUpload`
+* `s3:DeleteObject`
+* `s3:GetObject`
+* `s3:ListBucket`
+* `s3:ListBucketMultipartUploads`
+* `s3:ListMultipartUploadParts`
+* `s3:PutObject`
+* `s3:RestoreObject`
+
+
+
+
+[[s3-considerations-for-the-external-buckets-lifecycle]]
+== S3：外部儲存桶生命週期的考量因素
+
+StorageGRID 與雲端儲存池中指定的外部 S3 儲存桶之間的物件移動，由 StorageGRID 中的 ILM 規則和作用中的 ILM 原則控制。相較之下，物件從雲端儲存池中指定的外部 S3 儲存桶轉換至 Amazon S3 Glacier 或 S3 Glacier Deep Archive （或轉換至實作 Glacier 儲存類別的儲存解決方案）的程序，由該儲存桶的生命週期組態控制。
+
+如果要將物件從雲端儲存池遷移，則必須在外部 S3 儲存桶上建立適當的生命週期組態，並且必須使用實作 Glacier 儲存設備類別並支援 S3 RestoreObject API 的儲存解決方案。
+
+例如，假設您希望所有從 StorageGRID 移動到雲端儲存池的物件立即轉換到 Amazon S3 Glacier 儲存設備。您需要在外部 S3 儲存桶上建立生命週期組態，指定單一行動（*Transition*），如下所示：
+
+[listing]
+----
+<LifecycleConfiguration>
+  <Rule>
+    <ID>Transition Rule</ID>
+    <Filter>
+       <Prefix></Prefix>
+    </Filter>
+    <Status>Enabled</Status>
+    <Transition>
+      <Days>0</Days>
+      <StorageClass>GLACIER</StorageClass>
+    </Transition>
+  </Rule>
+</LifecycleConfiguration>
+----
+此規則會將所有儲存桶物件在其建立當天（即從 StorageGRID 遷移到 Cloud Storage Pool 的當天）移轉到 Amazon S3 Glacier。
+
+
+CAUTION: 設定外部儲存桶的生命週期時，切勿使用 *Expiration* 動作來定義物件的到期時間。Expiration 動作會導致外部儲存系統刪除已過期的物件。如果您之後嘗試從 StorageGRID 存取已過期的物件，則將找不到該已刪除的物件。
+
+如果您希望將雲端儲存池中的物件遷移到 S3 Glacier Deep Archive（而不是 Amazon S3 Glacier），請在儲存桶生命週期中指定 `<StorageClass>DEEP_ARCHIVE</StorageClass>`。但請注意，您無法使用 `Expedited`分層從 S3 Glacier Deep Archive 還原物件。
+
+
+
+[[azure-considerations-for-access-tier]]
+== Azure：存取層注意事項
+
+設定 Azure 儲存設備帳戶時，您可以將預設存取分層設定為「熱」或「冷」。建立用於雲端儲存池的儲存設備帳戶時，應使用「熱」分層作為預設分層。儘管 StorageGRID 在將物件移至雲端儲存池時會立即將分層設為「存檔」，但使用「熱」作為預設設定可確保您不會因在 30 天最短期限之前從「冷」分層移除物件而被收取提前刪除費用。
+
+
+
+[[azure-lifecycle-management-not-supported]]
+== Azure：不支援生命週期管理
+
+請勿對與雲端儲存池搭配使用的 Container 使用 Azure Blob 儲存設備生命週期管理。生命週期操作可能會干擾雲端儲存池的操作。
+
+.相關資訊
+link:creating-cloud-storage-pool.html["建立雲端儲存池"]

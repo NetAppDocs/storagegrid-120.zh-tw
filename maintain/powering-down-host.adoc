@@ -1,0 +1,126 @@
+---
+permalink: maintain/powering-down-host.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, stop services, power down host, power off host 
+summary: 在關閉主機電源之前，必須停止該主機上所有網格節點的服務。 
+---
+= 關閉 StorageGRID 主機
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在關閉主機電源之前，必須停止該主機上所有網格節點的服務。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 請輸入以下命令： `ssh admin@_grid_node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+. 停止節點上運行的所有服務： `service servermanager stop`
++
+服務關閉可能需要長達 15 分鐘的時間，您可能需要遠端登入系統來監控關閉過程。
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
+.. 停止節點： `storagegrid node stop`
+.. 關閉主機作業系統。
+
+
+. 如果節點在 VMware 虛擬機器上執行，或是應用裝置節點，請發出 shutdown 命令： `shutdown -h now`
++
+無論  `service servermanager stop` 命令的結果如何，請執行此步驟。
+
++
+
+NOTE: 在應用裝置節點上下達  `shutdown -h now` 命令之後，您必須將應用裝置關閉電源並重新開啟，以重新啟動節點。
+
++
+對於該應用裝置，此命令會關閉控制器，但應用裝置仍處於通電狀態。您必須完成下一步操作。
+
+. 如果要關閉應用裝置節點，請按照您的應用裝置的步驟操作。
++
+[role="tabbed-block"]
+====
+.SG6160
+--
+.. ${post_edited_translations.segment}
+.. 等待 SG6100-CN 儲存控制器上的藍色電源 LED 熄滅。
+
+
+--
+.SGF6112
+--
+.. 關閉應用裝置的電源。
+.. 等待藍色電源指示燈熄滅。
+
+
+--
+.SG6000
+--
+.. ${post_edited_translations.segment}
++
+當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
+
+.. ${post_edited_translations.segment}
+
+
+--
+.SG5800
+--
+.. ${post_edited_translations.segment}
++
+當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
+
+.. 從 SANtricity System Manager 的首頁，選擇「檢視正在進行的動作」。
+.. 請確認所有操作均已完成，然後再進行下一步。
+.. ${post_edited_translations.segment}
+
+
+--
+.SG5700
+--
+.. ${post_edited_translations.segment}
++
+當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
+
+.. 關閉應用裝置的電源，並等待所有 LED 和七段數位管顯示活動停止。
+
+
+--
+.SG110 或 SG1100
+--
+.. 關閉應用裝置的電源。
+.. 等待藍色電源指示燈熄滅。
+
+
+--
+.SG100 或 SG1000
+--
+.. 關閉應用裝置的電源。
+.. 等待藍色電源指示燈熄滅。
+
+
+--
+====
+. 登出命令 shell： `exit`
+
+
+.相關資訊
+* https://docs.netapp.com/us-en/storagegrid-appliances/sg6100/index.html["SGF6112 和 SG6160 儲存應用裝置"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/sg6000/index.html["SG6000 儲存設備"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/sg5700/index.html["SG5700 儲存設備"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/sg5800/index.html["SG5800 儲存設備"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/sg110-1100/index.html["SG110 和 SG1100 服務應用裝置"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/sg100-1000/index.html["SG100 和 SG1000 服務應用裝置"^]
+

@@ -1,0 +1,22 @@
+---
+permalink: network/admin-network-requirements.html 
+sidebar: sidebar 
+keywords: admin network requirements, guidelines for admin network, aesl 
+summary: 管理網路是可選的。如果您計劃設定管理網路，請遵循以下要求和準則。 
+---
+= StorageGRID 的管理網路需求
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+管理網路是可選的。如果您計劃設定管理網路，請遵循以下要求和準則。
+
+管理網路的典型用途包括管理連線、AutoSupport、KMS 以及與 NTP、DNS 和 LDAP 等關鍵伺服器的連線（如果這些連線未透過網格網路或用戶端網路提供）。
+
+
+NOTE: ${post_edited_translations.segment}
+
+
+NOTE: 您必須在管理網路上定義至少一個子網路，才能啟用來自外部子網路的傳入連線。AESL 中的每個子網路會在每個節點上自動產生靜態路由。

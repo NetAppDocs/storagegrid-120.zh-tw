@@ -1,0 +1,237 @@
+---
+permalink: admin/creating-sp-connection-ping.html 
+sidebar: sidebar 
+keywords: service provider, sp connection, pingfederate, ping, single sign on, sso 
+summary: 您需要使用 PingFederate 為系統中的每個管理節點建立一個服務供應商 （SP） 連線。為了加快此過程，您將從 StorageGRID 匯入 SAML 中繼資料。 
+---
+= 在 PingFederate 中為 StorageGRID 建立服務提供者連線
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您需要使用 PingFederate 為系統中的每個管理節點建立一個服務供應商 （SP） 連線。為了加快此過程，您將從 StorageGRID 匯入 SAML 中繼資料。
+
+.開始之前
+* ${post_edited_translations.segment}
+* 您在 Grid Manager 中有 link:../admin/configure-sso.html#enter-sandbox-mode["進入沙盒模式"]。
+* 您擁有系統中每個管理節點的 *SP 連線 ID*。您可以在「設定 SSO」頁面的管理節點詳細資料表中找到這些值。
+* 您已下載系統中每個管理節點的 *SAML 中繼資料*。
+* 您有在 PingFederate Server 中建立 SP 連線的經驗。
+* 您已取得 https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_administrators_reference_guide.html["管理員參考指南"^] PingFederate 伺服器端所需的檔案。PingFederate 文件中提供了詳細的逐步說明和解釋。
+* 您已取得 link:../admin/admin-group-permissions.html["管理員權限"] PingFederate 伺服器端所需的檔案。
+
+
+.關於此任務
+這些說明摘要介紹如何將 PingFederate Server 10.3 版設定為 StorageGRID 的 SSO 供應商。如果您使用的是其他版本的 PingFederate，您可能需要調整這些說明。有關您版本的詳細說明，請參閱 PingFederate Server 文件。
+
+
+
+[[complete-prerequisites-in-pingfederate]]
+== 完成 PingFederate 中的先決條件
+
+在您可以建立將用於 StorageGRID 的 SP 連線之前，您必須先在 PingFederate 中完成先決條件工作。當您設定 SP 連線時，將會使用來自這些先決條件的資訊。
+
+
+
+[[create-data-storedata-store]]
+=== 建立資料儲存區[[data-store]]
+
+如果您尚未執行此操作，請建立資料儲存區以將 PingFederate 連線至 AD FS LDAP 伺服器。請使用您在 StorageGRID 中 link:../admin/using-identity-federation.html["${post_edited_translations.segment}"] 時所使用的值。
+
+* *類型*：目錄（LDAP）
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+
+
+[[create-password-credential-validatorpassword-validator]]
+=== 建立密碼認證資料驗證器[[password-validator]]
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* *搜尋篩選條件*：sAMAccountName=${username}
+* ${post_edited_translations.segment}
+
+
+
+
+[[create-idp-adapter-instanceadapter-instance]]
+=== 建立 IdP 介面卡執行個體[[adapter-instance]]
+
+如果還沒有建立 IdP 介面卡執行個體，請建立一個。
+
+.步驟
+. 前往 *Authentication* > *Integration* > *IdP Adapters*。
+. 選擇 *Create New Instance*。
+. 在「類型」標籤上，選擇「HTML Form IdP Adapter」。
+. 在 IdP Adapter 標籤上，選擇「在『Credential Validators』新增一行」。
+. 選取您建立的 <<password-validator,${post_edited_translations.segment}>>。
+. 在「介面卡屬性」標籤上，為「*Pseudonym*」選擇「*username*」屬性。
+. 選取 *Save* 。
+
+
+
+
+[[create-or-import-signing-certificatesigning-certificate]]
+=== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+.步驟
+. 前往 *Security* > *Signing & Decryption Keys & Certificates*。
+. 建立或匯入簽署憑證。
+
+
+
+
+[[create-an-sp-connection-in-pingfederate]]
+== 在 PingFederate 中建立 SP 連線
+
+在 PingFederate 中建立 SP 連線時，您需要匯入從 StorageGRID 下載的管理節點 SAML 中繼資料。該中繼資料檔案包含您需要的許多特定值。
+
+
+TIP: 您必須為 StorageGRID 系統中的每個管理節點建立一個 SP 連線，以便使用者可以安全地登入和登出任何節點。請依照以下說明建立第一個 SP 連線。然後，前往 <<${post_edited_translations.segment}>> 建立您所需的任何其他連線。
+
+
+
+[[choose-sp-connection-type]]
+=== 選擇 SP 連線類型
+
+.步驟
+. 前往 *Applications* > *Integration* > *SP Connections*。
+. 選擇 *Create Connection*。
+. 選擇 *Do not use a template for this connection*。
+. ${post_edited_translations.segment}
+
+
+
+
+[[import-sp-metadata]]
+=== 匯入 SP 中繼資料
+
+.步驟
+. 在「匯入中繼資料」索引標籤上，選取 *檔案*。
+. 選擇您從管理節點的「設定 SSO」頁面下載的 SAML 中繼資料檔案。
+. ${post_edited_translations.segment}
++
+合作夥伴實體 ID 和連線名稱設定為 StorageGRID SP 連線 ID。（例如，10.96.105.200-DC1-ADM1-105-200）。基本 URL 是 StorageGRID 管理節點的 IP 位址。
+
+. 選擇 *Next* 。
+
+
+
+
+[[configure-idp-browser-sso]]
+=== ${post_edited_translations.segment}
+
+.步驟
+. 在「瀏覽器 SSO」標籤中，選擇「設定瀏覽器 SSO」。
+. ${post_edited_translations.segment}
+. 選擇 *Next* 。
+. ${post_edited_translations.segment}
+. 在「斷言建立」標籤上，選取「設定斷言建立」。
++
+.. 在「身分映射」標籤上，選取 *Standard*。
+.. ${post_edited_translations.segment}
+
+
+. 如需延長合約，請選擇 *Delete* 以移除 `urn:oid`（未使用）。
+
+
+
+
+[[map-adapter-instance]]
+=== 對應介面卡執行個體
+
+.步驟
+. 在「驗證來源對應」標籤上，選擇 *Map New Adapter Instance*。
+. 在「介面卡執行個體」標籤上，選擇您建立的<<adapter-instance,介面卡執行個體>>。
+. 在「映射方法」標籤上，選取*從資料儲存區擷取其他屬性*。
+. 在「屬性來源和使用者尋找」標籤上，選擇 *Add Attribute Source*。
+. 在「資料儲存區」標籤上，提供執行摘要並選擇您新增的 <<data-store,資料儲存區>>。
+. 在 LDAP 目錄搜尋標籤上：
++
+** 輸入 *Base DN*，該值應與您在 StorageGRID 中為 LDAP 伺服器輸入的值完全相符。
+** 在搜尋範圍中，選擇 *Subtree*。
+** 對於根物件類別，搜尋並新增下列屬性之一：*objectGUID* 或 *userPrincipalName*。
+
+
+. 在 LDAP 二進位屬性編碼類型標籤上，為 *objectGUID* 屬性選擇 *Base64*。
+. 在 LDAP 篩選器標籤上，輸入 *sAMAccountName=${username}*。
+. 在「屬性合約履行」標籤上，從「來源」下拉清單中選擇 *LDAP （屬性）*，然後從「值」下拉清單中選擇 *objectGUID* 或 *userPrincipalName*。
+. 審查並儲存屬性來源。
+. 在「Failsave 屬性來源」標籤上，選取 *中止 SSO 交易*。
+. 審查摘要並選擇 *Done*。
+. 選擇 *Done*。
+
+
+
+
+[[configure-protocol-settings]]
+=== 設定通訊協定設定
+
+.步驟
+. 在「*SP Connection*」>「*Browser SSO*」>「*Protocol Settings*」標籤上，選擇「*Configure Protocol Settings*」。
+. 在「Assertion Consumer Service URL」索引標籤上，接受預設值，這些預設值是從 StorageGRID SAML 中繼資料匯入的（Binding 為 *POST*，Endpoint URL 為 `/api/saml-response`）。
+. 在 SLO 服務 URL 索引標籤上，接受預設值，這些預設值是從 StorageGRID SAML 中繼資料匯入的（Binding 為 *REDIRECT*， `/api/saml-logout`為端點 URL）。
+. 在「允許的 SAML 綁定」標籤中，清除 *ARTIFACT* 和 *SOAP*。只需 *POST* 和 *REDIRECT*。
+. 在「簽署原則」標籤上，保持選取「*要求對驗證要求進行簽署*」和「*始終簽署判斷提示*」核取方塊。
+. 在「加密原則」索引標籤上，選取 *None*。
+. 審查摘要並選取 *Done* 以儲存通訊協定設定。
+. 審查摘要並選擇「完成」以儲存瀏覽器 SSO 設定。
+
+
+
+
+[[configure-credentials]]
+=== 設定認證資料
+
+.步驟
+. 在 SP Connection 標籤中，選擇「憑證」。
+. ${post_edited_translations.segment}
+. 選擇您建立或匯入的 <<signing-certificate,簽署憑證>>。
+. ${post_edited_translations.segment}
++
+.. 在「信任模型」標籤上，選擇 *Unanchored*。
+.. ${post_edited_translations.segment}
+
+
+. ${post_edited_translations.segment}
+
+
+
+
+[[create-additional-sp-connections]]
+=== ${post_edited_translations.segment}
+
+您可以複製第一個 SP 連線，為網格中的每個管理節點建立所需的 SP 連線。每個複本都需要上傳新的中繼資料。
+
+
+NOTE: ${post_edited_translations.segment}
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
+.. 選擇 *Choose File* 並上傳中繼資料。
+.. 選擇 *Next* 。
+.. 選取 *Save* 。
+
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 選取 *Save* 。
+
+
+

@@ -1,0 +1,77 @@
+---
+permalink: maintain/configuring-ntp-servers.html 
+sidebar: sidebar 
+keywords: storagegrid, ntp, ntp server, configure ntp, configuring ntp 
+summary: ${post_edited_translations.segment} 
+---
+= 在 StorageGRID 中管理 NTP 伺服器
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 您擁有佈建密碼。
+* 您需要設定 NTP 伺服器的 IPv4 位址。
+
+
+
+
+[[how-storagegrid-uses-ntp]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+在每個站點，StorageGRID 系統中至少有兩個節點被指定為主要 NTP 角色。它們與建議最少四個、最多六個外部時間來源以及彼此之間進行同步。StorageGRID 系統中非主要 NTP 節點的每個節點都充當 NTP 用戶端，並與這些主要 NTP 節點同步。
+
+外部 NTP 伺服器連線到您先前指派了主要 NTP 角色的節點。因此，建議至少指定兩個具有主要 NTP 角色的節點。
+
+
+
+[[ntp-server-guidelines]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 外部 NTP 伺服器連線到您先前指派了主要 NTP 角色的節點。因此，建議至少指定兩個具有主要 NTP 角色的節點。
+* 確保每個站台至少有兩個節點可以存取至少四個外部 NTP 來源。如果一個站台只有一個節點可以存取 NTP 來源，那麼一旦該節點發生故障，就會出現時間問題。此外，如果站台與網格其他部分隔離，則將每個站台的兩個節點指定為主要 NTP 來源可確保時間的準確性。
+* 指定的外部 NTP 伺服器必須使用 NTP 協定。您必須指定 Stratum 3 或更佳等級的 NTP 伺服器參照，以防止時間漂移問題。
+
+
+
+NOTE: 為生產等級的 StorageGRID 安裝指定外部 NTP 來源時，請勿在早於 Windows Server 2016 的 Windows 版本上使用 Windows Time (W32Time) 服務。較早版本 Windows 上的時間服務不夠精確，且 Microsoft 不支援將其用於包括 StorageGRID 在內的高精度環境中。如需詳細資訊，請參閱  https://support.microsoft.com/en-us/help/939322/support-boundary-to-configure-the-windows-time-service-for-high-accura["${post_edited_translations.segment}"^]。
+
+
+
+[[configure-ntp-servers]]
+== 設定 NTP 伺服器
+
+請依照下列步驟新增、更新或移除 NTP 伺服器。
+
+.步驟
+. 選擇*維護* > *網路* > *NTP 伺服器*。
+. 在「伺服器」部分，根據需要新增、更新或移除 NTP 伺服器條目。
++
+您至少應該包含四個 NTP 伺服器，最多可以指定六個伺服器。
+
+. 輸入 StorageGRID 系統的佈建密碼，然後選取 * 儲存 *。
++
+頁面將暫時停用，直到組態更新完成。
+
++
+
+NOTE: 如果您在儲存新的 NTP 伺服器後，所有 NTP 伺服器都無法通過連線測試，請勿繼續進行。請聯絡技術支援。
+
+
+
+
+
+[[resolve-ntp-server-issues]]
+== 解決 NTP 伺服器問題
+
+${post_edited_translations.segment}

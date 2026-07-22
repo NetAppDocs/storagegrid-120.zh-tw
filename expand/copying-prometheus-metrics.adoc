@@ -1,0 +1,69 @@
+---
+permalink: expand/copying-prometheus-metrics.html 
+sidebar: sidebar 
+keywords: prometheus, copy metrics, Admin Node expansion, StorageGRID 
+summary: 新增 Admin Node 之後，您可以選擇性地將 Prometheus 維護的歷史計量從主要 Admin Node 複製到新的 Admin Node。複製計量可確保 Admin Node 之間的歷史計量保持一致。 
+---
+= 將 Prometheus 計量複製到 StorageGRID 中的新管理節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+新增 Admin Node 之後，您可以選擇性地將 Prometheus 維護的歷史計量從主要 Admin Node 複製到新的 Admin Node。複製計量可確保 Admin Node 之間的歷史計量保持一致。
+
+.開始之前
+* 新的管理節點已安裝並正在執行。
+* 您擁有  `Passwords.txt` 檔案。
+* 您擁有佈建密碼。
+
+
+.關於此任務
+新增管理節點時，軟體安裝過程會建立一個新的 Prometheus 資料庫。您可以將主要管理節點（_來源管理節點_）中的 Prometheus 資料庫複製到新的管理節點，以保持節點間歷史計量的一致。
+
+
+NOTE: 複製 Prometheus 資料庫可能需要一個小時或更長時間。在來源管理節點上停止服務時，某些 Grid Manager 功能將無法使用。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 請輸入以下命令： `ssh admin@_grid_node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
+. 從來源 Admin Node 停止 Prometheus 服務： `service prometheus stop`
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
++
+... 請輸入以下命令： `ssh admin@_grid_node_IP_`
+... 請輸入 `Passwords.txt`檔案中列出的密碼。
+... 輸入以下命令以切換至根目錄： `su -`
+... 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
+.. 停止 Prometheus 服務： `service prometheus stop`
+.. 將 SSH 私鑰新增至 SSH 代理程式。輸入：``ssh-add``
+.. 輸入 `Passwords.txt`檔案中列出的 SSH 存取密碼。
+.. 將 Prometheus 資料庫從來源 Admin Node 複製到新的 Admin Node： `/usr/local/prometheus/bin/prometheus-clone-db.sh _Source_Admin_Node_IP_`
+.. ${post_edited_translations.segment}
++
+原始 Prometheus 資料庫及其歷史資料會複製到新的 Admin Node。當複本作業完成時，指令碼會啟動新的 Admin Node。出現以下狀態：
+
++
+`Database cloned, starting services`
+
+.. 當您不再需要免密碼存取其他伺服器時，請從 SSH 代理程式中移除私密金鑰。輸入：
++
+`ssh-add -D`
+
+
+
+. ${post_edited_translations.segment}
++
+`service prometheus start`
+
+

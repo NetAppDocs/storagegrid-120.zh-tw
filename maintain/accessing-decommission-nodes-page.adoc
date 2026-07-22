@@ -1,0 +1,145 @@
+---
+permalink: maintain/accessing-decommission-nodes-page.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission nodes, decommissioning nodes, maintenance task 
+summary: ${post_edited_translations.segment} 
+---
+= 存取 StorageGRID 中的解除委任節點頁面
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+
+
+
+CAUTION: 在包含基於軟體的僅中繼資料節點的網格中退役儲存節點時，請務必注意。如果您退役所有設定為同時儲存物件和中繼資料的節點，則網格將無法儲存物件。如需有關僅中繼資料儲存節點的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+
+.步驟
+. ${post_edited_translations.segment}
+. 選擇 *Decommission Nodes*。
++
+此時將顯示「退役節點」頁面。在此頁面，您可以執行以下操作：
+
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
++
+在本例中、「可退役」欄位表示您可以退役閘道節點和四個儲存節點中的一個。
+
++
+image:decommission_nodes_page_all_connected.png["${post_edited_translations.segment}"]
+
+
+
+. ${post_edited_translations.segment}
++
+如果網格節點可以退役，此欄會包含一個綠色核取記號，且左側欄會包含一個核取方塊。如果節點無法退役，此欄會說明該問題。如果節點無法退役的原因不只一個，則會顯示最關鍵的原因。
+
++
+[cols="1a,1a,1a"]
+|===
+| 退役的可能原因 | 說明 | ${post_edited_translations.segment} 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+無。
+
+
+
+ a| 
+不，至少有一個網格節點已中斷連線。
+
+*注意*：此訊息僅顯示已連線的網格節點。
+ a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+** image:icon_alarm_gray_administratively_down.png["灰色問號圖示"]（灰色）：管理性關閉
+** image:icon_alarm_blue_unknown.png["藍色問號圖示"]（藍色）：未知
+
+ a| 
+您必須先將所有中斷連線的節點恢復線上，或 link:decommissioning-disconnected-grid-nodes.html["退役所有已斷開連線的節點"]，然後才能移除連線的節點。
+
+*注意*：如果您的網格包含多個斷線節點，軟體要求您同時退役所有這些節點，這會增加發生意外結果的潛力。
+
+
+
+ a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+ a| 
+如果一個或多個必要節點也已中斷連線（例如，ADC 仲裁所需的儲存節點），則無法退役已中斷連線的網格節點。
+ a| 
+.. ${post_edited_translations.segment}
+.. 確定哪些節點無法退役，因為它們是必要的。
++
+*** ${post_edited_translations.segment}
+*** ${post_edited_translations.segment}
+
+
+
+
+
+
+ a| 
+不，該節點是 HA 群組「_群組名稱_」的成員。在退役此節點之前，必須先將其從所有 HA 群組中移除。
+ a| 
+${post_edited_translations.segment}
+ a| 
+編輯 HA 群組以移除節點的介面，或是移除整個 HA 群組。請參閱 link:../admin/configure-high-availability-group.html["設定高可用度群組"]。
+
+
+
+ a| 
+否，站台 _x_ 至少需要 _n_ 個具有 ADC 服務的儲存節點。
+ a| 
+*僅限儲存節點*（包括組合儲存節點或僅中繼資料儲存節點）。如果站台中剩餘的節點不足以支援 ADC 仲裁要求，則無法退役儲存節點。但是，您可以將 ADC 服務移至另一個儲存節點。
+ a| 
+link:../maintain/move-adc-service.html["${post_edited_translations.segment}"]，或透過向網站新增新的儲存節點並指定其應具有 ADC 服務來執行擴充。請參閱 link:understanding-adc-service-quorum.html["${post_edited_translations.segment}"]。
+
+
+
+ a| 
+不，一個或多個銷毀編碼設定檔至少需要 _n_ 個儲存節點。如果設定檔未在 ILM 規則中使用，則可以停用。
+ a| 
+*僅限儲存節點*。除非有足夠的節點可留給現有的銷毀編碼設定檔，否則您無法將儲存節點退役。
+
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+** *用於作用中的 ILM 策略*：執行擴充。新增足夠的新 Storage 節點以允許銷毀編碼繼續進行。請參閱 link:../expand/index.html["${post_edited_translations.segment}"] 的說明。
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+
+
+*附註：*如果您嘗試停用銷毀編碼設定檔，且物件資料仍與該設定檔相關聯，則會出現錯誤訊息。您可能需要等待數週，然後才能重新嘗試停用程序。
+
+了解更多link:../ilm/manage-erasure-coding-profiles.html["${post_edited_translations.segment}"]。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+*附註*：已移除對封存節點的支援。如果您需要將封存節點退役，請參閱 https://docs.netapp.com/us-en/storagegrid-118/maintain/grid-node-decommissioning.html["網格節點退役（StorageGRID 11.8 文件網站）"^]
+
+|===
+

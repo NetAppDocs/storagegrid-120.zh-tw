@@ -1,0 +1,92 @@
+---
+permalink: maintain/removing-port-remaps-on-bare-metal-hosts.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, linux, linux host, bare metal host, baremetal host, remove port remap, removing port remap, port remap 
+summary: 如果要為負載平衡器服務設定端點，並且要使用已設定為連接埠重新對應的「對應至連接埠」的連接埠，則必須先移除現有的連接埠重新對應，否則端點將無效。 
+---
+= 移除裸機主機上的 StorageGRID 連接埠重新映射
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果要為負載平衡器服務設定端點，並且要使用已設定為連接埠重新對應的「對應至連接埠」的連接埠，則必須先移除現有的連接埠重新對應，否則端點將無效。
+
+.關於此任務
+如果您在裸機主機上執行 StorageGRID，請依照下列步驟操作，而非依照一般步驟移除連接埠重新映射。您必須編輯每個存在衝突重新映射連接埠的管理節點和閘道節點的節點組態檔案，以移除節點的所有連接埠重新映射，然後重新啟動節點。
+
+
+CAUTION: 此操作會移除所有連接埠重新映射。如果您需要保留部分重新映射，請聯絡技術支援。
+
+有關設定負載平衡器端點的資訊，請參閱 StorageGRID 管理說明。
+
+
+NOTE: 由於節點需要重新啟動，此程序可能會導致服務暫時中斷。
+
+.步驟
+. 登入支援該節點的主機。以根目錄或具有 sudo 權限的帳戶登入。
+. 執行以下命令以暫時停用該節點： `sudo storagegrid node stop _node-name_`
+. 使用 vim 或 pico 等文字編輯器，編輯節點的節點組態檔案。
++
+節點組態檔案位於 `/etc/storagegrid/nodes/_node-name_.conf`。
+
+. 找到節點組態檔案中包含連接埠重映射的部分。
++
+請看以下範例中的最後兩行。
+
++
+[listing, subs="specialcharacters,quotes"]
+----
+ADMIN_NETWORK_CONFIG = STATIC
+ADMIN_NETWORK_ESL = 10.0.0.0/8, 172.19.0.0/16, 172.21.0.0/16
+ADMIN_NETWORK_GATEWAY = 10.224.0.1
+ADMIN_NETWORK_IP = 10.224.5.140
+ADMIN_NETWORK_MASK = 255.255.248.0
+ADMIN_NETWORK_MTU = 1400
+ADMIN_NETWORK_TARGET = eth1
+ADMIN_NETWORK_TARGET_TYPE = Interface
+BLOCK_DEVICE_VAR_LOCAL = /dev/sda2
+CLIENT_NETWORK_CONFIG = STATIC
+CLIENT_NETWORK_GATEWAY = 47.47.0.1
+CLIENT_NETWORK_IP = 47.47.5.140
+CLIENT_NETWORK_MASK = 255.255.248.0
+CLIENT_NETWORK_MTU = 1400
+CLIENT_NETWORK_TARGET = eth2
+CLIENT_NETWORK_TARGET_TYPE = Interface
+GRID_NETWORK_CONFIG = STATIC
+GRID_NETWORK_GATEWAY = 192.168.0.1
+GRID_NETWORK_IP = 192.168.5.140
+GRID_NETWORK_MASK = 255.255.248.0
+GRID_NETWORK_MTU = 1400
+GRID_NETWORK_TARGET = eth0
+GRID_NETWORK_TARGET_TYPE = Interface
+NODE_TYPE = VM_API_Gateway
+*PORT_REMAP = client/tcp/8082/443*
+*PORT_REMAP_INBOUND = client/tcp/8082/443*
+----
+. 編輯 PORT_REMAP 和 PORT_REMAP_INBOUND 條目以移除連接埠重新映射。
++
+[listing]
+----
+PORT_REMAP =
+PORT_REMAP_INBOUND =
+----
+. 執行以下命令以驗證您對節點組態檔案所做的變更：``sudo storagegrid node validate _node-name_``
++
+請先解決所有錯誤或警告，然後再進行下一步。
+
+. 執行以下命令重新啟動節點，但不進行連接埠重新映射： `sudo storagegrid node start _node-name_`
+. 使用  `Passwords.txt` 檔案中列出的密碼，以管理員身分登入節點。
+. 請確認服務已正確啟動。
++
+.. 檢視伺服器上所有服務的狀態清單：``sudo storagegrid-status``
++
+狀態會自動更新。
+
+.. ${post_edited_translations.segment}
+.. 離開狀態畫面：``Ctrl+C``
+
+
+. ${post_edited_translations.segment}
+

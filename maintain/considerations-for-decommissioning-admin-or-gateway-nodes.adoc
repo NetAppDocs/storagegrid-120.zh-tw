@@ -1,0 +1,38 @@
+---
+permalink: maintain/considerations-for-decommissioning-admin-or-gateway-nodes.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission admin node, decommission gateway node 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID 管理或閘道節點取消委任考量
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+
+[[considerations-for-admin-node]]
+== 管理節點注意事項
+
+* ${post_edited_translations.segment}
+* 如果管理節點的某個網路介面屬於高可用度 （HA） 群組，則無法將其退役。必須先將該網路介面從 HA 群組中移除。請參閱相關說明 link:../admin/managing-high-availability-groups.html["${post_edited_translations.segment}"]。
+* 如有需要，您可以在退役管理節點時安全地變更 ILM 原則。
+* 如果您退役管理節點，且您的 StorageGRID 系統已啟用單一登入 （SSO），則必須記住從 Active Directory Federation Services （AD FS） 中移除該節點的信賴方信任。
+* 如果使用 link:../admin/grid-federation-overview.html["${post_edited_translations.segment}"]，請確保要退役的節點的 IP 位址未指定用於網格聯邦連線。
+* ${post_edited_translations.segment}
+
+
+
+
+[[considerations-for-gateway-node]]
+== ${post_edited_translations.segment}
+
+* 如果閘道節點的某個網路介面屬於高可用度 （HA） 群組，則無法退役。您必須先將該網路介面從 HA 群組中移除。請參閱相關說明 link:../admin/managing-high-availability-groups.html["${post_edited_translations.segment}"]。
+* ${post_edited_translations.segment}
+* 如果使用 link:../admin/grid-federation-overview.html["${post_edited_translations.segment}"]，請確保要退役的節點的 IP 位址未指定用於網格聯邦連線。
+* 您可以在 Gateway Node 斷線時安全地將其退役。
+

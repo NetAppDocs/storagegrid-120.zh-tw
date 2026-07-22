@@ -1,0 +1,102 @@
+---
+permalink: monitor/viewing-nodes-page.html 
+sidebar: sidebar 
+keywords: nodes page 
+summary: ${post_edited_translations.segment} 
+---
+= 檢視 StorageGRID Nodes 頁面
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+「節點」表列出了整個網格、每個站台和每個節點的摘要資訊。如果節點已中斷連線或存在作用中警示，則節點名稱旁邊會顯示一個圖示。如果節點已連線且沒有作用中警示，則不會顯示任何圖示。
+
+
+NOTE: 當節點未連線至網格時（例如在升級期間或處於中斷連線狀態），某些計量可能無法使用，或未計入站台和網格總數中。節點重新連線至網格後，請等待幾分鐘以使數值穩定。
+
+
+NOTE: 若要變更 Grid Manager 中顯示的儲存設備值的單位，請選擇 Grid Manager 右上角的使用者下拉式選單，然後選擇 *User preferences*。
+
+
+NOTE: 所示螢幕截圖僅供參考。您的實際結果可能會因 StorageGRID 版本而異。
+
+image:nodes_table.png["節點選單"]
+
+
+
+[[connection-state-icons]]
+[[connection-state]]
+== 連線狀態圖示
+
+如果節點與網格中斷連線，節點名稱旁邊會出現下列任一圖示。
+
+[cols="1a,3a,3a"]
+|===
+| 圖示 | 說明 | 需要採取行動 
+
+
+ a| 
+image:icon_alarm_blue_unknown.png["藍色問號圖示"]
+ a| 
+${post_edited_translations.segment}
+
+由於不明原因，節點已中斷連線，或節點上的服務意外停止運作。例如，節點上的服務可能已停止，或者節點可能因為電力故障或非預期停電而失去網路連線。
+
+「無法與節點通訊」警報也可能被觸發。其他警報也可能處於作用中狀態。
+ a| 
+需要立即注意。link:monitoring-system-health.html#view-current-and-resolved-alerts["選擇每個警報"]並遵循建議的措施。
+
+${post_edited_translations.segment}
+
+*注意*：在受管關機操作期間，節點可能顯示為「未知」。在這種情況下，您可以忽略「未知」狀態。
+
+
+
+ a| 
+image:icon_alarm_gray_administratively_down.png["灰色問號圖示"]
+ a| 
+*未連線 - 管理員已關閉*
+
+${post_edited_translations.segment}
+
+例如，節點或其上的服務已正常關閉、節點正在重新開機，或軟體正在升級。也可能有一個或多個警示處於作用中狀態。
+
+${post_edited_translations.segment}
+ a| 
+確定是否有任何警報影響此節點。
+
+如果存在一個或多個警示，link:monitoring-system-health.html#view-current-and-resolved-alerts["選擇每個警報"]請依照建議的動作執行。
+
+|===
+如果節點與網格中斷連線，它可能會有潛在的警示，但只會顯示「未連線」圖示。若要檢視節點的作用中警示，請選取該節點。
+
+
+
+[[alert-icons]]
+== 警報圖示
+
+${post_edited_translations.segment}
+
+image:icon_alert_red_critical.png["圖示警報 紅色 關鍵"] *Critical*：StorageGRID 節點或服務出現異常情況，導致其正常運作停止。您必須立即解決根本問題。如果問題無法解決，可能會導致服務中斷和資料遺失。
+
+image:icon_alert_orange_major.png["圖示警報橙色主要"] *Major*：存在異常情況，該情況正在影響目前作業或接近嚴重警示的臨界值。您應調查重大警示並解決任何潛在問題，以確保異常情況不會停止 StorageGRID 節點或服務的正常運作。
+
+image:icon_alert_yellow_minor.png["圖示警告 黃色次要"] *Minor*：系統目前運作正常，但有異常情況，如果持續下去可能會影響系統運作。您應監控並解決不會自行消失的輕微警示，以確保它們不會導致更嚴重的問題。
+
+
+
+[[view-details-for-a-system-site-or-node]]
+== 檢視系統、站台或節點的詳細資訊
+
+若要篩選節點表中顯示的資訊，請在 *搜尋* 欄位中輸入搜尋字串。您可以依系統名稱、顯示名稱或類型進行搜尋（例如，輸入 *gat* 以快速尋找所有 Gateway 節點）。
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 選擇特定節點以檢視該節點的詳細資訊。
+

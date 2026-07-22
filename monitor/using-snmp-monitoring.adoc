@@ -1,0 +1,125 @@
+---
+permalink: monitor/using-snmp-monitoring.html 
+sidebar: sidebar 
+keywords: snmp, monitoring 
+summary: '如果要使用簡單網路管理協定 (SNMP) 監控 StorageGRID，則必須設定 StorageGRID 隨附的 SNMP 代理程式。' 
+---
+= 在 StorageGRID 中使用 SNMP 監控
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果要使用簡單網路管理協定 (SNMP) 監控 StorageGRID，則必須設定 StorageGRID 隨附的 SNMP 代理程式。
+
+* link:configuring-snmp-agent.html["設定 SNMP 代理程式"] Standard translation: link:configuring-snmp-agent.html["設定 SNMP 代理程式"] (Since it's only a markup placeholder, output it exactly as is). link:configuring-snmp-agent.html["設定 SNMP 代理程式"]_
+* link:updating-snmp-agent.html["更新 SNMP 代理程式"]
+
+
+
+
+[[capabilities]]
+== 功能
+
+每個 StorageGRID 節點都執行一個 SNMP 代理程式（或守護程式），該代理程式提供一個 MIB。StorageGRID MIB 包含用於警示的表格定義和通知定義。該 MIB 還包含每個節點的系統執行摘要資訊，例如平台和型號。每個 StorageGRID 節點也支援 MIB-II 物件的子集。
+
+
+NOTE: 如果您想要下載網格節點上的 MIB 檔案，請參閱 link:access-snmp-mib.html["存取 MIB 檔案"]。
+
+初始狀態下，所有節點上的 SNMP 均處於停用狀態。設定 SNMP 代理程式後，所有 StorageGRID 節點都會收到相同的組態。
+
+StorageGRID SNMP 代理程式支援所有三個版本的 SNMP 協定。它提供唯讀 MIB 存取以進行查詢，並且可以向管理系統傳送兩種類型的事件驅動型通知：
+
+陷阱:: 陷阱是由 SNMP 代理程式發送的通知，無需管理系統確認。陷阱用於通知管理系統 StorageGRID 中發生了某些事件，例如觸發了警報。
++
+--
+SNMP 的三個版本皆支援陷阱。
+
+--
+通知:: Inform 訊息類似於 Trap 訊息，但它需要管理系統的確認。如果 SNMP 代理程式在一定時間內未收到確認，它將重新傳送 Inform 訊息，直到收到確認或達到最大重試次數為止。
++
+--
+SNMPv2c 和 SNMPv3 都支援 Inform 訊息。
+
+--
+
+
+陷阱和通知訊息會在下列情況下傳送：
+
+* 預設警報或自訂警報可在任何嚴重層級觸發。若要抑制警報的 SNMP 通知，您必須link:silencing-alert-notifications.html["設定靜音"]為該警報進行設定。警報通知由link:../primer/what-admin-node-is.html["慣用寄件者管理節點"]傳送。
++
+每個警報都會根據其嚴重層級映射到三種陷阱類型之一：activeMinorAlert、activeMajorAlert 和 activeCriticalAlert。如需可觸發這些陷阱的警報清單，請參閱 link:alerts-reference.html["${post_edited_translations.segment}"]。
+
+
+
+
+
+[[snmp-version-support]]
+== SNMP 版本支援
+
+此表提供每個 SNMP 版本所支援功能的高階摘要。
+
+[cols="1a,2a,2a,2a"]
+|===
+|  | SNMPv1 | SNMPv2c | SNMPv3 
+
+
+ a| 
+查詢
+
+（GET 和 GETNEXT）
+ a| 
+唯讀 MIB 查詢
+ a| 
+唯讀 MIB 查詢
+ a| 
+唯讀 MIB 查詢
+
+
+
+ a| 
+查詢驗證
+ a| 
+社群字串
+ a| 
+社群字串
+ a| 
+基於使用者的安全模型（USM）使用者
+
+
+
+ a| 
+通知
+
+（TRAP and INFORM）
+ a| 
+僅限陷阱
+ a| 
+陷阱和通知
+ a| 
+陷阱和通知
+
+
+
+ a| 
+通知驗證
+ a| 
+每個陷阱目的地的預設陷阱社群或自訂社群字串
+ a| 
+每個陷阱目的地的預設陷阱社群或自訂社群字串
+ a| 
+每個陷阱目的地的 USM 使用者
+
+|===
+
+
+[[limitations]]
+== 限制
+
+* StorageGRID 支援唯讀 MIB 存取。不支援讀寫存取。
+* 網格中的所有節點都接收相同的組態。
+* SNMPv3：StorageGRID 不支援傳輸支援模式 （TSM）。
+* SNMPv3：僅支援 SHA（HMAC-SHA-96）身分驗證傳輸協定。
+* SNMPv3：唯一支援的隱私權傳輸協定為 AES。
+

@@ -1,0 +1,109 @@
+---
+permalink: admin/kms-considerations-and-requirements.html 
+sidebar: sidebar 
+keywords: Key Management Interoperability Protocol, kmip version, kms requirements, use key management server 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID 金鑰管理伺服器需求和注意事項
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+
+[[which-version-of-kmip-is-supported]]
+== 支援哪個版本的 KMIP？
+
+${post_edited_translations.segment}
+
+http://docs.oasis-open.org/kmip/spec/v1.4/os/kmip-spec-v1.4-os.html["${post_edited_translations.segment}"^]
+
+
+
+[[what-are-the-network-considerations]]
+== ${post_edited_translations.segment}
+
+網路防火牆設定必須允許每個應用裝置節點透過用於金鑰管理互作業協定 （KMIP） 通訊的連接埠進行通訊。 
+
+${post_edited_translations.segment}
+
+
+
+[[which-versions-of-tls-are-supported]]
+== ${post_edited_translations.segment}
+
+應用裝置節點與已設定的 KMS 之間的通訊使用安全的 TLS 連線。StorageGRID 在與 KMS 或 KMS 叢集建立 KMIP 連線時，可根據 KMS 支援的協定以及link:manage-tls-ssh-policy.html["${post_edited_translations.segment}"]您所使用的協定，支援 TLS 1.2 或 TLS 1.3 協定。
+
+StorageGRID 在建立連線時會與 KMS 協商協定和密碼（TLS 1.2）或密碼套件（TLS 1.3）。若要查看可用的協定版本和密碼/密碼套件，請審查網格的使用中 TLS 和 SSH 原則的 `tlsOutbound`部分（*組態* > *安全性* *安全性設定*）。
+
+
+
+[[which-appliances-are-supported]]
+== ${post_edited_translations.segment}
+
+您可以使用金鑰管理伺服器 (KMS) 來管理網格中任何已啟用 *Node Encryption* 設定的 StorageGRID 應用裝置的加密金鑰。此設定只能在應用裝置安裝的硬體組態階段使用 StorageGRID Appliance Installer 啟用。
+
+
+NOTE: ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 以虛擬機器 (VM) 形式部署的節點
+* ${post_edited_translations.segment}
+
+
+${post_edited_translations.segment}
+
+
+
+[[when-should-i-configure-key-management-servers]]
+== ${post_edited_translations.segment}
+
+對於全新安裝，通常應在建立租用戶之前，先在 Grid Manager 中設定一個或多個金鑰管理伺服器。此順序可確保在將任何物件資料儲存到節點之前，節點已受到保護。
+
+${post_edited_translations.segment}
+
+
+
+[[how-many-key-management-servers-do-i-need]]
+== ${post_edited_translations.segment}
+
+您可以設定一個或多個外部金鑰管理伺服器，為 StorageGRID 系統中的應用裝置節點提供加密金鑰。每個 KMS 為單一站台或站台群組內的 StorageGRID 應用裝置節點提供單一加密金鑰。
+
+StorageGRID 支援使用 KMS 叢集。每個 KMS 叢集包含多個複製的金鑰管理伺服器，這些伺服器共用組態設定和加密金鑰。建議使用 KMS 叢集進行金鑰管理，因為它能提高高可用度組態的故障轉移能力。
+
+例如，假設您的 StorageGRID 系統有三個資料中心站台。您可以設定一個 KMS 叢集，為資料中心 1 的所有應用裝置節點提供金鑰，並設定第二個 KMS 叢集，為所有其他站台的所有應用裝置節點提供金鑰。當您新增第二個 KMS 叢集時，可以為資料中心 2 和資料中心 3 設定預設 KMS。
+
+請注意，KMS 不能用於非應用裝置節點，也不能用於安裝期間未啟用 *Node Encryption* 設定的任何應用裝置節點。
+
+image:kms_per_site.png["每個站台的 KMS"]
+
+
+
+[[what-happens-when-a-key-is-rotated]]
+== 金鑰輪替時會發生什麼事？
+
+作為一項安全性最佳實務做法，您應該定期link:kms-managing.html#rotate-key["輪換加密金鑰"]每個已設定的 KMS。
+
+新加密金鑰版本可用時：
+
+* 金鑰會自動分發到與 KMS 關聯的一個或多個站台上的加密應用裝置節點。分發應在金鑰輪換後一小時內完成。
+* 如果加密應用裝置節點在發佈新金鑰版本時處於離線狀態，該節點將在重新開機後立即收到新金鑰。
+* 如果因任何原因而無法使用新的金鑰版本來加密應用裝置磁碟區，則會針對該應用裝置節點觸發 *KMS 加密金鑰輪替失敗* 警示。您可能需要聯絡技術支援以協助解決此警示。
+
+
+
+
+[[can-i-reuse-an-appliance-node-after-it-has-been-encrypted]]
+== 應用裝置節點加密後可以重複使用嗎？
+
+如果您需要將加密的應用裝置安裝到另一個 StorageGRID 系統中，您必須先將該網格節點退役，以便將物件資料移至另一個節點。然後，您可以使用 StorageGRID 應用裝置安裝程式來 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/monitoring-node-encryption-in-maintenance-mode.html["${post_edited_translations.segment}"^]。清除 KMS 組態會停用 *節點加密* 設定，並移除應用裝置節點與 StorageGRID 站台之 KMS 組態之間的關聯。
+
+
+NOTE: ${post_edited_translations.segment}

@@ -1,0 +1,61 @@
+---
+permalink: admin/kms-configuring-storagegrid-as-client.html 
+sidebar: sidebar 
+keywords: configure kms, key management server 
+summary: 在將 KMS 新增至 StorageGRID 之前，必須將 StorageGRID 設定為每個外部金鑰管理伺服器或 KMS 叢集的用戶端。 
+---
+= 在 KMS 中將 StorageGRID 設定為用戶端
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在將 KMS 新增至 StorageGRID 之前，必須將 StorageGRID 設定為每個外部金鑰管理伺服器或 KMS 叢集的用戶端。
+
+
+NOTE: 這些說明適用於 Thales CipherTrust Manager 和 Hashicorp Vault。有關支援的產品和版本清單，請使用 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+.步驟
+. 從 KMS 軟體中，為計畫使用的每個 KMS 或 KMS 叢集建立一個 StorageGRID 用戶端。
++
+每個 KMS 管理單一站台或一組站台中 StorageGRID 應用裝置節點的單一加密金鑰。
+
+. [[create-key-with-kms-product]]使用以下兩種方法之一建立金鑰：
++
+** 使用 KMS 產品的金鑰管理頁面。為每個 KMS 或 KMS 叢集建立一個 AES 加密金鑰。
++
+加密金鑰必須至少為 2,048 位元，且必須是可匯出的。
+
+** 讓 StorageGRID 建立金鑰。在 link:kms-adding.html#sg-create-key["上傳用戶端憑證"] 之後測試並儲存時，系統會提示您。
+
+
+. 記錄每個 KMS 或 KMS 叢集的以下資訊。
++
+將 KMS 新增至 StorageGRID 時，您需要以下資訊：
+
++
+** 每台伺服器的主機名稱或 IP 位址。
+** KMS 使用的 KMIP 連接埠。
+** KMS 中加密金鑰的金鑰別名。
+
+
+. 對於每個 KMS 或 KMS 叢集，取得由憑證授權單位 （CA） 簽署的伺服器憑證，或取得包含每個 PEM 編碼的 CA 憑證檔案（按憑證鏈順序串連）的憑證套裝組合。
++
+${post_edited_translations.segment}
+
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
++
+
+NOTE: 在 StorageGRID 中設定 KMS 時，必須在 *主機名稱* 欄位中輸入相同的 FQDN 或 IP 位址。
+
+** 伺服器憑證必須與 KMS 的 KMIP 介面使用的憑證相符，該介面通常使用連接埠 5696。
+
+
+. ${post_edited_translations.segment}
++
+用戶端憑證允許 StorageGRID 向 KMS 進行驗證。
+
+

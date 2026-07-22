@@ -1,0 +1,63 @@
+---
+permalink: ilm/when-to-use-cloud-storage-pools.html 
+sidebar: sidebar 
+keywords: use cloud storage pool, benefits of cloud storage pools 
+summary: 使用 Cloud Storage Pools ，您可以將資料備份或分層到外部位置。此外，您還可以將資料備份或分層到多個雲端。 
+---
+= StorageGRID 中的 Cloud Storage Pool 使用案例
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+使用 Cloud Storage Pools ，您可以將資料備份或分層到外部位置。此外，您還可以將資料備份或分層到多個雲端。
+
+
+
+[[back-up-storagegrid-data-to-external-location]]
+== ${post_edited_translations.segment}
+
+您可以使用雲端儲存資源池將 StorageGRID 物件備份到外部位置。
+
+如果 StorageGRID 中的複本無法存取，則可以使用 Cloud Storage Pool 中的物件資料來回應用戶端要求。但是，您可能需要發出 S3 RestoreObject 要求，才能存取 Cloud Storage Pool 中的備份物件複本。
+
+雲端儲存資源池中的物件資料也可用於恢復因儲存設備 Volume 或 Storage Node 故障而從 StorageGRID 遺失的資料。如果物件的唯一剩餘複本位於雲端儲存資源池中，StorageGRID 會暫時恢復該物件，並在復原的 Storage Node 上建立新複本。
+
+${post_edited_translations.segment}
+
+. 建立單一雲端儲存資源池。
+. ${post_edited_translations.segment}
+. 將此規則新增至您的 ILM 原則。然後，模擬並啟動該原則。
+
+
+
+
+[[tier-data-from-storagegrid-to-external-location]]
+== 將 StorageGRID 的資料分層至外部位置
+
+您可以使用 Cloud Storage Pool 將物件儲存至 StorageGRID 系統外部。例如，假設您有大量需要保留的物件，但您預期很少（甚至從不）存取這些物件。您可以使用 Cloud Storage Pool 將物件分層至成本較低的儲存設備，並釋放 StorageGRID 中的空間。
+
+實作分層解決方案：
+
+. 建立單一雲端儲存資源池。
+. 設定 ILM 規則，將不常用的物件從儲存節點移至雲端儲存資源池。
+. 將此規則新增至您的 ILM 原則。然後，模擬並啟動該原則。
+
+
+
+
+[[maintain-multiple-cloud-endpoints]]
+== ${post_edited_translations.segment}
+
+如果您想要將物件資料分層或備份到多個雲端，可以設定多個雲端儲存資源池端點。ILM 規則中的篩選器可讓您指定要將哪些物件儲存在每個雲端儲存資源池中。例如，您可能想要將來自某些租戶或儲存貯體的物件儲存在 Amazon S3 Glacier 中，並將來自其他租戶或儲存貯體的物件儲存在 Azure Blob storage 中。或者，您可能想要在 Amazon S3 Glacier 與 Azure Blob storage 之間移動資料。
+
+
+NOTE: ${post_edited_translations.segment}
+
+要實作多個雲端端點：
+
+. 最多可建立 10 個雲端儲存資源池。
+. 設定 ILM 規則，以便在適當的時間將對應的物件資料儲存到各個雲端儲存資源池中。例如，將儲存桶 A 中的物件儲存到雲端儲存資源池 A，將儲存桶 B 中的物件儲存到雲端儲存資源池 B。或者，將物件在雲端儲存資源池 A 中儲存一段時間，然後將其移至雲端儲存資源池 B。
+. 將規則新增至您的 ILM 原則。然後，模擬並啟動該原則。
+

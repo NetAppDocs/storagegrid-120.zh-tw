@@ -1,0 +1,160 @@
+---
+permalink: maintain/linux-migrating-grid-node-to-new-host.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, linux, migrate node, migrating node, new host for node 
+summary: ${post_edited_translations.segment} 
+---
+= 將 StorageGRID 節點遷移到新的 Linux 主機
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+.開始之前
+* 您已規劃 StorageGRID 部署以包含移轉支援。請參閱link:../swnodes/node-container-migration-requirements.html["節點 Container 移轉要求"]。
+* 目標主機已準備好用於 StorageGRID。
+* ${post_edited_translations.segment}
+* 網路介面在不同主機上的名稱一致。
+
+
+[NOTE]
+====
+在正式作業部署中，請勿在單一主機上執行多個 Storage Node。為每個 Storage Node 使用專用主機可提供隔離的故障網域。
+
+其他類型的節點，例如管理節點或閘道節點，可以部署在同一主機上。但是，如果您有多個相同類型的節點（例如兩個閘道節點），請不要將所有執行個體都安裝在同一主機上。
+
+====
+
+
+[[export-node-from-source-host]]
+== ${post_edited_translations.segment}
+
+首先，關閉網格節點並將其從來源 Linux 主機匯出。
+
+${post_edited_translations.segment}
+
+.步驟
+. ${post_edited_translations.segment}
++
+`sudo storagegrid node status all`
+
++
+範例輸出：
+
++
+[listing]
+----
+Name Config-State Run-State
+DC1-ADM1 Configured Running
+DC1-ARC1 Configured Running
+DC1-GW1 Configured Running
+DC1-S1 Configured Running
+DC1-S2 Configured Running
+DC1-S3 Configured Running
+----
+. ${post_edited_translations.segment}
++
+`sudo storagegrid node stop DC1-S3`
+
++
+範例輸出：
+
++
+[listing]
+----
+Stopping node DC1-S3
+Waiting up to 630 seconds for node shutdown
+----
+. 從來源主機匯出節點。
++
+`sudo storagegrid node export DC1-S3`
+
++
+範例輸出：
+
++
+[listing]
+----
+Finished exporting node DC1-S3 to /dev/mapper/sgws-dc1-s3-var-local.
+Use 'storagegrid node import /dev/mapper/sgws-dc1-s3-var-local' if you
+want to import it again.
+----
+. 請記下輸出中建議的 `import`命令。
++
+${post_edited_translations.segment}
+
+
+
+
+
+[[import-node-on-target-host]]
+== ${post_edited_translations.segment}
+
+從來源主機匯出節點後，您需要在目標主機上匯入並驗證該節點。驗證過程會確認該節點能夠存取與來源主機上相同的區塊儲存設備和網路介面裝置。
+
+${post_edited_translations.segment}
+
+.步驟
+. 在目標主機上匯入節點。
++
+`sudo storagegrid node import /dev/mapper/sgws-dc1-s3-var-local`
+
++
+範例輸出：
+
++
+[listing]
+----
+Finished importing node DC1-S3 from /dev/mapper/sgws-dc1-s3-var-local.
+You should run 'storagegrid node validate DC1-S3'
+----
+. 驗證新主機上的節點組態。
++
+`sudo storagegrid node validate DC1-S3`
+
++
+範例輸出：
+
++
+[listing]
+----
+Confirming existence of node DC1-S3... PASSED
+Checking configuration file /etc/storagegrid/nodes/DC1-S3.conf for node DC1-S3... PASSED
+Checking for duplication of unique values... PASSED
+----
+. ${post_edited_translations.segment}
++
+如需疑難排解資訊，請參閱適用於您 Linux 作業系統的 StorageGRID link:../swnodes/index.html["${post_edited_translations.segment}"]。
+
+
+
+
+
+[[start-migrated-node]]
+== 啟動移轉節點
+
+驗證移轉的節點後，在目標主機上執行命令來啟動該節點。
+
+.步驟
+. ${post_edited_translations.segment}
++
+`sudo storagegrid node start DC1-S3`
+
+. ${post_edited_translations.segment}
++
+
+CAUTION: 確認節點狀態為綠色，可確保移轉的節點已完全重新開機並重新加入網格。如果狀態不是綠色，請勿移轉任何其他節點，以免出現多個節點停止服務的情況。
+
+. ${post_edited_translations.segment}
++
+`sudo storagegrid node status _node-name`
+
++
+確認移轉後的節點執行狀態為「執行中」。
+
+

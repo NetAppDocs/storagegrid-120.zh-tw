@@ -1,0 +1,434 @@
+---
+permalink: expand/gather-required-materials.html 
+sidebar: sidebar 
+keywords: expand, expansion, planning, storagegrid files, StorageGRID 
+summary: 在執行擴充作業之前，請收集材料並安裝和設定任何新的硬體和網路。 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在執行擴充作業之前，請收集材料並安裝和設定任何新的硬體和網路。
+
+[cols="1a,2a"]
+|===
+| 項目 | 附註 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+如果您要新增網格節點或新站台，則必須下載並擷取 StorageGRID 安裝歸檔。您必須使用與目前在網格上執行之版本相同的版本。
+
+如需詳細資訊，請參閱 <<download-and-extract-install-files,${post_edited_translations.segment}>> 的說明。
+
+*注意：*如果您要將新的儲存設備磁碟區新增至現有的儲存節點或安裝新的 StorageGRID 應用裝置，則無需下載檔案。
+
+
+
+ a| 
+服務筆記型電腦
+ a| 
+此維修用筆記型電腦具備以下配置：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]
+
+
+
+
+ a| 
+`Passwords.txt` 檔案
+ a| 
+包含透過命令列存取網格節點所需的密碼。包含在恢復套件中。
+
+
+
+ a| 
+佈建複雜密碼
+ a| 
+StorageGRID 系統首次安裝時會建立並記錄佈建密碼短語。佈建密碼短語不在 `Passwords.txt`檔案中。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+* link:../admin/index.html["管理 StorageGRID"]_
+* https://library.netapp.com/ecm/ecm_download_file/ECMLP3351267["版本資訊"^]。您必須登入現有 NetApp 帳戶或建立帳戶才能存取發行說明。
+* link:../swnodes/index.html["平台安裝說明"]
+
+
+
+
+ a| 
+您平台的最新文件
+ a| 
+有關支援的版本，請參閱 https://imt.netapp.com/matrix/#welcome["互通性對照表工具（IMT）"^]。
+
+|===
+
+
+[[download-and-extract-the-storagegrid-installation-files]]
+== ${post_edited_translations.segment}
+
+.[[download-and-extract-install-files]]
+在新增新的網格節點或新網站之前，必須下載對應的 StorageGRID 安裝歸檔並擷取檔案。
+
+.關於此任務
+您必須使用目前在網格上執行的 StorageGRID 版本執行擴充作業。
+
+.步驟
+. 前往  https://mysupport.netapp.com/site/products/all/details/storagegrid/downloads-tab["NetApp 下載：StorageGRID"^]。
+. 選擇目前在網格上執行的 StorageGRID 版本。
+. 使用您 NetApp 帳戶的用戶名和密碼登入。
+. 閱讀終端使用者授權合約，選取核取方塊，然後選取 *Accept & Continue*。
+. 在下載頁面的 *Install StorageGRID* 欄位中，選取適用於您平台的  `.tgz` 或  `.zip` 檔案。
++
+安裝歸檔檔案中顯示的版本必須與目前已安裝軟體的版本一致。
+
++
+如果您在服務筆記型電腦上執行的是 Windows 系統，請使用  `.zip` 檔案。
+
++
+[cols="1a,2a"]
+|===
+| 平台 | ${post_edited_translations.segment} 
+
+
+ a| 
+RHEL
+| `StorageGRID-Webscale-_version_-RPM-_uniqueID_.zip` 
+`StorageGRID-Webscale-_version_-RPM-_uniqueID_.tgz` 
+
+
+ a| 
+${post_edited_translations.segment}
+| `StorageGRID-Webscale-_version_-DEB-_uniqueID_.zip` 
+`StorageGRID-Webscale-_version_-DEB-_uniqueID_.tgz` 
+
+
+ a| 
+VMware
+| `StorageGRID-Webscale-_version_-VMware-_uniqueID_.zip` 
+`StorageGRID-Webscale-_version_-VMware-_uniqueID_.tgz` 
+
+
+ a| 
+OpenStack/其他 Hypervisor
+ a| 
+要在 OpenStack 上擴充現有部署，您必須部署一台執行上述其中一個受支援 Linux 發行版的虛擬機器，並遵循適當的 Linux 說明。
+
+|===
+. 下載並擷取歸檔檔案。
+. ${post_edited_translations.segment}
++
+每個平台步驟中列出的路徑，均相對於歸檔檔案所安裝的頂層目錄。
+
+. ${post_edited_translations.segment}
+
+
+[cols="1a,1a"]
+|===
+| ${post_edited_translations.segment} | 說明 
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ./rpms/NLF000000.txt  a| 
+免費授權，不提供任何產品支援服務。
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ./rpms/StorageGRID-Webscale-Service-_version_-SHA.rpm  a| 
+用於在 RHEL 主機上安裝 StorageGRID 主機服務的 RPM 套件。
+
+
+
+| ${post_edited_translations.segment} | 說明 
+
+
+| ./rpms/configure-storagegrid.py  a| 
+${post_edited_translations.segment}
+
+
+
+| ./rpms/configure-sga.py  a| 
+用於自動化 StorageGRID 應用裝置組態的 Python 指令碼。
+
+
+
+| ./rpms/configure-storagegrid.sample.json  a| 
+搭配  `configure-storagegrid.py` 指令碼使用的範例組態檔案。
+
+
+
+| ./rpms/storagegrid-ssoauth.py  a| 
+這是一個範例 Python 指令碼，可用於在啟用單一登入的情況下登入 Grid Management API。您也可以使用此指令碼進行 Ping Federate 整合。
+
+
+
+| ${post_edited_translations.segment}  a| 
+一個用於搭配  `configure-storagegrid.py` 指令碼使用的空白組態檔案。
+
+
+
+| ${post_edited_translations.segment}  a| 
+用於為 StorageGRID Container 部署設定 RHEL 主機的範例 Ansible 角色與 Playbook。您可以根據需要自訂角色或 Playbook。
+
+
+
+| ${post_edited_translations.segment}  a| 
+這是一個範例 Python 指令碼，當使用 Active Directory 或 Ping Federate 啟用單一登入 （SSO） 時，您可以使用該指令碼登入 Grid Management API。
+
+
+
+| ${post_edited_translations.segment}  a| 
+由隨附的  `storagegrid-ssoauth-azure.py` Python 指令碼所呼叫的輔助指令碼，用於與 Azure 進行 SSO 互動。
+
+
+
+| ./rpms/extras/api-schemas  a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+|===
+. ${post_edited_translations.segment}
+
+
+[cols="1a,1a"]
+|===
+| ${post_edited_translations.segment} | 說明 
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ${post_edited_translations.segment}  a| 
+您可用於測試和概念驗證部署的非生產 NetApp 授權檔案。
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ${post_edited_translations.segment}  a| 
+檔案的 MD5 Checksum `/debs/storagegrid-webscale-images-version-SHA.deb`。
+
+
+
+| ./debs/storagegrid-webscale-service-version-SHA.deb  a| 
+用於在 Ubuntu 或 Debian 主機上安裝 StorageGRID 主機服務的 DEB 軟體套件。
+
+
+
+| ${post_edited_translations.segment} | 說明 
+
+
+| ./debs/configure-storagegrid.py  a| 
+${post_edited_translations.segment}
+
+
+
+| ./debs/configure-sga.py  a| 
+用於自動化 StorageGRID 應用裝置組態的 Python 指令碼。
+
+
+
+| ./debs/storagegrid-ssoauth.py  a| 
+這是一個範例 Python 指令碼，可用於在啟用單一登入的情況下登入 Grid Management API。您也可以使用此指令碼進行 Ping Federate 整合。
+
+
+
+| ./debs/configure-storagegrid.sample.json  a| 
+搭配  `configure-storagegrid.py` 指令碼使用的範例組態檔案。
+
+
+
+| ./debs/configure-storagegrid.blank.json  a| 
+一個用於搭配  `configure-storagegrid.py` 指令碼使用的空白組態檔案。
+
+
+
+| ./debs/extras/ansible  a| 
+以下是用於設定 Ubuntu 或 Debian 主機以部署 StorageGRID Container 的 Ansible 角色和 playbook 範例。您可以根據需要自訂角色或 playbook。
+
+
+
+| ./debs/storagegrid-ssoauth-azure.py  a| 
+這是一個範例 Python 指令碼，當使用 Active Directory 或 Ping Federate 啟用單一登入 （SSO） 時，您可以使用該指令碼登入 Grid Management API。
+
+
+
+| ./debs/storagegrid-ssoauth-azure.js  a| 
+由隨附的  `storagegrid-ssoauth-azure.py` Python 指令碼所呼叫的輔助指令碼，用於與 Azure 進行 SSO 互動。
+
+
+
+| ./debs/extras/api-schemas  a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+|===
+. 如果要擴充 VMware 系統，請選擇對應的檔案。
+
+
+[cols="1a,1a"]
+|===
+| ${post_edited_translations.segment} | 說明 
+
+
+| ./vsphere/README  a| 
+${post_edited_translations.segment}
+
+
+
+| ./vsphere/NLF000000.txt  a| 
+免費授權，不提供任何產品支援服務。
+
+
+
+| ./vsphere/NetApp-SG-version-SHA.vmdk  a| 
+用作建立網格節點虛擬機器範本的虛擬機器磁碟檔案。
+
+
+
+| ./vsphere/vsphere-primary-admin.ovf ./vsphere/vsphere-primary-admin.mf  a| 
+用於部署主管理節點的 Open Virtualization Format 範本檔案 (`.ovf`）和清單檔案 (`.mf`）。
+
+
+
+| ./vsphere/vsphere-non-primary-admin.ovf ./vsphere/vsphere-non-primary-admin.mf  a| 
+用於部署非主要管理節點的範本檔案 (`.ovf`）和清單檔案 (`.mf`）。
+
+
+
+| ./vsphere/vsphere-gateway.ovf ./vsphere/vsphere-gateway.mf  a| 
+用於部署 Gateway Nodes 的範本檔案 (`.ovf`）和清單檔案 (`.mf`）。
+
+
+
+| ./vsphere/vsphere-storage.ovf ./vsphere/vsphere-storage.mf  a| 
+用於部署基於虛擬機器的儲存節點的範本檔案 (`.ovf`）和清單檔案 (`.mf`）。
+
+
+
+| ${post_edited_translations.segment} | 說明 
+
+
+| ./vsphere/deploy-vsphere-ovftool.sh  a| 
+用於自動化部署虛擬網格節點的 Bash shell 指令碼。
+
+
+
+| ./vsphere/deploy-vsphere-ovftool-sample.ini  a| 
+與  `deploy-vsphere-ovftool.sh` 指令碼搭配使用的範例組態檔案。
+
+
+
+| ./vsphere/configure-storagegrid.py  a| 
+${post_edited_translations.segment}
+
+
+
+| ./vsphere/configure-sga.py  a| 
+用於自動化 StorageGRID 應用裝置組態的 Python 指令碼。
+
+
+
+| ./vsphere/storagegrid-ssoauth.py  a| 
+這是一個範例 Python 指令碼，可用於在啟用單一登入 （SSO） 的情況下登入 Grid Management API。您也可以使用此指令碼進行 Ping Federate 整合。
+
+
+
+| ./vsphere/configure-storagegrid.sample.json  a| 
+搭配  `configure-storagegrid.py` 指令碼使用的範例組態檔案。
+
+
+
+| ./vsphere/configure-storagegrid.blank.json  a| 
+一個用於搭配  `configure-storagegrid.py` 指令碼使用的空白組態檔案。
+
+
+
+| ./vsphere/storagegrid-ssoauth-azure.py  a| 
+這是一個範例 Python 指令碼，當使用 Active Directory 或 Ping Federate 啟用單一登入 （SSO） 時，您可以使用該指令碼登入 Grid Management API。
+
+
+
+| ./vsphere/storagegrid-ssoauth-azure.js  a| 
+由隨附的  `storagegrid-ssoauth-azure.py` Python 指令碼所呼叫的輔助指令碼，用於與 Azure 進行 SSO 互動。
+
+
+
+| ./vsphere/extras/api-schemas  a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+|===
+. ${post_edited_translations.segment}
+
+
+
+NOTE: 對於應用裝置安裝，僅當您需要避免網路流量時才需要這些檔案。應用裝置可以從您執行恢復程序的管理節點下載所需檔案。
+
+[cols="1a,1a"]
+|===
+| ${post_edited_translations.segment} | 說明 
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ${post_edited_translations.segment}  a| 
+檔案的 MD5 Checksum `/debs/storagegridwebscale-
+images-version-SHA.deb`。
+
+|===
+
+
+[[verify-hardware-and-networking]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 支援新網格節點或新站台所需的硬體已安裝並設定完成。
+* 所有新節點都與所有現有節點和新節點建立雙向通訊路徑（這是 Grid Network 的要求）。尤其需要確認，在擴充功能中新增的節點與主管理節點之間，以下 TCP 連接埠已開啟：
++
+** 1055
+** 7443
+** 8011
+** 10342
+
+
++
+請參閱 link:../network/internal-grid-node-communications.html["${post_edited_translations.segment}"]。
+
+* 主管理節點可以與所有用於託管 StorageGRID 系統的擴充伺服器進行通訊。
+* 如果任何新節點的網格網路 IP 位址位於先前未使用的子網路中，則您已將其link:updating-subnets-for-grid-network.html["新增了新的子網路"]新增至網格網路子網路清單中。否則，您必須取消擴充，新增子網路，然後重新開始此程序。
+* 您未在網格節點之間或 StorageGRID 站點之間的網格網路上使用網路位址轉換 （NAT）。當您為網格網路使用私有 IPv4 位址時，這些位址必須能夠從每個站點的每個網格節點直接路由。只有當您使用對網格中所有節點透明的隧道應用程式時，才支援使用 NAT 將網格網路橋接到公共網路區段，這表示網格節點無需了解公用 IP 位址。
++
+此 NAT 限制僅適用於網格節點和網格網路。如有需要，您可以在外部用戶端和網格節點之間使用 NAT，例如為 Gateway Node 提供公共 IP 位址。
+
+

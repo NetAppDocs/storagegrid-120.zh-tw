@@ -1,0 +1,82 @@
+---
+permalink: maintain/considerations-for-decommissioning-storage-nodes.html 
+sidebar: sidebar 
+keywords: storage node decommission, considerations, appliance node clone 
+summary: 在退役儲存節點之前，請考慮是否可以 Clone 該節點。如果最終決定退役該節點，請審查 StorageGRID 在退役程序期間如何管理物件和中繼資料。 
+---
+= StorageGRID 中的儲存節點汰換考量事項
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在退役儲存節點之前，請考慮是否可以 Clone 該節點。如果最終決定退役該節點，請審查 StorageGRID 在退役程序期間如何管理物件和中繼資料。
+
+
+
+[[when-to-clone-a-node-instead-of-decommissioning-it]]
+== 何時應該 Clone 節點而不是將其退役？
+
+如果您想用更新或更大的應用裝置取代舊的應用裝置儲存節點，請考慮 Clone 應用裝置節點，而非在擴充中新增應用裝置，然後再退役舊應用裝置。
+
+應用裝置節點 Clone 功能讓您可以輕鬆地在同一 StorageGRID 站點內以相容的應用裝置取代現有應用裝置節點。Clone 程序會將所有資料傳輸到新應用裝置、使新應用裝置投入使用，並將舊應用裝置保持在預先安裝狀態。
+
+${post_edited_translations.segment}
+
+* 更換即將報廢的應用裝置。
+* 升級現有節點，以利用改良的應用裝置技術。
+* 在不改變 StorageGRID 系統中儲存節點數量的情況下，增加網格儲存設備容量。
+* ${post_edited_translations.segment}
+
+
+如需詳細資訊，請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/how-appliance-node-cloning-works.html["應用裝置節點 Clone"^]。
+
+
+
+[[considerations-for-connected-storage-nodes]]
+== 互聯儲存節點的相關注意事項
+
+審查已連接儲存節點退役的相關注意事項。
+
+* 在單一停用節點程序中，不應退役超過 10 個儲存節點。
+* 系統必須始終包含足夠的儲存節點以滿足運作需求，包括 link:understanding-adc-service-quorum.html["${post_edited_translations.segment}"] 和使用中的 link:reviewing-ilm-policy-and-storage-configuration.html["ILM 政策"]。為滿足此限制，您可能需要在擴充作業中新增儲存節點，才能退役現有儲存節點。
++
+在包含基於軟體的僅中繼資料節點的網格中退役儲存節點時，請務必注意。如果您退役所有設定為同時儲存物件和中繼資料的節點，則網格將無法儲存物件。如需有關僅中繼資料儲存節點的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+
+* 移除儲存節點時，大量物件資料會透過網路傳輸。雖然這些傳輸不會影響系統的正常運行，但會影響 StorageGRID 系統消耗的總網路頻寬。
+* 與儲存節點退役相關的工作優先順序低於與正常系統作業相關的工作。這表示退役作業不會干擾 StorageGRID 系統的正常運作，也無需安排在系統閒置期間執行。由於退役作業在背景執行，因此難以估計完成此程序所需的時間。一般而言，當系統處於閒置狀態，或每次只移除一個儲存節點時，退役作業完成速度較快。
+* 退役 Storage Node 可能需要數天或數週的時間。請相應地規劃此程序。雖然退役程序旨在不影響系統運作，但它可能會限制其他程序。一般而言，您應該在移除網格節點之前，執行任何計劃中的系統升級或擴充。
+* 如果在移除儲存節點時需要執行其他維護程序，您可以 link:pausing-and-resuming-decommission-process-for-storage-nodes.html["暫停退役程序"] 並在其他程序完成後將其恢復。
++
+
+NOTE: ${post_edited_translations.segment}
+
+* 當退役工作執行時，您無法對任何網格節點執行資料修理作業。
+* ${post_edited_translations.segment}
+* 若要永久安全地移除資料，必須在退役程序完成後擦除儲存節點的磁碟機。
+
+
+
+
+[[considerations-for-disconnected-storage-nodes]]
+[[considerations-disconnected-storage-nodes]]
+== 斷開連接的儲存節點的相關注意事項
+
+${post_edited_translations.segment}
+
+* 除非確定無法重新上線或恢復，否則切勿退役已中斷連線的節點。
++
+
+CAUTION: 如果您認為有可能從節點恢復物件資料，請勿執行此程序。請改為聯絡技術支援，以確定是否可以進行節點恢復。
+
+* ${post_edited_translations.segment}
+* 如果您退役一個以上已中斷連線的 Storage Node ，可能會發生資料遺失。如果沒有足夠的物件複本、銷除編碼片段或物件中繼資料保持可用，系統可能無法重建資料。在具有軟體型僅限中繼資料節點的網格中退役 Storage Node 時，退役所有設定為同時儲存物件和中繼資料的節點，會從網格中移除所有物件儲存。請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"] 以取得更多關於僅限中繼資料 Storage Node 的資訊。
++
+
+CAUTION: 如果您有多個無法恢復的斷線儲存節點，請聯絡技術支援以確定最佳行動方案。
+
+* 當您將已中斷連線的 Storage Node 退役時，StorageGRID 會在退役程序結束時啟動資料修理工作。這些工作會嘗試重建儲存在已中斷連線節點上的物件資料與中繼資料。
+* 當您將已中斷連線的 Storage Node 退役時，退役程序會相對較快地完成。然而，資料修理工作可能需要數天或數週的時間才能執行，且退役程序不會監控這些工作。您必須手動監控這些工作，並視需要重新啟動。請參閱 link:checking-data-repair-jobs.html["檢查資料修理作業"]。
+* 如果退役包含物件唯一複本的已中斷連線的儲存節點，則該物件將會遺失。資料修理作業只有在目前連線的儲存節點上至少存在一個複寫複本或足夠的銷除編碼片段時，才能重建和恢復物件。
+

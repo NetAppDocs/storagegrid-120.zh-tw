@@ -1,0 +1,99 @@
+---
+section: swnodes
+title: 安裝 StorageGRID 節點
+entries:
+- title: 安裝設備型節點
+  url: "/swnodes/storagegrid-hardware.html"
+- title: 安裝軟體型節點
+  entries:
+  - title: 快速入門
+    pdf-filename: 在基於軟體的節點上安裝 StorageGRID
+    url: "/swnodes/index.html"
+  - title: 規劃並準備在軟體型節點上安裝
+    entries:
+    - title: 所需資訊和材料
+      url: "/swnodes/required-materials.html"
+    - title: "${post_edited_translations.segment}"
+      url: "/swnodes/downloading-and-extracting-storagegrid-installation-files.html"
+    - title: 手動驗證安裝檔案
+      url: "/swnodes/download-files-verify.html"
+    - title: 軟體需求
+      url: "/swnodes/software-requirements.html"
+    - title: CPU 和記憶體需求
+      url: "/swnodes/cpu-and-ram-requirements.html"
+    - title: 儲存設備與效能要求
+      url: "/swnodes/storage-and-performance-requirements.html"
+    - title: 節點 Container 移轉需求（Linux）
+      url: "/swnodes/node-container-migration-requirements.html"
+    - title: 準備主機（Linux）
+      entries:
+      - title: 主機級設定如何變更
+        url: "/swnodes/how-host-wide-settings-change.html"
+      - title: 安裝 Linux
+        url: "/swnodes/installing-linux.html"
+      - title: AppArmor 設定檔安裝（僅限 Ubuntu 和 Debian）
+        url: "/swnodes/understanding-apparmor-profile-installation.html"
+      - title: "${post_edited_translations.segment}"
+        url: "/swnodes/configuring-host-network.html"
+      - title: 設定主機儲存設備
+        url: "/swnodes/configuring-host-storage.html"
+      - title: 設定 Container 引擎儲存設備 Volume
+        url: "/swnodes/configuring-docker-storage-volume.html"
+      - title: 安裝 StorageGRID 主機服務
+        url: "/swnodes/installing-storagegrid-webscale-host-services.html"
+  - title: 自動化基於軟體的節點安裝
+    entries:
+    - title: 自動安裝（Linux）
+      url: "/swnodes/automating-installation-linux.html"
+    - title: 自動安裝（VMware）
+      url: "/swnodes/automating-grid-node-deployment-in-vmware-vsphere.html"
+  - title: 部署虛擬網格節點
+    entries:
+    - title: 收集有關您的部署環境（VMware）的資訊
+      url: "/swnodes/collecting-information-about-your-deployment-environment.html"
+    - title: 建立用於部署的節點組態檔（Linux）
+      url: "/swnodes/creating-node-configuration-files.html"
+    - title: 網格節點如何發現主管理節點
+      url: "/swnodes/how-grid-nodes-discover-primary-admin-node.html"
+    - title: 將 StorageGRID 節點部署為虛擬機器 （VMware）
+      url: "/swnodes/deploying-storagegrid-node-as-virtual-machine.html"
+    - title: 節點組態檔範例（Linux）
+      url: "/swnodes/example-node-configuration-files.html"
+    - title: 驗證 StorageGRID 組態（Linux）
+      url: "/swnodes/validating-storagegrid-configuration.html"
+    - title: 啟動 StorageGRID 主機服務（Linux）
+      url: "/swnodes/starting-storagegrid-host-service.html"
+  - title: 安裝 REST API
+    url: "/swnodes/overview-of-installation-rest-api.html"
+  - title: 疑難排解安裝問題
+    url: "/swnodes/troubleshooting-installation-issues.html"
+  - title: 腳本範例
+    entries:
+    - title: 範例 /etc/sysconfig/network-scripts (RHEL)
+      url: "/swnodes/example-etc-sysconfig-network-scripts.html"
+    - title: 例如 /etc/network/interfaces（Ubuntu 或 Debian）
+      url: "/swnodes/example-etc-network-interfaces.html"
+- title: 設定網格並完成安裝
+  entries:
+  - title: 瀏覽至 Grid Manager
+    url: "/swnodes/navigating-to-grid-manager.html"
+  - title: 指定授權資訊
+    url: "/swnodes/specifying-storagegrid-license-information.html"
+  - title: 新增站台
+    url: "/swnodes/adding-sites.html"
+  - title: 指定網格網路子網路
+    url: "/swnodes/specifying-grid-network-subnets.html"
+  - title: 批准待處理的網格節點
+    url: "/swnodes/approving-pending-grid-nodes.html"
+  - title: 指定 NTP 伺服器資訊
+    url: "/swnodes/specifying-network-time-protocol-server-information.html"
+  - title: 指定 DNS 伺服器資訊
+    url: "/swnodes/specifying-domain-name-system-server-information.html"
+  - title: 指定系統密碼
+    url: "/swnodes/specifying-storagegrid-system-passwords.html"
+  - title: 檢查組態並完成安裝
+    url: "/swnodes/reviewing-your-configuration-and-completing-installation.html"
+  - title: 安裝後指南
+    url: "/swnodes/post-installation-guidelines.html"
+- title: 接下來該去哪裡？
+  url: "/swnodes/where-to-go-next.html"

@@ -1,0 +1,56 @@
+---
+permalink: network/networking-and-ports-for-platform-services-and-cloud-storage-pools.html 
+sidebar: sidebar 
+keywords: networking for platform services, networking for cloud storage pools 
+summary: 如果您打算使用 StorageGRID 平台服務或雲端儲存池，則必須設定網格連網和防火牆，以確保可以存取目的地端點。 
+---
+= 平台服務和 Cloud Storage Pool 的連網與連接埠
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您打算使用 StorageGRID 平台服務或雲端儲存池，則必須設定網格連網和防火牆，以確保可以存取目的地端點。
+
+
+
+[[networking-for-platform-services]]
+== ${post_edited_translations.segment}
+
+如 link:../admin/manage-platform-services-for-tenants.html["管理租戶平台服務"] 和 link:../tenant/considerations-for-platform-services.html["${post_edited_translations.segment}"] 中所述，平台服務包括提供搜尋整合、事件通知和 CloudMirror 複寫的外部服務。
+
+平台服務需要託管 StorageGRID ADC 服務的儲存節點存取外部服務端點。提供存取的範例包括：
+
+* ${post_edited_translations.segment}
+* 使用用戶端網路提供的預設路由。如果使用預設路由，則可以使用link:../admin/manage-firewall-controls.html["不受信任的用戶端網路功能"]來限制傳入連線。
+
+
+
+
+[[networking-for-cloud-storage-pools]]
+== 雲端儲存池的連網
+
+雲端儲存池也需要儲存節點存取所用外部服務（例如 Amazon S3 Glacier 或 Microsoft Azure Blob 儲存設備）提供的端點。如需相關資訊，請參閱link:../ilm/what-cloud-storage-pool-is.html["${post_edited_translations.segment}"]。
+
+
+
+[[ports-for-platform-services-and-cloud-storage-pools]]
+== 平台服務和 Cloud Storage Pool 的連接埠
+
+預設情況下，平台服務和雲端儲存池通訊使用以下連接埠：
+
+* *80*：用於以……開頭的端點 URI `http`
+* *443*：用於以……開頭的端點 URI `https`
+
+
+建立或編輯端點時可以指定不同的連接埠。請參閱link:internal-grid-node-communications.html["網路連接埠參考"]。
+
+如果您使用非透明 Proxy 伺服器，您還必須 link:../admin/configuring-storage-proxy-settings.html["設定儲存設備 Proxy 設定"] 以允許將訊息傳送到外部端點，例如網際網路上的端點。
+
+
+
+[[vlans-and-platform-services-and-cloud-storage-pools]]
+== ${post_edited_translations.segment}
+
+您無法將 VLAN 網路用於平台服務或 Cloud Storage Pools。目的地端點必須可透過網格、管理或用戶端網路存取。

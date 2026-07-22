@@ -1,0 +1,78 @@
+---
+permalink: expand/index.html 
+sidebar: sidebar 
+keywords: expand grid, StorageGRID 
+summary: 您可以擴充 StorageGRID 系統的容量或功能，而不會中斷系統運作。 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+瞭解如何擴充您的 StorageGRID 系統，以在不中斷營運的情況下增加容量或功能。您可以將儲存 Volume 新增至現有的儲存節點、將新的網格節點新增至現有的站台，或是新增站台。
+
+在擴充網格節點之前，您必須確認沒有任何資料修理工作正在執行。如果有任何修理失敗，您必須重新啟動它們並讓其完成，然後才能執行退役或擴充程序。請參閱 link:../maintain/checking-data-repair-jobs.html["檢查資料修理作業"]。
+
+${post_edited_translations.segment}
+
+* 儲存 Volume 到儲存節點
+* 在現有站台新增網格節點
+* ${post_edited_translations.segment}
+
+
+執行擴充的原因會決定您必須新增每種型型的全新節點數量，以及這些新節點的位置。例如，如果您是為了增加儲存容量、增加中繼資料容量，或是增加備援或新功能而執行擴充，則會有不同的節點需求。
+
+${post_edited_translations.segment}
+
+[role="tabbed-block"]
+====
+.新增網格節點
+--
+. 請遵循 link:adding-grid-nodes-to-existing-site-or-adding-new-site.html["${post_edited_translations.segment}"] 的步驟。
+. link:updating-subnets-for-grid-network.html["${post_edited_translations.segment}"]。
+. ${post_edited_translations.segment}
++
+** link:deploying-new-grid-nodes.html#appliances-deploying-storage-gateway-or-non-primary-admin-nodes["${post_edited_translations.segment}"]
+** link:deploying-new-grid-nodes.html#vmware-deploy-grid-nodes["VMware"]
+** link:deploying-new-grid-nodes.html#linux-deploy-grid-nodes["Linux"]
+
+
+
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+. link:performing-expansion.html["執行擴充"]。
+. link:configuring-expanded-storagegrid-system.html["設定擴充系統"]。
+
+
+--
+.${post_edited_translations.segment}
+--
+請遵循 link:adding-storage-volumes-to-storage-nodes.html["將儲存 Volume 新增至儲存節點"] 的步驟。
+
+--
+.新增站台
+--
+. 請依照以下步驟操作link:adding-grid-nodes-to-existing-site-or-adding-new-site.html["新增站台"]。
+. link:updating-subnets-for-grid-network.html["${post_edited_translations.segment}"]。
+. ${post_edited_translations.segment}
++
+** link:deploying-new-grid-nodes.html#appliances-deploying-storage-gateway-or-non-primary-admin-nodes["${post_edited_translations.segment}"]
+** link:deploying-new-grid-nodes.html#vmware-deploy-grid-nodes["VMware"]
+** link:deploying-new-grid-nodes.html#linux-deploy-grid-nodes["Linux"]
+
+
+
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+. link:performing-expansion.html["執行擴充"]。
+. link:configuring-expanded-storagegrid-system.html["設定擴充系統"]。
+
+
+--
+====

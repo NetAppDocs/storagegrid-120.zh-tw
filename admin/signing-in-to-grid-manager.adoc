@@ -1,0 +1,132 @@
+---
+permalink: admin/signing-in-to-grid-manager.html 
+sidebar: sidebar 
+keywords: grid manager, sign in, log in 
+summary: '您可以透過在支援的 Web 瀏覽器的網址列中輸入管理節點的完整網域名稱 (FQDN) 或 IP 位址來存取 Grid Manager 登入頁面。' 
+---
+= 登入 StorageGRID Grid Manager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以透過在支援的 Web 瀏覽器的網址列中輸入管理節點的完整網域名稱 (FQDN) 或 IP 位址來存取 Grid Manager 登入頁面。
+
+每個 StorageGRID 系統包含一個主要管理節點和任意數量的非主要管理節點。您可以在任何管理節點上登入 Grid Manager 來管理 StorageGRID 系統。但是，某些維護程序只能從主要管理節點執行。
+
+
+
+[[connect-to-ha-group]]
+=== 連線至 HA 群組
+
+如果高可用度（ HA ）群組中包含管理節點，您可以使用 HA 群組的虛擬 IP 位址或對應至虛擬 IP 位址的完整網域進行連線。應選擇主要管理節點作為群組的主要介面，以便在您存取 Grid Manager 時，除非主要管理節點無法使用，否則您是在主要管理節點上存取它。請參閱 link:managing-high-availability-groups.html["管理高可用度群組"]。
+
+
+
+[[use-sso]]
+=== 使用 SSO
+
+如果 link:how-sso-works.html["已設定單一登入 (SSO)。"]，登入步驟會略有不同。
+
+
+
+[[sign-in-to-grid-manager-on-first-admin-node]]
+== ${post_edited_translations.segment}
+
+.開始之前
+* 您已擁有登入憑證。
+* 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
+* 您的瀏覽器已啟用 Cookie。
+* 您所屬的使用者群組至少擁有一項權限。
+* 您已取得網格管理員的 URL：
++
+`https://_FQDN_or_Admin_Node_IP_/`
+
++
+您可以使用完整網域名稱、管理節點的 IP 位址或管理節點 HA 群組的虛擬 IP 位址。
+
++
+若要透過 HTTPS 預設連接埠 （443） 以外的連接埠存取 Grid Manager，請在 URL 中包含連接埠號碼：
+
++
+`https://_FQDN_or_Admin_Node_IP:port_/`
+
++
+
+NOTE: SSO 功能在受限的 Grid Manager 連接埠上無法使用。您必須使用連接埠 443。
+
+
+
+.步驟
+. 啟動支援的網頁瀏覽器。
+. 在瀏覽器的網址列中，輸入 Grid Manager 的 URL。
+. 如果出現安全性警報，請使用瀏覽器的安裝精靈安裝憑證。參見link:using-storagegrid-security-certificates.html["管理安全性證書"]。
+. 登入網格管理器。
++
+${post_edited_translations.segment}
+
++
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+.. 請輸入您的 Grid Manager 使用者名稱和密碼。
+.. 選擇 *Sign In*。
+
+
+--
+.使用 SSO
+--
+** 如果 StorageGRID 使用 SSO，並且這是您首次在此瀏覽器上存取該 URL：
++
+... 選擇 *Sign in*。帳戶欄位可以保留 0。
+... 在貴組織的 SSO 登入頁面上輸入您的標準 SSO 憑證。
++
+${post_edited_translations.segment}
+
++
+.... 輸入 *0*（Grid Manager 的帳戶 ID），或者如果 *Grid Manager* 出現在最近的帳戶清單中，則選取 *Grid Manager*。
+.... ${post_edited_translations.segment}
+.... 使用您的標準 SSO 憑證登入您組織的 SSO 登入頁面。
+
+
+
+
+
+
+--
+====
+
+
+當您登入時，系統會顯示 Grid Manager 的首頁，其中包含儀表板。若要瞭解所提供的資訊，請參閱 link:../monitor/viewing-dashboard.html["檢視及管理儀表板"]。
+
+
+
+[[sign-into-another-admin-node]]
+== 登入另一個管理節點
+
+請依照下列步驟登入另一個管理節點。
+
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+.步驟
+. 在瀏覽器網址列中，輸入另一個管理節點的完整網域名稱或 IP 位址。視需要加入連接埠號碼。
+. 請輸入您的 Grid Manager 使用者名稱和密碼。
+. 選擇 *Sign In*。
+
+
+--
+.使用 SSO
+--
+如果 StorageGRID 使用 SSO，且您已登入一個管理節點，則無需再次登入即可存取其他管理節點。
+
+.步驟
+. 在瀏覽器網址列中輸入另一個管理節點的完整網域名稱或 IP 位址。
+. ${post_edited_translations.segment}
+
+
+--
+====

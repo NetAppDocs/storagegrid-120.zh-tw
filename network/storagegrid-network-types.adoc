@@ -1,0 +1,219 @@
+---
+permalink: network/storagegrid-network-types.html 
+sidebar: sidebar 
+keywords: network types, grid traffic, admin traffic, client traffic, grid network, admin network, client network 
+summary: StorageGRID 系統中的網格節點處理網格流量、管理流量和用戶端流量。您必須正確設定連網，以管理這三種類型的流量，並提供控制和安全性。 
+---
+= StorageGRID 網路類型
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 系統中的網格節點會處理 _網格流量_、_管理流量_ 和 _用戶端流量_。您必須適當設定連網，以管理這三種流量並提供控制與安全性。
+
+
+
+[[traffic-types]]
+== 流量類型
+
+[cols="1a,4a,2a"]
+|===
+| 流量類型 | 說明 | ${post_edited_translations.segment} 
+
+
+ a| 
+網格流量
+ a| 
+在網格中所有節點之間傳輸的內部 StorageGRID 流量。所有網格節點必須能夠透過此網路與所有其他網格節點進行通訊。
+ a| 
+Grid 網路（必填）
+
+
+
+ a| 
+管理員流量
+ a| 
+用於系統管理和維護的流量。
+ a| 
+管理網路（選用），<<選購的 VLAN 網路,VLAN 網路（選購）>>
+
+
+
+ a| 
+用戶端流量
+ a| 
+在外部用戶端應用程式和網格之間傳輸的流量，包括來自 S3 用戶端的所有物件儲存要求。
+ a| 
+用戶端網路（選購），<<選購的 VLAN 網路,VLAN 網路（選購）>>
+
+|===
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* 網格與管理網路
+* 網格與用戶端網路
+* ${post_edited_translations.segment}
+
+
+網格網路是必要的，可管理所有網格流量。管理網路和用戶端網路可在安裝時納入，或稍後根據需求變更而新增。雖然管理網路和用戶端網路是選用的，但當您使用這些網路處理管理和用戶端流量時，網格網路可設為隔離的且安全的。
+
+內部連接埠只能透過網格網路存取。外部連接埠可從所有網路類型存取。這種靈活度為設計 StorageGRID 部署以及在交換器和防火牆中設定外部 IP 和連接埠過濾提供了多種選擇。請參閱 link:../network/internal-grid-node-communications.html["內部網格節點通訊"] 和 link:../network/external-communications.html["外部通訊"]。
+
+
+
+[[network-interfaces]]
+== 網路介面
+
+StorageGRID 節點透過下列特定介面連接到各個網路：
+
+[cols="1a,1a"]
+|===
+| 網路 | ${post_edited_translations.segment} 
+
+
+ a| 
+Grid 網路（必填）
+ a| 
+eth0
+
+
+
+ a| 
+管理網路（選用）
+ a| 
+eth1
+
+
+
+ a| 
+用戶端網路（選購）
+ a| 
+eth2
+
+|===
+如需將虛擬或實體連接埠對應至節點網路介面的詳細資訊，請參閱 link:../swnodes/index.html["在基於軟體的節點上安裝 StorageGRID"]。
+
+.應用裝置節點
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/hardware-description-sg6100.html["SG6160 儲存應用裝置"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/hardware-description-sg6100.html["SGF6112 儲存應用裝置"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/hardware-description-sg6000.html["SG6000 儲存應用裝置"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/hardware-description-sg5800.html["${post_edited_translations.segment}"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/hardware-description-sg5700.html["SG5700 儲存應用裝置"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/hardware-description-sg110-and-1100.html["SG110 和 SG1100 服務應用裝置"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/hardware-description-sg100-and-1000.html["SG100 和 SG1000 服務應用裝置"^]
+
+
+
+
+[[network-information-for-each-node]]
+=== 每個節點的網路資訊
+
+對於在節點上啟用的每個網路，您必須設定以下內容：
+
+* IP 位址
+* 子網路遮罩
+* 閘道 IP 位址
+
+
+每個網格節點上的三個網路只能設定一個 IP 位址/子網路遮罩/閘道組合。如果不想為某個網路設定閘道，則應使用 IP 位址作為閘道位址。
+
+
+
+[[high-availability-groups]]
+=== 高可用度組
+
+高可用度 (HA) 群組提供將虛擬 IP (VIP) 位址新增至網格或用戶端網路介面的功能。如需詳細資訊，請參閱 link:../admin/managing-high-availability-groups.html["管理高可用度群組"]。
+
+
+
+[[grid-network]]
+== Grid 網路
+
+網格網路是必要的。它用於所有 StorageGRID 內部網路流量。網格網路提供網格中所有節點之間、所有站台和子網路之間的連線。網格網路上的所有節點都必須能夠與其他所有節點通訊。網格網路可以由多個子網路組成。包含關鍵網格服務（例如 NTP）的網路也可以新增為網格子網路。
+
+
+NOTE: ${post_edited_translations.segment}
+
+即使已設定 Admin Network 和 Client Network，Grid Network 仍可用於所有管理網路流量和所有用戶端網路流量。除非節點已設定 Client Network，否則 Grid Network 閘道即為節點預設閘道。
+
+
+CAUTION: 設定網格網路時，必須確保網路免受不受信任的用戶端（例如開放式網際網路上的用戶端）的侵害。
+
+${post_edited_translations.segment}
+
+* 如果存在多個網格子網路，則必須設定網格網路閘道。
+* 在網格組態完成之前，Grid Network 閘道是節點的預設閘道。
+* 系統會自動為所有節點產生靜態路由，以連至全域網格網路子網路清單中設定的所有子網路。
+* 如果新增了用戶端網路，則當網格組態完成後，預設閘道將從網格網路閘道切換到用戶端網路閘道。
+
+
+
+
+[[admin-network]]
+== ${post_edited_translations.segment}
+
+管理網路是可選的。設定後，可用於系統管理和維護流量。管理網路通常是私有網路，無需在節點之間路由。
+
+您可以選擇要在哪些網格節點上啟用管理網路。
+
+使用管理網路時，管理和維護流量無需經過網格網路。管理網路的典型用途包括以下幾點：
+
+* 存取 Grid Manager 和 Tenant Manager 使用者介面。
+* 存取關鍵服務，例如 NTP 伺服器、DNS 伺服器、外部金鑰管理伺服器 (KMS) 和輕量型目錄存取協定 (LDAP) 伺服器。
+* 存取管理節點上的稽核日誌。
+* 用於維護和支援的 Secure Shell Protocol (SSH) 存取。
+
+
+管理網路絕不用於內部網格流量。管理網路提供了一個閘道，允許其與多個外部子網路通訊。但是，管理網路閘道絕對不會用作節點預設閘道。
+
+請注意以下管理網路閘道的要求和詳細資訊：
+
+* 如果要從管理網路子網路外部建立連線，或設定了多個管理網路子網路，則需要管理網路閘道。
+* ${post_edited_translations.segment}
+
+
+
+
+[[client-network]]
+== 用戶端網路
+
+用戶端網路是選用的。設定後，可用於為用戶端應用程式（例如 S3）提供對網格服務的存取。如果您打算將 StorageGRID 資料提供給外部資源（例如雲端儲存資源池或 StorageGRID CloudMirror 複寫服務），則外部資源也可以使用用戶端網路。網格節點可以與透過用戶端網路閘道可達的任何子網路通訊。
+
+您可以選擇要在哪些網格節點上啟用用戶端網路。所有節點不一定要在同一個用戶端網路上，且節點絕不會透過用戶端網路彼此通訊。在網格安裝完成之前，用戶端網路不會開始運作。
+
+為了增強安全性，您可以指定節點的用戶端網路介面不受信任，這樣用戶端網路將更嚴格地限制允許的連線。如果節點的用戶端網路介面不受信任，則該介面接受傳出連線（例如 CloudMirror 複寫使用的連線），但僅接受已明確設定為負載平衡器端點的連接埠上的傳入連線。請參閱 link:../admin/manage-firewall-controls.html["管理防火牆控制"] 和 link:../admin/configuring-load-balancer-endpoints.html["設定負載平衡器端點"]。
+
+使用 Client Network 時，用戶端流量無需經過 Grid Network。Grid Network 流量可以分離到安全的、不可路由的網路上。以下節點類型通常設定了 Client Network：
+
+* ${post_edited_translations.segment}
+* 儲存節點，因為這些節點提供對 S3 協定、雲端儲存資源池和 CloudMirror 複寫服務的存取。
+* ${post_edited_translations.segment}
+
+
+請注意以下用戶端網路閘道的相關事項：
+
+* 如果已設定用戶端網路，則需要用戶端網路閘道。
+* ${post_edited_translations.segment}
+
+
+
+
+[[optional-vlan-networks]]
+== 選購的 VLAN 網路
+
+視需要，您可以選擇將虛擬區域網路 (VLAN) 用於用戶端流量和某些類型的管理流量。然而，網格流量無法使用 VLAN 介面。節點之間的內部 StorageGRID 流量必須一律使用 eth0 上的網格網路。
+
+為了支援使用 VLAN，您必須在交換器上將節點上的一或多個介面設定為 trunk 介面。您可以將 Grid Network 介面（eth0）或 Client Network 介面（eth2）設定為 trunk，或者也可以將 trunk 介面新增至節點。
+
+如果 eth0 設定為 trunk，則網格網路網路流量會流經 trunk 原生介面，如交換器上所設定。同樣地，如果 eth2 設定為 trunk，且用戶端網路也設定在同一個節點上，則用戶端網路會使用 trunk port 的原生 VLAN，如交換器上所設定。
+
+VLAN 網路僅支援傳入的管理網路流量，例如用於 SSH、Grid Manager 或租戶管理員（Tenant Manager）的流量。VLAN 網路不支援傳出流量，例如用於 NTP、DNS、LDAP、KMS 和雲端儲存資源池（Cloud Storage Pools）的流量。
+
+
+NOTE: VLAN 介面僅能新增至 Admin 節點和 Gateway 節點。您無法將 VLAN 介面用於用戶端或管理存取 Storage 節點。
+
+請參閱 link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"] 以取得說明與指南。
+
+VLAN 介面僅用於 HA 群組，並在作用中節點上指派 VIP 位址。請參閱 link:../admin/managing-high-availability-groups.html["管理高可用度群組"] 以取得相關說明和指南。

@@ -1,0 +1,26 @@
+---
+permalink: swnodes/post-installation-guidelines.html 
+sidebar: sidebar 
+keywords: after installation guidelines 
+summary: 完成網格節點部署和組態後，請依照下列指南進行 DHCP 位址指派和網路組態變更。 
+---
+= 安裝 StorageGRID 後的網路和 DHCP 需求
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+完成網格節點部署和組態後，請依照下列指南進行 DHCP 位址指派和網路組態變更。
+
+* ${post_edited_translations.segment}
++
+您只能在部署階段設定 DHCP。您無法在組態期間設定 DHCP。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+* 如果要變更網格節點的 IP 位址、子網路遮罩和預設閘道，則必須使用「變更 IP」程序。請參閱link:../maintain/configuring-ip-addresses.html["${post_edited_translations.segment}"]。
+* 如果您變更連網組態（包括路由和閘道變更），用戶端與主管理節點和其他網格節點的連線可能會遺失。根據所套用的連網變更，您可能需要重新建立這些連線。
+

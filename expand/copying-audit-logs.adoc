@@ -1,0 +1,98 @@
+---
+sidebar: sidebar 
+permalink: expand/copying-audit-logs.html 
+keywords: copy audit log, Admin Node expansion, StorageGRID 
+summary: 透過擴充流程新增新的管理節點時，其 AMS 服務僅記錄加入系統後發生的事件和動作。如有需要，您可以將先前安裝的管理節點的稽核日誌複製到新擴充的管理節點，使其與 StorageGRID 系統的其餘部分保持同步。 
+---
+= 將稽核日誌複製到 StorageGRID 中的新管理節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+透過擴充流程新增新的管理節點時，其 AMS 服務僅記錄加入系統後發生的事件和動作。如有需要，您可以將先前安裝的管理節點的稽核日誌複製到新擴充的管理節點，使其與 StorageGRID 系統的其餘部分保持同步。
+
+.開始之前
+* ${post_edited_translations.segment}
+* 您擁有  `Passwords.txt` 檔案。
+
+
+.關於此任務
+若要使歷史稽核訊息在新管理節點上可用，必須手動將稽核日誌檔案從現有管理節點複製到擴充管理節點。
+
+[NOTE]
+====
+預設情況下，稽核資訊會傳送到 `localaudit`每個節點的日誌中。若要使用此程序，您必須依照下列方式將管理節點設定為稽核目的地：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+詳情請參閱 link:../monitor/configure-audit-messages.html["設定稽核訊息和外部 syslog 伺服器"]。
+
+====
+.步驟
+. ${post_edited_translations.segment}
++
+.. 輸入下列命令： `ssh _admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 停止 AMS 服務以防止其建立新檔案： `service ams stop`
+. ${post_edited_translations.segment}
++
+`cd /var/local/audit/export/`
+
+. 重新命名來源  `audit.log` 檔案，以確保其不會覆寫您正複製到的擴充 Admin Node 上的檔案：
++
+[listing]
+----
+ls -l
+mv audit.log _new_name_.txt
+----
+. ${post_edited_translations.segment}
++
+`scp -p * _IP_address_:/var/local/audit/export/`
+
+. 如果系統提示輸入  `/root/.ssh/id_rsa` 的複雜密碼，請輸入  `Passwords.txt` 檔案中列出的 Primary Admin Node 的 SSH 存取密碼。
+. 恢復原始 `audit.log`檔案：
++
+`mv _new_name_.txt audit.log`
+
+. ${post_edited_translations.segment}
++
+`service ams start`
+
+. ${post_edited_translations.segment}
++
+`exit`
+
+. ${post_edited_translations.segment}
++
+.. 請輸入以下命令： `ssh admin@_expansion_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 更新稽核日誌檔案的使用者和群組設定：
++
+`cd /var/local/audit/export/`
+
++
+`chown ams-user:bycast *`
+
+. ${post_edited_translations.segment}
++
+`exit`
+
+

@@ -1,0 +1,114 @@
+---
+permalink: audit/gtsu-grid-task-submitted.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, GTSU, Grid Task Submitted 
+summary: 此稽核訊息表示已向 CMN 服務提交網格工作。 
+---
+= StorageGRID 中已提交網格任務的 GTSU 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+此稽核訊息表示已向 CMN 服務提交網格工作。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+TSID
+ a| 
+工作 ID
+ a| 
+唯一識別所產生的網格工作，並允許在其生命週期內管理該工作。
+
+*注意：* 工作 ID 是在產生網格工作時指派的，而不是在提交時指派的。同一個網格工作可能被提交多次，在這種情況下，工作 ID 欄位不足以唯一連結「已提交」、「已開始」和「已結束」稽核訊息。
+
+
+
+ a| 
+TTYP
+ a| 
+工作類型
+ a| 
+網格工作的類型。
+
+
+
+ a| 
+TVER
+ a| 
+工作版本
+ a| 
+表示網格工作版本號的數字。
+
+
+
+ a| 
+TDSC
+ a| 
+工作說明
+ a| 
+對網格工作進行易於理解的執行摘要。
+
+
+
+ a| 
+VATS
+ a| 
+有效時間戳記
+ a| 
+網格工作生效的最早時間（從 1970 年 1 月 1 日起的 UINT64 微秒 - UNIX 時間）。
+
+
+
+ a| 
+VBTS
+ a| 
+有效期限至時間戳記前
+ a| 
+網格工作的最新有效時間（1970 年 1 月 1 日起的 UINT64 微秒 - UNIX 時間）。
+
+
+
+ a| 
+TSRC
+ a| 
+來源
+ a| 
+工作來源：
+
+* TXTB：網格工作透過 StorageGRID 系統以簽章文字區塊的形式提交。
+* GRID：此網格工作是透過內部網格工作提交服務提交。
+
+
+
+
+ a| 
+ACTV
+ a| 
+啟動類型
+ a| 
+啟動類型：
+
+* AUTO：網格工作已提交以進行自動啟動。
+* PEND：網格工作已提交至待處理表中。這是 TXTB 來源的唯一可能狀態。
+
+
+
+
+ a| 
+RSLT
+ a| 
+結果
+ a| 
+提交結果：
+
+* SUCS：網格工作已成功提交。
+* 失敗：該工作已直接移至歷史記錄表。
+
+
+|===

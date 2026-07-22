@@ -1,0 +1,63 @@
+---
+permalink: upgrade/obtaining-required-materials-for-software-upgrade.html 
+sidebar: sidebar 
+keywords: upgrade, requirements, rhel, red hat, linux, ubuntu, debian 
+summary: 在開始軟體升級之前，請準備好所有必需的材料。 
+---
+= 取得 StorageGRID 軟體升級所需的材料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在開始軟體升級之前，請準備好所有必需的材料。
+
+[cols="1a,3a"]
+|===
+| 項目 | 附註 
+
+
+ a| 
+服務筆記型電腦
+ a| 
+服務用筆記型電腦必須具備：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+
+
+ a| 
+link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]
+ a| 
+瀏覽器支援通常會隨著每個 StorageGRID 版本而變更。請確認您的瀏覽器與新版本的 StorageGRID 相容。
+
+
+
+ a| 
+佈建複雜密碼
+ a| 
+首次安裝 StorageGRID 系統時，會建立並記錄此複雜密碼。建置資源複雜密碼未列在  `Passwords.txt` 檔案中。
+
+
+
+ a| 
+Linux RPM 或 DEB 歸檔
+ a| 
+如果任何節點部署在 Linux 主機上，則必須在開始升級之前link:linux-installing-rpm-or-deb-package-on-all-hosts.html["在所有主機上下載並安裝 RPM 或 DEB 套件"]。
+
+請確保您的 Linux 作業系統符合 StorageGRID 的最低核心版本要求。請參閱link:../swnodes/installing-linux.html["在 Linux 主機上安裝 StorageGRID"]。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+* https://library.netapp.com/ecm/ecm_download_file/ECMLP3351267["版本資訊"^]。您必須登入現有 NetApp 帳戶或建立帳戶才能存取發行說明。請務必在開始升級前仔細閱讀這些說明。
+* https://kb.netapp.com/hybrid/StorageGRID/Maintenance/StorageGRID_12.0_software_upgrade_resolution_guide["StorageGRID 軟體升級解決方案指南"^]您要升級至的主要版本（需要登入）
+* 其他 https://docs.netapp.com/us-en/storagegrid-family/index.html["${post_edited_translations.segment}"^]，視情況而定。
+
+
+|===

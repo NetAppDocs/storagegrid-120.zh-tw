@@ -1,0 +1,152 @@
+---
+permalink: swnodes/software-requirements.html 
+sidebar: sidebar 
+keywords: software requirements 
+summary: 您可以使用虛擬機器來託管任何類型的 StorageGRID 節點。每個網格節點都需要一台虛擬機器。 
+---
+= StorageGRID 的軟體需求
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用虛擬機器來託管任何類型的 StorageGRID 節點。每個網格節點都需要一台虛擬機器。
+
+[role="tabbed-block"]
+====
+.RHEL
+--
+要在 RHEL 上安裝 StorageGRID，您必須安裝一些第三方軟體套件。某些支援的 Linux 發行版預設不包含這些軟體套件。StorageGRID 安裝測試所使用的軟體套件版本包括本頁所列的版本。
+
+如果您選擇的 Linux 發行版和 Container 執行時間安裝選項需要這些套件中的任何一個，且這些套件未由 Linux 發行版自動安裝，請安裝此處列出的版本之一（如果您的供應商或 Linux 發行版支援廠商有提供）。否則，請使用廠商提供的預設套件版本。
+
+所有安裝選項都需要 Podman 或 Docker。請勿同時安裝這兩個套件。只需安裝您的安裝選項所需的套件即可。
+
+
+NOTE: 已棄用 Docker 作為純軟體部署的 Container 引擎。Docker 將在未來的版本中被其他 Container 引擎取代。
+
+*已測試的 Python 版本*
+
+* 3.5.2-2
+* 3.6.8-2
+* 3.6.8-38
+* 3.6.9-1
+* 3.7.3-1
+* 3.8.10-0
+* 3.9.2-1
+* 3.9.10-2
+* 3.9.16-1
+* 3.10.6-1
+* 3.11.2-6
+
+
+*已測試的 Podman 版本*
+
+* 3.2.3-0
+* 3.4.4+ds1
+* 4.1.1-7
+* 4.2.0-11
+* 4.3.1+ds1-8+b1
+* 4.4.1-8
+* 4.4.1-12
+
+
+*已測試的 Docker 版本*
+
+
+IMPORTANT: Docker 支援已過時，將在未來版本中移除。
+
+* Docker-CE 20.10.7
+* Docker-CE 20.10.20-3
+* Docker-CE 23.0.6-1
+* Docker-CE 24.0.2-1
+* Docker-CE 24.0.4-1
+* Docker-CE 24.0.5-1
+* Docker-CE 24.0.7-1
+* 1.5-2
+
+
+--
+.Ubuntu 和 Debian
+--
+要在 Ubuntu 或 Debian 上安裝 StorageGRID，您必須安裝一些第三方軟體套件。某些支援的 Linux 發行版預設不包含這些套件。StorageGRID 安裝測試所使用的軟體套件版本包括本頁所列的版本。
+
+如果您選擇的 Linux 發行版和 Container 執行時間安裝選項需要這些套件中的任何一個，且這些套件未由 Linux 發行版自動安裝，請安裝此處列出的版本之一（如果您的供應商或 Linux 發行版支援廠商有提供）。否則，請使用廠商提供的預設套件版本。
+
+所有安裝選項都需要 Podman 或 Docker。請勿同時安裝這兩個套件。只需安裝您的安裝選項所需的套件即可。
+
+
+NOTE: 已棄用 Docker 作為純軟體部署的 Container 引擎。Docker 將在未來的版本中被其他 Container 引擎取代。
+
+*已測試的 Python 版本*
+
+* 3.5.2-2
+* 3.6.8-2
+* 3.6.8-38
+* 3.6.9-1
+* 3.7.3-1
+* 3.8.10-0
+* 3.9.2-1
+* 3.9.10-2
+* 3.9.16-1
+* 3.10.6-1
+* 3.11.2-6
+
+
+*已測試的 Podman 版本*
+
+* 3.2.3-0
+* 3.4.4+ds1
+* 4.1.1-7
+* 4.2.0-11
+* 4.3.1+ds1-8+b1
+* 4.4.1-8
+* 4.4.1-12
+
+
+*已測試的 Docker 版本*
+
+
+IMPORTANT: Docker 支援已過時，將在未來版本中移除。
+
+* Docker-CE 20.10.7
+* Docker-CE 20.10.20-3
+* Docker-CE 23.0.6-1
+* Docker-CE 24.0.2-1
+* Docker-CE 24.0.4-1
+* Docker-CE 24.0.5-1
+* Docker-CE 24.0.7-1
+* 1.5-2
+
+
+--
+.VMware
+--
+*VMware vSphere Hypervisor*
+
+您必須在已準備好的實體伺服器上安裝 VMware vSphere Hypervisor。在安裝 VMware 軟體之前，必須正確設定硬體（包括韌體版本和 BIOS 設定）。
+
+* 根據需求在 Hypervisor 中設定連網，以支援您正在安裝的 StorageGRID 系統的連網。
++
+link:../network/index.html["${post_edited_translations.segment}"]
+
+* 確保資料存放區足夠大，能夠容納主機網格節點所需的虛擬機器和虛擬磁碟。
+* 如果建立多個資料存放區，請為每個資料存放區命名，以便在建立虛擬機器時可以輕鬆識別每個網格節點要使用哪個資料存放區。
+
+
+*ESX 主機組態需求*
+
+
+CAUTION: 您必須在每台 ESX 主機上正確設定網路時間協定 (NTP)。如果主機時間不正確，可能會產生負面影響，包括資料遺失。
+
+*VMware 組態要求*
+
+在部署 StorageGRID 節點之前，您必須先安裝並設定 VMware vSphere 和 vCenter。
+
+如需支援的 VMware vSphere Hypervisor 和 VMware vCenter Server 軟體版本，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互通性矩陣工具"^]。
+
+有關安裝這些 VMware 產品所需的步驟，請參閱 VMware 文件。
+
+--
+====

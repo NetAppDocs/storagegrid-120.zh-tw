@@ -1,0 +1,59 @@
+---
+permalink: maintain/checking-data-repair-jobs.html 
+sidebar: sidebar 
+keywords: storagegrid, data repair 
+summary: 在退役網格節點之前，必須確認沒有正在進行的資料修理作業。如果任何修理作業失敗，必須重新啟動這些作業並等待其完成，然後再執行退役程序。 
+---
+= 檢查 StorageGRID 中的資料修復工作
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在退役或擴充網格節點之前，必須確認沒有正在進行的資料修理作業。如果任何修理作業失敗，必須重新啟動這些作業並等待其完成，然後再執行退役程序。
+
+關於如何擴充網格節點的詳細資訊，請參閱 link:../expand/index.html["${post_edited_translations.segment}"]。
+
+.關於此任務
+如果需要退役已中斷連線的儲存節點，請在退役程序完成後執行下列步驟，以確保資料修理作業已完成。您必須確保已移除節點上的所有銷毀編碼片段已恢復。
+
+這些步驟僅適用於具有銷毀編碼物件的系統。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 請輸入以下命令： `ssh admin@_grid_node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 檢查是否有正在運作的維修項目： `repair-data show-ec-repair-status`
++
+** 如果您從未執行過資料修理作業，則輸出結果為 `No job found`。您無需重新啟動任何修理作業。
+** 如果資料修復作業之前已執行或目前正在執行，則輸出結果會列出修復資訊。每次修復都有一個唯一的修復 ID。
++
+image:repair-data-status.png["修復資料狀態"]
+
+
+
++
+
+TIP: （選填）您可以使用 Grid Manager 監控進行中的恢復程序，並顯示恢復歷程記錄。請參閱 link:../maintain/restoring-volume.html["使用 Grid Manager 恢復物件資料"]。
+
+. 如果所有修理的「狀態」為 `Completed`，您就不需要重新啟動任何修理工作。
+. 如果任何修理的狀態為 `Stopped`，您必須重新啟動該修理。
++
+.. ${post_edited_translations.segment}
+.. 執行  `repair-data start-ec-node-repair` 命令。
++
+使用 `--repair-id`選項可指定修復 ID。例如，如果您想重試修復 ID 為 949292 的修復，請執行下列命令： `repair-data start-ec-node-repair --repair-id 949292`
+
+.. 繼續追蹤 EC 資料修復狀態，直到所有修復的狀態都為 `Completed`。
+
+
+

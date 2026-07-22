@@ -1,0 +1,260 @@
+---
+permalink: monitor/monitoring-system-health.html 
+sidebar: sidebar 
+keywords: how to monitor system health, how to view system health 
+summary: 每日監測 StorageGRID 系統的整體健全狀況。 
+---
+= 監控 StorageGRID 中的系統健全狀況
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+每日監測 StorageGRID 系統的整體健全狀況。
+
+.關於此任務
+即使部分網格無法使用，StorageGRID 系統也能繼續運作。警示所指出的潛在問題不一定是系統運作的問題。請調查 Grid Manager 儀表板健全狀況卡片上彙總的問題。
+
+若要在警報觸發時立即收到通知，您可以 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/setting-up-email-notifications-for-alerts.html["${post_edited_translations.segment}"^]或link:using-snmp-monitoring.html["設定 SNMP 陷阱"]。
+
+image:health_status_card.png["健全狀況卡 - 儀表板"]
+
+當問題存在時，會顯示連結，讓您可以檢視其他詳細資訊：
+
+[cols="1a,2a"]
+|===
+| 連結 | 出現於…… 
+
+
+ a| 
+網格詳細資料
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+當前警報（嚴重、主要、次要）
+ a| 
+警報已發出<<檢視目前及已解決的警示,目前活躍>>。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+過去一週內觸發的警示 <<檢視目前及已解決的警示,現已解決>>。
+
+
+
+ a| 
+授權
+ a| 
+此 StorageGRID 系統的軟體授權發生問題。您可以 link:../admin/updating-storagegrid-license-information.html["視需要更新授權資訊"]。
+
+|===
+
+
+[[monitor-node-connection-states]]
+== ${post_edited_translations.segment}
+
+如果有一或多個節點與網格中斷連線，可能會影響關鍵的 StorageGRID 作業。請監控節點連線狀態並立即解決任何問題。
+
+[cols="1a,3a,3a"]
+|===
+| 圖示 | 說明 | 需要採取行動 
+
+
+ a| 
+image:icon_alarm_blue_unknown.png["藍色問號圖示"]
+ a| 
+${post_edited_translations.segment}
+
+由於不明原因，節點已中斷連線，或節點上的服務意外停止運作。例如，節點上的服務可能已停止，或者節點可能因為電力故障或非預期停電而失去網路連線。
+
+「無法與節點通訊」警報也可能被觸發。其他警報也可能處於作用中狀態。
+ a| 
+需要立即注意。<<檢視目前及已解決的警示,選擇每個警報>>並遵循建議的措施。
+
+${post_edited_translations.segment}
+
+*注意*：在受管關機操作期間，節點可能顯示為「未知」。在這種情況下，您可以忽略「未知」狀態。
+
+
+
+ a| 
+image:icon_alarm_gray_administratively_down.png["灰色問號圖示"]
+ a| 
+*未連線 - 管理員已關閉*
+
+${post_edited_translations.segment}
+
+例如，節點或其上的服務已正常關閉、節點正在重新開機，或軟體正在升級。也可能有一個或多個警示處於作用中狀態。
+
+${post_edited_translations.segment}
+ a| 
+確定是否有任何警報影響此節點。
+
+如果存在一個或多個警示，<<檢視目前及已解決的警示,選擇每個警報>>請依照建議的行動執行。
+
+
+
+ a| 
+image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]
+ a| 
+*已連線*
+
+該節點已連接到網格。
+ a| 
+${post_edited_translations.segment}
+
+|===
+
+
+[[view-current-and-resolved-alerts]]
+== 檢視目前及已解決的警示
+
+*目前警報*：當警報觸發時，儀表板上會顯示警報圖示。節點頁面上的節點也會顯示警報圖示。如果link:email-alert-notifications.html["已配置警報電子郵件通知"]，系統也會發送電子郵件通知，除非該警報已被靜音。
+
+${post_edited_translations.segment}
+
+（可選）觀看影片：
+
+.${post_edited_translations.segment}
+video::2eea81c5-8323-417f-b0a0-b1ff008506c1[panopto]
+${post_edited_translations.segment}
+
+[cols="1a,3a"]
+|===
+| 列標題 | 說明 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+警報的嚴重程度。對於目前警報，如果多個警報分組顯示，標題行會顯示每個嚴重程度下該警報的發生次數。
+
+image:icon_alert_red_critical.png["圖示警報 紅色 關鍵"] *Critical*：StorageGRID 節點或服務出現異常情況，導致其正常運作停止。您必須立即解決根本問題。如果問題無法解決，可能會導致服務中斷和資料遺失。
+
+image:icon_alert_orange_major.png["圖示警報橙色主要"] *Major*：存在異常情況，該情況正在影響目前作業或接近嚴重警示的臨界值。您應調查重大警示並解決任何潛在問題，以確保異常情況不會停止 StorageGRID 節點或服務的正常運作。
+
+image:icon_alert_yellow_minor.png["圖示警告 黃色次要"] *Minor*：系統目前運作正常，但有異常情況，如果持續下去可能會影響系統運作。您應監控並解決不會自行消失的輕微警示，以確保它們不會導致更嚴重的問題。
+
+
+
+ a| 
+時間觸發
+ a| 
+*目前警示*：警示在您本地時間和 UTC 觸發的日期與時間。如果有多個警示群組在一起，標題列會顯示最新警示執行個體（_最新_）和最舊警示執行個體（_最舊_）的時間。
+
+*已解決警報*：警報觸發至今已多長時間。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+發生或曾經發生警示的站台和節點名稱。
+
+
+
+ a| 
+狀態
+ a| 
+警示為作用中、已靜音或已解決。如果多個警示已群組，且在下拉式功能表中選取了 *All alerts* ，則標題列會顯示該警示有多少個執行個體處於作用中，以及有多少個執行個體已靜音。
+
+
+
+ a| 
+已解決時間（僅限已解決的警報）
+ a| 
+警報解決已有多久。
+
+
+
+ a| 
+當前值或_資料值_
+ a| 
+觸發警報的指標值。對於某些警報，也會顯示其他值，以幫助您理解和調查警報。例如，*Low object data storage* 警報顯示的值包括已使用磁碟空間百分比、磁碟空間總量和已使用磁碟空間量。
+
+*注意：*如果多個目前警報被分組，則標題列中不會顯示目前值。
+
+
+
+ a| 
+觸發值（僅限已解決的警報）
+ a| 
+觸發警報的指標值。對於某些警報，也會顯示其他值，以幫助您理解和調查警報。例如，*Low object data storage* 警報顯示的值包括已使用磁碟空間百分比、磁碟空間總量和已使用磁碟空間量。
+
+|===
+.步驟
+. 選擇 *Current alerts* 或 *Resolved alerts* 連結，即可檢視相應類別的警報列表。您也可以選擇 *Nodes* > *_node_* > *Overview*，然後在 Alerts 表中選擇警報，以檢視警報的詳細資訊。
++
+預設情況下，目前警報顯示如下：
+
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** 對於特定節點上的特定警示，如果多個嚴重性等級的閾值都已達到，則僅顯示最嚴重的警示。也就是說，如果輕微、重大和關鍵三個嚴重性等級的閾值都已達到，則僅顯示關鍵警示。
++
+目前警報頁面每兩分鐘重新整理一次。
+
+
+
+. 若要展開警報組，請選擇向下插入號 image:icon_alert_caret_down.png["向下插入號圖示"]。若要折疊群組中的單一警報，請選擇向上插入號 image:icon_alert_caret_up.png["向上箭頭圖示"]，或選擇群組的名稱。
+. 若要顯示單一警報而非警報群組，請清除 *Group alerts* 核取方塊。
+. 若要對目前警報或警報群組進行排序，請選擇每列標題中的向上/向下箭頭 image:icon_alert_sort_column.png["排序箭頭圖示"]。
++
+** 勾選「分組警報」後，警報群組及其群組內的各個警報都會被排序。例如，您可以按「觸發時間」對群組中的警報進行排序，以尋找特定警報的最新執行個體。
+** 清除「分組警報」後，所有警報清單將進行排序。例如，您可能想要按「節點/站台」對所有警報進行排序，以查看影響特定節點的所有警報。
+
+
+. 若要按狀態（*所有警報*、*活動*或*已靜音*）篩選目前警報，請使用表格頂部的下拉式選單。
++
+請參閱 link:silencing-alert-notifications.html["靜音警報通知"]。
+
+. 對已解決的警報進行排序：
++
+** 從 *觸發時* 下拉式選單中選取時間段。
+** 從 *Severity* 下拉式選單中選取一個或多個嚴重程度。
+** ${post_edited_translations.segment}
+** 從「節點」下拉式選單中選擇一個或多個節點，以篩選與特定節點相關的已解決警報。
+
+
+. 若要檢視特定警示的詳細資料，請選取該警示。對話方塊會提供您所選警示的詳細資料與建議行動。
+. （可選）對於特定警報，選擇「靜音此警報」可使觸發此警報的警報規則靜音。
++
+您必須擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"] 才能靜音警報規則。
+
++
+
+CAUTION: 決定將警示規則靜音時，請務必小心。如果警示規則被靜音，您可能無法偵測到潛在的問題，直到該問題導致關鍵作業無法完成為止。
+
+. 檢視警報規則的目前條件：
++
+.. 從警報詳細資料中選取 *View conditions*。
++
+${post_edited_translations.segment}
+
+.. ${post_edited_translations.segment}
+
+
+. （可選）選擇*編輯規則*來編輯觸發此警報的警報規則。
++
+您必須擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"] 才能編輯警報規則。
+
++
+
+CAUTION: 修改告警規則時務必謹慎。如果變更觸發值，可能無法及時發現潛在問題，直到關鍵作業無法完成。
+
+. 若要結案警示詳細資料，請選擇 *Close*。
+

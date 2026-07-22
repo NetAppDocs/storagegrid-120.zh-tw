@@ -1,0 +1,404 @@
+---
+permalink: s3/operations-on-buckets.html 
+sidebar: sidebar 
+keywords: bucket, buckets, operations on buckets 
+summary: StorageGRID 系統為每個 S3 租戶帳戶支援最多 5,000 個儲存桶。 
+---
+= StorageGRID 中的 S3 儲存貯體作業和實作詳細資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 系統為每個 S3 租戶帳戶支援最多 5,000 個儲存桶。
+
+每個網格最多可以有 100,000 個儲存桶。
+
+為了支援 5,000 個儲存桶，網格中的每個儲存節點必須至少有 64 GB 的 RAM。
+
+儲存桶名稱限制遵循 AWS 美國標準區域限制，但為了支援 S3 虛擬託管式請求，您應該進一步將其限制為 DNS 命名慣例。
+
+如需更多資訊，請參閱下列內容：
+
+* https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html["Amazon Simple Storage Service 使用者指南：儲存桶配額、限制與約束"^]
+* link:../admin/configuring-s3-api-endpoint-domain-names.html["設定 S3 端點網域名稱"]
+
+
+ListObjects（GET Bucket）和 ListObjectVersions（GET Bucket 物件版本）操作支援 StorageGRID link:consistency.html["一致性值"]。
+
+您可以檢查是否已為各個儲存桶啟用或停用上次存取時間更新。請參閱link:get-bucket-last-access-time-request.html["取得儲存桶上次存取時間"]。
+
+下表說明 StorageGRID 如何實作 S3 REST API 儲存桶操作。若要執行任何這些操作，必須提供帳戶所需的存取憑證。
+
+[cols="1a,3a"]
+|===
+| 操作 | 實作 
+
+
+ a| 
+CreateBucket
+ a| 
+建立新的儲存桶。建立儲存桶後，您將成為該儲存桶的擁有者。
+
+* 儲存桶名稱必須符合以下規則：
++
+** 必須在每個 StorageGRID 系統中是唯一的（而不僅僅是在租戶帳戶內是唯一的）。
+** 必須符合 DNS 規範。
+** 必須包含至少 3 個字元，且不超過 63 個字元。
+** 可以是一個或多個標籤的系列，相鄰標籤之間以句點分隔。每個標籤必須以小寫字母或數字開頭和結尾，且只能使用小寫字母、數字和連字號。
+** 不能看起來像文字格式的 IP 位址。
+** 在虛擬託管風格的請求中，不應使用句點。句點會導致伺服器萬用字元憑證驗證出現問題。
+
+
+* 預設情況下，儲存貯體是在  `us-east-1` 區域中建立；不過，您可以使用要求本文中的  `LocationConstraint` 要求元素來指定不同的區域。使用  `LocationConstraint` 元素時，您必須指定已使用 Grid Manager 或 Grid Management API 定義之區域的確切名稱。如果您不知道應使用的區域名稱，請聯絡您的系統管理員。
++
+*注意*：如果您的 CreateBucket 要求使用了 StorageGRID 中未定義的區域，則會發生錯誤。
+
+* 您可以透過新增 `x-amz-bucket-object-lock-enabled`請求標頭來建立啟用了 S3 物件鎖定的儲存桶。請參閱link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]。
++
+建立儲存桶時必須啟用 S3 物件鎖定。儲存桶建立後無法新增或停用 S3 物件鎖定。S3 物件鎖定需要儲存桶版本控制，該功能會在建立儲存桶時自動啟用。
+
+
+
+
+
+ a| 
+DeleteBucket
+ a| 
+刪除儲存桶。
+
+
+
+ a| 
+DeleteBucketCors
+ a| 
+刪除儲存桶的 CORS 組態。
+
+
+
+ a| 
+DeleteBucketEncryption
+ a| 
+刪除儲存桶中的預設加密。現有加密物件仍保持加密狀態，但新增至儲存桶中的任何新物件都不會加密。
+
+
+
+ a| 
+DeleteBucketLifecycle
+ a| 
+從儲存桶中刪除生命週期組態。請參閱 link:create-s3-lifecycle-configuration.html["建立 S3 生命週期組態"]。
+
+
+
+ a| 
+DeleteBucketPolicy
+ a| 
+刪除附加至儲存桶的原則。
+
+
+
+ a| 
+DeleteBucketReplication
+ a| 
+刪除附加至儲存貯體的複寫組態。
+
+
+
+ a| 
+DeleteBucketTagging
+ a| 
+使用 `tagging`子資源從儲存桶中移除所有標籤。
+
+*注意*：如果此儲存桶設定了非預設的 ILM 原則標籤，則會有一個 `NTAP-SG-ILM-BUCKET-TAG`儲存桶標籤並已賦值。如果存在 `NTAP-SG-ILM-BUCKET-TAG`儲存桶標籤，請勿發出 DeleteBucketTagging 要求。而應發出僅包含 `NTAP-SG-ILM-BUCKET-TAG`標籤及其賦值的 PutBucketTagging 要求，以移除儲存桶中的所有其他標籤。請勿修改或移除 `NTAP-SG-ILM-BUCKET-TAG`儲存桶標籤。
+
+
+
+ a| 
+GetBucketAcl
+ a| 
+傳回肯定回應以及儲存桶擁有者的 ID、DisplayName 和權限，表示擁有者對儲存桶擁有完全存取權限。
+
+
+
+ a| 
+GetBucketCors
+ a| 
+傳回 `cors`儲存桶的組態。
+
+
+
+ a| 
+GetBucketEncryption
+ a| 
+傳回儲存桶的預設加密組態。
+
+
+
+ a| 
+GetBucketLifecycleConfiguration
+
+（之前名為 GET Bucket lifecycle）
+ a| 
+傳回儲存桶的生命週期組態。參見link:create-s3-lifecycle-configuration.html["建立 S3 生命週期組態"]。
+
+
+
+ a| 
+GetBucketLocation
+ a| 
+傳回在 CreateBucket 請求中使用 `LocationConstraint`元素設定的區域。如果儲存桶的區域為 `us-east-1`，則該區域傳回空字串。
+
+
+
+ a| 
+GetBucketNotificationConfiguration
+
+（之前名為 GET Bucket notification）
+ a| 
+傳回附加至儲存貯體的通知組態。
+
+
+
+ a| 
+GetBucketPolicy
+ a| 
+傳回附加至儲存貯體的原則。
+
+
+
+ a| 
+GetBucketReplication
+ a| 
+傳回附加至儲存貯體的複寫組態。
+
+
+
+ a| 
+GetBucketTagging
+ a| 
+使用 `tagging`子資源傳回儲存桶的所有標籤。
+
+*注意*：如果為此儲存桶設定了非預設的 ILM 原則標籤，則會有一個 `NTAP-SG-ILM-BUCKET-TAG`儲存桶標籤被賦予一個值。請勿修改或移除此標籤。
+
+
+
+ a| 
+GetBucketVersioning
+ a| 
+此實作使用 `versioning`子資源傳回儲存桶的版本控制狀態。
+
+* _blank_: 版本控制從未啟用（儲存桶為「未版本化」）
+* 已啟用：版本控制已啟用
+* 已暫停：版本控制功能先前已啟用，現已暫停
+
+
+
+
+ a| 
+GetObjectLockConfiguration
+ a| 
+傳回儲存桶的預設保留模式和預設保留期間（如果已設定）。
+
+請參閱 link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]。
+
+
+
+ a| 
+HeadBucket
+ a| 
+判斷儲存桶是否存在以及您是否擁有存取權限。
+
+此作業會傳回：
+
+* `x-ntap-sg-bucket-id`：儲存桶的 UUID（UUID 格式）。
+* `x-ntap-sg-trace-id`：關聯請求的唯一追蹤 ID。
+
+
+
+
+ a| 
+ListObjects 和 ListObjectsV2
+
+（之前名為 GET Bucket）
+ a| 
+傳回儲存桶中的部分或全部物件（最多 1,000 個）。物件的 Storage Class 可以有兩個值之一，即使物件是使用 `REDUCED_REDUNDANCY` storage class 選項匯入的：
+
+* `STANDARD`，這表示該物件儲存在由 Storage Nodes 組成的儲存資源池中。
+* `GLACIER`，這表示該物件已移至 Cloud Storage Pool 指定的外部儲存桶。
+
+
+如果儲存桶中包含大量具有相同前綴的已刪除金鑰，則回應可能包含一些 `CommonPrefixes`不包含金鑰的項目。
+
+對於 HeadObject 和 ListObject 請求，StorageGRID 傳回的 LastModified 時間戳記精度不同，而 AWS 傳回的時間戳記精度相同，如下列範例所示：
+
+* StorageGRID HeadObject: "LastModified": "2024-09-26T16:43:24+00:00"
+* StorageGRID ListObject: "LastModified": "2024-09-26T16:43:24.931000+00:00"
+* AWS HeadObject: "LastModified": "2023-10-17T00:19:54+00:00"
+* AWS ListObject："LastModified"："2023-10-17T00:19:54+00:00"
+
+
+
+
+ a| 
+ListObjectVersions
+
+（以前稱為 GET Bucket Object versions）
+ a| 
+對儲存貯體具有 READ 存取權限時，搭配  `versions` 子資源使用此操作，可列出儲存貯體中所有物件版本的中繼資料。
+
+
+
+ a| 
+PutBucketCors
+ a| 
+設定儲存桶的 CORS 組態，以便該儲存桶可以處理跨域請求。跨域資源共用 (CORS) 是一種安全性機制，可讓一個網域中的用戶端 Web 應用程式存取另一個網域中的資源。例如，假設您使用名為 `images`的 S3 儲存桶來儲存圖形。透過設定 `images`儲存桶的 CORS 組態，您可以允許該儲存桶中的圖像顯示在網站 `+http://www.example.com+`上。
+
+
+
+ a| 
+PutBucketEncryption
+ a| 
+設定現有儲存桶的預設加密狀態。啟用儲存桶級加密後，新增至儲存桶的任何新物件都將被加密。StorageGRID 支援使用 StorageGRID 管理的金鑰進行伺服器端加密。指定伺服器端加密組態規則時，請將 `SSEAlgorithm`參數設為 `AES256`，並且不要使用 `KMSMasterKeyID`參數。
+
+如果物件上傳請求已指定加密（即請求包含 `x-amz-server-side-encryption-*`請求標頭），則忽略儲存桶預設加密組態。
+
+
+
+ a| 
+PutBucketLifecycleConfiguration
+
+（之前稱為 PUT Bucket lifecycle）
+ a| 
+為儲存桶建立新的生命週期組態或取代現有的生命週期組態。StorageGRID 的生命週期組態中支援最多 1,000 條生命週期規則。每條規則可以包含以下 XML 元素：
+
+* 到期時間（天數、日期、ExpiredObjectDeleteMarker）
+* NoncurrentVersionExpiration（NewerNoncurrentVersions，NoncurrentDays）
+* 篩選（前綴，標籤）
+* 狀態
+* ID
+
+
+StorageGRID 不支援這些動作：
+
+* AbortIncompleteMultipartUpload
+* 過渡
+
+
+請參閱link:create-s3-lifecycle-configuration.html["建立 S3 生命週期組態"]。若要了解儲存桶生命週期中的到期行動如何與 ILM 放置指令互動，請參閱link:../ilm/how-ilm-operates-throughout-objects-life.html["ILM 如何在物件的整個生命週期中運作"]。
+
+*注意*：儲存桶生命週期組態可用於已啟用 S3 Object Lock 的儲存桶，但不支援舊版 Compliant 儲存桶的儲存桶生命週期組態。
+
+
+
+ a| 
+PutBucketNotificationConfiguration
+
+（之前稱為 PUT Bucket notification）
+ a| 
+使用請求正文中包含的通知組態 XML 設定儲存貯體的通知。您應注意以下實作細節：
+
+* StorageGRID 支援將 Amazon Simple Notification Service (Amazon SNS) 主題、Kafka 主題或 Webhook 端點作為目的地。不支援 Simple Queue Service (SQS) 或 AWS Lambda 端點。
+* 通知的目的地必須指定為 StorageGRID 端點的 URN。可以使用 Tenant Manager 或 Tenant Management API 建立端點。
++
+端點必須存在，通知組態才能成功。如果端點不存在，則會傳回 `400 Bad Request`錯誤，錯誤代碼為 `InvalidArgument`。
+
+* 您無法為以下事件類型設定通知。這些事件類型*不受*支援。
++
+** `s3:ReducedRedundancyLostObject`
+** `s3:ObjectRestore:Completed`
+
+
+* StorageGRID 傳送的事件通知使用標準 JSON 格式，但不包含某些索引鍵，而其他索引鍵則使用特定值，如下列清單所示：
++
+** *eventSource*
++
+`sgws:s3`
+
+** *awsRegion*
++
+未包含
+
+** *x-amz-id-2*
++
+未包含
+
+** *arn*
++
+`urn:sgws:s3:::bucket_name`
+
+
+
+
+
+
+
+ a| 
+PutBucketPolicy
+ a| 
+設定附加到儲存桶的原則。參見link:use-access-policies.html["使用儲存桶和群組存取原則"]。
+
+
+
+ a| 
+PutBucketReplication
+ a| 
+使用請求正文中提供的複寫組態 XML，為儲存桶設定 link:../tenant/understanding-cloudmirror-replication-service.html["StorageGRID CloudMirror 複寫"]。對於 CloudMirror 複寫，您應該注意以下實作細節：
+
+* StorageGRID 僅支援複寫組態的 V1 版本。這表示 StorageGRID 不支援在規則中使用 `Filter`元素，並遵循 V1 慣例來刪除物件版本。如需詳細資訊，請參閱 https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-add-config.html["Amazon Simple Storage Service 使用者指南：複寫組態"^]。
+* 可以在版本化儲存桶或非版本化儲存桶上設定儲存桶複寫。
+* 您可以在複寫組態 XML 的每個規則中指定不同的目的地儲存桶。一個來源儲存桶可以複寫到多個目的地儲存桶。
+* 目標儲存桶必須指定為租用戶管理器或租用戶管理 API 中指定的 StorageGRID 端點的 URN。請參閱link:../tenant/configuring-cloudmirror-replication.html["設定 CloudMirror 複寫"]。
++
+要成功進行複寫組態，端點必須存在。如果端點不存在，則請求失敗為 `400 Bad Request`。錯誤訊息如下： `Unable to save the replication policy. The specified endpoint URN does not exist: _URN_.`
+
+* 您無需在組態 XML 中指定  `Role`。StorageGRID 不使用此值，提交後將被忽略。
+* 如果從組態 XML 中省略儲存設備類別，StorageGRID 預設會使用 `STANDARD`儲存設備類別。
+* 如果從來源儲存桶中移除物件或移除來源桶本身，則跨區域複寫行為如下：
++
+** 如果在物件或儲存桶複寫之前將其刪除，該物件/儲存桶將不會被複寫，您也不會收到通知。
+** 如果在複寫完成後刪除物件或儲存桶，StorageGRID 將遵循 Amazon S3 跨區域複寫 V1 的標準刪除行為。
+
+
+
+
+
+
+ a| 
+PutBucketTagging
+ a| 
+使用 `tagging`子資源為儲存桶新增或更新一組標籤。在新增儲存桶標籤時，請注意以下限制：
+
+* StorageGRID 和 Amazon S3 都支援每個儲存桶最多 50 個標籤。
+* 與儲存桶關聯的標籤必須具有唯一的標籤鍵。標籤鍵的長度最多可達 128 個 Unicode 字元。
+* 標籤值最多可以包含 256 個 Unicode 字元。
+* 鍵和值區分大小寫。
+
+
+*注意*：如果為此儲存桶設定了非預設的 ILM 原則標籤，則會有一個 `NTAP-SG-ILM-BUCKET-TAG`儲存桶標籤及其賦值。請確保所有 PutBucketTagging 請求中都包含 `NTAP-SG-ILM-BUCKET-TAG`儲存桶標籤及其賦值。請勿修改或移除此標籤。
+
+*注意*：此操作將覆寫儲存貯體中已有的所有標籤。如果從清單中省略任何現有標籤，這些標籤將從該儲存貯體中移除。
+
+
+
+ a| 
+PutBucketVersioning
+ a| 
+使用 `versioning`子資源設定現有儲存貯體的版本控制狀態。您可以使用下列值之一設定版本控制狀態：
+
+* 已啟用：啟用儲存桶中物件的版本控制。新增到儲存桶的所有物件都會獲得一個唯一的版本 ID。
+* 已暫停：停用儲存桶中物件的版本控制。新增到儲存桶的所有物件都將獲得版本 ID `null`。
+
+
+
+
+ a| 
+PutObjectLockConfiguration
+ a| 
+設定或移除儲存桶的預設保留模式和預設保留期間。
+
+如果修改預設保留期間，現有物件版本的保留截止日期保持不變，不會使用新的預設保留期間重新計算。
+
+詳情請見 link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]。
+
+|===

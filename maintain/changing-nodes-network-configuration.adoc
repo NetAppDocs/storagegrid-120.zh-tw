@@ -1,0 +1,248 @@
+---
+permalink: maintain/changing-nodes-network-configuration.html 
+sidebar: sidebar 
+keywords: storagegrid, network configuration, node network configuration 
+summary: 您可以使用變更 IP 工具來變更一或多個節點的網路組態。您可以變更網格網路的組態，或是新增、變更或移除管理網路或用戶端網路。 
+---
+= 變更 StorageGRID 中的節點網路組態
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用變更 IP 工具來變更一或多個節點的網路組態。您可以變更網格網路的組態，或是新增、變更或移除管理網路或用戶端網路。
+
+.開始之前
+您擁有  `Passwords.txt` 檔案。
+
+.關於此任務
+*Linux：* 如果您是首次在管理網路或用戶端網路新增網格節點，且先前未在節點組態檔案中設定 ADMIN_NETWORK_TARGET 或 CLIENT_NETWORK_TARGET，則必須立即進行設定。請參閱適用於您的 Linux 作業系統的 StorageGRID link:../swnodes/index.html["${post_edited_translations.segment}"]。
+
+*應用裝置：* 在 StorageGRID 應用裝置上，如果在初始安裝期間未在 StorageGRID 應用裝置安裝程式中設定用戶端或管理網路，則無法僅使用「變更 IP」工具新增網路。您必須先 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/placing-appliance-into-maintenance-mode.html["${post_edited_translations.segment}"^]、設定連結、將應用裝置恢復至正常運作模式，然後使用「變更 IP」工具修改網路組態。請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/configuring-network-links.html["網路鏈路設定步驟"^]。
+
+您可以變更任何網路上一個或多個節點的 IP 位址、子網路遮罩、閘道或 MTU 值。
+
+您也可以向用戶端網路或管理網路中新增或移除節點：
+
+* 您可以透過為節點新增該網路上的 IP 位址/子網路遮罩，將節點新增至用戶端網路或管理網路。
+* 您可以透過刪除用戶端網路或管理網路中節點的 IP 位址/子網路遮罩，將該節點從該網路中移除。
++
+無法從網格網路中移除節點。
+
+
+
+
+NOTE: 不允許交換 IP 位址。如果必須在網格節點之間交換 IP 位址，則必須使用臨時中間 IP 位址。
+
+
+NOTE: 如果您的 StorageGRID 系統已啟用單一登入 （SSO），且您正在變更管理節點的 IP 位址，請注意，任何使用管理節點的 IP 位址（而非建議的完整網域名稱）所設定的信賴方信任都將失效。您將無法再登入該節點。變更 IP 位址後，您必須立即在 Active Directory Federation Services （AD FS） 中使用新的 IP 位址更新或重新設定節點的信賴方信任。請參閱相關說明 link:../admin/configure-sso.html["設定 SSO"]。
+
+
+NOTE: 您使用變更 IP 工具對網路進行的任何變更，都會傳播到 StorageGRID 應用裝置的安裝程式韌體。如此一來，如果將 StorageGRID 軟體重新安裝到應用裝置上，或者將應用裝置置於維護模式，連網組態將會是正確的。
+
+.步驟
+. 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+. 輸入以下命令啟動 Change IP 工具： `change-ip`
+. 依照提示輸入配置密碼。
++
+主選單出現。
+
++
+image:change_ip_tool_main_menu.png["快照顯示變更 IP 工具的歡迎畫面"]
+
+. （可選）選擇 *1* 以選擇要更新的節點。然後選擇以下其中一個選項：
++
+** ${post_edited_translations.segment}
+** *2*：單一節點——先依站台選擇，再依名稱選擇
+** *3*：單節點——依目前 IP 選擇
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
++
+*附註：* 如果要更新所有節點，請保持「全部」選取狀態。
+
+
+
++
+選擇完成後，主選單將顯示，*Selected nodes* 欄位將更新以反映您的選擇。所有後續操作都僅針對顯示的節點執行。
+
+. 在主選單中，選擇選項 *2* 來編輯所選節點的 IP/遮罩、閘道和 MTU 資訊。
++
+.. 選擇要進行變更的網路：
++
+--
+*** ${post_edited_translations.segment}
+*** *2*：管理網路
+*** *3*：用戶端網路
+*** *4*：所有網路
+
+
+--
++
+--
+${post_edited_translations.segment}
+
+編輯 DHCP 設定介面的 IP 位址、前綴長度、閘道或 MTU 值會將該介面變更為靜態。當您選擇變更 DHCP 設定的介面時，系統會顯示警告，告知您該介面將變更為靜態。
+
+設定為 `fixed`的介面無法編輯。
+
+--
+.. 若要設定新值，請按目前值顯示的格式輸入。
+.. ${post_edited_translations.segment}
+.. 如果資料類型為 `IP/mask`，則可以輸入 *d* 或 *0.0.0.0/0* 從節點中移除管理網路或用戶端網路。
+.. 編輯完所有要變更的節點後，輸入 *q* 返回主選單。
++
+${post_edited_translations.segment}
+
+
+
+. 請選擇下列其中一個選項來審查您的變更：
++
+** *5*：在輸出結果中顯示編輯內容，並以隔離的方式僅顯示已變更的項目。變更內容以綠色（新增）或紅色（刪除）醒目提示，如範例輸出所示：
++
+image:change_ip_tool_edit_ip_mask_sample_output.png["快照由周圍文字描述"]
+
+** *6*：在顯示完整組態的輸出中顯示編輯內容。變更以綠色（新增）或紅色（刪除）突出顯示。
++
+
+NOTE: 某些命令列介面可能會使用刪除線格式顯示新增和刪除的內容。正確顯示取決於您的終端機用戶端是否支援必要的 VT100 轉義序列。
+
+
+
+. 選擇選項 *7* 以驗證所有變更。
++
+${post_edited_translations.segment}
+
++
+${post_edited_translations.segment}
+
++
+image:change_ip_tool_validate_sample_error_messages.gif["快照由周圍文字描述"]
+
++
+在此範例中，驗證已通過。
+
++
+image:change_ip_tool_validate_sample_passed_messages.gif["快照由周圍文字描述"]
+
+. 驗證通過後，請選擇以下選項之一：
++
+** *8*：儲存未套用的變更。
++
+此選項可讓您退出 Change IP 工具，並在稍後再次啟動，而不會遺失任何未套用的變更。
+
+** ${post_edited_translations.segment}
+
+
+. ${post_edited_translations.segment}
++
+** *apply*：立即套用變更，並在必要時自動重新啟動每個節點。
++
+如果新的網路組態不需要任何實體連網變更，您可以選取 *apply* 以立即套用變更。如有需要，節點將會自動重新啟動。將會顯示需要重新啟動的節點。
+
+** ${post_edited_translations.segment}
++
+如果您需要進行實體或虛擬連網組態變更以使新的網路組態正常運作，您必須使用 *stage* 選項、關閉受影響的節點、進行必要的實體連網變更，然後重新啟動受影響的節點。如果您在未先進行這些連網變更的情況下選擇 *apply*，變更通常會失敗。
+
++
+
+NOTE: 如果使用 *stage* 選項，則必須在接移後儘快重新啟動節點，以最大程度地減少中斷。
+
+** *取消*：此時請勿進行任何網路變更。
++
+如果您之前不知道建議的變更需要重新啟動節點，您可以推遲變更以盡量減少對使用者的影響。選取 *cancel* 將返回主選單並保留您的變更，以便您稍後套用。
+
++
+${post_edited_translations.segment}
+
++
+${post_edited_translations.segment}
+
++
+[listing]
+----
+Generating new grid networking description file...
+
+Running provisioning...
+
+Updating grid network configuration on Name
+----
+
+
++
+${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
++
+.. 進行必要的實體或虛擬連網變更。
++
+${post_edited_translations.segment}
+
++
+*Linux*：如果您是第一次將節點新增至管理網路或用戶端網路，請確保已依照 link:linux-adding-interfaces-to-existing-node.html["Linux：為現有節點新增介面"] 中的說明新增介面。
+
+.. 重新啟動受影響的節點。
+
+
+. 更改完成後，選擇 *0* 退出「更改 IP」工具。
+. ${post_edited_translations.segment}
++
+.. 選擇 *Maintenance* > *System* > *Recovery package*。
+.. 請輸入佈建密碼。
+
+
+. 如果您已允許外部 SSH 存取，link:../admin/manage-external-ssh-access.html["區塊存取"]當您完成變更節點網路組態後。
+
+
+
+
+[[temporarily-changing-the-lacp-pdu-rate]]
+== ${post_edited_translations.segment}
+
+若要對應用裝置中安裝的網路元件執行維護作業（例如升級網路卡韌體），您可以檢查目前的 LACP PDU 速率設定是否符合網路介面卡通訊時序要求。如有需要，您可以非持續性地在快速（等待 1 秒）和慢速（等待 30 秒）之間切換 LACP PDU 速率。
+
+
+NOTE: 若要永久變更 LACP PDU 速率，請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/configuring-network-links.html["設定網路鏈路"^]。
+
+.開始之前
+* ${post_edited_translations.segment}
+* 您擁有  `Passwords.txt` 檔案。
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 請輸入以下命令： `ssh admin@primary_Admin_Node_IP`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 若要檢查目前的 LACP PDU 速率設定，請輸入以下命令：
++
+`run-each-node --parallel --port 8022 '/usr/sbin/set-lacp-rate.sh'`
+
+. ${post_edited_translations.segment}
++
+`run-each-node --parallel --port 8022 '/usr/sbin/set-lacp-rate.sh _<speed>_'`
+
++
+其中 `_<speed>_`是 `fast`或 `slow`。
+
+
+
+LACP PDU 速率將在下次應用裝置重新開機時回復到先前的設定。

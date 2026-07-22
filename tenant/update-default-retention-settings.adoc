@@ -1,0 +1,69 @@
+---
+permalink: tenant/update-default-retention-settings.html 
+sidebar: sidebar 
+keywords: update default retention for s3 object lock bucket, default retention mode, default retention period, compliance, governance 
+summary: 如果在建立儲存桶時啟用了 S3 物件鎖定，則可以編輯儲存桶以變更預設保留設定。您可以啟用（或停用）預設保留，並設定預設保留模式和保留期間。 
+---
+= 更新 StorageGRID 中的 S3 Object Lock 預設保留
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果在建立儲存桶時啟用了 S3 物件鎖定，則可以編輯儲存桶以變更預設保留設定。您可以啟用（或停用）預設保留，並設定預設保留模式和保留期間。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於擁有 link:tenant-management-permissions.html["管理所有儲存桶或 root 存取權限"] 的使用者群組。這些權限會置換群組或儲存桶原則中的權限設定。
+* 您的 StorageGRID 系統已全域啟用 S3 Object Lock，並且在建立儲存桶時也啟用了 S3 Object Lock。請參閱link:using-s3-object-lock.html["使用 S3 物件鎖定來保留物件"]。
+
+
+.步驟
+. ${post_edited_translations.segment}
+. 從表格中選擇儲存桶名稱。
++
+顯示儲存桶詳細資料頁面。
+
+. 從「儲存桶選項」標籤中，選擇「S3 Object Lock」折疊選單。
+. （可選）啟用或停用此儲存桶的*預設保留*。
++
+此設定的變更不適用於儲存桶中已有的物件，也不適用於任何可能具有自身保留期間的物件。
+
+. 如果已啟用 *Default retention* ，請為儲存桶指定 *Default retention mode* 。
++
+[cols="1a,2a"]
+|===
+| 預設保留模式 | 說明 
+
+
+ a| 
+治理
+ a| 
+** 擁有 `s3:BypassGovernanceRetention`權限的使用者可以使用 `x-amz-bypass-governance-retention: true`請求標頭繞過保留設定。
+** ${post_edited_translations.segment}
+** 這些使用者可以增加、減少或移除物件的保留截止日期。
+
+
+
+
+ a| 
+合規性
+ a| 
+** 物件只有在達到其保留期限後才能刪除。
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+
+
+*注意*：您的網格系統管理員必須允許您使用法規遵循模式。
+
+|===
+. 如果已啟用*預設保留*，請指定儲存桶的*預設保留期間*。
++
+*預設保留期間* 指示新增至此儲存桶的新物件應保留多長時間，從物件被攝取之時起算。指定一個小於或等於網格系統管理員為租戶設定的最大保留期間的值。
+
++
+網格系統管理員建立租戶時會設定一個_最大_保留期間，其值範圍為 1 天到 100 年。設定_預設_保留期間時，其值不能超過最大保留期間的值。如有需要，請聯絡網格系統管理員增加或減少最大保留期間。
+
+. 選擇 *Save changes* 。
+

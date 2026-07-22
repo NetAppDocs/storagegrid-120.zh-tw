@@ -1,0 +1,246 @@
+---
+permalink: monitor/logs-files-reference.html 
+sidebar: sidebar 
+keywords: log, logs, log files 
+summary: StorageGRID 提供用於擷取事件、診斷訊息和錯誤情況的日誌。您可能需要收集日誌檔並將其轉發給技術支援，以協助進行疑難排解。 
+---
+= StorageGRID 日誌檔案
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 提供用於擷取事件、診斷訊息和錯誤情況的日誌。您可能需要收集日誌檔並將其轉發給技術支援，以協助進行疑難排解。
+
+日誌分類如下：
+
+* link:storagegrid-software-logs.html["StorageGRID 軟體日誌檔"]
+* link:deployment-and-maintenance-logs.html["部署與維護日誌檔"]
+* link:about-bycast-log.html["關於 bycast.log"]
+
+
+
+NOTE: 此處提供的每種日誌類型的詳細資訊僅供參考。這些日誌旨在供技術支援進行進階疑難排解。使用稽核日誌和應用程式日誌檔案重建問題歷史記錄等進階技術超出本說明的範圍。
+
+
+
+[[access-the-logs]]
+== 存取日誌
+
+若要存取日誌，您可以link:collecting-log-files-and-system-data.html["收集日誌檔和系統資料"]從一個或多個節點將日誌作為單一日誌檔歸檔。或者，您可以依照下列方式存取每個網格節點的個別日誌檔：
+
+.步驟
+. 輸入下列命令： `ssh admin@grid_node_IP`
+. 請輸入 `Passwords.txt`檔案中列出的密碼。
+. 輸入以下命令以切換至根目錄： `su -`
+. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
+
+
+[[export-logs-to-the-syslog-server]]
+== 將日誌匯出至 syslog 伺服器
+
+將日誌匯出至 syslog 伺服器可提供以下功能：
+
+* 除了 S3 要求之外，還會收到所有 Grid Manager 和 Tenant Manager 要求的清單。
+* 更清楚地掌握傳回錯誤的 S3 請求，而不會產生稽核記錄方法所造成的效能影響。
+* 能夠存取易於解析的 HTTP 層請求和錯誤代碼。
+* 更清楚地掌握負載平衡器上流量分類器所封鎖之請求的可見度。
+
+
+若要匯出日誌檔，請參閱link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+
+
+
+[[log-file-categories]]
+== 日誌檔類別
+
+StorageGRID 日誌檔歸檔包含每個類別所述的日誌，以及包含計量和偵錯命令輸出的其他檔案。
+
+[cols="1a,3a"]
+|===
+| 歸檔位置 | 說明 
+
+
+| 稽核  a| 
+系統正常運作期間產生的稽核訊息。
+
+
+
+| base-os-logs  a| 
+基礎作業系統資訊，包括 StorageGRID 映像版本。
+
+
+
+| 捆綁  a| 
+全域組態資訊（bundles）。
+
+
+
+| cache-svc  a| 
+快取服務日誌檔（僅限閘道節點）。
+
+
+
+| cassandra  a| 
+Cassandra 資料庫資訊和 Reaper 修理日誌。
+
+
+
+| ec  a| 
+VCSs 提供目前節點資訊和 EC 群組資訊（按設定檔 ID）。
+
+
+
+| 網格  a| 
+通用網格日誌（包括除錯(`bycast.log`）和 `servermanager`日誌。
+
+
+
+| grid.json  a| 
+網格組態檔案在所有節點間共享。此外， `node.json`還特定於目前節點。
+
+
+
+| hagroups  a| 
+高可用度群組計量和日誌檔。
+
+
+
+| 安裝  a| 
+`Gdu-server` 和安裝日誌檔。
+
+
+
+| Lambda-arbitrator  a| 
+與 S3 Select Proxy 請求相關的日誌檔。
+
+
+
+| leakd  a| 
+leakd 服務的日誌檔。
+
+
+
+| lumberjack.log  a| 
+與日誌收集相關的除錯訊息。
+
+
+
+| 指標  a| 
+Grafana、Jaeger、node exporter 和 Prometheus 的服務日誌檔。
+
+
+
+| ${post_edited_translations.segment}  a| 
+其他存取和錯誤日誌。
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ${post_edited_translations.segment}  a| 
+負載平衡器與網格聯盟組態檔案和記錄。也包括 Grid Manager 和 Tenant Manager 流量記錄。
+
+
+
+| nginx-gw  a| 
+* `access.log`: 網格管理程式與租戶管理程式要求記錄訊息。
++
+** 使用 syslog 匯出時，這些訊息的前面會加上  `mgmt:`。
+** 這些日誌訊息的格式為 `[$time_iso8601] $remote_addr $status $bytes_sent $request_length $request_time "$endpointId" "$request" "$http_host" "$http_user_agent" "$http_referer"`
+
+
+* `cgr-access.log.gz`：傳入的跨網格複寫請求。
++
+** 這些訊息在使用 syslog 匯出時會帶有前綴 `cgr:`。
+** 這些日誌訊息的格式是 `[$time_iso8601] $remote_addr $status $bytes_sent $request_length $request_time "$endpointId" "$upstream_addr" "$request" "$http_host"`
+
+
+* `endpoint-access.log.gz`：向負載平衡器端點發出的 S3 請求。
++
+** 這些訊息在使用 syslog 匯出時會帶有前綴 `endpoint:`。
+** 這些日誌訊息的格式是 `[$time_iso8601] $remote_addr $status $bytes_sent $request_length $request_time "$endpointId" "$upstream_addr" "$request" "$http_host"`
+
+
+* `nginx-gw-dns-check.log`: 與新的 DNS 檢查警示相關。
+
+
+
+
+| ntp  a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+與孤立物件相關的日誌。
+
+
+
+| 作業系統  a| 
+節點和網格狀態檔案，包括服務 `pid`。
+
+
+
+| 其他  a| 
+ `/var/local/log`下的日誌檔案不會收集到其他資料夾。
+
+
+
+| ${post_edited_translations.segment}  a| 
+CPU、連網和磁碟 I/O 的效能資訊。
+
+
+
+| ${post_edited_translations.segment}  a| 
+目前 Prometheus 計量（如果日誌收集包含 Prometheus 資料）。
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ${post_edited_translations.segment}  a| 
+平台服務中使用的 Raft 叢集的日誌。
+
+
+
+| ssh  a| 
+與 SSH 組態和服務相關的日誌。
+
+
+
+| SNMP  a| 
+用於發送 SNMP 通知的 SNMP 代理程式組態。
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ${post_edited_translations.segment}  a| 
+StorageGRID Container 指令的輸出。包含系統資訊，例如連網和磁碟使用情況。
+
+
+
+| 同步恢復套件  a| 
+${post_edited_translations.segment}
+
+|===

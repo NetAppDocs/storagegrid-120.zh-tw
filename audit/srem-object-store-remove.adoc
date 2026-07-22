@@ -1,0 +1,40 @@
+---
+permalink: audit/srem-object-store-remove.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, SREM, Object Store Remove 
+summary: 當內容從持續儲存設備中移除且無法再透過常規 API 存取時，將發出此訊息。 
+---
+= StorageGRID 中物件存放區移除的 SREM 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當內容從持續儲存設備中移除且無法再透過常規 API 存取時，將發出此訊息。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+CBID
+ a| 
+內容區塊識別碼
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+RSLT
+ a| 
+結果代碼
+ a| 
+指示內容移除作業的結果。唯一定義的值為：
+
+SUCS：內容已從持續儲存中移除
+
+|===
+此稽核訊息表示某個內容區塊已從節點中刪除，無法再直接要求。此訊息可用於追蹤系統內已刪除內容的流轉情況。

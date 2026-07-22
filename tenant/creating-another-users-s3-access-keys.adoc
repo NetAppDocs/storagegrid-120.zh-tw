@@ -1,0 +1,64 @@
+---
+permalink: tenant/creating-another-users-s3-access-keys.html 
+sidebar: sidebar 
+keywords: how to create other user S3 access key 
+summary: 如果您使用的是 S3 租戶並且擁有相應的權限，則可以為其他使用者（例如需要存取儲存桶和物件的應用程式）建立 S3 存取金鑰。 
+---
+= 在 StorageGRID 中建立其他使用者的 S3 存取金鑰
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您使用的是 S3 租戶並且擁有相應的權限，則可以為其他使用者（例如需要存取儲存桶和物件的應用程式）建立 S3 存取金鑰。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+
+
+.關於此任務
+您可以為其他使用者建立一個或多個 S3 存取金鑰，以便他們能夠為其租戶帳戶建立和管理儲存桶。建立新的存取金鑰後，請使用新的存取金鑰 ID 和秘密存取金鑰更新應用程式。基於安全性考量，請勿建立超出使用者需求的金鑰數量，並刪除未使用的金鑰。如果您只有一個金鑰且即將過期，請在舊金鑰過期前建立新金鑰，然後刪除舊金鑰。
+
+每個金鑰都可以設定特定的過期時間，也可以不設定過期時間。過期時間的設定請遵循以下準則：
+
+* 為金鑰設定過期時間，以限制使用者在特定時間內的存取。設定較短的過期時間有助於降低存取金鑰 ID 和秘密存取金鑰意外洩漏的風險。過期金鑰將自動移除。
+* 如果您的環境安全性風險較低，且您無需定期建立新金鑰，則無需為金鑰設定過期時間。如果您之後決定建立新金鑰，請手動刪除舊金鑰。
+
+
+
+CAUTION: 可以使用 Tenant Manager 中顯示的該使用者存取金鑰 ID 和秘密存取金鑰，來存取屬於該使用者的 S3 儲存桶和物件。因此，請像保護密碼一樣保護存取金鑰。定期輪換存取金鑰，從帳戶中移除任何未使用的金鑰，且切勿與其他使用者共享。
+
+.步驟
+. 選擇 *Access Management* > *Users*。
+. 選擇要管理其 S3 存取金鑰的使用者。
++
+顯示使用者詳情頁面。
+
+. 選擇 *Access keys*，然後選擇 *Create key*。
+. 執行下列其中一項作業：
++
+** 選擇「不設定過期時間」可建立永不過期的金鑰。（預設）
+** 選擇 *Set an expiration time*，然後設定到期日期和時間。
++
+
+NOTE: 有效期限最長為自目前日期起五年。有效時間最短為自目前時間起一分鐘。
+
+
+
+. 選擇 *建立存取金鑰*。
++
+「下載存取金鑰」對話方塊隨即出現，其中列出了存取金鑰 ID 和秘密存取金鑰。
+
+. 將存取金鑰 ID 和秘密存取金鑰複製到安全位置，或選取 *Download .csv* 以儲存包含存取金鑰 ID 和秘密存取金鑰的試算表檔案。
++
+
+CAUTION: 複製或下載此資訊之前，請勿關閉此對話方塊。對話方塊關閉後，您將無法複製或下載金鑰。
+
+. 選擇 *Finish* 。
++
+新密鑰列在使用者詳細資料頁面的「存取密鑰」標籤中。
+
+. 如果您的租戶帳戶擁有 *Use grid federation connection* 權限，則可以選擇使用 Tenant Management API 將來源網格上租戶的 S3 存取金鑰手動 Clone 到目的地網格上的租戶。請參閱link:grid-federation-clone-keys-with-api.html["使用 API Clone S3 存取金鑰"]。
+

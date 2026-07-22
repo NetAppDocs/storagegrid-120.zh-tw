@@ -1,0 +1,8 @@
+---
+permalink: ubuntu/installing-linux.html 
+redirect: storagegrid/swnodes/installing-linux.html 
+---
+= 
+:allow-uri-read: 
+
+

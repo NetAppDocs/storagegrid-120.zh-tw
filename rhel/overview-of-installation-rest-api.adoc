@@ -1,0 +1,8 @@
+---
+permalink: rhel/overview-of-installation-rest-api.html 
+redirect: storagegrid/swnodes/overview-of-installation-rest-api.html 
+---
+= 
+:allow-uri-read: 
+
+

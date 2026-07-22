@@ -1,0 +1,55 @@
+---
+permalink: primer/hybrid-clouds-with-storagegrid.html 
+sidebar: sidebar 
+keywords: StorageGRID, hybrid cloud, cloud storage pool, platform services, fabricpool, ontap 
+summary: 在混合雲組態中使用 StorageGRID，透過實施原則驅動型資料管理將物件儲存在雲端儲存資源池中，利用 StorageGRID 平台服務，以及使用 NetApp FabricPool 將資料從 ONTAP 分層至 StorageGRID。 
+---
+= 混合雲與 StorageGRID
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在混合雲組態中使用 StorageGRID，透過實施原則驅動型資料管理將物件儲存在雲端儲存資源池中，利用 StorageGRID 平台服務，以及使用 NetApp FabricPool 將資料從 ONTAP 分層至 StorageGRID。
+
+
+
+[[cloud-storage-pools]]
+== ${post_edited_translations.segment}
+
+雲端儲存資源池允許您將物件儲存在 StorageGRID 系統之外。例如，您可能想要將不常存取的物件移至成本較低的雲端儲存設備，例如 Amazon S3 Glacier、S3 Glacier Deep Archive、Google Cloud，或 Microsoft Azure Blob 儲存設備中的封存存取層。或者，您可能想要維護 StorageGRID 物件的雲端備份，以便在儲存 Volume 或儲存節點故障時恢復遺失的資料。
+
+也支援第三方合作夥伴儲存設備，包括磁碟和磁帶儲存設備。
+
+
+NOTE: 由於從雲端儲存池目標擷取物件會增加延遲，因此不支援將雲端儲存池與 FabricPool 搭配使用。
+
+
+
+[[s3-platform-services]]
+== S3 平台服務
+
+S3 平台服務可讓您將遠端服務用作物件複寫、事件通知或搜尋整合的端點。平台服務獨立於網格的 ILM 規則運作，並針對個別 S3 儲存桶啟用。支援下列服務：
+
+* CloudMirror 複寫服務會自動將指定物件鏡像到目標 S3 儲存桶，該儲存桶可以位於 Amazon S3 或第二個 StorageGRID 系統上。
+* 事件通知服務會將有關指定操作的訊息傳送至支援接收簡單通知服務 (Amazon SNS) 事件的外部端點。
+* 搜尋整合服務將物件中繼資料傳送到外部 Elasticsearch 服務，從而可以使用協力廠商工具搜尋、視覺化和分析中繼資料。
+
+
+例如，您可以使用 CloudMirror 複寫將特定客戶記錄鏡射到 Amazon S3，然後運用 AWS 服務對您的資料執行分析。
+
+
+
+[[ontap-data-tiering-using-fabricpool]]
+== 使用 FabricPool 的 ONTAP 資料分層
+
+您可以使用 FabricPool 將資料分層至 StorageGRID，從而降低 ONTAP 儲存設備的成本。FabricPool 可自動將資料分層至低成本的物件儲存層，無論是在本機或異地。
+
+與手動分層解決方案不同，FabricPool 透過自動化資料分層來降低儲存設備成本，進而降低整體擁有成本。它透過分層至公有雲和私有雲（包括 StorageGRID）來實現雲端經濟效益。
+
+.相關資訊
+* link:../ilm/what-cloud-storage-pool-is.html["什麼是雲端儲存資源池？"]
+* link:../tenant/what-platform-services-are.html["${post_edited_translations.segment}"]
+* link:../fabricpool/index.html["設定 StorageGRID 以供 FabricPool 使用"]
+

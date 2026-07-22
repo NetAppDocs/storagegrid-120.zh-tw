@@ -1,0 +1,56 @@
+---
+permalink: maintain/rebooting-grid-node-from-grid-manager.html 
+sidebar: sidebar 
+keywords: reboot grid node, tasks tab 
+summary: 您可以從「節點」頁面的「任務」標籤重新開機單一網格節點。 
+---
+= 從「任務」標籤重新啟動 StorageGRID 節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以從「節點」頁面的「任務」標籤重新開機單一網格節點。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 您擁有佈建密碼。
+* ${post_edited_translations.segment}
++
+** 當您重新開機主要管理節點時，您的瀏覽器將暫時失去對 Grid Manager 的存取。
+** 如果您在特定站台重新開機兩個或多個 Storage 節點，在重新開機期間，您可能無法存取某些物件。如果任何 ILM 規則使用 *Dual commit* 擷取選項（或規則指定 *Balanced* 且無法立即建立所有必要的複本），就可能會發生此問題。在這種情況下，StorageGRID 會將新擷取的物件認可至同一站台上的兩個 Storage 節點，並於稍後評估 ILM。
+** ${post_edited_translations.segment}
+
+
+
+
+.關於此任務
+當 StorageGRID 將網格節點重新開機時，它會在該節點上發出  `reboot` 命令，這會導致該節點關閉並重新啟動。所有服務都會自動重新啟動。
+
+* ${post_edited_translations.segment}
+* 重新開機 Linux 節點會重新啟動 Container。
+* ${post_edited_translations.segment}
+
+
+
+TIP: 如果需要重新開機多個節點，可以使用 link:../maintain/rolling-reboot-procedure.html["滾動重新開機程序"]。
+
+.步驟
+. 選取 *Nodes* 。
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+此時會跳出確認對話框。如果您正在重新開機主要管理節點，確認對話框會提醒您，當服務停止時，瀏覽器與 Grid Manager 的連線將暫時中斷。
+
+. 輸入佈建密碼，然後選擇 *OK*。
+. 等待節點重新開機。
++
+服務可能需要一段時間才能關閉。
+
++
+節點重新開機時，「節點」頁面上該節點會顯示灰色的（管理性故障）圖示。當所有服務重新啟動且節點成功連線至網格後，「節點」頁面應顯示正常狀態（節點名稱左側無圖示），表示沒有作用中的警示且節點已連線至網格。
+
+

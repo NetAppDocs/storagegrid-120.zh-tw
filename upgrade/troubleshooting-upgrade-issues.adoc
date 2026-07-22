@@ -1,0 +1,176 @@
+---
+permalink: upgrade/troubleshooting-upgrade-issues.html 
+sidebar: sidebar 
+keywords: upgrade, troubleshoot, troubleshooting, errors, upgrade precheck 
+summary: 如果在升級過程中出現問題，您可以嘗試自行解決問題。如果無法解決問題，請盡可能收集相關資訊，然後聯絡技術支援。 
+---
+= 疑難排解 StorageGRID 升級問題
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果在升級過程中出現問題，您或許可以自行解決問題。如果無法解決問題，請盡可能收集資訊，然後聯絡技術支援。
+
+
+
+[[upgrade-does-not-complete]]
+== 升級未完成
+
+以下各節說明如何從升級部分失敗的情況中恢復。
+
+
+
+[[upgrade-precheck-errors]]
+=== 升級預檢查錯誤
+
+為了偵測和解決問題，您可以在開始實際升級之前手動執行升級預先檢查。大多數預先檢查錯誤都會提供有關如何解決問題的資訊。
+
+
+
+[[provisioning-failures]]
+=== 佈建故障
+
+如果自動配置流程失敗，請聯絡技術支援。
+
+
+
+[[grid-node-crashes-or-fails-to-start]]
+=== 網格節點當機或啟動失敗
+
+如果在升級過程中網格節點當機，或升級完成後無法成功啟動，請聯絡技術支援進行調查並修正任何潛在問題。
+
+
+
+[[ingest-or-data-retrieval-is-interrupted]]
+=== 資料擷取或檢索中斷
+
+如果在未升級網格節點的情況下，資料擷取或檢索意外中斷，請聯絡技術支援。
+
+
+
+[[database-upgrade-errors]]
+=== 資料庫升級錯誤
+
+如果資料庫升級失敗並出現錯誤，請重試升級。如果仍然失敗，請聯絡技術支援。
+
+.相關資訊
+link:checking-systems-condition-before-upgrading-software.html["軟體升級前檢查系統狀況"]
+
+
+
+[[user-interface-issues]]
+== 使用者介面問題
+
+升級期間或升級後，您可能會遇到 Grid Manager 或 Tenant Manager 的問題。
+
+
+
+[[grid-manager-displays-multiple-error-messages-during-upgrade]]
+=== 網格管理器在升級過程中顯示多個錯誤訊息
+
+如果在主要管理節點升級期間重新整理瀏覽器或導覽至其他 Grid Manager 頁面，您可能會看到多個「503：服務不可用」和「連線伺服器時出現問題」的訊息。您可以放心忽略這些訊息——節點升級完成後，這些訊息將停止出現。
+
+如果在升級開始後超過一小時仍出現這些訊息，則可能會出現某些情況導致主要管理節點升級失敗。如果您無法自行解決問題，請聯絡技術支援。
+
+
+
+[[web-interface-does-not-respond-as-expected]]
+=== Web 介面未如預期回應
+
+StorageGRID 軟體升級後，Grid Manager 或 Tenant Manager 可能無法如預期回應。
+
+如果您在使用網頁介面時遇到問題：
+
+* 請確保您使用的是link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
++
+
+NOTE: 每個 StorageGRID 版本通常都會變更瀏覽器支援。
+
+* 清除網頁瀏覽器快取。
++
+清除快取會移除舊版 StorageGRID 軟體所使用的過時資源，讓使用者介面恢復正常運作。有關操作說明，請參閱您的 Web 瀏覽器文件。
+
+
+
+
+
+[[docker-image-availability-check-error-messages]]
+== "Docker image 可用度檢查"錯誤訊息
+
+嘗試啟動升級程序時，您可能會收到一條錯誤訊息，指出「Docker 映像可用度檢查驗證套件偵測到下列問題」。所有問題都必須先解決才能完成升級。
+
+如果您不確定解決已識別問題所需的變更，請聯絡技術支援。
+
+[cols="1a,1a,1a"]
+|===
+| 訊息 | 原因 | 解決方案 
+
+
+ a| 
+無法確定升級版本。升級版本資訊檔案 `{file_path}`格式不符合預期。
+ a| 
+升級套件已毀損。
+ a| 
+重新上傳升級套件，然後再試一次。如果問題仍然存在，請聯絡技術支援。
+
+
+
+ a| 
+找不到升級版本資訊檔案  `{file_path}`。無法確定升級版本。
+ a| 
+升級套件已毀損。
+ a| 
+重新上傳升級套件，然後再試一次。如果問題仍然存在，請聯絡技術支援。
+
+
+
+ a| 
+無法確定目前已安裝在  `{node_name}` 上的版本。
+ a| 
+節點上的關鍵檔案已毀損。
+ a| 
+聯絡技術支援。
+
+
+
+ a| 
+嘗試列出版本時發生連線錯誤 `{node_name}`
+ a| 
+節點已離線或連線已中斷。
+ a| 
+請確認所有節點均已上線，且可從主要管理節點存取，然後再試一次。
+
+
+
+ a| 
+節點所在的主機 `{node_name}`未載入 StorageGRID `{upgrade_version}`映像。必須先在主機上安裝映像和服務，升級才能繼續進行。
+ a| 
+升級所需的 RPM 或 DEB 套件尚未安裝在執行節點的主機上，或映像仍在匯入過程中。
+
+*注意：*此錯誤僅適用於在 Linux 上以容器形式執行的節點。
+ a| 
+請檢查所有執行節點的 Linux 主機上是否都已安裝 RPM 或 DEB 套件。確保服務和映像檔案的版本都正確。稍等幾分鐘，然後再試一次。
+
+請參閱 link:../upgrade/linux-installing-rpm-or-deb-package-on-all-hosts.html["Linux：在所有主機上安裝 RPM 或 DEB 套件"]。
+
+
+
+ a| 
+檢查節點時發生錯誤 `{node_name}`
+ a| 
+發生意外錯誤。
+ a| 
+請稍等幾分鐘，再試一次。
+
+
+
+ a| 
+執行預先檢查時發生未攔截的錯誤。 `{error_string}`
+ a| 
+發生意外錯誤。
+ a| 
+請稍等幾分鐘，再試一次。
+
+|===

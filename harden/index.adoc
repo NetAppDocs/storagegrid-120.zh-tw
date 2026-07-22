@@ -1,0 +1,28 @@
+---
+permalink: harden/index.html 
+sidebar: sidebar 
+keywords: StorageGRID, hardening guidelines, system, security 
+summary: 系統強化是指從 StorageGRID 系統中消除盡可能多的安全性風險的過程。 
+---
+= 了解 StorageGRID 的系統強化
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+系統強化是指從 StorageGRID 系統中消除盡可能多的安全性風險的過程。
+
+在安裝和設定 StorageGRID 時，請使用這些準則來協助您達成任何規定的機密性、完整性和可用度安全性目標。
+
+您應該已經採用業界標準的系統強化最佳實務做法。例如，您為 StorageGRID 使用強式密碼、使用 HTTPS 而非 HTTP，並在可用時啟用憑證型驗證。這些最佳實務做法必須包含實體和環境安全性，以限制實體存取並保護實體資料中心和支援基礎架構。您還必須參考適用於您業務和所在地區的任何監管標準和建議。
+
+StorageGRID 遵循相關規定 https://security.netapp.com/policy/["NetApp 漏洞處理原則"^]。已報告的漏洞將根據產品安全性事件回應流程進行驗證和處理。
+
+在強化 StorageGRID 系統時，請考慮以下事項：
+
+* 您已實作 StorageGRID 的哪三種網路。所有 StorageGRID 系統都必須使用網格網路，但您也可能同時使用管理網路、用戶端網路或兩者。每種網路的安全性考量各不相同。
+* *您在 StorageGRID 系統中各節點所使用的平台類型。*StorageGRID 節點可部署在 VMware 虛擬機器上、Linux 主機上的 Container 引擎中，或作為專用硬體應用裝置部署。每種平台類型都有其自身的一套強化最佳實務做法。
+* *租戶帳戶的可信度*。如果您是服務供應商，且租戶帳戶不受信任，那麼您面臨的安全性問題將與僅使用受信任的公司內部租戶帳戶的情況有所不同。
+* 貴組織遵循哪些安全性要求和規範。您可能需要遵守特定的監管或公司要求。
+

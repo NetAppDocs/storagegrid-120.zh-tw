@@ -1,0 +1,56 @@
+---
+permalink: maintain/selecting-start-recovery-to-configure-non-primary-admin-node.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, non-primary admin node 
+summary: ${post_edited_translations.segment} 
+---
+= 選擇 Start Recovery 以設定非主要 StorageGRID Admin Node
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 您擁有佈建密碼。
+* 您已部署並設定替換節點。
+
+
+.步驟
+. 從 Grid Manager 中，選擇 *Maintenance* > *Tasks* > *Recovery*。
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. 請輸入*佈建密碼*。
+. ${post_edited_translations.segment}
++
+image:4b_select_recovery_node.png["螢幕截圖顯示「維護 > 恢復」頁面"]
+
+. ${post_edited_translations.segment}
++
+
+NOTE: 恢復程序執行時，您可以按一下 *Reset* 以開始新的恢復。此時會出現一個對話方塊，提示若您重設程序，節點將處於不確定狀態。
+
++
+image:recovery_reset_warning.gif["${post_edited_translations.segment}"]
+
++
+如果您想在重置程序後重試恢復，則必須將節點還原至預先安裝狀態，如下所示：
+
++
+** *VMware*：刪除已部署的虛擬網格節點。然後，當您準備好重新啟動恢復時，請重新部署該節點。
+** *Linux*：在 Linux 主機上執行此命令以重新啟動節點： `storagegrid node force-recovery _node-name_`
+** *應用裝置*：如果在重置流程後想要重試恢復，則必須透過在節點上執行 `sgareinstall`，將應用裝置節點還原至預安裝狀態。請參閱link:preparing-appliance-for-reinstallation-platform-replacement-only.html["${post_edited_translations.segment}"]。
+
+
+. 如果您的 StorageGRID 系統已啟用單一登入 （SSO），且您所恢復的管理節點的信賴方信任已設定為使用預設管理介面憑證，請在 Active Directory Federation Services （AD FS） 中更新（或刪除並重新建立）該節點的信賴方信任。使用在管理節點恢復程序期間產生的新預設伺服器憑證。
++
+
+NOTE: 若要設定信賴方信任，請參閱link:../admin/configure-sso.html["設定單一登入"]。若要存取預設伺服器憑證，請登入管理節點的命令 shell。前往 `/var/local/mgmt-api`目錄，然後選取 `server.crt`檔案。
+
+

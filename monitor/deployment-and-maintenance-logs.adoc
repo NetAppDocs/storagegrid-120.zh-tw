@@ -1,0 +1,75 @@
+---
+permalink: monitor/deployment-and-maintenance-logs.html 
+sidebar: sidebar 
+keywords: deployment, logs, Maintenance 
+summary: 您可以使用部署和維護日誌來排除問題。 
+---
+= StorageGRID 中的部署和維護日誌
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用部署和維護日誌來排除問題。
+
+[cols="1a,3a,1a"]
+|===
+| 檔案名稱 | 附註 | 發現於 
+
+
+| /var/local/log/install.log  a| 
+在軟體安裝期間建立。包含安裝事件的記錄。
+ a| 
+所有節點
+
+
+
+| /var/local/log/expansion-progress.log  a| 
+在擴充作業期間建立。包含擴充事件的記錄。
+ a| 
+儲存節點
+
+
+
+| /var/local/log/pa-move.log  a| 
+在執行  `pa-move.sh` 指令碼時建立。
+ a| 
+主管理節點
+
+
+
+| /var/local/log/pa-move-new_pa.log  a| 
+在執行  `pa-move.sh` 指令碼時建立。
+ a| 
+主管理節點
+
+
+
+| /var/local/log/pa-move-old_pa.log  a| 
+在執行  `pa-move.sh` 指令碼時建立。
+ a| 
+主管理節點
+
+
+
+| /var/local/log/gdu-server.log  a| 
+由 GDU 服務建立。包含與主要管理節點管理的佈建和維護程序相關的事件。
+ a| 
+管理節點
+
+
+
+| /var/local/log/send_admin_hw.log  a| 
+安裝期間建立。包含與節點和主要管理節點通訊相關的偵錯資訊。
+ a| 
+所有節點
+
+
+
+| /var/local/log/upgrade.log  a| 
+建立於軟體升級過程中。包含軟體更新事件的記錄。
+ a| 
+所有節點
+
+|===

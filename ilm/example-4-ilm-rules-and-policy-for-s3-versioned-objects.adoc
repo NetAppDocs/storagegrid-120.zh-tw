@@ -1,0 +1,141 @@
+---
+permalink: ilm/example-4-ilm-rules-and-policy-for-s3-versioned-objects.html 
+sidebar: sidebar 
+keywords: object versions, example ILM rule, information lifecycle rule examples 
+summary: 如果您有一個啟用了版本控制的 S3 儲存桶，您可以透過在 ILM 原則中新增使用非目前時間作為參考時間的規則來管理非目前物件版本。 
+---
+= StorageGRID 中非當前 S3 物件版本的 ILM 規則和原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+CAUTION: 如果您為物件指定限制的保留時間，這些物件將在達到該時間段後被永久刪除。請確保您瞭解物件將保留多長時間。
+
+如本例所示，您可以透過對非目前物件版本使用不同的放置指令來控制版本化物件使用的儲存設備空間。
+
+
+CAUTION: 以下 ILM 規則和原則僅為範例。設定 ILM 規則的方法有很多種。在啟動新原則之前，請先進行模擬，以確認其運作方式符合預期，可保護內容免於遺失。
+
+
+NOTE: 若要對物件的非目前版本執行 ILM 原則模擬，您必須知道該物件版本的 UUID 或 CBID。若要尋找 UUID 和 CBID，請在物件仍為目前版本時使用 link:verifying-ilm-policy-with-object-metadata-lookup.html["${post_edited_translations.segment}"]。
+
+.相關資訊
+link:how-objects-are-deleted.html["${post_edited_translations.segment}"]
+
+
+
+[[ilm-rule-1-for-example-4-save-three-copies-for-10-years]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+儲存池
+ a| 
+三個儲存設備集區，每個儲存設備集區由不同的資料中心組成，分別命名為 Site 1、Site 2 和 Site 3。
+
+
+
+ a| 
+規則名稱
+ a| 
+三份十年
+
+
+
+ a| 
+參考時間
+ a| 
+擷取時間
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+在第 0 天，保留三個複本 10 年（3,652 天），一個在站台 1，一個在站台 2，一個在站台 3。10 年後，刪除該物件的所有複本。
+
+|===
+
+
+[[ilm-rule-2-for-example-4-save-two-copies-of-noncurrent-versions-for-2-years]]
+== ${post_edited_translations.segment}
+
+此範例 ILM 規則將 S3 版本化物件的非目前版本兩個複本儲存 2 年。
+
+因為 ILM 規則 1 適用於物件的所有版本，所以您必須建立另一條規則來過濾掉任何非目前版本。
+
+若要建立以「非目前時間」作為參考時間的規則，請在「建立 ILM 規則」精靈的步驟 1（輸入詳細資料）中，對「僅將此規則用於舊物件版本（在已啟用版本控制的 S3 儲存桶中）？」這個問題選擇「是」。選擇「是」後，系統會自動選擇「非目前時間」作為參考時間，您無法選擇其他參考時間。
+
+image:ilm-rule-apply-only-to-older-object-verions.png["${post_edited_translations.segment}"]
+
+在此範例中，只儲存兩個非目前版本的複本，這些複本將儲存兩年。
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+規則名稱
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+參考時間
+ a| 
+非當前時間
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+在相對於非當前時間的第 0 天（即從物件版本成為非當前版本之日起），保留非當前物件版本的兩個複本 2 年（730 天），一個在站台 1，一個在站台 2。2 年結束時，刪除非當前版本。
+
+|===
+
+
+[[ilm-policy-for-example-4-s3-versioned-objects]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 將每個物件的舊版本（非目前版本）保留 2 年，從該版本變為非目前版本之日起計算。
++
+
+NOTE: 「非目前時間」規則必須出現在原則中適用於目前物件版本的規則之前。否則，「非目前時間」規則將永遠無法比對非目前物件版本。
+
+* 在擷取時，建立三個複寫複本，並將一個複本儲存在三個站台中的每一個。將目前物件版本的複本保留 10 年。
+
+
+模擬範例原則時，您預期測試物件將如下進行評估：
+
+* 任何非最新物件版本都將與第一條規則比對。如果非最新物件版本早於 2 年，ILM 會將其永久刪除（從網格中移除該非最新版本的所有複本）。
+* 當前物件版本將符合第二條規則。當目前物件版本儲存滿 10 年後，ILM 流程會新增一個刪除標記作為物件的目前版本，並將先前的物件版本標記為「非目前版本」。下次進行 ILM 評估時，此非目前版本將符合第一條規則。因此，Site 3 中的複本將被清除，而 Site 1 和 Site 2 中的兩個複本將繼續儲存 2 年。
+

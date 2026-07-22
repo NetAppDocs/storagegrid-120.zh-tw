@@ -1,0 +1,143 @@
+---
+permalink: admin/grid-federation-compare-cgr-to-cloudmirror.html 
+sidebar: sidebar 
+keywords: cross-grid replication, cloudmirror replication 
+summary: 開始使用網格聯合時，請審查跨網格複寫和 StorageGRID CloudMirror 複寫服務之間的異同。 
+---
+= 比較 StorageGRID 中的跨網格複寫和 CloudMirror 複寫
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當您開始使用網格同盟時，請審查 link:grid-federation-what-is-cross-grid-replication.html["${post_edited_translations.segment}"] 與 link:../tenant/understanding-cloudmirror-replication-service.html["StorageGRID CloudMirror 複寫服務"] 之間的相似之處與差異。
+
+
+NOTE: 您無法在透過跨網格複寫所複寫的儲存桶上使用 CloudMirror，反之亦然。
+
+[cols="1a,3a,3a"]
+|===
+|  | 跨網格複寫 | CloudMirror 複寫服務 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+一個 StorageGRID 系統可作為災難恢復系統。儲存貯體中的物件可以在網格之間進行單向或雙向複寫。
+ a| 
+允許租戶自動將物件從 StorageGRID 中的儲存桶（來源）複寫到外部 S3 儲存桶（目的地）。
+
+CloudMirror 複寫會在獨立的 S3 基礎架構中建立物件的獨立複本。此獨立複本不作為備份使用，但通常會在雲端中進行進一步處理。
+
+
+
+ a| 
+它是如何設定的？
+ a| 
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+
+ a| 
+. 租戶使用者透過使用 Tenant Manager 或 S3 API 定義 CloudMirror 端點（IP 位址、認證資訊等）來設定 CloudMirror 複寫。
+. 該租戶帳戶所擁有的任何儲存貯器皆可設定為指向 CloudMirror 端點。
+
+
+
+
+ a| 
+誰負責設定？
+ a| 
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+在網格聯合連線中的另一個 StorageGRID 系統上，存在一個對應且相同的 S3 儲存桶。
+ a| 
+* ${post_edited_translations.segment}
+* Google Cloud Platform (GCP)
+
+
+
+
+ a| 
+是否需要物件版本控制？
+ a| 
+${post_edited_translations.segment}
+ a| 
+否， CloudMirror 複寫支援在來源和目的地兩端未啟用版本控制與已啟用版本控制之儲存貯體的任何組合。
+
+
+
+ a| 
+是什麼原因導致物件移動至目的地？
+ a| 
+${post_edited_translations.segment}
+ a| 
+當物件新增至已設定 CloudMirror 端點的儲存桶時，系統會自動複寫這些物件。在儲存桶設定 CloudMirror 端點之前已存在於來源儲存桶中的物件，除非經過修改，否則不會被複寫。
+
+
+
+ a| 
+物件如何複寫？
+ a| 
+跨網格複寫會建立版本化物件，並將來源儲存桶中的版本 ID 複寫到目的地儲存桶。這樣可以確保兩個網格之間的版本順序保持一致。
+ a| 
+CloudMirror 複寫不需要啟用版本控制的貯體，因此 CloudMirror 只能維護站台內金鑰的順序。無法保證對不同站台之物件的請求會維持順序。
+
+
+
+ a| 
+如果物件無法複寫怎麼辦？
+ a| 
+該物件已排入複寫佇列，受中繼資料儲存限制。
+ a| 
+該物件已排入複寫佇列，受平台服務限制約束（請參閱link:manage-platform-services-for-tenants.html["關於使用平台服務的建議"]）。
+
+
+
+ a| 
+物件的系統中繼資料是否已複寫？
+ a| 
+是的，當物件複寫到另一個網格時，其系統中繼資料也會一併複寫。兩個網格上的中繼資料將完全相同。
+ a| 
+不，當物件複寫到外部儲存桶時，其系統中繼資料會更新。中繼資料會因位置而異，取決於擷取時間和獨立 S3 基礎架構的行為。
+
+
+
+ a| 
+如何擷取物件？
+ a| 
+應用程式可以透過向任一網格上的儲存桶發出請求來擷取或讀取物件。
+ a| 
+應用程式可以透過向 StorageGRID 或 S3 目的地發出請求來擷取或讀取物件。例如，假設您使用 CloudMirror 複寫將物件鏡射到合作夥伴組織。合作夥伴可以使用自己的應用程式直接從 S3 目的地讀取或更新物件。不需要使用 StorageGRID。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+* 包含版本 ID 的刪除請求永遠不會複寫到目的地網格。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+ a| 
+結果會因來源和目的地儲存桶的版本狀態而異（兩者不必相同）：
+
+* ${post_edited_translations.segment}
+* 如果只有來源儲存桶已啟用版本控制，刪除請求將會在來源中新增刪除標記，但不會新增至目的地。
+* 如果兩個儲存桶都沒有版本控制，則刪除請求將從來源中刪除物件，但不會從目的地中刪除物件。
+
+
+同樣，可以刪除目的地儲存貯體中的物件，而不會影響來源。
+
+|===

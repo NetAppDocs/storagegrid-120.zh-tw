@@ -1,0 +1,26 @@
+---
+permalink: admin/what-object-segmentation-is.html 
+sidebar: sidebar 
+keywords: object segmentation, multipart upload 
+summary: 物件分割是指將一個物件分割成一組較小且固定大小的物件，以針對大型物件最佳化儲存設備與資源使用率的程序。S3 multi-part upload 也會建立分割的物件，其中每個部分皆由一個物件代表。 
+---
+= 了解 StorageGRID 中的物件分割
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+物件分割是指將一個物件分割成一組較小且固定大小的物件，以針對大型物件最佳化儲存設備與資源使用率的程序。S3 multi-part upload 也會建立分割的物件，其中每個部分皆由一個物件代表。
+
+當物件擷取至 StorageGRID 系統時，LDR 服務會將物件分割成多個區段，並建立一個區段 Container，該 Container 會將所有區段的標頭資訊列為內容。
+
+image:object_segmentation_diagram.gif["${post_edited_translations.segment}"]
+
+${post_edited_translations.segment}
+
+Container 和區段不一定儲存在同一個儲存節點上。Container 和區段可以儲存在 ILM 規則指定的儲存資源池中的任何儲存節點上。
+
+每個區段都由 StorageGRID 系統獨立處理，並計入「Managed Objects」和「Stored Objects」等屬性的數量。例如，如果儲存至 StorageGRID 系統的物件被分割為兩個區段，則在擷取完成後，「Managed Objects」的值會增加三個，如下所示：
+
+`segment container + segment 1 + segment 2 = three stored objects`

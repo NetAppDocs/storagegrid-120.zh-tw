@@ -1,0 +1,101 @@
+---
+permalink: admin/requirements-for-sso.html 
+sidebar: sidebar 
+keywords: sso requirements, single sign on requirements, identity federation requirements for sso, pingfederate, entra id, ad fs 
+summary: 在為 StorageGRID 系統啟用單一登入之前，請審查相關要求和注意事項。 
+---
+= StorageGRID 單一登入的要求和注意事項
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在為 StorageGRID 系統啟用單一登入 （SSO） 之前，請審查相關要求和注意事項。
+
+
+
+[[identity-provider-requirements]]
+== ${post_edited_translations.segment}
+
+StorageGRID 支援以下 SSO 身分供應商 (IdP)：
+
+* Active Directory Federation Service （AD FS）
+* ${post_edited_translations.segment}
+* PingFederate
+
+
+您必須先為您的 StorageGRID 系統設定身分識別同盟，然後才能設定 SSO 身分識別供應商。您用於身分識別同盟的 LDAP 服務類型會控制您可以實作的 SSO 類型。
+
+[cols="1a,1a"]
+|===
+| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+
+
+ a| 
+Active Directory
+ a| 
+* Active Directory
+* Entra ID
+* PingFederate
+
+
+
+
+ a| 
+Entra ID
+ a| 
+Entra ID
+
+|===
+
+
+[[ad-fs-requirements]]
+=== ${post_edited_translations.segment}
+
+您可以使用以下任何版本的 AD FS：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+
+NOTE: Windows Server 2016 應該使用 https://support.microsoft.com/en-us/help/3201845/cumulative-update-for-windows-10-version-1607-and-windows-server-2016["KB3201845 更新"^]或更高版本。
+
+
+
+[[additional-requirements]]
+=== 其他要求
+
+* 傳輸層安全協定 (TLS) 1.2 或 1.3
+* Microsoft .NET Framework，版本 3.5.1 或更高版本
+
+
+
+
+[[considerations-for-entra-id]]
+=== Entra ID 的相關注意事項
+
+如果您使用 Entra ID 作為 SSO 類型，且使用者的使用者主體名稱未使用 sAMAccountName 作為前綴，則當 StorageGRID 與 LDAP 伺服器斷開連線時，可能會出現登入問題。若要允許使用者登入，您必須還原與 LDAP 伺服器的連線。
+
+
+
+[[server-certificate-requirements]]
+== 伺服器憑證要求
+
+預設情況下，StorageGRID 會在每個管理節點上使用管理介面憑證來保護對 Grid Manager、Tenant Manager、Grid Management API 和 Tenant Management API 的存取。當您為 StorageGRID 設定信賴方信任（AD FS）、企業應用程式（Entra ID）或服務供應商連線（PingFederate）時，您將使用伺服器憑證作為 StorageGRID 請求的簽署憑證。
+
+如果您尚未link:configuring-custom-server-certificate-for-grid-manager-tenant-manager.html["已為管理介面設定自訂憑證"]，請立即執行。安裝自訂伺服器憑證後，該憑證將用於所有管理節點，您可以將其用於所有 StorageGRID 信賴方信任、企業應用程式或 SP 連線。
+
+
+NOTE: 不建議在信賴方信任、企業應用程式或 SP 連線中使用管理節點的預設伺服器憑證。如果節點發生故障並恢復後，系統會產生一個新的預設伺服器憑證。在登入已復原的節點之前，您必須使用新憑證更新信賴方信任、企業應用程式或 SP 連線。
+
+您可以透過登入該節點的命令 shell 並前往  `/var/local/mgmt-api` 目錄，來存取 Admin Node 的伺服器憑證。自訂伺服器憑證的名稱為  `custom-server.crt`。該節點的預設伺服器憑證名稱為  `server.crt`。
+
+
+
+[[port-requirements]]
+== 連接埠需求
+
+單一登入 (SSO) 在受限的 Grid Manager 或 Tenant Manager 連接埠上不可用。如果您希望使用者使用單一登入進行驗證，則必須使用預設的 HTTPS 連接埠 (443)。請參閱link:controlling-access-through-firewalls.html["${post_edited_translations.segment}"]。

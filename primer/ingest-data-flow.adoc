@@ -1,0 +1,32 @@
+---
+permalink: primer/ingest-data-flow.html 
+sidebar: sidebar 
+keywords: StorageGRID, object data, ingest 
+summary: 擷取或儲存作業是指用戶端和 StorageGRID 系統之間定義的資料流。 
+---
+= StorageGRID 如何處理物件擷取
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+擷取或儲存作業是指用戶端和 StorageGRID 系統之間定義的資料流。
+
+
+
+[[data-flow]]
+== 資料流
+
+當用戶端向 StorageGRID 系統擷取物件時，儲存節點上的 LDR 服務會處理該請求並將中繼資料和資料儲存到磁碟。
+
+image:ingest_data_flow.png["以同步放置方式擷取"]
+
+. 用戶端應用程式建立物件並透過 HTTP PUT 請求將其傳送到 StorageGRID 系統。
+. 系統會根據 ILM 原則評估物件。
+. LDR 服務將物件資料儲存為複本或銷毀編碼複本。（下圖顯示了將複本儲存到磁碟的簡化版本。）
+. LDR 服務將物件中繼資料傳送至中繼資料儲存。
+. 中繼資料儲存區將物件中繼資料儲存到磁碟。
+. 中繼資料儲存會將物件中繼資料的複本傳播到其他儲存節點。這些複本也會儲存到磁碟。
+. LDR 服務向用戶端傳回 HTTP 200 OK 回應，以確認物件已被擷取。
+

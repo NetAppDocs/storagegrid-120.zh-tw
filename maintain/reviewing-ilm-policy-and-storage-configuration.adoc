@@ -1,0 +1,65 @@
+---
+permalink: maintain/reviewing-ilm-policy-and-storage-configuration.html 
+sidebar: sidebar 
+keywords: storagegrid, restore, ilm policy, storage configuration 
+summary: ${post_edited_translations.segment} 
+---
+= 檢閱 StorageGRID ILM 原則和儲存組態
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+
+NOTE: 您在退役期間使用的 ILM 原則將在退役後繼續使用。您必須確保此原則在開始退役之前和退役完成後都符合您的資料要求。
+
+您應該審查每個 link:../ilm/creating-ilm-policy.html["${post_edited_translations.segment}"] 中的規則，以確保 StorageGRID 系統將繼續擁有足夠的容量、正確的容量類型及正確的位置，以容納儲存節點的退役。
+
+請考慮以下事項：
+
+* ILM 評估服務是否有可能複製物件資料，使其滿足 ILM 規則？
+* 如果站台在退役進行期間暫時不可用，會發生什麼事？是否可以在替代位置製作額外的複本？
+* 退役程序將如何影響內容的最終經銷？如 link:consolidating-storage-nodes.html["${post_edited_translations.segment}"] 中所述，您應該在退役舊的之前 link:../expand/index.html["${post_edited_translations.segment}"]。如果您在退役較小的 Storage Node 之後新增較大的替代 Storage Node ，舊的 Storage Node 可能會結案於容量，且新的 Storage Node 可能幾乎沒有內容。隨後針對新物件資料的大多數寫入作業將導向新的 Storage Node ，從而降低系統作業的整體效率。
+* 系統是否始終包含足夠的儲存節點，以滿足目前有效的 ILM 原則？
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+${post_edited_translations.segment}
+
+[cols="1a,2a"]
+|===
+| 評估區域 | ${post_edited_translations.segment} 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+儲存設備位置
+ a| 
+如果 StorageGRID 系統整體上還有足夠的容量，那麼這些容量是否位於適當的位置，以滿足 StorageGRID 系統的業務規則？
+
+
+
+ a| 
+儲存類型
+ a| 
+${post_edited_translations.segment}
+
+例如，隨著內容老化，ILM 規則可能會將內容從一種儲存設備類型移至另一種。在這種情況下，您必須確保 StorageGRID 系統的最終組態中具有足夠的適當類型儲存設備。
+
+|===

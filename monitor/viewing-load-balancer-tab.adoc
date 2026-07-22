@@ -1,0 +1,56 @@
+---
+permalink: monitor/viewing-load-balancer-tab.html 
+sidebar: sidebar 
+keywords: load balancer tab 
+summary: ${post_edited_translations.segment} 
+---
+= 檢視 StorageGRID 負載平衡器索引標籤
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+系統會針對 Admin Nodes、Gateway Nodes、每個站台及整個網格顯示 Load Balancer 索引標籤。針對每個站台，Load Balancer 索引標籤提供該站台所有節點統計資料的彙總摘要。針對整個網格，Load Balancer 索引標籤提供所有站台統計資料的彙總摘要。
+
+${post_edited_translations.segment}
+
+image:nodes_page_load_balancer_tab.png["節點頁面負載平衡器索引標籤"]
+
+
+
+[[request-traffic]]
+== ${post_edited_translations.segment}
+
+此圖顯示負載平衡器端點與發出請求的用戶端之間傳輸的資料處理量的 3 分鐘移動平均值，單位為位元/秒。
+
+
+NOTE: 此值會在每次要求完成時更新。因此，在低要求率或存留時間極長的要求下，此值可能會與即時處理量有所不同。您可以查看 Network 索引標籤，以更真實地檢視目前的網路行為。
+
+
+
+[[incoming-request-rate]]
+== ${post_edited_translations.segment}
+
+此圖表顯示每秒新要求數的 3 分鐘移動平均值，並依要求類型（GET、PUT、HEAD 和 DELETE）進行細分。當新要求的標頭通過驗證後，此值將會更新。
+
+
+
+[[average-request-duration-non-error]]
+== 平均請求持續時間（無錯誤）
+
+此圖表提供請求持續時間的 3 分鐘移動平均值，並依請求類型（GET、PUT、HEAD 和 DELETE）進行細分。每個請求的持續時間從負載平衡服務解析請求標頭開始，到將完整的回應本文傳回用戶端為止。
+
+
+
+[[error-response-rate]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+.相關資訊
+* link:monitoring-load-balancing-operations.html["監控負載平衡作業"]
+* link:../admin/index.html["管理 StorageGRID"]_
+

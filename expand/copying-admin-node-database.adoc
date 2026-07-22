@@ -1,0 +1,76 @@
+---
+permalink: expand/copying-admin-node-database.html 
+sidebar: sidebar 
+keywords: copy Admin Node database, alert history, Admin Node expansion, StorageGRID 
+summary: 透過擴充程序新增 Admin Node 時，您可以選擇性地將資料庫從主要 Admin Node 複製到新的 Admin Node。複製資料庫可讓您保留關於屬性、警示和警示的歷史資料。 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+透過擴充程序新增 Admin Node 時，您可以選擇性地將資料庫從主要 Admin Node 複製到新的 Admin Node。複製資料庫可讓您保留關於屬性、警示和警示的歷史資料。
+
+.開始之前
+* ${post_edited_translations.segment}
+* 您擁有  `Passwords.txt` 檔案。
+* 您擁有佈建密碼。
+
+
+.關於此任務
+StorageGRID 軟體啟動程序會在擴充管理節點上為 NMS 服務建立一個空資料庫。當 NMS 服務在擴充管理節點上啟動時，它會記錄目前系統中包含的或之後新增的伺服器和服務的資訊。此管理節點資料庫包含以下資訊：
+
+* ${post_edited_translations.segment}
+* 歷史屬性資料，用於「節點」頁面上的傳統樣式圖表
+
+
+若要確保管理節點資料庫在節點間保持一致，您可以將資料庫從主要管理節點複製到擴充管理節點。
+
+
+NOTE: 將資料庫從主要管理節點（來源管理節點）複製到擴充管理節點可能需要幾個小時才能完成。在此期間，Grid Manager 將無法存取。
+
+在複製資料庫之前，請依照下列步驟停止主要管理節點和擴充管理節點上的 MI 服務和管理 API 服務。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
++
+... 請輸入以下命令： `ssh admin@_grid_node_IP_`
+... 請輸入 `Passwords.txt`檔案中列出的密碼。
+... 輸入以下命令以切換至根目錄： `su -`
+... 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
+.. 執行下列命令： `recover-access-points`
+.. 請輸入佈建密碼。
+.. 停止 MI 服務： `service mi stop`
+.. 停止管理應用程式介面（mgmt-api）服務： `service mgmt-api stop`
+
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
++
+... 請輸入以下命令： `ssh admin@_grid_node_IP_`
+... 請輸入 `Passwords.txt`檔案中列出的密碼。
+... 輸入以下命令以切換至根目錄： `su -`
+... 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
+.. 停止 MI 服務： `service mi stop`
+.. 停止 mgmt-api 服務： `service mgmt-api stop`
+.. 將 SSH 私鑰新增至 SSH 代理程式。輸入：``ssh-add``
+.. 輸入 `Passwords.txt`檔案中列出的 SSH 存取密碼。
+.. 將資料庫從來源 Admin Node 複製到擴充 Admin Node： `/usr/local/mi/bin/mi-clone-db.sh _Source_Admin_Node_IP_`
+.. 出現提示時，確認是否要覆寫擴充管理節點上的 MI 資料庫。
++
+資料庫及其歷史資料會複製到擴充管理節點。複本作業完成後，指令碼會啟動擴充管理節點。
+
+.. 當您不再需要免密碼存取其他伺服器時，請從 SSH 代理程式中移除私密金鑰。輸入：``ssh-add -D``
+
+
+. 在主 Admin 節點上重新啟動服務： `service servermanager start`
+

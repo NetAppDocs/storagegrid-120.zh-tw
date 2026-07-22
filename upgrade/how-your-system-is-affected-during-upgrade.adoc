@@ -1,0 +1,119 @@
+---
+permalink: upgrade/how-your-system-is-affected-during-upgrade.html 
+sidebar: sidebar 
+keywords: upgrade, firmware, appliance, alert 
+summary: 了解您的 StorageGRID 系統在升級過程中將受到哪些影響。 
+---
+= StorageGRID 升級如何影響您的系統
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+了解您的 StorageGRID 系統在升級過程中將受到哪些影響。
+
+
+
+[[external-ssh-access-is-allowed-until-upgrade-completes]]
+== 升級完成前，允許外部 SSH 存取。
+
+升級期間允許外部 SSH 存取。升級完成後，預設會封鎖外部 SSH 存取。升級後，您可以使用 *Grid Manager* > *Security Settings* 頁面上的 *Block SSH* 標籤來link:../admin/manage-external-ssh-access.html["管理外部 SSH 存取"]。網格節點之間的 SSH 存取不受影響。
+
+
+
+[[storagegrid-upgrades-are-non-disruptive]]
+== StorageGRID 升級不會造成業務中斷。
+
+StorageGRID 系統在整個升級過程中可以擷取和存取來自用戶端應用程式的資料。如果您批准升級所有相同類型的節點（例如，儲存節點），則這些節點會逐一關閉，因此不會出現所有網格節點或特定類型網格節點全部不可用的情況。
+
+為確保持續可用度，請確保您的 ILM 原則包含指定儲存每個物件多個複本的規則。您還必須確保所有外部 S3 用戶端都設定為將請求傳送至下列其中一個位址：
+
+* 高可用度 （HA） 群組虛擬 IP 位址
+* 高可用度第三方負載平衡器
+* 每個用戶端有多個網關節點
+* 每個用戶端多個儲存節點
+
+
+
+
+[[client-applications-might-experience-short-term-disruptions]]
+== ${post_edited_translations.segment}
+
+StorageGRID 系統在整個升級過程中可以擷取和儲存來自用戶端應用程式的資料；但是，如果升級需要重新啟動某些節點上的服務，用戶端與這些 Gateway Nodes 或 Storage Nodes 的連線可能會暫時中斷。升級程序完成後，各節點上的服務恢復運行，連線也將隨之恢復。
+
+如果短時間內的連線中斷不可接受，則可能需要安排停機來執行升級。您可以使用選擇性批准來安排特定節點的更新時間。
+
+
+NOTE: 您可以使用多個閘道和高可用度 （HA） 群組，以便在升級過程中提供自動容錯移轉。請參閱相關說明 link:../admin/configure-high-availability-group.html["${post_edited_translations.segment}"]。
+
+
+
+[[background-repairs-wont-run-on-grids-with-mixed-version-nodes]]
+== 在混合版本節點的網格上，背景修復將無法運作。
+
+當網格包含混合版本節點時，升級期間不會執行背景修復。在站台停電期間出現的任何不一致情況，都必須等到升級完成後才能修復。
+
+
+
+[[appliance-firmware-is-upgraded]]
+== 應用裝置韌體已升級
+
+StorageGRID 12.0 升級期間：
+
+* 所有 StorageGRID 應用裝置節點會自動升級至 StorageGRID Appliance Installer 韌體版本 12.0。
+* SG6060 和 SGF6024 應用裝置將自動升級至 BIOS 韌體版本 3B08.EX 和 BMC 韌體版本 4.01.07。
+* SG100 和 SG1000 應用裝置將自動升級至 BIOS 韌體版本 3B13.EC 和 BMC 韌體版本 4.75.07。
+* SGF6112、SG6160、SG110 和 SG1100 應用裝置將自動升級至 BIOS 韌體版本 3A14.QD 和 BMC 韌體版本 3.19.07。
+
+
+
+
+[[ilm-policies-are-handled-differently-according-to-their-status]]
+== ILM 原則會根據其狀態以不同方式處理。
+
+* 升級後，目前原則將保持不變。
+* 升級時僅保留最新的 10 項歷史原則。
+* 如果有已提出的原則，則會在升級過程中刪除。
+
+
+
+
+[[alerts-might-be-triggered]]
+== 可能會觸發警報
+
+服務啟動和停止時，以及 StorageGRID 系統在混合版本環境中運作時（部分網格節點執行較早版本，而其他節點已升級至較新版本），可能會觸發警示。升級完成後，也可能觸發其他警示。
+
+例如，當服務停止時，您可能會看到「無法與節點通訊」的警報；或者，當某些節點已升級至 StorageGRID 12.0 但其他節點仍在執行 StorageGRID 11.9 時，您可能會看到「Cassandra 通訊錯誤」的警報。通常，這些警報會在升級完成後消失。
+
+在升級至 StorageGRID 12.0 期間，若儲存節點停止運作，可能會觸發 *ILM placement unachievable* 警示。此警示可能會在升級完成後持續 1 天。
+
+升級完成後，您可以從 Grid Manager 儀表板中選擇「最近解決的警報」或「目前警報」來審查任何與升級相關的警報。
+
+
+
+[[configuration-changes-are-restricted]]
+== ${post_edited_translations.segment}
+
+
+NOTE: 此清單專門適用於從 StorageGRID 11.9 升級至 StorageGRID 12.0。如果您要升級至其他 StorageGRID 版本，請參閱該版本升級說明中的受限變更清單。
+
+直到「啟用新功能」工作完成：
+
+* 請勿對網格組態進行任何變更。
+* 請勿啟用或停用任何新功能。
+* 請勿更新 ILM 組態。否則，您可能會遇到不一致且非預期的 ILM 行為。
+* 請勿套用 Hotfix 或恢復網格節點。
++
+
+NOTE: 升級過程中如果需要恢復節點，請聯絡技術支援。
+
+* 在升級至 StorageGRID 12.0 期間，您不應管理 HA 群組、VLAN 介面或負載平衡器端點。
+* 在 StorageGRID 12.0 升級完成之前，請勿刪除任何 HA 群組。否則，其他 HA 群組中的虛擬 IP 位址可能無法存取。
+
+
+直到「最終升級步驟」工作完成：
+
+* 請勿執行擴充程序。
+* 不要執行退役程序。
+

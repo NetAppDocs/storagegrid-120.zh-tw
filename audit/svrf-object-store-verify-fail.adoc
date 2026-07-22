@@ -1,0 +1,57 @@
+---
+permalink: audit/svrf-object-store-verify-fail.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, SVRF, Object Store Verify Fail 
+summary: 當內容區塊驗證失敗時，系統會發出此訊息。每次從磁碟讀取或寫入複製物件資料時，系統都會執行多項驗證和完整性檢查，以確保傳送給請求使用者的資料與最初匯入系統的資料完全一致。如果任何一項檢查失敗，系統會自動隔離毀損的複製物件資料，以防止再次擷取。 
+---
+= StorageGRID 中物件存放區驗證失敗的 SVRF 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當內容區塊驗證失敗時，系統會發出此訊息。每次從磁碟讀取或寫入複製物件資料時，系統都會執行多項驗證和完整性檢查，以確保傳送給請求使用者的資料與最初匯入系統的資料完全一致。如果任何一項檢查失敗，系統會自動隔離毀損的複製物件資料，以防止再次擷取。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+CBID
+ a| 
+內容區塊識別碼
+ a| 
+驗證失敗的內容區塊的唯一識別碼。
+
+
+
+ a| 
+RSLT
+ a| 
+結果代碼
+ a| 
+驗證故障類型：
+
+CRCF：循環冗餘校驗（CRC）失敗。
+
+HMAC：基於雜湊的訊息驗證碼 (HMAC) 檢查失敗。
+
+${post_edited_translations.segment}
+
+PHSH：意外的原始內容雜湊值。
+
+SEQC：磁碟上的資料順序錯誤。
+
+PERR：磁碟檔案結構無效。
+
+DERR：磁碟錯誤。
+
+FNAM：檔案名稱錯誤。
+
+|===
+
+NOTE: 請密切關注此訊息。內容驗證失敗可能預示著即將發生硬體故障。
+
+若要確定觸發訊息的操作，請查看 AMID（模組 ID）欄位的值。例如，SVFY 值表示訊息由 Storage Verifier 模組產生，即背景驗證；而 STOR 值表示訊息由內容擷取觸發。

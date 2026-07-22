@@ -1,0 +1,104 @@
+---
+permalink: swnodes/troubleshooting-installation-issues.html 
+sidebar: sidebar 
+keywords: how to troubleshoot ubuntu or debian installation 
+summary: 如果在安裝 StorageGRID 系統過程中出現任何問題，您可以存取安裝日誌檔案。技術支援也可能需要使用安裝日誌檔案來解決問題。 
+---
+= 疑難排解 StorageGRID 安裝問題
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果在安裝 StorageGRID 系統過程中出現任何問題，您可以存取安裝日誌檔案。技術支援也可能需要使用安裝日誌檔案來解決問題。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+[role="tabbed-block"]
+====
+.Linux
+--
+以下安裝日誌檔案可從執行每個節點的 Container 中取得：
+
+* `/var/local/log/install.log`（存在於所有網格節點上）
+* `/var/local/log/gdu-server.log`（位於主管理節點上）
+
+
+主機上可取得以下安裝日誌檔：
+
+* `/var/log/storagegrid/daemon.log`
+* `/var/log/storagegrid/nodes/node-name.log`
+
+
+若要了解如何存取日誌檔案，請參閱link:../monitor/collecting-log-files-and-system-data.html["收集日誌檔和系統資料"]。
+
+--
+.VMware
+--
+以下是主要的安裝日誌檔案，技術支援可能需要這些檔案來解決問題。
+
+* `/var/local/log/install.log`（存在於所有網格節點上）
+* `/var/local/log/gdu-server.log`（位於主管理節點上）
+
+
+*虛擬機器資源預留需要調整*
+
+OVF 檔案包含資源預留，旨在確保每個網格節點都有足夠的 RAM 和 CPU 以高效運作。如果您透過在 VMware 上部署這些 OVF 檔案來建立虛擬機器，但預先定義的資源數量不足，則虛擬機器將無法啟動。
+
+.關於此任務
+如果您確定 VM 主機有足夠的資源供每個網格節點使用，請手動調整指派給每個虛擬機器的資源，然後嘗試啟動虛擬機器。
+
+.步驟
+. 在 VMware vSphere Hypervisor 用戶端樹中，選擇未啟動的虛擬機器。
+. 右鍵單擊虛擬機器，然後選擇 *Edit Settings*。
+. 在「虛擬機器屬性」視窗中，選擇「資源」標籤。
+. 調整分配給虛擬機器的資源：
++
+.. 選擇 *CPU*，然後使用預留滑桿調整為此虛擬機器預留的 MHz。
+.. 選擇 *Memory*，然後使用 Reservation 滑桿調整為此虛擬機器預留的 MB 數。
+
+
+. 按一下 *OK* 。
+. 根據需要對同一 VM 主機上託管的其他虛擬機器重複上述步驟。
+
+
+*臨時安裝密碼已停用*
+
+部署 VMware 節點時，您可以選擇性地指定暫時安裝密碼。在新節點加入網格之前，您必須擁有此密碼才能存取虛擬機器主控台或使用 SSH。
+
+如果您選擇停用臨時安裝密碼，則必須執行其他步驟來偵錯安裝問題。
+
+${post_edited_translations.segment}
+
+* 重新部署虛擬機器，但指定暫時安裝密碼，以便您可以存取主控台或使用 SSH 偵錯安裝問題。
+* 使用 vCenter 設定密碼：
++
+.. 關閉虛擬機器。
+.. 前往 *VM*，選擇 *設定* 索引標籤，然後選擇 *vApp 選項*。
+.. 指定要設定的臨時安裝密碼類型：
++
+*** 選擇 *CUSTOM_TEMPORARY_PASSWORD* 以設定自訂臨時密碼。
+*** 選擇 *TEMPORARY_PASSWORD_TYPE* 以使用節點名稱作為臨時密碼。
+
+
+.. 選擇 *Set Value*。
+.. 設定臨時密碼：
++
+*** 將 *CUSTOM_TEMPORARY_PASSWORD* 變更為自訂密碼值。
+*** 使用 *使用節點名稱* 值更新 *TEMPORARY_PASSWORD_TYPE*。
+
+
+.. 重新啟動虛擬機器以套用新密碼。
+
+
+
+
+--
+====
+.相關資訊
+* 若要了解如何存取記錄檔，請參閱link:../monitor/logs-files-reference.html["日誌檔參考"]。
+* link:../troubleshoot/index.html["疑難排解 StorageGRID 系統"]
+* 如果您需要更多協助，請聯絡 https://mysupport.netapp.com/site/global/dashboard["NetApp 支援"^]。
+

@@ -1,0 +1,259 @@
+---
+permalink: tenant/manage-users.html 
+sidebar: sidebar 
+keywords: how to create local tenant users, manage users 
+summary: 您可以建立本機使用者並將其指派到本機群組，以確定這些使用者可以存取哪些功能。Tenant Manager 包含一個名為 root 的預先定義本機使用者。雖然您可以新增和刪除本機使用者，但無法刪除 root 使用者。 
+---
+= 管理 StorageGRID 租戶使用者
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以建立本機使用者並將其指派到本機群組，以確定這些使用者可以存取哪些功能。您也可以匯入聯合使用者。租戶管理器包含一個名為「root」的預先定義本機使用者。雖然您可以新增和移除本機使用者，但無法移除 root 使用者。
+
+
+NOTE: 如果您的 StorageGRID 系統啟用了單一登入 （SSO），則本機使用者將無法登入 Tenant Manager 或 Tenant Management API，但他們可以根據群組權限使用用戶端應用程式存取租戶的資源。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 如果您的租戶帳戶具有「使用網格聯合連線」權限，您已查看link:grid-federation-account-clone.html["Clone 租戶群組和使用者"]的工作流程和注意事項，並且您已登入租戶的來源網格。
+
+
+
+
+[[create-usercreate-a-local-user]]
+== [[create-user]]建立本機使用者
+
+您可以建立本機使用者並將其指派到一個或多個本機群組，以控制其存取權限。
+
+不屬於任何群組的 S3 使用者沒有管理權限，也沒有套用任何 S3 群組原則。這些使用者可能透過儲存貯體原則獲得 S3 儲存貯體存取權限。
+
+
+
+[[access-the-create-user-wizard]]
+=== 存取「建立使用者精靈」
+
+.步驟
+. 選擇 *Access Management* > *Users*。
++
+如果您的租戶帳戶擁有「使用網格聯合連線」權限，則會顯示藍色橫幅，表示這是租戶的來源網格。您在此網格上建立的任何本機使用者都會被 Clone 到連線中的另一個網格。
+
++
+image:grid-federation-tenant-user-banner.png["如果這是租戶來源網格，則使用者頁面上會顯示藍色橫幅\"映像\""]
+
+. 選取 *Create user*。
+
+
+
+
+[[enter-credentials]]
+=== 輸入憑證
+
+.步驟
+. 在「輸入使用者憑證」步驟中，請填寫以下欄位。
++
+[cols="1a,3a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+姓名
+ a| 
+該使用者的全名，例如，一個人的姓名（包括名字和姓氏）或應用程式的名稱。
+
+
+
+ a| 
+使用者名稱
+ a| 
+此使用者用於登入的名稱。使用者名稱必須是唯一的，且無法變更。
+
+*注意*：如果您的租戶帳戶具有 *使用網格聯合連線* 權限，則如果目的地網格上的租戶已存在相同的 *使用者名稱*，則會發生 Clone 錯誤。
+
+
+
+ a| 
+密碼和確認密碼
+ a| 
+使用者首次登入時所使用的密碼。
+
+
+
+ a| 
+拒絕存取
+ a| 
+選擇「是」可阻止此使用者登入租戶帳戶，即使他們可能仍屬於一個或多個群組。
+
+例如，選擇 *Yes* 可暫時中止使用者的登入功能。
+
+|===
+. 選擇 *Continue* 。
+
+
+
+
+[[assign-to-groups]]
+=== 分配到各個群組
+
+.步驟
+. 將使用者指派至一個或多個本機群組，以決定他們可以執行哪些工作。
++
+將使用者指派到使用者群組是可選的。如果您願意，可以在建立或編輯使用者群組時選擇使用者。
+
++
+未加入任何群組的使用者將不具備任何管理權限。權限是累積的。使用者將擁有其所屬所有群組的所有權限。請參閱link:tenant-management-permissions.html["租戶管理權限"]。
+
+. 選取 *Create user*。
++
+如果您的租戶帳戶擁有「使用網格聯合連線」權限，並且您位於租戶的來源網格上，則新的本機使用者將被 Clone 到租戶的目的地網格。「*成功*」將顯示為使用者詳細資料頁面「概覽」區段中的「*複製狀態*」。
+
+. 選取 *Finish* 以返回「使用者」頁面。
+
+
+
+
+[[view-or-edit-local-user]]
+== 檢視或編輯本機使用者
+
+.步驟
+. 選擇 *Access Management* > *Users*。
+. 請查看「使用者」頁面上提供的資訊，其中列出了此租戶帳戶所有本機使用者和聯合使用者的基本資訊。
++
+如果租戶帳戶具有「使用網格聯合連線」權限，且您正在租戶的來源網格上檢視該使用者：
+
++
+** 橫幅訊息表示，如果您編輯或移除使用者，您的變更將不會同步到另一個網格。
+** 如有需要，橫幅訊息會指示使用者是否未 Clone 到目的地網格上的租戶。您可以<<clone-users,重試失敗的使用者 Clone>>。
+
+
+. 如果您想變更使用者的全名：
++
+.. 選取該使用者的核取方塊。
+.. 選取 *Actions* > *Edit full name*。
+.. 請輸入新名稱。
+.. 選取 *儲存變更*。
+
+
+. 如果想檢視更多詳細資訊或進行其他編輯，請執行以下操作之一：
++
+** 選取使用者名稱。
+** 選取該使用者的核取方塊，然後選取 *Actions* > *View user details*。
+
+
+. 請查看「概覽」部分，其中顯示了每個使用者的以下資訊：
++
+** 姓名
+** 使用者名稱
+** 使用者類型
+** 拒絕存取
+** 存取模式
+** 群組成員資格
+** 如果租戶帳戶具有「使用網格聯合連線」權限，且您正在租戶的來源網格上檢視使用者，則也會顯示其他欄位：
++
+*** Clone 狀態，為 *Success* 或 *Failure*
+*** 藍色橫幅提示：如果您編輯此使用者，您的變更將不會同步到另一個網格。
+
+
+
+
+. 視需要編輯使用者設定。請參閱 <<create-user,建立本機使用者>> 以取得輸入內容的詳細資訊。
++
+.. 在「概覽」部分，選擇名稱或編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"] 即可變更全名。
++
+您無法變更使用者名稱。
+
+.. 在「密碼」標籤上，變更使用者的密碼，然後選擇「儲存變更」。
+.. 在 *Access* 索引標籤上，選取 *No* 以允許使用者登入，或選取 *Yes* 以防止使用者登入。然後，選取 *Save changes*。
+.. 在 *Access keys* 索引標籤上，選取 *Create key*，然後依照 link:creating-another-users-s3-access-keys.html["建立其他使用者的 S3 存取金鑰"] 的說明操作。
+.. 在「群組」標籤上，選擇「編輯群組」以將使用者新增至群組或從群組中移除使用者。然後，選擇「儲存變更」。
+
+
+. 請確認您已為修改的每個部分選擇「儲存變更」。
+
+
+
+
+[[import-federated-users]]
+== 匯入同盟使用者
+
+您可以將一個或多個聯合使用者（最多 100 個使用者）直接匯入到「使用者」頁面。
+
+.步驟
+. 選擇 *Access Management* > *Users*。
+. 選取 *Import federated users*。
+. 輸入一個或多個聯合使用者的 UUID 或使用者名稱。
++
+對於多個條目，請將每個 UUID 或使用者名稱新增至新的一行。
+
+. 選取 *Import*。
++
+如果一個或多個使用者的匯入作業失敗，請執行下列步驟：
+
++
+.. 展開 *Users not imported* ，然後選擇 *Copy users* 。
+.. 選擇 *Previous* ，然後將複製的使用者貼上到 *Import federated users* 對話方塊中，重新嘗試匯入。
+
+
++
+關閉*匯入聯合使用者*對話方塊後，成功匯入的使用者的聯合使用者資訊將顯示在「使用者」頁面上。
+
+
+
+
+
+[[duplicate-local-user]]
+== 複製本機使用者
+
+您可以複製本機使用者，以便更快速地建立新使用者。
+
+
+NOTE: 如果您的租戶帳戶具有「使用網格同盟連線」權限，並且您從租戶的來源網格複製使用者，則複製的使用者將會 Clone 到租戶的目的地網格。
+
+.步驟
+. 選擇 *Access Management* > *Users*。
+. 選取要複製的使用者的核取方塊。
+. 選擇 *Actions* > *Duplicate user*。
+. 請參閱 <<create-user,建立本機使用者>> 以取得輸入內容的詳細資訊。
+. 選取 *Create user*。
+
+
+
+
+[[clone-usersretry-user-clone]]
+== [[clone-users]]重試使用者 Clone
+
+要重試失敗的 Clone：
+
+. 選擇使用者名稱下方顯示「（Clone 失敗）」字樣的每個使用者。
+. 選取 *Actions* > *Clone users*。
+. 從每個被 Clone 使用者的詳細資料頁面檢視 Clone 作業的狀態。
+
+
+如需更多資訊，請參閱link:grid-federation-account-clone.html["Clone 租戶群組和使用者"]。
+
+
+
+[[delete-one-or-more-local-users]]
+== 刪除一個或多個本機使用者
+
+您可以永久刪除一個或多個不再需要存取 StorageGRID 租戶帳戶的本機使用者。
+
+
+NOTE: 如果您的租戶帳戶擁有 *Use grid federation connection* 權限，且您刪除了本機使用者，StorageGRID 不會刪除另一個網格上的對應使用者。如果您需要保持此資訊同步，則必須從兩個網格中刪除相同使用者。
+
+
+NOTE: 您必須使用同盟身分識別來源來刪除同盟使用者。
+
+.步驟
+. 選擇 *Access Management* > *Users*。
+. 選取要刪除的每個使用者的核取方塊。
+. 選擇 *Actions* > *Delete user* 或 *Actions* > *Delete users*。
++
+${post_edited_translations.segment}
+
+. 選擇 *Delete user* 或 *Delete users*。
+

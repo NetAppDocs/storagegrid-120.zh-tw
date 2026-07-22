@@ -1,0 +1,50 @@
+---
+permalink: monitor/reviewing-support-metrics.html 
+sidebar: sidebar 
+keywords: how to view support metrics, how to review support metrics 
+summary: 在疑難排解問題時，您可以與技術支援一起審查 StorageGRID 系統的詳細計量和圖表。 
+---
+= 檢閱 StorageGRID 支援指標
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在疑難排解問題時，您可以與技術支援一起審查 StorageGRID 系統的詳細計量和圖表。
+
+.開始之前
+* 您必須使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+.關於此任務
+「計量」頁面可讓您存取 Prometheus 和 Grafana 使用者介面。Prometheus 是用於收集計量的開放原始碼軟體。Grafana 是用於計量視覺化的開放原始碼軟體。
+
+
+NOTE: 「計量」頁面上的可用工具僅供技術支援使用。這些工具中的某些功能和功能表項目刻意不具備功能，且可能會有所變更。請參閱 link:commonly-used-prometheus-metrics.html["常用的 Prometheus 計量"] 的清單。
+
+.步驟
+. 依照技術支援的指示，選擇 *Support* > *Tools* > *Metrics*。
++
+以下是「計量」頁面的範例：
+
++
+image:metrics_page.png["計量頁面"]
+
+. 若要查詢 StorageGRID 計量的目前值並檢視這些數值隨時間變化的圖表，請按一下 Prometheus 區段中的連結。
++
+Prometheus 介面隨即出現。您可以使用此介面對可用的 StorageGRID 計量執行查詢，並繪製 StorageGRID 計量隨時間變化的圖表。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+. 若要存取包含 StorageGRID 計量隨時間變化的圖表的預先建置儀表板，請按一下 Grafana 區段中的連結。
++
+您選擇的連結對應的 Grafana 介面將會顯示出來。
+
++
+image:metrics_page_grafana.png["Grafana 計量頁面"]
+
+

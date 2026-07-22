@@ -1,0 +1,109 @@
+---
+permalink: tenant/deleting-s3-bucket-objects.html 
+sidebar: sidebar 
+keywords: how to delete bucket objects, empty bucket 
+summary: 您可以使用 Tenant Manager 刪除一個或多個儲存桶中的物件。 
+---
+= 從 StorageGRID S3 儲存貯體中刪除物件
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 Tenant Manager 刪除一個或多個儲存桶中的物件。
+
+.考慮因素和要求
+在執行以下步驟之前，請注意以下事項：
+
+* 當您刪除儲存貯體中的物件時，StorageGRID 會從 StorageGRID 系統中的所有節點和站台永久移除每個選取儲存貯體中的所有物件及所有物件版本。StorageGRID 也會移除所有相關的物件中繼資料。您將無法恢復這些資訊。
+* 根據物件數量、物件副本數量和並行作業數量，刪除儲存貯體中的所有物件可能需要幾分鐘、幾天甚至幾週的時間。
+* 如果儲存桶有 link:using-s3-object-lock.html["已啟用 S3 物件鎖定"]，它可能會保持「正在刪除物件：唯讀」狀態長達數年。
++
+
+TIP: 使用 S3 Object Lock 的儲存桶將保持「正在刪除物件：唯讀」狀態，直到所有物件的保留日期到期且任何法律保留都已解除。
+
+* 物件刪除期間，儲存桶的狀態為「正在刪除物件：唯讀」。在此狀態下，您無法為儲存桶新增物件。
+* 當所有物件都已刪除後，儲存桶將保持唯讀狀態。您可以執行下列其中一項操作：
++
+** 將儲存桶恢復為寫入模式，並將其用於新物件
+** 刪除儲存桶
+** 將儲存桶設定為唯讀模式，以便保留其名稱供將來使用。
+
+
+* 如果儲存桶已啟用物件版本控制，則可以使用「刪除儲存桶中的物件」操作，移除在 StorageGRID 11.8 或更新版本中建立的刪除標記。
+* 如果儲存桶已啟用物件版本控制，則刪除物件作業不會移除在 StorageGRID 11.7 或更早版本中建立的刪除標記。請參閱link:../ilm/how-objects-are-deleted.html#delete-s3-versioned-objects["如何刪除 S3 版本化物件"]中有關刪除儲存桶中物件的資訊。
+* 如果您使用 link:grid-federation-manage-cross-grid-replication.html["${post_edited_translations.segment}"]，請注意下列事項：
++
+** 使用此選項不會從另一個網格的儲存桶中刪除任何物件。
+** 如果為來源儲存桶選擇此選項，則在另一個網格上向目的地桶新增物件時，將觸發「跨網格複寫故障」警示。如果您無法保證不會有人向另一個網格上的儲存桶新增物件，link:../tenant/grid-federation-manage-cross-grid-replication.html["停用跨網格複寫"]請在刪除該儲存桶中的所有物件之前先執行此操作。
+
+
+
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您所屬的使用者群組擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"]。此權限會覆寫群組或儲存桶原則中的權限設定。
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+「儲存桶」頁面隨即出現，並顯示所有現有的 S3 儲存桶。
+
+. 使用 *Actions* 功能表或特定儲存桶的詳細資訊頁面。
++
+[role="tabbed-block"]
+====
+.操作選單
+--
+.. 選取要從中刪除物件的每個儲存桶對應的核取方塊。
+.. 選擇 *Actions* > *Delete objects in bucket*。
+
+
+--
+.詳細資料頁面
+--
+.. 選擇儲存桶名稱以顯示其詳細資訊。
+.. 選擇 *Delete objects in bucket*。
+
+
+--
+====
+. 當確認對話框出現時，審查詳細資訊，輸入 *Yes*，然後選取 *OK*。
+. 等待刪除作業開始。
++
+幾分鐘後：
+
++
+** 儲存桶詳細資料頁面上會顯示一個黃色狀態橫幅。進度列顯示已刪除物件的百分比。
+** 在儲存貯體詳細資料頁面上，儲存貯體名稱後面會顯示 *(read-only)*。
+** *(刪除物件：唯讀)* 顯示在「儲存桶」頁面上儲存桶名稱旁。
+
+
++
+image:delete-bucket-objects-in-progress.png["快照顯示儲存桶物件正在刪除"]
+
+. 操作進行過程中，如有需要，可選擇 *Stop deleting objects* 來停止該過程。然後，您可以選擇 *Delete objects in bucket* 來恢復該過程。
++
+當您選擇「停止刪除物件」時，儲存桶將恢復到寫入模式；但是，您將無法存取或還原任何已刪除的物件。
+
+. 等待操作完成。
++
+當儲存桶為空時，狀態橫幅會更新，但儲存桶仍保持唯讀狀態。
+
++
+image:delete-bucket-objects-complete.png["快照顯示所有儲存桶物件已刪除"]
+
+. 執行下列其中一項作業：
++
+** 退出頁面即可將儲存桶保持在唯讀模式。例如，您可以將一個空儲存桶保持在唯讀模式，以保留該儲存桶名稱供日後使用。
+** 刪除儲存桶。您可以選擇 *Delete bucket* 來刪除單一儲存桶，或返回 Buckets 頁面，然後選擇 *Actions* > *Delete* buckets 來移除多個儲存桶。
++
+
+NOTE: 如果刪除所有物件後仍無法刪除版本化儲存桶，則可能仍會殘留刪除標記。若要刪除該儲存桶，必須移除所有剩餘的刪除標記。
+
+** 將儲存桶恢復為寫入模式，並可選擇將其用於新物件。您可以為單一儲存桶選擇 *Stop deleting objects*，也可以返回 Buckets 頁面，然後選擇 *Action* > *Stop deleting objects* 來為多個儲存桶執行此操作。
+
+
+

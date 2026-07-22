@@ -1,0 +1,73 @@
+---
+permalink: audit/lkcu-overwritten-object-cleanup.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, LKCU, Overwritten Object Cleanup 
+summary: 當 StorageGRID 移除先前需要清理以釋放儲存空間的覆寫物件時，就會產生此訊息。當 S3 用戶端將物件寫入已包含物件的路徑時，該物件就會被覆寫。移除程序會自動在背景進行。 
+---
+= StorageGRID 中覆寫物件清理的 LKCU 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當 StorageGRID 移除先前需要清理以釋放儲存空間的覆寫物件時，就會產生此訊息。當 S3 用戶端將物件寫入已包含物件的路徑時，該物件就會被覆寫。移除程序會自動在背景進行。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+CSIZ
+ a| 
+內容大小
+ a| 
+物件的大小（以位元組為單位）。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+清理類型
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+LUID
+ a| 
+已移除物件 UUID
+ a| 
+已移除物件的識別碼。
+
+
+
+ a| 
+路徑
+ a| 
+S3 Bucket/Key
+ a| 
+S3 儲存桶名稱和 S3 金鑰名稱。
+
+
+
+ a| 
+SEGC
+ a| 
+Container UUID
+ a| 
+分段物件的 Container UUID。僅當物件已分段時，此值才可用。
+
+
+
+ a| 
+UUID
+ a| 
+通用唯一識別符
+ a| 
+仍然存在的物件識別碼。此值僅在物件尚未刪除時才可用。
+
+|===

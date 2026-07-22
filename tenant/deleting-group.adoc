@@ -1,0 +1,26 @@
+---
+permalink: tenant/deleting-group.html 
+sidebar: sidebar 
+keywords: how to delete tenant group 
+summary: 您可以從系統中刪除一個群組。任何僅屬於該群組的使用者將無法再登入 Tenant Manager 或使用租戶帳戶。 
+---
+= 刪除 StorageGRID 租用戶群組
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以從系統中刪除一個群組。任何僅屬於該群組的使用者將無法再登入 Tenant Manager 或使用租戶帳戶。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於擁有 Root 存取權限的使用者群組。請參閱link:tenant-management-permissions.html["租戶管理權限"]。
+
+
+.步驟
+. 選擇 *Access Management* > *Groups*。
+. 選取要刪除的每個群組的核取方塊。
+. ${post_edited_translations.segment}
+. 選擇 *刪除群組*。
+

@@ -1,0 +1,37 @@
+---
+permalink: swnodes/validating-storagegrid-configuration.html 
+sidebar: sidebar 
+keywords: how to validate StorageGRID configuration 
+summary: 在 /etc/storagegrid/nodes 中為每個 StorageGRID 節點建立組態檔後，必須驗證這些檔案的內容。 
+---
+= 在 Linux 上驗證 StorageGRID 組態
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在 `/etc/storagegrid/nodes`為每個 StorageGRID 節點建立組態檔後，必須驗證這些檔案的內容。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+若要驗證組態檔內容，請在每台主機上執行以下命令：
+
+[listing]
+----
+sudo storagegrid node validate all
+----
+如果檔案正確，則每個組態檔案都會輸出 *PASSED*，如範例所示。
+
+
+NOTE: 當僅在純中繼資料節點上使用一個 LUN 時，您可能會收到一則可忽略的警告訊息。
+
+image:rhel_node_configuration_file_output.gif["這張映像由周圍的文字進行解釋。"]
+
+
+TIP: 對於自動化安裝，您可以使用  `storagegrid` 命令中的  `-q` 或  `--quiet` 選項來隱藏此輸出（例如  `storagegrid --quiet...`）。如果您隱藏輸出，則在偵測到任何組態警告或錯誤時，此命令將具有非零結束值。
+
+如果組態檔有誤，則會顯示為 *WARNING* 和 *ERROR*，如範例所示。如果發現任何組態錯誤，必須先進行修正，然後才能繼續安裝。
+
+image:rhel_node_configuration_file_output_with_errors.gif["這張映像由周圍的文字進行解釋。"]

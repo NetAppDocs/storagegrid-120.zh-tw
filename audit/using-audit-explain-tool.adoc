@@ -1,0 +1,126 @@
+---
+permalink: audit/using-audit-explain-tool.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, tool, audit-explain, audit explain, translate audit messages, translate messages, translate audit message, translate message 
+summary: 您可以使用 audit-explain 工具將稽核日誌中的稽核訊息翻譯成易於閱讀的格式。 
+---
+= 使用 audit-explain 工具翻譯 StorageGRID 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 `audit-explain`工具，將稽核日誌中的稽核訊息轉換為易於閱讀的格式。
+
+.開始之前
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+* 您必須擁有該 `Passwords.txt`檔案。
+* 您必須知道主要管理節點的 IP 位址。
+
+
+.關於此任務
+此 `audit-explain`工具可在主要管理節點上使用，提供稽核日誌中稽核訊息的簡化摘要。
+
+
+NOTE: 該 `audit-explain`工具主要供技術支援在疑難排解作業中使用。處理 `audit-explain`查詢可能會使用大量 CPU 資源，這可能會影響 StorageGRID 的運作。
+
+此範例顯示  `audit-explain` 工具的典型輸出。這四個 link:sput-s3-put.html["SPUT"] 稽核訊息是在帳戶 ID 為 92484777680322627870 的 S3 租戶使用 S3 PUT 要求建立名為 "bucket1" 的儲存貯體，並向該儲存貯體新增三個物件時產生的。
+
+[listing]
+----
+SPUT S3 PUT bucket bucket1 account:92484777680322627870 usec:124673
+SPUT S3 PUT object bucket1/part1.txt tenant:92484777680322627870  cbid:9DCB157394F99FE5 usec:101485
+SPUT S3 PUT object bucket1/part2.txt tenant:92484777680322627870  cbid:3CFBB07AB3D32CA9 usec:102804
+SPUT S3 PUT object bucket1/part3.txt tenant:92484777680322627870  cbid:5373D73831ECC743 usec:93874
+----
+此  `audit-explain` 工具可以執行下列操作：
+
+* 處理純文字或壓縮的稽核日誌。例如：
++
+`audit-explain audit.log`
+
++
+`audit-explain 2019-08-12.txt.gz`
+
+* 同時處理多個檔案。例如：
++
+`audit-explain audit.log 2019-08-12.txt.gz 2019-08-13.txt.gz`
+
++
+`audit-explain /var/local/audit/export/*`
+
+* 接受來自管道的輸入，這可讓您使用  `grep` 命令或其他方式來篩選和預先處理輸入。例如：
++
+`grep SPUT audit.log | audit-explain`
+
++
+`grep bucket-name audit.log | audit-explain`
+
+
+
+由於稽核日誌可能非常大且剖析速度很慢，您可以藉由篩選想要查看的部分，並對這些部分（而非整個檔案）執行  `audit-explain` 來節省時間。
+
+[NOTE]
+====
+此 `audit-explain`工具不接受壓縮檔案作為管道輸入。若要處理壓縮檔案，請提供其檔案名稱作為命令列引數，或使用 `zcat`工具先解壓縮檔案。例如：
+
+`zcat audit.log.gz | audit-explain`
+
+====
+使用  `help (-h)` 選項來查看可用的選項。例如：
+
+`$ audit-explain -h`
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 輸入下列命令，其中  `/var/local/audit/export/audit.log` 代表您要分析之檔案的名稱與位置：
++
+`$ audit-explain /var/local/audit/export/audit.log` neoplasms_of_the_central_nervous_system.json (1).zip (1.1 KB)
+
+I am trying to load this JSON file into a pandas dataframe. The file contains a list of dictionaries, where each dictionary represents a neoplasm of the central nervous system.
+
+I have tried the following code:
+
+
+
+However, I get the following error:
+
+
+
+I have checked the JSON file and it seems to be valid. What am I doing wrong?
+
+The JSON file is attached.
+
+[Answer 1]
+
+The file you attached is not a valid JSON file. It contains multiple JSON objects, one after another, but they are not enclosed in a list (i.e., there are no  and  at the beginning and end of the file, and the objects are not separated by commas). This format is often called "JSON Lines" or "newline-delimited JSON" (ndjson).
+
+Pandas has a built-in way to read this format directly using  with the  argument.
+
+Here is how you can load it:
+
+
+
+If you want to read it using the  module first (though  is preferred and faster), you would have to read it line by line:
+
+
+
++
+此  `audit-explain` 工具會列印指定檔案中所有訊息的人類可讀解讀。
+
++
+
+NOTE: 為了縮短行長並提高可讀性，預設不顯示時間戳記。如果您想要查看時間戳記，請使用 timestamp (`-t`) 選項。
+
+

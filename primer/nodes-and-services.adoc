@@ -1,0 +1,419 @@
+---
+permalink: primer/nodes-and-services.html 
+sidebar: sidebar 
+keywords: StorageGRID, services, grid nodes, primary admin, storage, gateway 
+summary: StorageGRID 系統的基本建置區塊是網格節點。節點包含服務，這些服務是為網格節點提供一系列功能的軟體模組。 
+---
+= StorageGRID 網格節點與服務
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 系統的基本建置區塊是網格節點。節點包含服務，這些服務是為網格節點提供一系列功能的軟體模組。
+
+
+
+[[types-of-grid-nodes]]
+== 網格節點類型
+
+StorageGRID 系統使用三種類型的網格節點：
+
+管理節點:: 提供系統組態、監控和記錄等管理服務。登入 Grid Manager 後，您將連線到一個管理節點。每個網格必須有一個主要管理節點，並且可能還有其他非主要管理節點以實現備援。您可以連線到任何管理節點，每個管理節點顯示的 StorageGRID 系統檢視都類似。但是，維護程序必須使用主要管理節點執行。
++
+--
+管理節點也可用於對 S3 用戶端流量進行負載平衡。
+
+請參閱 link:what-admin-node-is.html["什麼是管理節點？"]
+
+--
+儲存節點:: 管理和儲存物件資料和中繼資料。StorageGRID 系統中的每個站點必須至少有三個儲存節點。
++
+--
+在首次安裝新的儲存節點時，您可以指定它僅用於link:../primer/what-storage-node-is.html#types-of-storage-nodes["儲存中繼資料"]。
+
+請參閱 link:what-storage-node-is.html["什麼是儲存節點？"]
+
+--
+閘道節點（選用）:: 提供一個負載平衡介面，供用戶端應用程式連接到 StorageGRID。負載平衡器能夠無縫地將用戶端導向至最佳的 Storage Node，使節點甚至整個站台的故障對用戶端而言都是透明的。
++
+--
+請參閱 link:what-gateway-node-is.html["什麼是 Gateway Node？"]
+
+--
+
+
+
+
+[[hardware-and-software-nodes]]
+== 硬體和軟體節點
+
+StorageGRID 節點可以部署為 StorageGRID 應用裝置節點或基於軟體的節點。每個系統最多可容納 220 個節點（包括所有節點類型）。
+
+
+
+[[storagegrid-appliance-nodes]]
+=== StorageGRID 應用裝置節點
+
+StorageGRID 硬體應用裝置專為 StorageGRID 系統設計。部分應用裝置可用作儲存節點。其他應用裝置可用作管理節點或閘道節點。您可以將應用裝置節點與軟體型節點組合使用，也可以部署完全由應用裝置組成的網格，這些網格不依賴外部虛擬機器管理程式、儲存設備或運算硬體。
+
+請參閱以下內容，以了解可用的應用裝置：
+
+* https://docs.netapp.com/us-en/storagegrid-appliances/["StorageGRID 應用裝置文件"^]
+* https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+
+
+
+[[software-based-nodes]]
+=== 基於軟體的節點
+
+基於軟體的網格節點可以部署為 VMware 虛擬機器，也可以部署在 Linux 主機上的 Container 引擎中。參見link:../swnodes/index.html["在基於軟體的節點上安裝 StorageGRID"]。
+
+使用 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]來確認支援的版本。
+
+
+
+[[storagegrid-services]]
+== StorageGRID 服務
+
+以下是 StorageGRID 服務的完整清單。
+
+[cols="2a,3a,2a"]
+|===
+| 服務 | 說明 | 地點 
+
+
+ a| 
+帳戶服務轉發器
+ a| 
+為負載平衡器服務提供介面，以便查詢遠端主機上的帳戶服務，並將負載平衡器端點組態變更的通知提供給負載平衡器服務。
+ a| 
+管理節點和閘道節點上的負載平衡服務
+
+
+
+ a| 
+ADC（管理網域控制站）
+ a| 
+維護拓撲資訊，提供驗證服務，並回應來自 LDR 和 CMN 服務的查詢。
+ a| 
+每個站台至少有三個包含 ADC 服務的儲存節點。
+
+
+
+ a| 
+AMS（Audit Management System）
+ a| 
+監控並記錄所有經稽核的系統事件和交易至文字日誌檔。
+ a| 
+管理節點
+
+
+
+ a| 
+Apache Tomcat
+ a| 
+用於 Java 應用程式的 Web 伺服器。
+ a| 
+管理節點
+
+
+
+ a| 
+Avahi Daemon
+ a| 
+處理 mDNS，mDNS 用於本機網路內的名稱解析和服務探索。
+ a| 
+所有節點
+
+
+
+ a| 
+快取服務
+ a| 
+在負載平衡器（Gateway）節點上執行，並管理物件內容的本機快取。
+ a| 
+閘道節點
+
+
+
+ a| 
+Cassandra
+ a| 
+管理物件中繼資料的分散式資料庫。
+ a| 
+儲存節點（資料專用節點除外）
+
+
+
+ a| 
+Cassandra Reaper
+ a| 
+自動修復物件中繼資料。
+ a| 
+儲存節點
+
+
+
+ a| 
+區塊服務
+ a| 
+管理糾刪碼資料和同位元檢查片段。
+ a| 
+儲存節點
+
+
+
+ a| 
+CMN（組態管理節點）
+ a| 
+管理整個系統的組態和網格工作。每個網格都有一個 CMN 服務。
+ a| 
+主管理節點
+
+
+
+ a| 
+DDS（分散式資料儲存）
+ a| 
+${post_edited_translations.segment}
+ a| 
+儲存節點
+
+
+
+ a| 
+DMV （Data Mover）
+ a| 
+將資料傳輸到雲端端點。
+ a| 
+儲存節點
+
+
+
+ a| 
+動態 IP（dynip）
+ a| 
+${post_edited_translations.segment}
+ a| 
+所有節點
+
+
+
+ a| 
+Grafana
+ a| 
+${post_edited_translations.segment}
+ a| 
+管理節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+在「高可用度群組」頁面上設定的節點上管理高可用度虛擬 IP。此服務也稱為 keepalived 服務。
+ a| 
+管理節點和 Gateway 節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+使用 ADC 服務的儲存節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+管理 S3 Select SelectObjectContent 請求。
+ a| 
+所有節點
+
+
+
+ a| 
+負載平衡器（nginx-gw）
+ a| 
+提供從用戶端到 Storage Nodes 的 S3 流量負載平衡。Load Balancer 服務可透過負載平衡器端點組態頁面進行設定。此服務也稱為 nginx-gw 服務。
+ a| 
+管理節點和 Gateway 節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+儲存節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+提供用於查詢和管理其他節點上服務的介面，以及管理節點上的環境組態，例如查詢在其他節點上執行的服務狀態。
+ a| 
+所有節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+可作為各種網格服務（如 Prometheus 和 Dynamic IP）的驗證和安全通訊機制，使其能夠透過 HTTPS API 與其他節點上的服務進行通訊。
+ a| 
+所有節點
+
+
+
+ a| 
+nginx-gw 負載平衡器
+ a| 
+提供從用戶端到 Storage Nodes 的 S3 流量負載平衡。Load Balancer 服務可透過負載平衡器端點組態頁面進行設定。此服務也稱為 nginx-gw 服務。
+ a| 
+管理節點和 Gateway 節點
+
+
+
+ a| 
+NMS （Network Management System）
+ a| 
+為透過 Grid Manager 顯示的監控、報告和組態選項提供支援。
+ a| 
+管理節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+發布 Prometheus 時間序列計量收集的系統級統計資料。
+ a| 
+所有節點
+
+
+
+ a| 
+ntp
+ a| 
+網路時間協定（NTP）服務。
+ a| 
+所有節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+管理根目錄磁碟上需要在重新開機後保留的檔案。
+ a| 
+所有節點
+
+
+
+ a| 
+Prometheus
+ a| 
+從所有節點上的服務收集時間序列計量。
+ a| 
+管理節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+確保平台服務請求發送到各自的端點。
+ a| 
+使用 ADC 服務的儲存節點
+
+
+
+ a| 
+SSM (Server Status Monitor)
+ a| 
+${post_edited_translations.segment}
+ a| 
+每個網格節點上都存在一個執行個體
+
+
+
+ a| 
+Server Manager
+ a| 
+管理 StorageGRID 服務。
+ a| 
+所有節點
+
+
+
+ a| 
+SNMP 代理程式
+ a| 
+回應 SNMP 請求。
+ a| 
+管理節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+負責 SNMP 連接埠的動態管理。
+ a| 
+所有節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+所有節點
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+所有節點
+
+
+
+ a| 
+統計
+ a| 
+${post_edited_translations.segment}
+ a| 
+儲存節點
+
+
+
+ a| 
+追蹤代理（jaeger-agent）
+ a| 
+接收並處理追蹤收集器（jaeger-collector）提交的追蹤資訊。
+ a| 
+所有節點
+
+
+
+ a| 
+痕跡收集器（jaeger-collector）
+ a| 
+執行追蹤資料收集，以收集資訊供技術支援使用。追蹤資料收集服務使用開放原始碼 Jaeger 軟體。
+ a| 
+管理節點
+
+|===

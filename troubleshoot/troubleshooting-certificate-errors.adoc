@@ -1,0 +1,55 @@
+---
+permalink: troubleshoot/troubleshooting-certificate-errors.html 
+sidebar: sidebar 
+keywords: how to troubleshoot certificate errors 
+summary: 如果您在使用 Web 瀏覽器、S3 用戶端或外部監控工具嘗試連線至 StorageGRID 時遇到安全性或憑證問題，則應檢查憑證。 
+---
+= 疑難排解 StorageGRID 中的憑證錯誤
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您在使用 Web 瀏覽器、S3 用戶端或外部監控工具嘗試連線至 StorageGRID 時遇到安全性或憑證問題，則應檢查憑證。
+
+.關於此任務
+當您嘗試使用 Grid Manager、Grid Management API、Tenant Manager 或 Tenant Management API 連線至 StorageGRID 時，憑證錯誤可能會導致問題。當您嘗試使用 S3 用戶端或外部監控工具連線時，也可能出現憑證錯誤。
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* 您將自訂管理介面憑證回復為預設伺服器憑證。
+
+
+以下範例展示了自訂管理介面憑證過期時出現的憑證錯誤：
+
+image:certificate_error.png["範例證書錯誤"]
+
+為確保作業不會因伺服器憑證失敗而中斷，當伺服器憑證即將過期時，會觸發 *Expiration of server certificate for Management Interface* 警示。
+
+當您使用用戶端憑證進行外部 Prometheus 整合時，憑證錯誤可能是由 StorageGRID 管理介面憑證或用戶端憑證所造成的。當用戶端憑證即將過期時、會觸發 *Expiration of client certificates configured on the Certificates page* 警示。
+
+.步驟
+如果您收到有關憑證過期的警示通知，請存取憑證詳細資訊：。選取 *Configuration* > *Security* > *Certificates*，然後 link:../admin/using-storagegrid-security-certificates.html#access-security-certificates["選取適當的憑證索引標籤"]。
+
+. 檢查憑證的有效期限。+ 部分網頁瀏覽器及 S3 用戶端不接受有效期限超過 398 天的憑證。
+. 如果憑證已過期或即將過期，請上傳或產生新憑證。
++
+** 有關伺服器憑證，請參閱以下步驟link:../admin/configuring-custom-server-certificate-for-grid-manager-tenant-manager.html#add-a-custom-management-interface-certificate["為 Grid Manager 和 Tenant Manager 設定自訂伺服器憑證"]。
+** 有關用戶端憑證，請參閱以下步驟link:../admin/configuring-administrator-client-certificates.html["設定用戶端憑證"]。
+
+
+. 如果出現伺服器憑證錯誤，請嘗試下列任一或兩種方法：
++
+** 確保已填寫憑證的主體替代名稱 (SAN)，且 SAN 與您要連線的節點的 IP 位址或主機名稱相符。
+** 如果您嘗試使用網域名稱連線至 StorageGRID：
++
+... 輸入管理節點的 IP 位址而非網域名稱，即可略過連線錯誤並存取 Grid Manager。
+... 從 Grid Manager 中，選取 *Configuration* > *Security* > *Certificates*，然後link:../admin/using-storagegrid-security-certificates.html#access-security-certificates["選取適當的憑證索引標籤"]安裝新的自訂憑證或繼續使用預設憑證。
+... 在 StorageGRID 的管理說明中，請參閱 link:../admin/configuring-custom-server-certificate-for-grid-manager-tenant-manager.html#add-a-custom-management-interface-certificate["為 Grid Manager 和 Tenant Manager 設定自訂伺服器憑證"] 的步驟。
+
+
+
+
+

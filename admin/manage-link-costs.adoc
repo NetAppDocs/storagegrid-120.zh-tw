@@ -1,0 +1,89 @@
+---
+permalink: admin/manage-link-costs.html 
+sidebar: sidebar 
+keywords: link cost, site latency, manage link costs, prioritize sites 
+summary: 當存在兩個或多個資料中心站台時，連結成本可讓您優先選擇哪個資料中心站台提供所要求的服務。您可以調整連結成本以反映站台間的延遲。 
+---
+= 在 StorageGRID 中管理連結成本
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當存在兩個或多個資料中心站台時，連結成本可讓您優先選擇哪個資料中心站台提供所要求的服務。您可以調整連結成本以反映站台間的延遲。
+
+
+
+[[what-are-link-costs]]
+== 什麼是連結成本？
+
+* 連結成本用於決定優先使用哪個物件複本來完成物件檢索。
+* 連結成本由 Grid Management API 和 Tenant Management API 使用，以決定要使用哪些內部 StorageGRID 服務。
+* 連結成本由管理節點和閘道節點上的負載平衡服務用於導向用戶端連線。請參閱 link:../admin/managing-load-balancing.html["負載平衡的考慮因素"]。
+
+
+此圖顯示一個由三個站台組成的網格，站台之間已設定連結成本：
+
+image:link_costs.gif["資料中心間連結成本的概念圖"]
+
+* 管理節點和閘道節點上的 Load Balancer 服務會將用戶端連線平均分配至相同資料中心站台的所有儲存節點，以及連結成本為 0 的任何資料中心站台。
++
+在本例中，資料中心站點 1 （DC1） 的 Gateway Node 將用戶端連線平均分配給 DC1 的 Storage Node 和 DC2 的 Storage Node。DC3 的 Gateway Node 僅將用戶端連線傳送到 DC3 的 Storage Node。
+
+* 當擷取存在多個複本的物件時，StorageGRID 會從連結成本最低的資料中心擷取複本。
++
+例如，如果 DC2 上的用戶端應用程式擷取同時儲存在 DC1 和 DC3 上的物件，則會從 DC1 擷取該物件，因為從 DC1 到 DC2 的連結成本為 0，低於從 DC3 到 DC2 的連結成本 （25）。
+
+
+
+連結成本是任意的相對數值，沒有具體的計量單位。例如，連結成本為 50 的連結使用優先順序低於連結成本為 25 的連結。下表列出了常用的連結成本。
+
+[cols="1a,1a,2a"]
+|===
+| 連結 | 連結成本 | 附註 
+
+
+ a| 
+在實體資料中心站點之間
+ a| 
+25（預設值）
+ a| 
+透過 WAN 連結連接的資料中心。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+0
+ a| 
+${post_edited_translations.segment}
+
+|===
+
+
+[[update-link-costs]]
+== 更新連結成本
+
+您可以更新資料中心站台之間的連結成本，以反映站台之間的延遲。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有 link:admin-group-permissions.html["其他網格組態權限"]。
+
+
+.步驟
+. 選擇 *Support* > *Other* > *Link cost*。
++
+image:configuring_link_costs.png["${post_edited_translations.segment}"]
+
+. 在「連結來源」下選擇一個站台，然後在「連結目的地」下輸入 0 到 100 之間的成本值。
++
+如果來源和目的地相同，則無法變更連結成本。
+
++
+若要取消變更，請選擇 image:nms_revert.gif["復原圖示"]*Revert*。
+
+. ${post_edited_translations.segment}
+

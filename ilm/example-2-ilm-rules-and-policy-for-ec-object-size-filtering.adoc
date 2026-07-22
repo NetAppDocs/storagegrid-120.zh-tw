@@ -1,0 +1,111 @@
+---
+permalink: ilm/example-2-ilm-rules-and-policy-for-ec-object-size-filtering.html 
+sidebar: sidebar 
+keywords: object size for erasure coding, example ILM rule, information lifecycle rule examples, 1 MB 
+summary: 您可以參考以下範例規則和原則作為起點，定義一個按物件大小篩選的 ILM 原則，以滿足建議的 EC 要求。 
+---
+= StorageGRID 中 EC 物件大小篩選的 ILM 規則和原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以參考以下範例規則和原則作為起點，定義一個按物件大小篩選的 ILM 原則，以滿足建議的 EC 要求。
+
+
+CAUTION: 以下 ILM 規則和原則僅為範例。設定 ILM 規則的方法有很多種。在啟動新原則之前，請先進行模擬，以確認其運作方式符合預期，可保護內容免於遺失。
+
+
+
+[[ilm-rule-1-for-example-2-use-ec-for-objects-greater-than-1-mb]]
+== ILM 規則 1 （範例 2）：對大於 1 MB 的物件使用 EC
+
+此範例 ILM 規則對大於 1 MB 的物件進行銷毀編碼。
+
+
+NOTE: 銷毀編碼最適合大於 1 MB 的物件。不要對小於 200 KB 的物件使用銷毀編碼，以免管理非常小的銷毀編碼片段帶來例行成本。
+
+[cols="2a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+規則名稱
+ a| 
+僅限 EC 物件 > 1 MB
+
+
+
+ a| 
+參考時間
+ a| 
+擷取時間
+
+
+
+ a| 
+物件大小進階篩選器
+ a| 
+物件大小大於 1 MB
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+|===
+image:policy_2_rule_1_ec_objects_adv_filtering.png["${post_edited_translations.segment}"]
+
+
+
+[[ilm-rule-2-for-example-2-two-replicated-copies]]
+== 範例 2 的 ILM 規則 2：兩個複寫複本
+
+此範例 ILM 規則會建立兩個複本，且不會依物件大小進行篩選。此規則是該原則的預設規則。因為第一條規則篩選出所有大於 1 MB 的物件，所以此規則僅適用於 1 MB 或更小的物件。
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+規則名稱
+ a| 
+兩份複寫複本
+
+
+
+ a| 
+參考時間
+ a| 
+擷取時間
+
+
+
+ a| 
+物件大小進階篩選器
+ a| 
+無
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+從第 0 天起永遠保留，在站台 1 保留一份複本，在站台 2 保留一份複本。
+
+|===
+
+
+[[ilm-policy-for-example-2-use-ec-for-objects-greater-than-1-mb]]
+== ILM 原則範例 2：對大於 1 MB 的物件使用 EC
+
+此範例 ILM 原則包含兩個 ILM 規則：
+
+* 第一條規則會對所有大於 1 MB 的物件進行銷毀編碼。
+* 第二條（預設）ILM 規則會建立兩個複本。由於大於 1 MB 的物件已被規則 1 篩選掉，因此規則 2 僅適用於 1 MB 或更小的物件。
+

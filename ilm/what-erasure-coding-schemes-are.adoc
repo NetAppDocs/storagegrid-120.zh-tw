@@ -1,0 +1,354 @@
+---
+permalink: ilm/what-erasure-coding-schemes-are.html 
+sidebar: sidebar 
+keywords: erasure-coding scheme 
+summary: ${post_edited_translations.segment} 
+---
+= 了解 StorageGRID 中的抹除編碼方案
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+當您建立或編輯 ILM 規則時，您可以選擇可用的銷毀編碼配置。StorageGRID 會根據構成您計劃使用之儲存資源池的儲存節點和站台數量，自動建立銷毀編碼配置。
+
+
+
+[[data-protection]]
+== 資料保護
+
+StorageGRID 系統使用 Reed-Solomon 銷毀編碼演算法。此演算法將一個物件切分為  `k` 個資料片段，並計算出  `m` 個同位元檢查片段。
+
+這些 `k + m = n`片段分散於 `n`儲存節點，以提供下列資料保護：
+
+* 若要擷取或修理物件，需要  `k` 分段。
+* 一個物件最多可承受  `m` 個遺失或毀損的片段。 `m` 的值越高，故障容許度就越高。
+
+
+在儲存資源池中，具有最高節點或 Volume 故障容錯能力的銷毀編碼方案可提供最佳的資料保護。
+
+
+
+[[storage-overhead]]
+== 儲存負荷
+
+銷毀編碼配置的儲存負荷計算方式，是將同位元檢查片段數量 (`m` ）除以資料片段數量 (`k` ）。您可以使用儲存負荷來計算每個經過銷毀編碼的物件需要多少磁碟空間：
+
+`_disk space_ = _object size_ + (_object size_ * _storage overhead_)`
+
+例如，如果您使用 4+2 配置（具有 50% 的儲存負荷）來儲存 10 MB 的物件，則該物件會消耗 15 MB 的網格儲存設備。如果您使用 6+2 配置（具有 33% 的儲存負荷）來儲存相同的 10 MB 物件，則該物件會消耗大約 13.3 MB。
+
+選擇符合您需求且具有最低  `k+m` 總值的銷毀編碼配置。片段數量較少的銷毀編碼配置具有更高的運算效率，因為：
+
+* ${post_edited_translations.segment}
+* 由於片段大小較大，因此效能較佳。
+* 它們可能需要在 link:../expand/index.html["當需要更多儲存設備時進行擴展"] 中新增較少的節點
+
+
+
+
+[[guidelines-for-storage-pools]]
+== ${post_edited_translations.segment}
+
+在選擇用於建立銷毀編碼複本之規則的儲存資源池時，請遵循下列儲存資源池準則：
+
+* ${post_edited_translations.segment}
++
+
+NOTE: 如果儲存資源池包含兩個站台，則無法使用銷毀編碼。
+
++
+** <<包含三個或更多站台的儲存資源池銷毀編碼方案,包含三個或更多站台的儲存資源池銷毀編碼方案>>
+** <<單一站台儲存資源池的銷毀編碼方案,單一站台儲存資源池的銷毀編碼方案>>
+
+
+* ${post_edited_translations.segment}
+* 儲存資源池應至少包含  `_k+m_ +1` 個可儲存物件資料的 Storage Node。
++
+
+NOTE: 儲存節點可在安裝期間進行設定，以包含物件資料與中繼資料（「結合」儲存節點）、僅包含物件中繼資料，或僅包含物件資料。如需詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+
++
+所需的最小 Storage Node 數為 `k+m`。但是，如果所需的 Storage Node 暫時無法使用，則至少配備一個額外的 Storage Node 可協助防止擷取失敗或 ILM 積壓。
+
+
+
+
+
+[[erasure-coding-schemes-for-storage-pools-containing-three-or-more-sites]]
+== 包含三個或更多站台的儲存資源池銷毀編碼方案
+
+下表說明 StorageGRID 目前針對包含三個或更多站台的儲存資源池所支援的銷毀編碼配置。所有這些配置均提供站台遺失保護。即使遺失一個站台，仍可存取該物件。
+
+對於提供站台遺失保護的銷毀編碼配置，儲存資源池中建議的 Storage Nodes 數量會超過 `_k+m_ +1`，因為每個站台最少需要三個 Storage Nodes。
+
+[cols="1a,1a,1a,1a,1a,1a"]
+|===
+| 銷毀編碼方案（_k+m_） | ${post_edited_translations.segment} | 每個站點建議的儲存節點數量 | ${post_edited_translations.segment} | 站台遺失保護？ | 儲存負荷 
+
+
+ a| 
+4+2
+ a| 
+3
+ a| 
+3
+ a| 
+9
+ a| 
+是的
+ a| 
+50%
+
+
+
+ a| 
+6+2
+ a| 
+4
+ a| 
+3
+ a| 
+12
+ a| 
+是的
+ a| 
+33%
+
+
+
+ a| 
+8+2
+ a| 
+5
+ a| 
+3
+ a| 
+15
+ a| 
+是的
+ a| 
+25%
+
+
+
+ a| 
+6+3
+ a| 
+3
+ a| 
+4
+ a| 
+12
+ a| 
+是的
+ a| 
+50%
+
+
+
+ a| 
+9+3
+ a| 
+4
+ a| 
+4
+ a| 
+16
+ a| 
+是的
+ a| 
+33%
+
+
+
+ a| 
+2+1
+ a| 
+3
+ a| 
+3
+ a| 
+9
+ a| 
+是的
+ a| 
+50%
+
+
+
+ a| 
+4+1
+ a| 
+5
+ a| 
+3
+ a| 
+15
+ a| 
+是的
+ a| 
+25%
+
+
+
+ a| 
+6+1
+ a| 
+7
+ a| 
+3
+ a| 
+21
+ a| 
+是的
+ a| 
+17%
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+3
+ a| 
+5
+ a| 
+15
+ a| 
+是的
+ a| 
+71%
+
+|===
+
+NOTE: StorageGRID 每個站台最少需要三個儲存節點。若要使用 7+5 配置，每個站台最少需要四個儲存節點。建議每個站台使用五個儲存節點。
+
+在選擇能夠提供站台保護的銷毀編碼方案時，應權衡以下因素的相對重要性：
+
+* *碎片數量*：碎片總數越少，效能和擴展靈活度通常越好。
+* *容錯能力*：增加同位元檢查區段的數量（即，當 `m`值較高時）可提高容錯能力。
+* *網路流量*：從故障中復原時，使用具有更多分段的配置（也就是  `k+m` 的總數較高）會產生更多網路流量。
+* *儲存負荷*：負荷較高的方案需要每個物件佔用更多儲存空間。
+
+
+例如，在選擇 4+2 方案和 6+3 方案（兩者儲存負荷均為 50%）時，如果需要更高的容錯能力，則選擇 6+3 方案。如果網路資源受限，則選擇 4+2 方案。如果其他條件相同，則選擇 4+2 方案，因為它產生的分片總數較少。
+
+
+NOTE: 如果您不確定要使用哪種方案，請選擇 4+2 或 6+3，或聯絡技術支援。
+
+
+
+[[erasure-coding-schemes-for-one-site-storage-pools]]
+== 單一站台儲存資源池的銷毀編碼方案
+
+單一站點儲存資源池支援為三個或更多站點定義的所有銷毀編碼方案，前提是該站點有足夠的 Storage Node。
+
+所需的最小儲存節點數為 `k+m`，但建議使用包含  `k+m +1` 個儲存節點的儲存資源池。例如，2+1 銷毀編碼方案至少需要一個包含三個儲存節點的儲存資源池，但建議使用四個儲存節點。
+
+[cols="1a,1a,1a,1a"]
+|===
+| 銷毀編碼方案（_k+m_） | ${post_edited_translations.segment} | 建議的儲存節點數量 | 儲存負荷 
+
+
+ a| 
+4+2
+ a| 
+6
+ a| 
+7
+ a| 
+50%
+
+
+
+ a| 
+6+2
+ a| 
+8
+ a| 
+9
+ a| 
+33%
+
+
+
+ a| 
+8+2
+ a| 
+10
+ a| 
+11
+ a| 
+25%
+
+
+
+ a| 
+6+3
+ a| 
+9
+ a| 
+10
+ a| 
+50%
+
+
+
+ a| 
+9+3
+ a| 
+12
+ a| 
+13
+ a| 
+33%
+
+
+
+ a| 
+2+1
+ a| 
+3
+ a| 
+4
+ a| 
+50%
+
+
+
+ a| 
+4+1
+ a| 
+5
+ a| 
+6
+ a| 
+25%
+
+
+
+ a| 
+6+1
+ a| 
+7
+ a| 
+8
+ a| 
+17%
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+12
+ a| 
+13
+ a| 
+71%
+
+|===

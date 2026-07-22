@@ -1,0 +1,88 @@
+---
+permalink: swnodes/installing-storagegrid-webscale-host-services.html 
+sidebar: sidebar 
+keywords: how to install StorageGRID host services 
+summary: 您可以使用適用於您作業系統類型的 StorageGRID 軟體套件來安裝 StorageGRID 主機服務。 
+---
+= 在 Linux 上安裝 StorageGRID 主機服務
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用適用於您作業系統類型的 StorageGRID 軟體套件來安裝 StorageGRID 主機服務。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+[role="tabbed-block"]
+====
+.RHEL
+--
+您可以使用 StorageGRID RPM 套件來安裝 StorageGRID 主機服務。
+
+.關於此任務
+這些說明介紹如何從 RPM 套件安裝主機服務。或者，您可以使用安裝封存檔中包含的 DNF 儲存庫中繼資料，遠端安裝 RPM 套件。請參閱適用於您的 Linux 作業系統的 DNF 儲存庫說明。
+
+.步驟
+. 將 StorageGRID RPM 套件複製到每台主機，或使其可在共享儲存設備上使用。
++
+例如，將它們放在 `/tmp`目錄中，以便在下一步中使用範例命令。
+
+. 以 root 身分或使用具有 sudo 權限的帳戶登入每台主機，並按指定順序執行以下命令：
++
+[listing]
+----
+sudo dnf --nogpgcheck localinstall /tmp/StorageGRID-Webscale-Images-version-SHA.rpm
+----
++
+[listing]
+----
+sudo dnf --nogpgcheck localinstall /tmp/StorageGRID-Webscale-Service-version-SHA.rpm
+----
++
+
+CAUTION: 必須先安裝 Images 軟體包，再安裝 Service 軟體包。
+
++
+
+NOTE: 如果您將軟體包放在 `/tmp`以外的目錄中，請修改命令以反映您使用的路徑。
+
+
+
+--
+.${post_edited_translations.segment}
+--
+您可以使用 StorageGRID DEB 套件為 Ubuntu 或 Debian 安裝 StorageGRID 主機服務。
+
+.關於此任務
+這些說明介紹如何從 DEB 套件安裝主機服務。或者，您可以使用安裝封存檔中包含的 APT 儲存庫中繼資料，遠端安裝 DEB 套件。請參閱適用於您的 Linux 作業系統的 APT 儲存庫說明。
+
+.步驟
+. 將 StorageGRID DEB 套件複製到每個主機，或使其可在共享儲存設備上使用。
++
+例如，將它們放在 `/tmp`目錄中，以便在下一步中使用範例命令。
+
+. 以 root 身分或使用具有 sudo 權限的帳戶登入每台主機，並執行以下命令。
++
+您必須先安裝  `images` 套件，再安裝  `service` 套件。如果您將套件放置在  `/tmp` 以外的其他目錄中，請修改命令以反映您使用的路徑。
+
++
+[listing]
+----
+sudo dpkg --install /tmp/storagegrid-webscale-images-version-SHA.deb
+----
++
+[listing]
+----
+sudo dpkg --install /tmp/storagegrid-webscale-service-version-SHA.deb
+----
++
+
+NOTE: 必須先安裝 Python 3，才能安裝 StorageGRID 套件。在完成此操作之前， `sudo dpkg --install /tmp/storagegrid-webscale-images-version-SHA.deb` 命令將會失敗。
+
+
+
+--
+====

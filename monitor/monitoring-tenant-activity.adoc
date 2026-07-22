@@ -1,0 +1,184 @@
+---
+permalink: monitor/monitoring-tenant-activity.html 
+sidebar: sidebar 
+keywords: how to monitor tenant activity 
+summary: 所有 S3 用戶端活動都與 StorageGRID 租戶帳戶關聯。您可以使用 Grid Manager 監控所有租戶或特定租戶的儲存設備使用量或網路流量。您可以使用稽核日誌或 Grafana 儀表板來收集有關租戶如何使用 StorageGRID 的更詳細資訊。 
+---
+= 監控 StorageGRID 中的租戶活動
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+所有 S3 用戶端活動都與 StorageGRID 租戶帳戶關聯。您可以使用 Grid Manager 監控所有租戶或特定租戶的儲存設備使用量或網路流量。您可以使用稽核日誌或 Grafana 儀表板來收集有關租戶如何使用 StorageGRID 的更詳細資訊。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+
+
+[[view-all-tenants]]
+== 檢視所有租戶
+
+「租戶」頁面顯示所有現有租戶帳戶的基本資訊。
+
+.步驟
+. 選擇*租戶*。
+. ${post_edited_translations.segment}
++
+每個租戶都會列出已使用邏輯空間、配額使用情況、配額和物件數量。如果未為租戶設定配額，則「配額使用情況」和「配額」欄位包含破折號（—）。
+
++
+
+NOTE: 屬於此租戶的所有物件之邏輯大小，包括未完成和進行中的多部分上傳。此大小不包括用於 ILM 規則的其他實體空間。已使用空間值為估計值。這些估計值會受到內嵌時間、網路連線能力和節點狀態的影響。
+
++
+image:tenant_accounts_page.png["租戶帳戶頁面"]
+
+. （可選）透過選擇「登入/複製網址」欄中的登入連結 image:icon_tenant_sign_in.png["租戶登入圖示"] 登入租戶帳戶。
+. （可選）在「登入/複製 URL」欄中選取複製 URL 連結 image:icon_tenant_copy_url.png["${post_edited_translations.segment}"]，以複製租戶登入頁面的 URL。
+. 視需要選取 *匯出至 CSV* 以檢視及匯出包含所有租戶使用量值的  `.csv` 檔案。
++
+系統提示您開啟或儲存 `.csv`檔案。
+
++
+ `.csv` 檔案的內容類似以下範例：
+
++
+image:tenant_accounts_example_csv.png["租戶帳戶範例 .csv"]
+
++
+您可以在試算表應用程式中開啟 `.csv`檔案，或在自動化中使用該檔案。
+
+. 如果未列出任何物件，可選擇 *Actions* > *Delete* 來移除一個或多個租戶。請參閱 link:../admin/deleting-tenant-account.html["刪除租戶帳戶"]。
++
+${post_edited_translations.segment}
+
+
+
+
+
+[[view-a-specific-tenant]]
+== 檢視特定租戶
+
+${post_edited_translations.segment}
+
+.步驟
+. 從「租戶」頁面中選擇租戶名稱。
++
+顯示租戶詳細資料頁面。
+
++
+image:tenant_usage_modal.png["租戶使用強制回應視窗"]
+
+. 請審查頁面頂部的租戶總覽。
++
+詳細資訊頁面的此部分提供租戶的摘要資訊，包括租戶的物件數量、配額使用情況、已使用的邏輯空間和配額設定。
+
++
+
+NOTE: 屬於此租戶的所有物件之邏輯大小，包括未完成和進行中的多部分上傳。此大小不包括用於 ILM 規則的其他實體空間。已使用空間值為估計值。這些估計值會受到內嵌時間、網路連線能力和節點狀態的影響。
+
+. 從「空間細分」索引標籤，檢視「空間消耗」圖表。
++
+${post_edited_translations.segment}
+
++
+如果為該租戶設定了配額，則會以文字顯示已使用和剩餘配額（例如， `85.00 GB of 100 GB used`）。如果未設定配額，則該租戶擁有無限配額，文字僅顯示已使用空間量（例如， `85.00 GB used`）。長條圖顯示每個儲存桶或 Container 的配額使用百分比。如果租戶超出儲存設備配額 1% 以上且至少超出 1 GB，則圖表會顯示總配額和超出量。
+
++
+您可以將游標置於長條圖上，查看每個儲存桶或 Container 已使用的儲存設備。您可以將游標置於可用空間區段上，查看剩餘的儲存設備配額。
+
++
+image:tenant_bucket_space_consumption_GM.png["${post_edited_translations.segment}"]
+
++
+
+CAUTION: 配額使用量是根據內部估計值而定，在某些情況下可能會超出。例如，StorageGRID 會在租戶開始上傳物件時檢查配額，如果租戶已超出配額，則會拒絕新的內嵌。然而，StorageGRID 在判斷是否已超出配額時，並不會將目前上傳的大小考慮在內。如果刪除了物件，在重新計算配額使用量之前，可能會暫時阻止租戶上傳新物件。配額使用量計算可能需要 10 分鐘或更長時間。
+
++
+
+NOTE: 租戶的配額使用量表示該租戶上傳至 StorageGRID 的物件資料總量（邏輯大小）。配額使用量並不代表用於儲存這些物件之複本及其中繼資料的空間（實體大小）。
+
++
+
+NOTE: 您可以啟用 *Tenant quota usage high* 警示規則，以確定租戶是否已用完其配額。啟用後，當租戶已使用 90% 的配額時，系統將觸發此警示。如需相關指示，請參閱 link:../monitor/editing-alert-rules.html["${post_edited_translations.segment}"]。
+
+. 從「空間細分」索引標籤中，審查「Bucket 詳細資料」。
++
+此表列出了租戶的 S3 儲存桶。已用空間是指儲存桶或 Container 中物件資料的總量。此值不包括 ILM 複本和物件中繼資料所需的儲存空間。
+
+. （可選）選擇 *Export to CSV* 以檢視和匯出包含每個儲存桶或 Container 使用情況值的 .csv 檔案。
++
+單一 S3 租戶的 `.csv`檔案內容類似以下範例：
+
++
+image:tenant_bucket_details_csv.png["租戶儲存桶詳細資訊 CSV 範例"]
+
++
+您可以在試算表應用程式中開啟 `.csv`檔案，或在自動化中使用該檔案。
+
+. 您也可以選擇「允許的功能」標籤，查看租戶已啟用的權限和功能清單。如果您需要變更任何設定，請參閱 link:../admin/editing-tenant-account.html["編輯租戶帳戶"]。
+. ${post_edited_translations.segment}
++
+請參閱 link:../admin/grid-federation-overview.html["什麼是網格聯邦？"] 與 link:../admin/grid-federation-manage-tenants.html["管理網格聯盟的允許租戶"]。
+
+
+
+
+
+[[view-network-traffic]]
+== 檢視網路流量
+
+如果租戶已設有流量分類原則，請審查該租戶的網路流量。
+
+.步驟
+. 選擇 *組態* > *網路* > *流量分類*。
++
+此時會顯示「流量分類原則」頁面，現有原則列於表格中。
+
+. 審查原則清單，以識別適用於特定租戶的原則。
+. ${post_edited_translations.segment}
+. 分析圖表，確定原則限制流量的頻率，以及是否需要調整原則。
+
+
+如需詳細資訊，請參閱 link:../admin/managing-traffic-classification-policies.html["管理流量分類原則"]。
+
+
+
+[[use-the-audit-log]]
+== ${post_edited_translations.segment}
+
+您也可以使用稽核日誌來更細緻地監控租戶的活動。
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 用戶端請求的來源 IP 位址
+
+
+稽核日誌會寫入文字檔案，您可以使用您選擇的日誌分析工具進行分析。這有助於您更了解用戶端活動，或實作複雜的費用分攤和計費模型。
+
+如需詳細資訊，請參閱 link:../audit/index.html["${post_edited_translations.segment}"]。
+
+
+
+[[use-prometheus-metrics]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 在 Grid Manager 中，選取 *支援* > *工具* > *計量*。您可以使用現有的儀表板（例如 S3 Overview）來審查用戶端活動。
++
+
+NOTE: Metrics 頁面上的工具主要供技術支援使用。這些工具中的某些功能和功能表項目是刻意不提供功能的。
+
+* 在 Grid Manager 的頂端，選取說明圖示，然後選取 *API documentation*。您可以使用 Grid Management API 中「計量」區段的計量，為租戶活動建立自訂警示規則和儀表板。
+
+
+如需詳細資訊，請參閱 link:reviewing-support-metrics.html["審查支援計量"]。

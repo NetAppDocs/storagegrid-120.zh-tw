@@ -1,0 +1,42 @@
+---
+permalink: s3/operations-on-the-service.html 
+sidebar: sidebar 
+keywords: listbuckets, get service, operations on the service 
+summary: StorageGRID 系統支援對該服務的操作。 
+---
+= StorageGRID 中支援的服務作業
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 系統支援對服務執行下列操作。
+
+[cols="1a,2a"]
+|===
+| 操作 | 實作 
+
+
+ a| 
+ListBuckets
+
+（之前名為 GET 服務）
+ a| 
+已實作所有 Amazon S3 REST API 行為。如有更改，恕不另行通知。
+
+
+
+ a| 
+取得儲存使用情況
+ a| 
+StorageGRID link:get-storage-usage-request.html["取得儲存使用情況"] 要求會告訴您某個帳戶正在使用的總儲存設備量，以及與該帳戶關聯的每個儲存桶的儲存設備使用情況。這是對服務執行的操作，路徑為 /，並新增了自訂查詢參數 (`?x-ntap-sg-usage`）。
+
+
+
+ a| 
+OPTIONS /
+ a| 
+用戶端應用程式無需提供 S3 身分驗證認證資料，即可向儲存節點上的 S3 連接埠發出 `OPTIONS /`請求，以確定儲存節點是否可用。您可以使用此請求進行監控，或允許外部負載平衡器識別儲存節點何時發生故障。
+
+|===

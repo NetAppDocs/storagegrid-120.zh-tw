@@ -1,0 +1,59 @@
+---
+permalink: tenant/ilm-policy-tags.html 
+sidebar: sidebar 
+keywords: how to assign ilm policy tag to bucket 
+summary: 根據您的物件儲存需求，選擇要指派給儲存桶的 ILM 原則標籤。 
+---
+= 將 ILM 策略標籤套用至 StorageGRID 儲存貯體
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+根據您的物件儲存要求，選擇要套用於儲存桶的 ILM 原則標籤。
+
+ILM 原則控制物件資料的儲存位置，以及是否在特定時間段後刪除資料。使用多個作用中原則時，網格系統管理員會建立 ILM 原則並將其指派給 ILM 原則標籤。
+
+
+NOTE: 避免頻繁重新分配儲存桶的原則標籤。否則，可能會出現效能問題。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於擁有 link:tenant-management-permissions.html["root 存取、管理所有儲存桶或檢視所有儲存桶權限"] 的使用者群組。這些權限會置換群組或儲存桶原則中的權限設定。
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+「儲存桶」頁面隨即出現。您可以根據需要依任意欄對資訊進行排序，也可以在清單中前後翻頁。
+
+. 選擇要指派 ILM 原則標籤的儲存桶名稱。
++
+您也可以變更已指派標籤的儲存桶的 ILM 原則標籤指派。
+
++
+
+NOTE: 顯示的物件數量和已使用空間值均為估算值。這些估算值會受到資料攝取時間、網路連線狀況和節點狀態的影響。如果儲存桶啟用了版本控制，則已刪除的物件版本也會包含在物件數量中。
+
+. 在「儲存桶選項」標籤中，擴充 ILM 原則標籤折疊面板。只有當您的網格系統管理員啟用了自訂原則標籤的使用時，此折疊面板才會顯示。
+. 閱讀每個原則標籤的執行摘要，以確定應將哪個標籤套用於儲存桶。
++
+
+CAUTION: 更改儲存桶的 ILM 原則標籤將觸發對儲存桶中所有物件的 ILM 重新評估。如果新原則將物件保留一段有限的時間，則舊物件將被刪除。
+
+. 選取要指派給儲存桶的標籤對應的選項按鈕。
+. 選擇 *Save changes*。系統將在儲存桶上設定一個新的 S3 儲存桶標籤，其鍵 `NTAP-SG-ILM-BUCKET-TAG`和值與 ILM 原則標籤名稱相同。
++
+
+CAUTION: 請確保您的 S3 應用程式不會意外置換或刪除新的儲存桶標籤。如果在為儲存桶套用新 TagSet 時省略了此標籤，則儲存桶中的物件將回復使用預設的 ILM 原則進行評估。
+
++
+
+CAUTION: 僅可使用 Tenant Manager 或 Tenant Manager API 設定和修改 ILM 原則標籤，前提是 ILM 原則標籤已通過驗證。請勿使用 S3 PutBucketTagging API 或 S3 DeleteBucketTagging API `NTAP-SG-ILM-BUCKET-TAG`修改 ILM 原則標籤。
+
++
+
+NOTE: 變更指派給儲存桶的原則標籤，會在使用新的 ILM 原則重新評估物件期間產生暫時性效能影響。
+
+

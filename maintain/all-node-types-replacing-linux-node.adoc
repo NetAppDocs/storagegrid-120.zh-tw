@@ -1,0 +1,20 @@
+---
+permalink: maintain/all-node-types-replacing-linux-node.html 
+sidebar: sidebar 
+keywords: replace linux node 
+summary: 如果故障需要您部署一或多個新的實體或虛擬主機，或是在現有主機上重新安裝 Linux，則必須先部署並設定替代主機，然後才能恢復網格節點。此程序是所有類型網格節點之網格節點恢復程序中的一個步驟。 
+---
+= 更換 StorageGRID 中的 Linux 節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果故障需要您部署一或多個新的實體或虛擬主機，或是在現有主機上重新安裝 Linux，則必須先部署並設定替代主機，然後才能恢復網格節點。此程序是所有類型網格節點之網格節點恢復程序中的一個步驟。
+
+「Linux」指的是 Red Hat® Enterprise Linux® （RHEL）、Ubuntu® 或 Debian® 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+此程序僅作為恢復軟體型儲存節點、主要或非主要管理節點或閘道節點過程中的一個步驟。無論要恢復哪種類型的網格節點，步驟都相同。
+
+如果實體或虛擬 Linux 主機上託管了多個網格節點，您可以依任何順序恢復這些網格節點。然而，先恢復主要 Admin Node （ 如果存在 ） 可以防止其他網格節點在嘗試聯絡主要 Admin Node 以註冊恢復時停滯。

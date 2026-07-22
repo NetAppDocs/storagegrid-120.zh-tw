@@ -1,0 +1,134 @@
+---
+permalink: audit/mgau-management-audit-message.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, MGAU, Management audit message 
+summary: 管理類別會記錄使用者向管理 API 發出的請求。所有非 GET 或 HEAD 的 API 請求都會記錄一個回應，其中包含使用者名稱、IP 位址和申請類型。 
+---
+= StorageGRID 中管理 API 請求的 MGAU 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+管理類別會記錄使用者對管理 API 的請求。所有非 GET 或 HEAD 請求（指向有效 API URI）的 HTTP 請求都會記錄一個包含使用者名稱、IP 位址和申請類型的回應。無效的 API URI（例如 /api/v3-authorize）以及對有效 API URI 的無效請求不會被記錄。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+MDIP
+ a| 
+目的地 IP 位址
+ a| 
+伺服器（目的地） IP 位址。
+
+
+
+ a| 
+MDNA
+ a| 
+網域名稱
+ a| 
+主機網域名稱。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+MPQP
+ a| 
+${post_edited_translations.segment}
+ a| 
+要求的查詢參數。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+請求本文
+ a| 
+要求本文的內容。雖然預設會記錄回應本文，但在某些情況下，當回應本文為空時，也會記錄要求本文。由於以下資訊在回應本文中不可用，因此對於以下 POST 方法，這些資訊會從要求本文中取得：
+
+* *POST authorize* 中的使用者名稱和帳戶 ID
+* ${post_edited_translations.segment}
+* 在 *POST /grid/ntp-servers/update* 中新增 NTP 伺服器
+* ${post_edited_translations.segment}
+
+
+*注意：*敏感資訊會被刪除（例如，S3 存取金鑰）或以星號遮罩（例如，密碼）。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+* POST
+* PUT
+* 刪除
+* PATCH
+
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+回應本文
+ a| 
+${post_edited_translations.segment}
+
+*注意：*敏感資訊會被刪除（例如，S3 存取金鑰）或以星號遮罩（例如，密碼）。
+
+
+
+ a| 
+MSIP
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+RSLT
+ a| 
+結果
+ a| 
+${post_edited_translations.segment}
+
+|===

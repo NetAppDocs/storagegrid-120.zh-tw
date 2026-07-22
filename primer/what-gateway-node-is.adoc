@@ -1,0 +1,64 @@
+---
+permalink: primer/what-gateway-node-is.html 
+sidebar: sidebar 
+keywords: StorageGRID, gateway nodes, api gateway 
+summary: Gateway Nodes 提供專用的負載平衡介面，S3 用戶端應用程式可以使用該介面連接至 StorageGRID。負載平衡透過將工作負載分配至多個 Storage Nodes，最大限度地提高速度和連線容量。Gateway Nodes 為選用項目。 
+---
+= 什麼是 StorageGRID 閘道節點？
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Gateway Nodes 提供專用的負載平衡介面，S3 用戶端應用程式可以使用該介面連接至 StorageGRID。負載平衡透過將工作負載分配至多個 Storage Nodes，最大限度地提高速度和連線容量。Gateway Nodes 為選用項目。
+
+StorageGRID 負載平衡器服務部署在所有管理節點和所有閘道節點上。它對用戶端請求執行傳輸層安全性 （TLS） 終止，檢查請求，並與儲存節點建立新的安全連線。負載平衡器服務無縫地將用戶端導向至最佳儲存節點，使節點甚至整個站台的故障對用戶端而言是透明的。
+
+您可以設定一個或多個負載平衡器端點，以定義傳入和傳出的用戶端請求存取 Gateway 和 Admin 節點上的負載平衡器服務時將使用的連接埠和網路傳輸協定（HTTPS 或 HTTP）。負載平衡器端點也定義了用戶端類型（S3）、綁定模式，以及可選的允許或封鎖的租戶清單。請參閱link:../admin/managing-load-balancing.html["負載平衡的考慮因素"]。
+
+根據需要，您可以將多個閘道節點和管理節點的網路介面分組到一個高可用度 （HA） 群組中。如果 HA 群組中的作用中介面發生故障，備份介面可以管理用戶端應用程式工作負載。請參閱link:../admin/managing-high-availability-groups.html["${post_edited_translations.segment}"]。
+
+
+
+[[primary-services-for-gateway-nodes]]
+== Gateway Node 的主要服務
+
+下表列出 Gateway Node 的主要服務；但此表並未列出所有節點服務。
+
+[cols="1a,2a"]
+|===
+| 服務 | ${post_edited_translations.segment} 
+
+
+ a| 
+快取服務
+ a| 
+管理物件內容的本機快取。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+管理管理節點群組和閘道節點群組的高可用度虛擬 IP 位址。
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+負載平衡器
+ a| 
+提供從用戶端到儲存節點的 S3 流量第 7 層負載平衡。這是建議的負載平衡機制。
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+監控作業系統和底層硬體。
+
+|===

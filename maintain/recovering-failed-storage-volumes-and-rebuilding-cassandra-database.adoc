@@ -1,0 +1,100 @@
+---
+permalink: maintain/recovering-failed-storage-volumes-and-rebuilding-cassandra-database.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, maintenance, maintain, failed storage volumes, failed volumes, cassandra, cassandra rebuild, rebuild cassandra, cassandra database 
+summary: 您必須執行一個指令碼，該指令碼可以重新格式化和重新掛載故障儲存 Volume 上的儲存設備，並在系統確定有必要時重新建置儲存節點上的 Cassandra 資料庫。 
+---
+= 在 StorageGRID 中恢復故障的儲存磁碟區並重建 Cassandra 資料庫
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您必須執行一個指令碼，該指令碼可以重新格式化和重新掛載故障儲存 Volume 上的儲存設備，並在系統確定有必要時重新建置儲存節點上的 Cassandra 資料庫。
+
+.開始之前
+* 您擁有  `Passwords.txt` 檔案。
+* 伺服器上的系統磁碟機完好無損。
+* 故障原因已查明，如有必要，已購置替換儲存設備硬體。
+* 替換儲存設備的總大小與原儲存設備相同。
+* 您已確認儲存節點退役作業未在進行中，或已暫停節點退役程序。（在 Grid Manager 中，選擇 *Maintenance* > *Tasks* > *Decommission*。）
+* 您已確認擴充並未在進行中。（在 Grid Manager 中，選取 *維護* > *工作* > *擴充*。）
+* 您有link:reviewing-warnings-about-storage-volume-recovery.html["已審查有關儲存設備 Volume 恢復的警告"]。
+
+
+.步驟
+. 根據需要，更換與先前識別並卸載的故障儲存 Volume 相關聯的故障實體或虛擬儲存設備。
++
+請勿在此步驟中重新掛載 Volume。儲存設備將在後續步驟中重新掛載並新增至 `/etc/fstab`。
+
+. 在 Grid Manager 中、前往 *Nodes* > `*appliance Storage Node*` > *Hardware* 。在頁面的 StorageGRID Appliance 區段中、確認 Storage RAID 模式是否正常。
+. 登入故障儲存節點：
++
+.. 請輸入以下命令： `ssh admin@_grid_node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 使用文字編輯器（vi 或 vim）從 `/etc/fstab`檔案中刪除失敗的 Volume，然後儲存檔案。
++
+
+NOTE: 僅在 `/etc/fstab`檔案中將故障 Volume 註解掉是不夠的。必須從 `fstab`中刪除該 Volume，因為恢復程序會驗證 `fstab`檔案中的所有行是否與已裝載的檔案系統相符。
+
+. 格式化任何故障的儲存設備 Volume ，並在必要時重新建置 Cassandra 資料庫。輸入： `reformat_storage_block_devices.rb`
++
+** 當儲存設備 Volume 0 被卸載時，提示和訊息會指示 Cassandra 服務正在停止。
+** 如有必要，系統會提示您重新建置 Cassandra 資料庫。
++
+*** 請審查警告訊息。如果所有警告均不適用，請重新建置 Cassandra 資料庫。輸入：*y*
+*** 如果多個儲存節點離線。請輸入：*n*
++
+指令碼將退出，不會重新建置 Cassandra。請聯絡技術支援。
+
+
+
+** 對於儲存節點上的每個 rangedb 磁碟機，當系統詢問： `Reformat the rangedb drive _<name>_ (device _<major number>:<minor number>_)? [y/n]?`時，請輸入以下回應之一：
++
+*** *y* 重新格式化有錯誤的磁碟機。這會重新格式化儲存設備 Volume，並將已重新格式化的儲存設備 Volume 新增至  `/etc/fstab` 檔案。
+*** *n* 如果磁碟機沒有錯誤，且您不想重新格式化它。
++
+
+NOTE: 選擇 *n* 將退出指令碼。您可以裝載磁碟機（如果您認為應該保留磁碟機上的資料，並且磁碟機被錯誤卸載），或者移除磁碟機。然後，再次執行  `reformat_storage_block_devices.rb` 命令。
+
++
+
+NOTE: 某些 StorageGRID 恢復程序使用 Reaper 來處理 Cassandra 的修復。一旦相關或必要的服務啟動，修復就會自動進行。您可能會注意到指令碼輸出中提及「reaper」或「Cassandra repair」。如果您看到指示修復失敗的錯誤訊息，請執行錯誤訊息中指示的命令。
+
++
+在以下範例輸出中，需要重新格式化磁碟機 `/dev/sdf`，但不需要重新建置 Cassandra：
+
++
+[listing]
+----
+root@DC1-S1:~ # reformat_storage_block_devices.rb
+Formatting devices that are not in use...
+Skipping in use device /dev/sdc
+Skipping in use device /dev/sdd
+Skipping in use device /dev/sde
+Reformat the rangedb drive /dev/sdf (device 8:64)? [Y/n]? y
+Successfully formatted /dev/sdf with UUID b951bfcb-4804-41ad-b490-805dfd8df16c
+All devices processed
+Running: /usr/local/ldr/setup_rangedb.sh 12368435
+Cassandra does not need rebuilding.
+Starting services.
+Informing storage services of new volume
+
+Reformatting done.  Now do manual steps to
+restore copies of data.
+----
+
+
+
+
+
+
+儲存設備 Volume 重新格式化並重新掛載，必要的 Cassandra 操作完成後，您可以link:../maintain/restoring-volume.html["使用 Grid Manager 還原物件資料"]。

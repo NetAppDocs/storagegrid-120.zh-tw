@@ -1,0 +1,59 @@
+---
+permalink: maintain/how-your-system-is-affected-when-you-apply-hotfix.html 
+sidebar: sidebar 
+keywords: storagegrid, hotfix 
+summary: 您必須了解套用 Hotfix 後 StorageGRID 系統將受到怎樣的影響。 
+---
+= 應用熱修復程式後 StorageGRID 會受到怎樣的影響
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您必須了解套用 Hotfix 後 StorageGRID 系統將受到怎樣的影響。
+
+
+
+[[storagegrid-hotfixes-are-non-disruptive]]
+== ${post_edited_translations.segment}
+
+StorageGRID 系統可以在 Hotfix 過程中從用戶端應用程式擷取和取得資料。如果您批准對所有相同類型的節點（例如，儲存節點）進行 Hotfix，則這些節點會逐一關閉，因此不會出現所有網格節點或特定類型的所有網格節點都無法使用的情況。
+
+為確保持續可用度，請確保您的 ILM 原則包含指定儲存每個物件多個複本的規則。您還必須確保所有外部 S3 用戶端都設定為將請求傳送至下列其中一個位址：
+
+* 高可用度 （HA） 群組虛擬 IP 位址
+* 高可用度第三方負載平衡器
+* 每個用戶端有多個網關節點
+* 每個用戶端多個儲存節點
+
+
+
+
+[[client-applications-might-experience-short-term-disruptions]]
+== ${post_edited_translations.segment}
+
+在整個 Hotfix 過程中，StorageGRID 系統可以從用戶端應用程式擷取和取回資料；但是，如果 Hotfix 需要重新啟動某些節點上的服務，則用戶端與個別 Gateway Node 或 Storage Node 的連線可能會暫時中斷。Hotfix 過程完成後，各節點上的服務恢復後，連線也將隨之恢復。
+
+如果短時間內的連線中斷不可接受，您可能需要安排停機來套用 Hotfix。您可以使用選擇性批准來安排特定節點的更新時間。
+
+
+NOTE: 您可以使用多個閘道和高可用度 （HA） 群組，以便在 Hotfix 過程中提供自動故障轉移。請參閱相關說明 link:../admin/configure-high-availability-group.html["${post_edited_translations.segment}"]。
+
+
+
+[[alerts-and-snmp-notifications-might-be-triggered]]
+== 可能會觸發警報和 SNMP 通知
+
+當服務重新啟動或 StorageGRID 系統處於混合版本環境（部分網格節點執行早期版本，而其他節點已升級至較新版本）時，可能會觸發警報和 SNMP 通知。一般而言，這些警報和通知會在 Hotfix 完成後清除。
+
+
+
+[[configuration-changes-are-restricted]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* 在 Hotfix 套用至所有節點之前，請勿更新 ILM 組態。
+

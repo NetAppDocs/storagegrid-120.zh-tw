@@ -1,0 +1,400 @@
+---
+settings:
+  name: StorageGRID software
+  search: storagegrid-enable,storagegrid,storagegrid-appliances
+  downlevel: true
+  internal:
+    pdf_enabled: true
+    termcheck_enabled: false
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+    hide_language_selector: false
+  versions:
+  - version-number: '12.0'
+    url: "/storagegrid-120"
+  - version-number: '12.1'
+    url: "/storagegrid"
+  - version-number: '11.9'
+    url: "/storagegrid-119"
+  - version-number: '11.8'
+    url: "/storagegrid-118"
+  - version-number: '11.7'
+    url: "/storagegrid-117"
+  - version-number: '11.6'
+    url: "/storagegrid-116"
+  - version-number: '11.5'
+    url: "/storagegrid-115"
+  langs: zh-tw,us-en,de-de,es-es,fr-fr,it-it,pt-br,ja-jp,ko-kr,zh-cn
+sidebar:
+  entries:
+  - title: StorageGRID 12.0 軟體
+    url: "/index.html"
+  - title: StorageGRID 應用裝置
+    url: "/swnodes/storagegrid-hardware.html"
+  - title: 版本資訊
+    entries:
+    - title: StorageGRID 12.0 的新功能
+      url: "/release-notes/whats-new.html"
+    - title: 已移除或已過時的功能和特性
+      url: "/release-notes/removed-or-deprecated-features.html"
+    - title: 網格管理 API 的變更
+      url: "/release-notes/changes-to-grid-management-api.html"
+    - title: 租戶管理 API 的變更
+      url: "/release-notes/changes-to-tenant-management-api.html"
+  - title: 開始使用
+    url: "/landing-get-started/index.html"
+    entries:
+    - section: primer
+    - section: network
+    - title: 快速入門
+      url: "/primer/quick-start.html"
+  - title: 安裝、升級和 Hotfix
+    url: "/landing-install-upgrade/index.html"
+    entries:
+    - section: swnodes
+    - section: upgrade
+    - title: 套用 StorageGRID Hotfix
+      entries:
+      - title: "${post_edited_translations.segment}"
+        url: "/maintain/storagegrid-hotfix-procedure.html"
+      - title: 套用 Hotfix 時對系統的影響
+        url: "/maintain/how-your-system-is-affected-when-you-apply-hotfix.html"
+      - title: 取得 Hotfix 所需的材料
+        url: "/maintain/obtaining-required-materials-for-hotfix.html"
+      - title: 下載 Hotfix 檔案
+        url: "/maintain/downloading-hotfix-file.html"
+      - title: 在套用 Hotfix 前，請檢查系統狀況。
+        url: "/maintain/checking-systems-condition-before-applying-hotfix.html"
+      - title: 套用 Hotfix
+        url: "/maintain/applying-hotfix.html"
+  - title: 設定及管理
+    url: "/landing-configure-manage/index.html"
+    entries:
+    - section: admin
+    - section: ilm
+    - section: harden
+    - section: fabricpool
+  - title: 使用 StorageGRID
+    url: "/landing-use/index.html"
+    entries:
+    - section: tenant
+    - section: s3
+    - section: swift
+  - title: 監控和故障排除
+    url: "/landing-monitor-troubleshoot/index.html"
+    entries:
+    - section: monitor
+    - section: troubleshoot
+    - section: audit
+  - section: expand
+  - title: 維護您的網格
+    url: "/landing-maintain/index.html"
+    entries:
+    - title: 網格維護
+      url: "/maintain/index.html"
+    - title: 下載恢復套件
+      url: "/maintain/downloading-recovery-package.html"
+    - title: 退役節點或站台
+      entries:
+      - title: 退役節點或站台
+        url: "/maintain/decommission-procedure.html"
+      - title: 退役節點
+        entries:
+        - title: 網格節點退役
+          url: "/maintain/grid-node-decommissioning.html"
+        - title: 管理節點或閘道節點的注意事項
+          url: "/maintain/considerations-for-decommissioning-admin-or-gateway-nodes.html"
+        - title: 儲存節點的相關考慮因素
+          entries:
+          - title: 一般性考慮
+            url: "/maintain/considerations-for-decommissioning-storage-nodes.html"
+          - title: "${post_edited_translations.segment}"
+            url: "/maintain/understanding-adc-service-quorum.html"
+          - title: 檢閱 ILM 原則和儲存組態
+            url: "/maintain/reviewing-ilm-policy-and-storage-configuration.html"
+          - title: "${post_edited_translations.segment}"
+            url: "/maintain/consolidating-storage-nodes.html"
+          - title: 退役多個儲存節點
+            url: "/maintain/decommissioning-multiple-storage-nodes.html"
+        - title: 檢查資料修理作業
+          url: "/maintain/checking-data-repair-jobs.html"
+        - title: 收集所需材料
+          url: "/maintain/gathering-required-materials-node-decom.html"
+        - title: 存取退役節點頁面
+          url: "/maintain/accessing-decommission-nodes-page.html"
+        - title: 退役已中斷連線的網格節點
+          url: "/maintain/decommissioning-disconnected-grid-nodes.html"
+        - title: "${post_edited_translations.segment}"
+          url: "/maintain/decommissioning-connected-grid-nodes.html"
+        - title: 暫停和恢復儲存節點的退役流程
+          url: "/maintain/pausing-and-resuming-decommission-process-for-storage-nodes.html"
+      - title: 退役站台
+        entries:
+        - title: 移除網站的注意事項
+          url: "/maintain/considerations-for-removing-site.html"
+        - title: 收集所需材料
+          url: "/maintain/gathering-required-materials-site-decom.html"
+        - title: 選擇站台
+          url: "/maintain/step-1-select-site.html"
+        - title: 檢視詳細資料
+          url: "/maintain/step-2-view-details.html"
+        - title: 修訂 ILM 原則
+          url: "/maintain/step-3-revise-ilm-policy.html"
+        - title: 刪除 ILM 引用
+          url: "/maintain/step-4-remove-ilm-references.html"
+        - title: 解決節點衝突（並開始退役）
+          url: "/maintain/step-5-resolve-node-conflicts.html"
+        - title: 監控退役
+          url: "/maintain/step-6-monitor-decommission.html"
+    - title: 重新命名網格、站台或節點
+      entries:
+      - title: 使用重新命名程式
+        url: "/maintain/rename-grid-site-node-overview.html"
+      - title: 新增或更新顯示名稱
+        url: "/maintain/rename-grid-site-node.html"
+    - title: 節點程序
+      entries:
+      - title: 節點維護流程
+        pdf-filename: 節點程序
+        url: "/maintain/grid-node-procedures.html"
+      - title: 移動 ADC 服務
+        url: "/maintain/move-adc-service.html"
+      - title: 轉換為僅資料節點
+        url: "/maintain/convert-to-data-only-node.html"
+      - title: 重新啟動、關機和電源操作步驟
+        entries:
+        - title: 執行滾動重新開機
+          url: "/maintain/rolling-reboot-procedure.html"
+        - title: 從「任務」索引標籤重新開機節點
+          url: "/maintain/rebooting-grid-node-from-grid-manager.html"
+        - title: 從命令 Shell 重新開機節點
+          url: "/maintain/rebooting-grid-node-from-command-shell.html"
+        - title: 關閉節點
+          url: "/maintain/shutting-down-grid-node.html"
+        - title: 關閉主機電源
+          url: "/maintain/powering-down-host.html"
+        - title: 關閉所有節點的電源，然後再重新啟動所有節點
+          url: "/maintain/powering-off-and-on-all-nodes-in-grid.html"
+      - title: 連接埠重映射程序
+        entries:
+        - title: "${post_edited_translations.segment}"
+          url: "/maintain/removing-port-remaps.html"
+        - title: 移除裸機主機上的連接埠重映射
+          url: "/maintain/removing-port-remaps-on-bare-metal-hosts.html"
+      - title: Server Manager 程序
+        entries:
+        - title: 查看 Server Manager 狀態和版本
+          url: "/maintain/viewing-server-manager-status-and-version.html"
+        - title: 查看所有服務的目前狀態
+          url: "/maintain/viewing-current-status-of-all-services.html"
+        - title: 啟動 Server Manager 和所有服務
+          url: "/maintain/starting-server-manager-and-all-services.html"
+        - title: 重新啟動 Server Manager 和所有服務
+          url: "/maintain/restarting-server-manager-and-all-services.html"
+        - title: 停止 Server Manager 和所有服務
+          url: "/maintain/stopping-server-manager-and-all-services.html"
+        - title: 查看目前服務狀態
+          url: "/maintain/viewing-current-status-of-service.html"
+        - title: 停止服務
+          url: "/maintain/stopping-service.html"
+        - title: 強制終止服務
+          url: "/maintain/forcing-service-to-terminate.html"
+        - title: 啟動或重新啟動服務
+          url: "/maintain/starting-or-restarting-service.html"
+        - title: 使用 DoNotStart 檔案
+          url: "/maintain/using-donotstart-file.html"
+        - title: Server Manager 故障排除
+          url: "/maintain/accessing-server-manager-log-file.html"
+    - title: 網路程序
+      entries:
+      - title: 更新網格網路的子網路
+        url: "/maintain/updating-subnets-for-grid-network.html"
+      - title: "${post_edited_translations.segment}"
+        entries:
+        - title: IP 位址指南
+          url: "/maintain/configuring-ip-addresses.html"
+        - title: "${post_edited_translations.segment}"
+          url: "/maintain/changing-nodes-network-configuration.html"
+        - title: 在管理網路上新增或變更子網路列表
+          url: "/maintain/adding-to-or-changing-subnet-lists-on-admin-network.html"
+        - title: "${post_edited_translations.segment}"
+          url: "/maintain/adding-to-or-changing-subnet-lists-on-grid-network.html"
+        - title: 更改網格中所有節點的 IP 位址
+          url: "/maintain/changing-ip-addresses-and-mtu-values-for-all-nodes-in-grid.html"
+      - title: 向現有節點新增介面
+        entries:
+        - title: Linux：新增管理或客戶端介面
+          url: "/maintain/linux-adding-interfaces-to-existing-node.html"
+        - title: Linux：新增主幹或存取介面
+          url: "/maintain/linux-adding-trunk-or-access-interfaces-to-node.html"
+        - title: VMware：新增中繼或存取介面
+          url: "/maintain/vmware-adding-trunk-or-access-interfaces-to-node.html"
+      - title: "${post_edited_translations.segment}"
+        url: "/maintain/configuring-dns-servers.html"
+      - title: "${post_edited_translations.segment}"
+        url: "/maintain/modifying-dns-configuration-for-single-grid-node.html"
+      - title: 管理 NTP 伺服器
+        url: "/maintain/configuring-ntp-servers.html"
+      - title: 恢復隔離節點的網路連線
+        url: "/maintain/restoring-network-connectivity-for-isolated-nodes.html"
+    - title: 主機和中介軟體程序
+      entries:
+      - title: Linux：將網格節點遷移到新主機
+        url: "/maintain/linux-migrating-grid-node-to-new-host.html"
+      - title: VMware：設定虛擬機器自動重新啟動
+        url: "/maintain/vmware-configuring-virtual-machine-for-automatic-restart.html"
+  - title: 恢復或替換節點
+    url: "/landing-recover/index.html"
+    entries:
+    - title: 網格節點恢復的警告和注意事項
+      url: "/maintain/warnings-and-considerations-for-grid-node-recovery.html"
+    - title: 收集網格節點恢復所需的材料
+      url: "/maintain/gathering-required-materials-for-grid-node-recovery.html"
+    - title: 選擇節點恢復程序
+      url: "/maintain/selecting-node-recovery-procedure.html"
+    - title: 從儲存節點故障中恢復
+      entries:
+      - title: 儲存節點恢復
+        url: "/maintain/recovering-from-storage-node-failures.html"
+      - title: 恢復應用裝置儲存節點
+        entries:
+        - title: 恢復應用裝置儲存節點的警告
+          pdf-filename: 恢復應用裝置儲存節點
+          url: "/maintain/recovering-storagegrid-appliance-storage-node.html"
+        - title: 準備應用裝置儲存節點以進行重新安裝
+          url: "/maintain/preparing-appliance-storage-node-for-reinstallation.html"
+        - title: 開始安裝 StorageGRID 應用裝置
+          url: "/maintain/starting-storagegrid-appliance-installation.html"
+        - title: 監控 StorageGRID 應用裝置安裝
+          url: "/maintain/monitoring-storagegrid-appliance-installation-sn.html"
+        - title: 選擇「開始恢復」以設定應用裝置儲存節點
+          url: "/maintain/selecting-start-recovery-to-configure-appliance-storage-node.html"
+        - title: 重新掛載並重新格式化應用裝置儲存設備磁碟區（手動步驟）
+          url: "/maintain/remounting-and-reformatting-appliance-storage-volumes.html"
+        - title: 將物件資料還原至應用裝置的儲存設備 Volume
+          url: "/maintain/restoring-object-data-to-storage-volume-for-appliance.html"
+        - title: 恢復應用裝置儲存節點後，檢查儲存設備狀態
+          url: "/maintain/checking-storage-state-after-recovering-sga.html"
+      - title: 在系統磁碟機完好無損的情況下，從儲存設備 Volume 故障中恢復
+        entries:
+        - title: 恢復任務
+          pdf-filename: 在系統磁碟機完好無損的情況下，從儲存設備 Volume 故障中恢復
+          url: "/maintain/recovering-from-storage-volume-failure-where-system-drive-is-intact.html"
+        - title: 儲存設備 Volume 恢復警告
+          url: "/maintain/reviewing-warnings-about-storage-volume-recovery.html"
+        - title: "${post_edited_translations.segment}"
+          url: "/maintain/identifying-and-unmounting-failed-storage-volumes.html"
+        - title: 恢復故障儲存設備 Volume 並重新建置 Cassandra 資料庫
+          url: "/maintain/recovering-failed-storage-volumes-and-rebuilding-cassandra-database.html"
+        - title: 將物件資料還原至系統磁碟機完好的儲存設備 Volume
+          url: "/maintain/restoring-object-data-to-storage-volume-where-system-drive-is-intact.html"
+        - title: 恢復儲存設備磁碟區後檢查儲存設備狀態
+          url: "/maintain/checking-storage-state-after-recovering-storage-volumes.html"
+      - title: "${post_edited_translations.segment}"
+        entries:
+        - title: 儲存節點系統磁碟機恢復警告
+          url: "/maintain/reviewing-warnings-for-system-drive-recovery.html"
+        - title: 更換儲存節點
+          url: "/maintain/replacing-storage-node.html"
+        - title: 選擇「開始恢復」以設定儲存節點
+          url: "/maintain/selecting-start-recovery-to-configure-storage-node.html"
+        - title: 重新掛載並重新格式化儲存設備 Volume （手動步驟）
+          url: "/maintain/remounting-and-reformatting-storage-volumes-manual-steps.html"
+        - title: 將物件資料恢復至儲存設備 Volume（系統磁碟機故障）
+          url: "/maintain/restoring-object-data-to-storage-volume.html"
+        - title: 恢復儲存節點系統磁碟機後，檢查儲存設備狀態
+          url: "/maintain/checking-storage-state-after-recovering-storage-node-system-drive.html"
+      - title: 使用 Grid Manager 恢復物件資料
+        url: "/maintain/restoring-volume.html"
+      - title: 監控修復資料作業
+        url: "/maintain/monitor-repairs.html"
+    - title: 從管理節點故障中恢復
+      entries:
+      - title: 主管理節點或非主管理節點
+        pdf-filename: 從管理節點故障中恢復
+        url: "/maintain/recovering-from-admin-node-failures.html"
+      - title: 從主管理節點故障中恢復
+        entries:
+        - title: 恢復主管理節點
+          pdf-filename: 從主管理節點故障中恢復
+          url: "/maintain/recovering-from-primary-admin-node-failures.html"
+        - title: 從故障的主管理節點複製稽核日誌
+          url: "/maintain/copying-audit-logs-from-failed-primary-admin-node.html"
+        - title: 替換主管理節點
+          url: "/maintain/replacing-primary-admin-node.html"
+        - title: "${post_edited_translations.segment}"
+          url: "/maintain/configuring-replacement-primary-admin-node.html"
+        - title: 確定主要管理節點的 Hotfix 要求
+          url: "/maintain/assess-hotfix-requirement-during-primary-admin-node-recovery.html"
+        - title: 在已恢復的主要管理節點上還原稽核日誌
+          url: "/maintain/restoring-audit-log-on-recovered-primary-admin-node.html"
+        - title: 恢復主管理節點時，恢復管理節點資料庫
+          url: "/maintain/restoring-admin-node-database-primary-admin-node.html"
+        - title: 恢復主要管理節點時，恢復 Prometheus 計量
+          url: "/maintain/restoring-prometheus-metrics-primary-admin-node.html"
+      - title: 從非主要管理節點故障中恢復
+        entries:
+        - title: 恢復非主要管理節點
+          pdf-filename: 從非主要管理節點故障中恢復
+          url: "/maintain/recovering-from-non-primary-admin-node-failures.html"
+        - title: 從故障的非主管理節點複製稽核日誌
+          url: "/maintain/copying-audit-logs-from-failed-non-primary-admin-node.html"
+        - title: 替換非主要管理節點
+          url: "/maintain/replacing-non-primary-admin-node.html"
+        - title: "${post_edited_translations.segment}"
+          url: "/maintain/selecting-start-recovery-to-configure-non-primary-admin-node.html"
+        - title: 在已恢復的非主要管理節點上恢復稽核日誌
+          url: "/maintain/restoring-audit-log-on-recovered-non-primary-admin-node.html"
+        - title: 復原非主要管理節點時，復原管理節點資料庫
+          url: "/maintain/restoring-admin-node-database-non-primary-admin-node.html"
+        - title: 恢復非主要管理節點時，恢復 Prometheus 計量
+          url: "/maintain/restoring-prometheus-metrics-non-primary-admin-node.html"
+    - title: "${post_edited_translations.segment}"
+      entries:
+      - title: 更換閘道節點
+        url: "/maintain/replacing-gateway-node.html"
+      - title: 選擇「開始恢復」以設定閘道節點
+        url: "/maintain/selecting-start-recovery-to-configure-gateway-node.html"
+    - title: 從歸檔節點故障中恢復
+      entries:
+      - title: 從歸檔節點故障中恢復
+        pdf-filename: 從歸檔節點故障中恢復
+        url: "/maintain/recovering-from-archive-node-failures.html"
+    - title: 替換 Linux 節點
+      entries:
+      - title: Linux 節點替換
+        pdf-filename: 替換 Linux 節點（所有網格節點類型）
+        url: "/maintain/all-node-types-replacing-linux-node.html"
+      - title: 部署新的 Linux 主機
+        url: "/maintain/deploying-new-linux-hosts.html"
+      - title: 將網格節點還原到主機
+        url: "/maintain/restoring-existing-nodes.html"
+      - title: 下一步：根據需要執行其他恢復步驟
+        url: "/maintain/whats-next-performing-additional-recovery-steps-if-required.html"
+    - title: 替換 VMware 節點
+      url: "/maintain/all-node-types-replacing-vmware-node.html"
+    - title: 使用服務應用裝置替換故障節點
+      entries:
+      - title: 更換指南
+        pdf-filename: 使用服務應用裝置替換故障節點
+        url: "/maintain/replacing-failed-node-with-services-appliance.html"
+      - title: 安裝服務應用裝置（僅限平台變更）
+        url: "/maintain/installing-services-appliance-platform-change-only.html"
+      - title: "${post_edited_translations.segment}"
+        url: "/maintain/preparing-appliance-for-reinstallation-platform-replacement-only.html"
+      - title: 在服務應用裝置上開始軟體安裝
+        url: "/maintain/starting-software-installation-on-services-appliance-recovery.html"
+      - title: 監控服務應用裝置安裝
+        url: "/maintain/monitoring-services-appliance-installation.html"
+    - title: "${post_edited_translations.segment}"
+      url: "/maintain/how-site-recovery-is-performed-by-technical-support.html"
+  - title: StorageGRID 解決方案和資源
+    url: "/storagegrid-enable.html"
+  - title: StorageGRID 和 NetApp Console
+    url: "/storagegrid-console.html"
+  - title: 法律聲明
+    url: "/legal-notices.html"
+product-family:
+  name: StorageGRID documentation
+  repo: storagegrid-family

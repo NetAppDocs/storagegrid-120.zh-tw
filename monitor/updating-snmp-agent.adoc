@@ -1,0 +1,102 @@
+---
+permalink: monitor/updating-snmp-agent.html 
+sidebar: sidebar 
+keywords: how to update the SNMP agent 
+summary: 您可以停用 SNMP 通知、更新團體字串，或新增或移除代理程式地址、USM 使用者和陷阱目的地。 
+---
+= 更新 StorageGRID SNMP 代理程式
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以停用 SNMP 通知、更新團體字串，或新增或移除代理程式地址、USM 使用者和陷阱目的地。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.關於此任務
+有關 SNMP 代理程式頁面上每個欄位的詳細資訊，請參閱 link:configuring-snmp-agent.html["設定 SNMP 代理程式"]。您必須在頁面底部選取 *Save*，才能提交在每個索引標籤上所做的變更。
+
+.步驟
+. ${post_edited_translations.segment}
++
+顯示 SNMP 代理程式頁面。
+
+. 若要停用所有網格節點上的 SNMP 代理程式，請清除「啟用 SNMP」核取方塊，然後選擇「儲存」。
++
+如果重新啟用 SNMP 代理程式，則會保留先前的所有 SNMP 組態設定。
+
+. （可選）更新「基本組態」部分的資訊：
++
+.. 視需要更新 *System contact* 和 *System location*。
+.. （可選）選取或取消選取 *啟用 SNMP 代理程式通知* 核取方塊，以控制 StorageGRID SNMP 代理程式是否傳送陷阱和通知訊息。
++
+取消選取此核取方塊後，SNMP 代理程式支援唯讀 MIB 存取，但不傳送 SNMP 通知。
+
+.. （可選）選取或清除「啟用驗證陷阱」核取方塊，以控制 StorageGRID SNMP 代理程式在收到未經正確驗證的協定訊息時是否傳送驗證陷阱。
+
+
+. 如果您使用 SNMPv1 或 SNMPv2c，則可以選擇在「團體字串」部分更新或新增「唯讀團體」。
+. 若要更新陷阱目的地，請在「其他組態」區段中選擇「陷阱目的地」索引標籤。
++
+使用此標籤定義一個或多個 StorageGRID 陷阱或通知的目的地。啟用 SNMP 代理程式並選擇 *Save* 後，當觸發警示時，StorageGRID 會將通知傳送至每個已定義的目的地。此外，也會為受支援的 MIB-II 實體（例如，ifDown 和 coldStart）傳送標準通知。
+
++
+有關輸入內容的詳細資訊，請參閱 link:../monitor/configuring-snmp-agent.html#create-trap-destinations["建立陷阱目的地"]。
+
++
+** （可選）更新或移除預設陷阱社群。
++
+如果要移除預設陷阱社群，則必須先確保任何現有的陷阱目的地都使用自訂社群字串。
+
+** 若要新增陷阱目的地，請選擇「建立」。
+** 若要編輯陷阱目的地，請選擇單選按鈕，然後選擇 *Edit*。
+** 若要移除陷阱目的地，請選擇單選按鈕，然後選擇「移除」。
+** 若要提交變更，請選擇頁面底部的「儲存」。
+
+
+. 若要更新代理程式地址，請在「其他組態」區段中選擇「代理程式地址」索引標籤。
++
+使用此標籤指定一個或多個「監聽位址」。這些是 SNMP 代理程式可以接收查詢的 StorageGRID 位址。
+
++
+有關輸入內容的詳細資訊，請參閱 link:../monitor/configuring-snmp-agent.html#create-agent-addresses["建立代理程式地址"]。
+
++
+** 若要新增代理程式地址，請選擇「建立」。
+** 若要編輯代理程式地址，請選擇單選按鈕，然後選擇 *Edit*。
+** 若要移除代理程式地址，請選擇單選按鈕，然後選擇 *Remove*。
+** 若要提交變更，請選擇頁面底部的「儲存」。
+
+
+. 若要更新 USM 使用者，請在「其他組態」區段中選擇「USM 使用者」索引標籤。
++
+使用此索引標籤定義有權查詢 MIB 或接收陷阱和通知的 USM 使用者。
+
++
+有關輸入內容的詳細資訊，請參閱 link:../monitor/configuring-snmp-agent.html#create-usm-users["建立 USM 使用者"]。
+
++
+** 若要新增 USM 使用者，請選擇 *Create*。
+** 若要編輯 USM 使用者，請選擇選項按鈕，然後選擇 *Edit*。
++
+現有 USM 使用者的使用者名稱無法變更。如果需要變更使用者名稱，必須移除該使用者並建立新使用者。
+
++
+
+NOTE: 如果新增或移除使用者的權威引擎 ID，且該使用者目前已被選為目的地，則必須編輯或移除該目的地。否則，儲存 SNMP 代理程式組態時會發生驗證錯誤。
+
+** 若要移除 USM 使用者，請選擇單選按鈕，然後選擇 *Remove*。
++
+
+NOTE: 如果您移除的使用者目前已被選為陷阱目的地，則必須編輯或移除該目的地。否則，儲存 SNMP 代理程式組態時會發生驗證錯誤。
+
+** 若要提交變更，請選擇頁面底部的「儲存」。
+
+
+. 更新完 SNMP 代理程式組態後，選擇「儲存」。
+

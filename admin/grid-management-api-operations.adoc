@@ -1,0 +1,75 @@
+---
+permalink: admin/grid-management-api-operations.html 
+sidebar: sidebar 
+keywords: Grid Management API,  API operations 
+summary: 網格管理 API 將可用的 API 作業組織成以下幾個部分。 
+---
+= StorageGRID 中的 Grid Management API 操作
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+網格管理 API 將可用作業組織成以下幾個部分。
+
+
+NOTE: 此清單僅包含公用 API 中可用的操作。
+
+* *帳戶*：管理儲存設備租戶帳戶的作業，包括建立新帳戶及擷取指定帳戶的儲存設備使用情況。
+* *alert-history*：對已解決警報的操作。
+* *alert-receivers*：對警報通知接收器（電子郵件）的操作。
+* *alert-rules*：對警報規則的操作。
+* *alert-silences*：對警報靜默的操作。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* *auth*：執行使用者工作階段驗證的操作。
++
+Grid Management API 支援 Bearer Token 驗證機制。若要登入，您必須在驗證要求的 JSON 本文中提供使用者名稱與密碼（也就是  `POST /api/v3/authorize`）。如果使用者成功通過驗證，系統將會傳回安全性權杖。必須在後續 API 要求的標頭中提供此權杖（"Authorization: Bearer _token_"）。此權杖將在 16 小時後逾期。
+
++
+
+NOTE: 如果 StorageGRID 系統啟用了單一登入，則必須執行不同的驗證步驟。請參閱「如果啟用了單一登入，如何對 API 進行驗證」。
+
++
+${post_edited_translations.segment}
+
+* *client-certificates*：設定用戶端憑證的操作，以便使用外部監控工具安全地存取 StorageGRID。
+* *config*：與產品版本及網格管理 API 版本相關的作業。您可以列出產品版本以及該版本支援的網格管理 API 主要版本，也可以停用已過時的 API 版本。
+* *deactivated-features*：檢視可能已停用的功能的操作。
+* *dns-servers*：列出並變更已設定的外部 DNS 伺服器的操作。
+* *drive-details*：針對特定儲存應用裝置型號的磁碟機操作。
+* *endpoint-domain-names*：列出並變更 S3 端點網域名稱的操作。
+* *erasure-coding*：對糾刪碼設定檔進行操作。
+* ${post_edited_translations.segment}
+* *expansion-nodes*：擴展操作（節點層級）。
+* *expansion-sites*：擴充作業（站台層級）。
+* *grid-networks*: 列出並變更網格網路清單的操作。
+* *grid-passwords*：網格密碼管理操作。
+* ${post_edited_translations.segment}
+* *identity-source*：設定外部身分來源並手動同步聯合群組和使用者資訊的操作。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* *metrics*：針對 StorageGRID 計量執行的作業，包括單一時間點的即時計量查詢，以及一段時間範圍內的範圍計量查詢。Grid Management API 使用 Prometheus 系統監控工具作為後端資料來源。如需建構 Prometheus 查詢的相關資訊，請參閱 Prometheus 網站。
++
+
+NOTE: 名稱中包含 ``_private_`` 的計量僅供內部使用。這些計量可能會在不同的 StorageGRID 版本之間變更，恕不另行通知。
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* *ntp-servers*：列出或更新外部網路時間協定 (NTP) 伺服器的作業。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* *recovery-package*：下載恢復套件的操作。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* *untrusted-client-network*: 對不受信任的用戶端網路組態執行操作。
+* ${post_edited_translations.segment}
+

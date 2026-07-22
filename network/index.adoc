@@ -1,0 +1,62 @@
+---
+permalink: network/index.html 
+sidebar: sidebar 
+keywords: storagegrid, network, networking, ethernet, subnet, routing 
+summary: 使用以下指南了解 StorageGRID 架構和連網拓撲，以及網路組態和部署的要求。 
+---
+= StorageGRID 的網路準則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+使用以下指南了解 StorageGRID 架構和連網拓撲，以及網路組態和部署的要求。
+
+
+
+[[about-these-instructions]]
+== 關於這些說明
+
+這些指南提供的資訊可用於在部署和設定 StorageGRID 節點之前建立 StorageGRID 連網基礎架構。使用這些指南有助於確保網格中所有節點之間、以及網格與外部用戶端和服務之間能夠進行通訊。
+
+外部用戶端和外部服務需要連線至 StorageGRID 網路，才能執行下列功能：
+
+* 儲存和擷取物件資料
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 存取稽核共享（選用）
+* ${post_edited_translations.segment}
++
+** 網路時間協定（NTP）
+** 網域名稱系統（DNS）
+** ${post_edited_translations.segment}
+
+
+
+
+${post_edited_translations.segment}
+
+
+
+[[before-you-begin]]
+== 開始之前
+
+設定 StorageGRID 系統的連網需要具備高層級的乙太網路交換、TCP/IP 連網、子網路、網路路由和防火牆經驗。
+
+在您設定連網之前，請先熟悉 link:../primer/index.html["了解 StorageGRID"] 中所述的 StorageGRID 架構。
+
+確定要使用的 StorageGRID 網路以及如何設定這些網路後，您可以按照對應的說明安裝和設定 StorageGRID 節點。
+
+.${post_edited_translations.segment}
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["安裝應用裝置硬體"^]
+
+
+.安裝軟體型節點
+* link:../swnodes/index.html["在基於軟體的節點上安裝 StorageGRID"]
+
+
+.設定與管理 StorageGRID 軟體
+* link:../admin/index.html["管理 StorageGRID"]_
+* https://library.netapp.com/ecm/ecm_download_file/ECMLP3351267["版本資訊"^]。您必須登入現有 NetApp 帳戶或建立帳戶才能存取發行說明。
+

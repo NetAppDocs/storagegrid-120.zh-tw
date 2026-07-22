@@ -1,0 +1,86 @@
+---
+permalink: admin/temporarily-disabling-and-reenabling-sso-for-admin-node.html 
+sidebar: sidebar 
+keywords: signing in when sso is down, single sign on failure 
+summary: '如果單一登入 (SSO) 系統發生故障，您可能無法登入 Grid Manager。在這種情況下，您可以暫時停用並重新啟用一個管理節點的 SSO。若要停用並重新啟用 SSO，您必須存取該節點的命令列介面。' 
+---
+= 暫時停用並重新啟用 StorageGRID 管理節點的 SSO
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果單一登入 （SSO） 系統故障，您可能無法登入 Grid Manager。在這種情況下，您可以暫時停用並重新啟用一個 Admin Node 的 SSO。若要停用並重新啟用 SSO，您必須存取該節點的命令 shell。
+
+.開始之前
+* 您有link:admin-group-permissions.html["特定存取權限"]。
+* 您擁有  `Passwords.txt` 檔案。
+* 您知道本機 root 使用者的密碼。
+
+
+.關於此任務
+在您停用一個管理節點的 SSO 之後，您可以本機 root 使用者身分登入 Grid Manager。為了確保您的 StorageGRID 系統是安全的，您必須在登出後立即使用該節點的命令 shell 重新啟用管理節點上的 SSO。
+
+
+TIP: 停用單一 Admin Node 的 SSO 並不會影響網格中任何其他 Admin Node 的 SSO 設定。Grid Manager 中「單一登入」頁面上的「*啟用 SSO*」核取方塊仍會保持選取狀態，且所有現有的 SSO 設定都會保留，除非您對其進行更新。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@Admin_Node_IP`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 執行下列命令：``disable-saml``
++
+${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. 透過網頁瀏覽器，存取同一管理節點上的 Grid Manager。
++
+由於 SSO 已停用，現在將顯示 Grid Manager 登入頁面。
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+.. 選擇 *Configuration* > *Access control* > *Single sign-on*。
+.. ${post_edited_translations.segment}
+.. 選取 *Save* 。
++
+${post_edited_translations.segment}
+
+
+
+. 如果您因為需要存取 Grid Manager 而暫時停用了 SSO：
++
+.. 執行您需要執行的任何工作。
+.. ${post_edited_translations.segment}
+.. 在 Admin 節點上重新啟用 SSO。您可以執行下列任一步驟：
++
+*** 執行下列命令： `enable-saml`
++
+${post_edited_translations.segment}
+
++
+${post_edited_translations.segment}
+
++
+${post_edited_translations.segment}
+
+*** 重啟網格節點： `reboot`
+
+
+
+
+. 透過網頁瀏覽器，從同一個管理節點存取 Grid Manager。
+. 確認 StorageGRID 登入頁面出現，且您必須輸入 SSO 憑證才能存取 Grid Manager。
+

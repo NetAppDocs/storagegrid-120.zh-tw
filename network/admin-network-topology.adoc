@@ -1,0 +1,24 @@
+---
+permalink: network/admin-network-topology.html 
+sidebar: sidebar 
+keywords: admin network topology, using admin network 
+summary: 擁有管理網路是選用的。使用管理網路和網格網路的一種方法，是為每個節點設定可路由的網格網路和受限的管理網路。 
+---
+= StorageGRID 的管理網路拓撲
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+擁有管理網路是選用的。使用管理網路和網格網路的一種方法，是為每個節點設定可路由的網格網路和受限的管理網路。
+
+${post_edited_translations.segment}
+
+管理網路可以對每個節點獨立設定，並且可以包含多個子網路。每個節點都可以設定一個管理外部子網路清單 （AESL）。AESL 列出了每個節點可透過管理網路存取的子網路。AESL 還必須包含網格將透過管理網路存取的任何服務的子網路，例如 NTP、DNS、KMS 和 LDAP。AESL 中的每個子網路都套用靜態路由。
+
+${post_edited_translations.segment}
+
+image:grid_admin_networks.png["${post_edited_translations.segment}"]
+
+image:grid_admin_networks_ips.png["${post_edited_translations.segment}"]

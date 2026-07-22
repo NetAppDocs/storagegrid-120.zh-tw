@@ -1,0 +1,36 @@
+---
+permalink: monitor/reviewing-audit-messages.html 
+sidebar: sidebar 
+keywords: how to review audit messages, how to view audit messages 
+summary: 稽核訊息可協助您更深入了解 StorageGRID 系統的詳細運作情況。您可以使用稽核日誌來疑難排解問題並評估效能。 
+---
+= 檢閱 StorageGRID 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+稽核訊息可協助您更深入了解 StorageGRID 系統的詳細運作情況。您可以使用稽核日誌來疑難排解問題並評估效能。
+
+在系統正常運作期間，所有 StorageGRID 服務都會產生下列稽核訊息：
+
+* ${post_edited_translations.segment}
+* 物件儲存稽核訊息與 StorageGRID 中的物件儲存與管理相關，包括物件儲存與擷取、網格節點到網格節點的傳輸以及驗證。
+* 當 S3 用戶端應用程式發出建立、修改或擷取物件的請求時，會記錄用戶端讀取和寫入稽核訊息。
+* 管理稽核訊息記錄使用者對管理 API 的請求。
+
+
+每個 Admin 節點都會將稽核訊息儲存在文字檔中。稽核共享包含作用中檔案（audit.log）以及前幾天的壓縮稽核日誌。網格中的每個節點也會儲存該節點上產生的稽核資訊複本。
+
+您可以直接從管理節點的命令列存取稽核日誌檔案。
+
+${post_edited_translations.segment}
+
+* StorageGRID 預設使用本機節點稽核目的地。
+* ${post_edited_translations.segment}
+* 您也可以選擇變更稽核日誌的目的地，並將稽核資訊傳送至外部 syslog 伺服器。設定外部 syslog 伺服器後，本機稽核記錄日誌仍會繼續產生和儲存。
+* link:../monitor/configure-log-management.html["了解如何設定日誌管理"]。
+
+
+如需稽核日誌檔案、稽核訊息的格式、稽核訊息的類型，以及可用於分析稽核訊息之工具的詳細資訊，請參閱 link:../audit/index.html["${post_edited_translations.segment}"]。

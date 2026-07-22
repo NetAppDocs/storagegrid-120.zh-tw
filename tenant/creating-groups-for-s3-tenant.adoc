@@ -1,0 +1,166 @@
+---
+permalink: tenant/creating-groups-for-s3-tenant.html 
+sidebar: sidebar 
+keywords: how to create S3 tenant groups, federated group, local group 
+summary: 您可以透過匯入聯合群組或建立本機群組來管理 S3 使用者群組的權限。 
+---
+= 在 StorageGRID 中為 S3 租戶建立群組
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以透過匯入聯合群組或建立本機群組來管理 S3 使用者群組的權限。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+* 如果您計劃匯入聯合群組，您必須已 link:using-identity-federation.html["已設定身分識別聯盟"]，且該聯合群組已存在於已設定的識別來源中。
+* 如果您的租戶帳戶具有「使用網格聯合連線」權限，您已查看link:grid-federation-account-clone.html["Clone 租戶群組和使用者"]的工作流程和注意事項，並且您已登入租戶的來源網格。
+
+
+
+
+[[access-the-create-group-wizard]]
+== 存取「建立群組精靈」
+
+首先，存取「建立群組」精靈。
+
+.步驟
+. 選擇 *Access Management* > *Groups*。
+. 如果您的租戶帳戶擁有「使用網格聯合連線」權限，請確認是否出現藍色橫幅，該橫幅表示在此網格上建立的新群組將 Clone 到連線中另一個網格上的相同租戶。如果未出現此橫幅，則您可能已登入租戶的目的地網格。
++
+image:grid-federation-tenant-group-banner.png["租戶來源網格的「群組」頁面上的藍色橫幅映像"]
+
+. ${post_edited_translations.segment}
+
+
+
+
+[[choose-a-group-type]]
+== ${post_edited_translations.segment}
+
+您可以建立本機群組或匯入聯合群組。
+
+.步驟
+. 選取「本機群組」索引標籤以建立本機群組，或選取「聯合群組」索引標籤，從先前設定的身分識別來源匯入群組。
++
+如果您的 StorageGRID 系統啟用了單一登入 （SSO），則屬於本機群組的使用者將無法登入 Tenant Manager，但他們可以根據群組權限使用用戶端應用程式來管理租戶的資源。
+
+. 請輸入群組名稱。
++
+** *本機群組*：請同時輸入顯示名稱和唯一名稱。您可以稍後編輯顯示名稱。
++
+
+NOTE: 如果您的租戶帳戶具有「使用 grid federation 連線」權限，則當目的地網格上已存在與租戶相同的「唯一名稱」時，將發生 Clone 錯誤。
+
+** *聯合組*：輸入唯一名稱。對於 Active Directory，唯一名稱是與 `sAMAccountName`屬性關聯的名稱。對於 OpenLDAP，唯一名稱是與 `uid`屬性關聯的名稱。
+
+
+. 選擇 *Continue* 。
+
+
+
+
+[[manage-group-permissions]]
+== ${post_edited_translations.segment}
+
+群組權限控制使用者在租戶管理員和租戶管理 API 中可以執行哪些工作。
+
+.步驟
+. 對於 *存取模式*，請選擇下列其中一項：
++
+** *讀寫*（預設）：使用者可以登入 Tenant Manager 並管理租戶組態。
+** *唯讀*：使用者只能檢視設定和功能。無法在 Tenant Manager 或 Tenant Management API 中進行任何變更或執行任何操作。本機唯讀使用者可以變更自己的密碼。
++
+
+NOTE: 如果使用者屬於多個群組，且其中任何一個群組設定為唯讀，則該使用者對所有選定的設定和功能將具有唯讀存取權限。
+
+
+
+. 請為此群組選擇一項或多項權限。
++
+請參閱 link:../tenant/tenant-management-permissions.html["租戶管理權限"]。
+
+. 選擇 *Continue* 。
+
+
+
+
+[[set-s3-group-policy]]
+== 設定 S3 群組原則
+
+群組原則決定使用者將擁有哪些 S3 存取權限。
+
+.步驟
+. 請選擇您要用於此群組的原則。
++
+[cols="1a,2a"]
+|===
+| 群組原則 | 說明 
+
+
+ a| 
+無 S3 存取權限
+ a| 
+預設設定。此群組中的使用者無權存取 S3 資源，除非透過儲存桶原則授予存取權限。如果選擇此選項，則預設只有 root 使用者有權存取 S3 資源。
+
+
+
+ a| 
+唯讀存取
+ a| 
+此群組中的使用者對 S3 資源擁有唯讀存取。例如，此群組中的使用者可以列出物件並讀取物件資料、中繼資料和標籤。選擇此選項後，唯讀群組原則的 JSON 字串將顯示在文字方塊中。您無法編輯此字串。
+
+
+
+ a| 
+完全存取權限
+ a| 
+此群組中的使用者擁有對 S3 資源（包括儲存桶）的完全存取權限。選擇此選項後，文字方塊中將顯示完全存取群組原則的 JSON 字串。您無法編輯此字串。
+
+
+
+ a| 
+勒索軟體緩解
+ a| 
+此範例原則適用於此租戶的所有儲存桶。此群組中的使用者可以執行常見操作，但無法永久刪除已啟用物件版本控制的儲存桶中的物件。
+
+擁有 *Manage all buckets* 權限的 Tenant Manager 使用者可以置換此群組原則。請將 Manage all buckets 權限限制為受信任的使用者，並在可用時使用多因素驗證 (MFA)。
+
+
+
+ a| 
+自訂
+ a| 
+群組內使用者將獲得您在文字方塊中指定的權限。
+
+|===
+. 如果您選擇 *Custom*，請輸入群組原則。每個群組原則的大小限制為 5,120 位元組。您必須輸入有效的 JSON 格式字串。
++
+有關群組原則的詳細資訊，包括語言語法和範例，請參閱link:../s3/example-group-policies.html["範例群組原則"]。
+
+. 如果要建立本機群組，請選擇「繼續」。如果要建立聯合群組，請選擇「建立群組」和「完成」。
+
+
+
+
+[[add-users-local-groups-only]]
+== 新增使用者（僅限本地群組）
+
+您可以儲存群組而不新增使用者，或者您可以選擇新增任何已存在的本機使用者。
+
+
+NOTE: 如果您的租戶帳戶擁有「使用網格聯合連線」權限，則在來源網格上建立本機群組時選擇的任何使用者都不會包含在複製到目的地網格的群組中。因此，在建立群組時請勿選擇使用者。而應在建立使用者時選擇群組。
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+您建立的群組會出現在群組清單中。
+
++
+如果您的租戶帳戶擁有 *Use grid federation connection* 權限，且您位於租戶的來源網格上，則新群組將複製到租戶的目的地網格。*Success* 會顯示為群組詳細資料頁面「概覽」區段中的 *Cloning status*。
+
+

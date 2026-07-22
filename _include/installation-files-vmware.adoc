@@ -1,0 +1,98 @@
+= 
+:allow-uri-read: 
+
+
+[cols="1a,1a"]
+|===
+| ${post_edited_translations.segment} | 說明 
+
+
+| ./vsphere/README  a| 
+${post_edited_translations.segment}
+
+
+
+| ./vsphere/NLF000000.txt  a| 
+免費授權，不提供任何產品支援服務。
+
+
+
+| ./vsphere/NetApp-SG-version-SHA.vmdk  a| 
+用作建立網格節點虛擬機器範本的虛擬機器磁碟檔案。
+
+
+
+| ./vsphere/vsphere-primary-admin.ovf ./vsphere/vsphere-primary-admin.mf  a| 
+用於部署主管理節點的 Open Virtualization Format 範本檔案 (`.ovf`）和清單檔案 (`.mf`）。
+
+
+
+| ./vsphere/vsphere-non-primary-admin.ovf ./vsphere/vsphere-non-primary-admin.mf  a| 
+用於部署非主要管理節點的範本檔案 (`.ovf`）和清單檔案 (`.mf`）。
+
+
+
+| ./vsphere/vsphere-gateway.ovf ./vsphere/vsphere-gateway.mf  a| 
+用於部署 Gateway Nodes 的範本檔案 (`.ovf`）和清單檔案 (`.mf`）。
+
+
+
+| ./vsphere/vsphere-storage.ovf ./vsphere/vsphere-storage.mf  a| 
+用於部署基於虛擬機器的儲存節點的範本檔案 (`.ovf`）和清單檔案 (`.mf`）。
+
+
+
+| ${post_edited_translations.segment} | 說明 
+
+
+| ./vsphere/deploy-vsphere-ovftool.sh  a| 
+用於自動化部署虛擬網格節點的 Bash shell 指令碼。
+
+
+
+| ./vsphere/deploy-vsphere-ovftool-sample.ini  a| 
+與  `deploy-vsphere-ovftool.sh` 指令碼搭配使用的範例組態檔案。
+
+
+
+| ./vsphere/configure-storagegrid.py  a| 
+${post_edited_translations.segment}
+
+
+
+| ./vsphere/configure-sga.py  a| 
+用於自動化 StorageGRID 應用裝置組態的 Python 指令碼。
+
+
+
+| ./vsphere/storagegrid-ssoauth.py  a| 
+這是一個範例 Python 指令碼，可用於在啟用單一登入 （SSO） 的情況下登入 Grid Management API。您也可以使用此指令碼進行 Ping Federate 整合。
+
+
+
+| ./vsphere/configure-storagegrid.sample.json  a| 
+搭配  `configure-storagegrid.py` 指令碼使用的範例組態檔案。
+
+
+
+| ./vsphere/configure-storagegrid.blank.json  a| 
+一個用於搭配  `configure-storagegrid.py` 指令碼使用的空白組態檔案。
+
+
+
+| ./vsphere/storagegrid-ssoauth-azure.py  a| 
+這是一個範例 Python 指令碼，當使用 Active Directory 或 Ping Federate 啟用單一登入 （SSO） 時，您可以使用該指令碼登入 Grid Management API。
+
+
+
+| ./vsphere/storagegrid-ssoauth-azure.js  a| 
+由隨附的  `storagegrid-ssoauth-azure.py` Python 指令碼所呼叫的輔助指令碼，用於與 Azure 進行 SSO 互動。
+
+
+
+| ./vsphere/extras/api-schemas  a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+|===

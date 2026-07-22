@@ -1,0 +1,233 @@
+---
+permalink: admin/grid-federation-troubleshoot.html 
+sidebar: sidebar 
+keywords: troubleshoot, grid federation connection, account clone, cross-grid replication, alerts, errors 
+summary: 您可能需要疑難排解與網格聯合連線、帳戶 Clone 和跨網格複寫相關的警示和錯誤。 
+---
+= 排查 StorageGRID 中的網格聯合錯誤
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可能需要疑難排解與網格聯合連線、帳戶 Clone 和跨網格複寫相關的警示和錯誤。
+
+
+
+[[grid-federation-errorsgrid-federation-connection-alerts-and-errors]]
+== [[grid-federation-errors]]網格同盟連線警示與錯誤
+
+您的網格聯盟連線可能會收到警報或發生錯誤。
+
+在對連線問題進行任何變更後，請測試連線以確保連線狀態恢復為 *Connected*。如需相關指示，請參閱link:grid-federation-manage-connection.html["管理網格同盟連線"]。
+
+
+
+[[grid-federation-connection-failure-alert]]
+=== ${post_edited_translations.segment}
+
+.問題
+已觸發「網格聯盟連線故障」警報。
+
+.詳細資料
+此警報表示網格之間的網格同盟連線出現故障。
+
+.建議採取的措施
+. 檢查兩個網格的「網格聯合」頁面上的設定。確認所有數值均正確。參見link:grid-federation-manage-connection.html["管理網格同盟連線"]。
+. 檢閱用於連線的憑證。確保沒有過期的網格聯盟憑證警示，且每個憑證的詳細資訊均有效。請參閱 link:grid-federation-manage-connection.html["管理網格同盟連線"] 中有關輪換連線憑證的說明。
+. 確認兩個網格中的所有管理節點和 Gateway 節點均已線上並可用。解決可能影響這些節點的任何警報，然後重試。
+. 如果您為本機或遠端網格提供了完整網域名稱 （FQDN），請確認 DNS 伺服器為線上且可用。請參閱 link:grid-federation-overview.html["什麼是網格聯邦？"] 以了解連網、IP 位址和 DNS 需求。
+
+
+
+
+[[expiration-of-grid-federation-certificate-alert]]
+=== 網格聯盟憑證到期警示
+
+.問題
+${post_edited_translations.segment}
+
+.詳細資料
+此警報表示一個或多個網格聯盟憑證即將過期。
+
+.建議採取的措施
+請參閱 link:grid-federation-manage-connection.html["管理網格同盟連線"] 中輪換連線憑證的說明。
+
+
+
+[[error-editing-a-grid-federation-connection]]
+=== 編輯網格同盟連線時發生錯誤
+
+.問題
+${post_edited_translations.segment}
+
+.詳細資料
+編輯網格聯合連線時，StorageGRID 會嘗試在第一個網格的所有管理節點上儲存「候選組態」檔案。如果無法將此檔案儲存到所有管理節點（例如，由於某個管理節點離線），則會顯示警告訊息。
+
+.建議採取的措施
+. 在用於編輯連線的網格中，選取 *Nodes*。
+. 確認該網格的所有管理節點均已線上。
+. 如果任何節點離線，請將其重新上線，然後再次嘗試編輯連線。
+
+
+
+
+[[account-clone-errors]]
+== 帳戶 Clone 錯誤
+
+
+
+[[cant-sign-in-to-a-cloned-tenant-account]]
+=== 無法登入 Clone 的租戶帳戶
+
+.問題
+您無法登入 Clone 的租戶帳戶。Tenant Manager 登入頁面上的錯誤訊息為「您此帳戶的認證資訊無效。請重試。」
+
+.詳細資料
+基於安全性考量，將租戶帳戶從租戶的來源網格 Clone 到租戶的目的地網格時，您為租戶本機 root 使用者設定的密碼不會被 Clone。同樣地，當租戶在其來源網格上建立本機使用者時，本機使用者密碼不會被 Clone 到目的地網格。
+
+.建議採取的措施
+在 root 使用者能夠登入租戶的目的地網格之前，網格系統管理員必須先在目的地網格上 link:changing-password-for-tenant-local-root-user.html["更改本機 root 使用者的密碼"]。
+
+在 Clone 的本機使用者能夠登入租戶的目的地網格之前，Clone 租戶的 root 使用者必須為目的地網格上的該使用者新增密碼。如需相關指示，請參閱 Tenant Manager 使用說明中的link:../tenant/manage-users.html["管理使用者"]。
+
+
+
+[[tenant-created-without-a-clone]]
+=== 建立租戶時未使用 Clone
+
+.問題
+${post_edited_translations.segment}
+
+.詳細資料
+如果連線狀態的更新延遲，則可能會出現此問題，這可能會導致不正常的連線被列為 *Connected*。
+
+.建議採取的措施
+. 查看錯誤訊息中列出的原因，並解決可能導致連線失敗的任何連網或其他問題。參見<<grid-federation-errors,網格聯盟連接警報和錯誤>>。
+. 按照說明測試 link:grid-federation-manage-connection.html["管理網格同盟連線"] 中的網格聯盟連線，以確認問題已解決。
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 選擇租戶名稱以顯示詳細資訊頁面。
+. 選擇 *Retry account clone*。
++
+image:grid-federation-retry-account-clone.png["快照顯示錯誤訊息和「重試帳戶 Clone」按鈕"] 如果錯誤已解決，租用戶帳戶現在將複製到另一個網格。
+
+
+
+
+
+[[cross-grid-replication-alerts-and-errors]]
+== 跨網格複寫警報和錯誤
+
+
+
+[[last-error-shown-for-connection-or-tenant]]
+=== 連線或租戶的最後顯示錯誤
+
+.問題
+當 link:../monitor/grid-federation-monitor-connections.html["檢視網格聯盟連線"] 時（或當 link:grid-federation-manage-tenants.html["管理獲準租戶"] 為某個連線時），您會在連線詳細資料頁面的「上次錯誤」欄中發現錯誤。例如：
+
+image:grid-federation-last-error.png["${post_edited_translations.segment}"]
+
+.詳細資料
+對於每個網格聯合連接，「上次錯誤」欄顯示租戶資料複寫到其他網格時發生的最新錯誤（如有）。此欄僅顯示上次跨網格複寫錯誤；之前可能發生的錯誤不會顯示。此欄中的錯誤可能由以下原因之一引起：
+
+* 未找到來源物件版本。
+* 找不到來源儲存桶。
+* 目的地儲存桶已刪除。
+* 目的地儲存桶已由其他帳戶重新建立。
+* 目的地儲存桶已暫停版本控制。
+* 目的地儲存桶由相同帳戶重新建立，但現在未進行版本控制。
+* 來源物件的 S3 物件鎖定設定與目的地網格的租戶層級保留設定不符。
+* 來源物件具有 S3 Object Lock 設定，且目的地儲存桶已停用 S3 Object Lock。
+
+
+.建議採取的措施
+如果「上次錯誤」欄位中出現錯誤訊息，請依照下列步驟操作：
+
+. 審查訊息內容。
+. 執行任何建議的操作。例如，如果跨網格複寫的目的地儲存桶的版本控制已暫停，請重新啟用該儲存桶的版本控制。
+. 從表格中選擇連線或租戶帳戶。
+. 選擇 *Clear error*。
+. 選擇 *Yes* 以清除訊息並更新系統狀態。
+. 等待 5-6 分鐘，然後將新物件擷取至儲存桶。確認錯誤訊息不再出現。
++
+
+NOTE: 為確保錯誤訊息已清除，請在訊息中的時間戳記之後至少等待 5 分鐘，再擷取新物件。
+
++
+
+TIP: 清除錯誤後，如果將物件擷取到另一個也存在錯誤的儲存桶中，則可能會出現新的 *Last error*。
+
+. 若要確定是否有任何物件因儲存桶錯誤而未能複寫，請參閱link:../admin/grid-federation-retry-failed-replication.html["識別並重試失敗的複寫操作"]。
+
+
+
+
+[[cross-grid-replication-permanent-failure-alert]]
+=== 跨網格複寫永久故障警報
+
+.問題
+觸發了「跨網格複寫永久故障」警報。
+
+.詳細資料
+此警報表示，由於需要使用者介入才能解決的原因，租戶物件無法在兩個網格的儲存桶之間進行複寫。此警報通常是由來源或目的地儲存桶的變更所引起的。
+
+.建議採取的措施
+. 登入觸發警報的網格。
+. 前往 *組態* > *系統* > *網格聯盟*，找到警示中列出的連線名稱。
+. 在「允許的租戶」索引標籤上，查看「上次錯誤」欄，以確定哪些租戶帳戶有問題。
+. 要深入瞭解此故障，請參閱link:../monitor/grid-federation-monitor-connections.html["監控網格聯盟連線"]中審查跨網格複寫計量的說明。
+. 對於每個受影響的租戶帳戶：
++
+.. 請參閱 link:../monitor/monitoring-tenant-activity.html["${post_edited_translations.segment}"] 中的說明，以確認租戶未超過目的地網格上用於跨網格複寫的配額。
+.. ${post_edited_translations.segment}
+
+
+. ${post_edited_translations.segment}
+. 對於每個啟用了跨網格複寫的儲存桶，請確認以下內容：
++
+** 在另一個網格中，同一租戶有一個對應的儲存桶（必須使用確切的名稱）。
+** 兩個儲存桶都已啟用物件版本控制（兩個網格上的版本控制均無法暫停）。
+** 兩個儲存桶均未處於「刪除物件：唯讀」狀態。
+
+
+. 若要確認問題已解決，請參閱 link:../monitor/grid-federation-monitor-connections.html["監控網格聯盟連線"] 中的說明以審查跨網格複寫計量，或執行以下步驟：
++
+.. 返回網格聯盟頁面。
+.. 選取受影響的租戶，然後在 *Last error* 欄中選取 *Clear Error*。
+.. 選擇 *Yes* 以清除訊息並更新系統狀態。
+.. 等待 5-6 分鐘，然後將新物件擷取至儲存桶。確認錯誤訊息不再出現。
++
+
+NOTE: 為確保錯誤訊息已清除，請在訊息中的時間戳記之後至少等待 5 分鐘，再擷取新物件。
+
++
+
+NOTE: 警報解決後，可能需要一天才能清除。
+
+.. 前往 link:grid-federation-retry-failed-replication.html["識別並重試失敗的複寫操作"] 識別未能複製到其他網格的任何物件或刪除標記，並視需要重試複寫。
+
+
+
+
+
+
+[[cross-grid-replication-resource-unavailable-alert]]
+=== 跨網格複寫資源無法使用警示
+
+.問題
+已觸發「跨網格複寫資源無法使用」警報。
+
+.詳細資料
+此警示表示跨網格複寫要求因資源無法使用而處於擱置狀態。例如，可能發生網路錯誤。
+
+.建議採取的措施
+. ${post_edited_translations.segment}
+. 如果問題仍然存在，請確定任一網格是否針對相同連線發出 *Grid federation connection failure* 警報，或針對某個節點發出 *Unable to communicate with node* 警報。解決這些警報後，此警報可能也會解決。
+. 要深入瞭解此故障，請參閱link:../monitor/grid-federation-monitor-connections.html["監控網格聯盟連線"]中審查跨網格複寫計量的說明。
+. 如果無法解決警報問題，請聯絡技術支援。
+
+
+問題解決後，跨網格複寫將照常進行。

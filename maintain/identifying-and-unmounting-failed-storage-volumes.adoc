@@ -1,0 +1,100 @@
+---
+permalink: maintain/identifying-and-unmounting-failed-storage-volumes.html 
+sidebar: sidebar 
+keywords: storagegrid, storage volume, failed storage volume, unmount failed volume 
+summary: 恢復具有故障儲存 Volume 的儲存節點時，您必須識別並取下故障 Volume。您必須驗證在恢復程序中，僅對故障儲存 Volume 進行重新格式化。 
+---
+= 識別並卸載 StorageGRID 中故障的儲存磁碟區
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+恢復具有故障儲存 Volume 的儲存節點時，您必須識別並取下故障 Volume。您必須驗證在恢復程序中，僅對故障儲存 Volume 進行重新格式化。
+
+.開始之前
+您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+
+.關於此任務
+您應該盡快恢復故障的儲存設備 Volume。
+
+恢復程序的第一步是偵測已分離、需要取下或發生 I/O 錯誤的 Volume。如果故障的 Volume 仍處於連接狀態，但其檔案系統隨機毀損，系統可能無法偵測到磁碟中未使用或未配置部分有任何毀損。
+
+
+NOTE: 您必須先完成此程序，然後才能執行手動恢復 Volume 的步驟，例如新增或重新連接磁碟、停止節點、啟動節點或重新開機。否則，執行 `reformat_storage_block_devices.rb`指令碼時可能會遇到檔案系統錯誤，導致指令碼掛起或執行失敗。
+
+
+NOTE: 在執行  `reboot` 命令之前，請先修復硬體並正確連接磁碟。
+
+
+CAUTION: 仔細識別故障的儲存設備 Volume。您將使用此資訊來驗證哪些 Volume 必須重新格式化。Volume 重新格式化後，Volume 上的資料將無法恢復。
+
+若要恢復故障的儲存設備 Volume，您需要知道故障儲存設備 Volume 的裝置名稱及其 Volume ID。
+
+在安裝時，每個儲存設備都會獲分配一個檔案系統通用唯一識別碼 (UUID)，並使用該分配的檔案系統 UUID 掛載到 Storage Node 上的 rangedb 目錄。檔案系統 UUID 和 rangedb 目錄列在  `/etc/fstab` 檔案中。Volume 的掛載點、裝置名稱和大小會顯示在 Grid Manager 中。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 選擇 *節點* > *_site_* > *_failed Storage Node_* > *儲存設備*。
+.. 向下捲動以找到 Volumes 表和 Object stores 表，並記錄狀態為「未知」或「離線」的每個 Volume 的以下資訊。
++
+*** 從 Volumes 表中記錄掛載點、裝置和大小。
+*** 從物件存放區表格中記錄 `object_store_ID`。
++
+這 `object_store_ID`是故障儲存設備 Volume 的 ID。例如，對於 ID 為 0000 的物件存放區，請在命令中指定 `0`。
+
+
+
+
+
+. 登入故障儲存節點：
++
+.. 請輸入以下命令： `ssh admin@_grid_node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 執行下列指令碼以取下故障的儲存設備 Volume：
++
+`sn-unmount-volume object_store_ID`
+
+. 如果出現提示，請按 *y* 停止依賴儲存設備 Volume 0 的 Cassandra 服務。
++
+
+NOTE: 如果 Cassandra 服務已經停止，系統不會提示您。Cassandra 服務僅針對 Volume 0 停止。
+
++
+[listing]
+----
+root@Storage-180:~/var/local/tmp/storage~ # sn-unmount-volume 0
+Services depending on storage volume 0 (cassandra) aren't down.
+Services depending on storage volume 0 must be stopped before running this script.
+Stop services that require storage volume 0 [y/N]? y
+Shutting down services that require storage volume 0.
+Services requiring storage volume 0 stopped.
+Unmounting /var/local/rangedb/0
+/var/local/rangedb/0 is unmounted.
+----
++
+幾秒鐘後，Volume 即會取下。螢幕上會顯示訊息，指示每個步驟的程序。最後一則訊息指示 Volume 已取下。
+
+. 如果因為 Volume 忙碌而導致取下失敗，您可以使用  `--use-umountof` 選項強制取下：
++
+
+NOTE: 使用 `--use-umountof`選項強制取下可能會導致使用該 Volume 的處理程序或服務出現異常行為或當機。
+
++
+[listing]
+----
+root@Storage-180:~ # sn-unmount-volume --use-umountof /var/local/rangedb/2
+Unmounting /var/local/rangedb/2 using umountof
+/var/local/rangedb/2 is unmounted.
+Informing LDR service of changes to storage volumes
+----
+

@@ -1,0 +1,61 @@
+---
+permalink: primer/index.html 
+sidebar: sidebar 
+keywords: StorageGRID, grid primer, what is storagegrid, storagegrid basics 
+summary: NetApp StorageGRID 是一套軟體定義物件儲存套件，支援公有雲、私有雲和混合多雲環境中的各種使用案例。StorageGRID 提供對 Amazon S3 API 的原生支援，並提供業界領先的創新功能，例如自動化生命週期管理，能夠長期且經濟高效地儲存、保護及保存非結構化資料。 
+---
+= StorageGRID 是什麼？
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp® StorageGRID® 是一款軟體定義物件儲存套件，支援公有雲、私有雲和混合多雲環境中的各種使用案例。StorageGRID 提供對 Amazon S3 API 的原生支援，並提供業界領先的創新功能，例如自動化生命週期管理，可長期經濟高效地儲存、保護及保存非結構化資料。
+
+StorageGRID 為大規模非結構化資料提供安全、持久的儲存設備。整合的中繼資料驅動生命週期管理原則可最佳化資料在其整個生命週期中的儲存位置。內容會在適當的時間、適當的地點和適當的儲存層中存放，進而降低成本。
+
+StorageGRID 由地理位置分散、備援、異質的節點組成，可與現有和次世代用戶端應用程式整合。
+
+image:storagegrid_system_diagram.png["包含多個用戶端的映像"]
+
+
+NOTE: 已移除歸檔節點的支援。透過 S3 API 將物件從歸檔節點移至外部歸檔儲存系統的功能已被 link:../ilm/what-cloud-storage-pool-is.html["ILM 雲端儲存資源池"] 取代，後者提供更多功能。
+
+
+
+[[storagegrid-benefits]]
+== StorageGRID 的優勢
+
+StorageGRID 系統的優點包括以下幾點：
+
+* 可大規模易擴充且易於使用的地理分散式非結構化資料儲存庫。
+* Amazon Web Services Simple Storage Service（S3）標準物件儲存協定。
+* 支援混合雲。原則型資訊生命週期管理 (ILM) 將物件儲存到公有雲，包括 Amazon Web Services (AWS) 和 Microsoft Azure。StorageGRID 平台服務支援對儲存在公有雲中的物件進行內容複寫、事件通知和中繼資料搜尋。
+* 靈活的資料保護可確保資料的持久性和可用度。資料保護可採用複寫和分層銷毀編碼。靜態資料和傳輸中資料驗證可確保長期保留的完整性。
+* 動態資料生命週期管理有助於管理儲存設備成本。您可以建立 ILM 規則，在物件層級管理資料生命週期，自訂資料位置、持久性、效能、成本和保留時間。
+* 資料儲存設備和一些管理功能具有高可用度，並整合了負載平衡，以最佳化 StorageGRID 資源的資料負載。
+* 支援多個儲存設備租戶帳戶，以便依不同實體隔離儲存在系統中的物件。
+* 提供多種工具來監控 StorageGRID 系統的健全狀況，包括全面的警報系統、圖形儀表板以及所有節點和站台的詳細狀態。
+* 支援軟體或硬體型部署。您可以將 StorageGRID 部署在以下任何平台上：
++
+** 在 VMware 中執行的虛擬機器。
+** Linux 主機上的容器引擎。
+** StorageGRID 工程設計的應用裝置。
++
+*** 儲存設備提供物件儲存。
+*** 服務設備提供網格管理和負載平衡服務。
+
+
+
+
+* 符合相關法規的儲存設備要求：
++
+** 美國證券交易委員會 （SEC） 在 17 CFR § 240.17a-4(f) 中規範交易所會員、經紀商或交易商。
+** 金融業監理局 (FINRA) 規則 4511(c) 遵循美國證券交易委員會 (SEC) 規則 17a-4(f) 的格式和媒體要求。
+** 美國商品期貨交易委員會 (CFTC) 在 17 CFR § 1.31(c)-(d) 法規中規定了商品期貨交易。
+
+
+* 無中斷升級和維護作業。在升級、擴充、退役和維護程序期間，維持對內容的存取。
+* 聯合身分管理。與 Active Directory、OpenLDAP 或 Oracle Directory Service 整合，用於使用者身分驗證。支援使用安全性斷言標記語言 2.0 （SAML 2.0） 標準進行單一登入 （SSO），以便在 StorageGRID 和 Active Directory Federation Services （AD FS） 之間交換驗證和授權資料。
+

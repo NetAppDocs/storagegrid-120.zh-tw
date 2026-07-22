@@ -1,0 +1,62 @@
+---
+permalink: maintain/selecting-start-recovery-to-configure-storage-node.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, storage node 
+summary: 更換儲存節點後，必須在 Grid Manager 中選擇「開始恢復」，將新節點設定為故障節點的替代節點。 
+---
+= 選擇 Start Recovery 以配置 StorageGRID Storage Node
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+更換儲存節點後，必須在 Grid Manager 中選擇「開始恢復」，將新節點設定為故障節點的替代節點。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 您擁有佈建密碼。
+* 您已部署並設定替換節點。
+* 您擁有所有銷毀編碼資料修復工作的開始日期。
+
+
+.關於此任務
+如果儲存節點以 Container 安裝在 Linux 主機上，則僅當滿足下列條件之一時才需要執行此步驟：
+
+* 您必須使用 `--force`旗標來匯入節點，或者您發出了 `storagegrid node force-recovery _node-name_`
+* ${post_edited_translations.segment}
+
+
+.步驟
+. 從 Grid Manager 中，選擇 *Maintenance* > *Tasks* > *Recovery*。
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. 請輸入*佈建密碼*。
+. ${post_edited_translations.segment}
++
+image:4b_select_recovery_node.png["螢幕截圖顯示「維護 > 恢復」頁面"]
+
+. ${post_edited_translations.segment}
++
+
+NOTE: 恢復程序執行時，您可以按一下 *Reset* 以開始新的恢復。此時會出現一個對話方塊，提示若您重設程序，節點將處於不確定狀態。
+
++
+image:recovery_reset_warning.gif["${post_edited_translations.segment}"]
+
++
+如果您想在重置程序後重試恢復，則必須將節點還原至預先安裝狀態，如下所示：
+
++
+** *VMware*：刪除已部署的虛擬網格節點。然後，當您準備好重新啟動恢復時，請重新部署該節點。
+** *Linux*：在 Linux 主機上執行此命令以重新啟動節點： `storagegrid node force-recovery _node-name_`
+
+
+. 當儲存設備節點達到「等待手冊步驟」階段時，請前往 link:remounting-and-reformatting-storage-volumes-manual-steps.html["重新掛載並重新格式化儲存設備 Volume （手動步驟）"]。
++
+image:recovery_reset_button.gif["快照顯示「等待手動步驟」階段"]
+
+

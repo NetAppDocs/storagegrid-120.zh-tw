@@ -1,0 +1,204 @@
+---
+permalink: tenant/manage-groups.html 
+sidebar: sidebar 
+keywords: how to view and edit tenant groups, manage groups, duplicate group, remove group, edit group 
+summary: 根據需要管理租戶群組，以檢視、編輯或複製群組等等。 
+---
+= 管理 StorageGRID 租戶群組
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+根據需要管理租戶群組，以檢視、編輯或複製群組等等。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+
+
+
+
+[[view-or-edit-group]]
+== 檢視或編輯群組
+
+您可以檢視和編輯每個群組的基本資訊和詳細資訊。
+
+.步驟
+. 選擇 *Access Management* > *Groups*。
+. 檢視「群組」頁面上提供的資訊，其中列出此租戶帳戶所有本機群組和聯合群組的基本資訊。
++
+如果租戶帳戶具有「使用網格聯合連線」權限，且您正在檢視租戶來源網格上的群組：
+
++
+** 橫幅訊息表示，如果您編輯或移除群組，您的變更將不會同步到另一個網格。
+** 如有需要，橫幅訊息會指示群組是否未 Clone 到目的地網格上的租戶。您可以<<clone-groups,重試群組 Clone>>查看失敗情況。
+
+
+. 如果您想要變更群組名稱：
++
+.. ${post_edited_translations.segment}
+.. 選擇 *Actions* > *Edit group name*。
+.. 請輸入新名稱。
+.. 選取 *儲存變更*。
+
+
+. 如果想檢視更多詳細資訊或進行其他編輯，請執行以下操作之一：
++
+** 選取群組名稱。
+** 選取該群組的核取方塊，然後選取 *Actions* > *View group details*。
+
+
+. 請查看「概述」區段，其中顯示每個群組的下列資訊：
++
+** 顯示名稱
+** 唯一名稱
+** 類型
+** 存取模式
+** 權限
+** S3 原則
+** 該群組中的使用者數量
+** 如果租戶帳戶具有「使用網格聯合連線」權限，且您正在租戶的來源網格上檢視群組，則也會顯示其他欄位：
++
+*** Clone 狀態，為 *Success* 或 *Failure*
+*** 藍色橫幅提示：如果您編輯或刪除此群組，您的變更將不會同步到另一個網格。
+
+
+
+
+. 根據需要編輯群組設定。有關輸入內容的詳細資訊，請參閱 link:creating-groups-for-s3-tenant.html["為 S3 租戶建立群組"]。
++
+.. 在「概覽」部分，選擇名稱或編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"] 即可變更顯示名稱。
+.. 在「群組權限」標籤上，更新權限，然後選擇「儲存變更」。
+.. 在「群組原則」索引標籤上，進行任何變更，然後選取「儲存變更」。
++
+您也可以選擇其他 S3 群組原則，或根據需要輸入自訂原則的 JSON 字串。
+
+
+
+. 若要將一個或多個現有本機使用者新增至該群組：
++
+.. 選取「使用者」索引標籤。
++
+image:manage_users.png["管理使用者"]
+
+.. 選擇 *Add users*。
+.. 選擇要新增的現有使用者，然後選擇 *Add users*。
++
+右上角會顯示成功訊息。
+
+
+
+. 若要從群組中移除本機使用者：
++
+.. 選取「使用者」索引標籤。
+.. 選取*移除使用者*。
+.. 選擇要移除的使用者，然後選擇 *Remove users*。
++
+右上角會顯示成功訊息。
+
+
+
+. 請確認您已為修改的每個部分選擇「儲存變更」。
+
+
+
+
+[[duplicate-group]]
+== 複製群組
+
+您可以複製現有群組，以便更快建立新群組。
+
+
+NOTE: 如果您的租戶帳戶具有「使用網格聯合連線」權限，並且您從租戶的來源網格複製一個群組，則複製的群組將會 Clone 到租戶的目的地網格。
+
+.步驟
+. 選擇 *Access Management* > *Groups*。
+. 選取要複製的群組的核取方塊。
+. ${post_edited_translations.segment}
+. 請參閱 link:creating-groups-for-s3-tenant.html["為 S3 租戶建立群組"] 以取得輸入內容的詳細資訊。
+. ${post_edited_translations.segment}
+
+
+
+
+[[clone-groupsretry-group-clone]]
+== [[clone-groups]]重試群組 Clone
+
+要重試失敗的 Clone：
+
+. 選擇群組名稱下方標示「（Clone 失敗）」的每個群組。
+. 選取 *Actions* > *Clone groups*。
+. 從您要 Clone 的每個群組的詳細資訊頁面檢視 Clone 作業的狀態。
+
+
+如需更多資訊，請參閱link:grid-federation-account-clone.html["Clone 租戶群組和使用者"]。
+
+
+
+[[delete-one-or-more-groups]]
+== 刪除一個或多個群組
+
+您可以刪除一個或多個群組。任何僅屬於已刪除群組的使用者將無法再登入 Tenant Manager 或使用租戶帳戶。
+
+
+NOTE: 如果您的租戶帳戶擁有 *Use grid federation connection* 權限，且您刪除了一個群組，StorageGRID 不會刪除另一個網格上的對應群組。如果您需要保持此資訊同步，則必須從兩個網格中刪除同一個群組。
+
+.步驟
+. 選擇 *Access Management* > *Groups*。
+. 選取要刪除的每個群組的核取方塊。
+. 選取 *Actions* > *Delete group* 或 *Actions* > *Delete groups*。
++
+${post_edited_translations.segment}
+
+. 選擇*刪除群組*或*刪除群組*。
+
+
+
+
+[[set-up-assumerole]]
+== 設定 AssumeRole
+
+.開始之前
+您必須是系統管理員才能設定 AssumeRole。
+
+.關於此任務
+若要設定 AssumeRole，請先建立要接手的目標群組（如果該群組尚不存在）。編輯該群組的 S3 原則，以指定接管該群組所允許的動作。編輯該群組的 S3 信任原則，以指定允許使用 AssumeRole API 接管該群組的受信任使用者。
+
+透過假設此群組所建立的臨時安全性憑證有效期限有限。工作階段介於 15 分鐘到 12 小時之間，預設工作階段長為 1 小時。當您將使用者從該群組的 S3 信任原則中移除時，該使用者將無法再假設此群組。
+
+.步驟
+. 選擇 *Access Management* > *Groups*。
+. 點選群組名稱。
+. 選擇 *S3 trust policy* 索引標籤。
+. 新增您的 S3 信任原則，包括可以執行 AssumeRole 的使用者清單。
+. 選擇 *Save changes* 。
+. 選擇「S3 群組原則」索引標籤。
+. 編輯 S3 原則，僅指定此群組 S3 信任原則中新增的受信任使用者所需的 S3 動作。
+. 選擇 *Save changes* 。
+
+
+
+
+[[example-of-an-assumerole-s3-trust-policy]]
+=== AssumeRole S3 信任原則範例
+
+[listing]
+----
+{
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+                "AWS": [
+                    "urn:sgws:identity::1234567890:user/user1",
+                    "arn:aws:iam::1234567890:user/user2"
+                ]
+            }
+        }
+    ]
+}
+----
+組態完成後，S3 信任原則中列出的使用者可以執行 AssumeRole 並接收憑證。最終權限由群組原則、儲存桶原則和工作階段原則決定。如需更多資訊，請參閱 link:../s3/use-access-policies.html["使用存取原則"]。

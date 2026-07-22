@@ -1,0 +1,253 @@
+---
+permalink: primer/what-admin-node-is.html 
+sidebar: sidebar 
+keywords: StorageGRID, admin nodes 
+summary: Admin Nodes 提供管理服務，例如系統組態、監控和記錄。Admin Nodes 也可以用於對 S3 用戶端流量進行負載平衡。每個網格必須具有一個主要 Admin Node，並且可以具有任意數量的非主要 Admin Node 以進行備援。 
+---
+= 什麼是 StorageGRID 管理節點？
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Admin Nodes 提供管理服務，例如系統組態、監控和記錄。Admin Nodes 也可以用於對 S3 用戶端流量進行負載平衡。每個網格必須具有一個主要 Admin Node，並且可以具有任意數量的非主要 Admin Node 以進行備援。
+
+
+
+[[differences-between-primary-and-non-primary-admin-nodes]]
+== 主要管理節點與非主要管理節點之間的差異
+
+當您登入 Grid Manager 或 Tenant Manager 時，您連線的是一個管理節點。您可以連接到任何管理節點，每個管理節點顯示的 StorageGRID 系統檢視都類似。但是，主管理節點提供的功能比非主管理節點更多。例如，大多數維護程序必須從主管理節點執行。
+
+此表總結了主要管理節點和非主要管理節點的功能。
+
+[cols="2a,1a,1a"]
+|===
+| 功能 | 主管理節點 | ${post_edited_translations.segment} 
+
+
+ a| 
+包含 <<ams,AMS>> 服務
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+包含 <<cmn,CMN>> 服務
+ a| 
+是的
+ a| 
+否
+
+
+
+ a| 
+包括 <<nms,NMS>> 服務
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+包含 <<prometheus,Prometheus>> 服務
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+包含 <<ssm,${post_edited_translations.segment}>> 服務
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+包括 <<load-balancer,負載平衡器>> 和 <<high-availability,${post_edited_translations.segment}>> 服務
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+支援 <<mgmt-api,${post_edited_translations.segment}>> （mgmt-api）
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+是的
+ a| 
+否
+
+
+
+ a| 
+可以下載恢復套件
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+是的
+ a| 
+否
+
+
+
+ a| 
+可用於 Volume 恢復程序
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+可以從一個或多個節點收集日誌檔案和系統資料
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+可以恢復儲存設備、Gateway 及非主要管理節點
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+可以恢復主管理節點
+ a| 
+是的
+ a| 
+否
+
+
+
+ a| 
+發送警報通知、AutoSupport 套件和 SNMP 陷阱及通知
+ a| 
+是的。充當<<preferred-sender,首選寄件人>>。
+ a| 
+是的。作為備用傳送方。
+
+|===
+
+
+[[preferred-senderpreferred-sender-admin-node]]
+== [[preferred-sender]]慣用寄件者管理節點
+
+如果您的 StorageGRID 部署包含多個管理節點，則主要管理節點是警報通知、AutoSupport 套件、SNMP 陷阱和通知的首選傳送者。
+
+在系統正常運作情況下，只有首選發送節點才會發送通知。但是，所有其他管理節點會監控首選發送節點。如果偵測到問題，其他管理節點將作為備用發送節點運作。
+
+${post_edited_translations.segment}
+
+* 如果管理節點彼此「隔離」，則慣用發送方和備用發送方都會嘗試發送通知，因此可能會收到多個通知複本。
+* 如果備用發送器偵測到首選發送器出現問題並開始發送通知，則首選發送器可能會恢復發送通知的能力。如果發生這種情況，可能會發送重複通知。當備用發送器不再偵測到首選發送器發生錯誤時，它將停止發送通知。
++
+
+NOTE: 當您測試 AutoSupport 套件時，所有 Admin 節點都會傳送測試。當您測試警示通知時，您必須登入每個 Admin 節點以驗證連線能力。
+
+
+
+
+
+[[primary-services-for-admin-nodes]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+[cols="1a,2a"]
+|===
+| 服務 | ${post_edited_translations.segment} 
+
+
+ a| 
+[[ams]]稽核管理系統 (AMS)
+ a| 
+追蹤系統活動和事件。
+
+
+
+ a| 
+[[cmn]]組態管理節點 (CMN)
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+[[high-availability]]高可用度
+ a| 
+管理管理節點群組和閘道節點群組的高可用度虛擬 IP 位址。
+
+*注意：*此服務也存在於 Gateway 節點上。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+提供從用戶端到儲存節點的 S3 流量負載平衡。
+
+*注意：*此服務也存在於 Gateway 節點上。
+
+
+
+ a| 
+[[mgmt-api]]管理應用程式介面 (mgmt-api)
+ a| 
+處理來自網格管理 API 和租戶管理 API 的請求。
+
+
+
+ a| 
+網路管理系統（NMS）
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+[[prometheus]]Prometheus
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+[[ssm]]伺服器狀態監控器 (SSM)
+ a| 
+監控作業系統和底層硬體。
+
+|===

@@ -1,0 +1,153 @@
+---
+permalink: swnodes/configuring-host-network.html 
+sidebar: sidebar 
+keywords: how to configure the host network 
+summary: 在主機上完成 Linux 安裝後，您可能需要執行一些額外的組態，以便在每台主機上準備一組適合映射到您稍後將部署的 StorageGRID 節點的網路介面。 
+---
+= 為 Linux 部署配置 StorageGRID 主機網路
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在主機上完成 Linux 安裝後，您可能需要執行一些額外的組態，以便在每台主機上準備一組適合映射到您稍後將部署的 StorageGRID 節點的網路介面。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+.開始之前
+* 您已審閱 link:../network/index.html["StorageGRID 連網指南"]。
+* 您已查看有關 link:node-container-migration-requirements.html["節點 Container 移轉要求"] 的資訊。
+* 如果您正在使用虛擬主機，請在設定主機網路之前閱讀 <<mac_address_cloning,MAC 位址複製的注意事項與建議>>。
+
+
+
+NOTE: 如果您使用虛擬機器作為主機，則應選擇 VMXNET 3 作為虛擬網路介面卡。VMware E1000 網路介面卡會導致部署在某些 Linux 經銷版本上的 StorageGRID Container 出現連線問題。
+
+.關於此任務
+網格節點必須能夠存取 Grid Network，並可選擇性地存取 Admin Network 和 Client Network。您可以透過建立對應來提供此存取，將主機的實體介面與每個網格節點的虛擬介面建立關聯。建立主機介面時，請使用易記名稱，以便於跨所有主機進行部署並支援移轉。
+
+主機和一個或多個節點可以共用同一個介面。例如，您可以使用同一個介面進行主機存取和節點管理網路存取，以方便主機和節點的維護。雖然主機和各個節點可以共用同一個介面，但所有節點必須擁有不同的 IP 位址。IP 位址不能在節點之間共用，也不能在主機和任何節點之間共用。
+
+您可以使用同一個主機網路介面為主機上的所有 StorageGRID 節點提供網格網路介面；您可以為每個節點使用不同的主機網路介面；或者您可以採用介於兩者之間的任何方式。但是，通常情況下，您不會將同一個主機網路介面同時用作單一節點的網格網路介面和管理網路介面，也不會將同一個主機網路介面用作一個節點的網格網路介面，而用作另一個節點的用戶端網路介面。
+
+您可以透過多種方式完成此工作。例如，如果您的主機是虛擬機器，並且您為每台主機部署一個或兩個 StorageGRID 節點，則可以在 Hypervisor 中建立正確數量的網路介面，並使用一對一對應。如果您在裸機主機上部署多個節點用於正式作業環境，則可以運用 Linux 連網堆疊對 VLAN 和 LACP 的支援來實現容錯能力和頻寬共用。以下章節將詳細說明這兩種範例的方法。您無需使用這些範例；您可以選擇任何符合需求的方法。
+
+
+NOTE: 請勿直接使用 bond 或 bridge 設備作為 Container 網路介面。這樣做可能會導致核心出現問題，從而阻止節點啟動，因為 Container 命名空間中 bond 和 bridge 設備會與 MACVLAN 衝突。請改用非 bond 設備，例如 VLAN 或虛擬乙太網路 （veth） 對。在節點組態檔案中將此設備指定為網路介面。
+
+
+
+[[considerations-and-recommendations-for-mac-address-cloning]]
+== MAC 位址複製的注意事項與建議
+
+.[[mac_address_cloning]]
+MAC 位址複製使 Container 使用主機的 MAC 位址，而主機則使用您指定的位址或隨機產生的 MAC 位址。您應該使用 MAC 位址複製來避免使用混雜模式網路組態。
+
+
+
+[[enabling-mac-cloning]]
+=== 啟用 MAC 位址克隆
+
+在某些環境下，MAC 位址複製可以增強安全性，因為它允許您為管理網路、網格網路和用戶端網路使用專用的虛擬 NIC。讓 Container 使用主機上專用 NIC 的 MAC 位址，可以避免使用混雜模式網路組態。
+
+
+NOTE: MAC 位址複製旨在與虛擬伺服器安裝搭配使用，可能無法在所有實體應用裝置組態中正常運作。
+
+
+NOTE: 如果節點因目標 MAC 位址克隆介面繁忙而啟動失敗，您可能需要在啟動節點之前將該連結設定為「down」。此外，虛擬化環境可能會在連結處於連線狀態時阻止網路介面上的 MAC 位址複製。如果節點因介面繁忙而無法設定 MAC 位址並啟動，在啟動節點之前將該連結設定為「down」可能可以解決此問題。
+
+MAC 位址克隆功能預設為停用狀態，必須透過節點組態項目進行設定。安裝 StorageGRID 時，您應該啟用此功能。
+
+每個網路都有一個對應的密鑰：
+
+* `ADMIN_NETWORK_TARGET_TYPE_INTERFACE_CLONE_MAC`
+* `GRID_NETWORK_TARGET_TYPE_INTERFACE_CLONE_MAC`
+* `CLIENT_NETWORK_TARGET_TYPE_INTERFACE_CLONE_MAC`
+
+
+將該鍵設為「true」後，Container 將使用主機網路卡的 MAC 位址。此外，主機將使用指定 Container 網路的 MAC 位址。預設情況下，Container 位址是隨機產生的，但如果您已使用 `_NETWORK_MAC`節點組態鍵設定了位址，則會使用該位址。主機和 Container 的 MAC 位址始終不同。
+
+
+NOTE: 如果在虛擬主機上啟用 MAC 位址克隆，但未同時在 Hypervisor 上啟用混雜模式，可能會導致使用主機介面的 Linux 主機連網停止運作。
+
+
+
+[[mac-cloning-use-cases]]
+=== MAC 複製使用案例
+
+MAC 複製有兩種使用案例需要考量：
+
+* MAC 複製未啟用：當 `_CLONE_MAC`節點組態檔案中的金鑰未設定或設定為「false」時，主機將使用主機 NIC MAC 位址，Container 將使用 StorageGRID 產生的 MAC 位址，除非在 `_NETWORK_MAC`金鑰中指定了 MAC 位址。如果在 `_NETWORK_MAC`金鑰中設定了位址，則 Container 將使用 `_NETWORK_MAC`金鑰中指定的位址。此金鑰組態需要使用混雜模式。
+* MAC 複製已啟用：當 `_CLONE_MAC`節點組態檔案中的金鑰設為「true」時，Container 將使用主機 NIC MAC 位址，而主機將使用 StorageGRID 產生的 MAC 位址，除非在 `_NETWORK_MAC`金鑰中指定了 MAC 位址。如果在 `_NETWORK_MAC`金鑰中設定了位址，則主機將使用指定的位址，而非產生的位址。在此金鑰組態中，不應使用混雜模式。
+
+
+
+NOTE: 如果您不想使用 MAC 位址克隆，而是希望允許所有介面接收和傳送除 Hypervisor 指派的 MAC 位址之外的其他 MAC 位址的資料，請確保虛擬交換器和連接埠群組層級的安全性屬性均設定為 *Accept*，以啟用 Promiscuous Mode、MAC Address Changes 和 Forged Transmits。虛擬交換器上的設定值可能會被連接埠群組層級的設定值覆蓋，因此請確保兩處的設定相同。
+
+若要啟用 MAC 克隆，請參閱link:creating-node-configuration-files.html["建立節點組態檔的說明"]。
+
+
+
+[[mac-cloning-example]]
+=== MAC 複製範例
+
+以下範例展示如何為介面 ens256 啟用 MAC 位址克隆，主機 MAC 位址為 11:22:33:44:55:66，節點組態檔案包含下列金鑰：
+
+* `ADMIN_NETWORK_TARGET = ens256`
+* `ADMIN_NETWORK_MAC = b2:9c:02:c2:27:10`
+* `ADMIN_NETWORK_TARGET_TYPE_INTERFACE_CLONE_MAC = true`
+
+
+*結果*：ens256 的主機 MAC 位址為 b2:9c:02:c2:27:10，管理網路 MAC 位址為 11:22:33:44:55:66
+
+
+
+[[example-1-1-to-1-mapping-to-physical-or-virtual-nics]]
+== 範例 1：與實體網卡或虛擬網卡的一對一映射
+
+範例 1 描述了一個簡單的實體介面對應，幾乎不需要主機端組態。
+
+image:rhel_install_vlan_diag_1.gif["安裝 VLAN 圖"]
+
+Linux 作業系統會在安裝或開機期間自動建立 `ensXYZ`介面，或在介面熱插入時自動建立。除了確保介面設定為在開機後自動啟動外，無需其他組態。您需要確定哪個 ensXYZ 對應哪個 StorageGRID 網路（Grid、Admin 或 Client），以便在後續組態程序中提供正確的對應關係。
+
+請注意，圖中顯示了多個 StorageGRID 節點；但是，通常情況下，您會將此組態用於單一節點 VM。
+
+如果交換器 1 是實體交換器，則應將連接到介面 10G1 到 10G3 的連接埠設定為存取模式，並將它們放置在對應的 VLAN 上。
+
+
+
+[[example-2-lacp-bond-carrying-vlans]]
+== 範例 2：LACP 綁定承載 VLAN
+
+範例 2 假設您熟悉綁定網路介面，以及在您使用的 Linux 發行版上建立 VLAN 介面。
+
+.關於此任務
+範例 2 描述了一種通用、靈活、基於 VLAN 的方案，該方案能夠實現單一主機上所有節點共享所有可用網路頻寬。此範例尤其適用於裸機主機。
+
+為了理解這個例子，假設每個資料中心都有三個分隔的子網路，分別用於 Grid 網路、管理網路和用戶端網路。這些子網路位於分隔的 VLAN （1001、1002 和 1003）上，並透過 LACP 綁定的中繼連接埠 （bond0） 呈現給主機。您需要在 bond 上設定三個 VLAN 介面：bond0.1001、bond0.1002 和 bond0.1003。
+
+如果您需要為同一主機上的節點網路設定分隔的 VLAN 和子網路，則可以在連結上新增 VLAN 介面，並將它們對應到主機（如圖中所示的 bond0.1004）。
+
+image:rhel_install_vlan_diag_2.gif["VLAN 介面"]
+
+.步驟
+. 將用於 StorageGRID 網路連線的所有實體網路介面彙總至單一 LACP 連結中。
++
+在每個主機上使用相同的綁定名稱，例如 `bond0`。
+
+. 建立使用此綁定作為其關聯「實體設備」的 VLAN 介面，並採用標準的 VLAN 介面命名慣例 `physdev-name.VLAN ID`。
++
+請注意，步驟 1 和 2 需要在連接網路連結另一端的邊緣交換器上進行對應的組態。邊緣交換器連接埠也必須聚合到 LACP 連接埠通路中，設定為 trunk 模式，並允許所有必要的 VLAN 通過。
+
++
+此基於主機的連網組態方案提供了範例介面組態檔。
+
+
+
+.相關資訊
+* link:example-etc-network-interfaces.html["Ubuntu 和 Debian 的 /etc/network/interfaces 範例"]
+* link:example-etc-sysconfig-network-scripts.html["RHEL 的 /etc/sysconfig/network-scripts 範例"]
+

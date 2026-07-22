@@ -1,0 +1,63 @@
+---
+permalink: fabricpool/other-best-practices-for-storagegrid-and-fabricpool.html 
+sidebar: sidebar 
+keywords: fabricPool, StorageGRID, best practices, audit log, encryption, compressions, tiering, ontap, consistency 
+summary: 設定 StorageGRID 系統以與 FabricPool 搭配使用時，您可能需要變更其他 StorageGRID 選項。在變更全域設定之前，請考慮此變更將如何影響其他 S3 應用程式。 
+---
+= StorageGRID 全域設定搭配 FabricPool 的最佳實務做法
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+設定 StorageGRID 系統以與 FabricPool 搭配使用時，您可能需要變更其他 StorageGRID 選項。在變更全域設定之前，請考慮此變更將如何影響其他 S3 應用程式。
+
+
+
+[[audit-message-and-log-destinations]]
+== 稽核訊息和日誌目標
+
+FabricPool 工作負載通常具有很高的讀取作業率，這可能會產生大量的稽核訊息。
+
+* 如果您不需要記錄 FabricPool 或任何其他 S3 應用程式的用戶端讀取作業，可選擇前往 *Configuration* > *Monitoring* > *Audit and syslog server*。將 *Client Reads* 設定變更為 *Error*，以減少稽核日誌中記錄的稽核訊息數量。如需詳細資訊，請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+* 如果您擁有大型網格、使用多種類型的 S3 應用程式，或希望保留所有稽核資料，請設定外部 syslog 伺服器並將稽核資訊遠端儲存。使用外部伺服器可將稽核訊息記錄的效能影響降至最低，同時不會降低稽核資料的完整性。如需詳細資訊，請參閱 link:../monitor/considerations-for-external-syslog-server.html["關於外部 syslog 伺服器的注意事項"]。
+
+
+
+
+[[object-encryption]]
+== 物件加密
+
+設定 StorageGRID 時，如果其他 StorageGRID 用戶端需要資料加密，您可以選擇啟用link:../admin/changing-network-options-object-encryption.html["儲存物件加密的全域選項"]。從 FabricPool 分層傳輸至 StorageGRID 的資料已經過加密，因此無需啟用 StorageGRID 設定。用戶端加密金鑰由 ONTAP 所有。
+
+
+
+[[object-compression]]
+== 物件壓縮
+
+設定 StorageGRID 時，請勿啟用 link:../admin/configuring-stored-object-compression.html["用於壓縮儲存物件的全域選項"]。從 FabricPool 分層至 StorageGRID 的資料已經過壓縮。使用 StorageGRID 選項不會進一步縮減物件的大小。
+
+
+
+[[s3-object-lock]]
+== S3 物件鎖定
+
+如果您的 StorageGRID 系統已啟用全域 S3 物件鎖定設定，請勿在建立 FabricPool 儲存桶時啟用link:../s3/use-s3-api-for-s3-object-lock.html["S3 物件鎖定"]。S3 物件鎖定不支援 FabricPool 儲存桶。
+
+
+
+[[bucket-consistency]]
+== Bucket 一致性
+
+對於 FabricPool 儲存桶，建議的儲存桶一致性設定為 *Read-after-new-write*，這也是新儲存桶的預設一致性。請勿將 FabricPool 儲存桶修改為使用 *Available* 或 *Strong-site*。
+
+
+
+[[fabricpool-tiering]]
+== FabricPool 分層
+
+如果 StorageGRID 節點使用從 NetApp ONTAP 系統指派的儲存設備，請確認該 Volume 未啟用 FabricPool 分層原則。例如，如果 StorageGRID 節點在 VMware 主機上執行，請確保為該 StorageGRID 節點資料儲存提供支援的 Volume 未啟用 FabricPool 分層原則。停用與 StorageGRID 節點搭配使用之 Volume 的 FabricPool 分層，可簡化疑難排解和儲存設備作業。
+
+
+CAUTION: 切勿使用 FabricPool 將與 StorageGRID 相關的任何資料分層回 StorageGRID 本身。將 StorageGRID 資料分層回 StorageGRID 會增加疑難排解和維運的複雜度。

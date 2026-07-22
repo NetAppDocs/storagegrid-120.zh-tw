@@ -1,0 +1,85 @@
+---
+permalink: maintain/step-2-view-details.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, view details 
+summary: 從退役網站精靈的第 2 步（查看詳細資料）中，您可以審查網站中包含哪些節點、查看每個儲存節點上已使用的空間，並評估網格中其他網站有多少可用空間。 
+---
+= 在 StorageGRID 中取消委任之前、請先檢閱站台詳細資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+從退役網站精靈的第 2 步（查看詳細資料）中，您可以審查網站中包含哪些節點、查看每個儲存節點上已使用的空間，並評估網格中其他網站有多少可用空間。
+
+.開始之前
+在退役某個站台之前，必須審查該站台上存在多少物件資料。
+
+* 如果您要執行已連線網站的退役，則必須先了解網站上目前存在多少物件資料，然後再更新 ILM。根據現場容量和您的資料保護需求，您可以建立新的 ILM 規則，將資料移至其他網站或從網站中刪除物件資料。
+* 如果可能，請在開始退役程式之前執行任何必要的儲存節點擴充。
+* 如果您要執行斷開連線的站台退役，則必須了解移除站台時會有多少物件資料永久無法存取。
+
+
+
+CAUTION: 如果您執行的是中斷連線的站台退役，ILM 無法移動或刪除物件資料。站台上保留的任何資料都將遺失。但是，如果您的 ILM 原則旨在防止單一站台的資料遺失，則物件資料的複本仍存在於其餘站台上。請參閱 link:../ilm/using-multiple-storage-pools-for-cross-site-replication.html["啟用站台遺失保護"]。
+
+.步驟
+. 從步驟 2（查看詳細資訊）中，審查與您選擇移除的站台相關的任何警告。
++
+image:decommission_site_step_2_site_warnings.png["退役站台步驟 2 站台警告"]
+
++
+${post_edited_translations.segment}
+
++
+** 該站台包含一個 Gateway Node。如果 S3 用戶端目前正在連線至此節點，則必須在另一個站台設定一個等效節點。在繼續執行退役程序之前，請確保用戶端可以連線至替換節點。
+** 該站點包含已連接（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）和已斷開連接的節點（image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]或image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]）。在移除此站點之前，您必須先將所有離線節點重新上線。
+
+
+. ${post_edited_translations.segment}
++
+image:decommission_site_step_2_view_details.png["退役站台步驟 2 檢視詳細資料"]
+
++
+以下是所選站台的相關資訊：
+
++
+** 節點數量
+** 站台中所有儲存節點的總已使用空間、可用空間和容量。
++
+*** 對於已連線網站的退役，*Used Space* 值表示必須將多少物件資料遷移到其他網站或使用 ILM 刪除。
+*** 對於已中斷連線的站台退役，「已使用空間」值表示移除站台時將有多少物件資料無法存取。
+
+
+** 節點名稱、類型和連線狀態：
++
+*** image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]（已連接）
+*** image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]（管理性關閉）
+*** image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]（未知）
+
+
+** 各節點詳情：
++
+*** ${post_edited_translations.segment}
+*** 對於 Admin 節點和 Gateway 節點，該節點目前是否用於高可用度 （HA） 群組。您無法退役 HA 群組中使用的 Admin 節點或 Gateway 節點。在開始退役之前，請編輯 HA 群組以移除該站台上的所有節點，或者如果該 HA 群組僅包含來自此站台的節點，則移除該 HA 群組。如需說明，請參閱 link:../admin/managing-high-availability-groups.html["${post_edited_translations.segment}"]。
+
+
+
+
+. ${post_edited_translations.segment}
++
+image:decommission_site_step_2_view_details_for_other_sites.png["退役站台步驟 2 檢視其他站台的詳細資訊"]
+
++
+如果您正在執行連線站台退役，並計劃使用 ILM 將物件資料從所選站台移動（而不是直接刪除），則必須確保其他站台有足夠的容量來容納移動的資料，且有足夠的容量供未來成長使用。
+
++
+
+NOTE: 如果要移除的站台的「已使用空間」大於「其他站台的總可用空間」，則會顯示警告。為確保移除站台後有足夠的儲存容量，您可能需要在執行此程序之前先執行擴充。
+
+. 選擇 *Next* 。
++
+步驟 3（修改 ILM 原則）出現。
+
+

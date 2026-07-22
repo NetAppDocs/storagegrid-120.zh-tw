@@ -1,0 +1,112 @@
+---
+permalink: s3/example-group-policies.html 
+sidebar: sidebar 
+keywords: group policy examples 
+summary: 使用本節中的範例為群組建置 StorageGRID 存取原則。 
+---
+= StorageGRID S3 REST API 群組原則範例
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+使用本節中的範例為群組建置 StorageGRID 存取原則。
+
+群組原則指定該原則所附加群組的存取權限。原則中沒有  `Principal` 元素，因為它是隱含的。群組原則可使用 Tenant Manager 或 API 進行設定。
+
+
+
+[[example-set-group-policy-using-tenant-manager]]
+== 範例：使用 Tenant Manager 設定群組原則
+
+在 Tenant Manager 中新增或編輯群組時，您可以選擇群組原則來確定該群組成員將擁有哪些 S3 存取權限。請參閱link:../tenant/creating-groups-for-s3-tenant.html["為 S3 租戶建立群組"]。
+
+* *無 S3 存取權限*：預設選項。此群組中的使用者無法存取 S3 資源，除非透過儲存桶原則授予存取權限。如果選擇此選項，預設只有 root 使用者可以存取 S3 資源。
+* *唯讀存取*：此群組中的使用者對 S3 資源擁有唯讀存取。例如，此群組中的使用者可以列出物件並讀取物件資料、中繼資料和標籤。選擇此選項後，唯讀群組原則的 JSON 字串將顯示在文字方塊中。您無法編輯此字串。
+* *完全存取*：此群組中的使用者擁有對 S3 資源（包括儲存桶）的完全存取權。選取此選項後，文字方塊中將顯示完全存取群組原則的 JSON 字串。您無法編輯此字串。
+* *Ransomware Mitigation*：此範例原則適用於此租戶的所有儲存桶。此群組中的使用者可以執行常見操作，但無法從已啟用物件版本控制的儲存桶中永久刪除物件。
++
+擁有「管理所有儲存桶」權限的 Tenant Manager 使用者可以置換此群組原則。將「管理所有儲存桶」權限限制為受信任的用戶端，並在可用時使用多因素驗證 （MFA）。
+
+* *自訂*：群組內使用者將獲得您在文字方塊中指定的權限。
+
+
+
+
+[[example-allow-group-full-access-to-all-buckets]]
+== 範例：允許群組對所有儲存桶擁有完全存取
+
+在本例中，除非儲存桶原則明確拒絕，否則群組的所有成員都可以完全存取租戶帳戶擁有的所有儲存桶。
+
+[listing]
+----
+{
+  "Statement": [
+    {
+      "Action": "s3:*",
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::*"
+    }
+  ]
+}
+----
+
+
+[[example-allow-group-read-only-access-to-all-buckets]]
+== 範例：允許群組對所有儲存桶進行唯讀存取
+
+在這個範例中，除非儲存桶原則明確禁止，否則群組中的所有成員都對 S3 資源擁有唯讀存取權限。例如，該群組中的使用者可以列出物件並讀取物件資料、中繼資料和標籤。
+
+[listing]
+----
+{
+  "Statement": [
+    {
+      "Sid": "AllowGroupReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:ListBucketVersions",
+        "s3:GetObject",
+        "s3:GetObjectTagging",
+        "s3:GetObjectVersion",
+        "s3:GetObjectVersionTagging"
+      ],
+      "Resource": "arn:aws:s3:::*"
+    }
+  ]
+}
+----
+
+
+[[example-allow-group-members-full-access-to-only-their-folder-in-a-bucket]]
+== 例如：允許群組成員僅對其在儲存桶中的「資料夾」擁有完全存取
+
+在本例中，群組成員僅可列出及存取指定儲存桶中屬於他們的特定資料夾（鍵前綴）。請注意，在確定這些資料夾的隱私等級時，應考慮其他群組原則和儲存桶原則中的存取權限。
+
+[listing]
+----
+{
+  "Statement": [
+    {
+      "Sid": "AllowListBucketOfASpecificUserPrefix",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::department-bucket",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": "${aws:username}/*"
+        }
+      }
+    },
+    {
+      "Sid": "AllowUserSpecificActionsOnlyInTheSpecificUserPrefix",
+      "Effect": "Allow",
+      "Action": "s3:*Object",
+      "Resource": "arn:aws:s3:::department-bucket/${aws:username}/*"
+    }
+  ]
+}
+----

@@ -1,0 +1,118 @@
+---
+permalink: monitor/viewing-dashboard.html 
+sidebar: sidebar 
+keywords: how to view dashboard, how to configure dashboard 
+summary: 您可以使用儀表板快速監控系統活動。您也可以建立自訂儀表板來監控您的 StorageGRID 實作。 
+---
+= 在 StorageGRID 中檢視及管理儀表板
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用儀表板快速監控系統活動。您也可以建立自訂儀表板來監控您的 StorageGRID 實作。
+
+
+TIP: 若要變更 Grid Manager 中顯示的儲存設備值的單位，請選擇 Grid Manager 右上角的使用者下拉式選單，然後選擇 *User preferences*。
+
+根據系統組態的不同，您的儀表板可能會有所不同。
+
+image:grid_manager_dashboard.png["網格管理器儀表板"]
+
+
+
+[[view-the-dashboard]]
+== 檢視儀表板
+
+儀表板由多個標籤頁組成，每個標籤頁包含有關 StorageGRID 系統的具體資訊。每個標籤頁包含以卡片形式顯示的各類資訊。
+
+您可以直接使用系統提供的儀表板。此外，您還可以建立自訂儀表板，其中僅包含與監控 StorageGRID 實作相關的標籤和卡片。
+
+系統提供的儀表板標籤頁包含以下幾種類型的資訊卡片：
+
+[cols="1a,3a"]
+|===
+| 系統提供的儀表板索引標籤 | 包含 
+
+
+ a| 
+概況
+ a| 
+網格的一般資訊，例如作用中警示、空間使用情況和網格中的物件總數。
+
+
+
+ a| 
+效能
+ a| 
+空間使用情況、儲存設備使用量（隨時間變化）、S3 操作、請求持續時間、錯誤率。
+
+
+
+ a| 
+儲存
+ a| 
+租戶配額使用情況和邏輯空間使用情況。使用者資料和中繼資料的空間使用預測。
+
+
+
+ a| 
+ILM
+ a| 
+資訊生命週期管理佇列和評估率。
+
+
+
+ a| 
+節點
+ a| 
+節點的 CPU、資料和記憶體容量使用量。節點的 S3 操作。節點到站台的經銷。
+
+|===
+部分卡片可以最大化以便更清晰地查看。選擇卡片右上角的最大化圖示 image:icon_dashboard_card_maximize.png["最大化圖示"]。若要關閉已最大化的卡片，請選擇最小化圖示 image:icon_dashboard_card_minimize.png["最小化圖示"] 或選取 *Close*。
+
+
+
+[[manage-dashboards]]
+== 管理儀表板
+
+如果您擁有 Root 存取（請參閱link:../admin/admin-group-permissions.html["管理員群組權限"]），則可以對儀表板執行下列管理任務：
+
+* 從零開始建立自訂儀表板。您可以使用自訂儀表板來控制顯示哪些 StorageGRID 資訊以及如何組織這些資訊。
+* 複製儀表板以建立自訂儀表板。
+* 為使用者設定使用中的儀表板。使用中的儀表板可以是系統提供的儀表板，也可以是自訂儀表板。
+* 設定預設儀表板，所有使用者除非啟動自己的儀表板，否則都會看到該儀表板。
+* 編輯儀表板名稱。
+* 編輯儀表板可以新增或移除標籤頁和卡片。標籤頁數量最少為 1 個，最多 20 個。
+* 移除儀表板。
+
+
+
+NOTE: 如果您擁有 Root 存取以外的任何其他權限，則只能設定活動儀表板。
+
+若要管理儀表板，請選擇 *Actions* > *Manage dashboards*。
+
+image:dashboard_manage.png["管理儀表板"]
+
+
+
+[[configure-dashboards]]
+== 設定儀表板
+
+若要透過複製使用中儀表板來建立新儀表板，請選取 *Actions* > *Clone active dashboard*。
+
+若要編輯或 Clone 現有儀表板，請選擇「Actions」>「Manage dashboards」。
+
+
+NOTE: 系統提供的儀表板無法編輯或刪除。
+
+配置儀表板時，您可以：
+
+* 新增或移除標籤頁
+* 重新命名標籤頁，並為新標籤頁賦予唯一名稱
+* 在每個索引標籤中新增、移除或重新排列（拖曳）卡片
+* 請在卡片頂部選擇 *S*、*M*、*L* 或 *XL* 來選擇單張卡片的尺寸。
+
+
+image:dashboard_configure.png["配置儀表板"]

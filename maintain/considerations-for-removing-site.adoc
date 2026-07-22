@@ -1,0 +1,179 @@
+---
+permalink: maintain/considerations-for-removing-site.html 
+sidebar: sidebar 
+keywords: how to remove site 
+summary: 在使用網站退役程序移除網站之前，您必須審查相關考量事項。 
+---
+= StorageGRID 中的站台停用考量
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在使用網站退役程序移除網站之前，您必須審查相關考量事項。
+
+
+
+[[what-happens-when-you-decommission-a-site]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* 您將無法再使用任何參照該站台的儲存設備集區或銷毀編碼設定檔。當 StorageGRID 退役某個站台時，會自動移除這些儲存設備集區並停用這些銷毀編碼設定檔。
+
+
+
+
+[[differences-between-connected-site-and-disconnected-site-decommission-procedures]]
+== 連線站台與中斷連線站台退役程序之間的差異
+
+您可以使用站台退役程序來移除所有節點皆已連線至 StorageGRID 的站台（稱為連線站台退役），或是移除所有節點皆與 StorageGRID 中斷連線的站台（稱為中斷連線站台退役）。在您開始之前，必須先瞭解這些程序之間的差異。
+
+
+NOTE: 如果一個站點包含已連接（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）和已斷開連接的節點（image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]或image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]），則必須將所有離線節點重新上線。
+
+* 已連線的站台退役可讓您從 StorageGRID 系統中移除運作中的站台。例如，您可以執行已連線的站台退役，以移除功能正常但不再需要的站台。
+* 當 StorageGRID 移除已連線的站台時，它會使用 ILM 來管理該站台的物件資料。在您開始已連線站台退役之前，您必須從所有 ILM 原則中移除該站台，並啟動新的 ILM 原則。移轉物件資料的 ILM 程序與移除站台的內部程序可以同時發生，但最佳實務做法是在您開始實際的退役程序之前，先讓 ILM 步驟完成。
+* 中斷連線的站台退役可讓您從 StorageGRID 系統中移除故障的站台。例如，您可以執行中斷連線的站台退役，以移除因火災或水災而損毀的站台。
++
+當 StorageGRID 移除已中斷連線的站台時，它會將所有節點視為無法恢復，且不會嘗試保留資料。然而，在您開始已中斷連線的站台退役之前，您必須從所有 ILM 規則中移除該站台，並啟動新的 ILM 原則。
+
++
+
+CAUTION: 在執行斷開連線的站台退役程序之前，您必須聯絡您的 NetApp 帳戶代表。NetApp 將審查您的需求，然後才會啟用「退役站台」精靈中的所有步驟。如果您認為有可能恢復站台或從站台恢復物件資料，則不應嘗試執行已中斷連線的站台退役。
+
+
+
+
+
+[[general-requirements-for-removing-a-connected-or-a-disconnected-site]]
+== 移除已連線或已中斷連線站台的一般需求
+
+${post_edited_translations.segment}
+
+* 您無法退役包含主管理節點的網站。
+* 如果網站中的任何節點具有屬於高可用度 （HA） 群組的介面，則無法退役該網站。您必須編輯 HA 群組以移除該節點的介面，或移除整個 HA 群組。
+* 如果站台包含已連線（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）和已中斷連線（image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]或image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]）節點的混合情況，則無法將其取消委任。
+* 如果任何其他站台上的任何節點已中斷連線（image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"] 或 image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]），則無法取消委任站台。
+* 如果 ec-node-repair 作業正在進行中，則無法啟動網站退役程式。請參閱link:checking-data-repair-jobs.html["檢查資料修理作業"]以追蹤糾刪碼資料的修復情況。
+* 站台退役程序執行期間：
++
+** 您無法建立參照正在退役之站台的 ILM 規則。您也無法編輯現有的 ILM 規則以參照該站台。
+** ${post_edited_translations.segment}
++
+
+NOTE: 如果您需要在已連線的站台退役期間執行另一個維護程序，您可以 link:pausing-and-resuming-decommission-process-for-storage-nodes.html["${post_edited_translations.segment}"]。只有在達到 ILM 評估或糾刪碼資料退役階段時，才會啟用 *Pause* 按鈕；然而，ILM 評估（資料移轉）將繼續在背景執行。在第二個維護程序完成後，您可以恢復退役。
+
+** ${post_edited_translations.segment}
+
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+
+
+[[requirements-for-information-lifecycle-management-ilm]]
+== 資訊生命週期管理（ILM）的要求
+
+作為移除站台的一部分，您必須更新您的 ILM 組態。「退役站台」精靈會引導您完成許多先決條件步驟，以確保符合下列條件：
+
+* 此站台未被任何 ILM 原則參照。如果是，您必須編輯原則，或使用新的 ILM 規則建立並啟動原則。
+* 沒有任何 ILM 規則參照該站台，即使這些規則未在任何原則中使用。您必須刪除或編輯所有參照該站台的規則。
+
+
+當 StorageGRID 退役某個站台時，它會自動停用所有參照該站台的未使用糾刪碼設定檔，並自動刪除所有參照該站台的未使用儲存資源池。如果存在「所有儲存節點」儲存資源池（StorageGRID 11.6 及更早版本），則會將其移除，因為它使用了所有站台。
+
+
+CAUTION: 在移除站台之前，您可能需要建立新的 ILM 規則並啟動新的 ILM 原則。這些說明假設您對 ILM 的運作方式有充分的瞭解，且熟悉建立儲存資源池、糾刪碼設定檔、ILM 規則，以及模擬和啟動 ILM 原則。請參閱 link:../ilm/index.html["使用 ILM 管理物件"]。
+
+
+
+[[considerations-for-the-object-data-at-a-connected-site]]
+== 連線站台中物件資料的注意事項
+
+如果您要執行已連線網站的退役，則在建立新的 ILM 規則和新的 ILM 原則時，必須決定如何處理網站中現有的物件資料。您可以執行以下一項或兩項操作：
+
+* 將物件資料從選定的站台移至網格中的一個或多個其他站台。
++
+*移轉資料的範例*：假設您因為在 Sunnyvale 新增了站台，而想要將 Raleigh 的站台退役。在此範例中，您想要將所有物件資料從舊站台移轉到新站台。在更新您的 ILM 規則和 ILM 原則之前，您必須審查這兩個站台的容量。您必須確保 Sunnyvale 站台有足夠的容量來容納來自 Raleigh 站台的物件資料，且 Sunnyvale 仍保留足夠的空間供未來成長之用。
+
++
+
+NOTE: 為了確保有足夠的容量可用，在您執行此程序之前，您可能需要透過向現有站台新增儲存磁碟區或 Storage Nodes，或是新增新站台來 link:../expand/index.html["${post_edited_translations.segment}"]。
+
+* ${post_edited_translations.segment}
++
+*資料刪除範例*：假設您目前使用 3 複本 ILM 規則將物件資料複寫到三個站台。在退役某個站台之前，您可以建立等效的 2 複本 ILM 規則，將資料僅儲存在兩個站台。當您啟動使用 2 複本規則的新 ILM 原則時，StorageGRID 會刪除第三個站台中的複本，因為這些複本不再符合 ILM 要求。但是，物件資料仍將受到保護，且剩餘兩個站台的容量將維持不變。
+
++
+
+CAUTION: 切勿建立單一複本的 ILM 規則來容納站台的移除。在任何時間段內僅建立一個複寫複本的 ILM 規則，都會使資料面臨永久遺失的風險。如果物件僅存在一個複寫複本，則當 Storage Node 故障或發生重大錯誤時，該物件將會遺失。在升級等維護程序期間，您也會暫時遺失對該物件的存取權限。
+
+
+
+
+
+[[additional-requirements-for-a-connected-site-decommission]]
+== 連線站台退役的其他需求
+
+${post_edited_translations.segment}
+
+* StorageGRID 系統中的所有節點必須具有 *Connected* 連線狀態（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）；但是，節點可以有活動警報。
++
+
+NOTE: 如果有一個或多個節點中斷連線，您仍可以完成「退役站台」精靈的步驟 1-4。然而，除非所有節點都已連線，否則您無法完成精靈的步驟 5（此步驟會啟動退役程序）。
+
+* 如果您計劃移除的站台包含用於負載平衡的 Gateway 節點或 Admin 節點，您可能需要link:../expand/index.html["${post_edited_translations.segment}"]在另一個站台新增等效的新節點。在開始站台退役程序之前，請確保用戶端可以連線到替代節點。
+* 如果您打算移除的站台包含任何位於高可用度 （HA） 群組中的閘道節點或管理節點，則可以完成「退役站台」精靈的步驟 1-4。但是，您必須先將這些節點從所有 HA 群組中移除，才能完成精靈的步驟 5 （此步驟將啟動退役程序）。如果現有用戶端連線至包含該站台節點的 HA 群組，則必須確保在移除該站台後，這些用戶端仍可繼續連線至 StorageGRID。
+* ${post_edited_translations.segment}
+* 您必須在剩餘站點上提供足夠的空間，以容納因任何活動 ILM 原則變更而需要移動的任何物件資料。在某些情況下，您可能需要link:../expand/index.html["${post_edited_translations.segment}"]，方法是在完成已連接網站的退役之前新增儲存節點、儲存設備磁碟區或新網站。
+* 您必須保留足夠的時間，以便退役程序完成。StorageGRID ILM 程序可能需要數天、數週甚至數月的時間，才能在站台退役之前從該站台移動或刪除物件資料。
++
+
+NOTE: ${post_edited_translations.segment}
+
+* 只要有可能，您應該儘早完成「退役站台」精靈的步驟 1-4。如果您在開始實際的退役程序之前，先允許將資料從該站台移出（藉由在精靈的步驟 5 中選取 *Start Decommission*），則退役程序將能更快完成，且造成的中斷與效能影響也會更少。
+
+
+
+
+[[additional-requirements-for-a-disconnected-site-decommission]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 您已聯絡您的 NetApp 帳戶代表。NetApp 將在啟用站台退役精靈中的所有步驟之前，先審查您的需求。
++
+
+CAUTION: 如果您認為可能可以恢復站台或從站台恢復任何物件資料，則不應嘗試進行已中斷連線的站台退役。請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+
+* 站台上的所有節點必須具有以下連線狀態之一：
++
+** *未知*（image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]）：由於未知原因，節點斷開連接或節點上的服務意外中斷。例如，節點上的某個服務可能已停止，或者節點可能因斷電或意外中斷而失去網路連線。
+** *Administratively Down*（image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]）：節點因預期原因未連接到網格。例如，節點或節點上的服務已正常關閉。
+
+
+* 所有其他站點的所有節點必須具有 *已連接* 的連接狀態（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）；但是，這些其他節點可以有活動警報。
+* 您必須了解，您將無法再使用 StorageGRID 檢視或擷取儲存在該站台上的任何物件資料。StorageGRID 執行此程序時，不會嘗試保留中斷連線站台上的任何資料。
++
+
+NOTE: ${post_edited_translations.segment}
+
+* 您必須明白，如果該站台包含某個物件的唯一複本，則該物件已遺失且無法擷取。
+
+
+
+
+[[considerations-for-consistency-when-you-remove-a-site]]
+== 移除網站時需要考慮的一致性問題
+
+S3 Bucket 的一致性決定了 StorageGRID 是否會在向用戶端確認物件擷取成功之前，將物件中繼資料完整複寫到所有節點和站台。一致性可在物件的可用度與這些物件在不同 Storage 節點和站台之間的一致性之間取得平衡。
+
+當 StorageGRID 移除站台時，必須確保不會將任何資料寫入正在移除的站台。因此，它會暫時置換每個 bucket 或 Container 的一致性。在您啟動站台退役程序之後，StorageGRID 會暫時使用強式站台一致性，以防止將物件中繼資料寫入正在移除的站台。
+
+${post_edited_translations.segment}

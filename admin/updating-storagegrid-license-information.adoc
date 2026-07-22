@@ -1,0 +1,31 @@
+---
+permalink: admin/updating-storagegrid-license-information.html 
+sidebar: sidebar 
+keywords: storagegrid license, update license, add storage capacity 
+summary: 如果您的授權條款發生變更，您必須更新 StorageGRID 系統的授權資訊。例如，如果您為網格購買了額外儲存容量，則必須更新授權資訊。 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您的授權條款發生變更，您必須更新 StorageGRID 系統的授權資訊。例如，如果您為網格購買了額外儲存容量，則必須更新授權資訊。
+
+.開始之前
+* 您有一個新的授權檔案需要套用到您的 StorageGRID 系統。
+* 您有link:admin-group-permissions.html["特定存取權限"]。
+* 您擁有佈建密碼。
+
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 找到並選取新的授權檔案(`.txt`）。
++
+新的授權檔案已驗證並顯示。
+
+. 請輸入佈建密碼。
+. 選取 *Save* 。
+

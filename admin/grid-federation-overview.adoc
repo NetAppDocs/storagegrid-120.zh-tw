@@ -1,0 +1,106 @@
+---
+permalink: admin/grid-federation-overview.html 
+sidebar: sidebar 
+keywords: grid federation, cross-grid replication, account clone, cgr, disaster recovery 
+summary: 您可以使用網格聯合來 Clone 租戶，並在兩個 StorageGRID 系統之間複寫其物件，以實現災難恢復。 
+---
+= 了解 StorageGRID 網格聯邦
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用網格聯合來 Clone 租戶，並在兩個 StorageGRID 系統之間複寫其物件，以實現災難恢復。
+
+
+
+[[what-is-a-grid-federation-connection]]
+== 什麼是網格聯盟連線？
+
+網格聯盟連線是兩個 StorageGRID 系統中 Admin 節點和 Gateway 節點之間的雙向、可信任且安全的連線。
+
+
+
+[[workflow-for-grid-federation]]
+== 網格聯盟工作流程
+
+工作流程圖總結了在兩個網格之間設定網格聯邦連線的步驟。
+
+image:grid-federation-workflow.png["網格聯盟連線工作流程"]
+
+
+
+[[considerations-and-requirements-for-grid-federation-connections]]
+== 網格聯邦連線的考量事項和需求
+
+* 用於網格聯合的網格必須執行 StorageGRID 版本，這些版本必須完全相同，或彼此之間最多只有一個主要版本差異。
++
+有關版本要求的詳細資訊，請參閱 https://library.netapp.com/ecm/ecm_download_file/ECMLP3351267["版本資訊"^]。您必須登入現有 NetApp 帳戶或建立帳戶才能存取發行說明。
+
+* 一個網格可以與其他網格建立一個或多個網格聯邦連接。每個網格聯邦連接都是獨立的，與其他連接互不影響。例如，如果 Grid 1 與 Grid 2 有一個連接，又與 Grid 3 有一個連接，那麼 Grid 2 和 Grid 3 之間並不存在隱含的連接。
+* 網格聯盟連線是雙向的。連線建立後，您可以從任一網格監控和管理該連線。
+* 必須至少存在一個網格同盟連線，才能使用 link:grid-federation-what-is-account-clone.html["帳戶 Clone"] 或 link:grid-federation-what-is-cross-grid-replication.html["${post_edited_translations.segment}"]。
+
+
+
+
+[[networking-and-ip-address-requirements]]
+=== 網路和 IP 位址需求
+
+* 網格聯盟連線可在網格網路、管理網路或用戶端網路上進行。
+* 網格同盟連線可將一個網格連線至另一個網格。每個網格的組態都會指定另一個網格上的網格同盟端點，該端點由 Admin 節點、Gateway 節點或兩者組成。
+* 最佳實務做法是連線每個網格上 Gateway 和 Admin 節點的 link:managing-high-availability-groups.html["高可用度 （HA） 群組"]。使用 HA 群組有助於確保在節點變得無法使用時，網格同盟連線仍保持線上狀態。如果任一 HA 群組中的作用中介面故障，連線可以使用備份介面。
+* 不建議建立使用單一 Admin 節點或 Gateway 節點 IP 位址的網格同盟連線。如果該節點變得無法使用，網格同盟連線也將變得無法使用。
+* link:grid-federation-what-is-cross-grid-replication.html["跨網格複寫"] 物件需要每個網格上的 Storage 節點能夠存取另一個網格上已設定的 Admin 和 Gateway 節點。對於每個網格，請確認所有 Storage 節點皆有高頻寬路由至用於連線的 Admin 節點或 Gateway 節點。
+
+
+
+
+[[use-fqdns-to-load-balance-the-connection]]
+=== ${post_edited_translations.segment}
+
+在正式作業環境中，請使用完整網域名稱 (FQDN) 來識別連線中的每個網格。然後，如下建立對應的 DNS 項目：
+
+* Grid 1 的 FQDN 會對應到 Grid 1 中 HA 群組的一個或多個虛擬 IP （VIP） 位址，或對應到 Grid 1 中一個或多個管理節點或閘道節點的 IP 位址。
+* Grid 2 的 FQDN 會對應到 Grid 2 的一個或多個 VIP 位址，或對應到 Grid 2 中的一個或多個管理節點或閘道節點的 IP 位址。
+
+
+${post_edited_translations.segment}
+
+* 對應到多個 HA 群組 VIP 位址的 DNS 項目會在 HA 群組的作用中節點之間進行負載平衡。
+* 對應至多個管理節點或閘道節點 IP 位址的 DNS 條目，會在對應的節點之間進行負載平衡。
+
+
+
+
+[[port-requirements]]
+=== 連接埠需求
+
+建立網格聯合連線時，您可以指定 23000 到 23999 之間的任何未使用的連接埠號碼。此連線中的兩個網格將使用相同的連接埠。
+
+您必須確保兩個網格中的任何節點都沒有使用此連接埠進行其他連線。
+
+
+
+[[certificate-requirements]]
+=== 憑證需求
+
+設定網格聯合連線時，StorageGRID 會自動產生四個 SSL 憑證：
+
+* 伺服器和用戶端憑證，用於驗證和加密從網格 1 傳送到網格 2 的資訊
+* 伺服器和用戶端憑證用於驗證和加密從網格 2 傳送到網格 1 的資訊。
+
+
+image:grid-federation-certificates.png["網格同盟憑證"]
+
+預設情況下，憑證有效期為 730 天（2 年）。當這些憑證接近到期日時，*網格聯盟憑證到期* 警示會提醒您輪換憑證，您可以使用 Grid Manager 執行此操作。
+
+
+CAUTION: 如果連接兩端的憑證過期，連線將停止運作。資料複寫將處於暫停狀態，直到憑證更新為止。
+
+.深入瞭解
+* link:grid-federation-create-connection.html["建立網格聯盟連線"]
+* link:grid-federation-manage-connection.html["管理網格同盟連線"]
+* link:grid-federation-troubleshoot.html["排除網格同盟錯誤"]
+

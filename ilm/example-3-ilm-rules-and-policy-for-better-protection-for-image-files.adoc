@@ -1,0 +1,127 @@
+---
+permalink: ilm/example-3-ilm-rules-and-policy-for-better-protection-for-image-files.html 
+sidebar: sidebar 
+keywords: example ILM rule, information lifecycle rule examples 
+summary: 您可以使用以下範例規則和原則，確保大於 1 MB 的映像進行銷毀編碼處理，並為較小的映像製作兩個複本。 
+---
+= StorageGRID 中用於保護映像檔案的 ILM 規則和原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用以下範例規則和原則，確保大於 1 MB 的映像進行銷毀編碼處理，並為較小的映像製作兩個複本。
+
+
+CAUTION: 以下 ILM 規則和原則僅為範例。設定 ILM 規則的方法有很多種。在啟動新原則之前，請先進行模擬，以確認其運作方式符合預期，可保護內容免於遺失。
+
+
+
+[[ilm-rule-1-for-example-3-use-ec-for-image-files-greater-than-1-mb]]
+== ${post_edited_translations.segment}
+
+此範例 ILM 規則使用進階篩選對所有大於 1 MB 的映像檔案進行銷毀編碼處理。
+
+
+NOTE: 銷毀編碼最適合大於 1 MB 的物件。不要對小於 200 KB 的物件使用銷毀編碼，以免管理非常小的銷毀編碼片段帶來例行成本。
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+規則名稱
+ a| 
+EC 映像檔 > 1 MB
+
+
+
+ a| 
+參考時間
+ a| 
+擷取時間
+
+
+
+ a| 
+物件大小進階篩選器
+ a| 
+物件大小大於 1 MB
+
+
+
+ a| 
+Key 的進階篩選器
+ a| 
+* 以 .jpg 結尾
+* 以 .png 結尾
+
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+|===
+image:policy_3_rule_1_ec_images_adv_filtering.png["${post_edited_translations.segment}"]
+
+${post_edited_translations.segment}
+
+
+
+[[ilm-rule-2-for-example-3-create-2-replicated-copies-for-all-remaining-image-files]]
+== ILM 規則 2 （範例 3）：為所有剩餘的映像檔案建立 2 個複本
+
+此範例 ILM 規則使用進階過濾來指定複製較小的映像檔。由於原則中的第一條規則已符合大於 1 MB 的映像檔，因此此規則適用於 1 MB 或更小的映像檔。
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+規則名稱
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+參考時間
+ a| 
+擷取時間
+
+
+
+ a| 
+Key 的進階篩選器
+ a| 
+* 以 .jpg 結尾
+* 以 .png 結尾
+
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+在兩個儲存資源池中建立 2 個複本
+
+|===
+
+
+[[ilm-policy-for-example-3-better-protection-for-image-files]]
+== ${post_edited_translations.segment}
+
+此範例 ILM 原則包含三條規則：
+
+* 第一條規則會對所有大於 1 MB 的映像檔案執行銷毀編碼。
+* 第二條規則會建立剩餘映像檔案（即 1 MB 或更小的映像）的兩個複本。
+* 預設規則適用於所有剩餘物件（即任何非映像檔案）。
+
+
+image:policy_3_configured_policy.png["${post_edited_translations.segment}"]

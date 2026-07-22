@@ -1,0 +1,48 @@
+---
+permalink: fabricpool/best-practices-ilm.html 
+sidebar: sidebar 
+keywords: FabricPool, StorageGRID, best practices, ILM, information lifecycle management, ILM rule, ILM policy, erasure-coding, replication 
+summary: 如果您正使用 FabricPool 將資料分層至 StorageGRID，您必須瞭解搭配 FabricPool 資料使用 StorageGRID 資訊生命週期管理 （ILM） 的需求。 
+---
+= 搭配 FabricPool 資料使用 StorageGRID ILM 的最佳實務做法
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您正使用 FabricPool 將資料分層至 StorageGRID，您必須瞭解搭配 FabricPool 資料使用 StorageGRID 資訊生命週期管理 （ILM） 的需求。
+
+
+CAUTION: FabricPool 對 StorageGRID ILM 規則或原則一無所知。如果 StorageGRID ILM 原則設定錯誤，可能會導致資料遺失。如需詳細資訊，請參閱 link:../ilm/what-ilm-rule-is.html["${post_edited_translations.segment}"] 與 link:../ilm/creating-ilm-policy.html["建立 ILM 原則"]。
+
+
+
+[[guidelines-for-using-ilm-with-fabricpool]]
+== 搭配 FabricPool 使用 ILM 的指南
+
+當您使用 FabricPool 設定精靈時，精靈會自動為您建立的每個 S3 貯體建立一個新的 ILM 規則，並將該規則新增至非作用中原則。系統會提示您啟動該原則。自動建立的規則遵循建議的最佳實務做法：它在單一站台使用 2+1 銷毀編碼。
+
+如果您是手動設定 StorageGRID，而非使用 FabricPool 設定精靈，請審查這些指南，以確保您的 ILM 規則和 ILM 原則適合 FabricPool 資料和您的業務需求。您可能需要建立新的規則並更新作用中的 ILM 原則，以符合這些指南。
+
+* 您可以使用複寫和銷毀編碼規則的任意組合來保護雲端分層資料。
++
+建議的最佳實務做法是在站台內使用 2+1 銷毀編碼，以實現具備成本效益的資料保護。與複寫相比，銷毀編碼會使用較多 CPU，但所需的儲存容量明顯較少。4+1 和 6+1 配置使用的容量少於 2+1 配置。然而，如果您需要在網格擴充期間新增 Storage Nodes，4+1 和 6+1 配置的靈活性較低。如需詳細資訊，請參閱 link:../expand/adding-storage-capacity-for-erasure-coded-objects.html["增加銷毀編碼物件的儲存容量"]。
+
+* 套用於 FabricPool 資料的每條規則必須使用銷毀編碼，或必須建立至少兩個複本。
++
+
+CAUTION: 如果 ILM 規則在任何時間段內僅建立一個複寫複本，則資料將面臨永久遺失的風險。如果物件僅存在一個複寫複本，則一旦儲存節點發生故障或出現重大錯誤，該物件就會遺失。此外，在升級等維護程序期間，您也會暫時失去對該物件的存取。
+
+* 如果您需要 link:remove-fabricpool-data.html["從 StorageGRID 移除 FabricPool 資料"]，請使用 ONTAP 擷取 FabricPool Volume 的所有資料，並將其提升至效能分層。
++
+
+CAUTION: 為了避免資料遺失，請勿使用會過期或刪除 FabricPool 雲端分層資料的 ILM 規則。將每個 ILM 規則中的保留期間設定為 *forever*，以確保 StorageGRID ILM 不會刪除 FabricPool 物件。
+
+* 請勿建立會將 FabricPool 雲端分層資料移出儲存貯體至其他位置的規則。您無法使用 Cloud Storage Pool 將 FabricPool 資料移至另一個物件存放區。
++
+
+NOTE: 由於從雲端儲存池目標擷取物件會增加延遲，因此不支援將雲端儲存池與 FabricPool 搭配使用。
+
+* 自 ONTAP 9.8 開始，您可以選擇建立物件標籤，以協助分類和排序分層資料，從而簡化管理。例如，您可以僅在連接至 StorageGRID 的 FabricPool Volume 上設定標籤。然後，在 StorageGRID 中建立 ILM 規則時，您可以使用「物件標籤」進階篩選器來選取並放置此資料。
+

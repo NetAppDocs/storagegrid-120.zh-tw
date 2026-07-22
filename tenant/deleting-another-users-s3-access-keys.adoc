@@ -1,0 +1,33 @@
+---
+permalink: tenant/deleting-another-users-s3-access-keys.html 
+sidebar: sidebar 
+keywords: how to delete access key for other user 
+summary: 如果您使用的是 S3 租戶且擁有對應的權限，則可以刪除其他使用者的 S3 存取金鑰。存取金鑰刪除後，將無法再用於存取租戶帳戶中的物件和儲存桶。 
+---
+= 刪除 StorageGRID 中其他使用者的 S3 存取金鑰
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您使用的是 S3 租戶且擁有對應的權限，則可以刪除其他使用者的 S3 存取金鑰。存取金鑰刪除後，將無法再用於存取租戶帳戶中的物件和儲存桶。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您有link:tenant-management-permissions.html["${post_edited_translations.segment}"]。
+
+
+
+CAUTION: 可以使用 Tenant Manager 中顯示的該使用者存取金鑰 ID 和秘密存取金鑰，來存取屬於該使用者的 S3 儲存桶和物件。因此，請像保護密碼一樣保護存取金鑰。定期輪換存取金鑰，從帳戶中移除任何未使用的金鑰，且切勿與其他使用者共享。
+
+.步驟
+. 選擇 *Access Management* > *Users*。
+. 在「使用者」頁面中，選擇要管理其 S3 存取金鑰的使用者。
+. 在使用者詳細資料頁面中，選取 *Access keys*，然後選取要刪除的每個存取金鑰的核取方塊。
+. 選取 *Actions* > *Delete selected key*。
+. 在確認對話方塊中，選取 *Delete key*。
++
+頁面右上角會顯示確認訊息。
+
+

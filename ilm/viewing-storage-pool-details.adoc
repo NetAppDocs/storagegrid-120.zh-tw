@@ -1,0 +1,58 @@
+---
+permalink: ilm/viewing-storage-pool-details.html 
+sidebar: sidebar 
+keywords: storage pool, view details 
+summary: 您可以檢視儲存資源池的詳細資訊，以確定儲存資源池的使用位置，以及包含哪些節點和儲存設備等級。 
+---
+= 在 StorageGRID 中檢視儲存資源池詳細資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以檢視儲存資源池的詳細資訊，以確定儲存資源池的使用位置，以及包含哪些節點和儲存設備等級。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+.步驟
+. 選擇 *ILM* > *儲存資源池*。
++
+${post_edited_translations.segment}
+
++
+** ${post_edited_translations.segment}
+** *節點數*：儲存資源池的節點數量。
+** *儲存使用情況*：此節點上用於物件資料的總可用空間百分比。此值不包括物件中繼資料。
+** ${post_edited_translations.segment}
+** *ILM 使用量*：儲存資源池目前的使用方式。儲存資源池可能未使用，或者可能用於一或多個 ILM 規則、銷毀編碼設定檔，或兩者皆有。
+
+
+. ${post_edited_translations.segment}
++
+顯示儲存資源池的詳細資訊頁面。
+
+. 檢視 *Nodes* 索引標籤，以了解儲存資源池中包含的儲存節點。
++
+${post_edited_translations.segment}
+
++
+** 節點名稱
+** 網站名稱
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
++
+
+NOTE: 每個 Storage Node 的儲存使用率 (%) 值也顯示在「Storage Used - Object Data」圖表中（選擇 *Nodes* > *_Storage Node_* > *Storage*）。
+
+
+
+. 檢視 *ILM usage* 索引標籤，以確定儲存資源池目前是否正在任何 ILM 規則或銷毀編碼設定檔中使用。
+. （可選）前往 *ILM 規則頁面* 了解並管理使用儲存資源池的任何規則。
++
+請參閱 link:working-with-ilm-rules-and-ilm-policies.html["使用 ILM 規則的說明"]。
+
+

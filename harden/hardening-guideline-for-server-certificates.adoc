@@ -1,0 +1,62 @@
+---
+permalink: harden/hardening-guideline-for-server-certificates.html 
+sidebar: sidebar 
+keywords: StorageGRID, hardening guidelines, certificates 
+summary: 您應該替換安裝期間建立的預設憑證，並為 TLS 和 SSH 連線選擇適當的安全性原則。 
+---
+= StorageGRID 中 TLS 和 SSH 的強化準則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您應該控制 SSH 存取，替換預設的 TLS 憑證，並為 TLS 和 SSH 連線選擇適當的安全性原則。
+
+
+
+[[hardening-guidelines-for-certificates]]
+== 憑證強化準則
+
+您應該將安裝過程中建立的預設憑證替換為您自己的自訂憑證。
+
+對於許多組織而言，用於 StorageGRID 網路存取的自簽章數位憑證不符合其資訊安全性原則。在正式作業系統中，您應該安裝 CA 簽署的數位憑證，以用於驗證 StorageGRID。
+
+具體來說，您應該使用自訂伺服器憑證，而不是這些預設憑證：
+
+* *管理介面憑證*：用於保護對 Grid Manager、Tenant Manager、網格管理 API 和 Tenant Management API 的存取。
+* *S3 API 憑證*：用於保護對儲存節點和 Gateway 節點的存取，S3 用戶端應用程式使用這些節點上傳和下載物件資料。
+
+
+如需詳細資訊和說明，請參閱 link:../admin/using-storagegrid-security-certificates.html["管理安全性證書"]。
+
+
+NOTE: StorageGRID 單獨管理負載平衡器端點所使用的憑證。若要設定負載平衡器憑證，請參閱 link:../admin/configuring-load-balancer-endpoints.html["設定負載平衡器端點"]。
+
+使用自訂伺服器憑證時，請遵循下列準則：
+
+* 憑證應具有 `_subjectAltName_`與 StorageGRID 的 DNS 項目相符的屬性。如需詳細資訊，請參閱 https://tools.ietf.org/html/rfc5280#section-4.2.1.6["RFC 5280：PKIX 憑證和 CRL 設定檔"^]中的第 4.2.1.6 節「Subject Alternative Name」。
+* 盡可能避免使用萬用字元憑證。此準則的例外情況是 S3 虛擬託管樣式端點的憑證，如果事先不知道儲存貯體名稱，則必須使用萬用字元憑證。
+* 當必須在憑證中使用萬用字元時，應採取額外措施來降低風險。使用類似 `*.s3.example.com`的萬用字元模式，且不要將 `s3.example.com`後綴用於其他應用程式。此模式也適用於路徑式 S3 存取，例如 `dc1-s1.s3.example.com/mybucket`。
+* 將憑證過期時間設定得較短（例如 2 個月），並使用 Grid Management API 自動化憑證輪替。這對於萬用字元憑證尤其重要。
+
+
+此外，用戶端在與 StorageGRID 通訊時應使用嚴格的主機名稱檢查。
+
+
+
+[[hardening-guidelines-for-tls-and-ssh-policy]]
+== TLS 和 SSH 原則強化指南
+
+您可以選擇安全性原則來決定使用哪些協定和密碼，以建立與用戶端應用程式的安全 TLS 連線，以及與內部 StorageGRID 服務的安全 SSH 連線。
+
+安全性原則控制 TLS 和 SSH 如何加密傳輸中的資料。最佳實務做法是停用應用程式相容性不需要的加密選項。除非您的系統需要符合通用準則 （Common Criteria）、FIPS 140-2 符合法規，或您需要使用其他加密演算法，否則請使用預設的「現代」原則。
+
+如需詳細資訊和說明，請參閱 link:../admin/manage-tls-ssh-policy.html["管理 TLS 和 SSH 原則"]。
+
+
+
+[[manage-external-ssh-access]]
+== 管理外部 SSH 存取
+
+為增強系統安全性，預設會封鎖外部 SSH 存取。僅在需要執行需要傳入 SSH 存取的任務（例如疑難排解）時，才啟用 SSH 存取。如需詳細資訊和說明，請參閱 link:../admin/manage-external-ssh-access.html["管理外部 SSH 存取"]。

@@ -1,0 +1,47 @@
+---
+permalink: admin/changing-provisioning-passphrase.html 
+sidebar: sidebar 
+keywords: provisioning passphrase, change passphrase 
+summary: 使用此步驟變更 StorageGRID 佈建密碼。恢復、擴充和維護程序需要此密碼。下載包含網格拓撲資訊、網格節點主控台密碼和 StorageGRID 系統加密金鑰的恢復套件備份也需要此密碼。 
+---
+= 更改 StorageGRID 佈建通關密碼
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+使用此步驟變更 StorageGRID 佈建密碼。恢復、擴充和維護程序需要此密碼。下載包含網格拓撲資訊、網格節點主控台密碼和 StorageGRID 系統加密金鑰的恢復套件備份也需要此密碼。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您擁有維護或 root 存取權限。
+* 您擁有目前的設定密碼。
+
+
+.關於此任務
+許多安裝和維護程序都需要佈建密碼，以及 link:../maintain/downloading-recovery-package.html["下載恢復套件"]。佈建密碼未列在  `Passwords.txt` 檔案中。請務必記錄佈建密碼，並將其保存在安全的位置。
+
+.步驟
+. 選擇 *Configuration* > *Access control* > *Grid passwords*。
+. 在 *Change provisioning passphrase* 下，選擇 *Make a change*
+. 請輸入您目前的佈建複雜密碼。
+. 請輸入新的密碼片語。密碼片語長度必須至少為 8 個字元，最多為 32 個字元。密碼片語區分大小寫。
++
+
+CAUTION: 請將佈建密碼儲存在安全的位置。安裝、擴充和維護程序都需要用到它。
+
+. 重新輸入新的密碼短語，然後選擇 *Save*。
++
+配置密碼變更完成後，系統會顯示綠色成功橫幅。
+
++
+image:change_provisioning_passphrase_success.png["佈建密碼短語變更成功訊息"]
+
+. 選擇 *Recovery Package*。
+. 輸入新的佈建密碼，以下載新的恢復套件。
++
+
+CAUTION: 變更佈建密碼後，您必須立即下載新的恢復套件。恢復套件檔案可讓您在發生故障時還原系統。
+
+

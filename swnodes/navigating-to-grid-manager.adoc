@@ -1,0 +1,52 @@
+---
+permalink: swnodes/navigating-to-grid-manager.html 
+sidebar: sidebar 
+keywords: how to navigate to Grid Manager 
+summary: 您可以使用 Grid Manager 來定義設定 StorageGRID 系統所需的所有資訊。 
+---
+= 導航至 StorageGRID Grid Manager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 Grid Manager 來定義設定 StorageGRID 系統所需的所有資訊。
+
+.開始之前
+主管理節點必須已部署並已完成初始啟動序列。
+
+.步驟
+. 開啟您的網頁瀏覽器並造訪：
++
+`https://_primary_admin_node_ip_`
+
++
+或者，您也可以透過連接埠 8443 存取 Grid Manager：
+
++
+`https://_primary_admin_node_ip_:8443`
+
++
+您可以依照網路組態，使用網格網路或管理網路上的主管理節點 IP 位址。您可能需要在瀏覽器中使用「安全性/進階」選項才能存取不受信任的憑證。
+
+. 視需要管理臨時安裝程式密碼：
++
+** ${post_edited_translations.segment}
++
+*** 使用者先前在存取安裝程式時設定了密碼。
+*** 對於 Linux 系統，密碼會自動從節點組態檔案匯入，路徑為 `/etc/storagegrid/nodes/_<node_name>_.conf`
+*** 對於 VMware，SSH/主控台密碼已從 OVF 屬性自動匯入。
+
+
+** 如果尚未設定密碼，可選擇設定密碼來保護 StorageGRID 安裝程式。
+
+
+. 選擇 *Install a StorageGRID system*。
++
+顯示用於設定 StorageGRID 網格的頁面。
+
++
+image:gmi_installer_first_screen.gif["StorageGRID 安裝程式第一畫面"]
+
+

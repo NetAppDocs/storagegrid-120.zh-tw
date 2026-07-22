@@ -1,0 +1,121 @@
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+
+
+
+
+[[find-hostname-for-storage-node]]
+== ${post_edited_translations.segment}
+
+. 登入任意管理節點：
++
+.. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 使用  `/etc/hosts` 檔案來尋找已還原儲存設備 Volume 的 Storage 節點主機名稱。若要檢視網格中所有節點的清單，請輸入下列內容： `cat /etc/hosts`。
+
+
+
+
+[[repair-data-if-all-volumes-have-failed]]
+== 如果所有 Volume 都失敗，請修理資料
+
+如果所有儲存設備 Volume 均已故障，請修理整個節點。請根據您使用的是複寫資料、糾刪碼（EC）資料或兩者，按照 *複寫資料*、*糾刪碼（EC）資料* 或兩者的說明進行操作。
+
+如果只有部分 Volume 故障，請前往 <<${post_edited_translations.segment}>>。
+
+
+NOTE: 您無法同時為多個節點執行  `repair-data` 作業。若要恢復多個節點，請聯絡技術支援。
+
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+如果您的網格包含複寫資料，請使用 `repair-data start-replicated-node-repair`命令搭配 `--nodes`選項，其中 `--nodes`是主機名稱（系統名稱），以修理整個儲存節點。
+
+此命令修復名為 SG-DC-SN3 的儲存節點上的複寫資料：
+
+`repair-data start-replicated-node-repair --nodes SG-DC-SN3`
+
+
+NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複寫的物件資料，則會觸發 *Objects Lost* 警示。整個系統中的儲存節點都可能會觸發警示。您應該確定遺失的原因，以及是否可以進行恢復。請參閱 link:../troubleshoot/investigating-potentially-lost-objects.html["${post_edited_translations.segment}"]。
+
+--
+.糾刪碼（EC）資料
+--
+如果您的網格包含銷毀編碼資料，請使用 `repair-data start-ec-node-repair`命令搭配 `--nodes`選項，其中 `--nodes`是主機名稱（系統名稱），以修理整個儲存節點。
+
+此命令修復名為 SG-DC-SN3 的儲存節點上的糾刪碼資料：
+
+`repair-data start-ec-node-repair --nodes SG-DC-SN3`
+
+此作業會傳回唯一的  `repair ID`，以識別此  `repair_data` 作業。使用此  `repair ID` 來追蹤  `repair_data` 作業的進度與結果。恢復程序完成時，不會傳回其他意見反應。
+
+當某些 Storage 節點離線時，即可開始修理糾刪碼資料。在所有節點都可用之後，修理即會完成。
+
+--
+====
+
+
+[[repair-data-if-only-some-volumes-have-failed]]
+== ${post_edited_translations.segment}
+
+如果只有部分 Volume 故障，請修理受影響的 Volume。請根據您使用的是複寫資料、糾刪碼（EC）資料或兩者，按照 *複寫資料*、*糾刪碼（EC）資料* 或兩者的說明進行操作。
+
+如果所有 Volume 都已失敗，請前往 <<如果所有 Volume 都失敗，請修理資料>>。
+
+以十六進位輸入 Volume ID。例如， `0000` 是第一個 Volume，而  `000F` 是第十六個 Volume。您可以指定單一 Volume、一組範圍的 Volume，或是多個不連續的 Volume。
+
+所有 Volume 必須位於同一個儲存節點上。如果您需要還原多個儲存節點的 Volume，請聯絡技術支援。
+
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+如果您的網格包含複寫的資料，請使用  `start-replicated-volume-repair` 命令搭配  `--nodes` 選項來識別節點（其中  `--nodes` 為該節點的主機名稱）。然後加入  `--volumes` 或  `--volume-range` 選項，如下列範例所示。
+
+*單一 Volume*：此命令將複寫的資料還原到名為 SG-DC-SN3 的儲存節點上的 Volume `0002`：
+
+`repair-data start-replicated-volume-repair --nodes SG-DC-SN3 --volumes 0002`
+
+*Volume 範圍*：此命令會將複寫的資料還原至名為 SG-DC-SN3 的 Storage 節點上範圍  `0003` 至  `0009` 的所有 Volume：
+
+`repair-data start-replicated-volume-repair --nodes SG-DC-SN3 --volume-range 0003,0009`
+
+*非連續的多個 Volume*：此命令會將複寫的資料還原至名為 SG-DC-SN3 的儲存節點上的 Volume  `0001`、 `0005` 和  `0008`：
+
+`repair-data start-replicated-volume-repair --nodes SG-DC-SN3 --volumes 0001,0005,0008`
+
+
+NOTE: 當物件資料進行還原時，如果 StorageGRID 系統無法定位複寫的物件資料，就會觸發 *Objects Lost* 警示。整個系統中的儲存節點可能會觸發警示。請注意警示執行摘要和建議動作，以判斷遺失的原因以及是否可以恢復。
+
+--
+.糾刪碼（EC）資料
+--
+如果您的網格包含銷毀編碼資料，請使用 `start-ec-volume-repair`命令搭配 `--nodes`選項來識別節點（其中 `--nodes`是節點的主機名稱）。然後新增 `--volumes`或 `--volume-range`選項，如下列範例所示。
+
+*單一 Volume*：此命令將糾刪碼資料還原至名為 SG-DC-SN3 的儲存節點上的 Volume `0007`：
+
+`repair-data start-ec-volume-repair --nodes SG-DC-SN3 --volumes 0007`
+
+*磁碟區範圍*：此命令將糾刪碼資料還原至名為 SG-DC-SN3 的儲存節點上 `0004`到 `0006`範圍內的所有磁碟區：
+
+`repair-data start-ec-volume-repair --nodes SG-DC-SN3 --volume-range 0004,0006`
+
+*多個磁碟區不依序排列*：此命令將糾刪碼資料還原至名為 SG-DC-SN3 的儲存節點上的磁碟區 `000A`、 `000C` 和 `000E`：
+
+`repair-data start-ec-volume-repair --nodes SG-DC-SN3 --volumes 000A,000C,000E`
+
+此 `repair-data`操作會傳回一個唯一的 `repair ID`，用於識別此 `repair_data`操作。使用此 `repair ID`追蹤 `repair_data`操作的進度和結果。恢復程序完成後，不會傳回其他回饋訊息。
+
+
+NOTE: 當某些 Storage 節點離線時，即可開始修理糾刪碼資料。在所有節點都可用之後，修理即會完成。
+
+--
+====

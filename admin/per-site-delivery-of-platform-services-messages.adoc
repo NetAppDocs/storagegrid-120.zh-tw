@@ -1,0 +1,24 @@
+---
+permalink: admin/per-site-delivery-of-platform-services-messages.html 
+sidebar: sidebar 
+keywords: platform services message delivery 
+summary: 所有平台服務作業均以每個站台為基礎執行。 
+---
+= 按站點交付 StorageGRID 平台服務訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+所有平台服務作業均以每個站台為基礎執行。
+
+也就是說，如果租戶使用用戶端透過連接到資料中心站點 1 的 Gateway Node 對物件執行 S3 API 建立操作，則會觸發該行動的通知，並從資料中心站點 1 發送該通知。
+
+image:notification_multiple_sites.gif["圖示說明，對站台 1 上的物件執行行動會觸發來自站台 1 的通知。"]
+
+如果用戶端隨後從資料中心站點 2 對相同物件執行 S3 API 刪除操作，則會觸發有關刪除行動的通知，並從資料中心站點 2 發送該通知。
+
+image:notifications_site_2.gif["圖示顯示，站台 2 對物件執行的行動會觸發來自站台 2 的通知。"]
+
+確保每個站台的連網設定正確，以便平台服務訊息能夠傳遞到目的地。

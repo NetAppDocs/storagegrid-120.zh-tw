@@ -1,0 +1,41 @@
+---
+section: network
+title: "${post_edited_translations.segment}"
+entries:
+- title: "${post_edited_translations.segment}"
+  pdf-filename: StorageGRID 的網路準則
+  url: "/network/index.html"
+- title: StorageGRID 網路類型
+  url: "/network/storagegrid-network-types.html"
+- title: 網路拓撲範例
+  entries:
+  - title: 網格網路拓撲
+    url: "/network/grid-network-topology.html"
+  - title: 管理網路拓撲
+    url: "/network/admin-network-topology.html"
+  - title: 用戶端網路拓撲
+    url: "/network/client-network-topology.html"
+  - title: 三個網路的拓撲
+    url: "/network/topology-for-all-three-networks.html"
+- title: 網路需求
+  url: "/network/networking-requirements-and-guidelines.html"
+- title: 網路特定要求
+  url: "/network/network-specific-requirements.html"
+- title: 部署相關的連網注意事項
+  entries:
+  - title: Linux 部署
+    url: "/network/linux-deployments.html"
+  - title: 平台服務和 Cloud Storage Pool 的連網與連接埠
+    url: "/network/networking-and-ports-for-platform-services-and-cloud-storage-pools.html"
+  - title: 設備網路組態
+    url: "/network/appliance-nodes.html"
+- title: 網路安裝與佈建
+  url: "/network/network-installation-and-provisioning.html"
+- title: 安裝後指南
+  url: "/network/post-installation-guidelines.html"
+- title: 網路連接埠參考
+  entries:
+  - title: "${post_edited_translations.segment}"
+    url: "/network/internal-grid-node-communications.html"
+  - title: "${post_edited_translations.segment}"
+    url: "/network/external-communications.html"

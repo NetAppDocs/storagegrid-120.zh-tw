@@ -1,0 +1,50 @@
+---
+permalink: ilm/enabling-s3-object-lock-globally.html 
+sidebar: sidebar 
+keywords: enable s3 object lock, object lock 
+summary: 如果 S3 租戶帳戶在儲存物件資料時需要遵守監管要求，則必須為整個 StorageGRID 系統啟用 S3 物件鎖定。啟用全域 S3 物件鎖定設定後，任何 S3 租戶使用者都可以建立和管理具有 S3 物件鎖定的儲存桶和物件。 
+---
+= 在 StorageGRID 中全域啟用 S3 物件鎖定
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果 S3 租戶帳戶在儲存物件資料時需要遵守監管要求，則必須為整個 StorageGRID 系統啟用 S3 物件鎖定。啟用全域 S3 物件鎖定設定後，任何 S3 租戶使用者都可以建立和管理具有 S3 物件鎖定的儲存桶和物件。
+
+.開始之前
+* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您已審查 S3 物件鎖定工作流程，並且了解其中的注意事項。
+* 您已確認作用中 ILM 原則中的預設規則符合法規。如需詳細資訊、請參閱 link:creating-default-ilm-rule.html["建立預設 ILM 規則"]。
+
+
+.關於此任務
+網格系統管理員必須啟用全域 S3 物件鎖定設定，才能允許租戶使用者建立已啟用 S3 物件鎖定的新儲存桶。啟用此設定後，無法停用。
+
+啟用全域 S3 物件鎖定設定後，請審查現有租戶的法規遵循設定。啟用此設定後，每個租戶的 S3 物件鎖定設定將取決於建立租戶時 StorageGRID 的版本。
+
+
+NOTE: 全域法規遵循設定已棄用。如果您使用舊版 StorageGRID 啟用了此設定，則 S3 物件鎖定設定將自動啟用。您可以繼續使用 StorageGRID 管理現有符合法規儲存區的設定；但是，您無法建立新的符合法規儲存區。如需詳細資訊，請參閱 https://kb.netapp.com/Advice_and_Troubleshooting/Hybrid_Cloud_Infrastructure/StorageGRID/How_to_manage_legacy_Compliant_buckets_in_StorageGRID_11.5["NetApp 知識庫：如何在 StorageGRID 11.5 中管理舊版符合法規的儲存桶"^]。
+
+.步驟
+. 選擇 *Configuration* > *System* > *S3 Object Lock*。
++
+${post_edited_translations.segment}
+
+. 選擇 *啟用 S3 物件鎖定*。
+. ${post_edited_translations.segment}
++
+此時會跳出確認對話框，提醒您啟用 S3 物件鎖定後無法停用它。
+
+. 如果您確定要永久為整個系統啟用 S3 物件鎖定，請選擇 *OK*。
++
+選擇 *OK* 後：
+
++
+** 如果作用中 ILM 原則中的預設規則符合法規，則 S3 物件鎖定現在已為整個網格啟用，且無法停用。
+** 如果預設規則不符合法規，則會顯示錯誤。您必須建立並啟動新的 ILM 原則，且該原則必須包含符合法規的規則作為其預設規則。選取 *OK*。然後，建立新原則、模擬並啟動它。如需相關指示，請參閱 link:creating-ilm-policy.html["建立 ILM 策略"]。
+
+
+

@@ -1,0 +1,57 @@
+---
+permalink: harden/hardening-guidelines-for-storagegrid-networks.html 
+sidebar: sidebar 
+keywords: StorageGRID, hardening guidelines, networks, networking, security 
+summary: StorageGRID 系統每個網格節點最多支援三個網路介面，可讓您為每個個別的網格節點設定連網，以符合您的安全性和存取需求。 
+---
+= StorageGRID 網路強化準則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 系統每個網格節點最多支援三個網路介面，可讓您為每個個別的網格節點設定連網，以符合您的安全性和存取需求。
+
+有關 StorageGRID 網路的詳細資訊，請參閱link:../network/storagegrid-network-types.html["StorageGRID 網路類型"]。
+
+
+
+[[guidelines-for-grid-network]]
+== Grid 網路準則
+
+您必須為所有內部 StorageGRID 流量設定網格網路。所有網格節點都位於網格網路上，且必須能夠與其他所有節點通訊。
+
+設定 Grid 網路時，請遵循以下準則：
+
+* 確保網路安全，防止來自不受信任的用戶端（例如來自開放網際網路的用戶端）的存取。
+* 盡可能僅使用 Grid Network 進行內部流量傳輸。Admin Network 和 Client Network 都設有額外的防火牆限制，會封鎖外部流量存取內部服務。雖然支援使用 Grid Network 傳輸外部用戶端流量，但這種做法提供的保護階層數較少。
+* 如果 StorageGRID 部署跨越多個資料中心，請使用 Grid Network 上的虛擬私人網路 （VPN） 或等效技術，為內部流量提供額外的保護。
+* 某些維護作業需要透過主管理節點與所有其他網格節點之間的連接埠 22 進行安全殼層 (SSH) 存取。請使用外部防火牆將 SSH 存取限制為受信任的用戶端。
+
+
+
+
+[[guidelines-for-admin-network]]
+== 管理員網路指南
+
+管理網路通常用於執行管理任務（受信任的員工使用 Grid Manager 或 SSH）以及與其他受信任的服務（例如 LDAP、DNS、NTP 或 KMS（或 KMIP 伺服器））通訊。但是，StorageGRID 內部並不會強制執行此用途。
+
+如果您要使用管理網路，請遵循以下準則：
+
+* 封鎖管理網路上的所有內部流量連接埠。請參閱link:../network/internal-grid-node-communications.html["內部連接埠列表"]。
+* 如果不受信任的用戶端可以存取管理網路，請使用外部防火牆封鎖管理網路上對 StorageGRID 的存取。
+
+
+
+
+[[guidelines-for-client-network]]
+== 用戶端網路指南
+
+用戶端網路通常用於租戶以及與外部服務（例如 CloudMirror 複寫服務或其他平台服務）通訊。但是，StorageGRID 內部並不會強制執行此用法。
+
+如果您正在使用用戶端網路，請遵循以下準則：
+
+* 封鎖用戶端網路上的所有內部流量連接埠。請參閱link:../network/internal-grid-node-communications.html["內部連接埠列表"]。
+* 僅允許透過明確設定的端點接受傳入用戶端流量。請參閱相關資訊 link:../admin/manage-firewall-controls.html["管理防火牆控制"]。
+

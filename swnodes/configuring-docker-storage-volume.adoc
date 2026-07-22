@@ -1,0 +1,182 @@
+---
+permalink: swnodes/configuring-docker-storage-volume.html 
+sidebar: sidebar 
+keywords: how to configure container engine storage volume, Docker, Podman 
+summary: 在安裝 Docker 或 Podman Container 引擎之前，您可能需要格式化儲存設備 Volume 並將其裝載。 
+---
+= 在 Linux 上為 StorageGRID 配置容器引擎儲存磁碟區
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在安裝 Docker 或 Podman Container 引擎之前，您可能需要格式化儲存設備 Volume 並將其裝載。
+
+
+NOTE: 已棄用 Docker 作為純軟體部署的 Container 引擎。Docker 將在未來的版本中被其他 Container 引擎取代。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+.關於此任務
+如果您打算將根 Volume 用作 Docker 或 Podman 儲存設備 Volume，並且主機分割區上有足夠的可用空間，則可以跳過這些步驟：
+
+* Podman： `/var/lib/containers`
+* Docker： `/var/lib/docker`
+
+
+.步驟
+. 在Container引擎儲存設備Volume上建立檔案系統：
++
+[role="tabbed-block"]
+====
+.RHEL
+--
+[listing]
+----
+sudo mkfs.ext4 container-engine-storage-volume-device
+----
+--
+.${post_edited_translations.segment}
+--
+[listing]
+----
+sudo mkfs.ext4 docker-storage-volume-device
+----
+--
+====
+. 裝載 Container 引擎儲存設備 Volume：
++
+[role="tabbed-block"]
+====
+.RHEL
+--
+** 對於 Docker：
++
+[listing]
+----
+sudo mkdir -p /var/lib/docker
+sudo mount container-storage-volume-device /var/lib/docker
+----
+** 若為 Podman：
++
+[listing]
+----
+sudo mkdir -p /var/lib/containers
+sudo mount container-storage-volume-device /var/lib/containers
+----
+
+
+--
+.${post_edited_translations.segment}
+--
+[listing]
+----
+sudo mkdir -p /var/lib/docker
+sudo mount docker-storage-volume-device /var/lib/docker
+----
+** 若為 Podman：
++
+[listing]
+----
+sudo mkdir -p /var/lib/podman
+sudo mount container-storage-volume-device /var/lib/podman
+----
+
+
+--
+====
+. 在 /etc/fstab 中新增 Container 儲存設備 Volume 裝置的條目。
++
+** RHEL：container-storage-volume-device
+** Ubuntu 或 Debian：docker-storage-volume-device
++
+此步驟可確保主機重新開機後，儲存設備 Volume 會自動重新掛載。
+
+
+
+
+
+
+
+[[install-docker]]
+== 安裝 Docker
+
+StorageGRID 系統可以作為 Container 集合在 Linux 上運作。
+
+* 在為 Ubuntu 或 Debian 安裝 StorageGRID 之前，必須先安裝 Docker。
+* 如果您選擇使用 Docker Container 引擎，請依照下列步驟安裝 Docker。否則，<<install-podman-rhel,安裝 Podman>>。
+
+
+
+NOTE: 已棄用 Docker 作為純軟體部署的 Container 引擎。Docker 將在未來的版本中被其他 Container 引擎取代。
+
+.步驟
+. 依照您的 Linux 經銷版本的說明安裝 Docker。
++
+
+NOTE: 如果您的 Linux 經銷版本中未包含 Docker，您可以從 Docker 網站下載。
+
+. 請確保已啟用並啟動 Docker，方法是執行以下兩個命令：
++
+[listing]
+----
+sudo systemctl enable docker
+----
++
+[listing]
+----
+sudo systemctl start docker
+----
+. 請輸入以下指令確認已安裝所需版本的 Docker：
++
+[listing]
+----
+sudo docker version
+----
++
+用戶端和伺服器版本必須為 1.11.0 或更新版本。
+
+
+
+
+
+[[install-podman]]
+[[install-podman-rhel]]
+== 安裝 Podman
+
+StorageGRID 系統以 Container 集合的形式運作。如果您選擇使用 Podman Container 引擎，請依照下列步驟安裝 Podman。否則，<<安裝 Docker,安裝 Docker>>。
+
+.步驟
+. 請依照適用於您的 Linux 發行版的說明安裝 Podman 和 Podman-Docker。
++
+
+NOTE: 安裝 Podman 時，也必須安裝 Podman-Docker 軟體套件。
+
+. 請輸入以下指令確認已安裝所需版本的 Podman 和 Podman-Docker：
++
+[listing]
+----
+sudo docker version
+----
++
+
+NOTE: Podman-Docker 軟體包可讓您使用 Docker 命令。
+
++
+用戶端和伺服器版本必須為 3.2.3 或更新版本。
+
++
+[listing]
+----
+Version: 3.2.3
+API Version: 3.2.3
+Go Version: go1.15.7
+Built: Tue Jul 27 03:29:39 2021
+OS/Arch: linux/amd64
+----
+
+
+.相關資訊
+link:configuring-host-storage.html["設定主機儲存設備"]

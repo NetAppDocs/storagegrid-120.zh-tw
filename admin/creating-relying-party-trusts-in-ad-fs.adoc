@@ -1,0 +1,247 @@
+---
+permalink: admin/creating-relying-party-trusts-in-ad-fs.html 
+sidebar: sidebar 
+keywords: relying party trust, active directory, ad fs, single sign on, sso 
+summary: 您必須使用 Active Directory Federation Services （AD FS） 為系統中的每個管理節點建立信賴方信任。您可以使用 PowerShell 命令建立信賴方信任、從 StorageGRID 匯入 SAML 中繼資料，或手動輸入資料。 
+---
+= 在 AD FS 中為 StorageGRID 建立信賴方信任
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您必須使用 Active Directory Federation Services （AD FS） 為系統中的每個管理節點建立信賴方信任。您可以使用 PowerShell 命令建立信賴方信任、從 StorageGRID 匯入 SAML 中繼資料，或手動輸入資料。
+
+.開始之前
+* 您已為 StorageGRID 設定單一登入，並選取 *AD FS* 作為 SSO 類型。
+* 您在 Grid Manager 中有 link:../admin/configure-sso.html["進入沙盒模式"]。
+* 您知道系統中每個 Admin 節點的完整網域名稱（或 IP 位址）和信任憑證者識別碼。您可以在 StorageGRID 設定單一登入頁面的 Admin 節點詳細資料表中找到這些值。
++
+
+NOTE: 您必須為 StorageGRID 系統中的每個管理節點建立信賴憑證者信任。為每個管理節點建立信賴憑證者信任，可確保使用者能夠安全地登入和登出任何管理節點。
+
+* ${post_edited_translations.segment}
+* 您正在使用 AD FS Management 嵌入式管理單元，且您屬於 Administrators 群組。
+* ${post_edited_translations.segment}
+
+
+.關於此任務
+這些說明適用於 Windows Server 2016 AD FS。如果您使用的是不同版本的 AD FS，您會注意到程序中的些微差異。如果您有任何疑問，請參閱 Microsoft AD FS 文件。
+
+
+
+[[create-a-relying-party-trust-using-windows-powershell]]
+== 使用 Windows PowerShell 建立信賴憑證者信任
+
+您可以使用 Windows PowerShell 快速建立一個或多個信賴方信任。
+
+.步驟
+. 從 Windows 開始功能表中，以滑鼠右鍵選取 PowerShell 圖示，然後選取*以系統管理員身分執行*。
+. 在 PowerShell 命令提示字元下，輸入以下命令：
++
+`Add-AdfsRelyingPartyTrust -Name "_Admin_Node_Identifer_" -MetadataURL "https://_Admin_Node_FQDN_/api/saml-metadata"` United States (US) 
+- Company name: NetApp
+- Source text: ``Add-AdfsRelyingPartyTrust -Name "_Admin_Node_Identifer_" -MetadataURL "https://_Admin_Node_FQDN_/api/saml-metadata"``
+- The source text only contains an image placeholder tag.
+- According to the instructions, I must keep all `` tags exactly as they appear in the source text and return only the correct translation.
+
+Output:
+`Add-AdfsRelyingPartyTrust -Name "_Admin_Node_Identifer_" -MetadataURL "https://_Admin_Node_FQDN_/api/saml-metadata"`_
+
++
+** 對於 `_Admin_Node_Identifier_`，請輸入管理節點的信賴方識別碼，其內容必須與單一登入頁面上顯示的內容完全一致。例如， `SG-DC1-ADM1`。
+** 針對  `_Admin_Node_FQDN_`，請輸入相同 Admin Node 的完整網域。（ 如有需要，您也可以改用該節點的 IP 位址。然而，如果您在此處輸入 IP 位址，請注意，如果該 IP 位址發生變更，您必須更新或重新建立此信賴憑證者信任。 ）
+
+
+. ${post_edited_translations.segment}
++
+AD FS 管理工具出現。
+
+. ${post_edited_translations.segment}
++
+信賴方信任清單隨即出現。
+
+. 為新建立的信賴方信任新增存取控制原則：
++
+.. 找到您剛建立的信賴方信任。
+.. ${post_edited_translations.segment}
+.. 選擇存取控制原則。
+.. ${post_edited_translations.segment}
+
+
+. 為新建立的信賴方信任新增宣告發行原則：
++
+.. 找到您剛建立的信賴方信任。
+.. ${post_edited_translations.segment}
+.. 選擇 *新增規則*。
+.. ${post_edited_translations.segment}
+.. 在「設定規則」頁面上，輸入該規則的顯示名稱。
++
+${post_edited_translations.segment}
+
+.. ${post_edited_translations.segment}
+.. 在映射表的 LDAP 屬性欄中，鍵入 *objectGUID* 或選擇 *User-Principal-Name*。
+.. 在對應表的「傳出宣告類型」欄位中，從下拉清單中選擇「名稱 ID」。
+.. 選擇 *Finish*，然後選擇 *OK*。
+
+
+. 確認中繼資料已成功匯入。
++
+.. 以滑鼠右鍵按一下信賴方信任，以開啟其屬性。
+.. 確認「端點」、「識別碼」和「簽名」標籤上的欄位已填寫。
++
+如果缺少中繼資料，請確認 Federation 中繼資料地址是否正確，或手動輸入值。
+
+
+
+. 重複這些步驟，為 StorageGRID 系統中的所有管理節點設定信賴方信任。
+. 完成後，返回 StorageGRID 並link:../admin/configure-sso.html#test-sso["測試所有信賴憑證者信任"]確認其組態是否正確。
+
+
+
+
+[[create-a-relying-party-trust-by-importing-federation-metadata]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+.步驟
+. 在 Windows Server 管理員中，選取 *工具*，然後選取 *AD FS Management*。
+. 在「操作」下，選擇 *Add Relying Party Trust*。
+. 在歡迎頁面上，選擇 *Claims aware*，然後選擇 *Start*。
+. 選擇「匯入有關依賴方的線上或區域網路上發佈的資料」。
+. 在「聯合中繼資料位址（主機名稱或 URL）」中，輸入此管理節點的 SAML 中繼資料的位置：
++
+`https://_Admin_Node_FQDN_/api/saml-metadata`
+
++
+針對  `_Admin_Node_FQDN_`，請輸入相同 Admin Node 的完整網域。（ 如有需要，您也可以改用該節點的 IP 位址。然而，如果您在此處輸入 IP 位址，請注意，如果該 IP 位址發生變更，您必須更新或重新建立此信賴憑證者信任。 ）
+
+. ${post_edited_translations.segment}
++
+
+NOTE: 輸入顯示名稱時，請使用管理節點的信賴方識別碼，該識別碼必須與 Grid Manager 單一登入頁面上顯示的識別碼完全一致。例如， `SG-DC1-ADM1`。
+
+. 新增聲明規則：
++
+.. ${post_edited_translations.segment}
+.. 選擇 *新增規則*：
+.. ${post_edited_translations.segment}
+.. 在「設定規則」頁面上，輸入該規則的顯示名稱。
++
+${post_edited_translations.segment}
+
+.. ${post_edited_translations.segment}
+.. 在映射表的 LDAP 屬性欄中，鍵入 *objectGUID* 或選擇 *User-Principal-Name*。
+.. 在對應表的「傳出宣告類型」欄位中，從下拉清單中選擇「名稱 ID」。
+.. 選擇 *Finish*，然後選擇 *OK*。
+
+
+. 確認中繼資料已成功匯入。
++
+.. 以滑鼠右鍵按一下信賴方信任，以開啟其屬性。
+.. 確認「端點」、「識別碼」和「簽名」標籤上的欄位已填寫。
++
+如果缺少中繼資料，請確認 Federation 中繼資料地址是否正確，或手動輸入值。
+
+
+
+. 重複這些步驟，為 StorageGRID 系統中的所有管理節點設定信賴方信任。
+. 完成後，請返回 StorageGRID 並link:../admin/configure-sso.html#test-sso["測試所有信賴憑證者信任"]以確認其已正確設定。
+
+
+
+
+[[create-a-relying-party-trust-manually]]
+== 手動建立信賴方信任
+
+如果您選擇不匯入依賴方信託的資料，您可以手動輸入這些值。
+
+.步驟
+. 在 Windows Server 管理員中，選取 *工具*，然後選取 *AD FS Management*。
+. 在「操作」下，選擇 *Add Relying Party Trust*。
+. 在歡迎頁面上，選擇 *Claims aware*，然後選擇 *Start*。
+. 選擇 *Enter data about the relying party manually*，然後選擇 *Next*。
+. 完成信賴方信任嚮導：
++
+.. ${post_edited_translations.segment}
++
+為保持一致性，請使用管理節點的信賴方識別碼，該識別碼應與 Grid Manager 單一登入頁面上顯示的識別碼完全一致。例如， `SG-DC1-ADM1`。
+
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 輸入管理節點的 SAML 服務端點 URL：
++
+`https://_Admin_Node_FQDN_/api/saml-response`
+
++
+針對  `_Admin_Node_FQDN_`，請輸入 Admin Node 的完整網域。（如有需要，您也可以改用該節點的 IP 位址。然而，如果您在此處輸入 IP 位址，請注意，如果該 IP 位址發生變更，您必須更新或重新建立此信賴憑證者信任。）
+
+.. ${post_edited_translations.segment}
++
+`_Admin_Node_Identifier_`_
+
++
+對於 `_Admin_Node_Identifier_`，請輸入管理節點的信賴方識別碼，其內容必須與單一登入頁面上顯示的內容完全一致。例如， `SG-DC1-ADM1`。
+
+.. 檢查設定，儲存信賴方信任，然後結束精靈。
++
+「編輯宣告簽發原則」對話方塊隨即出現。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
+.. 在「設定規則」頁面上，輸入該規則的顯示名稱。
++
+${post_edited_translations.segment}
+
+.. ${post_edited_translations.segment}
+.. 在映射表的 LDAP 屬性欄中，鍵入 *objectGUID* 或選擇 *User-Principal-Name*。
+.. 在對應表的「傳出宣告類型」欄位中，從下拉清單中選擇「名稱 ID」。
+.. 選擇 *Finish*，然後選擇 *OK*。
+
+
+. 以滑鼠右鍵按一下信賴方信任，以開啟其屬性。
+. ${post_edited_translations.segment}
++
+.. 選擇 *新增 SAML*。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
++
+`https://_Admin_Node_FQDN_/api/saml-logout`
+
++
+對於 `_Admin_Node_FQDN_`，請輸入管理節點的完整網域名稱。（如有必要，您也可以使用節點的 IP 位址。但是，如果您在此輸入 IP 位址，請注意，如果該 IP 位址發生變更，您必須更新或重新建立此信賴方信任。）
+
+.. 選擇 *OK* 。
+
+
+. 在「簽署」標籤上，指定此信賴方信任的簽署憑證：
++
+.. 新增自訂憑證：
++
+*** 如果您有已上傳至 StorageGRID 的自訂管理憑證，請選擇該憑證。
+*** 如果沒有自訂憑證，請登入管理節點，前往管理節點的 `/var/local/mgmt-api`目錄，然後新增 `custom-server.crt`憑證檔案。
++
+
+NOTE: 不建議使用管理節點的預設憑證 (`server.crt`。如果管理節點發生故障，恢復節點後將重新產生預設憑證，屆時您需要更新信賴方信任關係。
+
+
+
+.. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+
+
+. 重複這些步驟，為 StorageGRID 系統中的所有管理節點設定信賴方信任。
+. 完成後，請返回 StorageGRID 並link:../admin/configure-sso.html#test-sso["測試所有信賴憑證者信任"]以確認其已正確設定。
+

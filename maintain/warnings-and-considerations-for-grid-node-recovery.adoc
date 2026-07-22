@@ -1,0 +1,60 @@
+---
+permalink: maintain/warnings-and-considerations-for-grid-node-recovery.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, warning 
+summary: 如果網格節點故障，您必須儘快將其恢復。在開始之前，您必須審查節點恢復的所有警告和考量事項。 
+---
+= StorageGRID 節點恢復的警告和注意事項
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果網格節點故障，您必須儘快將其恢復。在開始之前，您必須審查節點恢復的所有警告和考量事項。
+
+
+CAUTION: StorageGRID 是一個由多個相互協作的節點所組成的分散式系統。請勿使用磁碟快照來還原網格節點。相反地，請參閱每種節點類型的恢復與維護程序。
+
+
+NOTE: 如果整個 StorageGRID 站台發生故障，請聯絡技術支援。技術支援將與您合作制定並執行站台恢復計畫，以最大限度地恢復資料量並達成您的業務目標。請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+
+${post_edited_translations.segment}
+
+* 網格節點故障會降低系統和物件資料的備援，如果另一個節點發生故障，則可能導致永久性資料遺失。
+* ${post_edited_translations.segment}
+* 網格節點故障會降低您監控系統運作的能力。
+* ${post_edited_translations.segment}
+* 如果未及時恢復網格節點，恢復時間可能會增加。例如，可能會產生需要在恢復完成前清除的佇列。
+
+
+請務必遵循您要恢復之特定類型網格節點的恢復程序。主要或非主要 Admin Node、Gateway Node、應用裝置節點及 Storage Node 的恢復程序各有不同。
+
+
+
+[[preconditions-for-recovering-grid-nodes]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* 替換應用裝置上的 StorageGRID Appliance Installer 版本與您的 StorageGRID 系統軟體版本相符，如 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/verifying-and-upgrading-storagegrid-appliance-installer-version.html["${post_edited_translations.segment}"^]所述。
+* 如果您要恢復的網格節點不是主要管理節點，則正在恢復的網格節點與管理恢復程序的管理節點之間存在連線。
+* 如果您要還原應用裝置儲存節點，則必須在應用裝置安裝期間指定與原始應用裝置相同的儲存設備類型（組合儲存、僅中繼資料儲存或僅資料儲存）。如果您指定了不同的儲存設備類型，則恢復將會失敗，並且需要使用正確的儲存設備類型重新安裝應用裝置。
+
+
+
+
+[[order-of-node-recovery-if-a-server-hosting-more-than-one-grid-node-fails]]
+== 如果託管多個網格節點的伺服器發生故障，節點恢復順序如下
+
+如果託管多個網格節點的伺服器發生故障，您可以以任意順序恢復這些節點。但是，如果發生故障的伺服器託管著主要管理節點，則必須先恢復該節點。
+
+
+
+[[ip-addresses-for-recovered-nodes]]
+== 已恢復節點的 IP 位址
+
+請勿嘗試使用目前已指派給其他節點的 IP 位址恢復節點。部署新節點時，請使用故障節點的目前 IP 位址或未使用的 IP 位址。
+
+如果您使用新的 IP 位址部署新節點，然後恢復該節點，則恢復後的節點將繼續使用該新 IP 位址。如果您想回復到原來的 IP 位址，請在恢復完成後使用「更改 IP」工具。

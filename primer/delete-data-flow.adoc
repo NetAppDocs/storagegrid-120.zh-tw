@@ -1,0 +1,65 @@
+---
+permalink: primer/delete-data-flow.html 
+sidebar: sidebar 
+keywords: StorageGRID, object, delete, deletion, object lock, bucket lifecycle, expiration, ilm, placement instruction 
+summary: 當用戶端或租戶執行刪除操作，或物件壽命到期觸發自動移除時，StorageGRID 系統中所有物件副本都會從中移除。物件刪除有既定的資料流。 
+---
+= StorageGRID 如何處理物件刪除
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當用戶端執行刪除作業，或是當物件的壽命到期並觸發其自動移除時，所有物件複本都會從 StorageGRID 系統中移除。物件刪除有定義的資料流程。
+
+
+
+[[deletion-hierarchy]]
+== ${post_edited_translations.segment}
+
+StorageGRID 提供了多種方法來控制物件的保留或刪除時機。物件可以透過用戶端請求刪除，也可以自動刪除。StorageGRID 一律優先執行 S3 物件鎖定設定，其優先權高於用戶端刪除請求，而用戶端刪除請求的優先順序又高於 S3 儲存貯體生命週期和 ILM 放置指令。
+
+* *S3 Object Lock*：如果為網格啟用了全域 S3 Object Lock 設定，則 S3 用戶端可以建立啟用了 S3 Object Lock 的儲存桶，然後使用 S3 REST API 為新增至該儲存桶的每個物件版本指定保留截止日期和合法持有設定。
++
+** ${post_edited_translations.segment}
+** 在物件版本的保留截止日期到達之前，任何方法都無法刪除該版本。
+** 啟用了 S3 Object Lock 的儲存桶中的物件會被 ILM 「永久」保留。但是，在達到保留期限後，物件版本可以透過用戶端請求或儲存桶生命週期到期而刪除。
+** 如果 S3 用戶端對儲存桶套用預設的保留期限，則無需為每個物件指定保留期限。
+
+
+* *用戶端刪除要求*：S3 用戶端可以發出刪除物件要求。當用戶端刪除物件時，該物件的所有副本都會從 StorageGRID 系統中移除。
+* *刪除儲存桶中的物件*：租戶管理器使用者可以使用此選項從 StorageGRID 系統中永久移除所選儲存桶中物件及物件版本的全部副本。
+* *S3 儲存桶生命週期*：S3 用戶端可以為其儲存桶新增生命週期組態，以指定到期行動。如果存在儲存桶生命週期，StorageGRID 會在到期行動中指定的日期或天數到期時自動刪除物件的所有副本，除非用戶端先刪除該物件。
+* *ILM 放置說明*：假設儲存桶未啟用 S3 物件鎖定，且沒有儲存桶生命週期，則當 ILM 規則中的最後一個時間段結束且未為該物件指定進一步放置位置時，StorageGRID 會自動刪除該物件。
++
+
+NOTE: 設定 S3 bucket 生命週期時，生命週期到期行動會置換與生命週期篩選器相符之物件的 ILM 原則。因此，即使放置物件的任何 ILM 指令已失效，物件仍可能會保留在網格上。
+
+
+
+如需詳細資訊，請參閱 link:../ilm/how-objects-are-deleted.html["${post_edited_translations.segment}"]。
+
+
+
+[[data-flow-for-client-deletes]]
+== 用戶端刪除的資料流
+
+image:delete_data_flow.png["用戶端刪除資料流"]
+
+. LDR 服務收到來自用戶端應用程式的刪除請求。
+. ${post_edited_translations.segment}
+. 該物件已從系統中移除。中繼資料儲存已更新，以移除物件中繼資料。
+
+
+
+
+[[data-flow-for-ilm-deletes]]
+== ILM 刪除的資料流
+
+image:automatic_deletion_data_flow.png["自動刪除資料流"]
+
+. ILM 引擎判定該物件需要刪除。
+. ILM 引擎通知中繼資料儲存庫。中繼資料儲存庫更新物件中繼資料，使物件在用戶端請求中顯示為已刪除。
+. ILM 引擎會移除物件的所有副本。中繼資料儲存也會更新，以移除物件中繼資料。
+

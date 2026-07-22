@@ -1,0 +1,169 @@
+---
+permalink: fabricpool/creating-load-balancer-endpoint-for-fabricpool.html 
+sidebar: sidebar 
+keywords: fabricPool, StorageGRID, load balancer, endpoint, load balancing, create, creating, certificate 
+summary: StorageGRID 使用負載平衡器來管理來自用戶端應用程式（例如 FabricPool）的工作負載。負載平衡可最大化多個儲存節點的速度和連線容量。 
+---
+= 在 StorageGRID 中為 FabricPool 建立負載平衡器端點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 使用負載平衡器來管理來自用戶端應用程式（例如 FabricPool）的工作負載。負載平衡可最大化多個儲存節點的速度和連線容量。
+
+在設定 StorageGRID 以搭配 FabricPool 使用時，您必須設定負載平衡器端點，並上傳或產生負載平衡器端點憑證，此憑證用來確保 ONTAP 與 StorageGRID 之間安全的連線。
+
+若要使用 FabricPool 設定精靈完成此工作，請前往link:use-fabricpool-setup-wizard-steps.html["存取並完成 FabricPool 設定精靈"]。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您已審閱了總覽link:../admin/managing-load-balancing.html["負載平衡的考量因素"]以及link:best-practices-for-load-balancing.html["適用於 FabricPool 的負載平衡最佳實務做法"]。
+
+
+.步驟
+. ${post_edited_translations.segment}
+. 選擇 *Create* 。
+. ${post_edited_translations.segment}
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+Name
+ a| 
+端點的描述性名稱。
+
+
+
+ a| 
+連接埠
+ a| 
+用於負載平衡的 StorageGRID 連接埠。對於您建立的第一個端點，此欄位預設值為 10433，但您可以輸入任何未使用的外部連接埠。如果您輸入 80 或 443，則該端點僅在閘道節點上設定。這些連接埠在管理節點上已保留。
+
+*注意：*不允許使用其他網格服務使用的連接埠。請參閱link:../network/internal-grid-node-communications.html["網路連接埠參考"]。
+
+當您將 StorageGRID 作為 FabricPool 雲端分層附加到 ONTAP 時，您需要向 ONTAP 提供此號碼。
+
+
+
+ a| 
+用戶端類型
+ a| 
+選擇 *S3*。
+
+
+
+ a| 
+網路傳輸協定
+ a| 
+選擇 *HTTPS* 。
+
+${post_edited_translations.segment}
+
+|===
+. 在「選擇綁定模式」步驟中，指定綁定模式。綁定模式控制如何存取端點，是使用任意 IP 位址，還是使用特定的 IP 位址和網路介面。
++
+[cols="1a,3a"]
+|===
+| 模式 | 說明 
+
+
+ a| 
+全域（預設）
+ a| 
+用戶端可以使用任何閘道節點或管理節點的 IP 位址、任何網路上任何 HA 群組的虛擬 IP （VIP） 位址或對應的 FQDN 存取端點。
+
+除非您需要限制此端點的存取能力，否則請使用 *全域* 設定（預設值）。
+
+
+
+ a| 
+HA 群組的虛擬 IP
+ a| 
+用戶端必須使用 HA 群組的虛擬 IP 位址（或對應的 FQDN）才能存取此端點。
+
+具有此綁定模式的端點都可以使用相同的連接埠號，只要您為端點選擇的 HA 群組不重疊即可。
+
+
+
+ a| 
+節點介面
+ a| 
+用戶端必須使用所選節點介面的 IP 位址（或對應的 FQDN）來存取此端點。
+
+
+
+ a| 
+節點類型
+ a| 
+根據您選擇的節點類型，用戶端必須使用任何管理節點的 IP 位址（或對應的 FQDN）或任何閘道節點的 IP 位址（或對應的 FQDN）來存取此端點。
+
+|===
+. 在「租戶存取」步驟中，請選擇下列選項之一：
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+允許所有租戶（預設）
+ a| 
+${post_edited_translations.segment}
+
+對於用於 FabricPool 的負載平衡器端點，*允許所有租戶*幾乎總是合適的選項。
+
+如果您尚未建立任何租戶帳戶，則必須選擇此選項。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+選定的租戶帳戶無法使用此端點存取其儲存桶。所有其他租戶均可使用此端點。
+
+|===
+. 在「附加憑證」步驟中，請選擇下列選項之一：
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+上傳憑證（建議）
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+產生證書
+ a| 
+使用此選項可產生自我簽署憑證。請參閱 link:../admin/configuring-load-balancer-endpoints.html["設定負載平衡器端點"] 以取得輸入內容的詳細資訊。
+
+
+
+ a| 
+使用 StorageGRID S3 憑證
+ a| 
+只有當您已上傳或產生自訂版本的 StorageGRID 全域憑證時，此選項才可用。如需詳細資訊，請參閱 link:../admin/configuring-custom-server-certificate-for-storage-node.html["設定 S3 API 憑證"]。
+
+|===
+. 選擇 *Create* 。
+
+
+
+NOTE: ${post_edited_translations.segment}

@@ -1,0 +1,46 @@
+---
+permalink: maintain/pausing-and-resuming-decommission-process-for-storage-nodes.html 
+sidebar: sidebar 
+keywords: how to pause decommission 
+summary: 如果您需要執行第二個維護程序，可以在特定階段暫停 Storage Node 的退役程序。在另一個程序完成後，您可以恢復退役。 
+---
+= 暫停和恢復 StorageGRID 儲存節點的停用流程
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您需要執行第二個維護程序，可以在特定階段暫停 Storage Node 的退役程序。在另一個程序完成後，您可以恢復退役。
+
+
+NOTE: ${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. 選擇 *Decommission Nodes*。
++
+此時會出現 Decommission Nodes 頁面。當退役程序達到以下任一階段時，系統便會啟用 *Pause* 按鈕。
+
++
+** 評估 ILM
+** 退役抹除編碼資料
+
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
++
+image:decommission_nodes_procedure_paused.png["節點退役程序暫停"]
+
+. ${post_edited_translations.segment}
+

@@ -1,0 +1,78 @@
+---
+permalink: s3/get-storage-usage-request.html 
+sidebar: sidebar 
+keywords: S3 REST API, S3 operations, GET storage usage request 
+summary: GET Storage Usage 要求會告訴您帳戶正在使用的總儲存設備量，以及與該帳戶關聯的每個儲存桶的使用量。 
+---
+= 使用 GET Storage Usage 請求擷取 StorageGRID 中的帳戶和儲存桶儲存使用量
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+GET Storage Usage 要求會告訴您帳戶正在使用的總儲存設備量，以及與該帳戶關聯的每個儲存桶的使用量。
+
+可以透過具有 `x-ntap-sg-usage`查詢參數的修改版 ListBuckets 請求來取得帳戶及其儲存桶所使用的儲存設備空間。儲存桶的儲存設備使用情況與系統處理的 PUT 和 DELETE 請求是分開追蹤的。由於請求處理需要時間，尤其是在系統負載較高的情況下，使用量值與預期值之間可能會有一些延遲。
+
+預設情況下，StorageGRID 嘗試使用強全域一致性來擷取使用量資訊。如果無法達成強全域一致性，StorageGRID 則嘗試使用強站點一致性來擷取使用量資訊。
+
+您必須擁有 s3:ListAllMyBuckets 權限，或者是帳戶根目錄使用者，才能完成此操作。
+
+
+
+[[request-example]]
+== 請求範例
+
+[listing, subs="specialcharacters,quotes"]
+----
+GET /?x-ntap-sg-usage HTTP/1.1
+Date: _date_
+Authorization: _authorization string_
+Host: _host_
+----
+
+
+[[response-example]]
+== 回應範例
+
+此範例顯示一個帳戶，該帳戶在兩個儲存桶中包含四個物件和 12 個位元組的資料。每個儲存桶包含兩個物件和 6 個位元組的資料。
+
+[listing]
+----
+HTTP/1.1 200 OK
+Date: Sat, 29 Nov 2015 00:49:05 GMT
+Connection: KEEP-ALIVE
+Server: StorageGRID/10.2.0
+x-amz-request-id: 727237123
+Content-Length: 427
+Content-Type: application/xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<UsageResult xmlns="http://s3.storagegrid.com/doc/2015-02-01">
+<CalculationTime>2014-11-19T05:30:11.000000Z</CalculationTime>
+<ObjectCount>4</ObjectCount>
+<DataBytes>12</DataBytes>
+<Buckets>
+<Bucket>
+<Name>bucket1</Name>
+<ObjectCount>2</ObjectCount>
+<DataBytes>6</DataBytes>
+</Bucket>
+<Bucket>
+<Name>bucket2</Name>
+<ObjectCount>2</ObjectCount>
+<DataBytes>6</DataBytes>
+</Bucket>
+</Buckets>
+</UsageResult>
+----
+
+
+[[versioning]]
+== 版本控制
+
+每個儲存的物件版本都會對回應中的 `ObjectCount`和 `DataBytes`值產生貢獻。刪除標記不會計入 `ObjectCount`總數。
+
+.相關資訊
+link:consistency.html["一致性"]

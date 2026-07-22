@@ -1,0 +1,60 @@
+---
+permalink: audit/object-delete-transactions.html 
+sidebar: sidebar 
+keywords: object delete transaction, S3 delete, SDEL, WDEL 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID 中物件刪除交易的稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+以下表格並未列出刪除交易期間產生的所有稽核訊息。表格中僅包含追蹤刪除交易所需的訊息。
+
+
+
+[[s3-delete-audit-messages]]
+== ${post_edited_translations.segment}
+
+[cols="1a,1a,2a,1a,2a"]
+|===
+| 程式碼 | Name | 說明 | ${post_edited_translations.segment} | 請參閱 
+
+
+ a| 
+SDEL
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+CBID, S3KY
+ a| 
+link:sdel-s3-delete.html["SDEL：S3 DELETE"]
+
+|===
+
+
+[[example-s3-object-deletion]]
+== 範例：S3 物件刪除
+
+當 S3 用戶端從儲存節點（LDR 服務）中刪除物件時，會產生一則稽核訊息並將其儲存到稽核日誌中。
+
+
+NOTE: 以下範例並未列出刪除交易期間產生的所有稽核訊息。僅列出與 S3 刪除交易 （SDEL） 相關的稽核訊息。
+
+
+
+[[sdel-s3-delete]]
+=== ${post_edited_translations.segment}
+
+當用戶端向 LDR 服務傳送 DeleteObject 要求時，即會開始刪除物件。該訊息包含要從中刪除物件的 Bucket 以及用於識別物件的 S3 Key。
+
+[listing, subs="specialcharacters,quotes"]
+----
+2017-07-17T21:17:58.959669[AUDT:[RSLT(FC32):SUCS][TIME(UI64):14316][SAIP(IPAD):"10.96.112.29"][S3AI(CSTR):"70899244468554783528"][SACC(CSTR):"test"][S3AK(CSTR):"SGKHyalRU_5cLflqajtaFmxJn946lAWRJfBF33gAOg=="][SUSR(CSTR):"urn:sgws:identity::70899244468554783528:root"][SBAI(CSTR):"70899244468554783528"][SBAC(CSTR):"test"]\[S3BK\(CSTR\):"example"\]\[S3KY\(CSTR\):"testobject-0-7"\][CBID\(UI64\):0x339F21C5A6964D89][CSIZ(UI64):30720][AVER(UI32):10][ATIM(UI64):150032627859669][ATYP\(FC32\):SDEL][ANID(UI32):12086324][AMID(FC32):S3RQ][ATID(UI64):4727861330952970593]]
+----

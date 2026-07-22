@@ -1,0 +1,107 @@
+---
+permalink: maintain/step-1-select-site.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, select site 
+summary: 若要確定站台是否可以退役，請先存取「退役站台」精靈。 
+---
+= 在 StorageGRID 中選取要取消委任的站台
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+若要確定站台是否可以退役，請先存取「退役站台」精靈。
+
+.開始之前
+* 您已獲得所有所需材料。
+* 您已審查移除站台的注意事項。
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["根存取權限或維護和 ILM 權限"]。
+
+
+.步驟
+. ${post_edited_translations.segment}
+. 選擇 *Decommission Site*。
++
+Decommission Site 精靈的 Step 1 (Select Site) 會隨之出現。此步驟包含您 StorageGRID 系統中各個站台的按字母順序排列清單。
+
++
+image:decommission_site_step_select_site.png["退役站台步驟 1 選擇站台"]
+
+. 查看 *已使用儲存容量* 欄中的值，以確定每個站點目前用於物件資料的儲存設備量。
++
+已使用儲存容量為預估值。如果節點離線，則已使用儲存容量為該站台最後已知的值。
+
++
+** 對於已連線的網站退役，此值表示在安全退役此網站之前，需要將多少物件資料移轉到其他網站或由 ILM 刪除。
+** ${post_edited_translations.segment}
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+. 審查 *Decommission Possible* 欄中的原因，以確定目前哪些站台可以退役。
++
+
+NOTE: ${post_edited_translations.segment}
+
++
+[cols="1a,1a,1a"]
+|===
+| 退役的可能原因 | 說明 | 下一步 
+
+
+ a| 
+綠色對勾（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）
+ a| 
+您可以退役此網站。
+ a| 
+請前往 <<decommission_possible,下一步>>。
+
+
+
+ a| 
+否。此站台包含主要管理節點。
+ a| 
+您無法退役包含主要管理節點的網站。
+ a| 
+無。您無法執行此程序。
+
+
+
+ a| 
+否。本站台包含一個或多個封存節點。
+ a| 
+您無法退役包含歸檔節點的站台。
+ a| 
+無。您無法執行此程序。
+
+
+
+ a| 
+否。此站台的所有節點均已中斷連線。請聯絡您的 NetApp 帳戶代表。
+ a| 
+除非站點中的每個節點都已連接，否則無法執行已連接站點的停用操作（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）。
+ a| 
+如果您要執行已斷開連線的站台退役，您必須聯絡您的 NetApp 客戶代表，他將審查您的需求並啟用「退役站台」精靈的其餘部分。
+
+*重要提示*：切勿為了移除站台而將線上節點設為離線。否則您將遺失資料。
+
+|===
++
+此範例展示了一個包含三個站點的 StorageGRID 系統。Raleigh 和 Sunnyvale 站點的綠色核取記號（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）表示您可以取消委任這些站點。但是，您無法取消委任 Vancouver 站點，因為它包含主要管理節點。
+
+
+
+[[decommission_possible]]
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. 選擇 *Next* 。
++
+步驟 2（檢視詳細資料）出現。
+
+

@@ -1,0 +1,270 @@
+---
+permalink: ilm/example-6-changing-ilm-policy.html 
+sidebar: sidebar 
+keywords: change ILM policy, example ILM policy, information lifecycle policy example 
+summary: ${post_edited_translations.segment} 
+---
+= 變更 ILM 原則如何影響 StorageGRID 效能
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+在變更原則之前，您必須了解 ILM 部署位置的變更如何暫時影響 StorageGRID 系統的整體效能。
+
+在本範例中，擴充過程中新增了一個 StorageGRID 站台，需要實作新的作用中 ILM 原則，以便在新站台儲存資料。若要實作新的作用中原則，請先 link:creating-ilm-policy.html["建立原則"]。之後，您必須 link:../ilm/creating-ilm-policy.html#simulate-ilm-policy["模擬"]，然後再 link:../ilm/creating-ilm-policy.html#activate-ilm-policy["啟動"] 新原則。
+
+
+CAUTION: 以下 ILM 規則和原則僅為範例。設定 ILM 規則的方法有很多種。在啟動新原則之前，請先進行模擬，以確認其運作方式符合預期，可保護內容免於遺失。
+
+
+
+[[how-changing-an-ilm-policy-affects-performance]]
+== 變更 ILM 原則如何影響效能
+
+${post_edited_translations.segment}
+
+啟動新的 ILM 原則後，StorageGRID 會使用此原則管理所有物件，包括現有物件和新擷取的物件。在啟動新的 ILM 原則之前，請審查現有複寫物件和銷毀編碼物件的放置位置是否有任何變更。變更現有物件的位置，可能會在評估和實作新放置位置時導致暫時性資源問題。
+
+為確保新的 ILM 原則不會影響現有複製物件和銷毀編碼物件的放置，您可以 link:create-ilm-rule-enter-details.html#use-advanced-filters-in-ilm-rules["${post_edited_translations.segment}"]。例如，*擷取時間_在指定日期和時間當天或之後_ _<date and time>_*，這樣新規則就只適用於在指定日期和時間當天或之後擷取的物件。
+
+可能暫時影響 StorageGRID 效能的 ILM 原則變更類型包括以下幾種：
+
+* 對現有的銷毀編碼物件套用不同的銷毀編碼設定檔。
++
+
+NOTE: ${post_edited_translations.segment}
+
+* 更改現有物件所需的複本類型；例如，將很大比例的複寫物件轉換為銷毀編碼物件。
+* ${post_edited_translations.segment}
+
+
+
+
+[[active-ilm-policy-for-example-6-data-protection-at-two-sites]]
+== 主動式 ILM 原則範例 6：兩個站台的資料保護
+
+在此範例中，作用中的 ILM 原則最初是為雙站台 StorageGRID 系統所設計，並使用兩個 ILM 規則。
+
+image:policy_6_active_policy.png["範例 ILM 原則 6 主動原則"]
+
+在此 ILM 原則中，屬於租戶 A 的物件在單一站台上透過 2+1 銷毀編碼進行保護，而屬於所有其他租戶的物件則使用 2 複本複寫在兩個站台上進行保護。
+
+
+
+[[rule-1-one-site-erasure-coding-for-tenant-a]]
+=== 規則 1：租戶 A 的單一站台銷毀編碼
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+規則名稱
+ a| 
+租戶 A 的單一站台銷毀編碼
+
+
+
+ a| 
+租戶帳戶
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+儲存資源池
+ a| 
+站台 1
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+|===
+
+
+[[rule-2-two-site-replication-for-other-tenants]]
+=== 規則 2：其他租戶的雙站台複寫
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+規則名稱
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+租戶帳戶
+ a| 
+忽略
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+站台 1 和站台 2
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+|===
+
+
+[[ilm-policy-for-example-6-data-protection-at-three-sites]]
+== ILM 原則範例 6：三個站點的資料保護
+
+在此範例中，ILM 原則將替換為適用於三站點 StorageGRID 系統的新原則。
+
+在執行擴充以新增新站台後，網格系統管理員建立了兩個新的儲存資源池：一個用於站台 3 的儲存資源池，以及一個包含所有三個站台的儲存資源池（與「所有儲存節點」預設儲存資源池不同）。然後，系統管理員建立了兩個新的 ILM 規則和一個新的 ILM 原則，旨在保護所有三個站台的資料。
+
+當此新的 ILM 原則啟動時，屬於租戶 A 的物件將在三個站台上受到 2+1 銷毀編碼的保護，而屬於其他租戶的物件（以及屬於租戶 A 的較小物件）將使用 3 複本複寫在三個站台上受到保護。
+
+
+
+[[rule-1-three-site-erasure-coding-for-tenant-a]]
+=== ${post_edited_translations.segment}
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+規則名稱
+ a| 
+租戶 A 的三站點銷毀編碼
+
+
+
+ a| 
+租戶帳戶
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+儲存資源池
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+|===
+
+
+[[rule-2-three-site-replication-for-other-tenants]]
+=== ${post_edited_translations.segment}
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+規則名稱
+ a| 
+其他租戶的三站點複寫
+
+
+
+ a| 
+租戶帳戶
+ a| 
+忽略
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+|===
+
+
+[[activating-the-ilm-policy-for-example-6]]
+== 啟動範例 6 的 ILM 原則
+
+${post_edited_translations.segment}
+
+
+CAUTION: ILM 原則中的錯誤可能導致無法復原的資料遺失。在啟動原則之前，請仔細審查並模擬該原則，以確認其能夠如預期運作。
+
+
+CAUTION: 啟動新的 ILM 原則後，StorageGRID 會使用此原則管理所有物件，包括現有物件和新擷取的物件。在啟動新的 ILM 原則之前，請審查現有複寫物件和銷毀編碼物件的放置位置是否有任何變更。變更現有物件的位置，可能會在評估和實作新放置位置時導致暫時性資源問題。
+
+
+
+[[what-happens-when-erasure-coding-instructions-change]]
+=== ${post_edited_translations.segment}
+
+在本範例目前有效的 ILM 原則中，屬於租戶 A 的物件在站點 1 使用 2+1 銷毀編碼進行保護。在新 ILM 原則中，屬於租戶 A 的物件將在站點 1、2 和 3 使用 2+1 銷毀編碼進行保護。
+
+當新的 ILM 原則啟動時，將執行以下 ILM 操作：
+
+* 由租戶 A 擷取的新物件會被分割為兩個資料片段，並新增一個同位元檢查片段。然後，這三個片段中的每一個都會儲存在不同的站台。
+* 在後續的 ILM 掃描過程中，屬於租戶 A 的現有物件將重新評估。由於 ILM 放置指令使用新的銷毀編碼設定檔，因此會建立全新的銷毀編碼片段並將其分發至三個站台。
++
+
+NOTE: 站台 1 現有的 2+1 片段不會被重複使用。StorageGRID 視每個銷毀編碼設定檔為唯一的，且在使用新設定檔時不會重複使用銷毀編碼片段。
+
+
+
+
+
+[[what-happens-when-replication-instructions-change]]
+=== ${post_edited_translations.segment}
+
+在此範例目前作用中的 ILM 原則中，屬於其他租戶的物件會使用站台 1 和站台 2 儲存資源池中的兩個複寫複本進行保護。在新的 ILM 原則中，屬於其他租戶的物件將使用站台 1、2 和 3 儲存資源池中的三個複寫複本進行保護。
+
+當新的 ILM 原則啟動時，將執行以下 ILM 操作：
+
+* ${post_edited_translations.segment}
+* 在後續的 ILM 掃描過程中，系統會重新評估屬於其他租戶的現有物件。由於 Site 1 和 Site 2 的現有物件複本仍然符合新 ILM 規則的複寫要求，因此 StorageGRID 只需為 Site 3 建立一個新的物件複本。
+
+
+
+
+[[performance-impact-of-activating-this-policy]]
+=== ${post_edited_translations.segment}
+
+本範例中的 ILM 原則啟動後，此 StorageGRID 系統的整體效能將暫時受到影響。需要比正常水準更高的網格資源，才能為租戶 A 的現有物件建立新的銷毀編碼片段，並在站台 3 為其他租戶的現有物件建立新的複寫複本。
+
+由於 ILM 原則的變更，用戶端的讀取和寫入請求可能會暫時出現高於正常水準的延遲。在網格中全面實施部署指令後，延遲將恢復正常水準。
+
+為避免啟動新的 ILM 原則時出現資源問題，您可以在任何可能更改大量現有物件位置的規則中使用「擷取時間」進階篩選器。將「擷取時間」設定為大於或等於新原則生效的大致時間，以確保現有物件不會被不必要地移動。
+
+
+NOTE: 如果在 ILM 原則變更後需要減慢或加快物件處理速度，請聯絡技術支援。

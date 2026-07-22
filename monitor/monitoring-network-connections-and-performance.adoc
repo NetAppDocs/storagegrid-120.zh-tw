@@ -1,0 +1,99 @@
+---
+permalink: monitor/monitoring-network-connections-and-performance.html 
+sidebar: sidebar 
+keywords: monitoring, monitoring network connections, network, network performance 
+summary: 節點和站台之間的網路完整性和頻寬，以及各個網格節點的資源使用情況，對於高效運作至關重要。 
+---
+= 監控 StorageGRID 中的網路和系統資源
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+節點和站台之間的網路完整性和頻寬，以及各個網格節點的資源使用情況，對於高效運作至關重要。
+
+
+
+[[monitor-network-connections-and-performance]]
+== 監控網路連線和效能
+
+如果您的資訊生命週期管理 （ILM） 原則會在站台之間複製複製品物件，或是使用提供站台遺失保護的配置來儲存糾刪碼物件，則網路連線能力與頻寬就顯得特別重要。如果站台之間的網路無法使用、網路延遲過高或網路頻寬不足，某些 ILM 規則可能無法將物件放置在預期位置。這可能會商機擷取失敗 （當為 ILM 規則選取 Strict 擷取選項時），或導致擷取效能不佳和 ILM 積壓。
+
+使用 Grid Manager 監控連線能力和網路效能，以便及時解決任何問題。
+
+此外，請考慮 link:../admin/managing-traffic-classification-policies.html["${post_edited_translations.segment}"] 以便監控與特定租用戶、儲存桶、子網路或負載平衡器端點相關的流量。您可以視需要設定流量限制原則。
+
+.步驟
+. 選取 *Nodes* 。
++
+「節點」頁面隨即出現。網格中的每個節點都以表格形式列出。
+
++
+image:nodes_menu.png["節點選單"]
+
+. 選擇網格名稱、特定資料中心站點或網格節點，然後選擇「網路」標籤。
++
+${post_edited_translations.segment}
+
++
+image:nodes_page_network_traffic_graph.png["${post_edited_translations.segment}"]
+
++
+.. 如果您選取了網格節點，請向下捲動以審查頁面上的「網路介面」部分。
++
+image:nodes_page_network_interfaces.png["節點頁面網路介面"]
+
+.. 對於網格節點，請向下捲動以審查頁面上的「網路通訊」部分。
++
+${post_edited_translations.segment}
+
++
+image:nodes_page_network_communication.png["節點頁面網路通訊"]
+
+
+
+. 使用與流量分類原則相關的計量來監控網路流量。
++
+.. 選擇 *組態* > *網路* > *流量分類*。
++
+此時會顯示「流量分類原則」頁面，現有原則列於表格中。
+
++
+image:traffic_classification_policies_main_screen_w_examples.png["圖示範例的流量原則"]
+
+.. 若要檢視顯示與原則關聯的連網計量的圖表，請選擇原則左側的單選按鈕，然後按一下 *Metrics*。
+.. 審查圖表以了解與該原則相關的網路流量。
++
+如果流量分類原則的設計旨在限制網路流量，請分析限制流量的頻率，並決定該原則是否繼續符合您的需求。不時，link:../admin/managing-traffic-classification-policies.html["${post_edited_translations.segment}"]。
+
+
+
+
+
+.相關資訊
+* link:viewing-network-tab.html["檢視「網路」索引標籤"]
+* link:monitoring-system-health.html#monitor-node-connection-states["${post_edited_translations.segment}"]
+
+
+
+
+[[monitor-node-level-resources]]
+== ${post_edited_translations.segment}
+
+監控各網格節點，檢查其資源使用層級。如果節點持續過載，則可能需要更多節點才能提高運作效率。
+
+.步驟
+. ${post_edited_translations.segment}
+. 選擇「硬體」標籤，顯示 CPU 使用率和記憶體使用量圖表。
++
+image:nodes_page_hardware_tab_graphs.png["${post_edited_translations.segment}"]
+
+. 若要顯示不同的時間間隔，請選擇圖表上方的控制項之一。您可以顯示 1 小時、1 天、1 週或 1 個月時間間隔內的資訊。您也可以設定自訂時間間隔，從而指定日期和時間範圍。
+. 如果節點是託管在儲存應用裝置或服務應用裝置上，請向下捲動以檢視元件表。所有元件的狀態應為 "Nominal"。調查具有任何其他狀態的元件。
+
+
+.相關資訊
+* link:viewing-hardware-tab.html#view-information-about-appliance-storage-nodes["檢視應用裝置儲存節點的相關資訊"]
+* link:viewing-hardware-tab.html#view-information-about-appliance-admin-nodes-and-gateway-nodes["${post_edited_translations.segment}"]
+

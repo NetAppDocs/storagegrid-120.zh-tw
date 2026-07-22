@@ -1,0 +1,69 @@
+---
+permalink: primer/storagegrid-architecture-and-network-topology.html 
+sidebar: sidebar 
+keywords: StorageGRID, architecture, deployment, topology, site, node redundancy, services, nodes 
+summary: ${post_edited_translations.segment} 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+了解一下link:nodes-and-services.html["網格節點類型"]。
+
+如需有關 StorageGRID 網路拓撲、需求和網格通訊的詳細資訊，請參閱 link:../network/index.html["${post_edited_translations.segment}"]。
+
+
+
+[[deployment-topologies]]
+== ${post_edited_translations.segment}
+
+StorageGRID 系統可部署至單一資料中心站點或多個資料中心站點。每次部署的最大站點數量為 16。
+
+
+
+[[single-site]]
+=== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+image:data_center_site_single.png["${post_edited_translations.segment}"]
+
+
+
+[[multiple-sites]]
+=== ${post_edited_translations.segment}
+
+在具有多個站點的部署中，每個站點都可以安裝不同類型和數量的 StorageGRID 資源。例如，某一個資料中心可能比另一個資料中心需要更多的儲存設備。
+
+站點通常位於跨越不同故障網域（例如地震斷層帶或洪氾區）的不同地理位置。透過將資料自動化分發到其他站點，可實現資料共享與災難恢復。
+
+image:data_center_sites_multiple.png["${post_edited_translations.segment}"]
+
+${post_edited_translations.segment}
+
+
+
+[[grid-node-redundancy]]
+=== ${post_edited_translations.segment}
+
+在單一站台或多站台部署中，您可以選擇性地包含一個以上的 Admin Node 或 Gateway Node 以提供備援。例如，您可以在單一站台或跨數個站台安裝一個以上的 Admin Node。然而，每個 StorageGRID 系統只能有一個主要 Admin Node。
+
+
+
+[[system-architecture]]
+== 系統架構
+
+此圖顯示了 StorageGRID 系統中網格節點的排列方式。
+
+image:grid_nodes_and_components.png["圖表由周圍文字描述"]
+
+S3 用戶端在 StorageGRID 中儲存及擷取物件。其他用戶端則用於傳送電子郵件通知、存取 StorageGRID 管理介面，以及選擇性地存取稽核共享。
+
+S3 用戶端可以連線至閘道節點或管理節點，以使用連至儲存節點的負載平衡介面。或者，S3 用戶端可以使用 HTTPS 直接連線至儲存節點。
+
+${post_edited_translations.segment}

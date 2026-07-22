@@ -1,0 +1,207 @@
+---
+permalink: admin/grid-federation-retry-failed-replication.html 
+sidebar: sidebar 
+keywords: grid federation, troubleshoot 
+summary: 解決跨網格複寫永久故障警報後，您應該確定是否有任何物件或刪除標記未能複寫到另一個網格。然後，您可以重新擷取這些物件，或使用 Grid Management API 重試複寫。 
+---
+= 識別並重試失敗的 StorageGRID 複寫作業
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+解決「跨網格複寫永久故障」警報後，您應該確定是否有任何物件或刪除標記未能複寫到另一個網格。然後，您可以重新擷取這些物件，或使用 Grid Management API 重試複寫。
+
+「跨網格複寫永久故障」警報表示租戶物件無法在兩個網格的儲存桶之間進行複寫，原因需要使用者介入才能解決。此警報通常是由來源或目的地儲存桶的變更所引起。如需詳細資訊，請參閱 link:grid-federation-troubleshoot.html["排除網格同盟錯誤"]。
+
+
+
+[[determine-if-any-objects-failed-to-be-replicated]]
+== 確定是否有任何物件複製失敗
+
+若要確定是否有任何物件或刪除標記未複寫到其他網格，您可以搜尋稽核日誌中的link:../audit/cgrr-cross-grid-replication-request.html["${post_edited_translations.segment}"]訊息。當 StorageGRID 無法將物件、多部分物件或刪除標記複寫到目的地儲存桶時，此訊息會新增至日誌中。
+
+您可以使用 link:../audit/using-audit-explain-tool.html["audit-explain 工具"] 將結果轉換為更易讀的格式。
+
+.開始之前
+* 您擁有根目錄存取權限。
+* 您擁有  `Passwords.txt` 檔案。
+* ${post_edited_translations.segment}
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
++
+`# awk -vdate=$(date -d "30 minutes ago" '+%Y-%m-%dT%H:%M:%S') '$1$2 >= date { print }' audit.log | grep CGRR | audit-explain`
+
++
+此命令的結果將類似於此範例，其中包含六個 CGRR 訊息的項目。在此範例中，所有跨網格複寫要求都傳回一般錯誤，因為無法複寫該物件。前三個錯誤代表「複寫物件」作業，後三個錯誤則代表「複寫刪除標記」作業。
+
++
+[listing]
+----
+CGRR Cross-Grid Replication Request tenant:50736445269627437748 connection:447896B6-6F9C-4FB2-95EA-AEBF93A774E9 operation:"replicate object" bucket:bucket123 object:"audit-0" version:QjRBNDIzODAtNjQ3My0xMUVELTg2QjEtODJBMjAwQkI3NEM4 error:general error
+CGRR Cross-Grid Replication Request tenant:50736445269627437748 connection:447896B6-6F9C-4FB2-95EA-AEBF93A774E9 operation:"replicate object" bucket:bucket123 object:"audit-3" version:QjRDOTRCOUMtNjQ3My0xMUVELTkzM0YtOTg1MTAwQkI3NEM4 error:general error
+CGRR Cross-Grid Replication Request tenant:50736445269627437748 connection:447896B6-6F9C-4FB2-95EA-AEBF93A774E9 operation:"replicate delete marker" bucket:bucket123 object:"audit-1" version:NUQ0OEYxMDAtNjQ3NC0xMUVELTg2NjMtOTY5NzAwQkI3NEM4 error:general error
+CGRR Cross-Grid Replication Request tenant:50736445269627437748 connection:447896B6-6F9C-4FB2-95EA-AEBF93A774E9 operation:"replicate delete marker" bucket:bucket123 object:"audit-5" version:NUQ1ODUwQkUtNjQ3NC0xMUVELTg1NTItRDkwNzAwQkI3NEM4 error:general error
+----
++
+每筆記錄包含以下資訊：
+
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+| ${post_edited_translations.segment}  a| 
+請求的名稱
+
+
+
+| 租戶  a| 
+${post_edited_translations.segment}
+
+
+
+| 連線  a| 
+${post_edited_translations.segment}
+
+
+
+| 作業  a| 
+嘗試執行的複寫操作類型：
+
+** 複寫物件
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+
+
+
+
+| 儲存貯體  a| 
+儲存桶名稱
+
+
+
+| ${post_edited_translations.segment}  a| 
+物件名稱
+
+
+
+| 版本  a| 
+物件的版本 ID
+
+
+
+| 錯誤  a| 
+錯誤類型。如果跨網格複寫失敗，錯誤為 "General error"。
+
+|===
+
+
+
+
+[[retry-failed-replications]]
+== 重試失敗的複寫
+
+產生未複寫到目的地儲存桶的物件和刪除標記清單並解決根本問題後，您可以透過以下兩種方式之一重試複寫：
+
+* 將每個物件重新匯入來源儲存桶。
+* 依照指示使用 Grid Management 私有 API。
+
+
+.步驟
+. ${post_edited_translations.segment}
+. 選擇「前往私有 API 文件」。
++
+
+NOTE: 標記為「Private」的 StorageGRID API 端點如有變更，恕不另行通知。StorageGRID 私有端點也會忽略請求的 API 版本。
+
+. 在 *cross-grid-replication-advanced* 部分，選擇以下端點：
++
+`POST /private/cross-grid-replication-retry-failed`
+
+. ${post_edited_translations.segment}
+. 在 *body* 文字方塊中，將 *versionID* 的範例條目替換為 audit.log 中與失敗的跨網格複寫請求對應的版本 ID。
++
+請務必保留字串周圍的雙引號。
+
+. 選擇 *Execute*。
+. ${post_edited_translations.segment}
++
+
+NOTE: 待處理狀態表示跨網格複寫請求已新增至內部佇列中進行處理。
+
+
+
+
+
+[[monitor-replication-retries]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+
+TIP: 將物件或刪除標記複寫到另一個網格可能需要幾個小時或更長時間。
+
+您可以透過以下兩種方式之一監控重試操作：
+
+* 使用 S3 link:../s3/head-object.html["HeadObject"] 或 link:../s3/get-object.html["GetObject"] 要求。回應包含 StorageGRID 專屬的 `x-ntap-sg-cgr-replication-status`回應標頭，其將具有下列其中一個值：
++
+[cols="1a,2a"]
+|===
+| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+
+
+ a| 
+來源
+ a| 
+** *COMPLETED*: 複寫成功。
+** *PENDING*：該物件尚未複寫。
+** *失敗*：複寫發生永久性故障。使用者必須解決此錯誤。
+
+
+
+
+ a| 
+目的地
+ a| 
+${post_edited_translations.segment}
+
+|===
+* 依照指示使用 Grid Management 私有 API。
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+`GET /private/cross-grid-replication-object-status/{id}`
+
+. ${post_edited_translations.segment}
+. 在「參數」部分，輸入您在 `cross-grid-replication-retry-failed`請求中使用的版本 ID。
+. 選擇 *Execute*。
+. 確認伺服器回應代碼為 *200*。
+. ${post_edited_translations.segment}
++
+** *PENDING*：該物件尚未複寫。
+** *COMPLETED*: 複寫成功。
+** *FAILED*：複寫發生永久性故障。使用者必須解決此錯誤。
+
+
+

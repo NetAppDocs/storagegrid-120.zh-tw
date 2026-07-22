@@ -1,0 +1,65 @@
+---
+permalink: maintain/grid-node-decommissioning.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission, remove grid node 
+summary: 您可以使用節點退役程序來移除一或多個站台的一或多個網格節點。您無法將主要 Admin 節點退役。 
+---
+= StorageGRID 網格節點汰除
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用節點退役流程移除一個或多個網站上的一個或多個網格節點。您無法退役主管理節點。
+
+
+
+[[when-to-decommission-a-node]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 您在擴充功能中新增了一個較大的儲存節點，現在想要移除一個或多個較小的儲存節點，同時保留物件。
++
+
+TIP: 如果您想用新應用裝置取代舊應用裝置，請考慮 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/how-appliance-node-cloning-works.html["${post_edited_translations.segment}"^]而非在擴充過程中新增應用裝置，然後再退役舊應用裝置。
+
+* 您需要的總儲存設備更少。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+
+
+[[how-to-decommission-a-node]]
+== ${post_edited_translations.segment}
+
+您可以退役已連線的網格節點或已斷線的網格節點。
+
+退役已連接的節點:: ${post_edited_translations.segment}
++
+--
+如需相關指示，請參閱 link:decommissioning-connected-grid-nodes.html["${post_edited_translations.segment}"]。
+
+--
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
++
+--
+如需相關指示，請參閱 link:decommissioning-disconnected-grid-nodes.html["退役已中斷連線的網格節點"]。
+
+--
+
+
+
+
+[[what-to-consider-before-decommissioning-a-node]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* link:considerations-for-decommissioning-admin-or-gateway-nodes.html["${post_edited_translations.segment}"]
+* link:considerations-for-decommissioning-storage-nodes.html["${post_edited_translations.segment}"]
+

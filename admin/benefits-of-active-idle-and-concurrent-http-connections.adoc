@@ -1,0 +1,103 @@
+---
+permalink: admin/benefits-of-active-idle-and-concurrent-http-connections.html 
+sidebar: sidebar 
+keywords: active http connection benefits, idle http connection benefits, concurrent http connection benefits 
+summary: HTTP 連線的設定方式會影響 StorageGRID 系統的效能。組態方式會根據 HTTP 連線是處於作用中狀態、閒置還是存在多個並行連線而有所不同。 
+---
+= StorageGRID 中活動、閒置和並行 HTTP 連線的優勢
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+HTTP 連線的設定方式會影響 StorageGRID 系統的效能。組態方式會根據 HTTP 連線是處於作用中狀態、閒置還是存在多個並行連線而有所不同。
+
+您可以識別以下幾種 HTTP 連線類型的效能優勢：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+
+
+[[benefits-of-keeping-idle-http-connections-open]]
+== ${post_edited_translations.segment}
+
+當用戶端應用程式處於閒置時，請保持 HTTP 連線開啟，以便後續交易處理。閒置的 HTTP 連線最多保持開啟狀態 10 分鐘。StorageGRID 可能會自動關閉開啟且閒置超過 10 分鐘的 HTTP 連線。
+
+開放且閒置的 HTTP 連線具有以下優點：
+
+* 縮短從 StorageGRID 系統確定需要執行 HTTP 交易到 StorageGRID 系統能夠執行該交易之間的延遲。
++
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+透過平衡慢啟動優勢和資源分配，決定保持閒置連線開啟多久。
+
+
+
+[[benefits-of-active-http-connections]]
+== ${post_edited_translations.segment}
+
+對於直接連線至儲存節點的連線，即使 HTTP 連線持續執行交易，也應將作用中 HTTP 連線的持續時間限制在最多 10 分鐘。
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
++
+隨著時間推移，隨著負載平衡需求發生變化，HTTP 連線可能不再是最佳選擇。當用戶端應用程式為每筆交易建立分隔的 HTTP 連線時，系統會執行最佳的負載平衡，但此方法會抵消與持續連線相關的寶貴效益。
+
+* ${post_edited_translations.segment}
+* 允許啟動維護程序。
++
+${post_edited_translations.segment}
+
+
+
+對於用戶端與負載平衡器服務的連線，限制開啟連線的持續時間有助於某些維護程序及時啟動。如果不限制用戶端連線的持續時間，則可能需要幾分鐘才能自動終止作用中的連線。
+
+
+
+[[benefits-of-concurrent-http-connections]]
+== 並發 HTTP 連線的優勢
+
+您應該保持多個連至 StorageGRID 系統的 TCP/IP 連線開啟，以允許平行處理，這能提高效能。平行連線的最佳數量取決於多種因素。
+
+並行 HTTP 連線具有以下優點：
+
+* 降低延遲
++
+交易可以立即開始，無需等待其他交易完成。
+
+* 處理量提高
++
+${post_edited_translations.segment}
+
+
+
+用戶端應用程式應建立多個 HTTP 連線。當用戶端應用程式需要執行交易時，它可以選擇並立即使用任何目前未處理交易的已建立連線。
+
+每個 StorageGRID 系統的拓撲對於並行交易和連線的峰值處理量各有不同。峰值處理量取決於運算、連網、儲存資源、WAN 連結，以及 StorageGRID 系統支援的伺服器、服務和應用程式的數量。
+
+StorageGRID 系統通常支援多個用戶端應用程式。在確定最大並行連線數時，請記住這一點。如果用戶端應用程式由多個軟體實體組成，且每個實體都與 StorageGRID 系統建立連線，則需要將所有實體的連線數加總。在下列情況下，您可能需要調整最大並行連線數：
+
+* StorageGRID 系統的拓撲會影響系統能夠支援的最大並行交易數和連線數。
+* 透過頻寬有限的網路與 StorageGRID 系統互動的用戶端應用程式，可能需要降低並行程度，以確保個別交易在合理的時間內完成。
+* 當許多用戶端應用程式共享 StorageGRID 系統時，您可能需要降低並發度，以避免超出系統限制。
+
+
+
+
+[[separation-of-http-connection-pools-for-read-and-write-operations]]
+== 將 HTTP 連線資源池分離，用於讀取和寫入操作
+
+您可以為讀取和寫入操作使用分隔的 HTTP 連線池，並控制每個操作所使用的資源池大小。獨立的 HTTP 連線池可讓您更好地控制交易並達到負載平衡。
+
+用戶端應用程式可以建立以擷取為主（讀取）或以儲存為主（寫入）的負載。透過為讀取和寫入交易分別設定獨立的 HTTP 連線資源池，您可以調整每個資源池指派給讀取或寫入交易的資源比例。

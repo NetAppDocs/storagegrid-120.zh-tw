@@ -1,0 +1,74 @@
+---
+permalink: maintain/linux-adding-trunk-or-access-interfaces-to-node.html 
+sidebar: sidebar 
+keywords: add extra interface to node, trunk interface, access interface 
+summary: 您可以在安裝 Linux 節點之後，向其新增額外的 Trunk 或存取介面。您新增的介面會顯示在 VLAN 介面頁面和 HA 群組頁面上。 
+---
+= 在 StorageGRID 中將主幹或存取介面新增至 Linux 節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以在安裝 Linux 節點之後，向其新增額外的 Trunk 或存取介面。您新增的介面會顯示在 VLAN 介面頁面和 HA 群組頁面上。
+
+.開始之前
+* 您可以在 Linux 平台上存取 link:../swnodes/index.html["StorageGRID 安裝說明"]。
+* 您擁有  `Passwords.txt` 檔案。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+
+CAUTION: ${post_edited_translations.segment}
+
+.關於此任務
+節點安裝完成後，您可以依照下列步驟為 Linux 節點新增一個或多個額外的介面。例如，您可能需要向 Admin 或 Gateway Node 新增一個主幹介面，以便使用 VLAN 介面隔離不同應用程式或租戶的流量。或者，您可能需要新增一個存取介面，以便在高可用度 （HA） 群組中使用。
+
+如果您新增 Trunk 介面，則必須在 StorageGRID 中設定 VLAN 介面。如果您新增存取介面，可以直接將該介面新增至 HA 群組，而不需要設定 VLAN 介面。
+
+當您新增介面時，節點會在短時間內無法使用。您應該一次在一個節點上執行此程序。
+
+.步驟
+. 登入託管該節點的 Linux 伺服器。
+. ${post_edited_translations.segment}
++
+`/etc/storagegrid/nodes/_node-name_.conf`
+
+. 在檔案中新增一個條目，用於指定要新增至節點的每個額外介面的名稱，以及（可選）執行摘要。請使用以下格式。
++
+`INTERFACE_TARGET_nnnn=_value_`
+
++
+針對 _nnnn_，請為您要新增的每個  `INTERFACE_TARGET` 項目指定一個唯一的數字。
+
++
+對於 _value_，請指定裸機主機上實體介面的名稱。然後，您可以選擇新增逗號並提供介面執行摘要，該執行摘要將顯示在 VLAN 介面頁面和 HA 群組頁面上。
+
++
+例如：
+
++
+`INTERFACE_TARGET_0001=ens256, Trunk`
+
++
+
+NOTE: 請勿指定任何其他網路參數，否則將導致驗證錯誤。
+
+. 執行以下命令以驗證您對節點組態檔案所做的變更：
++
+`sudo storagegrid node validate _node-name_`
+
++
+請先解決所有錯誤或警告，然後再進行下一步。
+
+. 執行以下命令更新節點的組態：
++
+`sudo storagegrid node reload _node-name_`
+
+
+
+.完成後
+* 如果您新增了一個或多個 trunk 介面，請前往link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]為每個新父介面設定一個或多個 VLAN 介面。
+* 如果您新增了一或多個存取介面，請前往 link:../admin/configure-high-availability-group.html["設定高可用度群組"]，直接將新介面新增至 HA 群組。
+

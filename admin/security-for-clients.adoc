@@ -1,0 +1,86 @@
+---
+permalink: admin/security-for-clients.html 
+sidebar: sidebar 
+keywords: security, S3, client application, TLS 
+summary: StorageGRID 租戶帳戶使用 S3 用戶端應用程式將物件資料儲存至 StorageGRID。您應該審查為用戶端應用程式實作的安全性措施。 
+---
+= StorageGRID 中 S3 用戶端的安全性
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 租戶帳戶使用 S3 用戶端應用程式將物件資料儲存至 StorageGRID。您應該審查為用戶端應用程式實作的安全性措施。
+
+
+
+[[summary]]
+== 總結
+
+以下列表總結了 S3 REST API 的安全性實作方式：
+
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: 由系統 CA 簽署的 X.509 伺服器憑證或系統管理員提供的自訂伺服器憑證
+用戶端驗證:: S3 帳戶存取金鑰 ID 和秘密存取金鑰
+${post_edited_translations.segment}:: 儲存桶所有權和所有適用的存取控制原則
+
+
+
+
+[[how-storagegrid-provides-security-for-client-applications]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 連接到負載平衡器服務的用戶端可以使用 HTTPS 或 HTTP，具體取決於您如何link:configuring-load-balancer-endpoints.html["設定負載平衡器端點"]。
++
+HTTPS 提供安全的 TLS 加密通訊，建議使用。您必須為端點附加安全性憑證。
+
++
+HTTP 提供的是安全性較低、未加密的通訊，因此只應在非生產或測試網格中使用。
+
+* 連接到儲存節點的用戶端也可以使用 HTTPS 或 HTTP。
++
+HTTPS 是預設值，建議使用。
+
++
+HTTP 提供較低安全性的未加密通訊，但對於非生產或測試網格，可選擇性地link:changing-network-options-object-encryption.html["已啟用"]啟用。
+
+* StorageGRID 與用戶端之間的通訊使用 TLS 加密。
+* 無論負載平衡器端點設定為接受 HTTP 連線或 HTTPS 連線，負載平衡器服務與網格內儲存節點之間的通訊都會加密。
+* 用戶端必須提供 link:../s3/authenticating-requests.html["HTTP 驗證標頭"] 給 StorageGRID，才能執行 REST API 操作。
+
+
+
+
+[[security-certificates-and-client-applications]]
+=== 安全性憑證和用戶端應用程式
+
+在所有情況下，用戶端應用程式都可以使用網格系統管理員上傳的自訂伺服器憑證或 StorageGRID 系統產生的憑證建立 TLS 連線：
+
+* 當用戶端應用程式連接到負載平衡器服務時，它們會使用為負載平衡器端點設定的憑證。每個負載平衡器端點都有自己的憑證—可以是網格系統管理員上傳的自訂伺服器憑證，也可以是網格系統管理員在 StorageGRID 中設定端點時產生的憑證。
++
+請參閱 link:managing-load-balancing.html["負載平衡的考慮因素"]。
+
+* 當用戶端應用程式直接連線至儲存節點時，它們可以使用在安裝 StorageGRID 系統時為儲存節點產生的系統產生伺服器憑證（由系統憑證授權單位簽署），或使用網格系統管理員為網格提供的單一自訂伺服器憑證。請參閱link:configuring-custom-server-certificate-for-storage-node.html["新增自訂 S3 API 證書"]。
+
+
+應將用戶端設定為信任簽署其用於建立 TLS 連線之憑證的憑證授權單位。
+
+
+
+[[supported-hashing-and-encryption-algorithms-for-tls-libraries]]
+== TLS 程式庫支援的雜湊和加密演算法
+
+StorageGRID 系統支援一組密碼套件，用戶端應用程式在建立 TLS 工作階段時可以使用這些密碼套件。若要設定密碼，請前往 *設定* > *安全性* > *安全性設定*，然後選取 *TLS 和 SSH 原則*。
+
+
+
+[[supported-versions-of-tls]]
+=== 支援的 TLS 版本
+
+StorageGRID 支援 TLS 1.2 和 TLS 1.3。
+
+
+NOTE: SSLv3 和 TLS 1.1（或更早版本）已不再支援。

@@ -1,0 +1,41 @@
+---
+permalink: maintain/preparing-appliance-for-reinstallation-platform-replacement-only.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, appliance, reinstallation appliance, reinstall appliance 
+summary: ${post_edited_translations.segment} 
+---
+= 準備 StorageGRID 設備以進行重新安裝 （僅限平台更換）
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+僅當要替換託管在服務應用裝置上的故障節點時，才執行此程序。如果故障節點最初託管在 VMware 或 Linux 主機上，請勿執行這些步驟。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 請輸入以下命令： `ssh admin@_grid_node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+. 準備應用裝置以安裝 StorageGRID 軟體。輸入： `sgareinstall`
+. 當提示繼續時，請輸入： `y`
++
+應用裝置重新開機，您的 SSH 工作階段將結束。StorageGRID Appliance Installer 通常需要大約 5 分鐘才能使用，但在某些情況下，您可能需要等待長達 30 分鐘。
+
++
+服務應用裝置已重置，網格節點上的資料將無法存取。原始安裝過程中設定的 IP 位址應保持不變；但是，建議您在操作完成後再次確認。
+
++
+執行 `sgareinstall`命令後，所有 StorageGRID 佈建的帳戶、密碼和 SSH 金鑰都會被移除，並產生新的主機金鑰。
+
+

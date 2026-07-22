@@ -1,0 +1,167 @@
+---
+permalink: troubleshoot/troubleshoot-low-watermark-alert.html 
+sidebar: sidebar 
+keywords: troubleshoot low soft read-only watermark override alert, optimized watermarks 
+summary: 如果您使用自訂的儲存設備 Volume 浮水印值，則可能需要解決「低讀取專用浮水印置換」警示。如果可能，您應該更新系統以開始使用最佳化的值。 
+---
+= 解決 StorageGRID 中的浮水印覆寫警示
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您使用自訂的儲存設備 Volume 浮水印值，則可能需要解決「低讀取唯讀浮水印置換」警示。如果可能，您應該更新系統以開始使用最佳化的值。
+
+在先前的版本中，這三個 link:../admin/what-storage-volume-watermarks-are.html["儲存設備 Volume 浮水印"] 是全域設定——相同的值會套用於每個儲存節點上的所有儲存設備 Volume。從 StorageGRID 11.6 開始，軟體可以根據儲存節點的大小和儲存 Volume 的相對容量，針對每個儲存設備 Volume 最佳化這些浮水印值。
+
+升級至 StorageGRID 11.6 或更高版本時，除非符合以下任一條件，否則所有儲存設備磁碟區都會自動套用最佳化的唯讀和讀寫浮水印：
+
+* 您的系統已接近容量上限，如果套用最佳化的浮水印，將無法接收新資料。在這種情況下，StorageGRID 不會變更浮水印設定。
+* 您之前已將任何儲存設備 Volume 浮水印設定為自訂值。StorageGRID 不會使用最佳化的值置換自訂浮水印設定。但是，如果您的儲存設備 Volume 軟唯讀浮水印自訂值太小，StorageGRID 可能會觸發 *Low read-only watermark override* 警示。
+
+
+
+
+[[understand-the-alert]]
+== 了解警報
+
+如果您使用自訂值作為儲存設備 Volume 浮水印，則可能會為一個或多個儲存節點觸發「低唯讀浮水印置換」警示。
+
+每個警示的執行個體都表示儲存設備 Volume 軟唯讀浮水印的自訂值小於該儲存節點的最小最佳化的值。如果繼續使用此自訂設定，儲存節點在安全切換到唯讀狀態之前，空間可能已嚴重不足。當節點達到容量上限時，某些儲存設備 Volume 可能會變得無法存取（自動卸載）。
+
+例如，假設您先前將儲存設備 Volume 的軟唯讀浮水印設定為 5 GB。現在假設 StorageGRID 已計算出儲存節點 A 中四個儲存設備 Volume 的下列最佳化的值：
+
+[cols="2a,2a"]
+|===
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+12 GB
+
+
+
+ a| 
+Volume 1
+ a| 
+12 GB
+
+
+
+ a| 
+Volume 2
+ a| 
+11 GB
+
+
+
+ a| 
+Volume 3
+ a| 
+15 GB
+
+|===
+由於您自訂的水位線 （5 GB） 小於儲存節點 A 中所有 Volume 的最小最佳化的值 （11 GB），因此觸發了「低唯讀水位線置換」警示。如果您繼續使用自訂設定，該節點在安全切換至唯讀狀態之前，空間可能嚴重不足。
+
+
+
+[[resolve-the-alert]]
+== 解決警報
+
+如果觸發了一個或多個「低唯讀浮水印置換」警示，請依照下列步驟操作。即使未觸發任何警示，如果您目前使用的是自訂浮水印設定，並希望開始使用最佳化的設定，也可以使用這些說明。
+
+.開始之前
+* ${post_edited_translations.segment}
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.關於此任務
+您可以將自訂浮水印設定更新為新的浮水印置換值來解決「低唯讀浮水印置換」警報。但是，如果一個或多個儲存節點接近滿載，或者您有特殊的 ILM 要求，則應先檢視最佳化的儲存設備浮水印，並確定使用它們是否安全。
+
+
+
+[[assess-object-data-usage-for-entire-grid]]
+=== 評估整個網格的物件資料使用情況
+
+.步驟
+. 選取 *Nodes* 。
+. 對於網格中的每個站台，展開節點清單。
+. 審查每個站台上每個儲存節點的「已使用物件資料」欄中顯示的百分比值。
++
+image:nodes_page_object_data_used_with_alert.png["節點頁面顯示用於 3 個 SN 的物件資料"]
+
+. 請依照以下步驟操作：
++
+.. 如果所有儲存節點都未接近滿載（例如，所有「物件資料使用量」值均小於 80%），則可以開始使用置換設定。前往 <<use-optimized-watermarks,使用最佳化的浮水印>>。
+.. 如果 ILM 規則使用嚴格擷取行為，或特定儲存資源池接近滿載，請執行 <<view-optimized-watermarks,檢視最佳化的儲存設備浮水印>> 和 <<determine-optimized-watermarks,確定是否可以使用最佳化的浮水印>> 中的步驟。
+
+
+
+
+
+
+[[view-optimized-watermarksview-optimized-storage-watermarks]]
+=== [[view-optimized-watermarks]]查看最佳化的儲存設備浮水印
+
+StorageGRID 使用兩個 Prometheus 計量來顯示其為儲存 Volume 軟唯讀浮水印計算的最佳化值。您可以檢視網格中每個儲存節點的最小和最大最佳化值。
+
+.步驟
+. 選擇 *Support* > *Tools* > *Metrics*。
+. 在 Prometheus 部分，選擇連結以存取 Prometheus 使用者介面。
+. 若要查看建議的最小軟唯讀浮水印，請輸入以下 Prometheus 指標，然後選擇「執行」：
++
+`storagegrid_storage_volume_minimum_optimized_soft_readonly_watermark`
+
++
+最後一列顯示每個儲存節點上所有儲存 Volume 的軟唯讀浮水印最小最佳化值。如果此值大於儲存 Volume 軟唯讀浮水印的自訂設定，則會針對該儲存節點觸發 *Low read-only watermark override* 警示。
+
+. 若要查看建議的最大軟唯讀浮水印，請輸入以下 Prometheus 指標，然後選擇「執行」：
++
+`storagegrid_storage_volume_maximum_optimized_soft_readonly_watermark`
+
++
+最後一欄顯示每個儲存節點上所有儲存 Volume 的軟唯讀水位線最大最佳化值。
+
+. [[maximum_optimized_value]]請記下每個 Storage Node 的最大最佳化值。
+
+
+
+
+[[determine-optimized-watermarksdetermine-if-you-can-use-optimized-watermarks]]
+=== [[determine-optimized-watermarks]]判斷是否可以使用最佳化的浮水印
+
+.步驟
+. 選取 *Nodes* 。
+. 對每個線上儲存節點重複這些步驟：
++
+.. 選擇 *_Storage Node_* > *Storage*。
+.. 向下捲動至物件存放區表格。
+.. 將每個物件存放區（Volume）的*可用*值與您為該儲存節點記錄的最大最佳化水位線進行比較。
+
+
+. 如果每個線上儲存節點上至少有一個 Volume 的可用空間大於該節點的最大最佳化浮水印，則前往 <<use-optimized-watermarks,使用最佳化的浮水印>> 開始使用最佳化浮水印。
++
+否則，請盡快擴充網格。可以link:../expand/adding-storage-volumes-to-storage-nodes.html["新增儲存 Volume"]至現有節點，也可以link:../expand/adding-grid-nodes-to-existing-site-or-adding-new-site.html["${post_edited_translations.segment}"]。然後，前往<<use-optimized-watermarks,使用最佳化的浮水印>>更新浮水印設定。
+
+. 如果您需要繼續使用自訂儲存設備 Volume 浮水印值，link:../monitor/silencing-alert-notifications.html["沉默"]或link:../monitor/disabling-alert-rules.html["停用"] *低唯讀浮水印置換*警報。
++
+
+NOTE: 每個儲存節點上的所有儲存設備 Volume 都套用相同的自訂浮水印值。如果儲存設備 Volume 浮水印值小於建議值，當節點達到容量上限時，某些儲存設備 Volume 可能會變得無法存取（自動卸載）。
+
+
+
+
+
+[[use-optimized-watermarksuse-optimized-watermarks]]
+=== 使用最佳化的浮水印
+
+.步驟
+. 前往*支援* > *其他* > *儲存浮水印*。
+. 選取*使用最佳化的值*核取方塊。
+. 選取 *Save* 。
+
+
+現在，每個儲存設備 Volume 的最佳化儲存設備 Volume 浮水印設定已根據儲存節點的大小和 Volume 的相對容量生效。

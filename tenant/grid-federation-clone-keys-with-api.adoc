@@ -1,0 +1,96 @@
+---
+permalink: tenant/grid-federation-clone-keys-with-api.html 
+sidebar: sidebar 
+keywords: s3 access key, secret key id, account clone, tenant manager api 
+summary: 如果您的 StorageGRID 租用戶帳戶具有使用網格聯合連線權限，則可以使用租用戶管理 API 手動複製 S3 存取金鑰。 
+---
+= 使用租用戶管理 API 在 StorageGRID 網格之間複製 S3 存取金鑰
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您的 StorageGRID 租用戶帳戶具有 *Use grid federation connection* 權限，則可以使用租用戶管理 API 手動將來源網格上的租用戶的 S3 存取金鑰複製到目標網格上的租用戶。
+
+.開始之前
+* 租戶帳戶擁有「使用網格聯合連線」權限。
+* 網格聯合連線的*連線狀態*為*已連線*。
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶來源網格上的 Tenant Manager。
+* 您屬於一個擁有 link:tenant-management-permissions.html["管理您自己的 S3 憑證或 Root 存取權限"] 的使用者群組。
+* 如果您要 Clone 本機使用者的存取金鑰，則該使用者已存在於兩個網格中。
++
+
+NOTE: 當您為聯合使用者 Clone S3 存取金鑰時，使用者和 S3 存取金鑰都會新增至目的地租戶。
+
+
+
+
+
+[[clone-your-own-access-keys]]
+== Clone 您自己的存取金鑰
+
+如果您需要在兩個網格上存取相同的儲存桶，則可以 Clone 自己的存取金鑰。
+
+.步驟
+. 使用來源網格上的 Tenant Manager，link:creating-your-own-s3-access-keys.html["建立您自己的存取金鑰"]並下載 `.csv`檔案。
+. 在 Tenant Manager 頂端，選取說明圖示，然後選取 *API documentation*。
+. 在 *s3* 部分，選擇以下端點：
++
+`POST /org/users/current-user/replicate-s3-access-key`
+
++
+image:grid-federation-post-current-user-replicate.png["用於複製自身存取金鑰的 POST 端點"]
+
+. ${post_edited_translations.segment}
+. 在 *body* 文字方塊中，將 *accessKey* 和 *secretAccessKey* 的範例條目替換為您下載的 *.csv* 檔案中的值。
++
+請務必保留每個字串周圍的雙引號。
+
++
+image:grid-federation-clone-access-key.png["租戶管理員 API 輸入值以 Clone 存取金鑰"]
+
+. 如果金鑰會過期，請將 *expires* 的範例條目替換為 ISO 8601 日期時間格式的過期日期和時間字串（例如， `2024-02-28T22:46:33-08:00`）。如果金鑰不會過期，請將 *expires* 條目的值輸入 *null*（或移除 *Expires* 行及其前面的逗號）。
+. 選擇 *Execute*。
+. 確認伺服器回應代碼為 *204*，表示金鑰已成功 Clone 到目的地網格。
+
+
+
+
+[[clone-another-users-access-keys]]
+== Clone 其他使用者的存取金鑰
+
+如果其他使用者需要存取兩個網格上的相同儲存貯體，您可以 Clone 其他使用者的存取金鑰。
+
+.步驟
+. 使用來源網格上的 Tenant Manager，link:creating-another-users-s3-access-keys.html["建立其他使用者的 S3 存取金鑰"]並下載 `.csv`檔案。
+. 在 Tenant Manager 頂端，選取說明圖示，然後選取 *API documentation*。
+. 取得使用者 ID。您需要此值來 Clone 其他使用者的存取金鑰。
++
+.. 在「使用者」部分，選擇以下端點：
++
+`GET /org/users`
+
+.. ${post_edited_translations.segment}
+.. 指定查找使用者時要使用的任何參數。
+.. 選擇 *Execute*。
+.. 找到要 Clone 其金鑰的使用者，並複製 *id* 欄位中的數字。
+
+
+. 在 *s3* 部分，選擇以下端點：
++
+`POST /org/users/{userId}/replicate-s3-access-key`
+
++
+image:grid-federation-post-other-user.png["用於複製其他使用者存取金鑰的 POST 端點"]
+
+. ${post_edited_translations.segment}
+. 在 *userId* 文字方塊中，貼上您複製的使用者 ID。
+. 在 *body* 文字方塊中，將 *example access key* 和 *secret access key* 的範例項目替換為該使用者的 *.csv* 檔案中的值。
++
+請務必保留字串周圍的雙引號。
+
+. 如果金鑰會過期，請將 *expires* 的範例條目替換為 ISO 8601 日期時間格式的過期日期和時間字串（例如， `2023-02-28T22:46:33-08:00`）。如果金鑰不會過期，請將 *expires* 條目的值輸入 *null*（或移除 *Expires* 行及其前面的逗號）。
+. 選擇 *Execute*。
+. 確認伺服器回應代碼為 *204*，表示金鑰已成功 Clone 到目的地網格。
+

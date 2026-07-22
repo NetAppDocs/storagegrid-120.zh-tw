@@ -1,0 +1,46 @@
+---
+permalink: audit/ilm-audit-messages.html 
+sidebar: sidebar 
+keywords: audit messages, ILM, IDEL, LKCU, ORLM 
+summary: 屬於 ILM 稽核類別的稽核訊息用於與資訊生命週期作業相關的事件。 
+---
+= StorageGRID ILM 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+屬於 ILM 稽核類別的稽核訊息用於與資訊生命週期管理 （ILM） 操作相關的事件。
+
+[cols="1a,3a,1a"]
+|===
+| 程式碼 | ${post_edited_translations.segment} | 請參閱 
+
+
+ a| 
+IDEL
+ a| 
+ILM 發起的刪除：當 ILM 開始刪除物件的程序時，會產生此稽核訊息。
+ a| 
+link:idel-ilm-initiated-delete.html["IDEL：ILM 發起的刪除"]
+
+
+
+ a| 
+LKCU
+ a| 
+已覆寫物件清理。當已覆寫物件自動移除以釋放儲存空間時，將產生此稽核訊息。
+ a| 
+link:lkcu-overwritten-object-cleanup.html["${post_edited_translations.segment}"]
+
+
+
+ a| 
+ORLM
+ a| 
+物件規則已滿足：當物件資料按照 ILM 規則指定的方式儲存時，將產生此稽核訊息。
+ a| 
+link:orlm-object-rules-met.html["ORLM：物件規則已符合"]
+
+|===

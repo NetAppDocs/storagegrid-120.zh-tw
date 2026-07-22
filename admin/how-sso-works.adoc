@@ -1,0 +1,129 @@
+---
+permalink: admin/how-sso-works.html 
+sidebar: sidebar 
+keywords: single sign on, sso, SAML 
+summary: 當啟用單一登入（SSO）時，使用者只有在透過您組織所實作的 SSO 登入程序授權其認證資訊時，才能存取 Grid Manager、Tenant Manager、Grid Management API 或 Tenant Management API。本機使用者無法登入 StorageGRID。 
+---
+= 了解 StorageGRID 單一登入
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+啟用單一登入 （SSO） 後，使用者只有在透過貴組織實作的 SSO 登入流程驗證其憑證後，才能存取 Grid Manager、Tenant Manager、Grid Management API 或 Tenant Management API。本機使用者無法登入 StorageGRID。
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+
+
+[[sign-in-when-sso-is-enabled]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+.步驟
+. 在網頁瀏覽器中輸入任何 StorageGRID 管理節點的完整網域名稱或 IP 位址。
++
+StorageGRID 登入頁面隨即出現。
+
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
++
+
+NOTE: 當您輸入租戶帳戶的完整 URL （即完整網域或 IP 位址，後跟  `/?accountId=_20-digit-account-id_`）時，不會顯示 StorageGRID 登入頁面。相反地，您會立即被重新導向至您組織的 SSO 登入頁面，您可以在該頁面 <<signin_sso,使用您的 SSO 憑證登入>>。
+
+
+
+. ${post_edited_translations.segment}
++
+** ${post_edited_translations.segment}
+** 若要存取 Tenant Manager，請輸入 20 位數的租戶帳戶 ID，或如果租戶出現在最近的帳戶清單中，請按名稱選擇租戶。
+
+
+. 選擇 *Sign in*
++
+StorageGRID 會將您重新導向至您組織的 SSO 登入頁面。例如：
+
+. [[signin_sso]]使用您的 SSO 憑證登入。
++
+如果您的 SSO 憑證正確：
+
++
+.. ${post_edited_translations.segment}
+.. StorageGRID 驗證驗證回應。
+.. ${post_edited_translations.segment}
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+
+
+
+
+[[sign-out-when-sso-is-enabled]]
+== 啟用 SSO 後登出
+
+${post_edited_translations.segment}
+
+.步驟
+. ${post_edited_translations.segment}
+. 選擇「登出」。
++
+StorageGRID 登入頁面隨即顯示。*最近使用的帳戶* 下拉式功能表已更新，包含 *Grid Manager* 或租戶名稱，以便您日後能更快速地存取這些使用者介面。
+
++
+
+TIP: 此表摘要說明如果您使用的是單一瀏覽器工作階段，在登出時會發生什麼事。如果您在多個瀏覽器工作階段中登入 StorageGRID，則必須個別登出所有的瀏覽器工作階段。
+
++
+[cols="1a,1a,1a"]
+|===
+| 如果您已登入…… | 然後您登出…… | 您已登出…… 
+
+
+ a| 
+Grid Manager 位於一個或多個管理節點上
+ a| 
+任何管理節點上的 Grid Manager
+ a| 
+所有管理節點上的 Grid Manager
+
+*注意：*如果您使用 Entra ID 進行 SSO，則可能需要幾分鐘才能從所有管理節點登出。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+所有管理節點上的租戶管理器
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+Grid Manager
+ a| 
+僅限 Grid Manager。您也必須從 Tenant Manager 登出才能登出單一登入 （SSO）。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+僅限租戶管理員。您還必須登出 Grid Manager 才能登出單一登入。
+
+|===
+

@@ -1,0 +1,86 @@
+---
+permalink: tenant/understanding-tenant-management-api.html 
+sidebar: sidebar 
+keywords: how to understand tenant management api 
+summary: 您可以使用租戶管理 REST API 而非租戶管理器使用者介面來執行系統管理工作。例如，您可能希望使用 API 來自動化作業，或更快速地建立多個實體（例如使用者）。 
+---
+= 了解 StorageGRID Tenant Management API
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用租戶管理 REST API 而非租戶管理器使用者介面來執行系統管理工作。例如，您可能希望使用 API 來自動化作業，或更快速地建立多個實體（例如使用者）。
+
+租戶管理 API：
+
+* 使用 Swagger 開放原始碼 API 平台。Swagger 提供直覺式使用者介面，讓開發人員和非開發人員能夠與 API 互動。Swagger 使用者介面為每個 API 操作提供完整的詳細資訊和文件。
+* 使用 link:tenant-management-api-versioning.html["版本控制以支援無中斷升級"]。
+
+
+若要存取租戶管理 API 的 Swagger 文件：
+
+. ${post_edited_translations.segment}
+. 在 Tenant Manager 頂端，選取說明圖示，然後選取 *API documentation*。
+
+
+
+
+[[api-operations]]
+== API 操作
+
+租戶管理 API 將可用的 API 作業整理為以下幾個部分：
+
+* *帳戶*：對目前租戶帳戶執行操作，包括取得儲存設備使用量資訊。
+* *auth*：執行使用者工作階段驗證的操作。
++
+租戶管理 API 支援 Bearer Token 驗證方案。當租戶登入時，您需要在驗證請求的 JSON 本文中提供使用者名稱、密碼和 accountId（即 `POST /api/v3/authorize`）。如果使用者驗證成功，系統將傳回安全性權杖。此權杖必須在後續 API 請求的標頭中提供（"Authorization: Bearer token"）。
+
++
+有關提高身分驗證安全性的資訊，請參閱link:protecting-against-cross-site-request-forgery-csrf.html["防範跨站請求偽造"]。
+
++
+
+NOTE: 如果 StorageGRID 系統啟用了單一登入 (SSO)，則必須執行不同的驗證步驟。請參閱 link:../admin/using-grid-management-api.html["網格管理 API 使用說明"]。
+
+* *config*：與租戶管理 API 的產品版本和版本相關的作業。您可以列出產品版本以及該版本支援的 API 主要版本。
+* *Container*：對 S3 儲存桶的操作。
+* *deactivated-features*：檢視可能已停用的功能的操作。
+* *端點*：用於管理端點的操作。端點允許 S3 儲存桶使用外部服務進行 StorageGRID CloudMirror 複寫、通知或搜尋整合。
+* *grid-federation-connections*: 網格聯盟連線和跨網格複寫的操作。
+* *群組*：管理本機租戶群組及從外部身分來源擷取聯合租戶群組的作業。
+* *identity-source*：設定外部身分來源並手動同步聯合群組和使用者資訊的操作。
+* *ilm*：資訊生命週期管理 （ILM） 設定的作業。
+* *regions*：用於確定已為 StorageGRID 系統設定哪些區域的作業。
+* *s3*：用於管理租戶使用者 S3 存取金鑰的操作。
+* *s3-object-lock*：對全域 S3 物件鎖定設定進行操作，用於支援法規遵循。
+* *使用者*：檢視和管理租戶使用者的作業。
+
+
+
+
+[[operation-details]]
+== 操作詳細資料
+
+展開每個 API 操作，即可查看其 HTTP 行動、端點 URL、任何必要或選用參數的清單、要求本文範例（如有需要）以及可能的回應。
+
+image:tenant_api_swagger_example.gif["範例展示了 Swagger API 中的 GET groups 操作"]
+
+
+
+[[issue-api-requests]]
+== 發出 API 請求
+
+
+CAUTION: 您透過 API 文件網頁執行的任何 API 操作都是即時操作。請務必小心，避免誤建立、更新或刪除組態資料或其他資料。
+
+.步驟
+. 選擇 HTTP 行動以查看請求詳細資料。
+. 確定請求是否需要其他參數，例如群組 ID 或使用者 ID。然後，取得這些值。您可能需要先發出另一個 API 請求，才能獲得所需資訊。
+. 確定是否需要修改範例要求本文。如果需要，您可以選取 *Model* 來瞭解每個欄位的需求。
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 選擇 *Execute*。
+. ${post_edited_translations.segment}
+

@@ -1,0 +1,53 @@
+---
+permalink: fabricpool/remove-fabricpool-data.html 
+sidebar: sidebar 
+keywords: fabricPool, StorageGRID, ontap, remove data 
+summary: 如果您需要移除目前儲存在 StorageGRID 中的 FabricPool 資料，請依照下列步驟操作。 
+---
+= 從 StorageGRID 移除 FabricPool 資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您需要移除目前儲存在 StorageGRID 中的 FabricPool 資料，則必須使用 ONTAP 擷取 FabricPool Volume 的所有資料，並將其提升至效能分層。
+
+.開始之前
+* 您已審閱了以下說明和注意事項 https://docs.netapp.com/us-en/ontap/fabricpool/promote-data-performance-tier-task.html["將資料提升至效能層"^]。
+* 您使用的是 ONTAP 9.8 或更新版本。
+* 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
+* 您屬於 StorageGRID 使用者群組，該群組適用於具有 link:../tenant/tenant-management-permissions.html["管理所有儲存桶或 root 存取權限"] 的 FabricPool 租戶帳戶。
+
+
+.關於此任務
+這些說明解釋如何將資料從 StorageGRID 移回 FabricPool。您可以使用 ONTAP 和 StorageGRID Tenant Manager 執行此程序。
+
+.步驟
+. 從 ONTAP 發出 `volume modify`命令。
++
+設定 `tiering-policy`為 `none`以停止新的分層，並設定 `cloud-retrieval-policy`為 `promote`以傳回先前分層至 StorageGRID 的所有資料。
+
++
+請參閱 https://docs.netapp.com/us-en/ontap/fabricpool/promote-all-data-performance-tier-task.html["將 FabricPool Volume 中的所有資料提升至效能分層"^]。
+
+. 等待操作完成。
++
+您可以使用 `volume object-store`命令搭配 `tiering`選項來 https://docs.netapp.com/us-en/ontap/fabricpool/check-status-performance-tier-promotion-task.html["查看效能層促銷狀態"^]。
+
+. 提升操作完成後，請登入 StorageGRID Tenant Manager 以存取 FabricPool 租戶帳戶。
+. ${post_edited_translations.segment}
+. 確認 FabricPool 儲存桶現在已空。
+. 如果儲存貯體是空的，link:../tenant/deleting-s3-bucket.html["刪除儲存桶"]。
+
+
+.完成後
+刪除儲存桶後，從 FabricPool 到 StorageGRID 的分層將無法繼續。但是，由於本機層仍連接到 StorageGRID 雲端層，ONTAP System Manager 將傳回錯誤訊息，指示該儲存桶無法存取。
+
+為避免這些錯誤訊息，請執行下列其中一項操作：
+
+* 使用 FabricPool Mirror 將不同的雲端分層附加到彙總。
+* 將資料從 FabricPool 彙總移至非 FabricPool 彙總，然後刪除未使用的彙總。
+
+
+請參閱 https://docs.netapp.com/us-en/ontap/fabricpool/index.html["ONTAP FabricPool 文件"^]以取得說明。

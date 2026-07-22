@@ -1,0 +1,40 @@
+---
+permalink: audit/scmt-object-store-commit.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, SCMT, Object Store Commit 
+summary: 網格內容只有在提交（即持久性儲存）後才能被識別為已儲存。持久性儲存的內容已完全寫入磁碟，並通過了相關的完整性檢查。當內容區塊提交到儲存設備時，系統會發出此訊息。 
+---
+= StorageGRID 中物件存放區認可的 SCMT 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+網格內容只有在提交（即持久性儲存）後才能被識別為已儲存。持久性儲存的內容已完全寫入磁碟，並通過了相關的完整性檢查。當內容區塊提交到儲存設備時，系統會發出此訊息。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+CBID
+ a| 
+內容區塊識別碼
+ a| 
+提交到永久儲存設備的內容區塊的唯一識別碼。
+
+
+
+ a| 
+RSLT
+ a| 
+結果代碼
+ a| 
+物件儲存到磁碟時的狀態：
+
+SUCS：物件已成功儲存。
+
+|===
+此訊息表示指定的內容區塊已完全儲存和驗證，現在可以請求。它可用於追蹤系統內的資料流。

@@ -1,0 +1,79 @@
+---
+permalink: primer/how-storagegrid-manages-data.html 
+sidebar: sidebar 
+keywords: StorageGRID, how storagegrid manages data, what an object is, how object data is protected 
+summary: 在物件儲存中，儲存設備單元是物件，而不是檔案或區塊。與檔案系統或區塊儲存設備的樹狀層次結構不同，物件儲存以扁平的非結構化佈局組織資料。 
+---
+= 什麼是 StorageGRID 物件
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在物件儲存中，儲存設備單元是物件，而不是檔案或區塊。與檔案系統或區塊儲存設備的樹狀層次結構不同，物件儲存以扁平的非結構化佈局組織資料。
+
+物件儲存將資料的實體位置與用於儲存和擷取該資料的方法解耦。
+
+基於物件的儲存系統中的每個物件都有兩個部分：物件資料和物件中繼資料。
+
+image:object_conceptual_drawing.png["物件"]
+
+
+
+[[what-is-object-data]]
+== 什麼是物件資料？
+
+物件資料可以是任何東西；例如，照片、影片或醫療記錄。
+
+
+
+[[what-is-object-metadata]]
+== ${post_edited_translations.segment}
+
+物件中繼資料是指描述物件的任何資訊。StorageGRID 使用物件中繼資料來追蹤網格中所有物件的位置，並管理每個物件隨時間的生命週期。
+
+物件中繼資料包含以下資訊：
+
+* ${post_edited_translations.segment}
+* 每個物件複本或銷毀編碼片段的目前儲存設備位置。
+* 與物件關聯的任何使用者中繼資料。
+
+
+物件中繼資料可自訂且可擴充，讓應用程式能夠靈活使用。
+
+有關 StorageGRID 如何以及在何處儲存物件中繼資料的詳細資訊，請前往 link:../admin/managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]。
+
+
+
+[[how-is-object-data-protected]]
+== 如何保護物件資料？
+
+StorageGRID 系統為您提供兩種機制來保護物件資料免於遺失：複寫和銷毀編碼。
+
+
+
+[[replication]]
+=== 複寫
+
+當 StorageGRID 將物件與設定為建立複寫複本的資訊生命週期管理 （ILM） 規則配對時，系統會建立物件資料的精確複本，並將其儲存在儲存節點或雲端儲存資源池中。ILM 規則決定複本的數量、複本的儲存位置，以及系統保留複本的時間長度。例如，如果某個複本遺失（例如，由於儲存節點故障），只要 StorageGRID 系統中其他位置存在該物件的複本，該物件仍然可用。
+
+在下列範例中，「建立 2 個複本」規則指定將每個物件的兩個複寫複本放置在包含三個儲存節點的儲存資源池中。
+
+image:ilm_replication_make_2_copies.png["製作 2 份複本規則"]
+
+
+
+[[erasure-coding]]
+=== ${post_edited_translations.segment}
+
+當 StorageGRID 將物件與設定為建立銷毀編碼複本的 ILM 規則相符時，它會將物件資料切片成資料片段，計算額外的同位元檢查片段，並將每個片段儲存在不同的儲存節點上。存取物件時，會使用儲存的片段重新組裝物件。如果資料片段或同位元檢查片段毀損或遺失，銷毀編碼演算法可以使用剩餘資料片段和同位元檢查片段的子集來重建該片段。ILM 規則和銷毀編碼設定檔決定所使用的銷毀編碼方案。
+
+以下範例說明如何對物件資料使用銷毀編碼。在本例中，ILM 規則採用 4+2 銷毀編碼方案。每個物件被分割成四個相等的資料片段，並從物件資料計算出兩個同位元檢查片段。這六個片段分別儲存在三個資料中心的不同儲存節點上，以在節點故障或站台遺失時提供資料保護。
+
+image:ec_three_sites_4_plus_2.png["銷毀編碼三個站台 4 加 2"]
+
+.相關資訊
+* link:../ilm/index.html["使用 ILM 管理物件"]
+* link:using-information-lifecycle-management.html["利用資訊生命週期管理"]
+

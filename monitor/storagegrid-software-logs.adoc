@@ -1,0 +1,430 @@
+---
+permalink: monitor/storagegrid-software-logs.html 
+sidebar: sidebar 
+keywords: logs 
+summary: 您可以使用 StorageGRID 日誌來疑難排解問題。 
+---
+= StorageGRID 軟體日誌檔
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 StorageGRID 日誌來疑難排解問題。
+
+
+NOTE: 如果您想要將日誌傳送到外部 syslog 伺服器，或是變更例如  `bycast.log` 和  `nms.log` 等稽核資訊的目的地，請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+
+
+
+[[general-storagegrid-logs]]
+== ${post_edited_translations.segment}
+
+[cols="3a,3a,2a"]
+|===
+| 檔案名稱 | 附註 | 發現於 
+
+
+| ${post_edited_translations.segment}  a| 
+主要的 StorageGRID 疑難排解檔案。
+ a| 
+所有節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+包含  `bycast.log` 的子集 （ 嚴重性為 ERROR 和 CRITICAL 的訊息 ）。CRITICAL 訊息也會顯示在系統中。
+ a| 
+所有節點
+
+
+
+| /var/local/core/  a| 
+包含方案異常終止時產生的所有核心傾印檔案。可能的原因包括斷言失敗、違規或執行緒逾時。
+
+*附註*：檔案 ``/var/local/core/kexec_cmd`通常存在於應用裝置節點上，並不表示發生錯誤。
+ a| 
+所有節點
+
+|===
+
+
+[[cipher-related-logs]]
+== ${post_edited_translations.segment}
+
+[cols="3a,3a,2a"]
+|===
+| 檔案名稱 | 附註 | 發現於 
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+ a| 
+所有節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+包含與產生 nginx 組態和重新載入 nginx 服務相關的日誌。
+ a| 
+所有節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+ a| 
+管理節點和 Gateway 節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+包含與設定 TLS 和 SSH 原則相關的日誌檔。
+ a| 
+所有節點
+
+|===
+
+
+[[grid-federation-logs]]
+== ${post_edited_translations.segment}
+
+[cols="3a,3a,2a"]
+|===
+| 檔案名稱 | 附註 | 發現於 
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+ a| 
+所有節點
+
+|===
+
+
+[[nms-logs]]
+== NMS 日誌
+
+[cols="3a,3a,2a"]
+|===
+| 檔案名稱 | 附註 | 發現於 
+
+
+| ${post_edited_translations.segment}  a| 
+* ${post_edited_translations.segment}
+* 擷取與 NMS 服務運作相關的事件。例如：電子郵件通知與組態變更。
+* 包含因系統組態變更而導致的 XML 套裝組合更新。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 包含與 AutoSupport 相關的日誌。
+
+ a| 
+管理節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+包含對應服務的標準錯誤 (stderr) 流。每個服務對應一個日誌檔。除非服務出現問題，否則這些檔案通常為空。
+ a| 
+管理節點
+
+
+
+| /var/local/log/nms.requestlog  a| 
+包含從管理 API 到內部 StorageGRID 服務的傳出連線相關資訊。
+ a| 
+管理節點
+
+|===
+
+
+[[server-manager-logs]]
+== ${post_edited_translations.segment}
+
+[cols="3a,3a,2a"]
+|===
+| 檔案名稱 | 附註 | 發現於 
+
+
+| ${post_edited_translations.segment}  a| 
+Server Manager 應用程式在伺服器上執行的日誌檔。
+ a| 
+所有節點
+
+
+
+| /var/local/log/GridstatBackend.errlog  a| 
+${post_edited_translations.segment}
+ a| 
+所有節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+Server Manager GUI 的日誌檔。
+ a| 
+所有節點
+
+|===
+
+
+[[storagegrid-services-logs]]
+== StorageGRID 服務日誌
+
+[cols="3a,3a,2a"]
+|===
+| 檔案名稱 | 附註 | 發現於 
+
+
+| /var/local/log/acct.errlog  a| 
+ a| 
+${post_edited_translations.segment}
+
+
+
+| /var/local/log/adc.errlog  a| 
+包含對應服務的標準錯誤 (stderr) 流。每個服務對應一個日誌檔。除非服務出現問題，否則這些檔案通常為空。
+ a| 
+${post_edited_translations.segment}
+
+
+
+| /var/local/log/ams.errlog  a| 
+ a| 
+管理節點
+
+
+
+| /var/local/log/cache-svc.log + /var/local/log/cache-svc.errlog  a| 
+${post_edited_translations.segment}
+ a| 
+閘道節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+ a| 
+儲存節點
+
+
+
+| /var/local/log/cassandra-reaper.log  a| 
+${post_edited_translations.segment}
+ a| 
+儲存節點
+
+
+
+| /var/local/log/cassandra-reaper.errlog  a| 
+${post_edited_translations.segment}
+ a| 
+儲存節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+ a| 
+儲存節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+ a| 
+管理節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+此日誌檔可能會出現在從舊版 StorageGRID 升級的系統上。它包含舊版資訊。
+ a| 
+儲存節點
+
+
+
+| /var/local/log/dds.errlog  a| 
+ a| 
+儲存節點
+
+
+
+| /var/local/log/dmv.errlog  a| 
+ a| 
+儲存節點
+
+
+
+| /var/local/log/dynip*  a| 
+${post_edited_translations.segment}
+ a| 
+所有節點
+
+
+
+| /var/local/log/grafana.log  a| 
+與 Grafana 服務關聯的日誌檔，該服務用於 Grid Manager 中的計量視覺化。
+ a| 
+管理節點
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+| /var/local/log/idnt.errlog  a| 
+ a| 
+${post_edited_translations.segment}
+
+
+
+| /var/local/log/jaeger.log  a| 
+與 jaeger 服務關聯的日誌，用於追蹤收集。
+ a| 
+所有節點
+
+
+
+| /var/local/log/kstn.errlog  a| 
+ a| 
+${post_edited_translations.segment}
+
+
+
+| /var/local/log/lambda*  a| 
+包含 S3 Select 服務的日誌。
+ a| 
+管理節點和 Gateway 節點
+
+只有特定的管理節點和 Gateway 節點包含此日誌。請參閱link:../admin/manage-s3-select-for-tenant-accounts.html["S3 Select 對管理節點和閘道節點的要求和限制"]。
+
+
+
+| /var/local/log/ldr.errlog  a| 
+ a| 
+儲存節點
+
+
+
+| /var/local/log/miscd/*.log  a| 
+包含 MISCd 服務（資訊服務控制常駐程式）的日誌，該服務提供介面，用於查詢和管理其他節點上的服務，以及管理節點上的環境組態，例如查詢在其他節點上執行的服務狀態。
+ a| 
+所有節點
+
+
+
+| /var/local/log/nginx/*.log  a| 
+包含 nginx 服務的日誌，該服務可作為各種網格服務（如 Prometheus 和 Dynip）的驗證和安全通訊機制，以便能夠透過 HTTPS API 與其他節點上的服務進行通訊。
+ a| 
+所有節點
+
+
+
+| /var/local/log/nginx-gw/*.log  a| 
+包含與 nginx-gw 服務相關的一般日誌，包括錯誤日誌和管理節點上受限管理連接埠的日誌。
+ a| 
+${post_edited_translations.segment}
+
+
+
+| /var/local/log/nginx-gw/cgr-access.log.gz  a| 
+包含與跨網格複寫流量相關的存取日誌。
+ a| 
+根據網格聯合組態，可能是管理節點、閘道節點或兩者兼有。僅在跨網格複寫的目的地網格上存在。
+
+
+
+| /var/local/log/nginx-gw/endpoint-access.log.gz  a| 
+包含 Load Balancer 服務的存取日誌，該服務提供從用戶端到 Storage Nodes 的 S3 流量負載平衡。
+ a| 
+${post_edited_translations.segment}
+
+
+
+| /var/local/log/persistence*  a| 
+包含 Persistence 服務的日誌，該服務管理根目錄磁碟上需要在重新開機後保留的檔案。
+ a| 
+所有節點
+
+
+
+| /var/local/log/prometheus.log  a| 
+對於所有節點，包含節點匯出器服務日誌和 ade-exporter 計量服務日誌。
+
+對於管理節點，也包含 Prometheus 和 Alert Manager 服務的日誌。
+ a| 
+所有節點
+
+
+
+| /var/local/log/raft.log  a| 
+包含 RSM 服務用於 Raft 協定的程式庫的輸出。
+ a| 
+具有 RSM 服務的儲存節點
+
+
+
+| /var/local/log/rms.errlog  a| 
+包含用於 S3 平台服務的複寫狀態機服務 (RSM) 服務的日誌。
+ a| 
+具有 RSM 服務的儲存節點
+
+
+
+| /var/local/log/ssm.errlog  a| 
+ a| 
+所有節點
+
+
+
+| /var/local/log/update-s3vs-domains.log  a| 
+包含與處理 S3 虛擬託管網域名稱組態更新相關的日誌。請參閱 S3 用戶端應用程式的實施說明。
+ a| 
+管理節點和 Gateway 節點
+
+
+
+| /var/local/log/update-snmp-firewall.*  a| 
+包含與管理 SNMP 的防火牆連接埠相關的日誌。
+ a| 
+所有節點
+
+
+
+| /var/local/log/update-sysl.log  a| 
+包含與系統 syslog 組態變更相關的日誌。
+ a| 
+所有節點
+
+
+
+| /var/local/log/update-traffic-classes.log  a| 
+包含與流量分類器組態變更相關的日誌。
+ a| 
+管理節點和 Gateway 節點
+
+
+
+| /var/local/log/update-utcn.log  a| 
+包含與此節點上的不受信任用戶端網路模式相關的日誌。
+ a| 
+所有節點
+
+|===
+.相關資訊
+* link:about-bycast-log.html["關於 bycast.log"]
+* link:../s3/index.html["使用 S3 REST API"]
+

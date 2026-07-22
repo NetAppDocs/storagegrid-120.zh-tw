@@ -1,0 +1,88 @@
+---
+permalink: tenant/tenant-management-permissions.html 
+sidebar: sidebar 
+keywords: tenant management permissions 
+summary: 在建立租戶群組之前，請考慮要為該群組指派哪些權限。租戶管理權限決定了使用者可以使用 Tenant Manager 或 Tenant Management API 執行哪些任務。一個使用者可以屬於一個或多個群組。如果使用者屬於多個群組，則權限是累加的。 
+---
+= StorageGRID 租戶管理權限
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在建立租戶群組之前，請考慮要為該群組指派哪些權限。租戶管理權限決定了使用者可以使用 Tenant Manager 或 Tenant Management API 執行哪些任務。一個使用者可以屬於一個或多個群組。如果使用者屬於多個群組，則權限是累加的。
+
+若要登入 Tenant Manager 或使用 Tenant Management API，使用者必須屬於至少擁有一項權限的群組。所有可以登入的使用者都可以執行以下操作：
+
+* 檢視儀表板
+* 變更自己的密碼（適用於本機使用者）
+
+
+對於所有權限，群組的 Access mode 設定決定使用者是否可以變更設定和執行操作，或者他們是否只能檢視相關的設定和功能。
+
+
+NOTE: 如果使用者屬於多個群組，且其中任何一個群組設定為唯讀，則該使用者對所有選定的設定和功能將具有唯讀存取權限。
+
+您可以將以下權限指派給一個群組。
+
+[cols="1a,3a,3a"]
+|===
+| 權限 | 說明 | 詳細資料 
+
+
+ a| 
+Root 存取
+ a| 
+提供對租戶管理器和租戶管理 API 的完整存取權限。
+ a| 
+
+
+
+ a| 
+管理您自己的 S3 憑證
+ a| 
+允許使用者建立和移除自己的 S3 存取金鑰。
+ a| 
+沒有此權限的使用者看不到「*STORAGE (S3)* > *My S3 access keys*」選單選項。
+
+
+
+ a| 
+檢視所有儲存桶
+ a| 
+允許使用者檢視所有儲存桶和儲存桶組態。
+ a| 
+沒有「View all buckets」或「Manage all buckets」權限的使用者看不到 *Buckets* 選單選項。
+
+此權限已被「Manage all buckets」權限取代。它不會影響 S3 用戶端或 S3 Console 使用的 S3 儲存桶或群組原則。
+
+
+
+ a| 
+管理所有儲存桶
+ a| 
+允許使用者使用 Tenant Manager 和 Tenant Management API 來建立和刪除 S3 儲存桶，並管理租戶帳戶中所有 S3 儲存桶的設定，而無需考慮 S3 儲存桶或群組原則。
+ a| 
+沒有「View all buckets」或「Manage all buckets」權限的使用者看不到 *Buckets* 選單選項。
+
+此權限會覆寫「檢視所有儲存桶」權限。它不會影響 S3 用戶端或 S3 Console 使用的 S3 儲存桶或群組原則。
+
+
+
+ a| 
+管理端點
+ a| 
+允許使用者使用 Tenant Manager 或租戶管理 API 建立或編輯平台服務端點，這些端點用作 StorageGRID 平台服務的目的地。
+ a| 
+沒有此權限的使用者看不到 *Platform services endpoints* 選單選項。
+
+
+
+ a| 
+使用 S3 Console 索引標籤
+ a| 
+與「View all buckets」或「Manage all buckets」權限結合使用時，允許使用者從儲存桶詳細資料頁面上的 S3 Console 索引標籤檢視和管理物件。
+ a| 
+
+|===

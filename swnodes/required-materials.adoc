@@ -1,0 +1,70 @@
+---
+permalink: swnodes/required-materials.html 
+sidebar: sidebar 
+keywords: installation materials 
+summary: 安裝 StorageGRID 之前，請收集並準備所需的資訊和資料。 
+---
+= StorageGRID 所需的資訊和資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+安裝 StorageGRID 之前，請收集並準備所需的資訊和資料。
+
+
+
+[[required-information]]
+== 必要資訊
+
+網路計劃:: 您打算將哪些網路連接到每個 StorageGRID 節點。StorageGRID 支援多個網路，以實現流量隔離、安全性和管理便利性。
++
+--
+請參閱 StorageGRID link:../network/index.html["${post_edited_translations.segment}"]。
+
+--
+網路資訊:: 分配給每個網格節點的 IP 位址，以及 DNS 和 NTP 伺服器的 IP 位址。
+網格節點的伺服器:: 確定一組伺服器（實體伺服器、虛擬伺服器或兩者兼有），這些伺服器彙總後能夠提供足夠的資源，以支援您計劃部署的 StorageGRID 節點數量和類型。
++
+--
+
+NOTE: 如果您的 StorageGRID 安裝不使用 StorageGRID 應用裝置（硬體）儲存節點，則必須使用具備電池備援寫入快取 (BBWC) 的硬體 RAID 儲存設備。StorageGRID 不支援使用虛擬儲存區域網路 (vSAN)、軟體 RAID 或無 RAID 保護。
+
+--
+節點移轉（僅限 Ubuntu 和 Debian，如有需要）:: 了解 link:node-container-migration-requirements.html["節點移轉的要求"]，才能在不中斷服務的情況下對實體主機執行計畫內維護。
+相關資訊:: https://imt.netapp.com/matrix/#welcome["NetApp 互通性矩陣工具"^]
+
+
+
+
+[[required-materials]]
+== 所需材料
+
+NetApp StorageGRID 授權:: 您必須持有有效且經過數位簽署的 NetApp 授權。
+
+
+
+NOTE: StorageGRID 安裝歸檔中包含一個非生產授權，可用於測試和概念驗證網格。
+
+${post_edited_translations.segment}:: link:downloading-and-extracting-storagegrid-installation-files.html["下載 StorageGRID 安裝歸檔並擷取檔案"]。
+服務筆記型電腦:: StorageGRID 系統透過服務筆記型電腦進行安裝。
++
+--
+服務用筆記型電腦必須具備：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]
+
+
+--
+${post_edited_translations.segment}::
++
+--
+* https://library.netapp.com/ecm/ecm_download_file/ECMLP3351267["版本資訊"^]。您必須登入現有 NetApp 帳戶或建立帳戶才能存取發行說明。
+* link:../admin/index.html["StorageGRID 管理說明"]
+
+
+--
+

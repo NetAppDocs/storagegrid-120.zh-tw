@@ -1,0 +1,25 @@
+---
+permalink: network/topology-for-all-three-networks.html 
+sidebar: sidebar 
+keywords: network topology for storagegrid 
+summary: 您可以將所有三個網路設定成一個網路拓撲，其中包含私有網格網路、受限的站台特定管理網路和開啟的用戶端網路。如有需要，使用負載平衡器端點和不受信任的用戶端網路可以提供額外的安全性。 
+---
+= 所有三個 StorageGRID 網路的網路拓撲
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以將所有三個網路設定成一個網路拓撲，其中包含私有網格網路、受限的站台特定管理網路和開啟的用戶端網路。如有需要，使用負載平衡器端點和不受信任的用戶端網路可以提供額外的安全性。
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* 管理網路用於與管理功能相關的流量。
+* 用戶端網路用於與 S3 用戶端請求相關的流量。
+
+
+*拓撲範例：網格網路、管理網路和用戶端網路*
+
+image:grid_admin_client_networks.png["網格管理用戶端網路"]

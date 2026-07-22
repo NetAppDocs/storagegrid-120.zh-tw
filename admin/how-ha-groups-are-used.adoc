@@ -1,0 +1,79 @@
+---
+permalink: admin/how-ha-groups-are-used.html 
+sidebar: sidebar 
+keywords: ha groups, high availability group 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID HA 群組如何提供高可用性
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+* HA 群組可以為 Grid Manager 或 Tenant Manager 提供高可用度的管理連線。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+只有當群組中包含的所有節點都提供相同的服務時，HA 群組才能提供高可用度。建立 HA 群組時，請從提供您所需服務的節點類型中新增介面。
+
+* *管理節點*：包含負載平衡器服務，並啟用對 Grid Manager 或 Tenant Manager 的存取。
+* ${post_edited_translations.segment}
+
+
+[cols="1a,2a"]
+|===
+| ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+
+
+ a| 
+存取 Grid Manager
+ a| 
+* ${post_edited_translations.segment}
+* 非主要管理節點
+
+
+*附註：* 主 Admin 節點必須是主介面。某些維護程序只能從主 Admin 節點執行。
+
+
+
+ a| 
+僅限存取 Tenant Manager
+ a| 
+* ${post_edited_translations.segment}
+
+
+
+
+ a| 
+S3 用戶端存取——負載平衡器服務
+ a| 
+* 管理節點
+* 閘道節點
+
+
+
+
+ a| 
+適用於 link:../admin/manage-s3-select-for-tenant-accounts.html["${post_edited_translations.segment}"] 的 S3 用戶端存取
+ a| 
+* 服務應用裝置
+* ${post_edited_translations.segment}
+
+
+*注意*：使用 S3 Select 時建議使用 HA 群組，但並非必須。
+
+|===
+
+
+[[limitations-of-using-ha-groups-with-grid-manager-or-tenant-manager]]
+== ${post_edited_translations.segment}
+
+如果 Grid Manager 或 Tenant Manager 服務發生故障，則不會觸發 HA 群組故障轉移。
+
+${post_edited_translations.segment}
+
+當主要管理節點無法使用時，無法執行某些維護程序。在容錯移轉期間，您可以使用 Grid Manager 來監控您的 StorageGRID 系統。

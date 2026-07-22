@@ -1,0 +1,16 @@
+---
+permalink: s3/conflicting-client-requests.html 
+sidebar: sidebar 
+keywords: conflicting client requests 
+summary: 如果用戶端請求發生衝突，例如兩個用戶端寫入同一個金鑰，則依照「最後寫入優先」的原則進行解決。 
+---
+= StorageGRID S3 REST API 如何解決衝突的用戶端請求
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果用戶端請求發生衝突，例如兩個用戶端寫入同一個金鑰，則依照「最新優先」的原則進行解決。
+
+「最新獲勝」評估的時間是根據 StorageGRID 系統完成給定請求的時間，而不是根據 S3 用戶端開始操作的時間。

@@ -1,0 +1,455 @@
+---
+permalink: admin/use-s3-setup-wizard-steps.html 
+sidebar: sidebar 
+keywords: FabricPool and S3 setup wizard, object storage system, S3 application 
+summary: 您可以使用 S3 設定精靈將 StorageGRID 設定為 S3 應用程式的物件儲存系統。 
+---
+= 在 StorageGRID 中存取並完成 S3 設定精靈
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 S3 設定精靈來設定 StorageGRID，以搭配 S3 應用程式使用。設定精靈會提供應用程式存取 StorageGRID 儲存貯體和儲存物件所需的值。
+
+.開始之前
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 您已審閱使用精靈的 link:use-s3-setup-wizard.html["${post_edited_translations.segment}"]。
+
+
+
+
+[[access-the-wizard]]
+== ${post_edited_translations.segment}
+
+.步驟
+. 使用 link:web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+. 如果儀表板上出現「* FabricPool 和 S3 設定精靈*」橫幅，請選擇橫幅中的連結。如果橫幅不再顯示，請從 Grid Manager 的標題列中選擇說明圖示，然後選擇「* FabricPool 和 S3 設定精靈*」。
++
+image:help_menu.png["說明功能表"]
+
+. 在 FabricPool 和 S3 設定精靈頁面的 S3 應用程式部分中，選擇「立即設定」。
+
+
+
+
+[[step-1-of-6-configure-ha-group]]
+== 步驟 1 （共 6 步）：設定 HA 群組
+
+HA 群組是由多個節點組成的集合，每個節點包含 StorageGRID 負載平衡器服務。HA 群組可以包含閘道節點、管理節點或兩者。
+
+您可以使用高可用性 （HA） 群組來幫助維持 S3 資料連線的可用性。如果 HA 群組中的作用中介面發生故障，備份介面可以管理工作負載，對 S3 作業的影響微乎其微。
+
+如需此工作的詳細資訊，請參閱 link:managing-high-availability-groups.html["管理高可用度群組"]。
+
+.步驟
+. 如果您打算使用外部負載平衡器，則無需建立 HA 群組。選取 *Skip this step* 並前往 <<${post_edited_translations.segment}>>。
+. 若要使用 StorageGRID 負載平衡器，您可以建立新的 HA 群組或使用現有的 HA 群組。
++
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+HA 組名
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+此 HA 群組的執行摘要。
+
+|===
+.. 在「新增介面」步驟中，選擇要在此 HA 群組中使用的節點介面。
++
+${post_edited_translations.segment}
+
++
+您可以選擇一個或多個節點，但每個節點只能選擇一個介面。
+
+.. 在「排列介面優先順序」步驟中，確定此 HA 群組的主要介面和任何備份介面。
++
+拖曳列以變更*優先順序*欄中的值。
+
++
+清單中的第一個介面是主要介面。除非發生故障，否則主要介面為作用中介面。
+
++
+如果高可用性 (HA) 群組包含多個介面，且目前活動介面發生故障，則虛擬 IP (VIP) 位址會依優先順序轉移到第一個備份介面。如果該介面也發生故障，則 VIP 位址會轉移到下一個備份介面，依此類推。故障解決後，VIP 位址會回到優先順序最高的可用介面。
+
+.. 在「輸入 IP 位址」步驟中，請填寫以下欄位。
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+子網路 CIDR
+ a| 
+VIP 子網路的位址（CIDR 表示法）— IPv4 位址後接斜線和子網路長度（0-32）。
+
+網路位址不得設定任何主機位元。例如  `192.16.0.0/22`。
+
+
+
+ a| 
+閘道 IP 位址（可選）
+ a| 
+如果用於存取 StorageGRID 的 S3 IP 位址與 StorageGRID VIP 位址不在同一子網路中，請輸入 StorageGRID VIP 本機閘道 IP 位址。本機閘道 IP 位址必須位於 VIP 子網路內。
+
+
+
+ a| 
+虛擬 IP 位址
+ a| 
+請為 HA 群組中的作用中介面輸入至少一個且不超過十個 IP 位址。所有 IP 位址都必須在 VIP 子網路內。
+
+至少有一個位址必須是 IPv4。您可以選擇性指定其他 IPv4 和 IPv6 位址。
+
+|===
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+
+
+--
+.${post_edited_translations.segment}
+--
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+
+
+--
+====
+
+
+
+
+[[step-2-of-6-configure-load-balancer-endpoint]]
+== ${post_edited_translations.segment}
+
+StorageGRID 使用負載平衡器來管理來自用戶端應用程式的工作負載。負載平衡能最大化跨多個 Storage 節點的速度與連線容量。
+
+您可以使用所有 Gateway 和 Admin 節點上的 StorageGRID 負載平衡器服務，也可以連線至外部（第三方）負載平衡器。建議使用 StorageGRID 負載平衡器。
+
+有關此工作的詳細資訊，請參閱link:managing-load-balancing.html["負載平衡的考慮因素"]。
+
+若要使用 StorageGRID 負載平衡服務，請選取 *StorageGRID load balancer* 索引標籤，然後建立或選取您要使用的負載平衡端點。若要使用外部負載平衡器，請選取 *External load balancer* 索引標籤，並提供您已設定之系統的詳細資料。
+
+[role="tabbed-block"]
+====
+.建立端點
+--
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+Name
+ a| 
+端點的描述性名稱。
+
+
+
+ a| 
+連接埠
+ a| 
+用於負載平衡的 StorageGRID 連接埠。對於您建立的第一個端點，此欄位預設值為 10433，但您可以輸入任何未使用的外部連接埠。如果您輸入 80 或 443，則該端點僅在閘道節點上設定，因為這些連接埠在管理節點上已保留。
+
+*附註：*不允許使用其他網格服務所使用的連接埠。請參閱 link:../network/internal-grid-node-communications.html#storagegrid-internal-ports["StorageGRID 內部連接埠"]。
+
+
+
+ a| 
+用戶端類型
+ a| 
+必須是*S3*。
+
+
+
+ a| 
+網路傳輸協定
+ a| 
+選擇 *HTTPS* 。
+
+${post_edited_translations.segment}
+
+|===
+. 在「選擇綁定模式」步驟中，指定綁定模式。綁定模式控制如何存取端點，是使用任意 IP 位址，還是使用特定的 IP 位址和網路介面。
++
+[cols="1a,3a"]
+|===
+| 模式 | 說明 
+
+
+ a| 
+全域（預設）
+ a| 
+用戶端可以使用任何閘道節點或管理節點的 IP 位址、任何網路上任何 HA 群組的虛擬 IP （VIP） 位址或對應的 FQDN 存取端點。
+
+除非您需要限制此端點的存取能力，否則請使用 *全域* 設定（預設值）。
+
+
+
+ a| 
+HA 群組的虛擬 IP
+ a| 
+用戶端必須使用 HA 群組的虛擬 IP 位址（或對應的 FQDN）才能存取此端點。
+
+具有此綁定模式的端點都可以使用相同的連接埠號，只要您為端點選擇的 HA 群組不重疊即可。
+
+
+
+ a| 
+節點介面
+ a| 
+用戶端必須使用所選節點介面的 IP 位址（或對應的 FQDN）來存取此端點。
+
+
+
+ a| 
+節點類型
+ a| 
+根據您選擇的節點類型，用戶端必須使用任何管理節點的 IP 位址（或對應的 FQDN）或任何閘道節點的 IP 位址（或對應的 FQDN）來存取此端點。
+
+|===
+. ${post_edited_translations.segment}
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+允許所有租戶（預設）
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+選定的租戶帳戶無法使用此端點存取其儲存桶。所有其他租戶均可使用此端點。
+
+|===
+. 在「附加憑證」步驟中，請選擇下列選項之一：
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+上傳憑證（建議）
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+產生證書
+ a| 
+使用此選項可產生自簽名憑證。請參閱 link:configuring-load-balancer-endpoints.html["設定負載平衡器端點"] 以取得輸入內容的詳細資訊。
+
+
+
+ a| 
+使用 StorageGRID S3 憑證
+ a| 
+僅當您已上傳或產生自訂版本的 StorageGRID 全域憑證時才使用此選項。如需詳細資訊，請參閱 link:configuring-custom-server-certificate-for-storage-node.html["設定 S3 API 憑證"]。
+
+|===
+. 選擇 *Finish* 以返回 S3 設定精靈。
+. 選擇 *Continue* 以前往租戶和儲存桶步驟。
+
+
+
+NOTE: ${post_edited_translations.segment}
+
+--
+.使用現有的負載平衡器端點
+--
+.步驟
+. 若要使用現有端點，請從「選擇負載平衡器端點」中選擇其名稱。
+. 選擇 *Continue* 以前往租戶和儲存桶步驟。
+
+
+--
+.使用外部負載平衡器
+--
+.步驟
+. 若要使用外部負載平衡器，請填寫以下欄位。
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+FQDN
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+連接埠
+ a| 
+S3 應用程式將用於連線至外部負載平衡器的連接埠號碼。
+
+
+
+ a| 
+證書
+ a| 
+${post_edited_translations.segment}
+
+|===
+. 選擇 *Continue* 以前往租戶和儲存桶步驟。
+
+
+--
+====
+
+
+[[step-3-of-6-create-tenant-and-bucket]]
+== 步驟 3（共 6 步）：建立租戶和儲存桶
+
+租戶是指可以使用 S3 應用程式在 StorageGRID 中儲存和擷取物件的實體。每個租戶都有自己的使用者、存取金鑰、儲存桶、物件和一組特定的權限。
+
+儲存桶是用於儲存租戶物件及其物件中繼資料的 Container。雖然租戶可以擁有多個儲存桶，但精靈可以幫助您以最快捷、最簡單的方式建立租戶和儲存桶。如果您之後需要新增儲存桶或設定選項，可以使用 Tenant Manager。
+
+如需此工作的詳細資訊，請參閱 link:creating-tenant-account.html["建立租戶帳戶"] 與 link:../tenant/creating-s3-bucket.html["建立 S3 儲存桶"]。
+
+.步驟
+. ${post_edited_translations.segment}
++
+租戶名稱不需要是唯一的。建立租戶帳戶時，它會收到一個唯一的數值帳戶 ID。
+
+. 根據您的 StorageGRID 系統是否使用 link:using-identity-federation.html["${post_edited_translations.segment}"]、link:how-sso-works.html["單一登入 (SSO)"]或兩者，為租戶帳戶定義 root 存取權。
++
+[cols="1a,2a"]
+|===
+| 選項 | ${post_edited_translations.segment} 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+.. 選擇現有的同盟群組，使其對租戶具有 link:../tenant/tenant-management-permissions.html["${post_edited_translations.segment}"]。
+.. （可選）指定以本機 root 使用者身分登入租戶時要使用的密碼。
+
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+選取現有的聯合群組，以便為租戶提供 link:../tenant/tenant-management-permissions.html["${post_edited_translations.segment}"]。本機使用者無法登入。
+
+|===
+. ${post_edited_translations.segment}
++
+如果租戶的唯一使用者是 root 使用者，請選擇此選項。如果其他使用者也將使用此租戶，link:../tenant/index.html["${post_edited_translations.segment}"]以設定金鑰和權限。
+
+. ${post_edited_translations.segment}
++
+
+TIP: 如果已為此網格啟用 S3 Object Lock ，則在此步驟中建立的貯存庫不會啟用 S3 Object Lock 。如果您需要為此 S3 應用程式使用 S3 Object Lock 貯存庫，請勿選取立即建立貯存庫。相反地，請稍後使用 Tenant Manager 來 link:../tenant/creating-s3-bucket.html["${post_edited_translations.segment}"]。
+
++
+.. 輸入 S3 應用程式將使用的儲存桶名稱。例如， `s3-bucket`。
++
+建立儲存桶後無法變更儲存桶名稱。
+
+.. 選擇此儲存桶的*區域*。
++
+除非您預計未來會使用 ILM 根據 Bucket 的地區來篩選物件，否則請使用預設地區 (`us-east-1`）。
+
+
+
+. ${post_edited_translations.segment}
+
+
+
+
+[[download-datastep-4-of-6-download-data]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+.步驟
+. 如果您選擇了*自動建立 root 使用者 S3 存取金鑰*，請執行下列一項或兩項操作：
++
+** 選擇 *Download access keys* 以下載 `.csv`包含租戶帳戶名稱、存取金鑰 ID 和秘密存取金鑰的檔案。
+** 選擇複製圖示（image:icon_tenant_copy_url.png["複本圖示"]）將存取金鑰 ID 和秘密存取金鑰複製到剪貼簿。
+
+
+. 選擇 *Download configuration values* 以下載 `.txt`包含負載平衡器端點、租戶、儲存桶和 root 使用者設定的檔案。
+. 請將此資訊儲存到安全的位置。
++
+
+CAUTION: 在您製作這兩個存取金鑰的複本之前，請勿結案此頁面。結案此頁面後，將無法再取得這些金鑰。請務必將此資訊儲存在安全的的位置，因為它可用於從您的 StorageGRID 系統取得資料。
+
+. 如果出現提示，請選取核取方塊以確認您已下載或複製金鑰。
+. 選擇 *Continue* 以進入 ILM 規則和原則步驟。
+
+
+
+
+[[step-5-of-6-review-ilm-rule-and-ilm-policy-for-s3]]
+== 步驟 5（共 6 步）：檢視 S3 的 ILM 規則和 ILM 原則
+
+資訊生命週期管理 （ILM） 規則可控制 StorageGRID 系統中所有物件的放置、持續時間和擷取行為。StorageGRID 隨附的 ILM 原則會建立所有物件的兩個複寫複本。此原則會一直有效，直到您啟動至少一個新原則為止。
+
+.步驟
+. ${post_edited_translations.segment}
+. 如果您想要為屬於新租戶或儲存桶的物件新增特定指令，請建立新規則和新原則。請參閱 link:../ilm/access-create-ilm-rule-wizard.html["建立 ILM 規則"] 和 link:../ilm/ilm-policy-overview.html["${post_edited_translations.segment}"]。
+. 選擇「我已閱讀這些步驟並了解我需要做什麼」。
+. 選取此複選框，表示您明白下一步該怎麼做。
+. 選擇 *Continue* 前往 *Summary*。
+
+
+
+
+[[step-6-of-6-review-summary]]
+== ${post_edited_translations.segment}
+
+.步驟
+. 檢閱摘要。
+. 請記下後續步驟中的詳細資訊，其中說明了在連線至 S3 用戶端之前可能需要的額外組態。例如，選取 *Sign in as root* 會帶您前往 Tenant Manager，您可以在該處新增租戶使用者、建立額外的儲存貯體，以及更新儲存貯體設定。
+. 選擇 *Finish* 。
+. 使用從 StorageGRID 下載的檔案或手動取得的值來設定應用程式。
+

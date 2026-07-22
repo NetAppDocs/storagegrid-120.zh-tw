@@ -1,0 +1,149 @@
+---
+permalink: tenant/enabling-or-disabling-last-access-time-updates.html 
+sidebar: sidebar 
+keywords: how to enable or disable last access time updates 
+summary: 當網格管理員為 StorageGRID 系統建立資訊生命週期管理 （ILM） 規則時，可以選擇指定使用物件的最後存取時間來決定是否將該物件移至不同的儲存位置。如果您使用的是 S3 租用戶，則可以透過啟用 S3 儲存桶中物件的最後存取時間更新來利用此類規則。 
+---
+= 啟用或停用 StorageGRID 中的上次存取時間更新
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當網格管理員為 StorageGRID 系統建立資訊生命週期管理 （ILM） 規則時，可以選擇指定使用物件的最後存取時間來決定是否將該物件移至不同的儲存設備位置。如果您使用的是 S3 租戶，則可以透過啟用 S3 儲存桶中物件的最後存取時間更新來利用此類規則。
+
+這些說明僅適用於至少包含一條使用「上次存取時間」選項作為進階篩選條件或參考時間的 ILM 規則的 StorageGRID 系統。如果您的 StorageGRID 系統不包含此類規則，則可以忽略這些說明。如需詳細資訊，請參閱 link:../ilm/using-last-access-time-in-ilm-rules.html["在 ILM 規則中使用最後存取時間"]。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於擁有 link:tenant-management-permissions.html["管理所有儲存桶或 root 存取權限"] 的使用者群組。這些權限會置換群組或儲存桶原則中的權限設定。
+
+
+.關於此任務
+「上次存取時間」是 ILM 規則的「參考時間」放置指令的可用選項之一。將規則的「參考時間」設定為「上次存取時間」，可讓網格管理員根據物件上次被擷取（讀取或檢視）的時間，指定將物件放置在特定的儲存設備位置。
+
+例如，為了確保最近查看的物件保留在速度更快的儲存設備上，網格系統管理員可以建立 ILM 規則，指定以下內容：
+
+* 過去一個月內擷取過的物件應保留在本機儲存節點上。
+* 過去一個月內未被擷取的物件應移至異地存放。
+
+
+預設情況下，上次存取時間的更新功能處於停用狀態。如果您的 StorageGRID 系統包含使用 *上次存取時間* 選項的 ILM 規則，且您希望此選項套用至此儲存桶中的物件，則必須為該規則中指定的 S3 儲存桶啟用上次存取時間的更新功能。
+
+
+CAUTION: 更新物件擷取時的最後存取時間可能會降低 StorageGRID 的效能，尤其是對於小物件而言。
+
+由於 StorageGRID 每次擷取物件時都必須執行這些額外步驟，因此最後存取時間更新會產生效能影響：
+
+* 使用新時間戳記更新物件
+* 將物件新增至 ILM 佇列，以便根據目前的 ILM 規則和原則重新評估它們。
+
+
+表格總結了停用或啟用上次存取時間時，套用於儲存桶中所有物件的行為。
+
+[cols="1a,1a,1a,1a,1a"]
+|===
+
+
+.2+| ${post_edited_translations.segment} 2+| 如果停用上次存取時間（預設），則行為 2+| 啟用上次存取時間後的行為 
+
+
+| 最後存取時間已更新？ | 物件已新增至 ILM 評估佇列？ | 最後存取時間已更新？ | 物件已新增至 ILM 評估佇列？ 
+
+
+ a| 
+發出 HEAD 操作時，請求擷取物件的中繼資料
+ a| 
+否
+ a| 
+否
+ a| 
+否
+ a| 
+否
+
+
+
+ a| 
+請求擷取物件、其存取控制清單或其中繼資料
+ a| 
+否
+ a| 
+否
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+請求更新物件的中繼資料
+ a| 
+是的
+ a| 
+是的
+ a| 
+是的
+ a| 
+是的
+
+
+
+ a| 
+請求列出物件或物件版本
+ a| 
+否
+ a| 
+否
+ a| 
+否
+ a| 
+否
+
+
+
+ a| 
+請求將物件從一個儲存桶複製到另一個儲存桶。
+ a| 
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+ a| 
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+ a| 
+* 是的，對於來源複本
+* ${post_edited_translations.segment}
+
+ a| 
+* 是的，對於來源複本
+* ${post_edited_translations.segment}
+
+
+
+
+ a| 
+請求完成多部分上傳
+ a| 
+是的，對於組裝好的物件
+ a| 
+是的，對於組裝好的物件
+ a| 
+是的，對於組裝好的物件
+ a| 
+是的，對於組裝好的物件
+
+|===
+.步驟
+. ${post_edited_translations.segment}
+. 從表格中選擇儲存桶名稱。
++
+顯示儲存桶詳細資料頁面。
+
+. 從「Bucket options」索引標籤中，選擇「Last access time updates」折疊選單。
+. 啟用或停用上次存取時間更新。
+. 選擇 *Save changes* 。
+

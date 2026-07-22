@@ -1,0 +1,69 @@
+---
+permalink: admin/viewing-network-traffic-metrics.html 
+sidebar: sidebar 
+keywords: network traffic, traffic classification policy, monitor traffic 
+summary: 您可以透過檢視流量分類原則頁面上的圖表來監控網路流量。 
+---
+= 在 StorageGRID 中檢視網路流量指標
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以透過檢視流量分類原則頁面上的圖表來監控網路流量。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您擁有 link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.關於此任務
+對於任何現有的網路流量分類原則，您可以檢視負載平衡器服務的計量，以確定該原則是否成功限制整個網路的網路流量。圖表中的資料可以協助您確定是否需要調整原則。
+
+${post_edited_translations.segment}
+
+.步驟
+. 選擇 *組態* > *網路* > *流量分類*。
++
+${post_edited_translations.segment}
+
+. 選擇要檢視計量的流量分類原則名稱。
+. 選擇*計量*索引標籤。
++
+隨即顯示網路流量分類原則圖表。圖表僅會顯示符合所選原則之網路流量的計量。
+
++
+頁面上包含以下圖表。
+
++
+** 要求速率：此圖表提供所有負載平衡器處理且符合此原則的頻寬量。接收的資料包含所有要求的要求標頭，以及具有主體資料之回應的主體資料大小。傳送的資料包含所有要求的回應標頭，以及在回應中包含主體資料之要求的回應主體資料大小。
++
+
+NOTE: 請求完成後，此圖表僅顯示頻寬使用量。對於速度較慢或物件較大的請求，實際瞬時頻寬可能與此圖表中顯示的值有所不同。
+
+** 錯誤回應率：此圖表顯示符合此原則的請求向用戶端傳回錯誤（HTTP 狀態碼 >= 400）的大致速率。
+** ${post_edited_translations.segment}
+** 原則頻寬使用量：此圖表提供所有負載平衡器處理的符合此原則的頻寬使用量。接收資料包括所有要求的要求標頭，以及含有本文資料的回應之本文資料大小。傳送資料包括所有要求的回應標頭，以及回應中含有本文資料的要求之回應本文資料大小。
+
+
+. ${post_edited_translations.segment}
+. 在「計量」標題下方選擇 *Grafana dashboard*，即可檢視原則的所有圖表。除了「計量」標籤中的四個圖表外，您還可以檢視另外兩個圖表：
++
+** 按物件大小劃分的寫入請求速率：符合此原則的 PUT/POST/DELETE 請求的速率。在單一儲存格上定位可顯示每秒速率。懸停檢視中顯示的速率會截斷為整數計數，當儲存桶中存在非零請求時，速率可能報告 0。
+** 以物件大小劃分的讀取請求速率：符合此原則的 GET/HEAD 請求的速率。懸停在單一儲存格上顯示每秒速率。懸停檢視中顯示的速率會截斷為整數計數，當儲存桶中存在非零請求時，速率可能報告 0。
+
+
+. ${post_edited_translations.segment}
++
+.. 選擇 *Support* > *Tools* > *Metrics*。
+.. 從 *Grafana* 部分選擇 *Traffic Classification Policy*。
+.. 請從頁面左上角的選單中選擇原則。
+.. ${post_edited_translations.segment}
++
+流量分類原則是透過其 ID 進行識別。原則 ID 會列在「流量分類原則」頁面上。
+
+
+
+. 分析圖表，確定原則限制流量的頻率，以及是否需要調整原則。
+

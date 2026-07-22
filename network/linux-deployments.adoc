@@ -1,0 +1,140 @@
+---
+permalink: network/linux-deployments.html 
+sidebar: sidebar 
+keywords: linux network, container engine, red hat enterprise linux network, rhel network, ubuntu network 
+summary: 為了提高效率、可靠性與安全性，StorageGRID 系統在 Linux 上以 Container 引擎集合的形式執行。StorageGRID 系統中不需要進行與 Container 引擎相關的網路組態。 
+---
+= StorageGRID Linux 部署的網路配置
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+為了提高效率、可靠性與安全性，StorageGRID 系統在 Linux 上以 Container 引擎集合的形式執行。StorageGRID 系統中不需要進行與 Container 引擎相關的網路組態。
+
+將非連結裝置（例如 VLAN 或虛擬乙太網路（veth）對）用於 Container 網路介面。在節點組態檔案中將此裝置指定為網路介面。
+
+
+CAUTION: 請勿直接將 bond 或橋接裝置用作 Container 網路介面。這樣做可能會因為在 Container 命名空間中將 macvlan 與 bond 和橋接裝置搭配使用時的核心問題，而導致節點無法啟動。
+
+請參閱 link:../swnodes/index.html["${post_edited_translations.segment}"]。
+
+
+
+[[host-network-configuration-for-container-engine-deployments]]
+== ${post_edited_translations.segment}
+
+在 Container 引擎平台上開始部署 StorageGRID 之前，請先確定每個節點將使用哪些網路（Grid、Admin、Client）。您必須確保每個節點的網路介面都設定在正確的虛擬或實體主機介面上，且每個網路都有足夠的頻寬。
+
+
+
+[[physical-hosts]]
+=== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 請確保所有主機針對每個節點介面使用相同的主機介面。此策略可簡化主機組態，並支援未來的節點移轉。
+* ${post_edited_translations.segment}
++
+
+NOTE: 主機上的實體介面可供主機本身以及執行在該主機上的一個或多個節點使用。指派給使用此介面的主機或節點的任何 IP 位址都必須是唯一的。主機和節點不能共享 IP 位址。
+
+* 開啟主機所需的連接埠。
+* 如果您打算在 StorageGRID 中使用 VLAN 介面，則主機必須具有一個或多個主幹介面，以提供對所需 VLAN 的存取。這些介面可以作為 eth0、eth2 或附加介面傳遞到節點 Container 中。若要新增主幹或存取介面，請參閱以下內容：
++
+** *Linux （安裝節點之前）*: link:../swnodes/creating-node-configuration-files.html["建立節點組態檔"]
+** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+
+
+
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+
+
+[[minimum-bandwidth-recommendations]]
+=== 最低頻寬建議
+
+下表列出每種 StorageGRID 節點類型和每種網路類型的最低 LAN 頻寬建議。您必須為每個實體或虛擬主機配置足夠的網路頻寬，以滿足您計劃在該主機上執行的 StorageGRID 節點總數和類型的彙總最低頻寬需求。
+
+[cols="1a,1a,1a,1a"]
+|===
+| ${post_edited_translations.segment} 3+| 網路類型 
+
+
+ a| 
+ a| 
+${post_edited_translations.segment}
+ a| 
+管理員
+ a| 
+用戶端
+
+
+
+ a| 
+ a| 
+*最低區域網路頻寬*
+
+
+
+ a| 
+管理員
+ a| 
+10 Gbps
+ a| 
+1 Gbps
+ a| 
+1 Gbps
+
+
+
+ a| 
+閘道
+ a| 
+10 Gbps
+ a| 
+1 Gbps
+ a| 
+10 Gbps
+
+
+
+ a| 
+儲存
+ a| 
+10 Gbps
+ a| 
+1 Gbps
+ a| 
+10 Gbps
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+10 Gbps
+ a| 
+1 Gbps
+ a| 
+10 Gbps
+
+|===
+
+NOTE: 此表未包含 SAN 頻寬，而 SAN 頻寬是存取共享儲存設備所必需的。如果您使用透過乙太網路（iSCSI 或 FCoE）存取的共享儲存設備，則應在每台主機上資源配置分隔的實體介面，以提供足夠的 SAN 頻寬。為避免瓶頸，給定主機的 SAN 頻寬應大致與執行在該主機上的所有儲存節點的彙總儲存節點網路頻寬相符。
+
+根據您計劃在該主機上執行的 StorageGRID 節點數量和類型，使用下表確定每個主機上所需佈建的最小網路介面數量。
+
+${post_edited_translations.segment}
+
+* 在管理節點上連接網格網路和管理網路（需要 10 + 1 = 11 Gbps）
+* 在閘道節點上連接網格和用戶端網路（需要 10 + 10 = 20 Gbps）
+* ${post_edited_translations.segment}
+
+
+在這種情況下，您應該提供至少 11 + 20 + 10 = 41 Gbps 的網路頻寬，這可以透過兩個 40 Gbps 介面或五個 10 Gbps 介面來滿足，這些介面可以聚合到中繼線中，然後由三個或更多 VLAN 共享，這些 VLAN 承載包含主機的實體資料中心本地的 Grid、Admin 和 Client 子網路。
+
+如需在 StorageGRID 叢集中的主機上設定實體與網路資源以準備進行 StorageGRID 部署的一些建議方法，請參閱 link:../swnodes/configuring-host-network.html["${post_edited_translations.segment}"]。

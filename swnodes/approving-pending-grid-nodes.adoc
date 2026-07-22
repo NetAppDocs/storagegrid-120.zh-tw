@@ -1,0 +1,135 @@
+---
+permalink: swnodes/approving-pending-grid-nodes.html 
+sidebar: sidebar 
+keywords: how to approve pending grid nodes 
+summary: 每個網格節點必須經過您的批准才能參加 StorageGRID 系統。 
+---
+= 批准 StorageGRID 的待處理網格節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+每個網格節點必須經過您的批准才能參加 StorageGRID 系統。
+
+.開始之前
+您已部署所有虛擬和 StorageGRID 應用裝置網格節點。
+
+
+NOTE: 一次性安裝所有節點，比分批安裝更有效率。
+
+.步驟
+. 查看待處理節點列表，並確認其中顯示了您部署的所有網格節點。
++
+
+NOTE: 如果缺少網格節點，請確認已成功部署，並且已將主要管理節點的正確 Grid Network IP 位址設定為 ADMIN_IP。
+
+. 選擇要核准的待處理節點旁的單選按鈕。
++
+image:5_gmi_installer_grid_nodes_pending.gif["這張映像由周圍的文字進行解釋。"]
+
+. 按一下 * 核准 * 。
+. 在「一般設定」中，視需要修改下列屬性的設定：
++
+** *站點*：此網格節點的站點系統名稱。
+** *名稱*：節點的系統名稱。名稱預設為您在設定節點時指定的名稱。
++
+系統名稱是 StorageGRID 內部作業所必需的，安裝完成後無法變更。但是，在此安裝步驟中，您可以根據需要變更系統名稱。
+
++
+
+NOTE: 對於 VMware 節點，您可以在此處變更名稱，但此行動不會變更 vSphere 中虛擬機器的名稱。
+
+** *NTP 角色*：網格節點的網路時間協定 (NTP) 角色。選項包括*自動*、*主要*和*用戶端*。選擇*自動*會將主要角色指派給管理節點、具有 ADC 服務的儲存節點、閘道節點，以及任何具有非靜態 IP 位址的網格節點。所有其他網格節點均會被指派用戶端角色。
++
+
+CAUTION: 確保每個站台至少有兩個節點可以存取至少四個外部 NTP 來源。如果一個站台只有一個節點可以存取 NTP 來源，那麼一旦該節點發生故障，就會出現時間問題。此外，如果站台與網格其他部分隔離，則將每個站台的兩個節點指定為主要 NTP 來源可確保時間的準確性。
+
+** *儲存類型*（僅限儲存節點）：指定新的儲存節點僅用於資料、僅用於中繼資料，或兩者兼有。選項包括 *Data and metadata*（「combined」）、*Data only* 和 *Metadata only*。
++
+
+CAUTION: 請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"] 以取得這些節點類型的需求相關資訊。
+
+** *ADC 服務*（僅限儲存節點）：選擇「自動」選項，讓系統自動判斷節點是否需要管理網域控制站 (ADC) 服務。ADC 服務用於追蹤網格服務的位置和可用度。每個站台至少需要三個儲存節點啟用 ADC 服務。節點部署後，無法再新增 ADC 服務。
+
+
+. 在 Grid Network 中，視需要修改下列屬性的設定：
++
+** *IPv4 位址（CIDR）*：網格網路介面（Container 內的 eth0）的 CIDR 網路位址。例如：192.168.1.234/21
+** *閘道*：網格網路閘道。例如：192.168.0.1
++
+如果有多個網格子網路，則需要閘道。
+
++
+
+NOTE: 如果您在網格網路組態中選擇了 DHCP，並且在此處變更了值，則新值將設定為節點上的靜態位址。您必須確保已設定的 IP 位址不在 DHCP 位址資源池中。
+
+
+
+. 如果要為網格節點設定管理網路，請視需要在管理網路區段中新增或更新設定。
++
+在「子網路 (CIDR)」文字方塊中輸入從此介面發出的路由的目的地子網路。如果有多個管理子網路，則需要管理閘道。
+
++
+
+NOTE: 如果您在管理網路組態中選擇了 DHCP，並且在此處變更了值，則新值將設定為節點上的靜態位址。您必須確保已設定的 IP 位址不在 DHCP 位址資源池中。
+
++
+*應用裝置：* 對於 StorageGRID 應用裝置，如果在初始安裝期間未使用 StorageGRID Appliance Installer 設定管理網路，則無法在此 Grid Manager 對話方塊中進行設定。您必須改為執行下列步驟：
+
++
+.. 重新啟動應用裝置：在 Appliance Installer 中，選擇 *Advanced* > *Reboot*。
++
+重啟可能需要幾分鐘。
+
+.. 選擇 *Configure Networking* > *Link Configuration*，然後啟用對應的網路。
+.. 選擇 *Configure Networking* > *IP Configuration*，然後設定已啟用的網路。
+.. 返回首頁，然後按一下 *Start Installation*。
+.. 在 Grid Manager 中：如果節點列在已核准節點表中，請移除該節點。
+.. 從待處理節點表中移除該節點。
+.. 等待節點重新出現在待處理節點清單中。
+.. 請確認您可以設定對應的網路。這些網路應該已經填入了您在應用裝置安裝程式的「IP 組態」頁面上提供的資訊。
++
+如需更多資訊，請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["硬體安裝快速入門"^]以找到您的應用裝置說明。
+
+
+
+. 如果要為網格節點設定用戶端網路，請視需要新增或更新用戶端網路區段中的設定。設定用戶端網路後，閘道為必要項目，且在安裝後將成為節點的預設閘道。
++
+
+NOTE: 如果您在用戶端網路組態中選擇了 DHCP，並且在此處變更了值，則新值將設定為節點上的靜態位址。您必須確保已設定的 IP 位址不在 DHCP 位址集區內。
+
++
+*應用裝置：* 對於 StorageGRID 應用裝置，如果在初始安裝期間未使用 StorageGRID Appliance Installer 設定用戶端網路，則無法在此 Grid Manager 對話方塊中進行設定。您必須改為執行下列步驟：
+
++
+.. 重新啟動應用裝置：在 Appliance Installer 中，選擇 *Advanced* > *Reboot*。
++
+重啟可能需要幾分鐘。
+
+.. 選擇 *Configure Networking* > *Link Configuration*，然後啟用對應的網路。
+.. 選擇 *Configure Networking* > *IP Configuration*，然後設定已啟用的網路。
+.. 返回首頁，然後按一下 *Start Installation*。
+.. 在 Grid Manager 中：如果節點列在已核准節點表中，請移除該節點。
+.. 從待處理節點表中移除該節點。
+.. 等待節點重新出現在待處理節點清單中。
+.. 請確認您可以設定對應的網路。這些網路應該已經填入了您在應用裝置安裝程式的「IP 組態」頁面上提供的資訊。
++
+如需更多資訊，請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["硬體安裝快速入門"^]以找到您的應用裝置說明。
+
+
+
+. 按一下 *Save* 。
++
+網格節點項目移至已核准節點清單。
+
++
+image:7_gmi_installer_grid_nodes_approved.gif["這張映像由周圍的文字進行解釋。"]
+
+. ${post_edited_translations.segment}
++
+您必須批准網格中所有要新增的節點。不過，您可以在點擊「摘要」頁面上的 *Install* 之前隨時返回此頁面。您可以選擇單選按鈕並點擊 *Edit* 來修改已核准網格節點的屬性。
+
+. 批准網格節點完成後，按一下「下一步」。
+

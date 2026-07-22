@@ -1,0 +1,166 @@
+---
+permalink: swnodes/automating-installation-linux.html 
+sidebar: sidebar 
+keywords: how to automate linux installation 
+summary: 您可以自動安裝 StorageGRID 主機服務並設定 Linux 上的網格節點。 
+---
+= 在 Linux 系統上自動安裝 StorageGRID 主機服務並設定網格節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以自動化安裝 StorageGRID 主機服務並設定網格節點。
+
+.關於此任務
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+在以下任何情況下，自動化部署都可能很有用：
+
+* 您已經在使用標準協調架構（例如 Ansible、Puppet 或 Chef）來部署和設定實體主機或虛擬主機。
+* 您計劃部署多個 StorageGRID 執行個體。
+* 您正在部署一個大型、複雜的 StorageGRID 執行個體。
+
+
+StorageGRID 主機服務透過軟體包安裝，並由組態檔驅動。您可以使用下列方法之一建立組態檔：
+
+* link:creating-node-configuration-files.html["建立組態檔"]在手動安裝過程中進行互動式操作。
+* 提前（或透過程式設計方式）準備組態檔案，以便使用標準協調架構實現自動化安裝，如本文所述。
++
+StorageGRID 提供選購的 Python 指令碼，用於自動化設定 StorageGRID 設備和整個 StorageGRID 系統（「網格」）。您可以直接使用這些指令碼，也可以查看它們，學習如何在您自己開發的網格部署和組態工具中使用 link:overview-of-installation-rest-api.html["StorageGRID 安裝 REST API"]。
+
+
+
+
+
+[[automate-the-installation-and-configuration-of-the-storagegrid-host-service]]
+== 自動化安裝及設定 StorageGRID 主機服務
+
+您可以使用 Ansible、Puppet、Chef、Fabric 或 SaltStack 等標準協調架構自動化安裝 StorageGRID 主機服務。
+
+StorageGRID 主機服務以 DEB（Ubuntu 或 Debian）或 RPM（RHEL）套件的形式封裝，並由組態檔驅動。您可以預先準備這些組態檔（或透過程式設計方式準備），以實現自動化安裝。如果您已使用標準協調架構來安裝和設定 Linux 部署，將 StorageGRID 新增至您的 playbook 或 recipe 應相當簡單。
+
+您可以自動化準備主機和部署虛擬網格節點的所有步驟。
+
+
+
+[[example-ansible-role-and-playbook]]
+=== Ansible 角色和劇本範例
+
+安裝套件歸檔 `/extras`資料夾中提供了範例 Ansible 角色和 playbook。這個 Ansible playbook 示範了 `storagegrid`角色如何準備主機並將 StorageGRID 安裝到目標伺服器上。您可以根據需要自訂角色或 playbook。
+
+
+NOTE: 範例腳本不包含在啟動 StorageGRID 主機服務之前建立網路裝置所需的步驟。請在完成並使用腳本之前新增這些步驟。
+
+[role="tabbed-block"]
+====
+.RHEL
+--
+對於 RHEL，提供的 `storagegrid`角色範例中的安裝任務使用 `ansible.builtin.dnf`模組從本機 RPM 檔案或遠端 Yum 儲存庫執行安裝。如果該模組無法使用或不受支援，您可能需要編輯以下檔案中的相應 Ansible 任務，以使用 `yum`或 `ansible.builtin.yum`模組：
+
+* `roles/storagegrid/tasks/rhel_install_from_repo.yml`
+* `roles/storagegrid/tasks/rhel_install_from_local.yml`
+
+
+--
+.${post_edited_translations.segment}
+--
+對於 Ubuntu 或 Debian 系統，提供的 `storagegrid`角色範例中的安裝任務使用 `ansible.builtin.apt`模組從本機 DEB 檔案或遠端 apt 儲存庫執行安裝。如果該模組無法使用或不受支援，您可能需要編輯以下檔案中的相應 Ansible 任務，以使用 `ansible.builtin.apt`模組：
+
+* `roles/storagegrid/tasks/deb_install_from_repo.yml`
+* `roles/storagegrid/tasks/deb_install_from_local.yml`
+
+
+--
+====
+
+
+[[automate-the-configuration-of-storagegrid]]
+== 自動化 StorageGRID 的組態
+
+部署網格節點後，即可自動化設定 StorageGRID 系統。
+
+.開始之前
+* 您知道安裝封存中以下檔案的位置。
++
+[cols="1a,1a"]
+|===
+| 檔案名稱 | 說明 
+
+
+| configure-storagegrid.py  a| 
+用於自動化組態的 Python 指令碼
+
+
+
+| configure-storagegrid.sample.json  a| 
+用於指令碼的範例組態檔案
+
+
+
+| configure-storagegrid.blank.json  a| 
+用於指令碼的空白組態檔案
+
+|===
+* 您已建立 `configure-storagegrid.json`組態檔案。若要建立此檔案，您可以修改範例組態檔案(`configure-storagegrid.sample.json`）或空白組態檔案(`configure-storagegrid.blank.json`）。
+
+
+
+CAUTION: 請將修改後的 `configure-storagegrid.json`組態檔案中密碼部分的管理密碼和佈建密碼短語儲存在安全的位置。這些密碼是安裝、擴充和維護程序所必需的。您也應該備份修改後的 `configure-storagegrid.json`組態檔案，並將其儲存在安全的位置。
+
+.關於此任務
+您可以使用 `configure-storagegrid.py` Python 指令碼和 `configure-storagegrid.json`組態檔案來自動化 StorageGRID 系統的組態。
+
+
+NOTE: 您也可以使用 Grid Manager 或安裝 API 來設定系統。
+
+.步驟
+. 登入您用於執行 Python 指令碼的 Linux 機器。
+. 切換到您解壓縮安裝封存檔的目錄。
++
+例如：
+
++
+[listing]
+----
+cd StorageGRID-Webscale-version/platform
+----
++
+其中 `platform`是 `debs`、 `rpms`或 `vsphere`。
+
+. 執行 Python 指令碼並使用您建立的組態檔案。
++
+例如：
+
++
+[listing]
+----
+./configure-storagegrid.py ./configure-storagegrid.json --start-install
+----
+
+
+.結果
+A Recovery Package `.zip` 檔案會在組態過程中產生，並下載至您執行安裝和組態程序的目錄中。您必須備份此 Recovery Package 檔案，以便在一個或多個網格節點發生故障時能夠恢復 StorageGRID 系統。例如，將其複製到安全的備份網路位置以及安全的雲端儲存位置。
+
+
+CAUTION: 復原套件檔案必須受到保護，因為它包含可用於從 StorageGRID 系統取得資料的加密金鑰和密碼。
+
+如果您指定要產生隨機密碼，請開啟 `Passwords.txt`檔案，並尋找存取 StorageGRID 系統所需的密碼。
+
+[listing]
+----
+######################################################################
+##### The StorageGRID "Recovery Package" has been downloaded as: #####
+#####           ./sgws-recovery-package-994078-rev1.zip          #####
+#####   Safeguard this file as it will be needed in case of a    #####
+#####                 StorageGRID node recovery.                 #####
+######################################################################
+----
+當顯示確認訊息時，您的 StorageGRID 系統即已安裝並設定完成。
+
+[listing]
+----
+StorageGRID has been configured and installed.
+----

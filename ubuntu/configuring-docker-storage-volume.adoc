@@ -1,0 +1,8 @@
+---
+permalink: ubuntu/configuring-docker-storage-volume.html 
+redirect: storagegrid/swnodes/configuring-docker-storage-volume.html 
+---
+= 
+:allow-uri-read: 
+
+

@@ -1,0 +1,62 @@
+---
+permalink: troubleshoot/troubleshooting-metadata-issues.html 
+sidebar: sidebar 
+keywords: how to troubleshoot metadata issues 
+summary: 如果出現中繼資料問題，系統會發出警報，告知您問題來源以及建議採取的措施。特別是，如果觸發「中繼資料儲存設備不足」警報，您必須新增新的 Storage Node。 
+---
+= 疑難排解 StorageGRID 中的中繼資料問題
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果出現中繼資料問題，系統會發出警報，告知您問題來源以及建議採取的措施。特別是，如果觸發「中繼資料儲存設備不足」警報，您必須新增新的 Storage Node。
+
+.開始之前
+您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+
+.關於此任務
+請按照觸發的每個中繼資料相關警報的建議行動執行。如果觸發了「中繼資料儲存設備不足」警報，則必須新增儲存節點。
+
+StorageGRID 會在每個儲存節點的 Volume 0 上預留一定空間用於物件中繼資料。這個空間稱為「實際預留空間」，又細分為用於物件中繼資料的空間（允許的中繼資料空間），以及資料庫基本操作（例如資料精簡和修理）所需的空間。允許的中繼資料空間決定了物件的整體容量。
+
+image:metadata_allowed_space_volume_0.png["中繼資料允許空間 Volume 0"]
+
+如果物件中繼資料使用的空間超過允許中繼資料空間的 100%，資料庫作業將無法有效率地執行，並且會發生錯誤。
+
+您可以link:../monitor/monitoring-storage-capacity.html#monitor-object-metadata-capacity-for-each-storage-node["監控每個儲存節點的物件中繼資料容量"]幫助您預見錯誤並在錯誤發生前予以修正。
+
+StorageGRID 使用以下 Prometheus 計量來衡量允許的中繼資料空間的使用程度：
+
+[listing]
+----
+storagegrid_storage_utilization_metadata_bytes/storagegrid_storage_utilization_metadata_allowed_bytes
+----
+當此 Prometheus 表示式達到某些閾值時，將觸發「中繼資料儲存設備不足」警報。
+
+* *次要*：物件中繼資料已使用 70% 或以上的允許中繼資料空間。您應盡快新增新的儲存節點。
+* *Major*：物件中繼資料已使用 90% 或以上的允許中繼資料空間。您必須立即新增新的儲存節點。
++
+
+CAUTION: 當物件中繼資料使用了允許中繼資料空間的 90% 或更多時，儀表板上會顯示警告。如果出現此警告，您必須立即新增新的儲存節點。物件中繼資料所佔用的空間絕對不能超過允許空間的 100%。
+
+* *關鍵*：物件中繼資料已使用 100% 或以上的允許中繼資料空間，並開始使用資料庫基本操作所需的空間。您必須停止擷取新物件，並立即新增新的儲存節點。
+
+
+
+CAUTION: 如果 Volume 0 的大小小於中繼資料保留空間儲存設備選項（例如，在非正式作業環境中），則「低中繼資料儲存設備」警示的計算可能不準確。
+
+.步驟
+. 選擇 *Alerts* > *Current*。
+. 從警報表中，視需要展開「中繼資料儲存空間不足」警報群組，然後選取要檢視的特定警報。
+. 請查看警告對話方塊中的詳細資訊。
+. 如果觸發了重大或關鍵的「中繼資料儲存空間不足」警報，請立即執行擴充以新增儲存節點。
++
+
+NOTE: 由於 StorageGRID 在每個站台保留所有物件中繼資料的完整複本，因此整個網格的中繼資料容量受限於最小站台的中繼資料容量。如果需要為某個站台增加中繼資料容量，則也應link:../expand/adding-grid-nodes-to-existing-site-or-adding-new-site.html["擴充任何其他網站"]相同數量的儲存節點。
+
++
+擴充完成後，StorageGRID 會將現有物件中繼資料重新指派到新節點，進而提高網格的整體中繼資料容量。無需使用者行動。*中繼資料儲存設備不足*警示已清除。
+
+

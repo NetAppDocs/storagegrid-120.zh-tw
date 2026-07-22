@@ -1,0 +1,99 @@
+---
+permalink: fabricpool/creating-ha-group-for-fabricpool.html 
+sidebar: sidebar 
+keywords: fabricPool, StorageGRID, high availability group, HA group, create, creating, virtual IP, VIP, active interface, backup interface 
+summary: 設定 StorageGRID 以搭配 FabricPool 使用時，您可以選擇性地建立一個或多個高可用度 （HA） 群組。HA 群組是包含 StorageGRID 負載平衡服務的節點集合。HA 群組可以包含閘道節點、管理節點或兩者。 
+---
+= 在 StorageGRID 中為 FabricPool 建立高可用性（HA）群組
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+設定 StorageGRID 以搭配 FabricPool 使用時，您可以選擇性地建立一個或多個高可用度 （HA） 群組。HA 群組是包含 StorageGRID 負載平衡服務的節點集合。HA 群組可以包含閘道節點、管理節點或兩者。
+
+您可以使用 HA 群組來確保 FabricPool 資料連線的可用性。HA 群組使用虛擬 IP 位址 （VIP） 為負載平衡器服務提供高可用度的存取。如果 HA 群組中的作用中介面發生故障，備份介面可以管理工作負載，對 FabricPool 作業的影響微乎其微。
+
+如需此工作的詳細資訊，請參閱 link:../admin/managing-high-availability-groups.html["管理高可用度群組"]。若要使用 FabricPool 設定精靈來完成此工作，請前往 link:use-fabricpool-setup-wizard-steps.html["存取並完成 FabricPool 設定精靈"]。
+
+.開始之前
+* 您已審閱 link:best-practices-for-high-availability-groups.html["高可用度群組的最佳實務做法"]。
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 如果您打算使用 VLAN，則需要建立 VLAN 介面。請參閱link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]。
+
+
+.步驟
+. 選擇 *Configuration* > *Network* > *High availability groups*。
+. 選擇 *Create* 。
+. ${post_edited_translations.segment}
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+HA 組名
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+此 HA 群組的執行摘要。
+
+|===
+. 在「新增介面」步驟中，選擇要在此 HA 群組中使用的節點介面。
++
+${post_edited_translations.segment}
+
++
+您可以選擇一個或多個節點，但每個節點只能選擇一個介面。
+
+. 在「排列介面優先順序」步驟中，確定此 HA 群組的主要介面和任何備份介面。
++
+拖曳列以變更*優先順序*欄中的值。
+
++
+清單中的第一個介面是主要介面。除非發生故障，否則主要介面為作用中介面。
+
++
+如果高可用性 (HA) 群組包含多個介面，且目前活動介面發生故障，則虛擬 IP (VIP) 位址會依優先順序轉移到第一個備份介面。如果該介面也發生故障，則 VIP 位址會轉移到下一個備份介面，依此類推。故障解決後，VIP 位址會回到優先順序最高的可用介面。
+
+. 在「輸入 IP 位址」步驟中，請填寫以下欄位。
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+子網路 CIDR
+ a| 
+${post_edited_translations.segment}
+
+網路位址不得設定任何主機位元。例如  `192.16.0.0/22`。
+
+
+
+ a| 
+閘道 IP 位址（可選）
+ a| 
+選用。如果用於存取 StorageGRID 的 ONTAP IP 位址與 StorageGRID VIP 位址不在同一子網路中，請輸入 StorageGRID VIP 本機閘道 IP 位址。本機閘道 IP 位址必須位於 VIP 子網路內。
+
+
+
+ a| 
+虛擬 IP 位址
+ a| 
+請為 HA 群組中的作用中介面輸入至少一個且不超過十個 IP 位址。所有 IP 位址都必須在 VIP 子網路內。
+
+至少有一個位址必須是 IPv4。您可以選擇性指定其他 IPv4 和 IPv6 位址。
+
+|===
+. 選擇 *Create HA group*，然後選擇 *Finish*。
+

@@ -1,0 +1,116 @@
+---
+permalink: s3/using-server-side-encryption.html 
+sidebar: sidebar 
+keywords: server side encryption, encryption, operations on objects, objects 
+summary: 伺服器端加密可以保護您的靜態物件資料。StorageGRID 在寫入物件時會對資料進行加密，並在您存取物件時對資料進行解密。 
+---
+= StorageGRID 如何使用伺服器端加密
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+伺服器端加密可以保護您的靜態物件資料。StorageGRID 在寫入物件時會對資料進行加密，並在您存取物件時對資料進行解密。
+
+如果要使用伺服器端加密，可以根據加密金鑰的管理方式，選擇兩種互斥的選項之一：
+
+* *SSE（使用 StorageGRID 管理的金鑰進行伺服器端加密）*：當您發出 S3 請求以儲存物件時，StorageGRID 會使用唯一金鑰對該物件進行加密。當您發出 S3 請求以擷取物件時，StorageGRID 會使用儲存的金鑰來解密該物件。
+* *SSE-C（使用客戶提供的金鑰進行伺服器端加密）*：當您向 S3 發出儲存物件的請求時，您需要提供自己的加密金鑰。當您擷取物件時，您需要在請求中提供相同的加密金鑰。如果兩個加密金鑰相符，則物件將被解密並傳回您的物件資料。
++
+StorageGRID 管理所有物件加密和解密作業，但您必須管理您提供的加密金鑰。
+
++
+
+CAUTION: 您提供的加密金鑰永遠不會儲存。如果您遺失了加密金鑰，您也會遺失對應的物件。
+
++
+
+NOTE: 如果物件使用 SSE 或 SSE-C 加密，則任何儲存桶層級或網格層級的加密設定都會被忽略。
+
+
+
+
+
+[[use-sse]]
+== 使用 SSE
+
+若要使用 StorageGRID 管理的唯一金鑰加密物件，請使用下列請求標頭：
+
+`x-amz-server-side-encryption`
+
+以下物件操作支援 SSE 請求標頭：
+
+* link:put-object.html["PutObject"]
+* link:put-object-copy.html["CopyObject"]
+* link:initiate-multipart-upload.html["CreateMultipartUpload"]
+
+
+
+
+[[use-sse-c]]
+== 使用 SSE-C
+
+若要使用您管理的唯一金鑰加密物件，您需要使用三個請求標頭：
+
+[cols="1a,2a"]
+|===
+| 要求標頭 | 說明 
+
+
+ a| 
+`x-amz-server-side​-encryption​-customer-algorithm`
+ a| 
+指定加密演算法。標頭值必須為 `AES256`。
+
+
+
+ a| 
+`x-amz-server-side​-encryption​-customer-key`
+ a| 
+指定用於加密或解密物件的加密金鑰。金鑰值必須為 256 位元，並採用 base64 編碼。
+
+
+
+ a| 
+`x-amz-server-side​-encryption​-customer-key-MD5`
+ a| 
+根據 RFC 1321 規範，指定加密金鑰的 MD5 摘要，用於確保加密金鑰傳輸無誤。MD5 摘要的值必須採用 Base64 編碼，長度為 128 位元。
+
+|===
+以下物件操作支援 SSE-C 請求標頭：
+
+* link:get-object.html["GetObject"]
+* link:head-object.html["HeadObject"]
+* link:put-object.html["PutObject"]
+* link:put-object-copy.html["CopyObject"]
+* link:initiate-multipart-upload.html["CreateMultipartUpload"]
+* link:upload-part.html["UploadPart"]
+* link:upload-part-copy.html["UploadPartCopy"]
+
+
+
+
+[[considerations-for-using-server-side-encryption-with-customer-provided-keys-sse-c]]
+== 使用客戶提供的金鑰進行伺服器端加密 （SSE-C） 的注意事項
+
+使用 SSE-C 之前，請注意以下事項：
+
+* 您必須使用 https。
++
+
+CAUTION: StorageGRID 在使用 SSE-C 時會拒絕所有透過 http 傳送的請求。出於安全性考慮，如果您不小心使用 http 傳送了金鑰，則應將其視為已洩露。請丟棄該金鑰，並視情況進行輪換。
+
+* 回應中的 ETag 不是物件資料的 MD5 值。
+* 您必須管理加密金鑰到物件的對應。StorageGRID 不儲存加密金鑰。您有責任追蹤您為每個物件提供的加密金鑰。
+* 如果您的儲存桶啟用了版本控制，則每個物件版本都應該有自己的加密金鑰。您有責任追蹤每個物件版本所使用的加密金鑰。
+* 因為加密金鑰是在用戶端管理的，所以任何其他安全措施（例如金鑰輪換）也必須在用戶端管理。
++
+
+CAUTION: 您提供的加密金鑰永遠不會儲存。如果您遺失了加密金鑰，您也會遺失對應的物件。
+
+* 如果儲存桶已設定跨網格複寫或 CloudMirror 複寫，則無法擷取 SSE-C 物件。擷取作業將會失敗。
+
+
+.相關資訊
+https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html["Amazon S3 使用者指南：使用客戶提供的金鑰進行伺服器端加密 （SSE-C）"^]

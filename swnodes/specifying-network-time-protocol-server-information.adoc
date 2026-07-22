@@ -1,0 +1,47 @@
+---
+permalink: swnodes/specifying-network-time-protocol-server-information.html 
+sidebar: sidebar 
+keywords: how to specify Network Time Protocol server information 
+summary: 您必須為 StorageGRID 系統指定網路時間協定 （NTP） 組態資訊，以便在分隔伺服器上執行的作業能夠保持同步。 
+---
+= 指定 StorageGRID 的網路時間協定伺服器資訊
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您必須為 StorageGRID 系統指定網路時間協定 （NTP） 組態資訊，以便在分隔伺服器上執行的作業能夠保持同步。
+
+.關於此任務
+您必須為 NTP 伺服器指定 IPv4 位址。
+
+您必須指定外部 NTP 伺服器。指定的 NTP 伺服器必須使用 NTP 協定。
+
+您必須指定四個 Stratum 3 或更高等級的 NTP 伺服器參考，以防止時間漂移問題。
+
+[NOTE]
+====
+為生產級 StorageGRID 安裝指定外部 NTP 來源時，請勿使用 Windows Server 2016 之前的 Windows 版本上的 Windows 時間 （W32Time） 服務。早期 Windows 版本上的時間服務精確度不足，且 Microsoft 不支援在 StorageGRID 等高精度環境中使用。
+
+https://support.microsoft.com/en-us/help/939322/support-boundary-to-configure-the-windows-time-service-for-high-accura["${post_edited_translations.segment}"^]
+
+====
+外部 NTP 伺服器供您先前指派了主要 NTP 角色的節點使用。
+
+
+CAUTION: 確保每個站台至少有兩個節點可以存取至少四個外部 NTP 來源。如果一個站台只有一個節點可以存取 NTP 來源，那麼一旦該節點發生故障，就會出現時間問題。此外，如果站台與網格其他部分隔離，則將每個站台的兩個節點指定為主要 NTP 來源可確保時間的準確性。
+
+（僅限 VMware）對 VMware 執行額外的檢查，例如確保 Hypervisor 使用與虛擬機器相同的 NTP 來源，並使用 VMTools 停用 Hypervisor 和 StorageGRID 虛擬機器之間的時間同步。
+
+.步驟
+. 在 *伺服器 1* 到 *伺服器 4* 文字方塊中指定至少四個 NTP 伺服器的 IPv4 位址。
+. 如有必要，請選擇最後一個條目旁邊的加號以新增其他伺服器條目。
++
+image:8_gmi_installer_ntp_page.gif["這張映像由周圍的文字進行解釋。"]
+
+. 選擇 *Next* 。
+
+
+.相關資訊
+link:../network/index.html["${post_edited_translations.segment}"]

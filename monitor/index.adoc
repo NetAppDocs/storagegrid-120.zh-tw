@@ -1,0 +1,46 @@
+---
+permalink: monitor/index.html 
+sidebar: sidebar 
+keywords: monitor StorageGRID 
+summary: 定期監控您的 StorageGRID 系統，以確保其能如預期運作。 
+---
+= 監控 StorageGRID 系統
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+定期監控您的 StorageGRID 系統，以確保其能如預期運作。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+
+NOTE: 若要變更 Grid Manager 中顯示的儲存設備值的單位，請選擇 Grid Manager 右上角的使用者下拉式選單，然後選擇 *User preferences*。
+
+.關於此任務
+這些說明描述如何：
+
+* link:viewing-dashboard.html["檢視及管理儀表板"]
+* link:viewing-nodes-page.html["檢視節點頁面"]
+* link:information-you-should-monitor-regularly.html["定期監控系統的下列幾個方面："]
++
+** link:monitoring-system-health.html["系統健全狀況"]
+** link:monitoring-storage-capacity.html["儲存容量"]
+** link:monitoring-information-lifecycle-management.html["資訊生命週期管理"]
+** link:monitoring-network-connections-and-performance.html["網路和系統資源"]
+** link:monitoring-tenant-activity.html["租戶活動"]
+** link:monitoring-load-balancing-operations.html["負載平衡操作"]
+** link:grid-federation-monitor-connections.html["網格同盟連線"]
+
+
+* link:managing-alerts.html["管理警報"]
+* link:logs-files-reference.html["檢視日誌檔"]
+* link:configure-log-management.html["${post_edited_translations.segment}"]
+* link:considerations-for-external-syslog-server.html["使用外部 syslog 伺服器"]收集稽核資訊
+* link:using-snmp-monitoring.html["使用 SNMP 進行監控"]
+* link:manage-io-prioritization.html["變更 I/O 優先權"]變更 I/O 作業的相對優先順序
+

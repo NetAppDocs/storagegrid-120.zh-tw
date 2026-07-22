@@ -1,0 +1,57 @@
+---
+permalink: tenant/viewing-and-editing-group-details.html 
+sidebar: sidebar 
+keywords: how to view and edit group 
+summary: 檢視群組的詳細資訊時，您可以變更群組的顯示名稱、權限、原則以及屬於該群組的使用者。 
+---
+= 在 StorageGRID 中檢視及編輯租戶群組詳細資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+檢視群組的詳細資訊時，您可以變更群組的顯示名稱、權限、原則以及屬於該群組的使用者。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您所屬的使用者群組擁有 Root 存取權限。
+
+
+.步驟
+. 選擇 *Access Management* > *Groups*。
+. 選擇要檢視或編輯其詳細資訊的群組的名稱。
++
+或者，您可以選擇 *Actions* > *View group details*。
+
++
+此時會顯示群組詳情頁面。以下範例展示了 S3 群組詳情頁面。
+
++
+image:tenant_group_details.png["檢視群組詳細資料"]
+
+. 視需要變更群組設定。
++
+
+TIP: 若要確保變更儲存，請在每部分變更完成後選擇 *Save changes*。變更儲存後，頁面右上角會顯示確認訊息。
+
++
+.. （可選）選擇顯示名稱或編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"] 以更新顯示名稱。
++
+您無法變更群組的唯一名稱。您無法編輯聯合群組的顯示名稱。
+
+.. （可選）更新權限。
+.. 對於群組原則，請為您的 S3 租戶進行相應的變更。
++
+*** 如果您正在編輯 S3 租戶的群組，可以選擇不同的 S3 群組原則。如果您選擇自訂 S3 原則，請視需要更新 JSON 字串。
+
+
+.. （可選）新增或移除使用者。
+
+
+. 請確認您已為修改的每個部分選擇「儲存變更」。
+
+
+.相關資訊
+* link:creating-groups-for-s3-tenant.html["為 S3 租戶建立群組"]
+

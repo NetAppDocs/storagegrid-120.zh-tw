@@ -1,0 +1,233 @@
+---
+permalink: admin/configuring-custom-server-certificate-for-storage-node.html 
+sidebar: sidebar 
+keywords: global S3 API certificate 
+summary: 您可以替換或還原用於 S3 用戶端連線至儲存節點或負載平衡器端點的伺服器憑證。替換後的自訂伺服器憑證專屬於您的組織。 
+---
+= 在 StorageGRID 中設定 S3 API 憑證
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以替換或還原用於 S3 用戶端連線至儲存節點或負載平衡器端點的伺服器憑證。替換後的自訂伺服器憑證專屬於您的組織。
+
+
+TIP: 此版本的文件網站已移除 Swift 相關細節。請參閱 https://docs.netapp.com/us-en/storagegrid-118/admin/configuring-custom-server-certificate-for-storage-node.html["${post_edited_translations.segment}"^]。
+
+.關於此任務
+預設情況下，每個 Storage Node 都會獲發由網格 CA 簽署的 X.509 伺服器憑證。這些 CA 簽署的憑證可以替換為單一常用的自訂伺服器憑證和對應的私密金鑰。
+
+所有 Storage Nodes 均使用單一自訂伺服器憑證，因此，如果用戶端在連線至儲存設備端點時需要驗證主機名稱，則必須將該憑證指定為萬用字元憑證或多網域憑證。請定義自訂憑證，使其與網格中的所有 Storage Nodes 相符。
+
+在伺服器上完成組態後，您可能還需要在用於存取系統的 S3 API 用戶端中安裝 Grid CA 憑證，具體取決於您使用的根憑證授權單位 (CA)。
+
+
+NOTE: 為確保伺服器憑證失效不會中斷運行，當根目錄伺服器憑證即將過期時，系統會觸發「S3 API 全域伺服器憑證即將過期」警報。如有需要，您可以透過選取「組態」>「安全性」>「憑證」，然後在「全域」標籤上查看 S3 API 憑證的到期日期，來檢視目前憑證的到期時間。
+
+您可以上傳或產生自訂 S3 API 憑證。
+
+
+
+[[add-a-custom-s3-api-certificate]]
+== ${post_edited_translations.segment}
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 選擇 *Use custom certificate*。
+. 上傳或產生憑證。
++
+[role="tabbed-block"]
+====
+.上傳證書
+--
+上傳所需的伺服器憑證檔案。
+
+.. 選擇 *Upload certificate*。
+.. 上傳所需的伺服器憑證檔案：
++
+*** ${post_edited_translations.segment}
+*** *憑證私鑰*：自訂伺服器憑證私鑰檔案 (`.key`）
++
+
+NOTE: EC 私鑰必須至少 224 位元。RSA 私鑰必須至少 2048 位元。
+
+*** *CA 套裝組合*：包含來自每個中介發行憑證授權單位憑證的單一選用檔案。此檔案應包含每個 PEM 編碼的 CA 憑證檔案，並依憑證鏈順序串聯。
+
+
+.. 選取憑證詳細資料，以顯示已上傳之每個自訂 S3 API 憑證的中繼資料與 PEM。如果您上傳了選用的 CA 套裝組合，每個憑證都會顯示在各自的索引標籤上。
++
+*** ${post_edited_translations.segment}
++
+指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
+
++
+例如： `storagegrid_certificate.pem`
+
+*** 選擇「複製憑證 PEM」或「複製 CA 套裝組合 PEM」以複製憑證內容並貼上到其他位置。
+
+
+.. 選取 *Save* 。
++
+自訂伺服器憑證用於後續新的 S3 用戶端連線。
+
+
+
+--
+.產生證書
+--
+產生伺服器憑證檔案。
+
+.. 選擇 *Generate certificate*。
+.. 請提供憑證資訊：
++
+[cols="1a,3a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+網域名稱
+ a| 
+要包含在憑證中的一或多個完整網域名稱。使用 * 做為萬用字元來代表多個網域名稱。
+
+
+
+ a| 
+IP
+ a| 
+憑證中要包含的一個或多個 IP 位址。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+X.509 憑證擁有者的主旨或可分辨名稱 (DN)。
+
+如果此欄位中未輸入任何值，則產生的憑證將使用第一個網域名稱或 IP 位址作為主旨通用名稱 (CN)。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+如果選取（預設且建議），則會將金鑰用途和擴充金鑰用途擴充功能新增至產生的憑證。
+
+這些擴充定義了憑證中包含的金鑰的用途。
+
+${post_edited_translations.segment}
+
+|===
+.. 選擇 *Generate* 。
+.. ${post_edited_translations.segment}
++
+*** 選取 *Download certificate* 以儲存憑證檔案。
++
+指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
+
++
+例如： `storagegrid_certificate.pem`
+
+*** 選擇 *Copy certificate PEM* 以複製憑證內容並貼到其他位置。
+
+
+.. 選取 *Save* 。
++
+自訂伺服器憑證用於後續新的 S3 用戶端連線。
+
+
+
+--
+====
+. ${post_edited_translations.segment}
++
+
+NOTE: ${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
+. 新增自訂 S3 API 憑證後，S3 API 憑證頁面會顯示目前使用中自訂 S3 API 憑證的詳細憑證資訊。+ 您可以根據需要下載或複製憑證 PEM。
+
+
+
+
+[[restore-the-default-s3-api-certificate]]
+== ${post_edited_translations.segment}
+
+您可以回復使用預設的 S3 API 憑證來建立 S3 用戶端與儲存節點的連線。但是，您不能將預設的 S3 API 憑證用於負載平衡器端點。
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+當您還原全域 S3 API 憑證的預設版本時，您設定的自訂伺服器憑證檔案將會被刪除，且無法從系統中復原。預設的 S3 API 憑證將用於後續與儲存節點的新 S3 用戶端連線。
+
+. ${post_edited_translations.segment}
++
+如果您擁有根目錄存取權限，並且使用了自訂 S3 API 憑證來連接負載平衡器端點，則會顯示負載平衡器端點清單，這些端點將無法再使用預設 S3 API 憑證存取。請前往 link:../admin/configuring-load-balancer-endpoints.html["設定負載平衡器端點"] 編輯或移除受影響的端點。
+
+. ${post_edited_translations.segment}
+
+
+
+
+[[download-or-copy-the-s3-api-certificate]]
+== ${post_edited_translations.segment}
+
+您可以儲存或複製 S3 API 憑證內容以供其他地方使用。
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+[role="tabbed-block"]
+====
+.下載憑證檔案或 CA 套裝組合
+--
+下載憑證或 CA 套裝組合 `.pem`檔案。如果您使用的是選用的 CA 套裝組合，則套裝組合中的每個憑證都會顯示在各自的子索引標籤中。
+
+.. 選擇「下載憑證」或「下載 CA 套裝組合」。
++
+如果您正在下載 CA 套裝組合，則 CA 套裝組合二級標籤中的所有憑證將下載為單一檔案。
+
+.. 指定憑證檔案名稱和下載位置。以副檔名 `.pem`儲存檔案。
++
+例如： `storagegrid_certificate.pem`
+
+
+
+--
+.複製憑證或 CA 套裝組合 PEM
+--
+複製憑證文字以貼到其他地方。如果您使用的是選用 CA 套裝組合，套裝組合中的每個憑證都會顯示在各自的子索引標籤上。
+
+.. 選擇「複製憑證 PEM」或「複製 CA 套裝組合 PEM」。
++
+如果您要複製 CA 套裝組合，則 CA 套裝組合次要標籤中的所有憑證都會一起複製。
+
+.. 將複製的憑證貼到文字編輯器中。
+.. 將文字檔案以副檔名 `.pem`儲存。
++
+例如： `storagegrid_certificate.pem`
+
+
+
+--
+====
+
+
+.相關資訊
+* link:../s3/index.html["使用 S3 REST API"]
+* link:configuring-s3-api-endpoint-domain-names.html["設定 S3 端點網域名稱"]
+

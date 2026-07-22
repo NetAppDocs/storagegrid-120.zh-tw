@@ -1,0 +1,52 @@
+---
+permalink: admin/editing-traffic-classification-policy.html 
+sidebar: sidebar 
+keywords: edit traffic classification policy 
+summary: 您可以編輯流量分類原則，變更其名稱或執行摘要，或建立、編輯或刪除該原則的任何規則或限制。 
+---
+= 編輯 StorageGRID 流量分類原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以編輯流量分類原則，變更其名稱或執行摘要，或建立、編輯或刪除該原則的任何規則或限制。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.步驟
+. 選擇 *組態* > *網路* > *流量分類*。
++
+「流量分類原則」頁面隨即出現，現有原則以表格形式列出。
+
+. 使用「動作」功能表或詳細資料頁面編輯原則。請參閱 link:../admin/creating-traffic-classification-policies.html["建立流量分類原則"] 以了解輸入內容。
++
+[role="tabbed-block"]
+====
+.操作選單
+--
+.. 選取該原則的核取方塊。
+.. 選取 *Actions* > *Edit*。
+
+
+--
+.詳細資料頁面
+--
+.. 選擇原則名稱。
+.. 選擇原則名稱旁的「編輯」按鈕。
+
+
+--
+====
+. 在「輸入原則名稱」步驟中，您可以選擇編輯原則名稱或執行摘要，然後選取*繼續*。
+. 在「新增符合規則」步驟中，您可以選擇新增規則或編輯現有規則的「類型」和「符合值」，然後選擇「繼續」。
+. 在「設定限制」步驟中，您可以選擇新增、編輯或刪除限制，然後選取 *Continue*。
+. 審查更新後的原則，然後選擇「儲存並繼續」。
++
+您對原則所做的變更已儲存，網路流量現在將根據流量分類原則進行處理。您可以檢視流量圖表，並驗證原則是否正在執行您預期的流量限制。
+
+

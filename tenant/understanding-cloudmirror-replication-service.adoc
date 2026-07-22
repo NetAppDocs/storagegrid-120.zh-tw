@@ -1,0 +1,67 @@
+---
+permalink: tenant/understanding-cloudmirror-replication-service.html 
+sidebar: sidebar 
+keywords: cloudmirror replication 
+summary: 如果您希望 StorageGRID 將新增至 S3 儲存桶中的指定物件複寫到一個或多個目的地儲存桶，則可以為 S3 儲存桶啟用 CloudMirror 複寫功能。 
+---
+= 了解 StorageGRID CloudMirror 複製服務
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您希望 StorageGRID 將新增至 S3 儲存桶中的指定物件複寫到一個或多個外部目的地儲存桶，則可以為 S3 儲存桶啟用 CloudMirror 複寫功能。
+
+例如，您可以使用 CloudMirror 複寫將特定客戶記錄鏡射到 Amazon S3，然後運用 AWS 服務對您的資料執行分析。
+
+
+NOTE: CloudMirror 如果來源儲存桶已啟用 S3 Object Lock，則不支援複寫。
+
+
+
+[[cloudmirror-and-ilm]]
+== CloudMirror 與 ILM
+
+CloudMirror 複寫獨立於網格的作用中 ILM 原則運作。CloudMirror 服務會在物件儲存至來源儲存桶時複寫物件，並盡快將其傳送至目的地儲存桶。複寫物件的傳送會在物件擷取成功後觸發。
+
+
+
+[[cloudmirror-and-cross-grid-replication]]
+== CloudMirror 以及跨網格複寫
+
+CloudMirror 複寫與跨網格複寫功能有重要的相似之處，也有不同之處。請參閱 link:../admin/grid-federation-compare-cgr-to-cloudmirror.html["比較跨網格複寫和 CloudMirror 複寫"]。
+
+
+
+[[cloudmirror-and-s3-buckets]]
+== CloudMirror 和 S3 儲存桶
+
+CloudMirror 複寫通常設定為使用外部 S3 儲存桶作為目的地。但是，您也可以設定複寫以使用另一個 StorageGRID 部署或任何與 S3 相容的服務。
+
+現有儲存桶:: 為現有儲存桶啟用 CloudMirror 複寫時，只有新增至該儲存桶的新物件才會被複寫。儲存桶中已存在的任何物件都不會被複寫。若要強制複寫現有物件，可以透過執行物件複本來更新現有物件的中繼資料。
++
+--
+
+NOTE: 如果您使用 CloudMirror 複寫將物件複寫至 Amazon S3 目的地，請注意 Amazon S3 將每個 PUT 請求標頭中使用者定義的中繼資料大小限制為 2 KB。如果物件的使用者定義中繼資料大於 2 KB，則該物件將不會被複寫。
+
+--
+多個目的地儲存桶:: 若要將單一儲存桶中的物件複寫到多個目的地儲存桶，請在複寫組態 XML 中為每個規則指定目的地。您不能同時將一個物件複寫到多個儲存桶。
+版本化或非版本化儲存桶:: 您可以在版本化或非版本化儲存桶上設定 CloudMirror 複寫。目的地儲存桶可以是版本化儲存桶，也可以是非版本化儲存桶。您可以任意組合使用版本化儲存桶和非版本化儲存桶。例如，您可以將版本化儲存桶指定為非版本化來源儲存桶的目的地，反之亦然。您也可以在非版本化儲存桶之間複寫。
+
+
+
+
+[[deletion-replication-loops-and-events]]
+== 刪除、複寫循環和事件
+
+刪除行為:: 這與 Amazon S3 服務的跨區域複寫 （CRR） 的刪除行為相同。在來源儲存桶中刪除物件不會刪除目的地中已複寫的物件。如果來源和目的地儲存桶都啟用了版本控制，則刪除標記會被複寫。如果目的地儲存桶未啟用版本控制，則在來源儲存桶中刪除物件不會將刪除標記複寫到目的地儲存桶，也不會刪除目的地儲存桶中的物件。
+防止複寫循環:: 當物件複寫到目的地儲存桶時，StorageGRID 會將其標記為「複本」。目的地 StorageGRID 儲存桶不會再次複寫標記為複本的物件，從而避免意外的複寫迴圈。此複本標記是 StorageGRID 的內部機制，不會妨礙您在使用 Amazon S3 儲存桶作為目的地時利用 AWS CRR。
++
+--
+
+NOTE: 用於標記複本的自訂標頭是 `x-ntap-sg-replica`。此標記可防止串聯鏡射。StorageGRID 確實支援兩個網格之間的雙向 CloudMirror。
+
+--
+目的地儲存桶中的事件:: 目的地儲存桶中事件的唯一性和順序無法保證。為了確保交付成功，可能會向目的地交付多個相同的來源物件複本。在極少數情況下，當同一物件同時從兩個或多個不同的 StorageGRID 站點更新時，目的地儲存桶上的操作順序可能與來源儲存桶上的事件順序不一致。
+

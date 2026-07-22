@@ -1,0 +1,218 @@
+---
+permalink: audit/spos-s3-post.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, SPOS, S3 POST 
+summary: 當 S3 用戶端發出 POST Object 請求時，如果交易成功，伺服器將發出此訊息。 
+---
+= StorageGRID 中 S3 POST 交易的 SPOS 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當 S3 用戶端發出 POST Object 請求時，如果交易成功，伺服器將發出此訊息。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+CBID
+ a| 
+內容區塊識別碼
+ a| 
+所要求內容區塊的唯一識別碼。如果 CBID 未知，此欄位會設定為 0。
+
+
+
+ a| 
+CNCH
+ a| 
+一致性控制標頭
+ a| 
+如果請求中存在 Consistency-Control HTTP 請求標頭，則該請求標頭的值即為 Consistency-Control 的值。
+
+
+
+ a| 
+CNID
+ a| 
+連線識別碼
+ a| 
+TCP/IP 連線的唯一系統識別碼。
+
+
+
+ a| 
+CSIZ
+ a| 
+內容大小
+ a| 
+擷取的物件大小（以位元組為單位）。
+
+
+
+ a| 
+HTRH
+ a| 
+HTTP 請求標頭
+ a| 
+在組態期間選擇的已記錄 HTTP 請求標頭名稱和值清單。
+
+ `X-Forwarded-For`如果請求中存在該欄位，且 `X-Forwarded-For`值與請求發送方 IP 位址（SAIP 稽核欄位）不同，則會自動包含該欄位。
+
+（SPOS 不適用）。
+
+
+
+ a| 
+RSLT
+ a| 
+結果代碼
+ a| 
+RestoreObject 請求結果。結果始終為：
+
+SUCS：成功
+
+
+
+ a| 
+S3AI
+ a| 
+S3 租戶帳戶 ID （請求傳送者）
+ a| 
+發送請求的使用者租戶帳戶 ID。空值表示匿名存取。
+
+
+
+ a| 
+S3AK
+ a| 
+S3 存取金鑰 ID（請求傳送者）
+ a| 
+傳送請求的使用者的雜湊 S3 存取金鑰 ID。空值表示匿名存取。
+
+
+
+ a| 
+S3BK
+ a| 
+S3 Bucket
+ a| 
+S3 儲存桶名稱。
+
+
+
+ a| 
+S3KY
+ a| 
+S3 金鑰
+ a| 
+S3 金鑰名稱，不包含儲存桶名稱。對儲存桶的操作不涉及此欄位。
+
+
+
+ a| 
+S3SR
+ a| 
+S3 子資源
+ a| 
+如果適用，則為正在操作的儲存貯體或物件子資源。
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+S3 租戶帳戶名稱（要求傳送者）
+ a| 
+傳送請求之使用者的租戶帳戶名稱。匿名請求時為空白。
+
+
+
+ a| 
+SAIP
+ a| 
+IP 位址（請求傳送方）
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+SBAC
+ a| 
+S3 租戶帳戶名稱（儲存桶擁有者）
+ a| 
+儲存桶擁有者的租戶帳戶名稱。用於識別跨帳戶或匿名存取。
+
+
+
+ a| 
+SBAI
+ a| 
+S3 租戶帳戶 ID （儲存桶擁有者）
+ a| 
+目標儲存桶擁有者的租戶帳戶 ID。用於識別跨帳戶或匿名存取。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+子資源組態
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+SUSR
+ a| 
+S3 使用者 URN（請求傳送方）
+ a| 
+租戶帳戶 ID 和發出請求的使用者名稱。使用者可以是本機使用者或 LDAP 使用者。例如： `urn:sgws:identity::03393893651506583485:root`
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+時間
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+TLIP
+ a| 
+可信任負載平衡器 IP 位址
+ a| 
+如果請求是由受信任的第 7 層負載平衡器路由，則為負載平衡器的 IP 位址。
+
+
+
+ a| 
+UUID
+ a| 
+通用唯一識別符
+ a| 
+StorageGRID 系統中物件的識別碼。
+
+
+
+ a| 
+VSID
+ a| 
+版本 ID
+ a| 
+所請求物件的特定版本的版本 ID。對儲存桶和未版本化儲存桶中的物件執行的操作不包含此欄位。
+
+|===

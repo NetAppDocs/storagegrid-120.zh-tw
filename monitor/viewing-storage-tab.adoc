@@ -1,0 +1,40 @@
+---
+permalink: monitor/viewing-storage-tab.html 
+sidebar: sidebar 
+keywords: storage tab 
+summary: 「儲存」標籤匯總了儲存可用度和其他儲存設備計量。 
+---
+= 檢視 StorageGRID 儲存選項卡
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+「儲存」標籤匯總了儲存可用度和其他儲存設備計量。
+
+「儲存」標籤會顯示所有節點、每個站台和整個網格。
+
+
+
+[[storage-used-graphs]]
+== ${post_edited_translations.segment}
+
+對於儲存節點、每個站台和整個網格，「儲存」標籤包含圖表，顯示物件資料和物件中繼資料隨時間推移使用了多少儲存設備。
+
+
+NOTE: 當節點未連線至網格時（例如在升級期間或處於中斷連線狀態），某些計量可能無法使用，或未計入站台和網格總數中。節點重新連線至網格後，請等待幾分鐘以使數值穩定。
+
+image:nodes_storage_node_storage_tab.png["節點 > 儲存節點 > 儲存索引標籤"]
+
+
+
+[[disk-devices-volumes-and-object-stores-tables]]
+== 磁碟設備、Volume 和物件儲存表
+
+對於所有節點，「儲存」標籤包含節點上磁碟設備和 Volume 的詳細資訊。對於儲存節點，「物件儲存」表提供每個儲存 Volume 的相關資訊。
+
+image:nodes_page_storage_tables.png["節點頁儲存表"]
+
+.相關資訊
+link:monitoring-storage-capacity.html["${post_edited_translations.segment}"]

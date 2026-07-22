@@ -1,0 +1,8 @@
+---
+permalink: rhel/index.html 
+redirect: storagegrid/swnodes/index.html 
+---
+= 
+:allow-uri-read: 
+
+

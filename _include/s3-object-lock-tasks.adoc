@@ -1,0 +1,38 @@
+= 
+:allow-uri-read: 
+
+
+以下清單包含網格系統管理員和租戶使用者使用 S3 Object Lock 功能的高階工作。
+
+網格系統管理員::
++
+--
+* ${post_edited_translations.segment}
+* 確保資訊生命週期管理 (ILM) 原則符合法規；也就是說，它們符合 link:../ilm/managing-objects-with-s3-object-lock.html["${post_edited_translations.segment}"]。
+* 如有需要，允許租戶使用 Compliance 作為保留模式。否則，僅允許使用 Governance 模式。
+* ${post_edited_translations.segment}
+
+
+--
+租戶使用者::
++
+--
+* 檢閱啟用 S3 Object Lock 的儲存桶和物件的注意事項。
+* 如有需要，請聯絡網格系統管理員啟用全域 S3 Object Lock 設定並設定權限。
+* ${post_edited_translations.segment}
+* （可選）設定儲存貯體的預設保留設定：
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+
+
+* 使用 S3 用戶端應用程式新增物件，並可選擇設定物件特定的保留：
++
+** 保留模式。治理或法規遵循（如果網格系統管理員允許）。
+** 保留至日期：必須小於或等於網格系統管理員設定的最大保留期間所允許的日期。
+
+
+
+
+--
+

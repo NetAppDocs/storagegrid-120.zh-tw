@@ -1,0 +1,123 @@
+---
+permalink: maintain/shutting-down-grid-node.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, node shutdown, shut down node, node shut down 
+summary: ${post_edited_translations.segment} 
+---
+= 關閉 StorageGRID 節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以從節點的命令 shell 關閉網格節點。
+
+.開始之前
+* 您擁有  `Passwords.txt` 檔案。
+
+
+.關於此任務
+${post_edited_translations.segment}
+
+* 一般而言，為避免中斷，不應同時關閉多個節點。
+* 除非文件或技術支援明確指示，否則請勿在維護程序期間關閉節點。
+* ${post_edited_translations.segment}
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** 關閉 StorageGRID 應用裝置節點會關閉運算控制器。
+
+
+* ${post_edited_translations.segment}
++
+如果任何 ILM 規則使用 *雙重提交* 擷取選項（或如果規則使用 *平衡* 選項且無法立即建立所有必需的副本），StorageGRID 會立即將所有新擷取的物件提交到同一網格上的兩個儲存節點，並在稍後評估 ILM。如果網格上的多個儲存節點關閉，則在關閉期間您可能無法存取新擷取的物件。如果站台上剩餘的可用儲存節點過少，寫入作業也可能會失敗。請參閱 link:../ilm/index.html["使用 ILM 管理物件"]。
+
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 請輸入以下命令： `ssh admin@_grid_node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+. 停止所有服務： `service servermanager stop`
++
+服務關閉可能需要長達 15 分鐘的時間，您可能需要遠端登入系統來監控關閉過程。
+
+. 如果節點在 VMware 虛擬機器上執行，或是應用裝置節點，請發出 shutdown 命令： `shutdown -h now`
++
+無論  `service servermanager stop` 命令的結果如何，請執行此步驟。
+
++
+
+NOTE: 在應用裝置節點上下達  `shutdown -h now` 命令之後，您必須將應用裝置關閉電源並重新開啟，以重新啟動節點。
+
++
+對於該應用裝置，此命令會關閉控制器，但應用裝置仍處於通電狀態。您必須完成下一步操作。
+
+. 如果要關閉應用裝置節點，請按照您的應用裝置的步驟操作。
++
+[role="tabbed-block"]
+====
+.SG6160
+--
+.. ${post_edited_translations.segment}
+.. 等待 SG6100-CN 儲存控制器上的藍色電源 LED 熄滅。
+
+
+--
+.SGF6112
+--
+.. 關閉應用裝置的電源。
+.. 等待藍色電源指示燈熄滅。
+
+
+--
+.SG6000
+--
+.. ${post_edited_translations.segment}
++
+當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
+
+.. ${post_edited_translations.segment}
+
+
+--
+.SG5800
+--
+.. ${post_edited_translations.segment}
++
+當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
+
+.. 從 SANtricity System Manager 的首頁，選擇「檢視正在進行的動作」。
+.. 請確認所有操作均已完成，然後再進行下一步。
+.. ${post_edited_translations.segment}
+
+
+--
+.SG5700
+--
+.. ${post_edited_translations.segment}
++
+當快取資料需要寫入磁碟機時，此 LED 就會亮起。您必須等待此 LED 熄滅，然後才能關閉電源。
+
+.. 關閉應用裝置的電源，並等待所有 LED 和七段數位管顯示活動停止。
+
+
+--
+.SG100 或 SG1000
+--
+.. 關閉應用裝置的電源。
+.. 等待藍色電源指示燈熄滅。
+
+
+--
+====
+

@@ -1,0 +1,49 @@
+---
+permalink: audit/gted-grid-task-ended.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, GTED, Grid Task Ended 
+summary: 此稽核訊息表示 CMN 服務已完成指定網格工作的處理，並將該工作移至歷史表。如果結果為 SUCS、ABRT 或 ROLF，則會產生對應的「網格工作已啟動」稽核訊息。其他結果表示此網格工作的處理從未啟動。 
+---
+= StorageGRID 中已結束網格工作的 GTED 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+此稽核訊息表示 CMN 服務已完成指定網格工作的處理，並將該工作移至歷史表。如果結果為 SUCS、ABRT 或 ROLF，則會產生對應的「網格工作已啟動」稽核訊息。其他結果表示此網格工作的處理從未啟動。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+TSID
+ a| 
+工作 ID
+ a| 
+此欄位可唯一識別所產生的網格工作，並允許在網格工作的生命週期內對其進行管理。
+
+*注意：* 工作 ID 是在產生網格工作時指派的，而不是在提交時指派的。同一個網格工作可能被提交多次，在這種情況下，工作 ID 欄位不足以唯一連結「已提交」、「已開始」和「已結束」稽核訊息。
+
+
+
+ a| 
+RSLT
+ a| 
+結果
+ a| 
+網格工作的最終狀態結果：
+
+* SUCS：網格工作已成功完成。
+* ABRT：網格工作已終止，未出現回溯錯誤。
+* ROLF：網格工作已終止，無法完成回溯程序。
+* CANC：使用者在網格工作開始前取消了該工作。
+* EXPR：網格工作在啟動前已過期。
+* IVLD：網格工作無效。
+* AUTH：網格工作未經授權。
+* DUPL：網格工作因重複而被拒絕。
+
+
+|===

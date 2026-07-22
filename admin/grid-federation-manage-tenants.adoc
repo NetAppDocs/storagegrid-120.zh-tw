@@ -1,0 +1,216 @@
+---
+permalink: admin/grid-federation-manage-tenants.html 
+sidebar: sidebar 
+keywords: grid federation, manage tenant, use grid federation permission, remove permission, cross grid replication 
+summary: 您可以允許 S3 租戶帳戶使用兩個 StorageGRID 系統之間的網格聯合連線。如果允許租戶使用連線，則需要執行特殊步驟才能編輯租戶詳細資料或永久移除租戶使用該連線的權限。 
+---
+= 管理 StorageGRID 網格聯盟的允許租戶
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以允許 S3 租戶帳戶使用兩個 StorageGRID 系統之間的網格聯合連線。如果允許租戶使用連線，則需要執行特殊步驟才能編輯租戶詳細資料或永久移除租戶使用該連線的權限。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入任一網格上的 Grid Manager。
+* 您擁有link:admin-group-permissions.html["${post_edited_translations.segment}"]您目前登入的網格的權限。
+* 您位於link:grid-federation-create-connection.html["建立網格聯盟連線"]兩個網格之間。
+* 您已檢閱 link:grid-federation-what-is-account-clone.html["帳戶 Clone"] 與 link:grid-federation-what-is-cross-grid-replication.html["${post_edited_translations.segment}"] 的工作流程。
+* 根據需求，您已為連線中的兩個網格設定單一登入（SSO）或身分識別同盟。請參閱 link:grid-federation-what-is-account-clone.html["什麼是帳戶 Clone"]。
+
+
+
+
+[[create-a-permitted-tenant]]
+== 建立允許的租戶
+
+如果您希望允許新的或現有的租戶帳戶使用網格聯合連線進行帳戶 Clone 和跨網格複寫，請按照一般說明 link:creating-tenant-account.html["${post_edited_translations.segment}"] 或 link:editing-tenant-account.html["${post_edited_translations.segment}"]，並注意以下事項：
+
+* 您可以從連線中的任一網格建立租戶。建立租戶的網格稱為該租戶的來源網格。
+* 連線狀態必須為「已連線」。
+* 當在第一個網格中建立或編輯租戶以啟用 *Use grid federation connection* 權限並儲存後，相同的租戶會自動複寫到另一個網格。租戶複寫至的網格即為該租戶的_目的地網格_。
+* 兩個網格上的租戶將具有相同的 20 位數帳戶 ID、名稱、執行摘要、配額和權限。您也可以選擇使用「執行摘要」欄位來協助識別哪個是來源租戶，哪一個是目的地租戶。例如，在網格 1 上建立的租戶的執行摘要也會顯示在複製到網格 2 的租戶中："此租戶是在網格 1 上建立的。"
+* 基於安全性考量，本機 root 使用者的密碼不會複製到目的地網格。
++
+
+TIP: 在本機 root 使用者可以登入目的地網格上的複寫租戶之前，該網格的網格系統管理員必須 link:changing-password-for-tenant-local-root-user.html["更改本機 root 使用者的密碼"]。
+
+* 在新租戶或編輯後的租戶同時出現在兩個網格中之後，租戶使用者可以執行以下操作：
++
+** 從租戶的來源網格建立群組和本地使用者，這些群組和使用者會自動 Clone 到租戶的目的地網格。請參閱 link:../tenant/grid-federation-account-clone.html["Clone 租戶群組和使用者"]。
+** 建立新的 S3 存取金鑰，其可選擇性地 Clone 到租戶的目的地網格。請參閱 link:../tenant/grid-federation-clone-keys-with-api.html["使用 API Clone S3 存取金鑰"]。
+** 在連線中的兩個網格上建立相同的儲存貯體，並啟用單向或雙向的跨網格複寫。請參閱 link:../tenant/grid-federation-manage-cross-grid-replication.html["管理跨網格複寫"]。
+
+
+
+
+
+
+[[view-a-permitted-tenant]]
+== 檢視獲准租戶
+
+${post_edited_translations.segment}
+
+.步驟
+. 選擇*租戶*。
+. 在「租戶」頁面中，選擇租戶名稱以檢視租戶詳細資料頁面。
++
+如果這是租戶的來源網格（即，如果租戶是在此網格上建立的），則會顯示橫幅，提醒您該租戶已 Clone 到另一個網格。如果您編輯或刪除此租戶，您的變更將不會同步到另一個網格。
+
++
+image:grid-federation-tenant-detail.png["${post_edited_translations.segment}"]
+
+. （可選）選擇 *Grid federation* 索引標籤以 link:../monitor/grid-federation-monitor-connections.html["${post_edited_translations.segment}"]。
+
+
+
+
+[[edit-a-permitted-tenant]]
+== 編輯已獲許可的租戶
+
+如果您需要編輯具有 *使用網格同盟連線* 權限的租戶，請遵循 link:editing-tenant-account.html["${post_edited_translations.segment}"] 的一般說明，並注意以下事項：
+
+* 如果租戶具有 *Use grid federation connection* 權限，您可以從連線中的任一網格編輯租戶詳細資料。然而，您所做的任何變更將不會複製到另一個網格。如果您想在網格之間保持租戶詳細資料同步，則必須在兩個網格上進行相同的編輯。
+* 編輯租戶時，無法清除「使用網格聯合連線」權限。
+* ${post_edited_translations.segment}
+
+
+
+
+[[delete-a-permitted-tenant]]
+== 刪除已獲許可的租戶
+
+如果您需要移除擁有「使用網格聯合連線」權限的租戶，請按照一般說明操作 link:deleting-tenant-account.html["${post_edited_translations.segment}"]，並附註以下事項：
+
+* 在移除來源網格上的原始租戶之前，必須先移除來源網格上該帳戶的所有儲存桶。
+* 在目的地網格上移除 Clone 租戶之前，必須先移除目的地網格上該帳戶的所有儲存桶。
+* 如果移除原始租戶或 Clone 租戶，則帳戶將無法再用於跨網格複寫。
+* 如果您要移除來源網格上的原始租戶，則複製到目的地網格的任何租戶群組、使用者或金鑰將不受影響。您可以刪除複製的租戶，或允許其管理自己的群組、使用者、存取金鑰和貯體。
+* ${post_edited_translations.segment}
++
+為避免這些錯誤，請在從該網格中刪除租戶之前，移除租戶使用網格同盟連線的權限。
+
+
+
+
+
+[[remove-grid-federation-connection-permissionremove-use-grid-federation-connection-permission]]
+== ${post_edited_translations.segment}
+
+若要防止租戶使用網格同盟連線，您必須移除「使用網格同盟連線」權限。
+
+image:grid-federation-remove-permission.png["移除網格同盟連線的步驟"]
+
+在移除租戶使用網格聯合連線的權限之前，請注意以下事項：
+
+* 如果租戶的任何儲存桶已啟用跨網格複寫，則無法移除 *Use grid federation connection* 權限。租戶帳戶必須先為其所有儲存桶停用跨網格複寫。
+* 移除「使用網格同盟連線」權限不會刪除已在網格之間複寫的任何項目。例如，當移除租戶的權限時，存在於兩個網格上的任何租戶使用者、群組和物件都不會從任何一個網格中刪除。如果您想要刪除這些項目，您必須手動從兩個網格中將其刪除。
+* ${post_edited_translations.segment}
+
+
+
+NOTE: 重新啟用「使用網格同盟連線」權限後，本機網格將成為來源網格，並觸發 Clone 至所選網格同盟連線指定的遠端網格。如果租戶帳戶已存在於遠端網格中，則 Clone 將導致衝突錯誤。
+
+.開始之前
+* 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
+* 您已擁有兩個網格的 link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+
+
+[[disable-replication-for-tenant-buckets]]
+=== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+.步驟
+. ${post_edited_translations.segment}
+. 選擇 *Configuration* > *System* > *Grid federation*。
+. 選取連線名稱以顯示其詳細資訊。
+. 在「允許的租戶」標籤上，確定租戶是否正在使用該連線。
+. 如果列出了該租戶，請指示他們針對連線中兩個網格上的所有貯體link:../tenant/grid-federation-manage-cross-grid-replication.html["停用跨網格複寫"]。
++
+
+TIP: 如果任何租戶儲存桶已啟用跨網格複寫，則無法移除「使用網格聯合連線」權限。租戶必須在兩個網格上停用其儲存桶的跨網格複寫。
+
+
+
+
+
+[[remove-permission-for-tenant]]
+=== 移除租戶權限
+
+停用租戶儲存桶的跨網格複寫後，您可以移除租戶使用網格聯合連線的權限。
+
+.步驟
+. 從主要管理節點登入 Grid Manager。
+. ${post_edited_translations.segment}
++
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+.. 選擇 *Configuration* > *System* > *Grid federation*。
+.. 選取連線名稱以顯示其詳細資訊頁面。
+.. 在「允許的租戶」索引標籤上，選取租戶的選項按鈕。
+.. 選擇 *移除權限*。
+
+
+--
+.租戶頁面
+--
+.. 選擇*租戶*。
+.. 選取租戶名稱以顯示詳細資訊頁面。
+.. 在「網格聯盟」索引標籤上，選取連線的選項按鈕。
+.. 選擇 *移除權限*。
+
+
+--
+====
+. 查看確認對話方塊中的警告，然後選擇 *移除*。
++
+** 如果可以移除該權限，您將返回詳細資訊頁面並顯示成功訊息。此租戶將無法再使用網格聯合連線。
+** ${post_edited_translations.segment}
++
+image:grid-federation-remove-permission-error.png["如果租戶為儲存桶啟用了 CGR，則會顯示錯誤訊息。"]
+
++
+${post_edited_translations.segment}
+
++
+*** （建議。）登入 Tenant Manager，停用每個租戶儲存桶的複寫。請參閱 link:../tenant/grid-federation-manage-cross-grid-replication.html["管理跨網格複寫"]。然後，重複上述步驟以移除 *Use grid connection* 權限。
+*** 強制移除權限。請參閱下一節。
+
+
+
+
+. ${post_edited_translations.segment}
+
+
+
+
+[[forceremovepermissionremove-the-permission-by-force]]
+== [[force_remove_permission]]強制移除權限
+
+${post_edited_translations.segment}
+
+在強制移除租戶的權限之前，請注意 <<remove-grid-federation-connection-permission,移除權限>> 的一般注意事項，以及以下其他注意事項：
+
+* 如果您強制移除 *Use grid federation connection*（使用網格同盟連線）權限，則任何擱置複寫至另一個網格的物件（已擷取但尚未複寫）將會繼續進行複寫。若要防止這些處理中的物件到達目的地 bucket，您也必須在另一個網格上移除該租戶的權限。
+* 移除*使用網格聯合連線*權限後，任何擷取至來源儲存區的物件都不會複寫至目的地儲存區。
+
+
+.步驟
+. 從主要管理節點登入 Grid Manager。
+. 選擇 *Configuration* > *System* > *Grid federation*。
+. 選取連線名稱以顯示其詳細資訊頁面。
+. 在「允許的租戶」索引標籤上，選取租戶的選項按鈕。
+. 選擇 *移除權限*。
+. ${post_edited_translations.segment}
++
+系統會顯示成功訊息。此租戶將無法再使用網格同盟連線。
+
+. 視需要前往另一個網格，並重複這些步驟，以強制移除另一個網格上相同租戶帳戶的權限。例如，您應該在另一個網格上重複這些步驟，以防止處理中的物件到達目的地貯體。
+

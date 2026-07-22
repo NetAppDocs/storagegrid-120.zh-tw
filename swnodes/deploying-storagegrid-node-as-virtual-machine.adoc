@@ -1,0 +1,319 @@
+---
+permalink: swnodes/deploying-storagegrid-node-as-virtual-machine.html 
+sidebar: sidebar 
+keywords: how to deploy grid nodes in vsphere or vsphere web client, port, remap, port remap, vmware 
+summary: 您可以使用 VMware vSphere Web Client 將每個網格節點部署為虛擬機器。部署期間，每個網格節點都會建立並連接到一個或多個 StorageGRID 網路。 
+---
+= 使用 VMware vSphere 將網格節點部署為 StorageGRID 的虛擬機
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 VMware vSphere Web Client 將每個網格節點部署為虛擬機器。部署期間，每個網格節點都會建立並連接到一個或多個 StorageGRID 網路。
+
+如果您需要部署任何 StorageGRID 應用裝置儲存節點，請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/deploying-appliance-storage-node.html["部署應用裝置儲存節點"^]。
+
+您也可以在啟動節點之前重新映射節點連接埠或增加節點的 CPU 或記憶體容量設定。
+
+.開始之前
+* 您已了解操作方法link:index.html["制定安裝計劃並做好準備"]，並且了解軟體、CPU 和 RAM、儲存設備和效能的要求。
+* 您熟悉 VMware vSphere Hypervisor，並且有在該環境中部署虛擬機器的經驗。
++
+
+NOTE: 該 `open-vm-tools`軟體包是類似於 VMware Tools 的開源實作，已包含在 StorageGRID 虛擬機器中。您無需手動安裝 VMware Tools。
+
+* 您已下載並解壓縮適用於 VMware 的正確版本 StorageGRID 安裝歸檔。
++
+
+CAUTION: 如果您要部署新節點作為擴充或恢復作業的一部分，則必須使用目前在網格上執行的 StorageGRID 版本。
+
+* 您擁有 StorageGRID 虛擬機器磁碟 (`.vmdk`） 檔案：
+
+
+[listing, subs="specialcharacters,quotes"]
+----
+NetApp-_SG-version_-SHA.vmdk
+----
+* 您擁有要部署的每種類型網格節點的 `.ovf`和 `.mf`檔案：
++
+[cols="1a,1a"]
+|===
+| 檔案名稱 | 說明 
+
+
+| vsphere-primary-admin.ovf vsphere-primary-admin.mf  a| 
+主管理節點的範本檔案和清單檔案。
+
+
+
+| vsphere-non-primary-admin.ovf vsphere-non-primary-admin.mf  a| 
+非主要管理節點的範本檔案和清單檔案。
+
+
+
+| vsphere-storage.ovf vsphere-storage.mf  a| 
+儲存節點的範本檔案和清單檔案。
+
+
+
+| vsphere-gateway.ovf vsphere-gateway.mf  a| 
+Gateway Node 的範本檔案和清單檔案。
+
+|===
+*  `.vdmk`、 `.ovf`和 `.mf`檔案都在同一個目錄中。
+* 您已制定計劃來盡量減少故障域。例如，您不應將所有 Gateway Nodes 部署在單一 vSphere ESXi 主機上。
++
+
+CAUTION: 在正式作業部署中，不要在單一虛擬機器上執行多個儲存節點。如果會導致不可接受的故障域問題，則不要在同一 ESXi 主機上執行多個虛擬機器。
+
+* 如果您要將節點部署為擴充或恢復作業的一部分，則需要 link:../expand/index.html["StorageGRID 系統擴充說明"] 或 link:../maintain/index.html["恢復和維護說明"]。
+* 如果您將 StorageGRID 節點部署為虛擬機器，並從 NetApp ONTAP 系統指派儲存設備，則您已確認該 Volume 未啟用 FabricPool 分層原則。例如，如果 StorageGRID 節點在 VMware 主機上以虛擬機器形式執行，請確保為該節點資料儲存區提供支援的 Volume 未啟用 FabricPool 分層原則。停用與 StorageGRID 節點搭配使用之 Volume 的 FabricPool 分層，可簡化疑難排解和儲存設備作業。
++
+
+NOTE: 切勿使用 FabricPool 將與 StorageGRID 相關的任何資料分層回 StorageGRID 本身。將 StorageGRID 資料分層回 StorageGRID 會增加疑難排解和維運的複雜度。
+
+
+
+.關於此任務
+請依照下列說明進行操作，以初始部署 VMware 節點、在擴充功能中新增 VMware 節點，或在恢復作業中取代 VMware 節點。除非步驟中另有說明，否則所有節點類型（包括管理節點、儲存節點和閘道節點）的節點部署程序均相同。
+
+如果您正在安裝新的 StorageGRID 系統：
+
+* 您可以按任意順序部署節點。
+* 您必須確保每台虛擬機器都能透過網格網路連接到主要管理節點。
+* 必須先部署所有網格節點，然後才能設定網格。
+
+
+如果您正在執行擴充或恢復操作：
+
+* 您必須確保新的虛擬機器能夠透過網格網路連接到所有其他節點。
+
+
+如果需要重新映射節點的任何連接埠，請在連接埠重新映射組態完成之前，不要啟動新節點。
+
+
+NOTE: 已取代對連接埠重新對應的支援，且將在未來的版本中移除。若要移除重新對應的連接埠，請參閱 link:../maintain/removing-port-remaps-on-bare-metal-hosts.html["移除裸機主機上的連接埠重映射"]。
+
+.步驟
+. 使用 VCenter，部署 OVF 範本。
++
+如果指定 URL，請指向包含下列檔案的資料夾。否則，請從本機目錄中選擇這些檔案。
+
++
+[listing, subs="specialcharacters,quotes"]
+----
+NetApp-_SG-version_-SHA.vmdk
+vsphere-_node_.ovf
+vsphere-_node_.mf
+----
++
+例如，如果這是您要部署的第一個節點，請使用下列檔案部署 StorageGRID 系統的主要管理節點：
+
++
+[listing, subs="specialcharacters,quotes"]
+----
+NetApp-_SG-version_-SHA.vmdk
+vsphere-primary-admin.ovf
+vsphere-primary-admin.mf
+----
+. 請為虛擬機器命名。
++
+通常的做法是為虛擬機器和網格節點使用相同的名稱。
+
+. 將虛擬機器放置在適當的 vApp 或資源池。
+. 如果您要部署主要管理節點，請閱讀並接受終端使用者授權合約。
++
+根據您使用的 vCenter 版本，接受最終使用者授權協議、指定虛擬機器名稱和選擇資料存放區的步驟順序會有所不同。
+
+. 選擇虛擬機器的儲存設備。
++
+如果您要將節點部署為恢復作業的一部分，請依照 <<step_recovery_storage,儲存設備恢復步驟>> 中的說明新增虛擬磁碟、從故障網格節點重新連接虛擬硬碟，或同時執行這兩項作業。
+
++
+部署儲存節點時，請使用 3 個或更多儲存 Volume，每個儲存 Volume 必須為 4 TB 或更大。您必須為 Volume 0 分配至少 4 TB 的空間。
+
++
+
+NOTE: 儲存節點 .ovf 檔案定義了多個用於儲存設備的 VMDK。除非這些 VMDK 滿足您的儲存設備需求，否則您應該在啟動節點之前將其移除，並分配適當的 VMDK 或 RDM 用於儲存設備。VMDK 在 VMware 環境中更常用，也更容易管理，而 RDM 可能為使用較大物件大小（例如，大於 100 MB）的工作負載提供更好的效能。
+
++
+
+NOTE: 某些 StorageGRID 安裝可能使用比典型虛擬化工作負載更大、更活躍的儲存設備磁碟區。您可能需要調校一些 Hypervisor 參數，例如 `MaxAddressableSpaceTB`，以達到最佳效能。如果遇到效能不佳的情況，請聯絡您的虛擬化支援資源，以確定您的環境是否可透過針對特定工作負載的組態調校而獲益。
+
+. 選擇網路。
++
+為每個來源網路選擇目的地網路，以確定節點將使用哪些 StorageGRID 網路。
+
++
+** 需要使用網格網路。您必須在 vSphere 環境中選擇目的地網路。+ 網格網路用於所有內部 StorageGRID 流量。它提供網格中所有節點之間、所有站台和子網路之間的連線。網格網路上的所有節點都必須能夠與其他所有節點通訊。
+** 如果使用管理網路，請在 vSphere 環境中選擇不同的目的地網路。如果不使用管理網路，請選擇與網格網路相同的目的地。
+** 如果使用用戶端網路，請在 vSphere 環境中選擇不同的目的地網路。如果未使用用戶端網路，請選擇與網格網路相同的目的地。
+** 如果使用管理網路或用戶端網路，節點不必位於相同的管理網路或用戶端網路中。
+
+
+. 對於 *Customize Template*，設定所需的 StorageGRID 節點屬性。
++
+.. 請輸入*節點名稱*。
++
+
+NOTE: 如果要恢復網格節點，則必須輸入要恢復的節點名稱。
+
+.. 使用「暫時安裝密碼」下拉式選單指定暫時安裝密碼，以便在新節點加入網格之前，您可以存取 VM 控制台或 StorageGRID 安裝 API，或使用 SSH。
++
+
+NOTE: 臨時安裝密碼僅在節點安裝期間使用。節點新增到網格後，您可以使用 link:../admin/change-node-console-password.html["節點主控台密碼"] 存取該節點，該密碼列於復原套件中的  `Passwords.txt` 檔案中。
+
++
+*** *使用節點名稱*：您在*節點名稱*欄位中提供的值將用作臨時安裝密碼。
+*** *使用自訂密碼*：自訂密碼將用作臨時安裝密碼。
+*** *停用密碼*：不會使用臨時安裝密碼。如果您需要存取虛擬機器以偵錯安裝問題，請參閱link:troubleshooting-installation-issues.html["疑難排解安裝問題"]。
+
+
+.. 如果您選擇了 *Use custom password*，請在 *Custom password* 欄位中指定您要使用的臨時安裝密碼。
+.. 在「網格網路（eth0）」部分，為「網格網路 IP 組態」選擇 STATIC 或 DHCP。
++
+*** 若選擇 STATIC，請輸入 *Grid network IP*、*Grid network mask*、*Grid network gateway* 和 *Grid network MTU*。
+*** 如果選擇 DHCP，則會自動指派 *Grid network IP*、*Grid network mask* 和 *Grid network gateway*。
+
+
+.. 在「主管理 IP」欄位中，輸入網格網路主管理節點的 IP 位址。
++
+
+NOTE: 如果您要部署的節點是主要管理節點，則此步驟不適用。
+
++
+如果省略主要管理節點 IP 位址，則當主要管理節點或至少一個已設定 ADMIN_IP 的網格節點位於相同子網路時，系統會自動探索該 IP 位址。但是，建議在此處設定主要管理節點 IP 位址。
+
+.. 在「管理網路 (eth1)」部分，為「管理網路 IP 組態」選擇 STATIC、DHCP 或 DISABLED。
++
+*** 如果您不想使用管理網路，請選擇 DISABLED，並在管理網路 IP 位址欄中輸入 *0.0.0.0*。其他欄位可以留空。
+*** 若選擇 STATIC，請輸入*管理網路 IP*、*管理網路遮罩*、*管理網路閘道*和*管理網路 MTU*。
+*** 若選擇 STATIC，請輸入*管理網路外部子網路清單*。您還必須設定閘道。
+*** 如果選擇 DHCP，則會自動指派 *管理網路 IP*、*管理網路遮罩* 和 *管理網路閘道*。
+
+
+.. 在「用戶端網路 (eth2)」部分，為「用戶端網路 IP 組態」選擇 STATIC、DHCP 或 DISABLED。
++
+*** 如果您不想使用用戶端網路，請選擇 DISABLED，並在用戶端網路 IP 位址欄位中輸入 *0.0.0.0*。其他欄位可以留空。
+*** 若選擇 STATIC，請輸入*用戶端網路 IP*、*用戶端網路遮罩*、*用戶端網路閘道*和*用戶端網路 MTU*。
+*** 如果選擇 DHCP，則會自動指派*用戶端網路 IP*、*用戶端網路遮罩*和*用戶端網路閘道*。
+
+
+
+
+. 檢查虛擬機器組態並進行必要的變更。
+. 準備好後，選取 *Finish* 以開始上傳虛擬機器。
+. [[step_recovery_storage]]如果您將此節點部署為恢復作業的一部分，且這不是完整節點恢復，請在部署完成後執行下列步驟：
++
+.. 在虛擬機器上按一下滑鼠右鍵，然後選取 *Edit Settings*。
+.. 選擇每個已指定用於儲存設備的預設虛擬硬碟，然後選擇 *Remove*。
+.. 根據您的資料恢復情況，依據儲存設備需求新增虛擬磁碟、重新連接從先前移除的故障網格節點中保留的任何虛擬硬碟，或兩者皆執行。
++
+請注意以下重要準則：
+
++
+*** 如果要新增磁碟，則應使用與節點恢復之前使用的相同類型的儲存設備。
+*** 儲存節點 .ovf 檔案定義了多個用於儲存設備的 VMDK。除非這些 VMDK 滿足您的儲存設備需求，否則您應該在啟動節點之前將其移除，並分配適當的 VMDK 或 RDM 用於儲存設備。VMDK 在 VMware 環境中更常用，也更容易管理，而 RDM 可能為使用較大物件大小（例如，大於 100 MB）的工作負載提供更好的效能。
+
+
+
+
+. [[vmware-remap-ports]]如果您需要重新映射此節點使用的連接埠，請依照下列步驟操作。
++
+如果您的企業連網策略限制了對 StorageGRID 所使用的一個或多個連接埠的存取，則可能需要重新對應連接埠。請參閱 link:../network/index.html["連網指南"] 以了解 StorageGRID 使用的連接埠。
+
++
+
+NOTE: 不要重新映射負載平衡器端點中使用的連接埠。
+
++
+.. 選擇新的虛擬機器。
+.. 在「Configure」標籤中，選擇「Settings」>「vApp Options」。「vApp Options」的位置取決於 vCenter 的版本。
+.. 在 *屬性* 表中，找到 PORT_REMAP_INBOUND 和 PORT_REMAP。
+.. 若要對稱地對應連接埠的傳入和傳出通訊，請選擇 *PORT_REMAP*。
++
+
+NOTE: 已取代對連接埠重新對應的支援，且將在未來的版本中移除。若要移除重新對應的連接埠，請參閱 link:../maintain/removing-port-remaps-on-bare-metal-hosts.html["移除裸機主機上的連接埠重映射"]。
+
++
+
+NOTE: 如果僅設定了 PORT_REMAP，則您指定的對應將同時套用於傳入和傳出通訊。如果也指定了 PORT_REMAP_INBOUND，則 PORT_REMAP 僅適用於傳出通訊。
+
++
+... 選擇 *Set Value*。
+... 輸入連接埠映射：
++
+`<network type>/<protocol>/<default port used by grid node>/<new port>`
+
++
+`<network type>` 是網格、admin 或用戶端，以及  `<protocol>` 是 tcp 或 udp。
+
++
+例如，要將 SSH 流量從連接埠 22 重新對應到連接埠 3022，請輸入：
+
++
+`client/tcp/22/3022`
+
++
+您可以使用逗號分隔的清單重新對應多個連接埠。
+
++
+例如：
+
++
+`client/tcp/18082/443, client/tcp/18083/80`
+
+... 選擇 *OK* 。
+
+
+.. 若要指定用於節點傳入通訊的連接埠，請選擇 *PORT_REMAP_INBOUND*。
++
+
+NOTE: 如果您指定了 PORT_REMAP_INBOUND 但未指定 PORT_REMAP 的值，則該連接埠的傳出通訊將保持不變。
+
++
+... 選擇 *Set Value*。
+... 輸入連接埠映射：
++
+`<network type>/<protocol>/<remapped inbound port>/<default inbound port used by grid node>`
+
++
+`<network type>` 是網格、admin 或用戶端，以及  `<protocol>` 是 tcp 或 udp。
+
++
+例如，要將傳送至連接埠 3022 的傳入 SSH 流量重新對應為由網格節點在連接埠 22 接收，請輸入下列命令：
+
++
+`client/tcp/3022/22`
+
++
+您可以使用逗號分隔的清單重新對應多個傳入連接埠。
+
++
+例如：
+
++
+`grid/tcp/3022/22, admin/tcp/3022/22`
+
+... 選擇 *OK*
+
+
+
+
+. 如果您想在預設設定的基礎上增加節點的 CPU 或記憶體容量：
++
+.. 在虛擬機器上按一下滑鼠右鍵，然後選取 *Edit Settings*。
+.. 根據需要變更 CPU 數量或記憶體容量大小。
++
+將*記憶體預留*設定為與分配給虛擬機器的*記憶體容量*相同的大小。
+
+.. 選擇 *OK* 。
+
+
+. 啟動虛擬機器。
+
+
+.完成後
+如果您在擴充或恢復程序中部署了此節點，請返回這些說明以完成該程序。

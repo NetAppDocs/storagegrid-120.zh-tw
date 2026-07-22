@@ -1,0 +1,55 @@
+---
+permalink: audit/ebkr-empty-bucket-request.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, EBKR, Empty Bucket Request 
+summary: 此訊息表示使用者已發送請求以開啟或關閉空白儲存桶（即刪除儲存桶物件或停止刪除物件）。 
+---
+= StorageGRID 中空白儲存貯體要求的 EBKR 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+此訊息表示使用者已發送請求以開啟或關閉空白儲存桶（即刪除儲存桶物件或停止刪除物件）。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+BUID
+ a| 
+儲存桶 UUID
+ a| 
+儲存桶 ID。
+
+
+
+ a| 
+EBJS
+ a| 
+空桶 JSON 組態
+ a| 
+包含表示目前 Empty Bucket 組態的 JSON。
+
+
+
+ a| 
+S3AI
+ a| 
+S3 租戶帳戶 ID
+ a| 
+發送請求的使用者租戶帳戶 ID。空值表示匿名存取。
+
+
+
+ a| 
+S3BK
+ a| 
+S3 Bucket
+ a| 
+S3 儲存桶名稱。
+
+|===

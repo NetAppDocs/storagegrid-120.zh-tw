@@ -1,0 +1,84 @@
+---
+permalink: troubleshoot/troubleshooting-low-object-data-storage-alert.html 
+sidebar: sidebar 
+keywords: how to troubleshoot the Low object data storage alert 
+summary: 低物件資料儲存警示會監控每個儲存節點上可用於儲存物件資料的空間大小。 
+---
+= 解決 StorageGRID 中的低物件資料儲存警示
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+「物件資料儲存設備不足」警示監控每個儲存節點上可用於儲存物件資料的空間大小。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+.關於此任務
+當儲存節點上複製和糾刪碼物件資料的總量符合警示規則中設定的其中一個條件時，將觸發 *Low object data storage* 警示。
+
+預設情況下，當此條件評估結果為真時，將觸發重大警報：
+
+[listing]
+----
+(storagegrid_storage_utilization_data_bytes/
+(storagegrid_storage_utilization_data_bytes + storagegrid_storage_utilization_usable_space_bytes)) >=0.90
+----
+在這種情況下：
+
+* `storagegrid_storage_utilization_data_bytes` 是儲存節點中複製和以糾刪碼編碼的物件資料總大小的估計值。
+* `storagegrid_storage_utilization_usable_space_bytes`是儲存節點剩餘的物件儲存空間總量。
+
+
+如果觸發了主要或次要的「物件資料儲存設備不足」警示，則應盡快執行擴充程序。
+
+.步驟
+. 選擇 *Alerts* > *Current*。
++
+顯示「警報」頁面。
+
+. 從警報表中，視需要展開「物件資料儲存設備不足」警報群組，然後選取要檢視的警報。
++
+
+NOTE: 選擇警報本身，而不是警報組的標題。
+
+. 請查看對話框中的詳細資訊，並注意以下事項：
++
+** 時間觸發
+** 站點和節點的名稱
+** 此警報的計量當前值
+
+
+. 選擇 *節點* > *_儲存節點或站台_* > *儲存設備*。
+. 將遊標停留在「已使用儲存空間 - 物件資料」圖表上。
++
+${post_edited_translations.segment}
+
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** *總計*：此節點、站台或網格上的可用空間總量。「已用」值是 `storagegrid_storage_utilization_data_bytes`計量。
+
+
++
+image:nodes_page_storage_used_object_data.png["節點頁面儲存設備已使用物件資料"]
+
+. 選擇圖表上方的時間控制項，以檢視不同時間段的儲存設備使用量。
++
+查看一段時間內的儲存設備使用情況，有助於了解觸發警示前後使用了多少儲存設備，並可協助您估計節點的剩餘空間可能需要多長時間才會填滿。
+
+. 盡快將link:../expand/guidelines-for-adding-object-capacity.html["增加儲存容量"]新增至您的網格中。
++
+您可以為現有儲存節點新增儲存設備磁碟區（LUN），也可以新增新的儲存節點。
+
++
+
+NOTE: 如需詳細資訊，請參閱 link:../admin/managing-full-storage-nodes.html["管理完整的儲存節點"]。
+
+

@@ -1,0 +1,98 @@
+---
+permalink: s3/deprecated-get-bucket-compliance-request.html 
+sidebar: sidebar 
+keywords: S3 REST API, S3 operations, deprecated GET compliance requests 
+summary: GET Bucket 法規遵循請求已棄用。但是，您仍然可以使用此要求來確定現有舊版 Compliant 儲存桶目前生效的法規遵循設定。 
+---
+= StorageGRID 中已棄用的 GET Bucket 合規性要求
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+GET Bucket 法規遵循請求已棄用。但是，您仍然可以使用此要求來確定現有舊版 Compliant 儲存桶目前生效的法規遵循設定。
+
+[NOTE]
+====
+先前 StorageGRID 版本中提供的 StorageGRID 法規遵循功能已過時，並已由 S3 Object Lock 取代。如需詳細資訊，請參閱下列內容：
+
+* link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Hybrid_Cloud_Infrastructure/StorageGRID/How_to_manage_legacy_Compliant_buckets_in_StorageGRID_11.5["NetApp 知識庫：如何在 StorageGRID 11.5 中管理舊版符合法規的儲存桶"^]
+
+
+====
+您必須擁有 s3:GetBucketCompliance 權限，或者是帳戶根目錄使用者，才能完成此操作。
+
+
+
+[[request-example]]
+== 請求範例
+
+此範例請求可讓您確定名為 `mybucket`的儲存桶的法規遵循設定。
+
+[listing, subs="specialcharacters,quotes"]
+----
+GET /mybucket/?x-ntap-sg-compliance HTTP/1.1
+Date: _date_
+Authorization: _authorization string_
+Host: _host_
+----
+
+
+[[response-example]]
+== 回應範例
+
+在回應 XML 中， `<SGCompliance>`列出了儲存桶生效的法規遵循設定。此範例回應顯示了一個儲存桶的法規遵循設定，其中每個物件將從被擷取到網格之日起保留一年（525,600 分鐘）。此儲存桶目前沒有合法持有。每個物件將在一年後自動刪除。
+
+[listing, subs="specialcharacters,quotes"]
+----
+HTTP/1.1 200 OK
+Date: _date_
+Connection: _connection_
+Server: StorageGRID/11.1.0
+x-amz-request-id: _request ID_
+Content-Length: _length_
+Content-Type: application/xml
+
+<SGCompliance>
+  <RetentionPeriodMinutes>525600</RetentionPeriodMinutes>
+  <LegalHold>false</LegalHold>
+  <AutoDelete>true</AutoDelete>
+</SGCompliance>
+----
+[cols="1a,2a"]
+|===
+| Name | 說明 
+
+
+ a| 
+RetentionPeriodMinutes
+ a| 
+新增至此儲存桶中的物件的保留期間，以分鐘為單位。保留期間從物件納入網格時開始計算。
+
+
+
+ a| 
+LegalHold
+ a| 
+* True：此儲存桶目前處於合法持有狀態。即使物件的保留期間已過，在合法持有解除之前，也無法刪除此儲存桶中的物件。
+* False：此儲存桶目前未處於合法持有。此儲存桶中的物件可在其保留期間到期後刪除。
+
+
+
+
+ a| 
+AutoDelete
+ a| 
+* 正確：除非儲存桶受到合法持有，否則此儲存桶中的物件將在其保留期間到期時自動刪除。
+* 錯誤：此儲存桶中的物件不會在保留期間到期後自動刪除。如果您需要刪除這些物件，則必須手動刪除。
+
+
+|===
+
+
+[[error-responses]]
+== 錯誤回應
+
+如果儲存桶建立時不符合法規，則回應的 HTTP 狀態代碼為 `404 Not Found`，S3 錯誤代碼為 `XNoSuchBucketCompliance`。

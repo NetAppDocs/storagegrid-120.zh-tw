@@ -1,0 +1,205 @@
+---
+permalink: admin/configure-autosupport-grid-manager.html 
+sidebar: sidebar 
+keywords: how to configure autosupport, what is autosupport-on-demand 
+summary: 預設情況下，首次安裝 StorageGRID 時會啟用 StorageGRID AutoSupport 功能。但是，您必須在每個應用裝置上設定硬體 AutoSupport。如有需要，您可以變更 AutoSupport 組態。 
+---
+= 在 StorageGRID 中設定 AutoSupport
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+預設情況下，首次安裝 StorageGRID 時會啟用 StorageGRID AutoSupport 功能。但是，您必須在每個應用裝置上設定硬體 AutoSupport。如有需要，您可以變更 AutoSupport 組態。
+
+如果要變更 StorageGRID AutoSupport 的組態，請僅在主要管理節點上進行變更。您必須<<autosupport-for-appliances,設定硬體 AutoSupport>>在每個應用裝置上進行變更。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 如果您使用 HTTPS 傳送 AutoSupport 套件，則您已向主要管理節點提供傳出網際網路存取，可以直接提供，也可以透過 link:configuring-admin-proxy-settings.html["使用 Proxy 伺服器"]（不需要傳入連線）。
+* 如果在 StorageGRID AutoSupport 頁面上選擇了 HTTP，則必須link:configuring-admin-proxy-settings.html["設定 Proxy 伺服器"]以 HTTPS 方式轉送 AutoSupport 封包。NetApp 的 AutoSupport 伺服器將拒絕使用 HTTP 傳送的封包。
+* 如果您使用 SMTP 作為 AutoSupport 套件的傳輸協定，則需要設定 SMTP 郵件伺服器。
+
+
+.關於此任務
+您可以使用以下任何選項組合，將 AutoSupport 套件傳送至技術支援：
+
+* *每週*：每週自動傳送一次 AutoSupport 套件。預設設定：已啟用。
+* *事件觸發*：每小時或發生重大系統事件時，自動傳送 AutoSupport 套件。預設設定：啟用。
+* *隨需*：允許技術支援人員要求您的 StorageGRID 系統自動傳送 AutoSupport 套件，這在他們積極處理問題時非常有用（需要 HTTPS AutoSupport 傳輸協定）。預設設定：停用。
+* *使用者觸發*：隨時手動傳送 AutoSupport 套件。
+* *日誌收集*：link:../monitor/collecting-log-files-and-system-data.html["手動收集日誌檔案和系統資料，並傳送 AutoSupport 套件"]。
+
+
+
+
+[[specify-protocol-for-autosupport-packagesspecify-the-protocol-for-autosupport-packages]]
+== [[specify-protocol-for-autosupport-packages]]指定 AutoSupport 套件的傳輸協定
+
+您可以使用下列任何一種協定來傳送 AutoSupport 套件：
+
+* *HTTPS*：這是新安裝的預設設定，也是建議設定。此協定使用 443 連接埠。如果您想要 <<啟用 AutoSupport on Demand,啟用 AutoSupport 隨需功能>>，則必須使用 HTTPS。
+* *HTTP*：如果您選擇 HTTP，則必須設定 Proxy 伺服器，以將 AutoSupport 封包轉送為 HTTPS。NetApp 的 AutoSupport 伺服器會拒絕使用 HTTP 傳送的封包。此協定使用 80 連接埠。
+* *SMTP*：如果您希望以電子郵件傳送 AutoSupport 套件，請使用此選項。
+
+
+您設定的協定用於傳送所有類型的 AutoSupport 套件。
+
+.步驟
+. 選擇 *Support* > *Tools* > *AutoSupport* > *Settings*。
+. 選擇您要用於傳送 AutoSupport 套件的協定。
+. 如果您選擇了 *HTTPS*，請選擇是否使用 NetApp 支援憑證（TLS 憑證）來保護與技術支援伺服器的連線。
++
+** *驗證憑證* （預設）：確保 AutoSupport 封包的傳輸是安全的。NetApp 支援憑證已隨 StorageGRID 軟體一起安裝。
+** *不驗證憑證*：僅當您有正當理由不使用憑證驗證時才選擇此選項，例如憑證出現臨時問題時。
+
+
+. 選擇 *Save*。所有每週、使用者觸發和事件觸發的套件都將使用所選協定傳送。
+
+
+
+
+[[disable-weekly-autosupport]]
+== 停用每週 AutoSupport
+
+預設情況下，StorageGRID 系統已設定為每週向技術支援傳送一次 AutoSupport 套件。
+
+若要確定每週 AutoSupport 套件的傳送時間，請前往「*AutoSupport* > *結果*」索引標籤。在「*每週 AutoSupport*」區段中，查看「*下次排程時間*」的值。
+
+您可以隨時停用每週 AutoSupport 套件的自動傳送功能。
+
+.步驟
+. 選擇 *Support* > *Tools* > *AutoSupport* > *Settings*。
+. 取消選取「啟用每週 AutoSupport」核取方塊。
+. 選取 *Save* 。
+
+
+
+
+[[disable-event-triggered-autosupport]]
+== 停用事件觸發的 AutoSupport
+
+StorageGRID 系統預設設定為每小時向技術支援傳送一個 AutoSupport 套件。
+
+您可以隨時停用事件觸發的 AutoSupport。
+
+.步驟
+. 選擇 *Support* > *Tools* > *AutoSupport* > *Settings*。
+. 取消選取「啟用事件觸發 AutoSupport」核取方塊。
+. 選取 *Save* 。
+
+
+
+
+[[enable-autosupport-on-demand]]
+== 啟用 AutoSupport on Demand
+
+AutoSupport on Demand 可協助解決技術支援正積極處理的問題。
+
+預設會停用 AutoSupport on Demand。啟用此功能可允許技術支援要求您的 StorageGRID 系統自動傳送 AutoSupport 套件。技術支援也可以設定 AutoSupport on Demand 查詢的輪詢時間間隔。
+
+技術支援無法啟用或停用 AutoSupport on Demand。
+
+.步驟
+. 選擇 *Support* > *Tools* > *AutoSupport* > *Settings*。
+. ${post_edited_translations.segment}
+. 選取 *啟用每週 AutoSupport* 核取方塊。
+. 選取 *啟用隨選 AutoSupport* 核取方塊。
+. 選取 *Save* 。
++
+AutoSupport on Demand 已啟用，且技術支援可以向 StorageGRID 傳送 AutoSupport on Demand 要求。
+
+
+
+
+
+[[disable-checks-for-software-updates]]
+== ${post_edited_translations.segment}
+
+預設情況下，StorageGRID 會聯絡 NetApp 以確定是否有適用於您系統的軟體更新。如果有可用的 StorageGRID Hotfix 或新版本，新版本將會顯示在 StorageGRID 升級頁面上。
+
+您可以根據需要選擇停用軟體更新檢查。例如，如果您的系統無法存取 WAN，則應停用此檢查以避免下載錯誤。
+
+.步驟
+. 選擇 *Support* > *Tools* > *AutoSupport* > *Settings*。
+. ${post_edited_translations.segment}
+. 選取 *Save* 。
+
+
+
+
+[[add-an-additional-autosupport-destination]]
+== 新增額外的 AutoSupport 目的地
+
+當您啟用 AutoSupport 時，健康狀況與狀態套件將會傳送給技術支援。您可以為所有 AutoSupport 套件指定一個額外的目的地。
+
+若要驗證或變更用於傳送 AutoSupport 套件的協定，請參閱說明以 <<specify-protocol-for-autosupport-packages,指定 AutoSupport 套件的協定>>。
+
+
+NOTE: 您無法使用 SMTP 協定傳送 AutoSupport 套件至額外的目的地。
+
+.步驟
+. 選擇 *Support* > *Tools* > *AutoSupport* > *Settings*。
+. 選取 *啟用額外 AutoSupport 目的地*。
+. 請具體說明以下內容：
++
+主機名稱:: 其他 AutoSupport 目的地伺服器的伺服器主機名稱或 IP 位址。
++
+--
+
+NOTE: 您只能輸入一個附加目的地。
+
+--
+連接埠:: 用於連線至其他 AutoSupport 目的地伺服器的連接埠。預設為 HTTP 的連接埠 80 或 HTTPS 的連接埠 443。
+憑證驗證:: 是否使用 TLS 憑證來保護與附加目的地的連線安全。
++
+--
+** 選取 *Verify certificate* 以使用憑證驗證。
+** 選取「不驗證憑證」，即可在不進行憑證驗證的情況下傳送 AutoSupport 套件。
++
+只有當您有正當理由不使用憑證驗證時才選擇此選項，例如憑證出現臨時問題時。
+
+
+
+--
+
+
+. 如果您選擇了*驗證憑證*，請執行以下操作：
++
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+
+
+. 選取 *Save* 。
++
+所有未來的每週、事件觸發及使用者觸發的 AutoSupport 封包都將傳送到此額外目的地。
+
+
+
+
+
+[[autosupport-for-appliancesconfigure-autosupport-for-appliances]]
+== [[autosupport-for-appliances]]為應用裝置設定 AutoSupport
+
+應用裝置的 AutoSupport 會報告 StorageGRID 硬體問題，而 StorageGRID AutoSupport 則會報告 StorageGRID 軟體問題，但有一個例外：對於 SGF6112，StorageGRID AutoSupport 會同時報告硬體和軟體問題。您必須在除 SGF6112 以外的每個應用裝置上設定 AutoSupport，SGF6112 不需要額外的設定。服務應用裝置和儲存應用裝置的 AutoSupport 實作方式有所不同。
+
+您可以使用 SANtricity 為每個儲存應用裝置啟用 AutoSupport。您可以在初始應用裝置設定期間，或在安裝應用裝置之後設定 SANtricity AutoSupport：
+
+* 針對 SG6000 和 SG5700 應用裝置， https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/accessing-and-configuring-santricity-system-manager.html["在 SANtricity System Manager 中設定 AutoSupport"^]
+
+
+如果您在 link:../admin/sending-eseries-autosupport-messages-through-storagegrid.html["SANtricity System Manager"] 中設定透過 Proxy 傳送 AutoSupport，則來自 E 系列應用裝置的 AutoSupport 套件可以包含在 StorageGRID AutoSupport 中。
+
+StorageGRID AutoSupport 不會報告硬體問題，例如 DIMM 或主機介面卡 （HIC） 故障。但是，某些元件故障可能會觸發link:../monitor/alerts-reference.html["硬體警報"]。對於具有基板管理控制器 （BMC） 的 StorageGRID 應用裝置，您可以設定電子郵件和 SNMP 陷阱來報告硬體故障：
+
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/setting-up-email-notifications-for-alerts.html["設定 BMC 警報的電子郵件通知"^]
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/configuring-snmp-settings-for-bmc.html["設定 BMC 的 SNMP 設定"^]
+
+
+.相關資訊
+https://mysupport.netapp.com/site/global/dashboard["NetApp 支援"^]

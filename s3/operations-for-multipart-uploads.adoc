@@ -1,0 +1,93 @@
+---
+permalink: s3/operations-for-multipart-uploads.html 
+sidebar: sidebar 
+keywords: operations, multipart uploads, uploads, rest API 
+summary: 本節說明 StorageGRID 如何支援多部分上傳作業。 
+---
+= StorageGRID 中支援的多部分上傳作業
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+本節說明 StorageGRID 如何支援多部分上傳作業。
+
+以下條件和注意事項適用於所有分段上傳作業：
+
+* 不應向單一儲存桶同時進行超過 1,000 次的多部分上傳，因為該儲存桶的 ListMultipartUploads 查詢結果可能不完整。
+* StorageGRID 強制執行 AWS 多部分的大小限制。S3 用戶端必須遵循以下準則：
++
+** 多部分上傳的每個部分必須介於 5 MiB （5,242,880 位元組） 和 5 GiB （5,368,709,120 位元組） 之間。
+** 最後一部分可以小於 5 MiB（5,242,880 位元組）。
+** 一般來說，分割區大小應盡可能大。例如，對於 100 GiB 的物件，可以使用 5 GiB 的分割區大小。由於每個分割區都被視為一個獨立的物件，因此使用較大的分割區大小可以減少 StorageGRID 中繼資料例行成本。
+** 對於小於 5 GiB 的物件，請考慮改用非分段上傳。
+
+
+* 如果 ILM 規則使用「平衡」或「嚴格」link:../ilm/data-protection-options-for-ingest.html["擷取選項"]，則在擷取多部分物件的每個部分時，ILM 會對其進行評估；在多部分上傳完成後，ILM 也會針對整個物件進行評估。您應該瞭解這會對物件和部分的放置產生哪些影響：
++
+** 如果在 S3 多部分上傳過程中 ILM 發生變化，則物件中的某些部分在多部分上傳完成後可能無法滿足目前的 ILM 要求。任何放置不正確的部分都會排入佇列，等待 ILM 重新評估，並在稍後移至正確的位置。
+** 在評估某部分的 ILM 時，StorageGRID 會根據部分的大小進行篩選，而不是根據物件的大小。這表示物件的某些部分可能儲存在不符合物件整體 ILM 要求的位置。例如，如果一條規則規定所有 10 GB 或更大的物件都儲存在 DC1，而所有較小的物件都儲存在 DC2，那麼一個包含 10 個部分的多部分上傳檔案在擷取時，每個 1 GB 的部分都會儲存在 DC2。但是，當評估物件整體的 ILM 時，物件的所有部分都會移至 DC1。
+
+
+* 所有多部分上傳作業均支援 StorageGRID link:consistency.html["一致性值"]。
+* 當使用分段上傳方式擷取物件時，此規則 link:../admin/what-object-segmentation-is.html["物件分割臨界值（1 GiB）"] 不適用。
+* 如有需要，您可以使用 link:using-server-side-encryption.html["伺服器端加密"] 進行分段上傳。若要使用 SSE （使用 StorageGRID 管理的金鑰進行伺服器端加密），只需在 CreateMultipartUpload 請求中包含  `x-amz-server-side-encryption` 請求標頭即可。若要使用 SSE-C （使用客戶提供的金鑰進行伺服器端加密），需要在 CreateMultipartUpload 請求及其後的每個 UploadPart 請求中指定相同的三個加密金鑰請求標頭。
+* 如果在基本儲存桶的 Before 時間戳記之前啟動擷取，則多部分上傳物件會包含在 link:../tenant/what-is-branch-bucket.html["分支桶"] 中，無論上傳何時完成。
+
+
+[cols="2a,3a"]
+|===
+| 操作 | 實作 
+
+
+ a| 
+AbortMultipartUpload
+ a| 
+已實作所有 Amazon S3 REST API 行為。如有更改，恕不另行通知。
+
+
+
+ a| 
+CompleteMultipartUpload
+ a| 
+請參閱 link:complete-multipart-upload.html["CompleteMultipartUpload"]
+
+
+
+ a| 
+CreateMultipartUpload
+
+（之前名為「啟動多部分上傳」）
+ a| 
+請參閱 link:initiate-multipart-upload.html["CreateMultipartUpload"]
+
+
+
+ a| 
+ListMultipartUploads
+ a| 
+請參閱 link:list-multipart-uploads.html["ListMultipartUploads"]
+
+
+
+ a| 
+ListParts
+ a| 
+已實作所有 Amazon S3 REST API 行為。如有更改，恕不另行通知。
+
+
+
+ a| 
+UploadPart
+ a| 
+請參閱 link:upload-part.html["UploadPart"]
+
+
+
+ a| 
+UploadPartCopy
+ a| 
+請參閱 link:upload-part-copy.html["UploadPartCopy"]
+
+|===

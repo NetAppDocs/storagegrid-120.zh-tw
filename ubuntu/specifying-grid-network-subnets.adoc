@@ -1,0 +1,8 @@
+---
+permalink: ubuntu/specifying-grid-network-subnets.html 
+redirect: storagegrid/swnodes/specifying-grid-network-subnets.html 
+---
+= 
+:allow-uri-read: 
+
+

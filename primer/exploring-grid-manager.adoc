@@ -1,0 +1,274 @@
+---
+permalink: primer/exploring-grid-manager.html 
+sidebar: sidebar 
+keywords: StorageGRID, what is the grid manager, grid manager dashboard 
+summary: ${post_edited_translations.segment} 
+---
+= 探索 StorageGRID Grid Manager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+NOTE: Grid Manager 會隨著每個版本更新，可能與此頁面上的範例螢幕截圖不符。
+
+登入 Grid Manager 時，您連線的是一個管理節點。每個 StorageGRID 系統都包含一個主管理節點和任意數量的非主管理節點。您可以連線至任何管理節點，每個管理節點顯示的 StorageGRID 系統檢視都類似。
+
+您可以使用以下方式存取 Grid Managerlink:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
+
+
+
+[[grid-manager-dashboard]]
+== 網格管理器儀表板
+
+首次登入 Grid Manager 時，您可以使用儀表板link:../monitor/viewing-dashboard.html["監控系統活動"]一目了然。
+
+儀表板包含關於系統健全狀況與效能、儲存設備使用量、ILM 程序、S3 作業以及網格中節點的資訊。您可以透過從卡片集合中進行選擇來 link:../monitor/viewing-dashboard.html["設定儀表板"]，這些卡片包含您有效監控系統所需的資訊。
+
+image:grid_manager_dashboard_and_menu.png["網格管理器中的儀表板"]
+
+若要了解每張卡片上顯示的資訊，請選擇該卡片的說明圖示 image:icon_nms_question.png["${post_edited_translations.segment}"]。
+
+
+
+[[search-field]]
+== 搜尋欄位
+
+標頭列中的 *Search* 欄位可讓您快速瀏覽至 Grid Manager 中的特定頁面。例如，您可以輸入 *km* 來存取金鑰管理伺服器 （KMS） 頁面。
+
+您可以使用「搜尋」功能在 Grid Manager 的側邊欄以及「組態」、「維護」和「支援」功能表中尋找條目。您也可以按名稱搜尋網格節點和租戶帳戶等項目。
+
+
+
+[[help-menu]]
+== ${post_edited_translations.segment}
+
+說明選單 image:icon-help-menu-bar.png["選單列上的說明圖示"] 提供以下項目的存取：
+
+* The link:../fabricpool/use-fabricpool-setup-wizard.html["FabricPool"] 和 link:../admin/use-s3-setup-wizard.html["S3 設定"] 精靈
+* StorageGRID 目前版本的文件網站
+* link:../admin/using-grid-management-api.html["API 文件"]
+* 有關目前已安裝的 StorageGRID 版本的資訊
+
+
+
+
+[[alerts-menu]]
+== 警報選單
+
+「警報」選單提供易於使用的介面，用於偵測、評估及解決 StorageGRID 運作期間可能發生的問題。
+
+在「提醒」功能表中，您可以執行以下操作link:../monitor/managing-alerts.html["${post_edited_translations.segment}"]：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 設定靜默模式以抑制警示通知
+* 定義觸發警示的條件警示規則
+* 設定電子郵件伺服器以接收警報通知
+
+
+
+
+[[nodes-page]]
+== 節點頁面
+
+link:../monitor/viewing-nodes-page.html["節點頁面"] 會顯示整個網格、網格中的每個站台，以及站台處每個節點的資訊。若要檢視特定站台或節點的資訊，請選取該站台或節點。
+
+
+
+[[tenants-page]]
+== 租戶頁面
+
+此 link:../admin/managing-tenants.html["租戶頁面"] 可讓您為您的 StorageGRID 系統 link:../tenant/index.html["建立和監控儲存設備租戶帳戶"]。您必須建立至少一個租戶帳戶，以指定誰可以儲存和擷取物件，以及他們可以使用哪些功能。
+
+「租戶」頁面也提供每位租戶的使用情況詳情，包括已使用儲存設備空間和物件數量。如果您在建立租戶時設定了配額，則可以查看已使用的配額量。
+
+
+
+[[ilm-menu]]
+== ${post_edited_translations.segment}
+
+此link:using-information-lifecycle-management.html["${post_edited_translations.segment}"]功能可讓您link:../ilm/index.html["設定資訊生命週期管理 （ILM） 規則和策略"]治理資料的持久性和可用度。您也可以輸入物件識別碼來檢視該物件的中繼資料。
+
+透過 ILM 選單，您可以檢視和管理 ILM：
+
+* 規則
+* ${post_edited_translations.segment}
+* 原則標籤
+* 儲存池
+* ${post_edited_translations.segment}
+* 地區
+* 物件中繼資料查詢
+
+
+
+
+[[configuration-menu]]
+== ${post_edited_translations.segment}
+
+設定選單可讓您指定網路設定、安全性設定、系統設定、監控選項和存取控制選項。
+
+
+
+[[network-tasks]]
+=== 網路任務
+
+網路任務包括：
+
+* link:../admin/managing-high-availability-groups.html["管理高可用度群組"]
+* link:../admin/managing-load-balancing.html["${post_edited_translations.segment}"]
+* link:../admin/configuring-s3-api-endpoint-domain-names.html["設定 S3 端點網域名稱"]
+* link:../admin/managing-traffic-classification-policies.html["管理流量分類原則"]
+* link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]
+* link:../admin/enable-cross-origin-resource-sharing-for-management-interface.html["為管理介面啟用 StorageGRID CORS"]
+
+
+
+
+[[security-tasks]]
+=== ${post_edited_translations.segment}
+
+安全性任務包括：
+
+* link:../admin/using-storagegrid-security-certificates.html["管理安全性證書"]
+* link:../admin/manage-firewall-controls.html["管理內部防火牆控制"]
+* link:../admin/kms-configuring.html["${post_edited_translations.segment}"]
+* 設定安全性設定，包括 link:../admin/manage-tls-ssh-policy.html["${post_edited_translations.segment}"]、link:../admin/changing-network-options-object-encryption.html["網路和物件安全性選項"]、link:../admin/changing-browser-session-timeout-interface.html["${post_edited_translations.segment}"] 和 link:../admin/manage-external-ssh-access.html["SSH 存取選項"]
+* 設定 link:../admin/configuring-storage-proxy-settings.html["${post_edited_translations.segment}"] 或 link:../admin/configuring-admin-proxy-settings.html["管理員 Proxy"] 的設定
+
+
+
+
+[[system-tasks]]
+=== 系統任務
+
+系統任務包括：
+
+* 使用 link:../admin/grid-federation-overview.html["${post_edited_translations.segment}"] 來 Clone 租戶帳戶資訊，並在兩個 StorageGRID 系統之間複寫物件資料
+* （可選）啟用 link:../admin/configuring-stored-object-compression.html["壓縮儲存物件"] 選項
+* （選填）設定 link:../s3/consistency.html["${post_edited_translations.segment}"]
+* link:../ilm/managing-objects-with-s3-object-lock.html["管理 S3 物件鎖定"]
+* 了解儲存設備設定，例如link:../admin/what-storage-volume-watermarks-are.html["儲存設備 Volume 浮水印"]
+* link:../ilm/manage-erasure-coding-profiles.html["管理糾刪碼設定檔"]
+
+
+
+
+[[monitoring-tasks]]
+=== 監控任務
+
+監控任務包括：
+
+* link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]
+* link:../monitor/using-snmp-monitoring.html["使用 SNMP 監控"]
+
+
+
+
+[[access-control-tasks]]
+=== 存取控制任務
+
+存取控制任務包括：
+
+* link:../admin/managing-admin-groups.html["${post_edited_translations.segment}"]
+* link:../admin/managing-users.html["管理系統管理員使用者"]
+* 更改 link:../admin/changing-provisioning-passphrase.html["佈建密碼"] 或 link:../admin/change-node-console-password.html["節點主控台密碼"]
+* link:../admin/using-identity-federation.html["${post_edited_translations.segment}"]
+* link:../admin/how-sso-works.html["設定 SSO"]
+
+
+
+
+[[maintenance-menu]]
+== 維護選單
+
+維護選單可讓您執行維護任務、系統維護和網路維護。
+
+
+
+[[tasks]]
+=== 任務
+
+維護任務包括：
+
+* link:../maintain/decommission-procedure.html["退役作業"]移除未使用的網格節點和站台
+* link:../expand/index.html["擴充作業"]新增網格節點和站台
+* link:../maintain/warnings-and-considerations-for-grid-node-recovery.html["網格節點恢復程序"] 替換故障節點並還原資料
+* link:../maintain/rename-grid-site-node-overview.html["重新命名程序"]變更網格、站台和節點的顯示名稱
+* link:../troubleshoot/verifying-object-integrity.html["物件存在檢查作業"] 以驗證物件資料的存在性（雖然並非其正確性）
+* 執行link:../maintain/rolling-reboot-procedure.html["滾動重新開機"]以重新啟動多個網格節點
+* link:../maintain/restoring-volume.html["${post_edited_translations.segment}"]
+
+
+
+
+[[system]]
+=== 系統
+
+${post_edited_translations.segment}
+
+* link:../admin/viewing-storagegrid-license-information.html["檢視 StorageGRID 授權資訊"] 或 link:../admin/updating-storagegrid-license-information.html["更新授權資訊"]
+* 產生並下載 link:../maintain/downloading-recovery-package.html["${post_edited_translations.segment}"]
+* ${post_edited_translations.segment}
++
+** link:../upgrade/index.html["升級程序"]
+** link:../maintain/storagegrid-hotfix-procedure.html["${post_edited_translations.segment}"]
+** https://docs.netapp.com/us-en/storagegrid-appliances/sg6000/upgrading-santricity-os-on-storage-controllers-using-grid-manager-sg6000.html["使用 Grid Manager 升級 SG6000 儲存控制器上的 SANtricity OS"^]
+** https://docs.netapp.com/us-en/storagegrid-appliances/sg5700/upgrading-santricity-os-on-storage-controllers-using-grid-manager-sg5700.html["使用 Grid Manager 升級 SG5700 儲存控制器上的 SANtricity OS"^]
+
+
+
+
+
+
+[[network]]
+=== 網路
+
+您可以執行的網路維護任務包括：
+
+* link:../maintain/configuring-dns-servers.html["${post_edited_translations.segment}"]
+* link:../maintain/updating-subnets-for-grid-network.html["更新網格網路子網路"]
+* link:../maintain/configuring-ntp-servers.html["管理 NTP 伺服器"]
+
+
+
+
+[[support-menu]]
+== 支援選單
+
+「支援」選單提供了一些選項，可協助技術支援分析及疑難排解您的系統。
+
+
+
+[[tools]]
+=== 工具
+
+在「支援」功能表的「工具」部分，您可以：
+
+* link:../admin/configure-autosupport-grid-manager.html["設定 AutoSupport"]
+* link:../monitor/running-diagnostics.html["執行診斷"]目前網格狀況
+* link:../monitor/collecting-log-files-and-system-data.html["收集日誌檔和系統資料"]
+* link:../monitor/reviewing-support-metrics.html["審查支援計量"]
++
+
+NOTE: 「指標」選項中提供的工具僅供技術支援人員使用。這些工具中的某些功能和選單項目故意設定為無法使用。
+
+
+
+
+
+[[other]]
+=== 其他
+
+在「支援」功能表的「其他」部分，您可以：
+
+* 設定 link:../monitor/manage-io-prioritization.html["I/O 優先權"]
+* 設定 link:../admin/configure-autosupport-grid-manager.html["AutoSupport 電子郵件設定（舊版）"]
+* 管理 link:../admin/manage-link-costs.html["連結成本"]
+* 檢視節點服務 ID
+* 管理 link:../admin/what-storage-volume-watermarks-are.html["儲存設備浮水印"]
+

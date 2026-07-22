@@ -1,0 +1,25 @@
+---
+permalink: maintain/checking-storage-state-after-recovering-storage-volumes.html 
+sidebar: sidebar 
+keywords: storagegrid, storage volume recovery, storage state, storage volume 
+summary: 恢復儲存設備磁碟區後，必須驗證儲存節點的期望狀態是否設定為線上，並確保每次重新啟動儲存節點伺服器時，此狀態預設為線上。 
+---
+= 恢復 StorageGRID 儲存磁碟區後檢查儲存狀態
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+恢復儲存設備磁碟區後，必須驗證儲存節點的期望狀態是否設定為線上，並確保每次重新啟動儲存節點伺服器時，此狀態預設為線上。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* ${post_edited_translations.segment}
+
+
+.步驟
+. 選擇 *節點* > *_儲存節點_* > *工作*。
+. 如果 *Storage state* 下拉清單設定為「唯讀」或「離線」，請選擇 *Online*。
+. 選取 *Save* 。
+

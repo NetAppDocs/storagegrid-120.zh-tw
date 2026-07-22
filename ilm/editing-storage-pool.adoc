@@ -1,0 +1,46 @@
+---
+permalink: ilm/editing-storage-pool.html 
+sidebar: sidebar 
+keywords: edit storage pool 
+summary: ${post_edited_translations.segment} 
+---
+= 在 StorageGRID 中編輯儲存資源池
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+* 您已審閱 link:guidelines-for-creating-storage-pools.html["建立儲存資源池的準則"]。
+* 如果您計劃編輯作用中 ILM 原則中的規則所使用的儲存資源池，則應考慮您的變更將如何影響物件資料放置。
+
+
+.關於此任務
+如果您要為使用中 ILM 原則的儲存資源池新增新的站台或儲存設備等級，請注意，新站台或儲存設備等級中的儲存節點不會自動使用。若要強制 StorageGRID 使用新的站台或儲存設備等級，您必須在儲存已編輯的儲存資源池後啟動新的 ILM 原則。
+
+.步驟
+. 選擇 *ILM* > *儲存資源池*。
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 根據需要，選擇其他場地和儲存設備等級。
++
+如果儲存資源池已用於銷毀編碼設定檔中，且變更會導致銷毀編碼配置失效，則系統會阻止您變更站台或儲存等級。例如，如果銷毀編碼設定檔中使用的儲存資源池目前包含僅有一個站台的儲存等級，則系統會阻止您使用具有兩個站台的儲存等級，因為此變更會使銷毀編碼配置失效。
+
++
+
+CAUTION: 從現有的儲存資源池中新增或移除站台，並不會移動任何現有的銷毀編碼資料。如果您想從該站台移動現有資料，則必須建立新的儲存資源池和 EC 設定檔，以重新編碼資料。
+
+. 選取 *Save* 。
+
+
+.完成後
+如果您在目前 ILM 原則中使用的儲存資源池新增了新的網站或儲存設備等級，請啟動新的 ILM 原則，強制 StorageGRID 使用新的網站或儲存設備等級。例如，Clone 現有的 ILM 原則，然後啟動該 Clone。請參閱 link:working-with-ilm-rules-and-ilm-policies.html["${post_edited_translations.segment}"]。

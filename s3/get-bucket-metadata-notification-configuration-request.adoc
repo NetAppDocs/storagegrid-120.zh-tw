@@ -1,0 +1,185 @@
+---
+permalink: s3/get-bucket-metadata-notification-configuration-request.html 
+sidebar: sidebar 
+keywords: S3 REST API, S3 operations, GET bucket metadata notification configuration 
+summary: GET Bucket 中繼資料通知組態請求可讓您擷取用於設定各個儲存桶搜尋整合的組態 XML。 
+---
+= 使用 GET Bucket 元資料通知組態要求在 StorageGRID 中設定搜尋整合
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+GET Bucket 中繼資料通知組態請求可讓您擷取用於設定各個儲存桶搜尋整合的組態 XML。
+
+您必須擁有 s3:GetBucketMetadataNotification 權限，或者是帳戶 root 使用者，才能完成此操作。
+
+
+
+[[request-example]]
+== 請求範例
+
+此請求會擷取名為 `bucket`的儲存桶的中繼資料通知組態。
+
+[listing, subs="specialcharacters,quotes"]
+----
+GET /bucket?x-ntap-sg-metadata-notification HTTP/1.1
+Date: _date_
+Authorization: _authorization string_
+Host: _host_
+----
+
+
+[[response]]
+== 回應
+
+回應正文包含儲存桶的中繼資料通知組態。中繼資料通知組態可讓您確定如何設定儲存桶以進行搜尋整合。也就是說，它可讓您確定哪些物件會被索引，以及其物件中繼資料會傳送至哪些端點。
+
+[listing]
+----
+<MetadataNotificationConfiguration>
+    <Rule>
+        <ID>Rule-1</ID>
+        <Status>rule-status</Status>
+        <Prefix>key-prefix</Prefix>
+        <Destination>
+           <Urn>arn:aws:es:_region:account-ID_:domain/_mydomain/myindex/mytype_</Urn>
+        </Destination>
+    </Rule>
+    <Rule>
+        <ID>Rule-2</ID>
+         ...
+    </Rule>
+     ...
+</MetadataNotificationConfiguration>
+----
+每個中繼資料通知組態都包含一條或多條規則。每條規則指定其適用的物件以及 StorageGRID 應將物件中繼資料傳送到的目的地。目的地必須使用 StorageGRID 端點的 URN 指定。
+
+[cols="1a,2a,1a"]
+|===
+| Name | 說明 | 必填 
+
+
+ a| 
+MetadataNotificationConfiguration
+ a| 
+用於指定中繼資料通知的物件和目的地的規則容器標籤。
+
+包含一個或多個規則元素。
+ a| 
+是的
+
+
+
+ a| 
+規則
+ a| 
+用於識別應將其中繼資料新增至指定索引之物件規則的容器標籤。
+
+前綴重疊的規則將被拒絕。
+
+包含在 MetadataNotificationConfiguration 元素中。
+ a| 
+是的
+
+
+
+ a| 
+ID
+ a| 
+規則的唯一識別碼。
+
+包含在規則元素中。
+ a| 
+否
+
+
+
+ a| 
+狀態
+ a| 
+狀態可以是「已啟用」或「已停用」。對於已停用的規則，不會採取任何行動。
+
+包含在規則元素中。
+ a| 
+是的
+
+
+
+ a| 
+前綴
+ a| 
+與前綴相符的物件會受到該規則的影響，其中繼資料會傳送至指定的目的地。
+
+若要符合所有物件，請指定空白前綴。
+
+包含在規則元素中。
+ a| 
+是的
+
+
+
+ a| 
+目的地
+ a| 
+規則目的地的容器標籤。
+
+包含在規則元素中。
+ a| 
+是的
+
+
+
+ a| 
+Urn
+ a| 
+物件中繼資料發送到的目的地的 URN。必須是具有以下屬性的 StorageGRID 端點的 URN：
+
+* `es`必須是第三個元素。
+* URN 必須以中繼資料儲存的索引和類型結尾，格式為 `domain-name/myindex/mytype`。
+
+
+端點透過 Tenant Manager 或租戶管理 API 進行設定。它們採用以下形式：
+
+* `arn:aws:es:_region:account-ID_:domain/mydomain/myindex/mytype`
+* `urn:mysite:es:::mydomain/myindex/mytype`
+
+
+必須先設定端點，然後才能提交組態 XML，否則組態將失敗並出現 404 錯誤。
+
+Urn 包含在 Destination 元素中。
+ a| 
+是的
+
+|===
+
+
+[[response-example]]
+== 回應範例
+
+ `<MetadataNotificationConfiguration></MetadataNotificationConfiguration>` 標籤之間的 XML 程式碼展示如何為儲存桶設定與搜尋整合端點的整合。在本例中，物件中繼資料被傳送到名為 `current`、類型名稱為 `2017` 的 Elasticsearch 索引，該索引託管在名為 `records` 的 AWS 網域中。
+
+[listing]
+----
+HTTP/1.1 200 OK
+Date: Thu, 20 Jul 2017 18:24:05 GMT
+Connection: KEEP-ALIVE
+Server: StorageGRID/11.0.0
+x-amz-request-id: 3832973499
+Content-Length: 264
+Content-Type: application/xml
+
+<MetadataNotificationConfiguration>
+    <Rule>
+        <ID>Rule-1</ID>
+        <Status>Enabled</Status>
+        <Prefix>2017</Prefix>
+        <Destination>
+           <Urn>arn:aws:es:us-east-1:3333333:domain/records/current/2017</Urn>
+        </Destination>
+    </Rule>
+</MetadataNotificationConfiguration>
+----
+.相關資訊
+link:../tenant/index.html["使用租戶帳戶"]

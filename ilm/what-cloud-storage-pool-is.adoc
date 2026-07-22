@@ -1,0 +1,102 @@
+---
+permalink: ilm/what-cloud-storage-pool-is.html 
+sidebar: sidebar 
+keywords: what is a cloud storage pool 
+summary: 雲端儲存資源池可讓您使用 ILM 將物件資料移出 StorageGRID 系統。例如，您可能想要將不常存取的物件移至成本較低的雲端儲存，例如 Amazon S3 Glacier、S3 Glacier Deep Archive、Google Cloud 或 Microsoft Azure Blob 儲存中的封存存取分層。或者，您可能想要保留 StorageGRID 物件的雲端備份，以增強災難恢復。 
+---
+= 了解 StorageGRID 中的雲端儲存資源池
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+雲端儲存資源池可讓您使用 ILM 將物件資料移出 StorageGRID 系統。例如，您可能想要將不常存取的物件移至成本較低的雲端儲存，例如 Amazon S3 Glacier、S3 Glacier Deep Archive、Google Cloud 或 Microsoft Azure Blob 儲存中的封存存取分層。或者，您可能想要保留 StorageGRID 物件的雲端備份，以增強災難恢復。
+
+從 ILM 的角度來看，Cloud Storage Pool 類似於儲存資源池。若要將物件儲存在任一位置，您可以在為 ILM 規則建立放置指示時選擇該資源池。然而，儲存資源池是由 StorageGRID 系統內的 Storage Node 組成，而 Cloud Storage Pool 則是由外部 Bucket (S3) 或 Container (Azure Blob storage) 組成。
+
+${post_edited_translations.segment}
+
+[cols="1a,2a,5a"]
+|===
+|  | 儲存資源池 | 雲端儲存資源池 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+在 Grid Manager 中使用 *ILM* > *Storage pools* > *Cloud Storage Pools* 選項。
+
+必須先設定外部儲存桶或 Container，然後才能建立雲端儲存資源池。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+在 StorageGRID 中的一個或多個儲存節點上。
+ a| 
+${post_edited_translations.segment}
+
+如果雲端儲存資源池是 Amazon S3 儲存桶：
+
+* 您可以選擇設定儲存桶生命週期，將物件遷移到低成本的長期儲存設備，例如 Amazon S3 Glacier 或 S3 Glacier Deep Archive。外部儲存系統必須支援 Glacier 儲存設備類別和 S3 RestoreObject API。
+* ${post_edited_translations.segment}
+
+
+如果雲端儲存資源池是 Azure Blob 儲存 Container，StorageGRID 會將物件轉換到 Archive 分層。
+
+*注意：* 通常情況下、請勿為用於雲端儲存資源池的 Container 設定 Azure Blob 儲存設備生命週期管理。RestoreObject 對雲端儲存資源池中物件的操作可能會受到已設定生命週期的影響。
+
+
+
+ a| 
+物件放置由什麼控制？
+ a| 
+現行 ILM 原則中的 ILM 規則。
+ a| 
+現行 ILM 原則中的 ILM 規則。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+多種的。
+ a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+有哪些優勢？
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+*注意*：FabricPool 資料無法分層至雲端儲存資源池。
+
+|===

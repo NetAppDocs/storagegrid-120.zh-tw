@@ -1,0 +1,25 @@
+---
+permalink: monitor/viewing-network-tab.html 
+sidebar: sidebar 
+keywords: network tab 
+summary: 「網路」標籤顯示一個圖表，顯示節點、站台或網格上所有網路介面接收和傳送的網路流量。 
+---
+= 檢視 StorageGRID 網路標籤
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+「網路」標籤顯示一個圖表，顯示節點、站台或網格上所有網路介面接收和傳送的網路流量。
+
+${post_edited_translations.segment}
+
+若要顯示不同的時間間隔，請選擇圖表上方的控制項之一。您可以顯示 1 小時、1 天、1 週或 1 個月時間間隔內的資訊。您也可以設定自訂時間間隔，從而指定日期和時間範圍。
+
+對於節點而言，「網路介面」表提供有關每個節點實體網路連接埠的資訊。「網路通訊」表提供有關每個節點的接收和發送操作以及驅動程式報告的任何故障計數器的詳細資訊。
+
+image:nodes_page_network_tab.png["${post_edited_translations.segment}"]
+
+.相關資訊
+link:monitoring-network-connections-and-performance.html["監控網路連線和效能"]

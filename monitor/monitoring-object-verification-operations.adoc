@@ -1,0 +1,70 @@
+---
+permalink: monitor/monitoring-object-verification-operations.html 
+sidebar: sidebar 
+keywords: object, verification 
+summary: StorageGRID 系統可以驗證儲存節點上物件資料的完整性，檢查是否有毀損或遺失的物件。 
+---
+= 監控 StorageGRID 中的物件驗證作業
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 系統可以驗證儲存節點上物件資料的完整性，檢查是否有毀損或遺失的物件。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+
+
+.關於此任務
+兩個 link:../troubleshoot/verifying-object-integrity.html["驗證程序"] 共同運作以確保資料完整性：
+
+* *背景驗證*自動執行，持續檢查物件資料的正確性。
++
+背景驗證會自動持續檢查所有儲存節點，以確定是否存在已複製且經過銷除編碼處理的物件資料的毀損副本。如果發現問題，StorageGRID 系統會自動嘗試從系統中其他位置儲存的副本取代毀損的物件資料。背景驗證不會對雲端儲存集區中的物件執行。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
++
+物件存在性檢查用於驗證儲存節點上是否存在所有預期的複寫物件副本和銷除編碼片段。物件存在性檢查提供了一種驗證儲存裝置完整性的方法，尤其是在近期硬體問題可能影響資料完整性的情況下。
+
+
+
+您應該定期審查背景驗證與物件存在檢查的結果。立即調查任何毀損或遺失物件資料的情況，以判斷根目錄原因。
+
+.步驟
+. 審查背景驗證結果：
++
+.. ${post_edited_translations.segment}
+.. 檢視驗證結果：
++
+*** 若要檢查複製物件資料的驗證情況，請查看「驗證」區段中的屬性。
++
+image:nodes_storage_node_object_verification.png["節點 > 儲存節點 > 物件 > 驗證"]
+
+*** 若要檢查糾刪碼片段驗證，請選擇 *_Storage Node_* > *ILM*，然後查看糾刪碼驗證部分中的屬性。
++
+image:nodes_storage_node_ilm_ec_verification.png["節點 > 儲存節點 > ILM > EC 驗證"]
+
++
+選擇屬性名稱旁的問號 image:icon_nms_question.png["問號"] 即可顯示說明文字。
+
+
+
+
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
+.. 掃描「偵測到遺失物件複本」欄。如果有任何工作導致 100 個或更多遺失物件複本，且已觸發「*可能遺失物件*」警示，請聯絡技術支援。
++
+image:oec_job_history.png["物件存在性檢查作業歷史記錄"]
+
+
+
+

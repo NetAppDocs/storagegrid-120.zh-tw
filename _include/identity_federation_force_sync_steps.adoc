@@ -1,0 +1,17 @@
+= 
+:allow-uri-read: 
+
+
+StorageGRID 系統會定期從識別來源同步聯盟群組與使用者。如果您想儘快啟用或限制使用者權限，可以強制開始同步。
+
+.步驟
+. 前往身分聯盟頁面。
+. ${post_edited_translations.segment}
++
+同步程序可能需要一些時間，視您的環境而定。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+

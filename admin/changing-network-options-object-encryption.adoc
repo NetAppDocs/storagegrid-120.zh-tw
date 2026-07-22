@@ -1,0 +1,79 @@
+---
+permalink: admin/changing-network-options-object-encryption.html 
+sidebar: sidebar 
+keywords: enable http, storage node connections 
+summary: 您可以設定網路和物件安全性，以加密儲存的物件、阻止某些 S3 請求，或允許用戶端連線至儲存節點時使用 HTTP 而非 HTTPS。 
+---
+= 設定 StorageGRID 網路和物件安全
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以設定網路和物件安全性，以加密儲存的物件、阻止某些 S3 請求，或允許用戶端連線至儲存節點時使用 HTTP 而非 HTTPS。
+
+
+
+[[stored-object-encryption]]
+== 儲存物件加密
+
+儲存物件加密可在透過 S3 匯入所有物件資料時對其進行加密。預設情況下，儲存物件不會加密，但您可以選擇使用 AES‐128 或 AES‐256 加密演算法對物件加密。啟用此設定後，所有新匯入的物件都會加密，但現有儲存物件不會有任何變更。如果停用加密，目前已加密的物件仍保持加密狀態，但新匯入的物件將不會加密。
+
+儲存物件加密設定僅適用於尚未透過儲存桶層級或物件層級加密進行加密的 S3 物件。
+
+有關 StorageGRID 加密方法的更多詳細資訊，請參閱link:../admin/reviewing-storagegrid-encryption-methods.html["檢閱 StorageGRID 加密方法"]。
+
+
+
+[[prevent-client-modification]]
+== 防止用戶端修改
+
+「防止用戶端修改」是一項全系統設定。選取「防止用戶端修改」選項後，以下請求將被拒絕。
+
+
+
+[[s3-rest-api]]
+=== S3 REST API
+
+* DeleteBucket 請求
+* 任何修改現有物件資料、使用者定義中繼資料或 S3 物件標記的請求
+
+
+
+
+[[enable-http-for-storage-node-connections]]
+== 為儲存節點連線啟用 HTTP
+
+預設情況下，用戶端應用程式使用 HTTPS 網路傳輸協定與儲存節點建立任何直接連線。您可以選擇為這些連線啟用 HTTP，例如，在測試非生產網格時。
+
+只有當 S3 用戶端需要直接與儲存節點建立 HTTP 連線時，才使用 HTTP 進行儲存節點連線。對於僅使用 HTTPS 連線的用戶端或連線到負載平衡器服務的用戶端，則無需使用此選項（因為可以link:../admin/configuring-load-balancer-endpoints.html["設定每個負載平衡器端點"]使用 HTTP 或 HTTPS）。
+
+請參閱 link:summary-ip-addresses-and-ports-for-client-connections.html["摘要：用戶端連線的 IP 位址和連接埠"] 以了解 S3 用戶端在使用 HTTP 或 HTTPS 連線至儲存節點時所使用的連接埠。
+
+
+
+[[select-options]]
+== 選擇選項
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您擁有根目錄存取權限。
+
+
+.步驟
+. ${post_edited_translations.segment}
+. 選擇「網路和物件」索引標籤。
+. 對於儲存物件加密，如果您不希望對儲存物件進行加密，請使用 *None*（預設）設定；或選擇 *AES-128* 或 *AES-256* 來加密儲存物件。
+. 如果您想防止 S3 用戶端發出特定請求，可以選擇性地選取 *Prevent client modification*。
++
+
+NOTE: 更改此設定後，新設定大約需要一分鐘才能生效。已設定的值會被快取，以提高效能和擴充性。
+
+. 如果用戶端直接連線至儲存節點，且您想要使用 HTTP 連線，請選擇性地選取 *Enable HTTP for Storage Node connections*。
++
+
+NOTE: 在生產網格中啟用 HTTP 時要格外小心，因為請求將以未加密的方式傳送。
+
+. 選取 *Save* 。
+

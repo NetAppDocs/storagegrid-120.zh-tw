@@ -1,0 +1,102 @@
+---
+permalink: audit/object-ingest-transactions.html 
+sidebar: sidebar 
+keywords: object ingest transaction, S3 ingest, SPUT, ORLM, WPUT 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID 中物件擷取交易的稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+下表並未列出擷取交易期間產生的所有稽核訊息。其中僅包含追蹤擷取交易所需的訊息。
+
+
+
+[[s3-ingest-audit-messages]]
+== S3 擷取稽核訊息
+
+[cols="1a,1a,2a,1a,2a"]
+|===
+| 程式碼 | Name | 說明 | ${post_edited_translations.segment} | 請參閱 
+
+
+ a| 
+SPUT
+ a| 
+${post_edited_translations.segment}
+ a| 
+S3 PUT 擷取交易已成功完成。
+ a| 
+CBID、S3BK、S3KY
+ a| 
+link:sput-s3-put.html["SPUT：S3 PUT"]
+
+
+
+ a| 
+ORLM
+ a| 
+符合物件規則
+ a| 
+此物件已滿足 ILM 原則。
+ a| 
+CBID
+ a| 
+link:orlm-object-rules-met.html["ORLM：物件規則已符合"]
+
+|===
+
+
+[[example-s3-object-ingest]]
+== 範例：S3 物件擷取
+
+${post_edited_translations.segment}
+
+在這個例子中，有效的 ILM 原則包括 Make 2 Copies ILM 規則。
+
+
+NOTE: 並非交易期間產生的所有稽核訊息都會列在以下範例中。僅列出與 S3 擷取交易 （SPUT） 相關的訊息。
+
+${post_edited_translations.segment}
+
+
+
+[[sput-s3-put]]
+=== SPUT：S3 PUT
+
+SPUT 訊息用於指示已發出 S3 PUT 交易，以在特定儲存貯體中建立物件。
+
+[listing, subs="specialcharacters,quotes"]
+----
+2017-07-17T21:17:58.959669[AUDT:[RSLT(FC32):SUCS][TIME(UI64):25771][SAIP(IPAD):"10.96.112.29"][S3AI(CSTR):"70899244468554783528"][SACC(CSTR):"test"][S3AK(CSTR):"SGKHyalRU_5cLflqajtaFmxJn946lAWRJfBF33gAOg=="][SUSR(CSTR):"urn:sgws:identity::70899244468554783528:root"][SBAI(CSTR):"70899244468554783528"][SBAC(CSTR):"test"][S3BK(CSTR):"example"][S3KY(CSTR):"testobject-0-3"][CBID\(UI64\):0x8EF52DF8025E63A8][CSIZ(UI64):30720][AVER(UI32):10][ATIM(UI64):150032627859669][ATYP\(FC32\):SPUT][ANID(UI32):12086324][AMID(FC32):S3RQ][ATID(UI64):14399932238768197038]]
+----
+
+
+[[orlm-object-rules-met]]
+=== ORLM：物件規則已符合
+
+ORLM 訊息表示此物件已滿足 ILM 原則。此訊息包含該物件的 CBID 以及所套用的 ILM 規則名稱。
+
+${post_edited_translations.segment}
+
+[listing, subs="specialcharacters,quotes"]
+----
+2019-07-17T21:18:31.230669[AUDT:[CBID\(UI64\):0x50C4F7AC2BC8EDF7][RULE(CSTR):"Make 2 Copies"][STAT(FC32):DONE][CSIZ(UI64):0][UUID(CSTR):"0B344E18-98ED-4F22-A6C8-A93ED68F8D3F"][LOCS(CSTR):"CLDI 12828634 2148730112, CLDI 12745543 2147552014"][RSLT(FC32):SUCS][AVER(UI32):10][ATYP\(FC32\):ORLM][ATIM(UI64):1563398230669][ATID(UI64):15494889725796157557][ANID(UI32):13100453][AMID(FC32):BCMS]]
+----
+${post_edited_translations.segment}
+
+[listing, subs="specialcharacters,quotes"]
+----
+2019-02-23T01:52:54.647537 [AUDT:[CBID(UI64):0xFA8ABE5B5001F7E2][RULE(CSTR):"EC_2_plus_1"][STAT(FC32):DONE][CSIZ(UI64):10000][UUID(CSTR):"E291E456-D11A-4701-8F51-D2F7CC9AFECA"][LOCS(CSTR):"CLEC 1 A471E45D-A400-47C7-86AC-12E77F229831"][RSLT(FC32):SUCS][AVER(UI32):10][ATIM(UI64):1550929974537]\[ATYP\(FC32\):ORLM\][ANID(UI32):12355278][AMID(FC32):ILMX][ATID(UI64):4168559046473725560]]
+----
+${post_edited_translations.segment}
+
+[listing]
+----
+2019-09-15.txt:2018-01-24T13:52:54.131559 [AUDT:[CBID(UI64):0x82704DFA4C9674F4][RULE(CSTR):"Make 2 Copies"][STAT(FC32):DONE][CSIZ(UI64):3145729][UUID(CSTR):"8C1C9CAC-22BB-4880-9115-CE604F8CE687"][PATH(CSTR):"frisbee_Bucket1/GridDataTests151683676324774_1_1vf9d"][LOCS(CSTR):"CLDI 12525468, CLDI 12222978"][RSLT(FC32):SUCS][AVER(UI32):10][ATIM(UI64):1568555574559][ATYP(FC32):ORLM][ANID(UI32):12525468][AMID(FC32):OBDI][ATID(UI64):344833886538369336]]
+----

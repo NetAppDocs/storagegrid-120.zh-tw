@@ -1,0 +1,100 @@
+---
+permalink: s3/complete-multipart-upload.html 
+sidebar: sidebar 
+keywords: multipart upload, object, object size 
+summary: CompleteMultipartUpload 操作透過組裝先前上傳的各個部分，完成物件的多部分上傳。 
+---
+= StorageGRID S3 REST API 如何完成多部分上傳
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+CompleteMultipartUpload 操作透過組裝先前上傳的各個部分，完成物件的多部分上傳。
+
+
+NOTE: StorageGRID 支援 CompleteMultipartUpload 的  `partNumber` 請求參數使用非連續值，並依升序排列。此參數可以從任何值開始。
+
+
+
+[[resolve-conflicts]]
+== 解決衝突
+
+當用戶端請求發生衝突時，例如兩個用戶端同時寫入同一個金鑰，系統會遵循「最新優先」的原則來解決衝突。這種「最新優先」的判斷依據是 StorageGRID 系統完成請求的時間，而不是 S3 用戶端開始操作的時間。
+
+
+
+[[supported-request-headers]]
+== 支援的要求標頭
+
+支援以下請求標頭：
+
+* `x-amz-checksum-sha256`
+* `x-amz-storage-class`
++
+The `x-amz-storage-class` 標頭會影響 StorageGRID 建立的物件複本數量（如果符合的 ILM 規則指定了link:../ilm/data-protection-options-for-ingest.html["雙重提交或平衡擷取選項"]）。
+
+* `STANDARD`
++
+（預設）指定當 ILM 規則使用 Dual commit 選項，或當 Balanced 選項回退到建立臨時複本時執行雙重提交擷取操作。
+
+* `REDUCED_REDUNDANCY`
++
+指定當 ILM 規則使用雙重提交選項，或當平衡選項回退到建立臨時複本時，執行單次提交擷取操作。
+
++
+
+NOTE: 如果將物件擷取至已啟用 S3 物件鎖定的儲存桶，則 `REDUCED_REDUNDANCY`選項將被忽略。如果將物件擷取至舊版法規遵循儲存桶，則 `REDUCED_REDUNDANCY`選項會傳回錯誤。StorageGRID 一律會執行雙重提交擷取，以確保符合法規遵循要求。
+
+
+
+
+CAUTION: 如果多部分上傳在 15 天內未完成，該作業將標記為非作用中狀態，且所有相關資料將從系統中刪除。
+
+
+NOTE: 傳回的值 `ETag`不是資料的 MD5 總和，而是遵循 Amazon S3 API 對多部分物件的 `ETag`值實作。
+
+
+
+[[unsupported-request-headers]]
+== 不支援的要求標頭
+
+不支援以下請求標頭：
+
+* `If-Match`
++
+ `If-Match header`已被接受，但無法正常使用。
+
+* `If-None-Match`
++
+ `If-None-Match header`已被接受，但無法正常使用。
+
+* `x-amz-sdk-checksum-algorithm`
+* `x-amz-trailer`
+
+
+
+
+[[versioning]]
+== 版本控制
+
+此操作完成分段上傳。如果儲存桶啟用了版本控制，則會在分段上傳完成後建立物件版本。
+
+如果儲存桶啟用了版本控制，則會自動為儲存物件的版本產生一個唯一 `versionId`識別碼。此 `versionId`識別碼也會透過 `x-amz-version-id`回應標頭在回應中傳回。
+
+如果版本控制暫停，物件版本將以 null `versionId` 值儲存；如果已存在 null 版本，則會被覆寫。
+
+
+NOTE: 如果儲存桶啟用了版本控制，即使在同一物件金鑰上同時存在多個已完成的多部分上傳，完成一次多部分上傳也總是會建立一個新版本。如果儲存桶未啟用版本控制，則可能出現以下情況：啟動一次多部分上傳後，同一物件金鑰上的另一個多部分上傳會先啟動並完成。對於未啟用版本控制的儲存桶，最後完成的多部分上傳將優先。
+
+
+
+[[failed-replication-notification-or-metadata-notification]]
+== 複寫失敗、通知失敗或中繼資料通知失敗
+
+如果進行分段上傳的儲存桶已設定為平台服務，即使相關的複寫或通知行動失敗，分段上傳也會成功。
+
+租戶可以透過更新物件的中繼資料或標籤來觸發失敗的複寫或通知。租戶可以重新提交現有值，以避免進行不必要的變更。
+
+請參閱 link:../admin/troubleshooting-platform-services.html["平台服務疑難排解"]。

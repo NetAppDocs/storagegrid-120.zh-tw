@@ -1,0 +1,52 @@
+---
+permalink: upgrade/upgrade-workflow.html 
+sidebar: sidebar 
+keywords: upgrade workflow 
+summary: 開始升級前，請審查整體工作流程。StorageGRID 升級頁面會引導您完成升級步驟。 
+---
+= StorageGRID 升級快速入門
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+開始升級前，請審查整體工作流程。StorageGRID 升級頁面會引導您完成每個升級步驟。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一"] 準備 Linux 主機
+[role="quick-margin-para"]
+如果任何 StorageGRID 節點部署在 Linux 主機上，link:linux-installing-rpm-or-deb-package-on-all-hosts.html["在每台主機上安裝 RPM 或 DEB 套件"]請在開始升級之前執行此操作。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["二"] 上傳升級和 Hotfix 檔案
+[role="quick-margin-para"]
+從主要管理節點存取 StorageGRID 升級頁面，並上傳升級檔案和 Hotfix 檔案（如果需要）。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["三"] 下載恢復套件
+[role="quick-margin-para"]
+開始升級之前、請先下載目前的恢復套件。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["四"] 執行升級預先檢查
+[role="quick-margin-para"]
+升級預檢查可以幫助您檢測問題，以便您在開始實際升級之前解決這些問題。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png["五"] 開始升級
+[role="quick-margin-para"]
+升級開始時，系統會再次執行預檢查，主管理節點將自動升級。主管理節點升級期間，您將無法存取 Grid Manager。稽核日誌也將無法使用。此升級過程可能需要長達 30 分鐘。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-6.png["六"] 下載恢復套件
+[role="quick-margin-para"]
+主要管理節點升級完成後，請下載新的恢復套件。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-7.png["七"] 批准節點
+[role="quick-margin-para"]
+您可以批准單一網格節點、網格節點群組或所有網格節點。
+
+
+CAUTION: 除非確定節點已準備好停止和重新啟動，否則請勿核准該網格節點的升級。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-8.png["八"] 恢復作業
+[role="quick-margin-para"]
+當所有網格節點升級後，新功能將會啟用，您可以恢復作業。您必須等待背景 *Upgrade database* 工作和 *Final upgrade steps* 工作完成後，才能執行退役或擴充程序。
+
+.相關資訊
+link:estimating-time-to-complete-upgrade.html["估算完成升級所需的時間"]

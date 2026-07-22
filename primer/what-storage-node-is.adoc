@@ -1,0 +1,253 @@
+---
+permalink: primer/what-storage-node-is.html 
+sidebar: sidebar 
+keywords: StorageGRID, what is a storage node, how many storage nodes 
+summary: 儲存設備節點管理並儲存物件資料和中繼資料。儲存設備節點包含在磁碟上儲存、移動、驗證及擷取物件資料和中繼資料所需的服務與程序。 
+---
+= 什麼是 StorageGRID 儲存節點？
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+儲存設備節點管理並儲存物件資料和中繼資料。儲存設備節點包含在磁碟上儲存、移動、驗證及擷取物件資料和中繼資料所需的服務與程序。
+
+${post_edited_translations.segment}
+
+
+
+[[types-of-storage-nodes]]
+== ${post_edited_translations.segment}
+
+在安裝期間，您可以選擇要安裝的 Storage Node 類型。這些類型適用於軟體型 Storage Node，以及支援此功能的硬體設備型 Storage Node：
+
+* 合併資料和中繼資料儲存節點
+* ${post_edited_translations.segment}
+* 僅資料儲存節點
+
+
+在以下情況下，您可以選擇儲存節點類型：
+
+* 首次安裝儲存節點時
+* 在 StorageGRID 系統擴充期間新增儲存節點時
+
+
+
+
+[[data-and-metadata-storage-node-combined]]
+=== ${post_edited_translations.segment}
+
+預設情況下，所有新建的儲存節點都會同時儲存物件資料和中繼資料。這種類型的儲存節點稱為_組合_儲存節點。
+
+
+
+[[metadata-only-storage-node]]
+=== ${post_edited_translations.segment}
+
+如果您的網格儲存了極大數量的微小物件，那麼專門將儲存節點用於中繼資料可能是有意義的。安裝專用的中繼資料容量，可在極大數量微小物件所需的空間與這些物件的中繼資料所需的空間之間，提供更好的平衡。此外，託管在高效能應用裝置上的僅限中繼資料儲存節點可以提升效能。
+
+僅中繼資料的儲存節點有特定的硬體需求：
+
+* 使用 StorageGRID 應用裝置時，僅中繼資料節點只能在配備十二個 1.9 TB 或十二個 3.8 TB 磁碟的 SGF6112 應用裝置上設定。
+* 使用軟體型節點時，僅中繼資料節點資源必須與現有儲存節點資源相符。例如：
++
+** ${post_edited_translations.segment}
++
+*** 128 GB RAM
+*** ${post_edited_translations.segment}
+*** ${post_edited_translations.segment}
+
+
+** ${post_edited_translations.segment}
+
+
+* 新增新的 StorageGRID 站台時，新站台的中繼資料總容量至少應與現有站台相符。新站台的資源應與現有站台的儲存節點相符。
+
+
+
+NOTE: 雖然僅限中繼資料的 Storage Nodes 包含 <<ldr-service,LDR 服務>> 且可以處理 S3 用戶端要求，但 StorageGRID 效能可能不會增加。
+
+
+
+[[data-only-storage-node]]
+=== 僅資料儲存節點
+
+如果您的儲存節點效能各異，那麼將某個儲存節點專門用於資料就很有意義。例如，為了潛在地提高效能，您可以配置僅用於儲存資料的大容量機械硬碟儲存節點，以及僅用於儲存中繼資料的高效能儲存節點。
+
+此外，您也可以透過從 Cassandra 移除低 RAM 節點來取得更多中繼資料容量，這會增加每個節點的中繼資料容量限制。請參閱 link:../admin/managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]。
+
+您可以將不包含 <<adc-service,ADC 服務>> 的儲存節點轉換為僅儲存資料的儲存節點。請參閱 link:../maintain/convert-to-data-only-node.html["將儲存節點轉換為僅資料節點"]。
+
+
+
+[[required-storage-nodes-per-grid-and-per-site]]
+== 每個網格和每個站台所需的儲存節點數
+
+${post_edited_translations.segment}
+
+* 每個站台（在單一或多站台網格中）：三個 <<adc-service,${post_edited_translations.segment}>> 儲存節點（可以是組合式與僅限中繼資料儲存節點的任何組合）
+* 單一站台網格：至少兩個物件儲存節點（可以是組合式和僅資料式的任意組合）
+* ${post_edited_translations.segment}
+
+
+
+
+[[primary-services-for-storage-nodes]]
+== 儲存節點的主要服務
+
+下表列出儲存節點的主要服務；但是，此表並未列出所有節點服務。
+
+
+NOTE: ${post_edited_translations.segment}
+
+[cols="1a,3a"]
+|===
+| 服務 | ${post_edited_translations.segment} 
+
+
+ a| 
+帳戶（acct）
+ a| 
+管理租戶帳戶。
+
+僅資料儲存節點不託管此服務。
+
+
+
+ a| 
+[[adc-service]]管理網域控制站 (ADC)
+ a| 
+維護拓撲和網格範圍組態。
+
+僅資料儲存節點不託管此服務。
+
+.詳細資料
+[%collapsible]
+====
+管理網域控制器 (ADC) 服務用於驗證網格節點及其相互連接。ADC 服務至少部署在站台上的三個儲存節點上。
+
+ADC 服務維護拓撲資訊，包括服務的位置和可用度。當一個網格節點需要從另一個網格節點取得資訊或需要另一個網格節點執行行動時，它會聯絡 ADC 服務以找到最適合處理其請求的網格節點。此外，ADC 服務還保留 StorageGRID 部署的組態套件組合複本，允許任何網格節點擷取目前的組態資訊。
+
+為了方便分散式和孤島式操作，每個 ADC 服務都會與 StorageGRID 系統中的其他 ADC 服務同步憑證、組態套件以及有關服務和拓撲的資訊。
+
+通常情況下，所有網格節點都會與至少一個 ADC 服務保持連線。這可確保網格節點始終能夠存取最新資訊。當網格節點連線時，它們會快取其他網格節點的憑證，使系統即使在 ADC 服務無法使用時，也能繼續與已知的網格節點協同運作。新的網格節點只能透過 ADC 服務來建立連線。
+
+每個網格節點的連接使 ADC 服務能夠收集拓撲資訊。這些網格節點資訊包括 CPU 負載、可用磁碟空間（如有儲存設備）、支援的服務以及網格節點的站點 ID。其他服務透過拓撲查詢向 ADC 服務請求拓撲資訊。ADC 服務會使用從 StorageGRID 系統接收到的最新資訊來回應每個查詢。
+
+====
+
+
+ a| 
+Cassandra
+ a| 
+儲存和保護物件中繼資料。
+
+僅資料儲存節點不託管此服務。
+
+
+
+ a| 
+Cassandra Reaper
+ a| 
+自動修復物件中繼資料。
+
+僅資料儲存節點不託管此服務。
+
+
+
+ a| 
+區塊
+ a| 
+管理糾刪碼資料和同位元檢查片段。
+
+
+
+ a| 
+Data Mover (dmv)
+ a| 
+將資料移至 Cloud Storage Pools。
+
+
+
+ a| 
+分散式資料儲存（DDS）
+ a| 
+監控物件中繼資料儲存設備。
+
+.詳細資料
+[%collapsible]
+====
+每個儲存節點都包含分散式資料儲存（DDS）服務。此服務與 Cassandra 資料庫介接，對儲存在 StorageGRID 系統中的物件中繼資料執行背景工作。
+
+DDS 服務追蹤導入 StorageGRID 系統的物件總數，以及透過系統支援的每個介面（S3）匯入的物件總數。
+
+====
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+僅資料儲存節點不託管此服務。
+
+
+
+ a| 
+[[ldr-service]]本機分發路由器 (LDR)
+ a| 
+${post_edited_translations.segment}
+
+.詳細資料
+[%collapsible]
+====
+每個「混合」、「僅限資料」和「僅限中繼資料」的 Storage Node 都包含本機分發路由器（LDR）服務。此服務處理內容傳輸功能，包括資料儲存設備、路由和要求處理。LDR 服務透過處理資料傳輸負載和資料流量功能，承擔了 StorageGRID 系統的大部分繁重工作。
+
+LDR 服務處理以下任務：
+
+* 查詢
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 物件資料儲存設備
+* 從另一個 LDR 服務（儲存節點）傳輸物件資料
+* ${post_edited_translations.segment}
+* S3 協定介面
+
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}:: LDR 服務的底層資料儲存設備分為固定數量的物件存放區（也稱為儲存 Volume）。每個物件存放區都是一個分隔的安裝點。
++
+--
+Storage Node 中的物件存放區是由 0000 到 002F 的十六進位數字來識別，這稱為 Volume ID。第一個物件存放區（Volume 0）中已保留空間，用於 Cassandra 資料庫中的物件中繼資料；該 Volume 上的任何剩餘空間都會用於物件資料。所有其他物件存放區則專門用於物件資料，其中包括複寫的複本和糾刪編碼片段。
+
+為了確保複寫複本的空間使用量均勻，特定物件的物件資料會根據可用儲存空間儲存至一個物件存放區。當某個物件存放區裝滿時，其餘的物件存放區會繼續儲存物件，直到 Storage Node 上沒有更多空間為止。
+
+--
+中繼資料保護:: ${post_edited_translations.segment}
++
+--
+為確保備援並防止遺失，每個站台都維護三份物件中繼資料副本。此複寫不可設定，且自動執行。如需詳細資訊，請參閱 link:../admin/managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]。
+
+--
+
+
+====
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+僅資料儲存節點不託管此服務。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+監控作業系統和底層硬體。
+
+|===

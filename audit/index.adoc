@@ -1,0 +1,20 @@
+---
+permalink: audit/index.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, log, structure, content 
+summary: 這些說明包含關於 StorageGRID 稽核訊息與稽核日誌之結構和內容的資訊。您可以使用此資訊來讀取和分析系統活動的稽核軌跡。 
+---
+= 稽核訊息和日誌檔
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+這些說明包含關於 StorageGRID 稽核訊息與稽核日誌之結構和內容的資訊。您可以使用此資訊來讀取和分析系統活動的稽核軌跡。
+
+這些說明適用於負責產生系統活動和使用情況報告的管理員，這些報告需要分析 StorageGRID 系統的稽核訊息。
+
+若要使用文字日誌檔，您必須能夠存取管理節點上已設定的稽核共享。
+
+如需設定稽核訊息層級與使用外部 syslog 伺服器的相關資訊，請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。

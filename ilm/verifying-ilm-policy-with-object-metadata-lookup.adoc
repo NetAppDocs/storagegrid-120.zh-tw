@@ -1,0 +1,58 @@
+---
+permalink: ilm/verifying-ilm-policy-with-object-metadata-lookup.html 
+sidebar: sidebar 
+keywords: verify ilm policy, object metadata lookup 
+summary: 啟動 ILM 原則後，將代表性測試物件擷取至 StorageGRID 系統，然後執行物件中繼資料查詢，以確認複本是否如預期建立並放置在正確的位置。 
+---
+= 使用 StorageGRID 中的物件中繼資料查詢來驗證 ILM 原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+啟動 ILM 原則後，將代表性測試物件擷取至 StorageGRID 系統，然後執行物件中繼資料查詢，以確認複本是否如預期建立並放置在正確的位置。
+
+.開始之前
+您有一個物件識別碼，可以是下列其中之一：
+
+* *UUID*：物件的通用唯一識別碼。
+* *CBID*：物件在 StorageGRID 內部的唯一識別碼。您可以從稽核日誌中取得物件的 CBID。請以全大寫輸入 CBID。
+* *S3 儲存桶和物件金鑰*：當透過 S3 介面擷取物件時，用戶端應用程式使用儲存桶和物件金鑰的組合來儲存和識別該物件。如果 S3 儲存桶已進行版本控制，且您想要使用儲存桶和物件金鑰來查詢特定版本的 S3 物件，則您擁有 *版本 ID*。
+
+
+.步驟
+. 擷取物件。
+. 選擇 *ILM* > *物件中繼資料查找*。
+. 在 *Identifier* 欄位中輸入物件的識別碼。您可以輸入 UUID、CBID 或 S3 儲存桶/物件金鑰。
+. ${post_edited_translations.segment}
+. 選擇 *Look Up*。
++
+物件中繼資料查詢結果隨即顯示。此頁面列出下列類型的資訊：
+
++
+** 系統中繼資料，例如物件 ID （UUID）、結果類型（物件、刪除標記、S3 貯體）和物件的邏輯大小。如需詳細資訊，請參閱下方的範例快照。
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** 對於銷毀編碼物件複本，每個片段的目前儲存設備位置。
+** ${post_edited_translations.segment}
+** 對於分段物件和多部分物件，為物件分段清單，包括分段識別碼和資料大小。對於超過 100 個分段的物件，僅顯示前 100 個分段。
+** 所有未處理之內部儲存設備格式的物件中繼資料。此原始中繼資料包含無法保證在各版本之間持續保留的內部系統中繼資料。
+
+
+. ${post_edited_translations.segment}
++
+如果啟用了「稽核」選項，您也可以監控稽核日誌中的 ORLM Object Rules Met 訊息。ORLM 稽核訊息可以提供有關 ILM 評估程序狀態的更多資訊，但無法提供有關物件資料放置是否正確或 ILM 原則是否完整的資訊。您必須自行評估這些內容。如需詳細資訊，請參閱 link:../audit/index.html["${post_edited_translations.segment}"]。
+
+
+
+以下範例顯示儲存為兩個複寫複本的 S3 測試物件的物件中繼資料查詢結果。
+
+
+NOTE: 以下快照僅為範例。您的實際結果會因 StorageGRID 版本而異。
+
+image:object_lookup_results.png["物件查詢結果"]
+
+.相關資訊
+link:../s3/index.html["使用 S3 REST API"]

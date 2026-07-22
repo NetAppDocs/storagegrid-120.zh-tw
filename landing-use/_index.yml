@@ -1,0 +1,62 @@
+---
+indexpage:
+  title: 使用 StorageGRID 租戶和用戶端
+  summary: 初始組態完成後，StorageGRID 租戶帳戶可以建立儲存桶，並使用 S3 用戶端應用程式來擷取、取得和刪除物件。
+  keywords: use tenant, manage tenant group, manage tenant user, manage s3 access
+    key, manage s3 bucket, use tenant features, use s3 rest api
+  lead: 初始組態完成後，StorageGRID 租戶帳戶可以建立儲存桶，並使用 S3 用戶端應用程式來擷取、取得和刪除物件。
+  tiles:
+  - title: 了解租戶資訊
+    links:
+    - title: 什麼是租戶？
+      url: "../tenant/index.html"
+    - title: 登入租戶管理器
+      url: "../tenant/signing-in-to-tenant-manager.html"
+    - title: 監控租戶帳戶
+      url: "../tenant/understanding-tenant-manager-dashboard.html"
+    - title: 使用租戶管理 API
+      url: "../tenant/understanding-tenant-management-api.html"
+  - title: 管理租戶群組和用戶
+    links:
+    - title: "${post_edited_translations.segment}"
+      url: "../tenant/using-identity-federation.html"
+    - title: 建立 S3 群組
+      url: "../tenant/creating-groups-for-s3-tenant.html"
+    - title: 租戶管理權限
+      url: "../tenant/tenant-management-permissions.html"
+    - title: 管理使用者
+      url: "../tenant/manage-users.html"
+  - title: 管理 S3 存取金鑰和儲存桶
+    links:
+    - title: "${post_edited_translations.segment}"
+      url: "../tenant/managing-s3-access-keys.html"
+    - title: 建立儲存桶
+      url: "../tenant/creating-s3-bucket.html"
+    - title: 檢視儲存貯體詳細資料
+      url: "../tenant/viewing-s3-bucket-details.html"
+    - title: 刪除儲存桶
+      url: "../tenant/deleting-s3-bucket.html"
+  - title: 使用租戶功能
+    links:
+    - title: 帳戶 Clone
+      url: "../tenant/grid-federation-account-clone.html"
+    - title: 跨網格複寫
+      url: "../tenant/grid-federation-manage-cross-grid-replication.html"
+    - title: 平台服務
+      url: "../tenant/considerations-for-platform-services.html"
+    - title: S3 物件鎖定
+      url: "../tenant/using-s3-object-lock.html"
+  - title: 使用 S3 REST API
+    links:
+    - title: 快速參考：支援的 S3 API 請求
+      url: "../s3/quick-reference-support-for-aws-apis.html"
+    - title: 儲存貯體上的作業
+      url: "../s3/operations-on-buckets.html"
+    - title: 對物件進行操作
+      url: "../s3/operations-on-objects.html"
+    - title: 儲存桶和群組存取原則
+      url: "../s3/use-access-policies.html"
+  - title: 使用 Swift REST API （已停止維護）
+    links:
+    - title: 使用 Swift
+      url: "../swift/index.html"

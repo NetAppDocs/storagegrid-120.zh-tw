@@ -1,0 +1,31 @@
+---
+permalink: audit/syst-node-stopping.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, SYST, Node Stopping 
+summary: 當服務正常停止時，會產生此訊息以表示已要求關閉服務，且該服務已啟動其關閉序列。SYST 可用於在服務重新啟動之前確定是否已要求關閉服務（與通常在服務重新啟動後發送的 SYSD 不同）。 
+---
+= StorageGRID 中節點停止的 SYST 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當服務正常停止時，會產生此訊息以表示已要求關閉服務，且該服務已啟動其關閉序列。SYST 可用於在服務重新啟動之前確定是否已要求關閉服務（與通常在服務重新啟動後發送的 SYSD 不同）。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+RSLT
+ a| 
+正常關機
+ a| 
+關機的性質：
+
+SUCS：系統已正常關機。
+
+|===
+該訊息並未指示主機伺服器是否停止執行，僅指示報告服務是否停止運作。SYST 訊息的 RSLT 代碼無法指示「非正常」關機，因為該訊息僅由「正常」關機產生。

@@ -1,0 +1,120 @@
+---
+permalink: maintain/starting-software-installation-on-services-appliance-recovery.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, services appliance, start software installation 
+summary: ${post_edited_translations.segment} 
+---
+= 在服務設備上啟動 StorageGRID 軟體安裝
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* ${post_edited_translations.segment}
+* 使用 StorageGRID Appliance Installer 為應用裝置設定網路連結和 IP 位址。
+* 如果您要安裝 Gateway Node 或非主要 Admin Node，您需要知道 StorageGRID 網格的主要 Admin Node 的 IP 位址。
+* StorageGRID 應用裝置安裝程式的 IP 組態頁面上列出的所有 Grid Network 子網路，均定義於主要管理節點的 Grid Network 子網路清單中。
++
+請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["硬體安裝快速入門"^]。
+
+* 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
+* 您已獲得指派給該應用裝置的其中一個 IP 位址。您可以將此 IP 位址用於管理網路、網格網路或用戶端網路。
+* 如果您要安裝主要管理節點，則可以使用適用於此版本 StorageGRID 的 Ubuntu 或 Debian 安裝檔案。
++
+
+NOTE: StorageGRID 軟體的最新版本已在製造過程中預先安裝到服務應用裝置上。如果預先安裝的軟體版本與您 StorageGRID 部署中使用的版本相符，則無需安裝檔案。
+
+
+
+.關於此任務
+在服務應用裝置上安裝 StorageGRID 軟體：
+
+* 對於主要管理節點，您可以指定節點名稱，然後上傳對應的軟體套件（如有需要）。
+* 對於非主要管理節點或閘道節點，您需要指定或確認主要管理節點的 IP 位址和節點名稱。
+* 啟動安裝，等待磁碟區配置完成和軟體安裝完成。
+* 安裝過程中途會暫停。若要繼續安裝，您必須登入 Grid Manager，並將待處理節點設定為故障節點的替代節點。
+* 完成節點設定後，應用裝置安裝程序完成，應用裝置將重新啟動。
+
+
+.步驟
+. 開啟瀏覽器，輸入服務應用裝置的 IP 位址之一。
++
+`https://_Controller_IP_:8443`
+
++
+StorageGRID 應用裝置安裝程式首頁隨即出現。
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
+.. 在「節點名稱」欄位中，輸入與要恢復的節點相同的名稱，然後按一下「儲存」。
+.. 在「安裝」部分，檢查「目前狀態」下所列的軟體版本
++
+如果準備安裝的軟體版本正確，請跳至<<installation_section_step,安裝步驟>>。
+
+.. 如果需要上傳不同版本的軟體，請在「進階」選單下選擇「上傳 StorageGRID 軟體」。
++
+顯示「上傳 StorageGRID 軟體」頁面。
+
+.. 點選「瀏覽」上傳 StorageGRID 軟體的「軟體包」和「校驗和檔案」。
++
+您選擇檔案後，檔案將自動上傳。
+
+.. ${post_edited_translations.segment}
+
+
+. 安裝 Gateway Node 或非主要 Admin Node：
++
+.. ${post_edited_translations.segment}
+.. 在「節點名稱」欄位中，輸入與要恢復的節點相同的名稱，然後按一下「儲存」。
+.. ${post_edited_translations.segment}
++
+假設主要管理節點或至少一個已設定 ADMIN_IP 的其他網格節點位於相同子網路中，StorageGRID 應用裝置安裝程式可以自動探索此 IP 位址。
+
+.. ${post_edited_translations.segment}
+
+
++
+[cols="1a,2a"]
+|===
+| 選項 | 說明 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 按一下 *Save* 。
+.. 請等待新 IP 位址的連線狀態變成「就緒」。
+
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+.. ${post_edited_translations.segment}
+.. 從已發現的 IP 位址清單中，選擇要部署此服務應用裝置的網格的主要管理節點。
+.. 按一下 *Save* 。
+.. 請等待新 IP 位址的連線狀態變成「就緒」。
+
+
+|===
+. [[installation_section_step]]在安裝部分，確認目前狀態為「準備開始安裝節點名稱」，並且「開始安裝」按鈕已啟用。
++
+如果 *Start Installation* 按鈕未啟用，您可能需要變更網路組態或連接埠設定。請參閱您應用裝置的維護說明。
+
+. 在 StorageGRID 應用裝置安裝程式首頁上，按一下 *Start Installation*。
++
+目前狀態變更為「正在安裝」，並顯示「監控安裝」頁面。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+

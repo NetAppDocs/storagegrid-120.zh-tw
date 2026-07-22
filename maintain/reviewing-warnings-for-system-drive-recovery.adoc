@@ -1,0 +1,35 @@
+---
+permalink: maintain/reviewing-warnings-for-system-drive-recovery.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, system drive warning, storage node 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID 儲存節點系統磁碟機復原警告
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在恢復 Storage Node 故障的系統磁碟機之前，請審查一般 link:warnings-and-considerations-for-grid-node-recovery.html["網格節點恢復的警告和注意事項"] 與下列特定警告。
+
+儲存節點具有包含物件中繼資料的 Cassandra 資料庫。在以下情況下，可能會重建 Cassandra 資料庫：
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+當 Cassandra 重建時，系統會使用來自其他儲存節點的資訊。如果 Cassandra 最近重建過，Cassandra 資料在整個網格中可能尚未一致。如果有太多儲存節點離線：
+
+* 部分 Cassandra 資料可能無法取得。
+* 可能會發生資料遺失。
+
+
+
+CAUTION: 如果有一個以上的 Storage Node 故障（或離線），請聯絡技術支援。請勿執行下列恢復程序。可能會發生資料遺失。如需詳細資訊，請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+
+
+CAUTION: 如果此儲存設備節點處於唯讀維護模式，以允許具有故障儲存設備 Volume 的另一個儲存設備節點擷取物件，請在恢復此故障的儲存設備節點之前，先恢復該具有故障儲存設備 Volume 的儲存設備節點上的 Volume。請參閱說明以 link:recovering-from-storage-volume-failure-where-system-drive-is-intact.html["在系統磁碟機完好無損的情況下，從儲存設備 Volume 故障中恢復"]。
+
+
+CAUTION: 如果 ILM 規則設定為僅儲存一個複寫複本，且該複本存在於發生故障的儲存 Volume 上，則您將無法恢復該物件。

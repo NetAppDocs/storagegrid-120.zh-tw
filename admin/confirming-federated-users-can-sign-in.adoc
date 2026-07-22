@@ -1,0 +1,68 @@
+---
+permalink: admin/confirming-federated-users-can-sign-in.html 
+sidebar: sidebar 
+keywords: sso configuration 
+summary: ${post_edited_translations.segment} 
+---
+= 確認聯合使用者可以登入 StorageGRID
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["特定存取權限"]。
+* ${post_edited_translations.segment}
+
+
+.步驟
+. 如果存在租戶帳戶，請確認沒有租戶使用自己的身分來源。
++
+
+TIP: 啟用單一登入 （SSO） 後，租戶管理員中設定的身分來源將會被 Grid Manager 中設定的身分來源覆寫。除非擁有 Grid Manager 身分來源的帳戶，否則屬於租戶身分來源的使用者將無法再登入。
+
++
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+
+
+. ${post_edited_translations.segment}
++
+.. 從 Grid Manager 中，選擇 *Configuration* > *Access control* > *Admin groups*。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 確認您可以以聯合群組使用者的身分重新登入 Grid Manager。
+
+
+. ${post_edited_translations.segment}
++
+.. 從 Grid Manager 中選擇 *租戶*。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+
+
++
+${post_edited_translations.segment}
+
++
+.. ${post_edited_translations.segment}
+.. 從 Tenant Manager 中選擇 *Access Management* > *Groups*。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 請確認您可以以聯合群組中的使用者身分重新登入租戶。
+
+
+
+
+.相關資訊
+* link:requirements-for-sso.html["單一登入的要求和注意事項"]
+* link:managing-admin-groups.html["${post_edited_translations.segment}"]
+* link:../tenant/index.html["使用租戶帳戶"]
+

@@ -1,0 +1,46 @@
+---
+permalink: admin/configuring-storage-proxy-settings.html 
+sidebar: sidebar 
+keywords: storage proxy, non-transparent proxy, platform service endpoint 
+summary: 如果您使用平台服務或雲端儲存池，則可以在儲存節點和外部 S3 端點之間設定非透明 Proxy。例如，您可能需要非透明 Proxy 來允許平台服務訊息傳送到外部端點，例如網際網路上的端點。 
+---
+= 配置 StorageGRID 儲存代理
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您使用平台服務或雲端儲存池，則可以在儲存節點和外部 S3 端點之間設定非透明 Proxy。例如，您可能需要非透明 Proxy 來允許平台服務訊息傳送到外部端點，例如網際網路上的端點。
+
+
+NOTE: ${post_edited_translations.segment}
+
+.開始之前
+* 您有link:admin-group-permissions.html["特定存取權限"]。
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+
+
+.關於此任務
+您可以設定單一儲存設備 Proxy 的設定。
+
+.步驟
+. 選取 *Configuration* > *Security* > *Proxy settings*。
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 輸入 Proxy 伺服器的主機名稱或 IP 位址。
+. （可選）輸入用於連線至 Proxy 伺服器的連接埠。
++
+${post_edited_translations.segment}
+
+. 選取 *Save* 。
++
+儲存設備 Proxy 儲存後，即可設定和測試平台服務或雲端儲存池的新端點。
+
++
+
+NOTE: Proxy 變更最多可能需要 10 分鐘才能生效。
+
+. 檢查 Proxy 伺服器的設定，確保來自 StorageGRID 的平台服務相關訊息不會被封鎖。
+. 如果需要停用儲存設備 Proxy，請清除核取方塊，然後選擇 *儲存*。
+

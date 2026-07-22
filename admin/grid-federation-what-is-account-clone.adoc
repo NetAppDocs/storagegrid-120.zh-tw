@@ -1,0 +1,122 @@
+---
+permalink: admin/grid-federation-what-is-account-clone.html 
+sidebar: sidebar 
+keywords: account clone, tenant replication, disaster recovery, grid federation 
+summary: 帳戶 Clone 是指在網格聯合連線中的 StorageGRID 系統之間自動複寫租戶帳戶、租戶群組、租戶使用者以及（可選的）S3 存取金鑰。 
+---
+= 瞭解 StorageGRID 中的帳戶複製
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+帳戶 Clone 是指在 link:grid-federation-overview.html["網格聯盟連線"] 中的 StorageGRID 系統之間自動複寫租戶帳戶、租戶群組、租戶使用者，以及 （選擇性） S3 存取金鑰。
+
+需要為 link:grid-federation-what-is-cross-grid-replication.html["${post_edited_translations.segment}"] 進行帳戶 Clone。將帳戶資訊從來源 StorageGRID 系統 Clone 至目的地 StorageGRID 系統，可確保租戶使用者和群組能夠存取任一網格上的對應儲存桶和物件。
+
+
+
+[[workflow-for-account-clone]]
+== 帳戶 Clone 工作流程
+
+工作流程圖顯示了網格系統管理員和允許的租戶設定帳戶 Clone 所將執行的步驟。這些步驟是在 link:grid-federation-create-connection.html["網格聯盟連線已設定"] 之後執行。
+
+image:grid-federation-account-clone-workflow.png["${post_edited_translations.segment}"]
+
+
+
+[[grid-admin-workflow]]
+== ${post_edited_translations.segment}
+
+網格管理員執行的步驟取決於 link:grid-federation-overview.html["網格聯盟連線"] 中的 StorageGRID 系統是否使用單一登入 （SSO） 或身分聯合。
+
+
+
+[[account-clone-ssoconfigure-sso-for-account-clone-optional]]
+=== ${post_edited_translations.segment}
+
+如果網格聯合連接中的任何一個 StorageGRID 系統使用 SSO，則兩個網格都必須使用 SSO。在為網格聯合建立租戶帳戶之前，租戶來源和目的地網格的網格系統管理員必須執行下列步驟。
+
+.步驟
+. 為兩個網格設定相同的身分識別來源。請參閱link:using-identity-federation.html["${post_edited_translations.segment}"]。
+. 為兩個網格設定相同的 SSO 身分識別供應商 (IdP)。請參閱link:how-sso-works.html["設定單一登入"]。
+. link:managing-admin-groups.html["建立相同的管理員群組"]在兩個網格上匯入相同的聯合群組。
++
+${post_edited_translations.segment}
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+
+
+[[account-clone-identity-federationconfigure-grid-level-identity-federation-for-account-clone-optional]]
+=== [[account-clone-identity-federation]]為帳戶 Clone 設定網格層級身分識別聯盟（選用）
+
+如果任一 StorageGRID 系統使用未啟用 SSO 的身分識別同盟，則兩個網格都必須使用身分識別同盟。在為網格同盟建立租戶帳戶之前，租戶來源和目的地網格的網格系統管理員必須執行這些步驟。
+
+.步驟
+. 為兩個網格設定相同的身分識別來源。請參閱link:using-identity-federation.html["${post_edited_translations.segment}"]。
+. 如果聯合群組對來源和目的地租戶帳戶都具有初始 Root 存取權限，則可以透過在兩個網格上匯入同一個聯合群組來link:managing-admin-groups.html["建立相同的管理員群組"]實現此權限。
++
+
+NOTE: 如果將 Root 存取權限指派給兩個網格上都不存在的聯合群組，租戶不會複寫到目的地網格。
+
+. ${post_edited_translations.segment}
+
+
+
+
+[[create-permitted-s3-tenant-account]]
+=== 建立允許的 S3 租戶帳戶
+
+在選擇性設定 SSO 或身分聯合之後，網格管理員執行下列步驟，以確定哪些租戶可以將儲存桶物件複寫到其他 StorageGRID 系統。
+
+.步驟
+. 決定要將哪個網格作為租戶帳戶 Clone 操作的來源網格。
++
+最初建立租戶的網格稱為租戶的_來源網格_。複寫租戶的網格稱為租戶的_目的地網格_。
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 如果租戶帳戶將管理自己的聯合使用者，則指派「使用自己的身分來源」權限。
++
+如果指派了此權限，則來源和目的地租戶帳戶必須先設定相同的身分來源，然後才能建立聯合群組。除非兩個網格使用相同的身分來源，否則新增至來源租戶的聯合群組無法 Clone 到目的地租戶。
+
+. 選擇特定的網格聯邦連線。
+. ${post_edited_translations.segment}
++
+當儲存具有「使用網格聯合連線」權限的新租戶時，StorageGRID 會自動在另一個網格上建立該租戶的複本，如下所示：
+
++
+** 兩個租戶帳戶具有相同的帳戶 ID、名稱、儲存設備配額和已指派的權限。
+** 如果您選擇了一個聯合群組，使其對租戶具有 Root 存取權限，則該群組將 Clone 至目的地租戶。
+** 如果您選擇某個本機使用者擁有租戶的 Root 存取權限，則該使用者將被 Clone 到目的地租戶。但是，該使用者的密碼不會被 Clone。
+
+
+
+
+如需詳細資訊，請參閱 link:grid-federation-manage-tenants.html["管理網格聯邦的授權租戶"]。
+
+
+
+[[permitted-tenant-account-workflow]]
+== 允許的租戶帳戶工作流程
+
+將具有「使用網格聯合連線」權限的租戶複寫到目的地網格後，允許的租戶帳戶可以執行下列步驟來 Clone 租戶群組、使用者和 S3 存取金鑰。
+
+.步驟
+. 在租戶的來源網格上登入租戶帳戶。
+. 如果允許，請在來源租戶帳戶和目的地租戶帳戶上設定身分識別聯合。
+. ${post_edited_translations.segment}
++
+當在來源租戶上建立新群組或使用者時，StorageGRID 會自動將其 Clone 到目的地租戶，但不會從目的地 Clone 回來源。
+
+. 建立 S3 存取金鑰。
+. （可選）將來源租戶的 S3 存取金鑰 Clone 到目的地租戶。
+
+
+有關允許的租戶帳戶工作流程的詳細資訊，以及如何 Clone 群組、使用者和 S3 存取金鑰，請參閱 link:../tenant/grid-federation-account-clone.html["Clone 租戶群組和使用者"] 和 link:../tenant/grid-federation-clone-keys-with-api.html["使用 API Clone S3 存取金鑰"]。

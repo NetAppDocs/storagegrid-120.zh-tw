@@ -1,0 +1,36 @@
+---
+permalink: tenant/deleting-platform-services-endpoint.html 
+sidebar: sidebar 
+keywords: how to delete tenant platform services endpoint 
+summary: 如果您不再想使用關聯的平台服務，可以刪除該端點。 
+---
+= 刪除 StorageGRID 平台服務端點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您不再想使用關聯的平台服務，可以刪除該端點。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於一個擁有 link:tenant-management-permissions.html["管理端點或根存取權限"] 的使用者群組。
+
+
+.步驟
+. 選擇 *STORAGE (S3)* > *Platform services endpoints*。
++
+「平台服務端點」頁面隨即出現，並顯示已設定的平台服務端點清單。
+
+. 選取要刪除的每個端點的核取方塊。
++
+
+NOTE: 如果您刪除正在使用的平台服務端點，則使用該端點的所有儲存桶的關聯平台服務將會停用。所有尚未完成的請求都將被丟棄。在您變更儲存桶組態以不再引用已刪除的 URN 之前，系統將繼續產生新的請求。StorageGRID 會將這些請求報告為無法恢復的錯誤。
+
+. 選擇 *Actions* > *Delete endpoint*。
++
+螢幕上會顯示確認訊息。
+
+. 選擇 *Delete endpoint*。
+

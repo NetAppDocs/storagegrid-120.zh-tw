@@ -1,0 +1,33 @@
+---
+permalink: admin/disabling-single-sign-on.html 
+sidebar: sidebar 
+keywords: disable sso, disable single sign on 
+summary: 如果您不再需要此功能，可以停用單一登入 （SSO）。您必須先停用單一登入，然後才能停用身分識別聯盟。 
+---
+= 停用 StorageGRID 中的 SSO
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您不再需要此功能，可以停用單一登入 （SSO）。您必須先停用單一登入，然後才能停用身分識別聯盟。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["特定存取權限"]。
+
+
+.步驟
+. 選擇 *Configuration* > *Access control* > *Single sign-on*。
++
+單一登入頁面隨即出現。
+
+. 選擇 *停用單一登入*。
+. ${post_edited_translations.segment}
++
+螢幕上出現警告訊息，指出本機使用者現在可以登入。
+
+
+
+${post_edited_translations.segment}

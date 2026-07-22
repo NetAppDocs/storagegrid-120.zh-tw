@@ -1,0 +1,23 @@
+---
+permalink: admin/administering-storagegrid-system.html 
+sidebar: sidebar 
+keywords: administration overview 
+summary: 請依照以下說明設定和管理 StorageGRID 系統。 
+---
+= 管理 StorageGRID 系統
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+請依照以下說明設定和管理 StorageGRID 系統。
+
+這些說明描述如何使用 Grid Manager 來設定群組和使用者、建立租戶帳戶以允許 S3 用戶端應用程式儲存和擷取物件、設定和管理 StorageGRID 網路、設定 AutoSupport、管理節點設定等。
+
+${post_edited_translations.segment}
+
+.開始之前
+* 您對 StorageGRID 系統有基本的了解。
+* ${post_edited_translations.segment}
+

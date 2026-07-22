@@ -1,0 +1,72 @@
+---
+permalink: swnodes/node-container-migration-requirements.html 
+sidebar: sidebar 
+keywords: how to migrate a node 
+summary: 節點移轉功能可讓您手動將節點從一台主機移至另一台主機。通常，兩台主機位於同一實體資料中心內。 
+---
+= StorageGRID 節點容器遷移需求 (Linux)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+節點移轉功能可讓您手動將節點從一台主機移至另一台主機。通常，兩台主機位於同一實體資料中心內。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+節點移轉可讓您在不中斷網格運作的情況下執行實體主機維護。您需要將所有 StorageGRID 節點逐一移轉至另一主機，然後再將實體主機離線。移轉節點僅需每個節點短暫的停機，不會影響網格服務的運作或可用度。
+
+如果要使用 StorageGRID 節點移轉功能，您的部署必須符合下列附加需求：
+
+* 單一實體資料中心內所有主機使用一致的網路介面名稱
+* 用於 StorageGRID 中繼資料和物件儲存庫 Volume 的共享儲存設備，可供單一實體資料中心內的所有主機存取。例如，您可以使用 NetApp E 系列儲存系統陣列。
+
+
+如果您使用的是虛擬主機，且底層 Hypervisor 階層支援虛擬機器移轉，則可以使用此功能而不是 StorageGRID 中的節點移轉功能。在這種情況下，您可以忽略這些額外的要求。
+
+在執行移轉或 Hypervisor 維護之前，請先正常關閉節點。請參閱相關說明 link:../maintain/shutting-down-grid-node.html["關閉網格節點"]。
+
+
+
+[[vmware-live-migration-not-supported]]
+== 不支援 VMware Live Migration
+
+在 VMware 虛擬機器上執行裸機安裝時，OpenStack Live Migration 和 VMware Live vMotion 會導致虛擬機器時鐘時間跳躍，且不支援任何類型的網格節點。雖然這種情況很少見，但錯誤的時鐘時間可能會導致資料遺失或組態更新失敗。
+
+支援冷移轉。在冷移轉中，您需要在主機之間移轉 StorageGRID 節點之前將其關閉。請參閱相關說明 link:../maintain/shutting-down-grid-node.html["關閉網格節點"]。
+
+
+
+[[consistent-network-interface-names]]
+== 一致的網路介面名稱
+
+若要將節點從一台主機移轉到另一台主機，StorageGRID 主機服務需要確信該節點目前位置的外部網路連線在新位置也能複製。它透過在主機中使用一致的網路介面名稱來獲得這種確信。
+
+例如，假設在 Host1 上執行的 StorageGRID NodeA 已設定了以下介面映射：
+
+image:eth0_bond.gif["這張映像由周圍的文字進行解釋。"]
+
+箭頭左側對應於從 StorageGRID Container 內部看到的傳統介面（即網格網路介面、管理網路介面和用戶端網路介面）。箭頭右側對應於提供這些網路的實際主機介面，它們是隸屬於同一實體介面綁定的三個 VLAN 介面。
+
+現在，假設您想將 NodeA 移轉到 Host2。如果 Host2 也具有名為 bond0.1001、bond0.1002 和 bond0.1003 的介面，系統將允許移轉，因為系統假定名稱相同的介面在 Host2 上提供與 Host1 上相同的連線能力。如果 Host2 沒有名稱相同的介面，則不允許移轉。
+
+實現跨多個主機的一致網路介面命名的方法有很多；請參閱 link:configuring-host-network.html["${post_edited_translations.segment}"] 以取得一些範例。
+
+
+
+[[shared-storage]]
+== 共享儲存設備
+
+為了實現快速、低成本的節點移轉，StorageGRID 節點移轉功能不會實際移動節點資料。節點移轉是以一對匯出和匯入作業的形式執行，如下所示：
+
+* 在「節點匯出」作業期間，從執行在 HostA 上的節點 Container 中擷取少量持久狀態資料，並將其快取到該節點的系統資料 Volume 中。然後，HostA 上的節點 Container 將取消執行個體化。
+* 在「節點導入」作業期間，HostB 上會實例化一個節點 Container，該 Container 使用與 HostA 上相同的網路介面和區塊儲存設備映射。然後，快取的持久狀態資料會插入新執行個體中。
+
+
+在這種操作模式下，為了允許並成功進行移轉，節點的所有系統資料和物件儲存 Volume 必須能夠從 HostA 和 HostB 存取。此外，它們必須已使用保證指向 HostA 和 HostB 上相同 LUN 的名稱對應到節點中。
+
+以下範例展示了 StorageGRID 儲存節點區塊裝置對應的一種解決方案，其中主機上使用了 DM 多路徑，並且在 `/etc/multipath.conf`中使用了別名欄位，以提供所有主機上可用的一致且易讀的區塊裝置名稱。
+
+image:block_device_mapping_rhel.gif["區塊設備映射"]

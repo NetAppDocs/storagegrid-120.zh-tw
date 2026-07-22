@@ -1,0 +1,181 @@
+---
+permalink: tenant/specifying-urn-for-platform-services-endpoint.html 
+sidebar: sidebar 
+keywords: how to specify platform services urn 
+summary: '建立平台服務端點時，必須指定唯一資源名稱 (URN)。在為平台服務建立組態 XML 時，您將使用此 URN 來參照該端點。每個端點的 URN 必須是唯一的。' 
+---
+= 為 StorageGRID 平台服務端點指定 URN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+建立平台服務端點時，必須指定唯一資源名稱 (URN)。在為平台服務建立組態 XML 時，您將使用此 URN 來參照該端點。每個端點的 URN 必須是唯一的。
+
+StorageGRID 會在您建立平台服務端點時進行驗證。在建立平台服務端點之前，請確認端點中指定的資源存在且可存取。
+
+
+
+[[urn-elements]]
+== URN 元素
+
+平台服務端點的 URN 必須以 `arn:aws`或 `urn:mysite`開頭，如下所示：
+
+* 如果該服務託管在 Amazon Web Services （AWS） 上，請使用 `arn:aws`
+* 如果該服務託管在 Google Cloud Platform (GCP) 上，請使用 `arn:aws`
+* 如果服務託管在本機，請使用 `urn:mysite`
+
+
+例如，如果您要為託管在 StorageGRID 上的 CloudMirror 端點指定 URN，則 URN 可能以 `urn:sgws`開頭。
+
+URN 的下一個元素指定平台服務的類型，如下所示：
+
+[cols="2a,1a"]
+|===
+| 服務 | 類型 
+
+
+ a| 
+CloudMirror 複寫
+ a| 
+`s3`
+
+
+
+ a| 
+通知
+ a| 
+`sns`、 `kafka` 或  `webhook`
+
+
+
+ a| 
+搜尋整合
+ a| 
+`es`
+
+|===
+例如，若要繼續指定託管在 StorageGRID 上的 CloudMirror 端點的 URN，您需要新增 `s3`以取得 `urn:sgws:s3`。
+
+對於大多數端點，URN 的最後一個元素可識別目的地 URI 處的特定目標資源，例如 `sns-topic-name`。
+
+對於 webhook 端點，目標資源就是目的地 URI 本身。
+
+[cols="1a,2a"]
+|===
+| 服務 | 特定資源 
+
+
+ a| 
+CloudMirror 複寫
+ a| 
+`bucket-name`
+
+
+
+ a| 
+通知
+ a| 
+`sns-topic-name` 或  `kafka-topic-name`
+
+*注意：*對於 webhook 端點，URN 的最後一個元素可以是任何字串，只要端點的 URN 是唯一的即可。
+
+
+
+ a| 
+搜尋整合
+ a| 
+`domain-name/index-name/type-name`
+
+*注意：*如果 Elasticsearch 叢集*未*設定為自動建立索引，則必須先手動建立索引，然後再建立端點。
+
+|===
+
+
+[[urns-for-services-hosted-on-aws-and-gcp]]
+== AWS 和 GCP 上託管服務的 URN
+
+對於 AWS 和 GCP 實體，完整的 URN 是有效的 AWS ARN。例如：
+
+* CloudMirror 複寫：
++
+[listing]
+----
+arn:aws:s3:::bucket-name
+----
+* 通知：
++
+[listing]
+----
+arn:aws:sns:region:account-id:topic-name
+----
+* 搜尋整合：
++
+[listing]
+----
+arn:aws:es:region:account-id:domain/domain-name/index-name/type-name
+----
++
+
+NOTE: 對於 AWS 搜尋整合端點， `domain-name`必須包含字面字串 `domain/`，如這裡所示。
+
+
+
+
+
+[[urns-for-locally-hosted-services]]
+== 本地代管服務的 URN
+
+當使用本機託管服務而非雲端服務時，您可以以任何方式指定 URN，只要該 URN 包含第三個和最後一個位置的必要元素即可。您可以將標有「可選」的元素留空，也可以以任何有助於識別資源並使 URN 唯一的方式指定它們。例如：
+
+* CloudMirror 複寫：
++
+[listing]
+----
+urn:mysite:s3:optional:optional:bucket-name
+----
++
+對於託管在 StorageGRID 上的 CloudMirror 端點，您可以指定以下列形式開頭的有效 URN `urn:sgws`：
+
++
+[listing]
+----
+urn:sgws:s3:optional:optional:bucket-name
+----
+* 通知：
++
+指定 Amazon Simple Notification Service 終端節點：
+
++
+[listing]
+----
+urn:mysite:sns:optional:optional:sns-topic-name
+----
++
+指定 Kafka 端點：
+
++
+[listing]
+----
+urn:mysite:kafka:optional:optional:kafka-topic-name
+----
++
+指定 webhook 端點：
+
++
+[listing]
+----
+urn:mysite:webhook:optional:optional:webhook-name
+----
+* 搜尋整合：
++
+[listing]
+----
+urn:mysite:es:optional:optional:domain-name/index-name/type-name
+----
++
+
+NOTE: 對於本機託管的搜尋整合端點，只要端點的 URN 是唯一的， `domain-name`元素可以是任何字串。
+
+

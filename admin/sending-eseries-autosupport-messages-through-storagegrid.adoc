@@ -1,0 +1,88 @@
+---
+permalink: admin/sending-eseries-autosupport-messages-through-storagegrid.html 
+sidebar: sidebar 
+keywords: eseries, santricity, system manager, asup, autosupport, technical support, appliance 
+summary: 您可以透過 StorageGRID 管理節點而非儲存應用裝置管理連接埠，將 E 系列 SANtricity System Manager AutoSupport 套件傳送至技術支援。 
+---
+= 透過 StorageGRID 傳送 E 系列 AutoSupport 套件
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以透過 StorageGRID 管理節點而非儲存應用裝置管理連接埠，將 E 系列 SANtricity System Manager AutoSupport 套件傳送至技術支援。
+
+如需更多關於搭配 E 系列應用裝置使用 AutoSupport 的資訊，請參閱 https://docs.netapp.com/us-en/e-series-santricity/sm-support/autosupport-feature-overview.html["E 系列硬體 AutoSupport"^]。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入網格管理員。
+* 您有link:admin-group-permissions.html["儲存應用裝置系統管理員或 Root 存取權限"]。
+* 您已設定 SANtricity AutoSupport：
++
+** 針對 SG6000 和 SG5700 應用裝置， https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/accessing-and-configuring-santricity-system-manager.html["在 SANtricity System Manager 中設定 AutoSupport"^]
+
+
+
+
+
+NOTE: 若要使用 Grid Manager 存取 SANtricity System Manager，您必須擁有 SANtricity 韌體 8.70 或更高版本。
+
+.關於此任務
+E 系列 AutoSupport 套件包含儲存硬體的詳細資訊，比 StorageGRID 系統所傳送的其他 AutoSupport 套件更為具體。
+
+您可以在 SANtricity System Manager 中設定特殊的 Proxy 伺服器位址，以便透過 StorageGRID 管理節點傳輸 AutoSupport 套件，而無需使用應用裝置的管理連接埠。以這種方式傳輸的 AutoSupport 套件由 link:../primer/what-admin-node-is.html["慣用寄件者管理節點"] 傳送，並使用已在 Grid Manager 中設定的任何 link:../admin/configuring-admin-proxy-settings.html["管理員 Proxy 設定"]。
+
+
+NOTE: 此程序僅適用於為 E 系列 AutoSupport 套件設定 StorageGRID Proxy 伺服器。如需 E 系列 AutoSupport 組態的詳細資訊，請參閱 https://docs.netapp.com/us-en/e-series-family/index.html["NetApp E 系列和 SANtricity 文件"^]。
+
+.步驟
+. 在 Grid Manager 中，選擇 *Nodes* 。
+. 從左側的節點清單中，選擇要設定的儲存應用裝置節點。
+. 選擇 *SANtricity System Manager*。
++
+SANtricity System Manager 首頁隨即出現。
+
++
+image:autosupport_santricity_home_page.png["AutoSupport SANtricity 首頁"]
+
+. 選擇 *支援* > *支援中心* > *AutoSupport*。
++
+AutoSupport 操作頁面隨即出現。
+
++
+image:autosupport_santricity_operations.png["AutoSupport SANtricity AutoSupport 作業"]
+
+. 選擇 *Configure AutoSupport Delivery Method* 。
++
+顯示「設定 AutoSupport 傳送方式」頁面。
+
++
+image:autosupport_configure_delivery_santricity.png["設定 AutoSupport 傳送方法 SANtricity"]
+
+. 選擇*HTTPS*作為傳輸方式。
++
+
+NOTE: 用於啟用 HTTPS 的憑證已預先安裝。
+
+. ${post_edited_translations.segment}
+. 輸入 `tunnel-host`作為 *Host address*。
++
+`tunnel-host` 是使用管理節點傳送 E 系列 AutoSupport 套件的特殊位址。
+
+. 輸入  `10225` 作為 *Port number*。
++
+`10225` 是 StorageGRID Proxy 伺服器上的連接埠號碼，用於接收來自應用裝置中 E 系列控制器的 AutoSupport 套件。
+
+. 選擇 *Test Configuration* 來測試您的 AutoSupport Proxy 伺服器的路由和組態。
++
+如果正確，綠色橫幅中會顯示一則訊息：「您的 AutoSupport 組態已驗證。」
+
++
+如果測試失敗，則會在紅色橫幅中顯示錯誤訊息。請檢查您的 StorageGRID DNS 設定和連網，確保 link:../primer/what-admin-node-is.html["慣用寄件者管理節點"] 可以連線至 NetApp 支援網站，然後再試一次。
+
+. 選取 *Save* 。
++
+組態已儲存，並顯示確認訊息：「AutoSupport 傳送方式已設定完成。」
+
+

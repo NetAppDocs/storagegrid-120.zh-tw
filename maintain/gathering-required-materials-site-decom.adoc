@@ -1,0 +1,51 @@
+---
+permalink: maintain/gathering-required-materials-site-decom.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission 
+summary: ${post_edited_translations.segment} 
+---
+= 收集 StorageGRID 站台汰除所需的資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+[cols="1a,2a"]
+|===
+| 項目 | 附註 
+
+
+ a| 
+恢復套件 `.zip`檔案
+ a| 
+您必須下載最新的恢復套件 `.zip` 檔案 (`sgws-recovery-package-id-revision.zip`）。如果發生故障，您可以使用恢復套件檔案來還原系統。
+
+link:downloading-recovery-package.html["下載恢復套件"]
+
+
+
+ a| 
+`Passwords.txt` 檔案
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+佈建複雜密碼
+ a| 
+StorageGRID 系統首次安裝時會建立並記錄佈建密碼短語。佈建密碼短語不在 `Passwords.txt`檔案中。
+
+
+
+ a| 
+StorageGRID 系統退役前的拓撲描述
+ a| 
+${post_edited_translations.segment}
+
+|===
+.相關資訊
+link:../admin/web-browser-requirements.html["網頁瀏覽器要求"]

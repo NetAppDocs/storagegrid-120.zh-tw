@@ -1,0 +1,30 @@
+---
+permalink: expand/adding-grid-nodes-to-existing-site-or-adding-new-site.html 
+sidebar: sidebar 
+keywords: grid node, add node, add site, expand, expansion, StorageGRID 
+summary: 請按照此程序將網格節點新增至現有站台，或新增新站台。您一次只能執行一種擴充類型。 
+---
+= 在 StorageGRID 中新增網格節點或新站台的工作流程摘要
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+請按照此程序將網格節點新增至現有站台，或新增新站台。您一次只能執行一種擴充類型。
+
+.開始之前
+* 您有link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 網格中所有現有節點在所有站台均已啟動並執行。
+* 之前的所有擴建、升級、退役或恢復程序均已完成。
++
+
+NOTE: 當其他擴充、升級、恢復或作用中的退役程序正在進行時，您將無法啟動新的擴充。但是，如有必要，您可以暫停退役程序來啟動擴充。
+
+
+
+.步驟
+. link:updating-subnets-for-grid-network.html["更新網格網路的子網路"]。
+. link:deploying-new-grid-nodes.html["部署新的網格節點"]。
+. link:performing-expansion.html["執行擴充"]。
+

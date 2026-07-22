@@ -1,0 +1,28 @@
+---
+permalink: admin/configuring-network-settings.html 
+sidebar: sidebar 
+keywords: network settings, vlan interface, traffic classification 
+summary: 您可以透過 Grid Manager 設定各種網路設定，以調校 StorageGRID 系統的運作。 
+---
+= 配置 StorageGRID 網路設定
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以透過 Grid Manager 設定各種網路設定，以調校 StorageGRID 系統的運作。
+
+
+
+[[configure-vlan-interfaces]]
+== 設定 VLAN 介面
+
+您可以link:configure-vlan-interfaces.html["建立虛擬區域網路 (VLAN) 介面"]隔離和劃分流量，以提高安全性、靈活度和效能。每個 VLAN 介面都與管理節點和閘道節點上的一個或多個父介面關聯。您可以在高可用度群組和負載平衡器端點中使用 VLAN 介面，以便依應用程式或租戶隔離用戶端或管理流量。
+
+
+
+[[traffic-classification-policies]]
+== 流量分類原則
+
+您可以使用 link:managing-traffic-classification-policies.html["流量分類原則"] 來識別和處理不同類型的網路流量，包括與特定儲存桶、租戶、用戶端子網路或負載平衡器端點相關的流量。這些原則有助於限制流量和監控。

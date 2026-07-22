@@ -1,0 +1,72 @@
+---
+permalink: fabricpool/creating-s3-bucket-and-access-key.html 
+sidebar: sidebar 
+keywords: fabricPool, StorageGRID, S3 bucket, bucket, access key, secret access key 
+summary: 在使用 StorageGRID 處理 FabricPool 工作負載之前，您必須為 FabricPool 資料建立一個 S3 儲存桶。您還需要取得將用於 FabricPool 的租戶帳戶的存取金鑰和秘密存取金鑰。 
+---
+= 在 StorageGRID 中為 FabricPool 建立 S3 儲存貯體並取得存取金鑰
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在使用 StorageGRID 處理 FabricPool 工作負載之前，您必須為 FabricPool 資料建立一個 S3 儲存桶。您還需要取得將用於 FabricPool 的租戶帳戶的存取金鑰和秘密存取金鑰。
+
+有關此工作的詳細資訊，請參閱 link:../tenant/creating-s3-bucket.html["建立 S3 儲存桶"] 和 link:../tenant/creating-your-own-s3-access-keys.html["建立您自己的 S3 存取金鑰"]。若要使用 FabricPool 設定精靈完成此工作，請前往 link:use-fabricpool-setup-wizard-steps.html["存取並完成 FabricPool 設定精靈"]。
+
+.開始之前
+* 您已建立供 FabricPool 使用的租戶帳戶。
+* 您擁有租戶帳戶的 root 存取權。
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
++
+** 在 Grid Manager 的「租戶帳戶」頁面中，選擇租戶的「登入」連結，然後輸入您的憑證。
+** 在網頁瀏覽器中輸入租戶帳戶的網址，然後輸入您的憑證。
+
+
+. 建立用於 FabricPool 資料的 S3 bucket。
++
+${post_edited_translations.segment}
+
++
+.. ${post_edited_translations.segment}
+.. 選擇 *Create bucket*。
+.. 輸入您要與 FabricPool 搭配使用的 StorageGRID bucket 名稱。例如， `fabricpool-bucket`。
++
+
+TIP: 建立儲存桶後無法變更儲存桶名稱。
+
+.. ${post_edited_translations.segment}
++
+預設情況下，所有 bucket 都建立在  `us-east-1` 區域中。如果預設區域設定為  `us-east-1` 以外的區域，則最初會在下拉式功能表中選取此其他區域。
+
+.. 選擇 *Continue* 。
+.. 選擇 *Create bucket*。
++
+
+NOTE: 請勿為 FabricPool 貯體選取 *啟用物件版本控制*。同樣地，請勿編輯 FabricPool 貯體以使用 *可用* 或非預設的一致性。FabricPool 貯體建議的貯體一致性為 *新寫入後讀取*，這是新貯體的預設一致性。
+
+
+
+. ${post_edited_translations.segment}
++
+.. 選擇 *STORAGE (S3)* > *My access keys*。
+.. 選取 *Create key*。
+.. 選擇 *建立存取金鑰*。
+.. 將存取金鑰 ID 和秘密存取金鑰複製到安全位置，或選取 *Download .csv* 以儲存包含存取金鑰 ID 和秘密存取金鑰的試算表檔案。
++
+當您將 StorageGRID 設定為 FabricPool 雲端分層時，您將在 ONTAP 中輸入這些值。
+
++
+
+TIP: 如果將來在 StorageGRID 中產生新的存取金鑰和秘密存取金鑰，請在從 StorageGRID 中刪除舊值之前，將新金鑰輸入到 ONTAP 中。否則，ONTAP 可能會暫時失去對 StorageGRID 的存取。
+
+
+
+

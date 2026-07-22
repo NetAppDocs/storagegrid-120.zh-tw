@@ -1,0 +1,158 @@
+---
+permalink: s3/initiate-multipart-upload.html 
+sidebar: sidebar 
+keywords: initiate multipart upload, CreateMultipartUpload, upload ID 
+summary: 此 CreateMultipartUpload 操作會啟動物件的分段上傳，並傳回上傳 ID。 
+---
+= StorageGRID 中的 S3 CreateMultipartUpload 請求標頭和選項
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+CreateMultipartUpload（以前稱為 Initiate Multipart Upload）操作會為物件啟動多部分上傳，並傳回上傳 ID。
+
+The `x-amz-storage-class`請求標頭受支援。提交的 `x-amz-storage-class`值會影響 StorageGRID 在擷取期間如何保護物件資料，而不會影響 StorageGRID 系統中儲存的物件持久複本數量（該數量由 ILM 決定）。
+
+如果與已擷取物件相符的 ILM 規則使用 Strict link:../ilm/data-protection-options-for-ingest.html["擷取選項"]，則 `x-amz-storage-class`標頭無效。
+
+以下數值可用於 `x-amz-storage-class`：
+
+* `STANDARD` （預設）
++
+** *雙重提交*：如果 ILM 規則指定了雙重提交擷取選項，則物件擷取後會立即建立該物件的第二個複本，並將其分發到不同的儲存節點（雙重提交）。在評估 ILM 時，StorageGRID 會決定這些初始臨時複本是否符合規則中的放置指令。如果不符合，則可能需要在不同的位置建立新的物件複本，並且可能需要刪除初始臨時複本。
+** *平衡*：如果 ILM 規則指定了平衡選項，且 StorageGRID 無法立即建立規則中指定的所有複本，StorageGRID 會在不同的 Storage Nodes 上建立兩個暫存複本。
++
+如果 StorageGRID 可以立即建立 ILM 規則中指定的所有物件複本（同步放置），則  `x-amz-storage-class` 標頭無效。
+
+
+
+* `REDUCED_REDUNDANCY`
++
+** *雙重提交*：如果 ILM 規則指定了雙重提交選項，StorageGRID 會在物件被擷取時建立單一臨時複本（單一提交）。
+** *平衡*：如果 ILM 規則指定了「平衡」選項，則僅當系統無法立即建立規則中指定的所有複本時，StorageGRID 才會建立單一臨時複本。如果 StorageGRID 可以執行同步放置，則此標頭無效。 `REDUCED_REDUNDANCY` 選項最適合在與物件相符的 ILM 規則建立單一複寫複本時使用。在這種情況下，使用  `REDUCED_REDUNDANCY` 可避免每次擷取作業都不必要地建立和刪除額外的物件複本。
+
+
++
+不建議在其他情況下使用  `REDUCED_REDUNDANCY` 選項。 `REDUCED_REDUNDANCY` 會增加擷取期間物件資料遺失的風險。例如，如果單一複本最初儲存在儲存節點上，而該儲存節點在 ILM 評估完成之前發生故障，則可能會遺失資料。
+
+
+
+
+CAUTION: 在任何時間段內，僅保留一份複寫複本都會使資料面臨永久遺失的風險。如果某個物件僅存在一份複寫複本，則一旦 Storage Node 發生故障或發生重大錯誤，該物件就會遺失。此外，在升級等維護程序期間，您也會暫時失去對該物件的存取。
+
+指定 `REDUCED_REDUNDANCY`僅影響物件首次擷取時所建立的複本數量。它不會影響作用中 ILM 原則評估物件時所建立的物件複本數量，也不會導致 StorageGRID 系統中的資料以較低的備援等級儲存。
+
+
+NOTE: 如果將物件擷取至已啟用 S3 物件鎖定的儲存桶，則 `REDUCED_REDUNDANCY`選項將被忽略。如果將物件擷取至舊版法規遵循儲存桶，則 `REDUCED_REDUNDANCY`選項會傳回錯誤。StorageGRID 一律會執行雙重提交擷取，以確保符合法規遵循要求。
+
+
+
+[[supported-request-headers]]
+== 支援的要求標頭
+
+支援以下請求標頭：
+
+* `Content-Type`
+* `x-amz-checksum-algorithm`
++
+目前僅支援  `x-amz-checksum-algorithm` 的 SHA256 值。
+
+* `x-amz-meta-`，後接包含使用者定義中繼資料的名稱值對
++
+指定使用者自訂中繼資料的名稱-值對時，請使用以下通用格式：
+
++
+[listing]
+----
+x-amz-meta-_name_: `value`
+----
++
+如果要將「使用者定義的建立時間」選項用作 ILM 規則的參考時間，則必須使用 `creation-time`作為記錄物件建立時間的中繼資料名稱。例如：
+
++
+[listing]
+----
+x-amz-meta-creation-time: 1443399726
+----
++
+的值 `creation-time`以自 1970 年 1 月 1 日以來的秒數來評估。
+
++
+
+NOTE: 如果您要將物件新增至已啟用舊版合規性的儲存桶中，則不允許將  `creation-time` 新增為使用者自訂中繼資料。系統將傳回錯誤。
+
+* S3 物件鎖定請求標頭：
++
+** `x-amz-object-lock-mode`
+** `x-amz-object-lock-retain-until-date`
+** `x-amz-object-lock-legal-hold`
++
+如果請求中沒有這些標頭，則使用儲存桶預設保留設定來計算物件版本的保留期限。
+
++
+link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
+
+
+
+* SSE 要求標頭：
++
+** `x-amz-server-side-encryption`
+** `x-amz-server-side-encryption-customer-key-MD5`
+** `x-amz-server-side-encryption-customer-key`
+** `x-amz-server-side-encryption-customer-algorithm`
++
+<<伺服器端加密的要求標頭>>
+
+
+
++
+
+NOTE: 有關 StorageGRID 如何處理 UTF-8 字元的資訊，請參閱link:put-object.html["PutObject"]。
+
+
+
+
+
+[[request-headers-for-server-side-encryption]]
+== 伺服器端加密的要求標頭
+
+您可以使用下列請求標頭，以伺服器端加密方式對多部分物件進行加密。SSE 和 SSE-C 選項互斥。
+
+* *SSE*：如果您希望使用由 StorageGRID 管理的唯一加密金鑰來加密物件，請在 CreateMultipartUpload 請求中使用下列標頭。請勿在任何 UploadPart 請求中指定此標頭。
++
+** `x-amz-server-side-encryption`
+
+
+* *SSE-C*：如果您想使用您提供和管理的唯一金鑰對物件加密，請在 CreateMultipartUpload 請求（以及每個後續 UploadPart 請求）中使用這三個標頭。
++
+** `x-amz-server-side-encryption-customer-algorithm`：指定 `AES256`。
+** `x-amz-server-side-encryption-customer-key`：指定新物件的加密金鑰。
+** `x-amz-server-side-encryption-customer-key-MD5`：指定新物件加密金鑰的 MD5 摘要。
+
+
+
+
+
+CAUTION: 您提供的加密金鑰不會被儲存。如果您遺失加密金鑰，您將遺失對應的物件。在使用客戶提供的金鑰來保護物件資料之前，請審查 link:using-server-side-encryption.html["使用伺服器端加密"] 的相關注意事項。
+
+
+
+[[unsupported-request-headers]]
+== 不支援的要求標頭
+
+不支援以下請求標頭：
+
+* `x-amz-website-redirect-location`
++
+The `x-amz-website-redirect-location`標頭返回 `XNotImplemented`。
+
+
+
+
+
+[[versioning]]
+== 版本控制
+
+多部分上傳包含啟動上傳、列出上傳檔案、上傳各個部分、組裝已上傳部分及完成上傳等分隔操作。執行 CompleteMultipartUpload 操作時會建立物件（如果適用，也會進行版本控制）。

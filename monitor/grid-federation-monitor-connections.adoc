@@ -1,0 +1,123 @@
+---
+permalink: monitor/grid-federation-monitor-connections.html 
+sidebar: sidebar 
+keywords: grid federation, monitor connection, cross grid replication metrics 
+summary: 您可以監控所有網格聯合連線的基本資訊、特定連線的詳細資訊，或有關跨網格複寫作業的 Prometheus 計量。您可以從任一網格監控連線。 
+---
+= 監控 StorageGRID 網格聯盟連線
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以監控所有 link:../admin/grid-federation-overview.html["網格同盟連線"] 的基本資訊、特定連線的詳細資訊，或有關跨網格複寫操作的 Prometheus 計量。您可以從任一網格監控連線。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入任一網格上的 Grid Manager。
+* 您具有您登入之網格的 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+
+
+[[view-all-connections]]
+== 檢視所有連線
+
+網格聯盟頁面顯示有關所有網格聯盟連線及所有允許使用網格聯盟連線的租戶帳戶的基本資訊。
+
+.步驟
+. 選擇 *Configuration* > *System* > *Grid federation*。
++
+網格聯盟頁面隨即出現。
+
+. 若要檢視此網格上所有連線的基本資訊，請選擇 *Connections* 索引標籤。
++
+在此標籤頁中，您可以：
+
++
+** link:../admin/grid-federation-create-connection.html["建立新連線"]。
+** 選取現有的連線至 link:../admin/grid-federation-manage-connection.html["編輯或測試"]。
+
+
++
+image:grid-federation-connections-tab.png["網格同盟連線索引標籤"]
+
+. 若要查看此網格上所有具有「使用網格同盟連線」權限的租戶帳戶的基本資訊，請選擇「允許的租戶」索引標籤。
++
+在此標籤頁中，您可以：
+
++
+** link:../monitor/monitoring-tenant-activity.html["檢視每位獲準租戶的詳細資訊頁面"]。
+** 檢視每個連線的詳細資訊頁面。請參閱 <<view-specific-connection,${post_edited_translations.segment}>>。
+** 選擇允許的租戶並link:../admin/grid-federation-manage-tenants.html["${post_edited_translations.segment}"]。
+** 檢查是否有跨網格複寫錯誤，並清除最後一個錯誤（如有）。參見link:../admin/grid-federation-troubleshoot.html["排除網格同盟錯誤"]。
++
+image:grid-federation-permitted-tenants-tab.png["網格聯盟允許的租戶索引標籤"]
+
+
+
+
+
+
+
+[[view-specific-connectionview-a-specific-connection]]
+== 檢視特定連線
+
+您可以檢視特定網格聯邦連線的詳細資訊。
+
+.步驟
+. 從 Grid federation 頁面中選擇任一索引標籤，然後從表格中選擇連線名稱。
++
+在連結詳情頁面，您可以：
+
++
+** 查看連線的基本狀態訊息，包括本機和遠端主機名稱、連接埠和連線狀態。
+** 選擇連線至 link:../admin/grid-federation-manage-connection.html["${post_edited_translations.segment}"]。
+
+
+. 檢視特定連線時，請選擇「*允許的租戶*」索引標籤，以檢視該連線的允許租戶詳細資訊。
++
+在此標籤頁中，您可以：
+
++
+** link:../monitor/monitoring-tenant-activity.html["檢視每位獲準租戶的詳細資訊頁面"]。
+** link:../admin/grid-federation-manage-tenants.html["${post_edited_translations.segment}"]以使用連線。
+** 檢查跨網格複寫錯誤並清除最後一個錯誤。請參閱 link:../admin/grid-federation-troubleshoot.html["排除網格同盟錯誤"]。
++
+image:grid-federation-permitted-tenants-tab-for-connection.png["用於連線的網格同盟允許租戶索引標籤"]
+
+
+
+. 檢視特定連線時，選取 *Certificates* 索引標籤，即可檢視此連線的系統所產生的伺服器和用戶端憑證。
++
+在此標籤頁中，您可以：
+
++
+** link:../admin/grid-federation-manage-connection.html["輪換連線憑證"]。
+** ${post_edited_translations.segment}
++
+image:grid-federation-certificates-tab.png["${post_edited_translations.segment}"]
+
+
+
+
+
+
+
+[[review-cross-grid-replication-metrics]]
+== 檢視跨網格複寫計量
+
+您可以使用 Grafana 中的 Cross-Grid Replication 儀表板來檢視有關網格上跨網格複寫操作的 Prometheus 計量。
+
+.步驟
+. 從 Grid Manager 中，選擇 *Support* > *Tools* > *Metrics*。
++
+
+NOTE: 「計量」頁面上的工具僅供技術支援人員使用。這些工具中的某些功能和選單項目刻意設定為不具備實際功能，且可能隨時變更。請參閱link:../monitor/commonly-used-prometheus-metrics.html["常用的 Prometheus 計量"]清單。
+
+. 在頁面的 Grafana 部分，選擇 *Cross Grid Replication*。
++
+如需詳細說明，請參閱 link:../monitor/reviewing-support-metrics.html["審查支援計量"]。
+
+. 若要重試複寫失敗物件的複寫作業，請參閱 link:../admin/grid-federation-retry-failed-replication.html["識別並重試失敗的複寫操作"]。
+

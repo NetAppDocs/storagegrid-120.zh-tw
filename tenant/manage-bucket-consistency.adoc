@@ -1,0 +1,87 @@
+---
+permalink: tenant/manage-bucket-consistency.html 
+sidebar: sidebar 
+keywords: how to manage bucket consistency, how to change bucket consistency, read after new write, read-after-new-write, strong site, strong-site, strong global, strong-global 
+summary: 一致性值可用於指定儲存桶設定變更的可用度，以及在儲存桶內物件的可用度與這些物件在不同儲存節點和站台間的一致性之間取得平衡。您可以變更一致性值，使其與預設值不同，以便用戶端應用程式能夠滿足其作業需求。 
+---
+= 管理 StorageGRID 儲存貯體一致性
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+一致性值可用於指定儲存桶設定變更的可用度，以及在儲存桶內物件的可用度與這些物件在不同儲存節點和站台間的一致性之間取得平衡。您可以變更一致性值，使其與預設值不同，以便用戶端應用程式能夠滿足其作業需求。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於擁有 link:tenant-management-permissions.html["管理所有儲存桶或 root 存取權限"] 的使用者群組。這些權限會置換群組或儲存桶原則中的權限設定。
+
+
+
+
+[[bucket-consistency-guidelines]]
+== 儲存桶一致性準則
+
+儲存桶一致性用於確定影響該 S3 儲存桶內物件的用戶端應用程式的一致性。通常，您應該為儲存桶使用 *Read-after-new-write* 一致性。
+
+
+
+[[change-bucket-consistencychange-bucket-consistency]]
+== [[change-bucket-consistency]]變更貯體一致性
+
+如果「新寫後讀取」一致性不符合用戶端應用程式的要求，您可以透過設定儲存桶一致性或使用 `Consistency-Control`標頭來變更一致性。 `Consistency-Control`標頭會覆蓋儲存桶一致性。
+
+
+NOTE: 當您變更儲存桶的一致性時，只有在變更之後攝取的物件才能保證符合修改後的設定。
+
+.步驟
+. 從儀表板中選擇 *View buckets*，或選擇 *STORAGE (S3)* > *Buckets*。
+. 從表格中選擇儲存桶名稱。
++
+顯示儲存桶詳細資料頁面。
+
+. 從「儲存桶選項」標籤中，選擇 ** 摺疊面板。
+. 為此儲存桶中物件執行的操作選擇一致性。
++
+** *All*：提供最高層級的一致性。所有節點都會立即收到資料，否則要求將失敗。
+** *Strong-global*：保證所有站台上所有用戶端請求的讀寫後一致性。
+** *Strong-site*：保證站台內所有用戶端請求的寫後讀一致性。
+** *Read-after-new-write*（預設）：提供新物件寫入後讀取一致性，為物件更新提供最終一致性。提供高可用度和資料保護保證。建議在大多數情況下使用。
+** *Available*：為新物件和物件更新提供最終一致性。對於 S3 儲存貯體，請僅在需要時使用（例如，對於包含極少讀取之記錄值的儲存貯體，或針對不存在的金鑰進行 HEAD 或 GET 作業）。不支援 S3 FabricPool 儲存貯體。
+
+
+. 選擇 *Save changes* 。
+
+
+
+
+[[what-happens-when-you-change-bucket-settings]]
+== 更改儲存桶設定時會發生什麼情況
+
+儲存桶有多個設定，這些設定會影響儲存桶及其內部物件的行為。
+
+以下儲存桶設定預設使用*強*一致性。如果任何站台中有兩個或多個儲存節點無法使用，或某個站台無法使用，則對這些設定所做的任何變更可能都無效。
+
+* link:deleting-s3-bucket-objects.html["背景空桶刪除"]
+* link:enabling-or-disabling-last-access-time-updates.html["最後存取時間"]
+* link:../s3/create-s3-lifecycle-configuration.html["${post_edited_translations.segment}"]
+* link:../s3/use-access-policies.html["儲存桶原則"]
+* link:../s3/operations-on-buckets.html["儲存桶標記"]
+* link:changing-bucket-versioning.html["儲存桶版本控制"]
+* link:using-s3-object-lock.html["S3 物件鎖定"]
+* link:../admin/reviewing-storagegrid-encryption-methods.html#bucket-encryption-table["儲存桶加密"]
+
+
+
+NOTE: 儲存桶版本控制、S3 Object Lock 和儲存桶加密的一致性值不能設定為非強一致值。
+
+以下儲存桶設定未使用強一致性，且變更的可用度更高。對這些設定的變更可能需要一些時間才能生效。
+
+* link:considerations-for-platform-services.html["平台服務組態：通知、複寫或搜尋整合"]
+* link:configuring-cross-origin-resource-sharing-for-buckets-and-objects.html["為儲存桶和物件設定 StorageGRID CORS"]
+* <<change-bucket-consistency,變更儲存桶一致性>>
+
+
+
+TIP: 如果變更貯體設定時所使用的預設一致性不符合用戶端應用程式的需求，您可以使用 link:../s3/put-bucket-consistency-request.html["S3 REST API"] 的  `Consistency-Control` 標頭，或使用 link:understanding-tenant-management-api.html["租戶管理 API"] 中的  `reducedConsistency` 或  `force` 選項來變更一致性。

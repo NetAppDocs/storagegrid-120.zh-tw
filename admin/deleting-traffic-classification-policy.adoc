@@ -1,0 +1,49 @@
+---
+permalink: admin/deleting-traffic-classification-policy.html 
+sidebar: sidebar 
+keywords: delete traffic classification policy 
+summary: ${post_edited_translations.segment} 
+---
+= 刪除 StorageGRID 流量分類原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您不再需要某個流量分類原則，可以將其刪除。請務必刪除正確的原則，因為原則一旦刪除將無法復原。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.步驟
+. 選擇 *組態* > *網路* > *流量分類*。
++
+${post_edited_translations.segment}
+
+. 使用「動作」功能表或詳細資料頁面刪除原則。
++
+[role="tabbed-block"]
+====
+.操作選單
+--
+.. 選取該原則的核取方塊。
+.. 選擇 *Actions* > *Remove*。
+
+
+--
+.原則詳細資料頁面
+--
+.. 選擇原則名稱。
+.. ${post_edited_translations.segment}
+
+
+--
+====
+. 選擇「是」以確認您要刪除該原則。
++
+原則已刪除。
+
+

@@ -1,0 +1,8 @@
+---
+permalink: swift/monitoring-and-auditing-operations.html 
+redirect: storagegrid/swift/index.html 
+---
+= 
+:allow-uri-read: 
+
+

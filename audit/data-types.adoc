@@ -1,0 +1,61 @@
+---
+permalink: audit/data-types.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, data, types, UI32, UI64, FC32, IPAD, CSTR, IPAD 
+summary: 稽核訊息中使用了不同的資料類型來儲存資訊。 
+---
+= StorageGRID 稽核訊息中的資料類型
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+稽核訊息中使用了不同的資料類型來儲存資訊。
+
+[cols="1a,4a"]
+|===
+| 類型 | 說明 
+
+
+ a| 
+UI32
+ a| 
+無符號長整數（32 位元）；它可以儲存 0 到 4,294,967,295 之間的數字。
+
+
+
+ a| 
+UI64
+ a| 
+無符號雙長整型（64 位元）；它可以儲存 0 到 18,446,744,073,709,551,615 的數字。
+
+
+
+ a| 
+FC32
+ a| 
+四字元常數；一個 32 位元無符號整數值，表示為四個 ASCII 字元，例如「ABCD」。
+
+
+
+ a| 
+iPad
+ a| 
+用於 IP 位址。
+
+
+
+ a| 
+CSTR
+ a| 
+一個可變長度的 UTF-8 字元陣列。字元可以使用以下約定進行轉義：
+
+* 反斜杠是 \\。
+* 回車符是 \r。
+* 雙引號是 \ʺ。
+* 換行符（新行）是 \n。
+* 字元可以用其十六進位等效值替換（格式為 \xHH，其中 HH 是表示該字元的十六進位值）。
+
+
+|===

@@ -1,0 +1,80 @@
+---
+permalink: audit/audit-message-flow-and-retention.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, flow, retention 
+summary: 在系統正常運作期間，所有 StorageGRID 服務都會產生稽核訊息。您應該瞭解這些稽核訊息如何透過 StorageGRID 系統傳送到 audit.log 檔案。 
+---
+= 稽核訊息如何透過 StorageGRID 系統傳輸到 audit.log 檔案以進行保留
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+所有 StorageGRID 服務都會在正常系統運作期間產生稽核訊息。您應該瞭解這些稽核訊息如何透過 StorageGRID 系統傳送至  `audit.log` 檔案。
+
+下列稽核訊息和稽核訊息保留工作流程僅適用於 StorageGRID 設定為「管理節點/本機節點」或「管理節點和外部 syslog 伺服器」的情況。如果 StorageGRID 設定為「僅限本機節點」（預設）或「外部 syslog 伺服器」，稽核訊息將儲存在每個節點本機的 `/var/local/log/localaudit.log`檔案中，管理節點或儲存節點無法處理這些訊息。
+
+
+
+[[audit-message-flow]]
+== ${post_edited_translations.segment}
+
+當 StorageGRID 設定為 *管理節點/本機節點* 或 *管理節點和外部 syslog 伺服器* 時，管理節點會處理稽核訊息；此外，具有管理網域控制器 （ADC） 服務的儲存節點也會處理稽核訊息。
+
+如稽核訊息流程圖所示，每個 StorageGRID 節點會將其稽核訊息傳送至資料中心站台的某個 ADC 服務。每個站台上安裝的前三個儲存節點會自動啟用 ADC 服務。
+
+反過來，每個 ADC 服務充當中繼，並將其收集的稽核訊息傳送到 StorageGRID 系統中的每個管理節點，使每個管理節點獲得完整的系統活動記錄。
+
+每個 Admin Node 都會將稽核訊息儲存在文字日誌檔中；作用中的日誌檔命名為 `audit.log`。
+
+image:audit_message_flow.gif["概述稽核訊息通過中繼器流程的圖表"]
+
+
+
+[[audit-message-retention]]
+=== 稽核訊息保留
+
+StorageGRID 使用複製和刪除程序來確保在將稽核訊息寫入稽核日誌之前不會遺失任何稽核訊息。
+
+當節點產生或轉送稽核訊息時，該訊息會儲存在網格節點系統磁碟上的稽核訊息佇列中。稽核訊息佇列中會一直保留該訊息的複本，直到該訊息被寫入 Admin Node 的  `/var/local/audit/export` 目錄中的稽核日誌檔為止。這有助於防止稽核訊息在傳輸過程中遺失。
+
+image:audit_message_retention.gif["${post_edited_translations.segment}"]
+
+由於網路連線問題或稽核容量不足，稽核訊息佇列可能會暫時增加。隨著佇列的增加，它們會使用每個節點 `/var/local/`目錄中更多的可用空間。如果問題持續存在，且某個節點的稽核訊息目錄已滿，則該節點會優先處理積壓的訊息，並暫時無法接收新訊息。
+
+具體來說，您可能會看到以下行為：
+
+* 如果 Admin Node 所使用的  `/var/local/audit/export` 目錄已滿，Admin Node 會被標記為無法接收新的稽核訊息，直到該目錄不再滿為止。S3 用戶端要求不受影響。當稽核儲存庫無法連線時，會觸發 XAMS （Unreachable Audit Repositories）警示。
+* 如果 `/var/local/`啟用了 ADC 服務的儲存節點所使用的目錄已滿 92%，則該節點將被標記為無法使用，無法處理稽核訊息，直到目錄使用率降至 87% 為止。S3 用戶端對其他節點的請求不受影響。當稽核中繼無法連線時，將觸發 NRLY（可用稽核中繼）警示。
++
+
+NOTE: 如果沒有具備 ADC 服務的可用 Storage Node，Storage Node 會將稽核訊息在本機儲存於  `/var/local/log/localaudit.log` 檔案中。
+
+* 如果 `/var/local/`Storage Node 使用的目錄已滿 85%，則該節點將開始拒絕 S3 用戶端請求 `503 Service Unavailable`。
+
+
+以下類型的問題會導致稽核訊息佇列變得非常大：
+
+* 含有 ADC 服務的管理節點或儲存節點停電。如果系統中的某個節點停機，其餘節點可能會出現請求積壓。
+* 持續的活動頻率超過系統的稽核容量。
+* The `/var/local/` ADC 儲存節點上的空間因與稽核訊息無關的原因而滿溢。發生這種情況時，該節點將停止接收新的稽核訊息，並優先處理當前積壓的訊息，這可能會導致其他節點出現積壓。
+
+
+
+
+[[large-audit-queue-alert-and-audit-messages-queued-amqs-alarm]]
+=== 大型稽核佇列警示和稽核訊息已排隊 (AMQS) 警示
+
+為了協助您監控稽核訊息佇列的大小隨時間的變化，當儲存節點佇列或管理節點佇列中的訊息數量達到某些閾值時，將觸發 *Large audit queue* 警示和舊版 AMQS 警示。
+
+${post_edited_translations.segment}
+
+如果警示或警報持續存在且嚴重性增加，請檢視佇列大小的圖表。如果該數字在數小時或數天內穩定增加，則稽核負載可能已超過系統的稽核容量。請降低用戶端作業速率，或將「用戶端寫入」和「用戶端讀取」的稽核層級變更為「錯誤」或「關閉」，以減少記錄的稽核訊息數量。請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+
+
+
+[[duplicate-messages]]
+=== ${post_edited_translations.segment}
+
+StorageGRID 系統在發生網路或節點故障時會採取保守的處理方式。因此，稽核日誌中可能會出現重複的訊息。

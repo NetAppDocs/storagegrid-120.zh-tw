@@ -1,0 +1,91 @@
+---
+permalink: primer/using-information-lifecycle-management.html 
+sidebar: sidebar 
+keywords: StorageGRID, what is information lifecycle management, how to use ilm 
+summary: 您可以使用資訊生命週期管理 （ILM） 來控制 StorageGRID 系統中所有物件的放置、儲存時間長度和擷取行為。ILM 規則決定 StorageGRID 如何隨時間儲存物件。您可以設定一個或多個 ILM 規則，然後將其新增至 ILM 原則。 
+---
+= StorageGRID 中的資訊生命週期管理
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用資訊生命週期管理 （ILM） 來控制 StorageGRID 系統中所有物件的放置、儲存時間長度和擷取行為。ILM 規則決定 StorageGRID 如何隨時間儲存物件。您可以設定一個或多個 ILM 規則，然後將它們新增至 ILM 原則。一個網格可以同時擁有多個活動原則。
+
+${post_edited_translations.segment}
+
+* 哪些物件應該被儲存。規則可以套用於所有物件，或者您可以指定篩選條件來識別規則適用的物件。例如，規則可以僅套用於與特定租戶帳戶、特定 S3 儲存桶或特定中繼資料值關聯的物件。
+* 儲存設備類型與位置。物件可儲存在儲存節點或雲端儲存池中。
+* 所建立的物件複本類型。複本可以是複寫或銷毀編碼。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 隨著時間的推移，物件的儲存設備位置和複本類型的變化。
+* 物件擷取至網格時如何保護物件資料（同步放置或雙重提交）。
+
+
+請注意，物件中繼資料並非由 ILM 規則管理。物件中繼資料儲存在 Cassandra 資料庫中，該資料庫稱為中繼資料儲存庫。每個站台都會自動維護三份物件中繼資料複本，以防止資料遺失。
+
+
+
+[[example-ilm-rule]]
+== 範例 ILM 規則
+
+例如，ILM 規則可以規定以下內容：
+
+* 僅適用於屬於租戶 A 的物件。
+* ${post_edited_translations.segment}
+* 將這兩個複本「永久」保留，這意味著 StorageGRID 不會自動刪除它們。StorageGRID 將保留這些物件，直到用戶端發出刪除請求或儲存桶生命週期到期為止。
+* ${post_edited_translations.segment}
++
+例如，如果租戶 A 儲存物件時站點 2 無法存取，StorageGRID 將在站點 1 的儲存節點上建立兩個臨時複本。一旦站點 2 可用，StorageGRID 將在該站點建立所需的複本。
+
+
+
+
+
+[[how-an-ilm-policy-evaluates-objects]]
+== ILM 原則如何評估物件
+
+StorageGRID 系統的作用中 ILM 原則控制所有物件的放置、持續時間和擷取行為。
+
+當用戶端將物件儲存到 StorageGRID 時，系統會根據作用中原則中已排序的 ILM 規則集對物件進行評估，如下所示：
+
+. 如果原則中第一條規則的篩選器與某個物件相符，則該物件將根據該規則的擷取行為進行擷取，並根據該規則的放置指示進行儲存。
+. ${post_edited_translations.segment}
+. 如果沒有規則與物件相符，則會套用原則中預設規則的擷取行為和放置指令。預設規則是原則中的最後一條規則，且不能使用任何篩選器。它必須套用於所有租戶、所有儲存桶和所有物件版本。
+
+
+
+
+[[example-ilm-policy]]
+== ${post_edited_translations.segment}
+
+例如，一項 ILM 原則可以包含三條 ILM 規則，分別規定如下：
+
+* *規則 1：租戶 A 的複本*
++
+** ${post_edited_translations.segment}
+** 將這些物件以三個複本的形式儲存在三個不同的地點。
+** ${post_edited_translations.segment}
+
+
+* *規則 2：對大於 1 MB 的物件進行銷毀編碼*
++
+** 比對來自其他租戶的所有物件，但僅限於大於 1 MB 的物件。這些較大的物件在三個站台使用 6+3 銷毀編碼進行儲存。
+** 不符合 1 MB 或更小的物件，因此這些物件將根據規則 3 進行評估。
+
+
+* *規則 3：2 個複本，2 個資料中心*（預設）
++
+** 是原則中的最後一個預設規則。不使用篩選器。
+** 製作兩個與規則 1 或規則 2 不符的所有物件的複本（不屬於租戶 A 且大小為 1 MB 或更小的物件）。
+
+
+
+
+image:ilm_policy_and_rules.png["ILM 原則和規則"]
+
+.相關資訊
+* link:../ilm/index.html["使用 ILM 管理物件"]
+

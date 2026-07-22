@@ -1,0 +1,221 @@
+---
+permalink: expand/performing-expansion.html 
+sidebar: sidebar 
+keywords: expand, expansion procedure, StorageGRID 
+summary: 執行擴充時，新的網格節點將會新增到現有的 StorageGRID 部署。 
+---
+= 執行 StorageGRID 擴充
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+執行擴充時，新的網格節點將會新增到現有的 StorageGRID 部署。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您擁有佈建密碼。
+* 您已部署本次擴充中新增的所有網格節點。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 如果您正在新增儲存節點，則表示您已確認作為恢復一部分執行的所有資料修復作業均已完成。請參閱link:../maintain/checking-data-repair-jobs.html["檢查資料修理作業"]。
+* 如果您正在新增儲存節點，且想要為這些節點指派自訂儲存等級，您已經 link:../ilm/creating-and-assigning-storage-grades.html["已建立自訂儲存設備等級"]。您也必須具有 Root 存取權限，或是同時具有維護與 ILM 權限。
+* 如果您要新增站台，您已檢閱並更新 ILM 規則。您必須確保在擴充完成之前，不會將物件複本儲存到新站台。例如，如果規則使用預設儲存資源池（*所有儲存節點*），您必須 link:../ilm/creating-storage-pool.html["建立一個新的儲存資源池"] 僅包含現有的儲存節點，並 link:../ilm/working-with-ilm-rules-and-ilm-policies.html["更新 ILM 規則"] 與 ILM 原則，以使用該新的儲存資源池。否則，一旦該站台的第一個節點啟用，物件就會立即被複製到新站台。
+
+
+.關於此任務
+${post_edited_translations.segment}
+
+. 設定擴充。
+. 開始擴充。
+. 下載新的恢復套件檔案。
+. 監控擴充步驟和階段，直到所有新節點均已安裝並設定完畢，且所有服務均已啟動。
++
+
+CAUTION: 在大型網格上，某些擴展步驟和階段可能需要相當長的時間才能完成。例如，如果 Cassandra 資料庫為空，將 Cassandra 資料串流傳輸到新的儲存節點可能只需幾分鐘。但是，如果 Cassandra 資料庫包含大量物件中繼資料，則此階段可能需要幾個小時甚至更長時間。在「擴充 Cassandra 叢集」或「啟動 Cassandra 並串流資料」階段，請勿重新開機任何儲存節點。
+
+
+
+.步驟
+. 選擇 *Maintenance* > *Tasks* > *Expansion*。
++
+「網格擴充」頁面隨即出現。「待新增節點」部分列出了可以新增的節點。
+
++
+image:grid_expansion_page.png["快照顯示網格擴充頁面"]
+
+. 選擇 *Configure Expansion*。
++
+「選址」對話框隨即出現。
+
+. 選擇您要啟動的擴充類型：
++
+** 如果要新增站台，請選擇 *New*，然後輸入新站台的名稱。
+** 如果要為現有站台新增一個或多個節點，請選擇 *Existing*。
+
+
+. 選取 *Save* 。
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
++
+image:grid_node_details.png["網格節點詳細資訊快照"]
+
++
+
+NOTE: 如果缺少節點，請確認該節點已成功部署。
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
+.. 選擇 *Approve*。
++
+顯示網格節點組態表單。
+
+.. ${post_edited_translations.segment}
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+地點
+ a| 
+網格節點將關聯的站台名稱。如果要新增多個節點，請確保為每個節點選擇正確的站台。如果要新增站台，所有節點都會新增到新站台。
+
+
+
+ a| 
+Name
+ a| 
+節點的系統名稱。系統名稱是 StorageGRID 內部作業的必要項目，且無法變更。
+
+
+
+ a| 
+儲存類型（僅限儲存節點）
+ a| 
+*** ${post_edited_translations.segment}
+*** ${post_edited_translations.segment}
+*** ${post_edited_translations.segment}
+
+
+
+
+ a| 
+NTP 角色
+ a| 
+網格節點的網路時間協定（NTP）角色：
+
+*** 選擇 *Automatic* （預設）可自動將 NTP 角色指派給節點。Primary 角色將指派給管理節點、具有 ADC 服務的儲存節點、Gateway 節點，以及任何具有非靜態 IP 位址的網格節點。Client 角色將指派給所有其他網格節點。
+*** 選擇 *Primary* 以手動將 Primary NTP 角色指派給該節點。每個站台至少應有兩個節點具有 Primary 角色，以提供對外部時間來源的備援系統存取。
+*** 選擇 *Client* 以手動將 Client NTP 角色指派給節點。
+
+
+
+
+ a| 
+ADC 服務（合併式或僅中繼資料儲存節點）
+ a| 
+此儲存節點是否執行管理網域控制器 (ADC) 服務。ADC 服務負責追蹤網格服務的位置和可用度。每個站台至少需要三個儲存節點才能包含 ADC 服務。
+
+*** 如果要替換的儲存節點包含 ADC 服務，請選擇「是」。因為如果剩餘的 ADC 服務過少，則無法退役儲存節點，所以此設定可確保在移除舊服務之前，新的 ADC 服務可用。
+*** 您可以link:../maintain/move-adc-service.html["將 ADC 服務移至同一站台上的另一個儲存節點"]以確保 ADC 服務達到法定人數。
+*** ${post_edited_translations.segment}
+
+
+了解 link:../maintain/understanding-adc-service-quorum.html["${post_edited_translations.segment}"]。
+
+
+
+ a| 
+儲存級（組合式或僅資料儲存節點）
+ a| 
+使用*預設*儲存設備等級，或選擇要指派給此新節點的自訂儲存設備等級。
+
+儲存等級由 ILM 儲存資源池使用，因此您的選擇會影響哪些物件將放置在儲存節點上。
+
+|===
+.. 根據需要修改網格網路、管理網路和用戶端網路的設定。
++
+*** *IPv4 Address (CIDR)*：網路介面的 CIDR 網路位址。例如：172.16.10.100/24
++
+
+NOTE: 如果在核准節點時發現網格網路上的節點有重複的 IP 位址，則必須取消擴充，使用不重複的 IP 位址重新部署虛擬機器或應用裝置，然後重新啟動擴充。
+
+*** *Gateway*：網格節點的預設閘道。例如：172.16.10.1
+*** *子網路（CIDR）*：管理網路的一個或多個子網路。
+
+
+.. 選取 *Save* 。
++
+${post_edited_translations.segment}
+
++
+*** 若要修改已核准的網格節點的屬性，請選擇其單選按鈕，然後選擇 *Edit*。
+*** 若要將已核准的網格節點移回待處理節點清單，請選取其選項按鈕，然後選取 *Reset*。
+*** 若要永久移除已核准的網格節點，請先關閉該節點的電源。然後，選擇其單選按鈕，並選擇 *Remove*。
+
+
+.. ${post_edited_translations.segment}
++
+
+NOTE: 如果可能，您應該核准所有待處理的網格附註並執行單一擴充。如果您執行多次小擴充，則需要更多時間。
+
+
+
+. 當您核准所有網格節點後，輸入*佈建密碼*，然後選擇*展開*。
++
+幾分鐘後，此頁面將更新以顯示擴充程序的狀態。當影響單一網格節點的工作正在進行時，「網格節點狀態」區段將列出每個網格節點的目前狀態。
+
++
+
+NOTE: 在為新應用裝置執行「安裝網格節點」步驟期間，StorageGRID Appliance Installer 會顯示安裝從第 3 階段過渡到第 4 階段（完成安裝）。第 4 階段完成後，控制器將重新開機。
+
++
+
+NOTE: 網站擴充還包括為新網站設定 Cassandra 的額外工作。
+
+. 當「下載恢復套件」連結出現時，立即下載恢復套件檔案。
++
+在對 StorageGRID 系統進行網格拓撲變更後，您必須儘快下載恢復套件檔案的更新複本。如果發生故障，恢復套件檔案可讓您還原系統。
+
++
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 下載完成後，開啟 `.zip`檔案，並確認您可以存取其中的內容，包括 `Passwords.txt`檔案。
+.. 將下載的恢復套件檔案 (`.zip`) 複製至兩個安全、安全的且分隔的位置。
++
+
+CAUTION: 恢復套件檔案必須受到保護，因為它包含可用於從 StorageGRID 系統取得資料的加密金鑰和密碼。
+
+
+
+. 如果您要為現有站台新增儲存節點或新增站台，請監控 Cassandra 階段，這些階段會在新網格節點上啟動服務時發生。
++
+
+CAUTION: 在「擴充 Cassandra 叢集」或「啟動 Cassandra 並串流資料」階段，請勿重新開機任何儲存節點。對於每個新的儲存節點，這些階段可能需要數小時才能完成，尤其是在現有儲存節點包含大量物件中繼資料的情況下。
+
++
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+如果您要為現有站台新增儲存節點，請審查「正在啟動 Cassandra 和串流資料」狀態訊息中顯示的百分比。
+
+此百分比根據可用的 Cassandra 資料總量和已寫入新節點的資料量，來估計 Cassandra 串流作業的完成程度。
+
+--
+.${post_edited_translations.segment}
+--
+如果您要新增網站，請使用  `nodetool status` 監控 Cassandra 串流的進度，並在「擴充 Cassandra 叢集」階段檢視已複製到新網站的中繼資料量。新網站上的總資料負載應在目前網站總載入量的 20% 左右。
+
+--
+====
+. 繼續監控擴充過程，直到所有任務完成且「設定擴充」按鈕重新出現。
+
+
+.完成後
+根據您新增的網格節點類型，執行額外的整合和組態步驟。請參閱link:configuring-expanded-storagegrid-system.html["${post_edited_translations.segment}"]。

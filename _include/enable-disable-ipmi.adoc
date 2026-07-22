@@ -1,0 +1,6 @@
+= 
+:allow-uri-read: 
+
+
+
+NOTE: 您可以為所有包含 BMC 的裝置啟用或停用遠端 IPMI 存取。遠端 IPMI 介面允許任何擁有 BMC 帳戶和密碼的使用者對您的 StorageGRID 設備進行底層硬體存取。如果您不需要對 BMC 進行遠端 IPMI 存取，請使用下列方法之一停用此選項：+ 在 Grid Manager 中，前往 *Configuration* > *Security* > *Security settings* > *Appliances*，然後清除 *Enable remote IPMI access* 核取方塊。+ 在 Grid 管理 API 中，使用私有端點： `PUT /private/bmc`。

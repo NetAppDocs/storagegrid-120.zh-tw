@@ -1,0 +1,72 @@
+---
+permalink: primer/copy-management.html 
+sidebar: sidebar 
+keywords: StorageGRID, object data, ilm policy, ilm rules, replicated copy, replication, erasure-coded copy, ec, cloud storage pool 
+summary: 物件資料由目前有效的 ILM 原則及其 ILM 規則進行管理。ILM 規則會建立複寫或銷毀編碼複本，以保護物件資料免於遺失。 
+---
+= StorageGRID 如何管理物件副本
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+物件資料由作用中的 ILM 原則和相關的 ILM 規則進行管理。ILM 規則會建立複寫或銷毀編碼的複本，以保護物件資料免於遺失。
+
+在物件生命週期的不同階段，可能需要不同類型或不同位置的物件複本。ILM 規則會定期評估，以確保物件按要求放置。
+
+${post_edited_translations.segment}
+
+
+
+[[content-protection-replication]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+LDR 服務中的 ILM 引擎控制複寫，並確保將正確數量的複本儲存在正確的位置，並保存正確的時間。
+
+image:replication_data_flow.png["${post_edited_translations.segment}"]
+
+. ILM 引擎查詢 ADC 服務，以決定 ILM 規則指定的儲存資源池中最佳的目的地 LDR 服務。然後，它向該 LDR 服務傳送命令以啟動複寫。
+. 目的地 LDR 服務向 ADC 服務查詢最佳來源位置。然後，它會向來源 LDR 服務發送複寫請求。
+. 來源 LDR 服務將複本傳送到目的地 LDR 服務。
+. 目的地 LDR 服務通知 ILM 引擎物件資料已儲存。
+. ILM 引擎使用物件位置中繼資料更新中繼資料儲存。
+
+
+
+
+[[content-protection-erasure-coding]]
+== 內容保護：銷毀編碼
+
+如果 ILM 規則包含建立物件資料的銷毀編碼複本的指示，則適用的銷毀編碼方案會將物件資料分解為資料片段和同位元檢查片段，並將這些片段分發到銷毀編碼設定檔中設定的儲存節點上。
+
+作為 LDR 服務的元件，ILM 引擎控制銷毀編碼，並確保銷毀編碼設定檔套用於物件資料。
+
+image:erasure_coding_data_flow.png["銷毀編碼資料流"]
+
+. ILM 引擎會查詢 ADC 服務，以決定哪個 DDS 服務最適合執行銷毀編碼操作。確定後，ILM 引擎會向該服務發送「啟動」請求。
+. DDS 服務指示 LDR 對物件資料進行銷毀編碼。
+. 來源 LDR 服務將複本傳送給選取用於銷毀編碼的 LDR 服務。
+. 在建立適當數量的同位元檢查和資料片段後，LDR 服務將這些片段分發到構成銷毀編碼設定檔儲存資源池的儲存節點（區塊服務）上。
+. LDR 服務通知 ILM 引擎，確認物件資料已成功發佈。
+. ILM 引擎使用物件位置中繼資料更新中繼資料儲存。
+
+
+
+
+[[content-protection-cloud-storage-pool]]
+== 內容保護：Cloud Storage Pool
+
+如果 ILM 規則的內容放置說明要求將物件資料的複寫複本儲存在雲端儲存資源池中，物件資料將複製到為雲端儲存資源池指定的外部 S3 儲存貯體或 Azure Blob 儲存 Container。
+
+ILM 引擎是 LDR 服務的元件，與 Data Mover 服務共同控制物件移動至 Cloud Storage Pool 的過程。
+
+image:cloud_storage_pool_data_flow.png["雲端儲存池資料流"]
+
+. ILM 引擎選擇 Data Mover 服務以複寫到雲端儲存池。
+. 資料移動服務將物件資料傳送至雲端儲存池。
+. ${post_edited_translations.segment}
+. ILM 引擎使用物件位置中繼資料更新中繼資料儲存。
+

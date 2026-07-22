@@ -1,0 +1,39 @@
+---
+permalink: tenant/guidelines-for-configuring-openldap-server.html 
+sidebar: sidebar 
+keywords: how to configure open ldap 
+summary: ${post_edited_translations.segment} 
+---
+= 為 StorageGRID 設定 OpenLDAP 伺服器
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+
+[[memberof-and-refint-overlays]]
+== ${post_edited_translations.segment}
+
+應啟用 memberof 和 refint 覆蓋層。如需更多資訊，請參閱《OpenLDAP Software Administrator's Guide》中的反向群組成員關係維護說明。
+
+
+
+[[indexing]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+[listing]
+----
+olcDbIndex: objectClass eq
+olcDbIndex: uid eq,pres,sub
+olcDbIndex: cn eq,pres,sub
+olcDbIndex: entryUUID eq
+----
+${post_edited_translations.segment}
+
+有關反向群組成員資格維護的資訊，請參閱《OpenLDAP Software Administrator's Guide》。

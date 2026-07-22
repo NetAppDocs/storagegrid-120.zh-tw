@@ -1,0 +1,8 @@
+---
+permalink: vmware/collecting-information-about-your-deployment-environment.html 
+redirect: storagegrid/swnodes/collecting-information-about-your-deployment-environment.html 
+---
+= 
+:allow-uri-read: 
+
+

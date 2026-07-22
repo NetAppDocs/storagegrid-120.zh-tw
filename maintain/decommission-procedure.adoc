@@ -1,0 +1,26 @@
+---
+permalink: maintain/decommission-procedure.html 
+sidebar: sidebar 
+keywords: how to decommission 
+summary: 您可以執行退役程序，從 StorageGRID 系統永久移除網格節點或整個站台。 
+---
+= 停用 StorageGRID 節點或站台
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以執行退役程序，從 StorageGRID 系統永久移除網格節點或整個站台。
+
+${post_edited_translations.segment}
+
+* 執行 link:grid-node-decommissioning.html["${post_edited_translations.segment}"] 以移除一個或多個節點，這些節點可以位於一個或多個站台。您要移除的節點可以處於線上並已連接至 StorageGRID 系統，也可以處於離線並已中斷連線。
+* 執行link:considerations-for-removing-site.html["站台退役"]以移除站台。如果所有節點都已連線至 StorageGRID ，您可執行 * 連線站台退役 * 。如果所有節點都與 StorageGRID 中斷連線，您可執行 * 離線站台退役 * 。如果站台包含連線和離線節點的混合，您必須將所有離線節點重新恢復線上。
++
+
+CAUTION: 在執行斷開連線的站台退役之前，請聯絡您的 NetApp 客戶代表。NetApp 將在啟用「退役站台」精靈中的所有步驟之前審查您的需求。如果您認為有可能恢復站台或從站台恢復物件資料，則不應嘗試執行斷開連線的站台退役。
+
+
+
+在退役網格節點之前，必須確認沒有正在執行的資料修理工作。如果任何修理作業失敗，必須重新啟動這些作業並等待其完成，然後再執行退役程序。請參閱 link:../maintain/checking-data-repair-jobs.html["檢查資料修理作業"]。

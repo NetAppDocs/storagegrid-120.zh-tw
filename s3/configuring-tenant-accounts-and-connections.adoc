@@ -1,0 +1,84 @@
+---
+permalink: s3/configuring-tenant-accounts-and-connections.html 
+sidebar: sidebar 
+keywords: aws cli, test s3 client connection 
+summary: 您可以使用 Amazon Web Services 命令列介面 （AWS CLI） 來測試您與系統的連線，並驗證您是否可以讀取和寫入物件。 
+---
+= 測試 StorageGRID S3 REST API 組態
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 Amazon Web Services 命令列介面 （AWS CLI） 來測試您與系統的連線，並驗證您是否可以讀取和寫入物件。
+
+.開始之前
+* 您已從  https://aws.amazon.com/cli["aws.amazon.com/cli"^] 下載並安裝 AWS CLI。
+* （可選）您擁有link:../admin/configuring-load-balancer-endpoints.html["已建立負載平衡器端點"]。否則，您需要知道要連線的儲存節點的 IP 位址和要使用的連接埠號碼。請參閱link:../admin/summary-ip-addresses-and-ports-for-client-connections.html["用戶端連接的 IP 位址和連接埠"]。
+* 您有link:../admin/creating-tenant-account.html["建立了一個 S3 租戶帳戶"]。
+* 您已登入租戶並link:../tenant/creating-your-own-s3-access-keys.html["建立了存取金鑰"]。
+
+
+有關這些步驟的詳細資訊，請參閱 link:../admin/configuring-client-connections.html["設定用戶端連線"]。
+
+.步驟
+. 設定 AWS CLI 設定以使用您在 StorageGRID 系統中建立的帳戶：
++
+.. 進入組態模式： `aws configure`
+.. 請輸入您建立的帳戶的存取金鑰 ID。
+.. 請輸入您建立之帳戶的秘密存取金鑰。
+.. 請輸入要使用的預設區域。例如， `us-east-1`。
+.. 輸入要使用的預設輸出格式，或按 *Enter* 選擇 JSON。
+
+
+. 建立一個儲存桶。
++
+本範例假設您已設定負載平衡器端點以使用 IP 位址 10.96.101.17 和連接埠 10443。
+
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443
+--no-verify-ssl create-bucket --bucket testbucket
+----
++
+如果儲存桶建立成功，則會傳回儲存桶的位置，如下例所示：
+
++
+[listing]
+----
+"Location": "/testbucket"
+----
+. 上傳一個物件。
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443 --no-verify-ssl
+put-object --bucket testbucket --key s3.pdf --body C:\s3-test\upload\s3.pdf
+----
++
+如果物件上傳成功，則會傳回一個 Etag，它是物件資料的雜湊值。
+
+. 列出儲存桶的內容，以驗證物件是否已上傳。
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443 --no-verify-ssl
+list-objects --bucket testbucket
+----
+. 刪除該物件。
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443 --no-verify-ssl
+delete-object --bucket testbucket --key s3.pdf
+----
+. 刪除儲存桶。
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443 --no-verify-ssl
+delete-bucket --bucket testbucket
+----
+

@@ -1,0 +1,44 @@
+---
+permalink: maintain/viewing-current-status-of-all-services.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, service, status 
+summary: ${post_edited_translations.segment} 
+---
+= 查看所有 StorageGRID 服務的目前狀態
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+您擁有  `Passwords.txt` 檔案。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 請輸入以下命令： `ssh admin@_grid_node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+. 檢視網格節點上執行的所有服務的狀態： `storagegrid-status`
++
+例如，主要 Admin Node 的輸出會將 AMS、CMN 和 NMS 服務的目前狀態顯示為 Running。如果服務狀態發生變更，此輸出會立即更新。
+
++
+image:storagegrid_status_output.gif["StorageGRID 命令輸出的畫面截圖"]
+
+. ${post_edited_translations.segment}
+. （可選）檢視網格節點上執行的所有服務的靜態報告： `/usr/local/servermanager/reader.rb`
++
+${post_edited_translations.segment}
+
+. 登出命令 shell： `exit`
+

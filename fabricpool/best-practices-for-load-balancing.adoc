@@ -1,0 +1,65 @@
+---
+permalink: fabricpool/best-practices-for-load-balancing.html 
+sidebar: sidebar 
+keywords: fabricPool, StorageGRID, load balancer endpoint, load balancing, Layer 7, best practices, certificate, CA, certificate authority, tls, ssl 
+summary: 將 StorageGRID 附加為 FabricPool 雲端分層之前，請先審查搭配 FabricPool 使用負載平衡器的最佳實務做法。 
+---
+= StorageGRID 負載平衡與 FabricPool 的最佳實踐
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+將 StorageGRID 附加為 FabricPool 雲端分層之前，請先審查搭配 FabricPool 使用負載平衡器的最佳實務做法。
+
+若要瞭解關於 StorageGRID 負載平衡器和負載平衡器憑證的一般資訊，請參閱 link:../admin/managing-load-balancing.html["負載平衡的考慮因素"]。
+
+
+
+[[best-practices-for-tenant-access-to-the-load-balancer-endpoint-used-for-fabricpool]]
+== 租戶存取用於 FabricPool 的負載平衡器端點的最佳實務做法
+
+您可以控制哪些租戶可以使用特定的負載平衡器端點來存取其儲存貯體。您可以允許所有租戶、允許部分租戶或封鎖部分租戶。建立供 FabricPool 使用的負載平衡端點時，請選取 *允許所有租戶*。ONTAP 會加密放置在 StorageGRID 儲存貯體中的資料，因此這個額外的安全性階層幾乎無法提供額外的安全性。
+
+
+
+[[best-practices-for-the-security-certificate]]
+== 安全性憑證最佳實務做法
+
+當您建立供 FabricPool 使用的 StorageGRID 負載平衡端點時，您需要提供可讓 ONTAP 向 StorageGRID 進行驗證的安全性憑證。
+
+大多數情況下，ONTAP 和 StorageGRID 之間的連線應使用傳輸層安全性協定 （TLS） 加密。FabricPool 雖然支援不使用 TLS 加密，但不建議這樣做。為 StorageGRID 負載平衡器端點選擇網路傳輸協定時，請選擇 *HTTPS*。然後提供安全性憑證，以便 ONTAP 能夠向 StorageGRID 進行驗證。
+
+${post_edited_translations.segment}
+
+* link:../admin/using-storagegrid-security-certificates.html["管理安全性證書"]
+* link:../admin/managing-load-balancing.html["負載平衡的考慮因素"]
+* link:../harden/hardening-guideline-for-server-certificates.html["伺服器憑證強化準則"]
+
+
+
+
+[[add-certificate-to-ontap]]
+=== ${post_edited_translations.segment}
+
+當您將 StorageGRID 新增為 FabricPool 雲端分層時，必須在 ONTAP 叢集上安裝相同的憑證，包括根目錄憑證和任何從屬憑證授權單位 （CA） 憑證。
+
+
+
+[[manage-certificate-expiration]]
+=== 管理憑證到期日
+
+
+CAUTION: 如果用於保護 ONTAP 和 StorageGRID 之間連線的憑證過期，FabricPool 將暫時停止運作，且 ONTAP 將暫時失去對分層至 StorageGRID 之資料的存取。
+
+${post_edited_translations.segment}
+
+* 仔細監控任何警告憑證即將到期的警示，例如「負載平衡器端點憑證即將到期」和「S3 API 全域伺服器憑證即將到期」警示。
+* 請務必始終保持 StorageGRID 與 ONTAP 版本的憑證同步。如果您取代或更新用於負載平衡器端點的憑證，則必須取代或更新 ONTAP 用於雲端分層的等效憑證。
+* 使用公開簽署的 CA 憑證。如果使用由 CA 簽署的憑證，則可以使用 Grid Management API 自動化憑證輪替。這樣，您就可以在不中斷服務的情況下更換即將過期的憑證。
+* 如果您已產生自我簽署的 StorageGRID 憑證，且該憑證即將過期，您必須在現有憑證過期之前，手動在 StorageGRID 和 ONTAP 中取代該憑證。如果自我簽署的憑證已經過期，請在 ONTAP 中關閉憑證驗證，以防止存取遺失。
++
+請參閱  https://kb.netapp.com/Advice_and_Troubleshooting/Hybrid_Cloud_Infrastructure/StorageGRID/How_to_configure_a_new_StorageGRID_self-signed_server_certificate_on_an_existing_ONTAP_FabricPool_deployment["NetApp 知識庫：如何在現有的 ONTAP FabricPool 部署上設定新的 StorageGRID 自簽署伺服器憑證"^] 以取得說明。
+
+

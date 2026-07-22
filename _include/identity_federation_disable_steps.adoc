@@ -1,0 +1,19 @@
+= 
+:allow-uri-read: 
+
+
+您可以暫時或永久停用群組和使用者的身分聯合。停用身分聯合後，StorageGRID 與身分來源之間將不再通訊。但是，您已設定的所有設定都將保留，以便您日後可以輕鬆重新啟用身分聯合。
+
+.關於此任務
+在停用身分聯合之前，您應該注意以下事項：
+
+* 已加入聯盟的用戶將無法登入。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 如果單一登入 （SSO） 狀態為 *已啟用* 或 *沙箱模式*，則 *啟用身分識別同盟* 核取方塊會停用。您必須先將單一登入頁面上的 SSO 狀態設為 *已停用*，才能停用身分識別同盟。請參閱 link:../admin/disabling-single-sign-on.html["${post_edited_translations.segment}"]。
+
+
+.步驟
+. 前往身分聯盟頁面。
+. ${post_edited_translations.segment}
+

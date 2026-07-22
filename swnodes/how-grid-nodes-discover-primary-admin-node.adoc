@@ -1,0 +1,32 @@
+---
+permalink: swnodes/how-grid-nodes-discover-primary-admin-node.html 
+sidebar: sidebar 
+keywords: how grid nodes discover the primary Admin Node 
+summary: 網格節點與主要管理節點通訊，以進行組態設定和管理。每個網格節點都必須知道網格網路上主要管理節點的 IP 位址。 
+---
+= 網格節點如何在 StorageGRID 中探索主要管理節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+網格節點與主要管理節點通訊，以進行組態設定和管理。每個網格節點都必須知道網格網路上主要管理節點的 IP 位址。
+
+為確保網格節點可以存取主要管理節點，您可以在部署節點時執行下列任一操作：
+
+* 您可以使用 ADMIN_IP 參數手動輸入主要管理節點的 IP 位址。
+* 您可以省略 ADMIN_IP 參數，讓網格節點自動探索其值。當網格網路使用 DHCP 為主要管理節點指派 IP 位址時，自動探索尤其有用。
+
+
+主管理節點的自動探索是透過多播網域名稱系統 (mDNS) 實現的。主管理節點首次啟動時，會使用 mDNS 發佈其 IP 位址。同一子網路上的其他節點可以查詢該 IP 位址並自動取得。但是，由於多播 IP 流量通常無法跨子網路路由，因此其他子網路上的節點無法直接取得主管理節點的 IP 位址。
+
+[NOTE]
+====
+如果您使用自動探索：
+
+* 對於主要管理節點未直接連接的任何子網路，您必須至少為一個網格節點包含 ADMIN_IP 設定。此網格節點隨後會將主要管理節點的 IP 位址發佈給子網路上的其他節點，以便透過 mDNS 探索該位址。
+* 確保您的網路基礎架構支援在子網路內傳輸多播 IP 流量。
+
+
+====

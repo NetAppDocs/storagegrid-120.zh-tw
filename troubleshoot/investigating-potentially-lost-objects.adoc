@@ -1,0 +1,144 @@
+---
+permalink: troubleshoot/investigating-potentially-lost-objects.html 
+sidebar: sidebar 
+keywords: lost objects, investigating, objects 
+summary: 當觸發「物件可能遺失」警報時，您必須立即展開調查。收集受影響物件的資訊並聯絡技術支援。 
+---
+= 解決 StorageGRID 中可能遺失物件的警示
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當「可能遺失的物件」警示觸發時，您必須立即展開調查。收集受影響物件的資訊並聯絡技術支援。
+
+.開始之前
+* 您必須使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+* 您必須擁有該 `Passwords.txt`檔案。
+
+
+.關於此任務
+「物件可能遺失」警示表示，根據 StorageGRID 中的可用資訊，網格中不存在某個物件的副本。資料可能已永久遺失。
+
+立即調查遺失物件警報。您可能需要採取行動防止進一步的資料遺失。在某些情況下，如果您及時採取行動，或許可以還原遺失的物件。
+
+
+CAUTION: 如果報告遺失的物件超過 10 個，請聯絡技術支援。請勿自行操作。
+
+.步驟
+. 選取 *Nodes* 。
+. 選擇 *_儲存節點_* > *物件*。
+. 請查看物件計數表中顯示的遺失物件數量。
++
+此數值表示此網格節點偵測到的整個 StorageGRID 系統中遺失的物件總數。該值是 LDR 和 DDS 服務中 Data store 元件的 Lost objects 計數器總和。
+
+. 從管理節點，link:../audit/accessing-audit-log-file.html["存取稽核日誌"]以判斷觸發「物件可能遺失」警示的物件的唯一識別碼 （UUID）：
++
+.. ${post_edited_translations.segment}
++
+... 輸入下列命令： `ssh admin@grid_node_IP`
+... 請輸入 `Passwords.txt`檔案中列出的密碼。
+... 輸入以下命令以切換至根目錄： `su -`
+... 輸入 `Passwords.txt`檔案中列出的密碼。當您以 root 身分登入時，提示符號將從 `$`變為 `#`。
+
+
+.. 切換到稽核日誌所在的目錄。
++
+--
+稽核日誌目錄和適用節點取決於您的稽核目的地設定。
+
+[cols="1a,2a"]
+|===
+| 選項 | 目的地 
+
+
+ a| 
+本地節點（預設）
+ a| 
+`/var/local/log/localaudit.log`
+
+
+
+ a| 
+管理節點/本地節點
+ a| 
+*** 管理節點（主節點和非主節點）： `/var/local/audit/export/audit.log`
+*** 所有節點：在此模式下， `/var/local/log/localaudit.log`檔案通常為空或缺失。
+
+
+
+
+ a| 
+外部 syslog 伺服器
+ a| 
+`/var/local/log/localaudit.log`
+
+|===
+根據您的稽核目的地設定，輸入： `cd /var/local/log` 或 `/var/local/audit/export/`
+
+若要深入瞭解，請參閱 link:../monitor/configure-log-management.html#select-log-location["選擇日誌位置"]。
+
+--
+.. 使用 grep 指令擷取物件遺失 (OLST) 稽核訊息。輸入： `grep OLST audit_file_name`
+.. 請注意訊息中包含的 UUID 值。
++
+[listing]
+----
+Admin: # grep OLST audit.log
+2020-02-12T19:18:54.780426 [AUDT:[CBID(UI64):0x38186FE53E3C49A5][UUID(CSTR):"926026C4-00A4-449B-AC72-BCCA72DD1311"]
+[PATH(CSTR):"source/cats"][NOID(UI32):12288733][VOLI(UI64):3222345986][RSLT(FC32):NONE][AVER(UI32):10]
+[ATIM(UI64):1581535134780426][ATYP(FC32):OLST][ANID(UI32):12448208][AMID(FC32):ILMX][ATID(UI64):7729403978647354233]]
+----
+
+
+. 使用 UUID 尋找遺失物件的中繼資料：
++
+.. 選擇 *ILM* > *物件中繼資料查找*。
+.. 輸入 UUID，然後選擇 *Look Up*。
+.. 查看中繼資料中的位置，並採取適當的行動：
++
+[cols="2a,4a"]
+|===
+| ${post_edited_translations.segment} | 結論 
+
+
+ a| 
+物件 <object_identifier> 未找到
+ a| 
+如果找不到該物件，則傳回訊息 "ERROR":"。
+
+如果找不到物件，<<reset-lost-obj-count,重置可能遺失的物件計數器>>以清除警報。物件缺失表示該物件已被有意刪除。
+
+
+
+ a| 
+位置 > 0
+ a| 
+如果輸出中列出了位置，則「可能遺失的物件」警示可能是誤報。
+
+確認物件是否存在。使用輸出中列出的節點 ID 和檔案路徑，確認物件檔案位於所列位置。
+
+如果物件存在，<<reset-lost-obj-count,重置可能遺失的物件計數器>>以清除警報。
+
+
+
+ a| 
+位置數 = 0
+ a| 
+如果輸出結果中未列出任何位置，則該物件可能遺失。請聯絡技術支援。
+
+技術支援可能會要求您確定是否存在正在進行的儲存設備恢復流程。請參閱有關 link:../maintain/restoring-volume.html["使用 Grid Manager 還原物件資料"] 和 link:../maintain/restoring-object-data-to-storage-volume.html["將物件資料還原至儲存設備 Volume"] 的資訊。
+
+|===
+
+
+. [[reset-lost-obj-count]]在解決遺失物件問題後，請重設「可能遺失的物件」計數器，以確保警示不會是誤報：
++
+.. 選取 *Nodes* 。
+.. 選擇 *_Storage Node_* > *Tasks*。
+.. 在「Reset Objects potentially lost counter」部分，選擇 *Reset*。
+
+
+

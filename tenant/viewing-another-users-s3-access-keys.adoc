@@ -1,0 +1,41 @@
+---
+permalink: tenant/viewing-another-users-s3-access-keys.html 
+sidebar: sidebar 
+keywords: how to view other user access key 
+summary: 如果您使用的是 S3 租戶並且擁有相應的權限，則可以檢視其他使用者的 S3 存取金鑰。您可以按過期時間對清單進行排序，以便確定哪些金鑰即將過期。如有需要，您可以建立新金鑰並刪除不再使用的金鑰。 
+---
+= 在 StorageGRID 中檢視其他使用者的 S3 存取金鑰
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您使用的是 S3 租戶並且擁有相應的權限，則可以檢視其他使用者的 S3 存取金鑰。您可以按過期時間對清單進行排序，以便確定哪些金鑰即將過期。如有需要，您可以建立新金鑰並刪除不再使用的金鑰。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您有link:tenant-management-permissions.html["${post_edited_translations.segment}"]。
+
+
+
+CAUTION: 可以使用 Tenant Manager 中顯示的該使用者存取金鑰 ID 和秘密存取金鑰，來存取屬於該使用者的 S3 儲存桶和物件。因此，請像保護密碼一樣保護存取金鑰。定期輪換存取金鑰，從帳戶中移除任何未使用的金鑰，且切勿與其他使用者共享。
+
+.步驟
+. 選擇 *Access Management* > *Users*。
+. 在「使用者」頁面中，選擇要檢視其 S3 存取金鑰的使用者。
+. 在使用者詳細資料頁面中，選取 *存取金鑰*。
+. 依*過期時間*或*存取金鑰 ID*對金鑰進行排序。
+. 視需要建立新金鑰，並手動刪除不再使用的金鑰。
++
+如果在現有金鑰過期之前建立新金鑰，使用者可以開始使用新金鑰，而不會暫時失去對帳戶中物件的存取。
+
++
+過期的金鑰將自動移除。
+
+
+
+.相關資訊
+* link:creating-another-users-s3-access-keys.html["建立其他使用者的 S3 存取金鑰"]
+* link:deleting-another-users-s3-access-keys.html["刪除其他使用者的 S3 存取金鑰"]
+

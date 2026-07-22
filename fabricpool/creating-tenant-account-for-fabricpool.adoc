@@ -1,0 +1,106 @@
+---
+permalink: fabricpool/creating-tenant-account-for-fabricpool.html 
+sidebar: sidebar 
+keywords: fabricPool, StorageGRID, tenant, SSO 
+summary: 您必須在 Grid Manager 中建立租戶帳戶，以供 FabricPool 使用。 
+---
+= 在 StorageGRID 中為 FabricPool 建立租戶帳戶
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您必須在 Grid Manager 中建立租戶帳戶，以供 FabricPool 使用。
+
+租戶帳戶允許用戶端應用程式在 StorageGRID 上儲存和擷取物件。每個租戶帳戶都有自己的帳戶 ID、授權群組和使用者、儲存桶和物件。
+
+有關此工作的詳細資訊，請參閱link:../admin/creating-tenant-account.html["建立租戶帳戶"]。若要使用 FabricPool 設定精靈完成此工作，請前往link:use-fabricpool-setup-wizard-steps.html["存取並完成 FabricPool 設定精靈"]。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+.步驟
+. 選擇*租戶*。
+. 選擇 *Create* 。
+. 在「輸入詳細資料」步驟中，請輸入以下資訊。
++
+[cols="1a,3a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+Name
+ a| 
+租戶帳戶名稱。租戶名稱無需唯一。建立租戶帳戶時，系統會為其指派一個唯一的數字帳戶 ID。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+用戶端類型
+ a| 
+必須是 *S3* 才能使用 FabricPool。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+請將此欄位留空以供 FabricPool 使用。
+
+|===
+. ${post_edited_translations.segment}
++
+.. 不要選擇「允許平台服務」。
++
+FabricPool 租戶通常不需要使用平台服務，例如 CloudMirror 複寫。
+
+.. （可選）選擇 *Use own identity source*。
+.. 不要選擇 *Allow S3 Select*。
++
+FabricPool 租戶通常不需要使用 S3 Select。
+
+.. （可選）選取 *Use grid federation connection* 以允許租戶使用 link:../admin/grid-federation-overview.html["網格聯盟連線"] 進行帳戶 Clone 和跨網格複寫。然後，選取要使用的網格聯合連線。
+
+
+. 對於「定義 root 存取權」步驟，根據您的 StorageGRID 系統是否使用link:../admin/using-identity-federation.html["${post_edited_translations.segment}"]、link:../admin/how-sso-works.html["單一登入 (SSO)"]或兩者，指定哪個使用者將擁有租戶帳戶的初始 root 存取權限。
++
+[cols="1a,2a"]
+|===
+| 選項 | ${post_edited_translations.segment} 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+.. 選取現有的聯合群組，使其擁有租戶的 root 存取權。
+.. （可選）指定以本機 root 使用者身分登入租戶時要使用的密碼。
+
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+選取現有的聯合群組，以取得租戶的 root 存取權限。本機使用者無法登入。
+
+|===
+. 選擇 *Create tenant*。
+

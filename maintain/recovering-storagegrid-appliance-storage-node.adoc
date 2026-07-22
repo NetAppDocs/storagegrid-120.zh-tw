@@ -1,0 +1,23 @@
+---
+permalink: maintain/recovering-storagegrid-appliance-storage-node.html 
+sidebar: sidebar 
+keywords: recover, appliance storage node failure, workflow 
+summary: ${post_edited_translations.segment} 
+---
+= 恢復 StorageGRID 應用裝置儲存節點的警告
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+CAUTION: 如果多個儲存節點發生故障（或離線），請聯絡技術支援。請勿執行以下恢復程序。可能會發生資料遺失。如需更多資訊，請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+
+
+CAUTION: 如果 ILM 規則設定為僅儲存一個複寫複本，且該複本存在於發生故障的儲存 Volume 上，則您將無法恢復該物件。
+
+
+NOTE: 如需硬體維護程序，例如更換控制器或重新安裝 SANtricity 作業系統的說明，請參閱  https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/index.html["儲存應用裝置的維護說明"^]。

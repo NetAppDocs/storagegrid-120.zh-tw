@@ -1,0 +1,27 @@
+---
+permalink: primer/retrieve-data-flow.html 
+sidebar: sidebar 
+keywords: StorageGRID, object data, retrieve 
+summary: 擷取操作是指 StorageGRID 系統與用戶端之間定義的資料流。系統使用屬性來追蹤從儲存節點或（如有必要）Cloud Storage Pool 中擷取物件的過程。 
+---
+= StorageGRID 如何處理物件擷取
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+擷取操作是指 StorageGRID 系統與用戶端之間定義的資料流。系統使用屬性來追蹤從儲存節點或（如有必要）Cloud Storage Pool 中擷取物件的過程。
+
+儲存節點的 LDR 服務會查詢中繼資料存放區，以確定物件資料的位置，並從來源 LDR 服務擷取資料。優先從儲存節點擷取資料。如果儲存節點上沒有該物件，則擷取要求會導向至雲端儲存池。
+
+
+NOTE: 如果唯一的物件複本位於 AWS Glacier 儲存設備或 Azure Archive 分層上，用戶端應用程式必須發出 S3 RestoreObject 要求，以將可擷取的複本還原至 Cloud Storage Pool。
+
+image:retrieve_data_flow.png["擷取"]
+
+. LDR 服務接收來自用戶端應用程式的擷取請求。
+. LDR 服務查詢中繼資料儲存以取得物件資料位置和中繼資料。
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+

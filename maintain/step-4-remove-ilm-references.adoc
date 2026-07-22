@@ -1,0 +1,44 @@
+---
+permalink: maintain/step-4-remove-ilm-references.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, remove ilm reference 
+summary: 從「退役網站精靈」的第 4 步（移除 ILM 引用）開始，您必須刪除或編輯引用該網站的任何未使用的 ILM 規則，即使這些規則未在任何 ILM 原則中使用。 
+---
+= 移除 StorageGRID 中對站台的 ILM 參照
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+從「退役網站精靈」的第 4 步（移除 ILM 引用）開始，您必須刪除或編輯引用該網站的任何未使用的 ILM 規則，即使這些規則未在任何 ILM 原則中使用。
+
+.步驟
+. 確定是否有任何未使用的 ILM 規則參照該站台。
++
+${post_edited_translations.segment}
+
++
+
+NOTE: 當 StorageGRID 退役某個站台時，它會自動停用所有參照該站台的未使用糾刪碼設定檔，並自動刪除所有參照該站台的未使用儲存資源池。「所有儲存節點」儲存資源池（StorageGRID 11.6 及更早版本）會被移除，因為它使用了「所有站台」站台。
+
+. ${post_edited_translations.segment}
++
+** 若要編輯規則，請前往 ILM 規則頁面，並更新所有使用參照該站台之糾刪碼設定檔或儲存資源池的配置。然後，返回 * 步驟 4 （ 移除 ILM 參照 ） *。
+** 若要刪除規則，請選擇垃圾桶圖示 image:icon_trash_can.png["垃圾桶圖示"] 並選擇 *OK*。
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+. 確認沒有未使用的 ILM 規則參照該站台，且「下一步」按鈕已啟用。
+. 選擇 *Next* 。
++
+
+NOTE: 當移除該站台時，任何參照該站台的剩餘儲存資源池和糾刪碼設定檔都將失效。當 StorageGRID 將該站台退役時，系統會自動停用任何參照該站台且未使用的糾刪碼設定檔，並自動刪除任何參照該站台且未使用的儲存資源池。「所有儲存節點」儲存資源池（StorageGRID 11.6 及更早版本）會被移除，因為它使用的是「所有站台」站台。
+
++
+步驟 5（解決節點衝突）出現。
+
+

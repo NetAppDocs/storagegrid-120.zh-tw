@@ -1,0 +1,43 @@
+---
+permalink: maintain/deploying-new-linux-hosts.html 
+sidebar: sidebar 
+keywords: storagegrid, deploy linux host, new host, new linux host 
+summary: 除了少數例外情況外，您需要按照初始安裝程序中的步驟準備新主機。 
+---
+= 為 StorageGRID 部署新的 Linux 主機
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+除了少數例外情況外，您需要按照初始安裝程序中的步驟準備新主機。
+
+若要部署新的或重新安裝的實體或虛擬 Linux 主機，請依照 StorageGRID 安裝說明中針對您的 Linux 作業系統的主機準備步驟進行操作。請參閱 link:../swnodes/installing-linux.html["安裝 Linux"]。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+此流程包括完成以下工作的步驟：
+
+. 安裝 Linux。
+. 設定主機網路。
+. 設定主機儲存設備。
+. 安裝 Container 引擎。
+. 安裝 StorageGRID 主機服務。
++
+
+CAUTION: 在您完成安裝說明中的「安裝 StorageGRID 主機服務」工作之後停止。請勿開始「部署網格節點」工作。
+
+
+
+在執行這些步驟時，請注意以下重要準則：
+
+* 請務必使用與原始主機上相同的主機介面名稱。
+* 如果您使用共享儲存設備來支援 StorageGRID 節點，或者您已將部分或全部磁碟機或 SSD 從故障節點移轉到取代節點，則必須重新建立與原始主機上相同的儲存設備對應。例如，如果您在 `/etc/multipath.conf`中按照安裝說明中的建議使用了 WWID 和別名，請確保在取代主機上的 `/etc/multipath.conf`中使用相同的別名/WWID 配對。
+* 如果 StorageGRID 節點使用從 NetApp ONTAP 系統指派的儲存設備，請確認該 Volume 未啟用 FabricPool 分層原則。針對與 StorageGRID 節點搭配使用的 Volume 停用 FabricPool 分層，可簡化疑難排解與儲存作業。
++
+
+CAUTION: 切勿使用 FabricPool 將與 StorageGRID 相關的任何資料分層回 StorageGRID 本身。將 StorageGRID 資料分層回 StorageGRID 會增加疑難排解和維運的複雜度。
+
+

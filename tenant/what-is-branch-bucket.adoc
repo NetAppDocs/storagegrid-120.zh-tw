@@ -1,0 +1,112 @@
+---
+permalink: tenant/what-is-branch-bucket.html 
+sidebar: sidebar 
+keywords: how to create branch bucket 
+summary: 分支桶允許存取桶中物件在特定時間點的狀態。 
+---
+= 了解 StorageGRID 分支儲存貯體
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+分支桶允許存取桶中物件在特定時間點的狀態。
+
+您可以從現有儲存桶建立分支儲存桶。建立分支儲存桶後，建立它的原始儲存桶稱為「基礎儲存桶」。此外，您還可以從另一個分支儲存桶建立分支儲存桶。
+
+分支儲存桶提供對受保護資料的存取，但不能用作備份。若要繼續保護資料，請在基礎儲存桶上使用以下功能：
+
+* link:../tenant/using-s3-object-lock.html["S3 物件鎖定"]
+* link:../admin/grid-federation-what-is-cross-grid-replication.html["跨網格複寫"] 適用於基本儲存桶
+* link:../tenant/manage-bucket-policy.html["儲存桶原則"]用於版本控制儲存桶以清理舊物件版本
+
+
+請注意以下分支桶的特性：
+
+* 您可以使用以下方式存取分支桶中的物件link:../tenant/use-s3-console.html["使用 S3 Console 下載物件"]。
+* 當用戶端存取分支儲存桶中的物件時，分支儲存桶的link:../s3/use-access-policies.html["存取原則"]原則（而非基礎儲存桶的原則）決定是否授予或拒絕存取。
+* 在基礎儲存桶中建立的物件，會根據 link:../ilm/access-create-ilm-rule-wizard.html["ILM 規則"] 對基礎儲存桶的適用性進行評估。在分支儲存桶中建立的物件，會根據 ILM 規則對分支儲存桶的適用性進行評估。
+* 分支儲存桶不支援跨網格複寫。
+* 平台服務不支援分支儲存桶。
+
+
+
+
+[[examples-for-branch-bucket-usage]]
+== 分支桶使用範例
+
+* 您可以使用分支儲存桶來移除毀損的物件，方法是從毀損發生之前的時間點建立分支儲存桶，然後將應用程式指向該分支儲存桶，而不是指向包含毀損物件的基本儲存桶。
+* 您正在將資料儲存在版本化的儲存桶中。由於存在意外漏洞，導致許多不需要的物件在時間 _T_ 之後被擷取。您可以為「之前時間」值 _T_ 建立分支儲存桶，並將用戶端操作重新導向至該分支儲存桶。這樣，只有在「之前時間」_T_ 之前擷取的物件才會對用戶端可見。
+
+
+
+
+[[operations-on-objects-in-branch-buckets]]
+== 對分支桶中的物件進行操作
+
+* 對分支桶執行 PUT 物件操作會在分支中建立一個物件。
+* 對分支儲存桶執行 GET 物件操作會從該分支擷取物件。如果該物件不存在於分支儲存桶中，則從基礎儲存桶擷取該物件。
+* 從分支儲存桶中刪除物件的操作如下：
++
+[cols="1a,1a,2a,2a,2a"]
+|===
+| 操作 | 目標 | 結果 | 基本儲存桶中的物件可見度 | 分支桶中的物件可見度 
+
+
+ a| 
+刪除時不帶版本 ID
+ a| 
+基礎儲存桶
+ a| 
+僅為基礎儲存桶建立刪除標記
+ a| 
+HEAD/GET 傳回物件不存在，但仍可存取特定版本
+ a| 
+HEAD/GET 傳回物件存在，並且仍然可以存取特定版本。
+
+刪除標記是在分支儲存桶的 `beforeTime`之後建立的。
+
+
+
+ a| 
+使用版本 ID 刪除
+ a| 
+基礎儲存桶
+ a| 
+特定物件版本已從基礎儲存桶和分支儲存桶中刪除
+ a| 
+HEAD/GET 傳回物件版本不存在
+ a| 
+HEAD/GET 傳回物件版本不存在
+
+
+
+ a| 
+刪除時不帶版本 ID
+ a| 
+分支桶
+ a| 
+僅針對分支儲存桶建立刪除標記
+ a| 
+HEAD/GET 傳回物件（基本儲存桶物件不受影響）
+ a| 
+HEAD/GET 傳回物件不存在
+
+
+
+ a| 
+使用版本 ID 刪除
+ a| 
+分支桶
+ a| 
+僅針對分支儲存桶刪除特定物件版本
+ a| 
+HEAD/GET 傳回特定物件版本（基礎儲存桶物件不受影響）
+ a| 
+HEAD/GET 傳回物件版本不存在
+
+|===
+
+
+另請參閱 link:../ilm/how-objects-are-deleted.html#delete-s3-versioned-objects["如何刪除 S3 版本化物件"]。

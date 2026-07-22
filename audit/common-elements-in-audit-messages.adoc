@@ -1,0 +1,106 @@
+---
+permalink: audit/common-elements-in-audit-messages.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, messages, message, common elements, AMID, ANID, ASES, ASQN, ATID, ATIM, ATYP, AVER, RSLT 
+summary: 所有稽核訊息都包含共同要素。 
+---
+= StorageGRID 稽核訊息中的常見元素
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+所有稽核訊息都包含共同要素。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 類型 | 說明 
+
+
+ a| 
+AMID
+ a| 
+FC32
+ a| 
+模組 ID：產生該訊息的模組 ID，由四個字元組成。這表示產生稽核訊息的程式碼區段。
+
+
+
+ a| 
+ANID
+ a| 
+UI32
+ a| 
+節點 ID：指派給產生訊息之服務的網格節點 ID。每個服務在 StorageGRID 系統組態設定和安裝時都會被指派一個唯一的識別碼。此 ID 無法變更。
+
+
+
+ a| 
+ASES
+ a| 
+UI64
+ a| 
+稽核工作階段識別碼：在先前的版本中，此元素指示服務啟動後稽核系統初始化的時間。此時間值以微秒為單位，自作業系統紀元（1970 年 1 月 1 日 00:00:00 UTC）起算。
+
+*注意：*此元素已過時，不再出現在稽核訊息中。
+
+
+
+ a| 
+ASQN
+ a| 
+UI64
+ a| 
+序列計數：在先前的版本中，此計數器會針對網格節點 （ANID） 上產生的每個稽核訊息遞增，並在服務重新啟動時重設為零。
+
+*注意：*此元素已過時，不再出現在稽核訊息中。
+
+
+
+ a| 
+ATID
+ a| 
+UI64
+ a| 
+追蹤 ID：由單一事件觸發的一組訊息所共享的識別碼。
+
+
+
+ a| 
+ATIM
+ a| 
+UI64
+ a| 
+時間戳記：觸發稽核訊息的事件產生時間，以微秒為單位，自作業系統紀元（1970 年 1 月 1 日 00:00:00 UTC）起計算。請注意，大多數用於將時間戳記轉換為本地日期和時間的工具均以毫秒為基礎。
+
+可能需要對已記錄的時間戳進行四捨五入或截斷。稽核訊息開頭顯示於 `audit.log`檔案中的人類可讀時間，是 ISO 8601 格式的 ATIM 屬性。日期和時間表示為 `_YYYY-MMDDTHH:MM:SS.UUUUUU_`，其中 `T`是一個字面字串字元，表示日期時間段的開始。 `_UUUUUU_`為微秒。
+
+
+
+ a| 
+ATYP
+ a| 
+FC32
+ a| 
+事件類型：用於標識所記錄事件的四個字元識別碼。它決定了訊息的「有效負載」內容：即包含的屬性。
+
+
+
+ a| 
+AVER
+ a| 
+UI32
+ a| 
+版本：稽核訊息的版本。隨著 StorageGRID 軟體的演進，新版本的服務可能會在稽核報告中加入新的功能。此欄位可確保 AMS 服務向後相容，以便處理來自舊版服務的訊息。
+
+
+
+ a| 
+RSLT
+ a| 
+FC32
+ a| 
+結果：事件、流程或事務的結果。如果結果與訊息無關，則使用 NONE 而不是 SUCS，以避免訊息被意外過濾。
+
+|===

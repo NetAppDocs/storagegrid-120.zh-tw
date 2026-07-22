@@ -1,0 +1,198 @@
+---
+permalink: admin/managing-admin-groups.html 
+sidebar: sidebar 
+keywords: what are admin groups, user permissions 
+summary: 您可以建立管理員群組來管理一個或多個管理員使用者的安全性權限。使用者必須屬於某個群組，才能獲得對 StorageGRID 系統的存取權限。 
+---
+= 管理 StorageGRID 中的管理員群組
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以建立管理員群組來管理一個或多個管理員使用者的安全性權限。使用者必須屬於某個群組，才能獲得對 StorageGRID 系統的存取權限。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["特定存取權限"]。
+* 如果您打算匯入聯合群組，則您已設定身分聯合，且該聯合群組已存在於已設定的身分來源中。
+
+
+
+
+[[create-an-admin-group]]
+== 建立管理員群組
+
+管理員群組可讓您決定哪些使用者可以存取 Grid Manager 和 Grid Management API 中的哪些功能和操作。
+
+
+
+[[access-the-wizard]]
+=== ${post_edited_translations.segment}
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+
+
+
+
+[[choose-a-group-type]]
+=== ${post_edited_translations.segment}
+
+您可以建立本機群組或匯入聯合群組。
+
+* 如果要為本機使用者指派權限，請建立本機群組。
+* 建立聯合群組，從身分來源匯入使用者。
+
+
+[role="tabbed-block"]
+====
+.本地群組
+--
+.步驟
+. 選擇*本機群組*。
+. 請輸入該群組的顯示名稱，您可以稍後視需要更新。例如，「Maintenance Users」或「ILM Administrators」。
+. 請為群組輸入唯一名稱，此名稱之後將無法更新。
+. 選擇 *Continue* 。
+
+
+--
+.${post_edited_translations.segment}
+--
+.步驟
+. ${post_edited_translations.segment}
+. 請輸入要匯入的群組名稱，務必與已設定的身分識別來源中顯示的名稱完全一致。
++
+** 對於 Active Directory 和 Microsoft Entra ID，請使用 sAMAccountName。
+** 對於 OpenLDAP，請使用 CN （Common Name）。
+** 對於另一個 LDAP，請使用 LDAP 伺服器的對應唯一名稱。
+
+
+. 選擇 *Continue* 。
+
+
+--
+====
+
+
+[[manage-group-permissions]]
+=== ${post_edited_translations.segment}
+
+.步驟
+. 對於*存取模式*，選擇群組中的使用者是否可以變更 Grid Manager 和 Grid Management API 中的設定並執行操作，或者他們是否只能檢視設定和功能。
++
+** ${post_edited_translations.segment}
+** *唯讀*：使用者只能檢視設定和功能。無法對 Grid Manager 或 Grid Management API 進行任何變更或執行任何操作。本機唯讀使用者可以變更自己的密碼。
++
+
+NOTE: 如果使用者屬於多個群組，且其中任何一個群組設定為*唯讀*，則該使用者對所有選定的設定和功能將具有唯讀存取權限。
+
+
+
+. 選取一或多個 link:admin-group-permissions.html["管理員群組權限"]。
++
+${post_edited_translations.segment}
+
+. 如果要建立本機群組，請選擇「繼續」。如果要建立聯合群組，請選擇「建立群組」和「完成」。
+
+
+
+
+[[add-users-local-groups-only]]
+=== 新增使用者（僅限本地群組）
+
+.步驟
+. ${post_edited_translations.segment}
++
+如果您尚未建立本機使用者，則可以在不新增使用者的情況下儲存該群組。您可以在「使用者」頁面上將此群組新增至使用者。如需詳細資訊、請參閱 link:managing-users.html["管理使用者"]。
+
+. ${post_edited_translations.segment}
+
+
+
+
+[[view-and-edit-admin-groups]]
+== 檢視和編輯管理員群組
+
+您可以檢視現有群組的詳細資訊、修改群組或複製群組。
+
+* 若要檢視所有群組的基本資訊，請審查「群組」頁面上的表格。
+* 若要檢視特定群組的所有詳細資訊或編輯群組，請使用 *Actions* 功能表或詳細資料頁面。
++
+[cols="1a, 2a,2a"]
+|===
+| 任務 | 操作選單 | 詳細資料頁面 
+
+
+ a| 
+檢視群組詳細資料
+ a| 
+.. ${post_edited_translations.segment}
+.. 選取 *Actions* > *View group details*。
+
+ a| 
+從表格中選擇群組名稱。
+
+
+
+ a| 
+編輯顯示名稱（僅限本機群組）
+ a| 
+.. ${post_edited_translations.segment}
+.. 選擇 *Actions* > *Edit group name*。
+.. 請輸入新名稱。
+.. 選擇 *Save changes* 。
+
+ a| 
+.. 選擇群組名稱以顯示詳細資訊。
+.. 選擇編輯圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"]。
+.. 請輸入新名稱。
+.. 選擇 *Save changes* 。
+
+
+
+
+ a| 
+編輯存取模式或權限
+ a| 
+.. ${post_edited_translations.segment}
+.. 選取 *Actions* > *View group details*。
+.. ${post_edited_translations.segment}
+.. （可選）選擇或清除 link:admin-group-permissions.html["管理員群組權限"]。
+.. 選擇 *Save changes* 。
+
+ a| 
+.. 選擇群組名稱以顯示詳細資訊。
+.. ${post_edited_translations.segment}
+.. （可選）選擇或清除 link:admin-group-permissions.html["管理員群組權限"]。
+.. 選擇 *Save changes* 。
+
+
+|===
+
+
+
+
+[[duplicate-a-group]]
+== 複製群組
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+
+
+
+
+[[delete-a-group]]
+== 刪除群組
+
+當您想要從系統中移除管理群組，並移除與該群組相關聯的所有權限時，可以刪除管理群組。刪除管理群組會將所有使用者從該群組中移除，但不會刪除這些使用者。
+
+.步驟
+. 在「群組」頁面中，選取要移除的每個群組的核取方塊。
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+

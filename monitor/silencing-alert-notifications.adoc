@@ -1,0 +1,127 @@
+---
+permalink: monitor/silencing-alert-notifications.html 
+sidebar: sidebar 
+keywords: how to disable alert rules, how to remove a custom alert rule 
+summary: ${post_edited_translations.segment} 
+---
+= 在 StorageGRID 中靜音警示通知
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.關於此任務
+您可以對整個網格、單一站台或單一節點上的警示規則進行靜默，並可選擇一個或多個嚴重性等級。每次靜默操作都會抑制單一警示規則或所有警示規則的所有通知。
+
+如果您已啟用 SNMP 代理程式，靜默操作也會抑制 SNMP 陷阱和通知。
+
+
+CAUTION: 決定靜音警示規則時務必謹慎。如果靜音警示，您可能無法發現潛在問題，直到該問題阻止關鍵作業完成。
+
+.步驟
+. 選擇 *Alerts* > *Silences*。
++
+Silences 頁面隨即出現。
+
++
+image:alerts_silences_page.png["Alerts > Silences 頁面"]
+
+. 選擇 *Create* 。
++
+「建立靜音」對話方塊出現。
+
++
+image:alerts_create_silence.png["警報 > 建立靜默"]
+
+. ${post_edited_translations.segment}
++
+[cols="1a,3a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+警報規則
+ a| 
+您要靜音的警示規則名稱。您可以選擇任何預設或自訂警示規則，即使該警示規則已停用。
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+說明
+ a| 
+（選填）此靜音的說明。例如，說明此靜音的目的。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+您希望此靜音維持生效的時間，以分鐘、小時或天為單位。靜音的生效時間可介於 5 分鐘到 1,825 天（5 年）之間。
+
+*附註：*您不應將警示規則靜音過長的時間。如果警示規則被靜音，您可能無法偵測到潛在問題，直到該問題阻礙關鍵作業完成為止。然而，如果警示是由特定的刻意組態所觸發，您可能需要使用延長靜音，例如 *服務應用裝置連結中斷* 警示和 *儲存應用裝置連結中斷* 警示。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+應將哪些警示嚴重性層級靜音。如果警示是在其中一個選取的嚴重性層級觸發，則不會傳送任何通知。
+
+
+
+ a| 
+節點
+ a| 
+您希望此靜音套用至哪一個或哪些節點。您可以抑制整個網格、單一站台或單一節點上的警示規則或所有規則。如果您選擇整個網格，靜音將套用至所有站台和所有節點。如果您選擇某個站台，靜音將僅套用至該站台的節點。
+
+*注意：*每次靜默操作只能選擇一個節點或一個站點。如果要同時在多個節點或多個站點上抑制相同警示規則，則必須建立多個靜默操作。
+
+|===
+. 選取 *Save* 。
+. 如果您想在靜默期到期前進行修改或結束，可以編輯或移除。
++
+[cols="1a,3a"]
+|===
+| 選項 | 說明 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+.. 選擇 *Alerts* > *Silences*。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 變更執行摘要、剩餘時間、選定的嚴重程度或受影響的節點。
+.. 選取 *Save* 。
+
+
+
+
+ a| 
+移除靜音
+ a| 
+.. 選擇 *Alerts* > *Silences*。
+.. 從表格中，選擇要移除的靜音的單選按鈕。
+.. 選擇 *Remove* 。
+.. ${post_edited_translations.segment}
++
+*附註*：觸發此警示時，現在將會傳送通知（除非被另一個靜音抑制）。如果此警示目前已觸發，可能需要幾分鐘的時間才能傳送電子郵件或 SNMP 通知，且「警示」頁面才會更新。
+
+
+
+|===
+
+
+.相關資訊
+link:configuring-snmp-agent.html["設定 SNMP 代理程式"] Standard translation: link:configuring-snmp-agent.html["設定 SNMP 代理程式"] (Since it's only a markup placeholder, output it exactly as is). link:configuring-snmp-agent.html["設定 SNMP 代理程式"]_

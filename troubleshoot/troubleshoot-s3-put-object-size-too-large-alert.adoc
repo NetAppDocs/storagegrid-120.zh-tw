@@ -1,0 +1,137 @@
+---
+permalink: troubleshoot/troubleshoot-s3-put-object-size-too-large-alert.html 
+sidebar: sidebar 
+keywords: how to troubleshoot S3 PUT Object size too large alert, S3 PutObject size 
+summary: 如果租戶嘗試執行超過 S3 大小限制 5 GiB 的非多部分 PutObject 操作，則會觸發 S3 PUT 物件大小過大的警示。 
+---
+= 解決 StorageGRID 中 S3 PUT 物件大小過大的警示
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果租戶嘗試執行超過 S3 大小限制 5 GiB 的非多部分 PutObject 操作，則會觸發 S3 PUT 物件大小過大的警示。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+確定哪些租戶使用大於 5 GiB 的物件，以便通知他們。
+
+.步驟
+. 前往 *組態* > *監控* > *稽核和 syslog 伺服器*。
+. 如果用戶端寫入正常，存取稽核日誌：
++
+.. 輸入 `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+.. 切換到稽核日誌所在的目錄。
++
+--
+稽核日誌目錄和適用節點取決於您的稽核目的地設定。
+
+[cols="1a,2a"]
+|===
+| 選項 | 目的地 
+
+
+ a| 
+本地節點（預設）
+ a| 
+`/var/local/log/localaudit.log`
+
+
+
+ a| 
+管理節點/本地節點
+ a| 
+*** 管理節點（主節點和非主節點）： `/var/local/audit/export/audit.log`
+*** 所有節點：在此模式下， `/var/local/log/localaudit.log`檔案通常為空或缺失。
+
+
+
+
+ a| 
+外部 syslog 伺服器
+ a| 
+`/var/local/log/localaudit.log`
+
+|===
+根據您的稽核目的地設定，輸入： `cd /var/local/log` 或 `/var/local/audit/export/`
+
+若要深入瞭解，請參閱 link:../monitor/configure-log-management.html#select-log-location["選擇日誌位置"]。
+
+--
+.. 確定哪些租戶正在使用大於 5 GiB 的物件。
++
+... 輸入 `zgrep SPUT * | egrep "CSIZ\(UI64\):([5-9]|[1-9][0-9]+)[0-9]{9}"`
+... 對於結果中的每個稽核訊息，請查看 `S3AI`欄位以確定租戶帳戶 ID。使用訊息中的其他欄位來確定用戶端、儲存桶和物件使用的 IP 位址：
++
+[cols="1a,2a"]
+|===
+| 程式碼 | 說明 
+
+
+| SAIP  a| 
+來源 IP
+
+
+
+| S3AI  a| 
+租戶 ID
+
+
+
+| S3BK  a| 
+儲存貯體
+
+
+
+| S3KY  a| 
+物件
+
+
+
+| CSIZ  a| 
+大小（位元組）
+
+|===
++
+*稽核日誌結果範例*
+
++
+[listing]
+----
+audit.log:2023-01-05T18:47:05.525999 [AUDT:[RSLT(FC32):SUCS][CNID(UI64):1672943621106262][TIME(UI64):804317333][SAIP(IPAD):"10.96.99.127"][S3AI(CSTR):"93390849266154004343"][SACC(CSTR):"bhavna"][S3AK(CSTR):"06OX85M40Q90Y280B7YT"][SUSR(CSTR):"urn:sgws:identity::93390849266154004343:root"][SBAI(CSTR):"93390849266154004343"][SBAC(CSTR):"bhavna"][S3BK(CSTR):"test"][S3KY(CSTR):"large-object"][CBID(UI64):0x077EA25F3B36C69A][UUID(CSTR):"A80219A2-CD1E-466F-9094-B9C0FDE2FFA3"][CSIZ(UI64):6040000000][MTME(UI64):1672943621338958][AVER(UI32):10][ATIM(UI64):1672944425525999][ATYP(FC32):SPUT][ANID(UI32):12220829][AMID(FC32):S3RQ][ATID(UI64):4333283179807659119]]
+----
+
+
+
+
+. 如果用戶端寫入異常，請使用警報中的租戶 ID 來識別租戶：
++
+.. 前往「支援」>「工具」>「日誌收集」。收集警報中儲存節點的應用程式日誌。指定警報發生前後各 15 分鐘的日誌。請參閱link:../monitor/collecting-log-files-and-system-data.html["收集日誌檔和系統資料"]。
+.. 解壓縮檔案並前往 `bycast.log`：
++
+`/GID<grid_id>_<time_stamp>/<site_node>/<time_stamp>/grid/bycast.log`
+
+.. 在日誌中搜尋 `method=PUT`，並識別 `clientIP`欄位中的用戶端。
++
+*範例 bycast.log*
+
++
+[listing]
+----
+Jan  5 18:33:41 BHAVNAJ-DC1-S1-2-65 ADE: |12220829 1870864574 S3RQ %CEA 2023-01-05T18:33:41.208790| NOTICE   1404 af23cb66b7e3efa5 S3RQ: EVENT_PROCESS_CREATE - connection=1672943621106262 method=PUT name=</test/4MiB-0> auth=<V4> clientIP=<10.96.99.127>
+----
+
+
+. 告知租戶最大 PutObject 大小為 5 GiB，對於大於 5 GiB 的物件，請使用分段上傳。
+. 如果應用程式已變更，請忽略該警示一週。
+

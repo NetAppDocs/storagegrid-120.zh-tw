@@ -1,0 +1,8 @@
+---
+permalink: vmware/software-requirements.html 
+redirect: storagegrid/swnodes/software-requirements.html 
+---
+= 
+:allow-uri-read: 
+
+

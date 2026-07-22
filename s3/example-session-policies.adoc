@@ -1,0 +1,34 @@
+---
+permalink: s3/example-session-policies.html 
+sidebar: sidebar 
+keywords: session policy example 
+summary: 使用本節中的範例來建立 StorageGRID 工作階段原則。 
+---
+= StorageGRID S3 REST API 工作階段原則範例
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+使用以下範例建立 StorageGRID 工作階段原則。
+
+
+
+[[example-set-up-a-session-policy-that-allows-object-retrieval]]
+== 範例：設定允許物件擷取的工作階段原則
+
+在本例中，工作階段的主體僅被允許從 bucket1 擷取物件。所有其他動作均被隱含拒絕，但 StorageGRID 特有的動作（例如使用 link:../s3/use-access-policies.html#use-putoverwriteobject-permission["s3:PutOverwriteObject"] 權限）除外。工作階段原則可以在呼叫 AssumeRole API 時以 JSON 檔案的形式提供。
+
+[listing]
+----
+{
+  "Statement": [
+    {
+      "Action": "s3:GetObject",
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::bucket1/*"
+    }
+  ]
+}
+----

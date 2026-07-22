@@ -1,0 +1,128 @@
+---
+permalink: ilm/example-1-ilm-rules-and-policy-for-object-storage.html 
+sidebar: sidebar 
+keywords: example ILM rule, information lifecycle rule examples 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID 中基本物件保護和保留的 ILM 規則和原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+CAUTION: 以下 ILM 規則和原則僅為範例。設定 ILM 規則的方法有很多種。在啟動新原則之前，請先進行模擬，以確認其運作方式符合預期，可保護內容免於遺失。
+
+
+
+[[ilm-rule-1-for-example-1-copy-object-data-to-two-sites]]
+== ${post_edited_translations.segment}
+
+此範例 ILM 規則將物件資料複製到兩個網站的儲存資源池中。
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+單站台儲存資源池
+ a| 
+兩個儲存資源池，每個儲存資源池包含不同的站台，分別命名為站台 1 和站台 2。
+
+
+
+ a| 
+規則名稱
+ a| 
+兩份複本，兩個站台
+
+
+
+ a| 
+參考時間
+ a| 
+擷取時間
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+從第 0 天起永遠保留，在站台 1 保留一份複本，在站台 2 保留一份複本。
+
+|===
+保留圖表的規則分析區段指出：
+
+* StorageGRID 站台遺失保護將在本規則有效期限內生效。
+* 根據此規則處理的物件不會被 ILM 刪除。
+
+
+image:ilm_rule_two_copies_two_data_centers.png["${post_edited_translations.segment}"]
+
+
+
+[[ilm-rule-2-for-example-1-erasure-coding-profile-with-bucket-matching]]
+== ${post_edited_translations.segment}
+
+此範例 ILM 規則使用銷毀編碼設定檔和 S3 儲存桶來決定物件的儲存位置和儲存時間。
+
+[cols="1a,2a"]
+|===
+| 規則定義 | 範例值 
+
+
+ a| 
+具有多個站點的儲存資源池
+ a| 
+* 一個儲存資源池分佈在三個站點（站點 1、2、3）
+* 使用 6+3 銷毀編碼方案
+
+
+
+
+ a| 
+規則名稱
+ a| 
+S3 Bucket finance-records
+
+
+
+ a| 
+參考時間
+ a| 
+擷取時間
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+對於名為 finance-records 的 S3 儲存桶中的物件，在銷毀編碼設定檔指定的資源池中建立一個銷毀編碼複本。永久保留此複本。
+
+|===
+image:ilm_rule_ec_for_s3_bucket_finance_records.png["ILM 規則 2 （範例 1）：具有儲存貯體比對的銷毀編碼設定檔"]
+
+
+
+[[ilm-policy-for-example-1]]
+== ILM 原則範例 1
+
+實際上，大多數 ILM 原則都很簡單，儘管 StorageGRID 系統允許您設計複雜且精密的 ILM 原則。
+
+典型的多站點網格的 ILM 原則可能包含以下 ILM 規則：
+
+* 在擷取時，將屬於名為 `finance-records`的 S3 儲存桶的所有物件儲存到包含三個站台的儲存資源池中。使用 6+3 銷毀編碼。
+* ${post_edited_translations.segment}
++
+image:policy_1_configured_policy.png["ILM 原則範例 1"]
+
+
+
+.相關資訊
+* link:ilm-policy-overview.html["${post_edited_translations.segment}"]
+* link:creating-ilm-policy.html["建立 ILM 原則"]
+

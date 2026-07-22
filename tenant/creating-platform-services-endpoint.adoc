@@ -1,0 +1,457 @@
+---
+permalink: tenant/creating-platform-services-endpoint.html 
+sidebar: sidebar 
+keywords: how to create platform services endpoint 
+summary: 必須先建立至少一個正確類型的端點，才能啟用平台服務。 
+---
+= 建立 StorageGRID 平台服務端點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+必須先建立至少一個正確類型的端點，才能啟用平台服務。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* StorageGRID 系統管理員已為您的租戶帳戶啟用平台服務。
+* 您屬於一個擁有 link:tenant-management-permissions.html["管理端點或根存取權限"] 的使用者群組。
+* 平台服務端點所引用的資源已建立：
++
+** CloudMirror 複寫：S3 儲存桶
+** 事件通知：Amazon Simple Notification Service (Amazon SNS) 主題、Kafka 主題或 Webhook 端點
+** 搜尋通知：Elasticsearch 索引，如果目的地叢集未設定為自動建立索引。
+
+
+* 您已掌握目的地資源的相關資訊：
++
+** 統一資源識別碼 (URI) 的主機和連接埠
++
+
+NOTE: 如果您打算使用託管在 StorageGRID 系統上的儲存桶作為 CloudMirror 複寫的端點，請聯絡網格系統管理員以確定您需要輸入的值。
+
+** 唯一資源名稱 (URN)
++
+link:specifying-urn-for-platform-services-endpoint.html["指定平台服務端點的 URN"]
+
+** 驗證認證（如有需要）：
++
+[role="tabbed-block"]
+====
+.搜尋整合端點
+--
+對於搜尋整合端點，您可以使用下列憑證：
+
+*** 存取金鑰：存取金鑰 ID 和秘密存取金鑰
+*** 基本 HTTP：使用者名稱和密碼
+
+
+--
+.CloudMirror 複寫端點
+--
+對於 CloudMirror 複寫端點，您可以使用下列憑證：
+
+*** 存取金鑰：存取金鑰 ID 和秘密存取金鑰
+*** CAP（C2S Access Portal）：臨時憑證 URL、伺服器和用戶端憑證、用戶端金鑰以及可選的用戶端私鑰密碼短語。
+
+
+--
+.Amazon SNS 端點
+--
+對於 Amazon SNS 終端節點，您可以使用下列憑證：
+
+*** 存取金鑰：存取金鑰 ID 和秘密存取金鑰
+
+
+--
+.Kafka 端點
+--
+對於 Kafka 端點，您可以使用下列憑證：
+
+*** SASL/PLAIN：使用者名稱和密碼
+*** SASL/SCRAM-SHA-256：使用者名稱和密碼
+*** SASL/SCRAM-SHA-512：使用者名稱和密碼
+
+
+--
+====
+** 安全性憑證（如果需要憑證驗證）
+
+
+* 如果啟用了 Elasticsearch 安全功能，您將擁有用於連線測試的監控叢集權限，以及用於文件更新的寫入索引權限或索引和刪除索引權限。
+
+
+.步驟
+. 選擇 *STORAGE （S3）* > *Platform services endpoints*。此時將顯示「Platform services endpoints」頁面。
+. 選擇 *建立端點*。
+. 輸入顯示名稱，簡要描述端點及其用途。
++
+當端點列在「端點」頁面上時，端點名稱旁邊會顯示端點支援的平台服務類型，因此您無需將該資訊包含在名稱中。
+
+. 在 *URI* 欄位中，指定端點的唯一資源識別碼 （URI）。
++
+--
+請使用以下格式之一：
+
+[listing]
+----
+https://host:port
+http://host:port
+----
+如果您未指定連接埠，則使用以下預設連接埠：
+
+** HTTPS URI 使用連接埠 443，HTTP URI 使用連接埠 80（大多數端點）
+** 連接埠 9092 用於 HTTPS 和 HTTP URI（僅限 Kafka 端點）
+
+
+--
++
+例如，託管在 StorageGRID 上的儲存桶的 URI 可能是：
+
++
+[listing]
+----
+https://s3.example.com:10443
+----
++
+在此範例中， `s3.example.com` 表示 StorageGRID 高可用度 （HA） 群組的虛擬 IP （VIP） 的 DNS 條目， `10443` 表示負載平衡器端點中定義的連接埠。
+
++
+
+NOTE: 盡可能連線至負載平衡節點的 HA 群組，以避免單點故障。
+
++
+同樣，託管在 AWS 上的儲存桶的 URI 可能是：
+
++
+[listing]
+----
+https://s3-aws-region.amazonaws.com
+----
++
+
+NOTE: 如果該端點用於 CloudMirror 複寫服務，則不要在 URI 中包含儲存桶名稱。儲存桶名稱應包含在 *URN* 欄位中。
+
+. 輸入端點的唯一資源名稱（URN）。
++
+
+NOTE: 端點建立後，無法變更端點的 URN。
+
+. 選擇 *Continue* 。
+. 請選擇*驗證類型*的值。
++
+
+NOTE: 如果您需要對 webhook 端點進行驗證，請在 <<verify-certs,步驟 9>> 中設定相互傳輸層安全性 (mTLS)。
+
++
+[role="tabbed-block"]
+====
+.搜尋整合端點
+--
+輸入或上傳搜尋整合端點的憑證。
+
+您提供的憑證必須具有目的地資源的寫入權限。
+
+[cols="1a,2a,2a"]
+|===
+| 驗證類型 | 說明 | 認證資料 
+
+
+ a| 
+匿名
+ a| 
+提供對目的地的匿名存取。僅適用於已停用安全性的端點。
+ a| 
+無需驗證。
+
+
+
+ a| 
+存取金鑰
+ a| 
+使用 AWS 風格的憑證來驗證與目的地的連線。
+ a| 
+** 存取金鑰 ID
+** 秘密存取金鑰
+
+
+
+
+ a| 
+基本 HTTP
+ a| 
+使用使用者名稱和密碼來驗證與目的地的連線。
+ a| 
+** 使用者名稱
+** 密碼
+
+
+|===
+--
+.CloudMirror 複寫端點
+--
+輸入或上傳 CloudMirror 複寫端點的憑證。
+
+您提供的憑證必須具有目的地資源的寫入權限。
+
+[cols="1a,2a,2a"]
+|===
+| 驗證類型 | 說明 | 認證資料 
+
+
+ a| 
+匿名
+ a| 
+提供對目的地的匿名存取。僅適用於已停用安全性的端點。
+ a| 
+無需驗證。
+
+
+
+ a| 
+存取金鑰
+ a| 
+使用 AWS 風格的憑證來驗證與目的地的連線。
+ a| 
+** 存取金鑰 ID
+** 秘密存取金鑰
+
+
+
+
+ a| 
+CAP（C2S 存取入口網站）
+ a| 
+使用憑證和金鑰來驗證與目的地的連線。
+ a| 
+** 臨時憑證 URL
+** 伺服器 CA 憑證（PEM 檔案上傳）
+** 用戶端憑證（PEM 檔案上傳）
+** 用戶端私鑰（PEM 檔案上傳、OpenSSL 加密格式或未加密私鑰格式）
+** 用戶端私密金鑰複雜密碼（選用）
+
+
+|===
+--
+.Amazon SNS 端點
+--
+輸入或上傳 Amazon SNS 端點的憑證。
+
+您提供的憑證必須具有目的地資源的寫入權限。
+
+[cols="1a,2a,2a"]
+|===
+| 驗證類型 | 說明 | 認證資料 
+
+
+ a| 
+匿名
+ a| 
+提供對目的地的匿名存取。僅適用於已停用安全性的端點。
+ a| 
+無需驗證。
+
+
+
+ a| 
+存取金鑰
+ a| 
+使用 AWS 風格的憑證來驗證與目的地的連線。
+ a| 
+** 存取金鑰 ID
+** 秘密存取金鑰
+
+
+|===
+--
+.Kafka 端點
+--
+輸入或上傳 Kafka 端點的憑證。
+
+您提供的憑證必須具有目的地資源的寫入權限。
+
+[cols="1a,2a,2a"]
+|===
+| 驗證類型 | 說明 | 認證資料 
+
+
+ a| 
+匿名
+ a| 
+提供對目的地的匿名存取。僅適用於已停用安全性的端點。
+ a| 
+無需驗證。
+
+
+
+ a| 
+SASL/PLAIN
+ a| 
+使用明文使用者名稱和密碼來驗證與目的地的連線。
+ a| 
+** 使用者名稱
+** 密碼
+
+
+
+
+ a| 
+SASL/SCRAM-SHA-256
+ a| 
+使用使用者名稱和密碼，透過質詢-回應協定和 SHA-256 雜湊演算法來驗證與目的地的連線。
+ a| 
+** 使用者名稱
+** 密碼
+
+
+
+
+ a| 
+SASL/SCRAM-SHA-512
+ a| 
+使用使用者名稱和密碼，透過質詢-回應協定和 SHA-512 雜湊演算法來驗證與目的地的連線。
+ a| 
+** 使用者名稱
+** 密碼
+
+
+|===
+如果使用者名稱和密碼是從 Kafka 叢集取得的委派權杖衍生而來，請選擇 *Use delegation taken authentication*。
+
+--
+====
+. 選擇 *Continue* 。
+. [[verify-certs]]選擇 *Verify certificates* 的選項按鈕，以選擇如何驗證與端點的 TLS 連線。
++
+[role="tabbed-block"]
+====
+.大多數端點
+--
+驗證搜尋整合、CloudMirror 複寫、Amazon SNS 或 Kafka 端點的 TLS 連線。
+
+[cols="1a,2a"]
+|===
+| 證書驗證類型 | 說明 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+驗證與端點資源建立 TLS 連線的伺服器憑證。
+
+
+
+ a| 
+已停用
+ a| 
+憑證驗證已停用。此選項並不安全。
+
+
+
+ a| 
+使用自訂 CA 憑證
+ a| 
+自訂 CA 憑證用於連線至端點時驗證伺服器的身分識別。
+
+
+
+ a| 
+使用作業系統 CA 憑證
+ a| 
+使用作業系統上安裝的預設 Grid CA 憑證來保護連線安全。
+
+|===
+--
+.僅限 Webhook 端點
+--
+驗證 webhook 端點的 TLS 連線。
+
+[cols="1a,2a"]
+|===
+| 證書驗證類型 | 說明 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+驗證與端點資源建立 TLS 連線的伺服器憑證。
+
+
+
+ a| 
+mTLS
+ a| 
+驗證用戶端和伺服器憑證，以建立與端點資源的相互 TLS 連線。
+
+
+
+ a| 
+已停用
+ a| 
+憑證驗證已停用。此選項並不安全。
+
+
+
+ a| 
+使用自訂 CA 憑證
+ a| 
+自訂 CA 憑證用於連線至端點時驗證伺服器的身分識別。
+
+|===
+選擇 *mTLS* 後，這些選項將變成可用。
+
+[cols="1a,2a"]
+|===
+| 證書驗證類型 | 說明 
+
+
+ a| 
+請勿驗證伺服器憑證
+ a| 
+停用伺服器憑證驗證，這表示伺服器的身分將不予驗證。此選項並不安全。
+
+
+
+ a| 
+用戶端憑證
+ a| 
+用戶端憑證用於在連線至端點時驗證用戶端的身分識別。
+
+
+
+ a| 
+用戶端私密金鑰
+ a| 
+用戶端憑證的私鑰。如果加密，則必須使用傳統的 PKCS #1 格式（不支援 PKCS #8 格式）。
+
+
+
+ a| 
+用戶端私密金鑰複雜密碼
+ a| 
+用於解密用戶端私鑰的口令。如果私鑰未加密，請留空。
+
+|===
+--
+====
+. 選擇 *Test and create endpoint*。
++
+** 如果使用指定的憑證可以存取端點，則會顯示成功訊息。每個站台上的一個節點都會驗證與端點的連線。
+** 如果端點驗證失敗，則會顯示錯誤訊息。如果需要修改端點以修正錯誤，請選擇 *Return to endpoint details* 並更新資訊。然後，選擇 *Test and create endpoint*。
++
+
+NOTE: 如果您的租戶帳戶未啟用平台服務，則端點建立將會失敗。請聯絡您的 StorageGRID 系統管理員。
+
+
+
+
+
+設定端點後，您可以使用其 URN 來設定平台服務。
+
+.相關資訊
+* link:specifying-urn-for-platform-services-endpoint.html["指定平台服務端點的 URN"]
+* link:configuring-cloudmirror-replication.html["設定 CloudMirror 複寫"]
+* link:configuring-event-notifications.html["設定事件通知"]
+* link:configuring-search-integration-service.html["設定搜尋整合服務"]
+

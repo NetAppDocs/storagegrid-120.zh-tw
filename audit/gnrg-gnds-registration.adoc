@@ -1,0 +1,79 @@
+---
+permalink: audit/gnrg-gnds-registration.html 
+sidebar: sidebar 
+keywords: storagegrid, audi, message, GNRG, GNDS Registration 
+summary: 當服務在 StorageGRID 系統中更新或註冊了有關自身的資訊時，CMN 服務會產生此稽核訊息。 
+---
+= StorageGRID 中 GNDS 註冊的 GNRG 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當服務在 StorageGRID 系統中更新或註冊了有關自身的資訊時，CMN 服務會產生此稽核訊息。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+RSLT
+ a| 
+結果
+ a| 
+更新請求的結果：
+
+* SUCS：成功
+* SUNV：服務無法使用
+* GERR：其他故障
+
+
+
+
+ a| 
+GNID
+ a| 
+節點 ID
+ a| 
+發起更新請求的服務節點 ID。
+
+
+
+ a| 
+GNTP
+ a| 
+設備類型
+ a| 
+網格節點的裝置類型（例如，LDR 服務的 BLDR）。
+
+
+
+ a| 
+GNDV
+ a| 
+設備型號版本
+ a| 
+DMDL 套裝組合中識別網格節點裝置型號版本的字串。
+
+
+
+ a| 
+GNGP
+ a| 
+群組
+ a| 
+網格節點所屬的群組（在連結成本和服務查詢排名的上下文中）。
+
+
+
+ a| 
+GNIA
+ a| 
+IP 位址
+ a| 
+網格節點的 IP 位址。
+
+|===
+每當網格節點更新其在 Grid Nodes Bundle 中的條目時，都會產生此訊息。

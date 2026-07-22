@@ -1,0 +1,121 @@
+---
+permalink: ilm/example-8-priorities-for-s3-bucket-lifecycle-and-ilm-policy.html 
+sidebar: sidebar 
+keywords: retention priority, example S3 bucket lifecycle, example ILM policy 
+summary: ${post_edited_translations.segment} 
+---
+= S3 儲存貯體生命週期與 ILM 原則在 StorageGRID 中的互動方式
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+
+[[example-of-bucket-lifecycle-taking-priority-over-ilm-policy]]
+== 儲存桶生命週期優先於 ILM 原則的範例
+
+ILM 政策::
++
+--
+* 基於非目前時間參考的規則：在第 0 天，保留 X 份複本 20 天
+* 基於擷取時間參考的規則（預設）：在第 0 天，保留 X 份複本 50 天
+
+
+--
+${post_edited_translations.segment}:: `"Filter": {"Prefix": "docs/"}, "Expiration": {"Days": 100}, "NoncurrentVersionExpiration": {"NoncurrentDays": 5}`
+結果::
++
+--
+* 已擷取名為「docs/text」的物件。它與儲存貯體生命週期篩選器中的「docs/」前綴相符。
++
+** 100 天後會建立一個刪除標記，「docs/text」將變為非目前狀態。
+** 5 天後，自擷取以來總共 105 天，「docs/text」已刪除。
+** 95 天後，即自資料擷取以來共 200 天、自刪除標記建立以來共 100 天，過期的刪除標記將被刪除。
+
+
+* 已擷取名為「video/movie」的物件。此物件與篩選器不符，因此使用 ILM 保留政策。
++
+** ${post_edited_translations.segment}
+** 擷取後 20 天（自擷取起共 70 天），「video/movie」將被刪除。
+** 經過 30 天，也就是自擷取以來共 100 天，自刪除標記建立以來共 50 天後，過期的刪除標記將被刪除。
+
+
+
+
+--
+
+
+
+
+[[example-of-bucket-lifecycle-implicitly-keeping-forever]]
+== ${post_edited_translations.segment}
+
+ILM 政策::
++
+--
+* 基於非目前時間參考的規則：在第 0 天，保留 X 份複本 20 天
+* 基於擷取時間參考的規則（預設）：在第 0 天，保留 X 份複本 50 天
+
+
+--
+${post_edited_translations.segment}:: `"Filter": {"Prefix": "docs/"}, "Expiration": {"ExpiredObjectDeleteMarker": true}`
+結果::
++
+--
+* 已擷取名為「docs/text」的物件。它與儲存貯體生命週期篩選器中的「docs/」前綴相符。
++
+此  `Expiration` 行動僅適用於過期的刪除標記，這代表永久保留其他所有內容（以 "docs/" 開頭）。
+
++
+${post_edited_translations.segment}
+
+* 已擷取名為「video/movie」的物件。此物件與篩選器不符，因此使用 ILM 保留政策。
++
+** ${post_edited_translations.segment}
+** 擷取後 20 天（自擷取起共 70 天），「video/movie」將被刪除。
+** 經過 30 天，也就是自擷取以來共 100 天，自刪除標記建立以來共 50 天後，過期的刪除標記將被刪除。
+
+
+
+
+--
+
+
+
+
+[[example-of-using-bucket-lifecycle-to-duplicate-ilm-and-clean-up-expired-delete-markers]]
+== 使用儲存桶生命週期複製 ILM 並清理過期刪除標記的範例
+
+ILM 政策::
++
+--
+* 基於非目前時間參考的規則：在第 0 天，保留 X 份複本 20 天
+* 基於擷取時間參考的規則（預設）：在第 0 天，永久保留 X 份複本。
+
+
+--
+${post_edited_translations.segment}:: `"Filter": {}, "Expiration": {"ExpiredObjectDeleteMarker": true}, "NoncurrentVersionExpiration": {"NoncurrentDays": 20}`
+結果::
++
+--
+* ${post_edited_translations.segment}
++
+** ILM 原則的永久規則旨在手動移除物件，並在 20 天後清理非目前版本。因此，擷取時間規則將永久保留過期的刪除標記。
+** 儲存貯體生命週期會複製 ILM 原則的行為，同時新增 `"ExpiredObjectDeleteMarker": true`，這會在刪除標記過期時將其移除
+
+
+* 已擷取物件。無篩選器表示貯體生命週期適用於所有物件，且會置換 ILM 保留設定。
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** 不久之後，過期的刪除標記將會被刪除。
+
+
+
+
+--
+

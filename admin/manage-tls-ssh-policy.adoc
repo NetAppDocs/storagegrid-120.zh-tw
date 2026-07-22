@@ -1,0 +1,163 @@
+---
+permalink: admin/manage-tls-ssh-policy.html 
+sidebar: sidebar 
+keywords: TLS and SSH policy, secure connection, FIPS, Common Criteria 
+summary: TLS 和 SSH 原則決定了使用哪些協定和密碼，以便與用戶端應用程式建立安全的 TLS 連線，以及與內部 StorageGRID 服務建立安全的 SSH 連線。 
+---
+= 管理 StorageGRID 中的 TLS 和 SSH 原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+TLS 和 SSH 原則決定了使用哪些協定和密碼，以便與用戶端應用程式建立安全的 TLS 連線，以及與內部 StorageGRID 服務建立安全的 SSH 連線。
+
+安全性原則控制 TLS 和 SSH 如何加密傳輸中的資料。通常情況下，請使用「現代相容性（預設）」原則，除非您的系統需要符合通用準則 (Common Criteria) 或需要使用其他加密演算法。
+
+
+NOTE: 部分 StorageGRID 服務尚未更新，以使用這些原則中的加密演算法。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+
+
+[[select-a-security-policy]]
+== 選擇安全性原則
+
+.步驟
+. ${post_edited_translations.segment}
++
+An error occurred. 
+
++
+image:securitysettings_tls_ssh_policies_current.png["TLS 和 SSH 原則"]
+
+. ${post_edited_translations.segment}
++
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+如果您需要強式加密且沒有特殊需求，請使用預設原則。此原則與大多數 TLS 和 SSH 用戶端相容。
+
+--
+.${post_edited_translations.segment}
+--
+如果您需要適用於較舊用戶端的額外相容性選項，請使用 Legacy 相容性原則。此原則中的額外選項可能會使其比 Modern 相容性原則更不安全。
+
+--
+.${post_edited_translations.segment}
+--
+如果您需要獲得通用準則認證，請使用通用準則原則。
+
+--
+.${post_edited_translations.segment}
+--
+如果您需要 Common Criteria 認證，且需要使用 NetApp Cryptographic Security Module （NCSM） 3.0.8 或 NetApp StorageGRID Kernel Crypto API 6.1.129-1-ntap1-amd64 模組來進行連線至負載平衡器端點、Tenant Manager 和 Grid Manager 的外部用戶端連線，請使用 FIPS 嚴格原則。使用此原則可能會降低效能。
+
+NCSM 3.0.8 和 NetApp StorageGRID Kernel Crypto API 6.1.129-1-ntap1-amd64 模組用於以下操作：
+
+** ${post_edited_translations.segment}
++
+*** 以下服務之間的 TLS 連線：ADC、AMS、CMN、DDS、LDR、SSM、NMS、mgmt-api、nginx、nginx-gw 和 cache-svc
+*** 用戶端與 nginx-gw 服務（負載平衡器端點）之間的 TLS 連線
+*** ${post_edited_translations.segment}
+*** 物件內容加密（適用於 SSE-S3、SSE-C 和儲存物件加密設定）
+*** SSH 連線
+
+
++
+如需詳細資訊，請參閱 NIST Cryptographic Algorithm Validation Program link:https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4838["憑證 #4838"^]。
+
+** NetApp StorageGRID Kernel Crypto API 模組
++
+NetApp StorageGRID 核心加密 API 模組僅存在於 VM 和 StorageGRID 應用裝置平台上。
+
++
+*** 熵收集
+*** ${post_edited_translations.segment}
+
+
++
+如需詳細資訊，請參閱 NIST Cryptographic Algorithm Validation Program link:https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/validation-search?searchMode=implementation&product=NetApp+StorageGRID+Kernel+Crypto+API&productType=-1&ipp=50["證書編號 #A6242 至 #A6257"^] 與 link:https://csrc.nist.gov/projects/cryptographic-module-validation-program/entropy-validations/certificate/223["Entropy 憑證 #E223"^]。
+
+
+
+*注意*：選取此原則後，link:../maintain/rolling-reboot-procedure.html["執行滾動重新開機"]所有節點以啟動 NCSM。使用 *維護* > *輪流重新開機* 來啟動並監控重新開機。
+
+--
+.自訂
+--
+${post_edited_translations.segment}
+
+（選用）如果您的 StorageGRID 具有 FIPS 140 密碼編譯需求，請啟用 FIPS 模式功能以使用 NCSM 3.0.8 和 NetApp StorageGRID Kernel Crypto API 6.1.129-1-ntap1-amd64 模組：
+
+.. 將 `fipsMode`參數設定為 `true`。
+.. 出現提示時，請link:../maintain/rolling-reboot-procedure.html["執行滾動重新開機"]所有節點以啟動密碼編譯模組。使用 * 組織維護 * > * 輪流重新開機 * 來啟動和監控重新開機。
+.. 選擇 *Support* > *Diagnostics* 以檢視作用中的 FIPS 模組版本。
+
+
+--
+====
+. 若要查看每項原則的密碼編譯、協定和演算法的詳細資訊，請選取 *View details*。
+. ${post_edited_translations.segment}
++
+在原則圖塊的「目前原則」旁邊會出現一個綠色對勾。
+
+
+
+
+
+[[create-a-custom-security-policy]]
+== ${post_edited_translations.segment}
+
+如果您需要套用自己的密碼編譯，可以建立自訂原則。
+
+.步驟
+. 在與您要建立的自訂原則最相似的原則圖塊中，選擇 *View details*。
+. 選擇*複製到剪貼簿*，然後選擇*取消*。
++
+image:securitysettings-custom-security-policy-copy.png["複製現有原則以建立自訂原則"]
+
+. ${post_edited_translations.segment}
+. 貼上您複製的 JSON，並進行必要的修改。
+. 選擇 *Use policy*。
++
+${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
+
+
+
+
+[[temporarily-revert-to-the-default-security-policy]]
+[[temporarily-revert-to-default-security-policy]]
+== 暫時回復預設安全性原則
+
+如果您設定了自訂安全性原則，且設定的 TLS 原則與 link:global-certificate-types.html["${post_edited_translations.segment}"] 不相容，您可能無法登入 Grid Manager。
+
+${post_edited_translations.segment}
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 執行下列命令：
++
+`restore-default-cipher-configurations`
+
+. 透過網頁瀏覽器，存取同一管理節點上的 Grid Manager。
+. 請依照<<select-a-security-policy,選擇安全性原則>>中的步驟重新設定原則。
+

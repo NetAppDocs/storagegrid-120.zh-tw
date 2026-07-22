@@ -1,0 +1,123 @@
+---
+permalink: maintain/applying-hotfix.html 
+sidebar: sidebar 
+keywords: storagegrid, hotfix, software update 
+summary: 此 Hotfix 首先會自動套用至主要管理節點。然後，您必須核准將此 Hotfix 套用至其他網格節點，直到所有節點都執行相同的軟體版本為止。您可以自訂核准順序，選擇核准個別網格節點、網格節點群組或所有網格節點。 
+---
+= 在 StorageGRID 中套用 Hotfix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+此 Hotfix 首先會自動套用至主要管理節點。然後，您必須核准將此 Hotfix 套用至其他網格節點，直到所有節點都執行相同的軟體版本為止。您可以自訂核准順序，選擇核准個別網格節點、網格節點群組或所有網格節點。
+
+.開始之前
+* 您已審閱 link:storagegrid-hotfix-procedure.html["${post_edited_translations.segment}"]。
+* 您擁有佈建密碼。
+* 您擁有 Root 存取或維護權限。
+
+
+.關於此任務
+* 您可以延遲將 Hotfix 套用至某個節點，但必須將 Hotfix 套用至所有節點後，Hotfix 程序才算完成。
+* 在完成 Hotfix 程序之前，您無法執行 StorageGRID 軟體升級或 SANtricity 作業系統更新。
+
+
+.步驟
+. 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+. 選擇 *Maintenance* > *System* > *Software update*。
++
+軟體更新頁面出現。
+
++
+image:software_update_landing.png["軟體更新登陸頁面"]
+
+. 選擇 *Apply hotfix*。
++
+${post_edited_translations.segment}
+
++
+image:hotfix_choose_file.png["Hotfix 選擇檔案"]
+
+. 選擇您從 NetApp 支援網站下載的 Hotfix 檔案。
++
+.. 選取 *Browse*。
+.. ${post_edited_translations.segment}
++
+`hotfix-install-_version_`
+
+.. 選擇 *Open*。
++
+檔案已上傳。上傳完成後，檔案名稱會顯示在「詳細資料」欄位中。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+. 請在文字方塊中輸入資源配置密碼。
++
+${post_edited_translations.segment}
+
+. 選擇 *Start*。
++
+${post_edited_translations.segment}
+
+. 選擇「確定」開始將 Hotfix 套用到主要管理節點。
++
+Hotfix 程序啟動時：
+
++
+.. ${post_edited_translations.segment}
++
+
+NOTE: 如果出現任何錯誤，請解決這些錯誤，重新上傳 Hotfix 檔案，然後再次選擇「開始」。
+
+.. 顯示 Hotfix 安裝進度表。
++
+此表顯示網格中的所有節點以及每個節點的 Hotfix 安裝的目前階段。表中的節點按類型分組（管理節點、閘道節點和儲存節點）。
+
+.. 進度條到達完成狀態後，主要管理節點將顯示為「已完成」。
++
+image:hotfix_progress_table.png["Hotfix 進度表"]
+
+
+
+. 您可以選擇按「網站」、「名稱」、「進度」、「階段」或「詳細資料」，對每個分組中的節點清單進行升序或降序排序。或者，在「搜尋」方塊中輸入關鍵字以尋找特定節點。
+. 批准已準備好更新的網格節點。已核准的同類型節點將逐一升級。
++
+
+CAUTION: 除非您確定節點已準備好進行更新，否則請勿核准該節點的 Hotfix。將 Hotfix 套用至網格節點時，該節點上的某些服務可能會重新啟動。這些作業可能會導致與該節點進行通訊的用戶端服務中斷。
+
++
+** 選擇一個或多個「核准」按鈕，將一個或多個個別節點新增至 Hotfix 佇列。
+** 選取每個分組中的 *Approve All* 按鈕，將所有相同類型的節點新增至 Hotfix 佇列。如果您已在 *Search* 欄位中輸入搜尋條件，*Approve All* 按鈕將套用至搜尋條件選取的所有節點。
++
+
+NOTE: 頁面頂部的「全部批准」按鈕會批准頁面上列出的所有節點，而表格分組頂部的「全部批准」按鈕只會批准該分組中的所有節點。如果節點升級的順序很重要，請一次批准一個節點或一組節點，並等待每個節點的升級完成後，再批准下一個節點。
+
+** 選擇頁面頂部的頂層「全部批准」按鈕，將網格中的所有節點新增至 Hotfix 佇列。
++
+
+NOTE: 您必須先完成 StorageGRID Hotfix，然後才能開始進行其他軟體更新。如果您無法完成 Hotfix，請聯絡技術支援。
+
+** 選擇「移除」或「全部移除」可從 Hotfix 佇列中移除一個節點或所有節點。
++
+${post_edited_translations.segment}
+
++
+image:approve_all_progresstable.png["Hotfix 進度，移除按鈕"]
+
+
+
+. 請等待 Hotfix 套用至每個已核准的網格節點。
++
+當所有節點上都已成功安裝 Hotfix 時，Hotfix 安裝進度表就會關閉。綠色橫幅會顯示 Hotfix 完成的日期和時間。
+
+. 如果 Hotfix 無法套用至任何節點，請審查每個節點的錯誤，解決問題，然後重複這些步驟。
++
+只有當 Hotfix 成功套用至所有節點後，程序才算完成。您可以視需要安全地重試 Hotfix 程序多次，直到完成為止。
+
+

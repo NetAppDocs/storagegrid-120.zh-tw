@@ -1,0 +1,62 @@
+---
+section: expand
+title: 展開網格
+url: "/landing-expand/index.html"
+entries:
+- title: 了解擴充
+  pdf-filename: 擴充您的 StorageGRID 系統
+  url: "/expand/index.html"
+- title: 擴充規劃
+  entries:
+  - title: 複製資料的擴展規劃
+    url: "/expand/adding-storage-capacity-for-replicated-objects.html"
+  - title: 銷毀編碼資料的擴充規劃
+    url: "/expand/adding-storage-capacity-for-erasure-coded-objects.html"
+  - title: 了解擴充後的糾刪碼重新平衡機制
+    url: "/expand/considerations-for-rebalancing-erasure-coded-data.html"
+- title: 擴充指南
+  entries:
+  - title: 增加物件容量的指南
+    url: "/expand/guidelines-for-adding-object-capacity.html"
+  - title: 新增中繼資料容量的指南
+    url: "/expand/adding-metadata-capacity.html"
+  - title: 新增網格節點的指南
+    url: "/expand/adding-grid-nodes-to-add-capabilities.html"
+  - title: 新增網站的指南
+    url: "/expand/adding-new-site.html"
+- title: 做好擴張準備
+  url: "/expand/gather-required-materials.html"
+- title: 新增網格節點或站台
+  entries:
+  - title: 工作流程概要
+    url: "/expand/adding-grid-nodes-to-existing-site-or-adding-new-site.html"
+  - title: 新增或更新網格網路的子網路
+    url: "/expand/updating-subnets-for-grid-network.html"
+  - title: 部署新的網格節點
+    url: "/expand/deploying-new-grid-nodes.html"
+  - title: 執行擴充
+    url: "/expand/performing-expansion.html"
+- title: "${post_edited_translations.segment}"
+  entries:
+  - title: 向儲存節點新增儲存設備磁碟區
+    url: "/expand/adding-storage-volumes-to-storage-nodes.html"
+  - title: 為 VMware 新增儲存設備 Volume
+    url: "/expand/vmware-adding-storage-volumes-to-storage-node.html"
+  - title: 為 Linux 新增直連或 SAN Volume
+    url: "/expand/linux-adding-direct-attached-or-san-volumes-to-storage-node.html"
+- title: 設定擴充系統
+  entries:
+  - title: 設定新增的節點和站台
+    url: "/expand/configuring-expanded-storagegrid-system.html"
+  - title: 驗證儲存節點是否處於作用中狀態
+    url: "/expand/verifying-storage-node-is-active.html"
+  - title: 複製管理節點資料庫
+    url: "/expand/copying-admin-node-database.html"
+  - title: "${post_edited_translations.segment}"
+    url: "/expand/copying-prometheus-metrics.html"
+  - title: "${post_edited_translations.segment}"
+    url: "/expand/copying-audit-logs.html"
+  - title: 重新平衡擦除編碼資料
+    url: "/expand/rebalancing-erasure-coded-data-after-adding-storage-nodes.html"
+- title: 排查擴充錯誤
+  url: "/expand/contacting-technical-support.html"

@@ -1,0 +1,8 @@
+---
+permalink: ubuntu/example-etc-network-interfaces.html 
+redirect: storagegrid/swnodes/example-etc-network-interfaces.html 
+---
+= 
+:allow-uri-read: 
+
+

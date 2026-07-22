@@ -1,0 +1,40 @@
+---
+section: troubleshoot
+title: "${post_edited_translations.segment}"
+entries:
+- title: 故障排除指南
+  pdf-filename: "${post_edited_translations.segment}"
+  url: "/troubleshoot/index.html"
+- title: 排查物件和儲存設備問題
+  entries:
+  - title: 確認物件資料位置
+    url: "/troubleshoot/confirming-object-data-locations.html"
+  - title: 物件儲存故障
+    url: "/troubleshoot/object-store-storage-volume-failures.html"
+  - title: "${post_edited_translations.segment}"
+    url: "/troubleshoot/verifying-object-integrity.html"
+  - title: 故障排除：S3 PUT 物件大小過大警報
+    url: "/troubleshoot/troubleshoot-s3-put-object-size-too-large-alert.html"
+  - title: "${post_edited_translations.segment}"
+    entries:
+    - title: 檢索物件的方法
+      pdf-filename: "${post_edited_translations.segment}"
+      url: "/troubleshoot/troubleshooting-lost-and-missing-object-data.html"
+    - title: "${post_edited_translations.segment}"
+      url: "/troubleshoot/investigating-potentially-lost-objects.html"
+  - title: 排除物件資料儲存設備不足警報
+    url: "/troubleshoot/troubleshooting-low-object-data-storage-alert.html"
+  - title: 排除低唯讀浮水印置換警報問題
+    url: "/troubleshoot/troubleshoot-low-watermark-alert.html"
+- title: 疑難排解中繼資料問題
+  url: "/troubleshoot/troubleshooting-metadata-issues.html"
+- title: 排除憑證錯誤
+  url: "/troubleshoot/troubleshooting-certificate-errors.html"
+- title: 排查管理節點與使用者介面問題
+  url: "/troubleshoot/troubleshooting-admin-node-and-user-interface-issues.html"
+- title: 排查網路、硬體和平台問題
+  url: "/troubleshoot/troubleshooting-network-hardware-and-platform-issues.html"
+- title: 排除外部 syslog 伺服器故障
+  url: "/troubleshoot/troubleshooting-syslog-server.html"
+- title: "${post_edited_translations.segment}"
+  url: "/troubleshoot/troubleshooting-load-balancer-caching.html"

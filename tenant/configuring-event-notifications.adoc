@@ -1,0 +1,135 @@
+---
+permalink: tenant/configuring-event-notifications.html 
+sidebar: sidebar 
+keywords: how to configure event notifications, bucket notification 
+summary: 您可以透過建立通知組態 XML 並使用 Tenant Manager 將 XML 套用到儲存桶來啟用儲存桶的通知功能。 
+---
+= 在 StorageGRID 中設定事件通知
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以透過建立通知組態 XML 並使用 Tenant Manager 將 XML 套用到儲存桶來啟用儲存桶的通知功能。
+
+.開始之前
+* StorageGRID 系統管理員已為您的租戶帳戶啟用平台服務。
+* 您已經建立了一個儲存桶作為通知來源。
+* 您打算用作事件通知目的地的端點已經存在，並且您擁有其 URN。
+* 您屬於擁有 link:tenant-management-permissions.html["管理所有儲存桶或 root 存取權限"] 的使用者群組。使用 Tenant Manager 設定儲存貯體時，這些權限會置換群組或儲存貯體原則中的權限設定。
+
+
+.關於此任務
+您可以將通知組態 XML 與來源儲存桶關聯來設定事件通知。通知組態 XML 遵循 S3 設定儲存桶通知的慣例，目的地 Amazon SNS 主題、Kafka 主題或 webhook 端點以端點的 URN 形式指定。
+
+如需事件通知及其設定方法的一般資訊，請參閱  https://docs.aws.amazon.com/s3/["Amazon 文件"^]。如需 StorageGRID 如何實作 S3 儲存貯體通知組態 API 的相關資訊，請參閱 link:../s3/index.html["S3 用戶端應用程式的實作說明"]。
+
+設定儲存桶的事件通知時，請注意以下要求和特性：
+
+* 建立和套用有效的通知組態 XML 時，必須為每個目的地使用事件通知端點的 URN。
+* 雖然可以在啟用了 S3 Object Lock 的儲存桶上設定事件通知，但物件的 S3 Object Lock 中繼資料（包括保留至日期和法律保留狀態）不會包含在通知訊息中。
+* 設定事件通知後，每當來源儲存桶中的物件發生指定事件時，都會產生通知並將其傳送至用作目的地的 Amazon SNS 主題、Kafka 主題或 webhook 端點。
+* 如果為包含物件的儲存桶啟用事件通知，則僅針對儲存通知組態後執行的動作傳送通知。
+
+
+.步驟
+. 啟用來源儲存桶的通知：
++
+** 使用文字編輯器建立啟用事件通知所需的通知組態 XML，如 S3 通知 API 中所述。
+** 設定 XML 時，請使用事件通知端點的 URN 作為目的地主題。
++
+[listing]
+----
+<NotificationConfiguration>
+  <TopicConfiguration>
+     <Id>Image-created</Id>
+     <Filter>
+        <S3Key>
+          <FilterRule>
+            <Name>prefix</Name>
+            <Value>images/</Value>
+          </FilterRule>
+        </S3Key>
+    </Filter>
+    <Topic>arn:aws:sns:us-east-1:050340950352:sgws-topic</Topic>
+    <Event>s3:ObjectCreated:*</Event>
+   </TopicConfiguration>
+ </NotificationConfiguration>
+----
+
+
+. 在租戶管理器中，選擇 *STORAGE (S3)* > *Buckets*。
+. 選取來源儲存貯體的名稱。
++
+顯示儲存桶詳細資料頁面。
+
+. 選擇 *Platform services* > *Event notifications*。
+. 選取 *Enable event notifications* 核取方塊。
+. 將通知組態 XML 貼上到文字方塊中，然後選擇 *Save changes*。
++
+
+NOTE: StorageGRID 系統管理員必須使用 Grid Manager 或 Grid Management API 為每個租戶帳戶啟用平台服務。如果在儲存組態 XML 時發生錯誤，請聯絡您的 StorageGRID 系統管理員。
+
+. 請確認事件通知已正確設定：
++
+.. 對來源儲存貯體中符合組態 XML 中設定的觸發通知要求的物件執行行動。
++
+在這個範例中，每當建立帶有  `images/` 前綴的物件時，都會傳送事件通知。
+
+.. 確認通知已傳送至目的地 Amazon SNS 主題、Kafka 主題或 webhook 端點。
++
+例如，如果您的目標主題託管在 Amazon SNS 上，您可以設定服務，以便在送達通知時向您發送電子郵件。
+
++
+[listing]
+----
+{
+   "Records":[
+      {
+         "eventVersion":"2.0",
+         "eventSource":"sgws:s3",
+         "eventTime":"2017-08-08T23:52:38Z",
+         "eventName":"ObjectCreated:Put",
+         "userIdentity":{
+            "principalId":"1111111111111111111"
+         },
+         "requestParameters":{
+            "sourceIPAddress":"193.51.100.20"
+         },
+         "responseElements":{
+            "x-amz-request-id":"122047343"
+         },
+         "s3":{
+            "s3SchemaVersion":"1.0",
+            "configurationId":"Image-created",
+            "bucket":{
+               "name":"test1",
+               "ownerIdentity":{
+                  "principalId":"1111111111111111111"
+               },
+               "arn":"arn:sgws:s3:::test1"
+            },
+            "object":{
+               "key":"images/cat.jpg",
+               "size":0,
+               "eTag":"d41d8cd98f00b204e9800998ecf8427e",
+               "sequencer":"14D90402421461C7"
+            }
+         }
+      }
+   ]
+}
+----
++
+如果目的地主題收到了通知，則表示您已成功設定 StorageGRID 通知的來源儲存桶。
+
+
+
+
+
+.相關資訊
+* link:understanding-notifications-for-buckets.html["了解儲存桶的通知"]
+* link:../s3/index.html["使用 S3 REST API"]
+* link:creating-platform-services-endpoint.html["${post_edited_translations.segment}"]
+

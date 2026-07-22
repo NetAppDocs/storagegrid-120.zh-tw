@@ -1,0 +1,52 @@
+---
+permalink: network/general-networking-requirements.html 
+sidebar: sidebar 
+keywords: networking requirements, storagegrid networks 
+summary: 所有 StorageGRID 部署都必須能夠支援以下連線。 
+---
+= StorageGRID 的一般網路需求
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+所有 StorageGRID 部署都必須能夠支援以下連線。
+
+${post_edited_translations.segment}
+
+* *管理連線*：系統管理員到節點的傳入連線，通常透過 SSH 進行。透過 Web 瀏覽器存取 Grid Manager、Tenant Manager 和 StorageGRID Appliance Installer。
+* ${post_edited_translations.segment}
++
+主要管理節點必須至少能夠連線到一個 NTP 伺服器。
+
+* *DNS 伺服器連線*：傳出 UDP 連線，接收傳入 UDP 回應。
+* *LDAP/Active Directory 伺服器連線*：來自儲存節點上的身分識別服務的輸出 TCP 連線。
+* *AutoSupport*：從管理節點到 `support.netapp.com`或客戶設定的 Proxy 的輸出 TCP 連線。
+* *外部金鑰管理伺服器*：每個已啟用節點加密的應用裝置節點的輸出 TCP 連線。
+* 來自 S3 用戶端的輸入 TCP 連線。
+* 來自 StorageGRID 平台服務（例如 CloudMirror 複寫）或來自 Cloud Storage Pools 的輸出要求。
+
+
+如果 StorageGRID 無法使用預設路由規則聯絡任何已設定的 NTP 或 DNS 伺服器，只要指定了 DNS 和 NTP 伺服器的 IP 位址，它就會自動嘗試在所有網路（Grid、Admin 和 Client）上進行連線。如果可以透過任何網路存取 NTP 或 DNS 伺服器，StorageGRID 將自動建立額外的路由規則，以確保所有後續的連線嘗試都使用該網路。
+
+
+TIP: 雖然您可以使用這些自動探索的主機路由，但通常您應該手動設定 DNS 和 NTP 路由，以確保在自動探索失敗時仍能保持連線。
+
+如果您在部署期間尚未準備好設定選購的管理網路和用戶端網路，則可以在組態步驟中核准網格節點時設定這些網路。此外，您也可以在安裝完成後使用「變更 IP」工具（請參閱 link:../maintain/configuring-ip-addresses.html["${post_edited_translations.segment}"]）設定這些網路。
+
+
+
+[[connections-for-admin-nodes-and-gateway-nodes]]
+== 管理節點和閘道節點的連線
+
+管理節點必須始終受到保護，以防止不受信任的用戶端（例如開放網際網路上的用戶端）存取。您必須確保任何不受信任的用戶端都無法存取網格網路、管理網路或用戶端網路上的任何管理節點。
+
+您計劃新增至高可用度群組的 Admin 節點和 Gateway 節點必須設定靜態 IP 位址。請參閱 link:../admin/managing-high-availability-groups.html["管理高可用度群組"]。
+
+
+
+[[using-network-address-translation-nat]]
+== 使用網路位址轉換（NAT）
+
+請勿在網格節點之間或 StorageGRID 站點之間使用網路位址轉換 （NAT）。當您為網格網路使用私有 IPv4 位址時，這些位址必須能夠從每個站點的每個網格節點直接路由。但是，如有需要，您可以在外部用戶端和網格節點之間使用 NAT，例如為閘道節點提供公用 IP 位址。只有當您使用對網格中所有節點透明的通道應用程式時，才支援使用 NAT 來橋接公共網路區段，這表示網格節點無需了解公用 IP 位址。

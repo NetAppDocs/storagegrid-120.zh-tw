@@ -1,0 +1,73 @@
+---
+permalink: maintain/monitoring-services-appliance-installation.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, appliance 
+summary: StorageGRID 應用裝置安裝程式會提供狀態，直到安裝完成為止。軟體安裝完成後，應用裝置會重新開機。 
+---
+= 監控 StorageGRID 服務應用裝置安裝
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 應用裝置安裝程式會提供狀態，直到安裝完成為止。軟體安裝完成後，應用裝置會重新開機。
+
+.步驟
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
++
+藍色狀態列表示目前正在進行的工作。綠色狀態列表示已成功完成的工作。
+
++
+
+NOTE: 安裝程式會確保不會重新執行先前安裝中已完成的工作。如果您正在重新執行安裝，任何不需要重新執行的工作都會顯示綠色狀態列，且狀態為「已跳過」。
+
+. 檢閱前兩個安裝階段的進度。
++
+** *1.設定儲存設備*
++
+${post_edited_translations.segment}
+
+** *2.安裝作業系統*
++
+${post_edited_translations.segment}
+
+
+
+. 持續監控安裝進度，直到出現以下情況之一：
++
+** ${post_edited_translations.segment}
+** 對於應用裝置主管理節點，會出現第五階段（載入 StorageGRID 安裝程式）。如果第五階段持續超過 10 分鐘，請手動重新整理頁面。
+
+
+. 前往您正在恢復的應用裝置網格節點類型的恢復程序的下一步。
++
+[cols="1a,2a"]
+|===
+| ${post_edited_translations.segment} | 參考 
+
+
+ a| 
+閘道節點
+ a| 
+link:selecting-start-recovery-to-configure-gateway-node.html["選擇「開始恢復」以設定閘道節點"]
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+link:selecting-start-recovery-to-configure-non-primary-admin-node.html["${post_edited_translations.segment}"]
+
+
+
+ a| 
+主管理節點
+ a| 
+link:configuring-replacement-primary-admin-node.html["${post_edited_translations.segment}"]
+
+|===
+

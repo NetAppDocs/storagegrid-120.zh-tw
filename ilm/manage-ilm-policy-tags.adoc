@@ -1,0 +1,71 @@
+---
+permalink: ilm/manage-ilm-policy-tags.html 
+sidebar: sidebar 
+keywords: ILM policy tag 
+summary: 您可以檢視 ILM 原則標籤詳情、編輯標籤或移除標籤。 
+---
+= 在 StorageGRID 中管理 ILM 原則標籤
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以檢視 ILM 原則標籤詳情、編輯標籤或移除標籤。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["所需存取權限"]。
+
+
+
+
+[[view-ilm-policy-tag-details]]
+== 檢視 ILM 原則標籤詳細資料
+
+若要檢視標籤的詳細資訊：
+
+. 選擇 *ILM* > *原則標籤*。
+. 從表格中選擇原則名稱。標籤的詳細資訊頁面隨即顯示。
+. ${post_edited_translations.segment}
+. 選取原則即可檢視。
+
+
+
+
+[[edit-ilm-policy-tag]]
+== 編輯 ILM 原則標籤
+
+
+NOTE: 標籤名稱和執行摘要對租戶可見。請選擇有助於租戶在選擇要指派給其儲存桶的原則標籤時做出明智決策的值。例如，如果指派的原則會在一段時間後刪除物件，您可以在執行摘要中說明這一點。請勿在這些欄位中包含敏感資訊。
+
+若要編輯現有標籤的執行摘要：
+
+. 選擇 *ILM* > *原則標籤*。
+. 選取標籤的核取方塊，然後選取 *Edit*。
++
+或者，選取標籤的名稱。此時會出現該標籤的詳細資料頁面，您可以在該頁面上選取 * 編輯 *。
+
+. 根據需要修改標籤執行摘要
+. 選取 *Save* 。
+
+
+
+
+[[remove-ilm-policy-tag]]
+== 移除 ILM 原則標籤
+
+移除原則標籤後，所有指派了該標籤的儲存桶都會套用預設原則。
+
+若要移除標籤：
+
+. 選擇 *ILM* > *原則標籤*。
+. 選取標籤對應的核取方塊，然後選取*移除*。此時會出現確認對話框。
++
+或者，選擇標籤名稱。此時會顯示該標籤的詳細資訊頁面，您可以在該頁面上選擇*移除*。
+
+. 選擇 *Yes* 以刪除標籤。
+
+
+.相關資訊
+link:creating-ilm-policy.html#activate-ilm-policy["了解如何建立 ILM 原則標籤"]

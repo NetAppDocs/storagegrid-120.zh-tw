@@ -1,0 +1,25 @@
+---
+permalink: monitor/viewing-ilm-tab.html 
+sidebar: sidebar 
+keywords: ilm tab 
+summary: ${post_edited_translations.segment} 
+---
+= 檢視 StorageGRID ILM 索引標籤
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+每個儲存節點、每個站點以及整個網格都會顯示 ILM 標籤。對於每個站點和網格，ILM 標籤都會顯示 ILM 佇列隨時間變化的圖表。對於網格，此標籤還會提供完成所有物件完整 ILM 掃描的預計時間。
+
+對於儲存節點，ILM 索引標籤提供有關銷毀編碼物件的 ILM 評估和背景驗證的詳細資訊。
+
+image:nodes_page_ilm_tab.png["${post_edited_translations.segment}"]
+
+.相關資訊
+* link:monitoring-information-lifecycle-management.html["監控資訊生命週期管理"] Standard Traditional Chinese translation. No explanation needed. Only the tag is returned. link:monitoring-information-lifecycle-management.html["監控資訊生命週期管理"]_
+* link:../admin/index.html["管理 StorageGRID"]_
+

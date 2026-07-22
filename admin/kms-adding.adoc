@@ -1,0 +1,157 @@
+---
+permalink: admin/kms-adding.html 
+sidebar: sidebar 
+keywords: add kms, key management server 
+summary: 您可以使用 StorageGRID 金鑰管理伺服器精靈來新增每個 KMS 或 KMS 叢集。 
+---
+= 在 StorageGRID 中新增金鑰管理伺服器
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 StorageGRID 金鑰管理伺服器精靈來新增每個 KMS 或 KMS 叢集。
+
+.開始之前
+* 您已審閱 link:kms-considerations-and-requirements.html["${post_edited_translations.segment}"]。
+* 您已link:kms-configuring-storagegrid-as-client.html["在 KMS 中將 StorageGRID 設定為用戶端"]，且擁有每個 KMS 或 KMS 叢集所需的資訊。
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.關於此任務
+如果可能，請在設定適用於所有未由其他 KMS 管理的站台的預設 KMS 之前，先設定任何站台專屬的金鑰管理伺服器。如果您先建立預設 KMS，則網格中所有節點加密的應用裝置都將由預設 KMS 加密。如果您稍後想要建立站台專屬的 KMS，則必須先將目前版本的加密金鑰從預設 KMS 複製到新的 KMS。如需詳細資訊，請參閱 link:kms-considerations-for-changing-for-site.html["更改網站 KMS 的注意事項"]。
+
+
+
+[[step-1-kms-details]]
+== 步驟 1：KMS 詳細資料
+
+在「新增金鑰管理伺服器」精靈的步驟 1（KMS 詳細資料）中，您可以提供有關 KMS 或 KMS 叢集的詳細資訊。
+
+.步驟
+. 選擇 *組態* > *安全性* > *金鑰管理伺服器*。
++
+金鑰管理伺服器頁面隨即顯示，並已選取「組態詳細資料」索引標籤。
+
+. 選擇 *Create* 。
++
+「新增金鑰管理伺服器」精靈的步驟 1（KMS 詳細資料）隨即出現。
+
+. 請輸入您在 KMS 中設定的 KMS 和 StorageGRID 用戶端的以下資訊。
++
+[cols="1a,2a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+KMS 名稱
+ a| 
+用於協助您識別此 KMS 的描述性名稱。長度必須介於 1 到 64 個字元之間。
+
+
+
+ a| 
+金鑰名稱
+ a| 
+KMS 中 StorageGRID 用戶端的確切金鑰別名。長度必須介於 1 到 255 個字元之間。
+
+*注意*：如果您尚未使用 KMS 產品建立金鑰，系統將提示您讓 StorageGRID 建立金鑰。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+將與此 KMS 關聯的 StorageGRID 站台。如果可能，您應在設定適用於所有未由其他 KMS 管理之站台的預設 KMS 之前，先設定任何特定站台的金鑰管理伺服器。
+
+** 如果此 KMS 將管理特定網站上應用裝置節點的加密金鑰，請選擇該網站。
+** 選擇「未由其他 KMS 管理的網站（預設 KMS）」以設定預設 KMS，該預設 KMS 將套用於任何沒有專用 KMS 的網站以及您在後續擴充中新增的任何網站。
++
+*注意：* 如果您選擇了先前由預設 KMS 加密的站台，但未向新 KMS 提供原始加密金鑰的目前版本，則在儲存 KMS 組態時將發生驗證錯誤。
+
+
+
+
+
+ a| 
+連接埠
+ a| 
+KMS 伺服器用於金鑰管理互通協定 (KMIP) 通訊的連接埠。預設值為 5696，這是 KMIP 標準連接埠。
+
+
+
+ a| 
+主機名稱
+ a| 
+KMS 的完整網域名稱或 IP 位址。
+
+* 附註：* 伺服器憑證的主體替代名稱 （SAN） 欄位必須包含您在此處輸入的 FQDN 或 IP 位址。否則， StorageGRID 將無法連線至 KMS 或 KMS 叢集中的所有伺服器。
+
+|===
+. 如果您正在設定 KMS 叢集，請選擇 *新增另一個主機名稱* 為叢集中的每個伺服器新增主機名稱。
+. 選擇 *Continue* 。
+
+
+
+
+[[step-2-upload-server-certificate]]
+== 步驟 2：上傳伺服器憑證
+
+在「新增金鑰管理伺服器」精靈的步驟 2（上傳伺服器憑證）中，您需要上傳 KMS 的伺服器憑證（或憑證套裝組合）。伺服器憑證允許外部 KMS 向 StorageGRID 進行驗證。
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+伺服器憑證中繼資料隨即顯示。
+
++
+
+NOTE: 如果您上傳了憑證套裝組合，則每個憑證的中繼資料將顯示在各自的標籤頁中。
+
+. 選擇 *Continue* 。
+
+
+
+
+[[sg-create-keystep-3-upload-client-certificates]]
+== ${post_edited_translations.segment}
+
+在「新增金鑰管理伺服器」精靈的步驟 3 （ 上傳用戶端憑證 ） 中，您要上傳用戶端憑證和用戶端憑證私有金鑰。用戶端憑證可讓 StorageGRID 向 KMS 進行自我驗證。
+
+.步驟
+. ${post_edited_translations.segment}
+. 上傳用戶端憑證檔案。
++
+用戶端憑證中繼資料隨即顯示。
+
+. 瀏覽至用戶端憑證私密金鑰所在的位置。
+. 上傳私鑰檔案。
+. 選擇 *Test and save*。
++
+如果金鑰不存在，系統會提示您讓 StorageGRID 建立一個金鑰。
+
++
+金鑰管理伺服器與應用裝置節點之間的連線已完成測試。如果所有連線均有效，並且在 KMS 中找到正確的加密金鑰，則新的金鑰管理伺服器將新增至「金鑰管理伺服器」頁面上的表格中。
+
++
+
+NOTE: 新增 KMS 後，金鑰管理伺服器頁面上的憑證狀態會立即顯示為「未知」。StorageGRID 可能需要長達 30 分鐘才能取得每個憑證的實際狀態。您必須重新整理網頁瀏覽器才能查看目前狀態。
+
+. 如果在選取 *Test and save* 時出現錯誤訊息，請審查訊息詳細資料，然後選取 *OK*。
++
+例如，如果連線測試失敗，您可能會收到 422：Unprocessable Entity 錯誤。
+
+. 如果您需要在不測試外部連線的情況下儲存目前組態，請選擇「強制儲存」。
++
+
+CAUTION: 選擇「強制儲存」會儲存 KMS 組態，但不會測試每個應用裝置到該 KMS 的外部連線。如果組態有問題，您可能無法重新開機受影響網站上已啟用節點加密的應用裝置節點。在問題解決之前，您可能無法存取您的資料。
+
+. 審查確認警告，如果您確定要強制儲存組態，請選擇「確定」。
++
+KMS 組態已儲存，但與 KMS 的連線尚未測試。
+
+

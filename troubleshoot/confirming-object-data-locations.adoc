@@ -1,0 +1,57 @@
+---
+permalink: troubleshoot/confirming-object-data-locations.html 
+sidebar: sidebar 
+keywords: how to confirm object location, object metadata lookup 
+summary: 根據具體問題，您可能需要確認物件資料的儲存位置。例如，您可能需要驗證 ILM 原則是否如預期運行，以及物件資料是否儲存在預期位置。 
+---
+= 確認 StorageGRID 中的物件資料位置
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+根據具體問題，您可能需要link:../audit/object-ingest-transactions.html["確認物件資料的儲存位置。"]。例如，您可能需要驗證 ILM 原則是否如預期般運行，以及物件資料是否儲存在預期的位置。
+
+.開始之前
+* 您必須提供一個物件識別碼，可以是下列其中之一：
++
+** *UUID*：物件的通用唯一識別碼。請輸入全部大寫的 UUID。
+** *CBID*：物件在 StorageGRID 中的唯一識別碼。您可以從稽核日誌中取得物件的 CBID。請輸入全部大寫的 CBID。
+** *S3 bucket 和物件金鑰*：當透過 link:../s3/operations-on-objects.html["S3 介面"] 擷取物件時，用戶端應用程式使用 bucket 和物件金鑰的組合來儲存和識別該物件。
+
+
+
+
+.步驟
+. 選擇 *ILM* > *物件中繼資料查找*。
+. 在 *Identifier* 欄位中輸入物件的識別碼。
++
+您可以輸入 UUID、CBID 或 S3 儲存桶/物件鍵。
+
+. 如果要尋找物件的特定版本，請輸入版本 ID（選用）。
++
+image:object_lookup.png["物件查詢頁面"]
+
+. 選擇 *Look Up*。
++
+link:../ilm/verifying-ilm-policy-with-object-metadata-lookup.html["物件中繼資料查找結果"] 隨即出現。此頁面列出下列類型的資訊：
+
++
+** 系統中繼資料，包括物件 ID （UUID）、版本 ID （選用）、物件名稱、Container 名稱、租戶帳戶名稱或 ID、物件的邏輯大小、物件首次建立的日期和時間，以及物件上次修改的日期和時間。
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** 對於銷毀編碼物件複本，每個片段的目前儲存設備位置。
+** ${post_edited_translations.segment}
+** 對於分段物件和多部分物件，為物件分段清單，包括分段識別碼和資料大小。對於超過 100 個分段的物件，僅顯示前 100 個分段。
+** 所有未處理之內部儲存設備格式的物件中繼資料。此原始中繼資料包含無法保證在各版本之間持續保留的內部系統中繼資料。
++
+以下範例顯示儲存為兩個複寫複本的 S3 測試物件的物件中繼資料查詢結果。
+
+
+
++
+image:object_lookup_results.png["物件查詢結果"]
+
+

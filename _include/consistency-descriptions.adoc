@@ -1,0 +1,28 @@
+= 
+:allow-uri-read: 
+
+
+* *全部*：所有節點立即接收物件中繼資料，否則要求將失敗。
+* *Strong-global*：保證所有站台上所有用戶端請求的寫入後讀取一致性。設定 Quorum 語意後，將套用以下行為：
++
+** 當網格具有三個或更多站台時，允許用戶端要求具有站台故障容許度。雙站台網格將不具備站台故障容許度。
+** 如果其中一個站台停機，以下 S3 作業將無法成功：
++
+*** DeleteBucketEncryption
+*** PutBucketBranch
+*** PutBucketEncryption
+*** PutBucketVersioning
+*** PutObjectLegalHold
+*** PutObjectLockConfiguration
+*** PutObjectRetention
+
+
+
+
++
+如果需要，您可以 https://kb.netapp.com/hybrid/StorageGRID/Object_Mgmt/Configuring_StorageGRID_quorum_semantics_for_strong-global_consistency["${post_edited_translations.segment}"^]。
+
+* *Strong-site*：物件中繼資料會立即分發至站台內的其他節點。保證站台內所有用戶端請求的寫後讀一致性。
+* *Read-after-new-write*：為新物件提供寫入後讀取一致性，並為物件更新提供最終一致性。提供高可用度和資料保護保證。建議在大多數情況下使用。
+* *Available*：為新物件和物件更新提供最終一致性。對於 S3 儲存貯體，請僅在需要時使用（例如，對於包含極少讀取之記錄值的儲存貯體，或針對不存在的金鑰進行 HEAD 或 GET 作業）。不支援 S3 FabricPool 儲存貯體。
+

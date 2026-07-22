@@ -1,0 +1,75 @@
+---
+permalink: admin/use-api-if-sso-is-enabled-entra-id.html 
+sidebar: sidebar 
+keywords: how to access storagegrid API if SSO is enabled with Entra ID 
+summary: ${post_edited_translations.segment} 
+---
+= 如果啟用了單一登入 （Entra ID），請使用 StorageGRID API
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您有 link:../admin/how-sso-works.html["${post_edited_translations.segment}"] 且使用 Entra ID 作為 SSO 供應商，您可以使用兩個範例指令碼來取得適用於 Grid Management API 或 Tenant Management API 的有效驗證權杖。
+
+
+
+[[sign-in-to-the-api-if-entra-id-single-sign-on-is-enabled]]
+== 如果已啟用 Entra ID 單一登入，請登入 API。
+
+如果您使用 Entra ID 作為 SSO 身分供應商，則適用以下說明。
+
+.開始之前
+* 您知道屬於 StorageGRID 使用者群組的聯合使用者的 SSO 電子郵件地址和密碼。
+* 如果您想存取租戶管理 API，您需要知道租戶帳戶 ID。
+
+
+.關於此任務
+若要取得驗證權杖，可以使用下列範例指令碼：
+
+* The `storagegrid-ssoauth-azure.py` Python 指令碼
+* The `storagegrid-ssoauth-azure.js` Node.js 指令碼
+
+
+這兩個指令碼都位於 StorageGRID 安裝檔案目錄中（RHEL 為 (`./rpms`，Ubuntu 或 Debian 為  `./debs`，VMware 則為  `./vsphere`）。
+
+若要撰寫您自己與 Entra ID 的 API 整合，請參閱 `storagegrid-ssoauth-azure.py`指令碼。這個 Python 指令碼直接向 StorageGRID 發出兩個請求（第一個請求用於取得 SAMLRequest，第二個請求用於取得授權權杖），同時也呼叫 Node.js 指令碼與 Entra ID 互動以執行 SSO 操作。
+
+SSO 作業可以使用一系列 API 要求來執行，但這樣做並不簡單。Puppeteer Node.js 模組可用於抓取 Entra ID SSO 介面。
+
+如果遇到 URL 編碼問題，您可能會看到以下錯誤： `Unsupported SAML version`。
+
+.步驟
+. 依下列步驟安裝所需的相依性：
++
+.. 安裝 Node.js（請參閱 https://nodejs.org/en/download/["https://nodejs.org/en/download/"^]）。
+.. 安裝所需的 Node.js 模組（puppeteer 和 jsdom）：
++
+`npm install -g <module>`
+
+
+
+. ${post_edited_translations.segment}
++
+然後，Python 指令碼將呼叫對應的 Node.js 指令碼來執行 Entra ID SSO 互動。
+
+. 出現提示時，請輸入以下參數的值（或使用參數傳遞它們）：
++
+** 用於登入 Entra ID 的 SSO 電子郵件地址
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+
+
+. 出現提示時，輸入密碼，並準備好在 Entra ID 要求時提供 MFA 授權。
++
+image:sso_api_password_mfa.png["提示輸入密碼和 MFA"]
+
++
+
+NOTE: 該指令碼假定使用 Microsoft Authenticator 進行多因素驗證 （MFA）。您可能需要修改指令碼以支援其他形式的 MFA （例如輸入透過簡訊收到的驗證碼）。
+
++
+StorageGRID 授權權杖已在輸出中提供。現在，您可以像未使用 SSO 時使用 API 一樣，使用此權杖發出其他請求。
+
+

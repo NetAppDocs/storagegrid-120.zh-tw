@@ -1,0 +1,146 @@
+---
+permalink: maintain/changing-ip-addresses-and-mtu-values-for-all-nodes-in-grid.html 
+sidebar: sidebar 
+keywords: storagegrid, node ip address, change node ip, change node ip address, changing node ip, changing node ip address 
+summary: 如果您需要變更網格中所有節點的 Grid Network IP 位址，則必須遵循此特殊步驟。您不能使用變更單一節點的步驟來變更整個網格的 Grid Network IP 位址。 
+---
+= 更改 StorageGRID 網格中所有節點的 IP 位址
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您需要變更網格中所有節點的 Grid Network IP 位址，則必須遵循此特殊步驟。您不能使用變更單一節點的步驟來變更整個網格的 Grid Network IP 位址。
+
+.開始之前
+* 您擁有  `Passwords.txt` 檔案。
+
+
+為確保網格成功啟動，必須同時進行所有變更。
+
+
+NOTE: 此步驟僅適用於 Grid Network。您不能使用此步驟變更管理網路或用戶端網路上的 IP 位址。
+
+如果您只想變更單一站台節點的 IP 位址和 MTU，請按照 link:changing-nodes-network-configuration.html["${post_edited_translations.segment}"] 說明進行操作。
+
+.步驟
+. 提前規劃好需要在「變更 IP」工具之外進行的變更，例如 DNS 或 NTP 的變更，以及單一登入 （SSO） 組態的變更（如果使用）。
++
+
+NOTE: 如果現有 NTP 伺服器在新 IP 位址上無法供網格存取，請在執行 change-ip 程序之前新增新的 NTP 伺服器。
+
++
+
+NOTE: ${post_edited_translations.segment}
+
++
+
+NOTE: 如果您的 StorageGRID 系統啟用了 SSO，並且任何信賴方信任關係都是使用管理節點 IP 位址（而不是建議的完整網域名稱）設定的，請在變更 IP 位址後，立即在 Active Directory Federation Services （AD FS） 中更新或重新設定這些信賴方信任關係。請參閱link:../admin/configure-sso.html["設定單一登入"]。
+
++
+
+NOTE: 如有必要，請為新的 IP 位址新增新的子網路。
+
+. 預設情況下，外部 SSH 存取會遭到封鎖。如有需要，link:../admin/manage-external-ssh-access.html["暫時允許存取"]。
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+
+
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+. 輸入以下命令啟動 Change IP 工具： `change-ip`
+. 依照提示輸入配置密碼。
++
+主選單出現。預設情況下， `Selected nodes`欄位設定為 `all`。
+
++
+image:change_ip_tool_main_menu.png["快照顯示變更 IP 工具的歡迎畫面"]
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
++
+編輯 DHCP 設定介面的 IP 位址、前綴長度、閘道或 MTU 會將該介面變更為靜態。每個由 DHCP 設定的介面之前都會顯示警告。
+
++
+設定為 `fixed`的介面無法編輯。
+
+.. 若要設定新值，請按目前值顯示的格式輸入。
+.. 編輯完所有要變更的節點後，輸入 *q* 返回主選單。
++
+${post_edited_translations.segment}
+
+
+
+. 請選擇下列其中一個選項來審查您的變更：
++
+** *5*：在輸出結果中顯示編輯內容，並以隔離的方式僅顯示已變更的項目。變更內容以綠色（新增）或紅色（刪除）醒目提示，如範例輸出所示：
++
+image:change_ip_tool_edit_ip_mask_sample_output.png["快照由周圍文字描述"]
+
+** *6*：在顯示完整組態的輸出中顯示編輯內容。變更以綠色（新增）或紅色（刪除）突出顯示。
++
+
+NOTE: 某些命令列介面可能會使用刪除線格式顯示新增和刪除的內容。正確顯示取決於您的終端機用戶端是否支援必要的 VT100 轉義序列。
+
+
+
+. 選擇選項 *7* 以驗證所有變更。
++
+此驗證可確保網格網路的規則（例如不使用重疊子網路）不會遭到違反。
+
++
+${post_edited_translations.segment}
+
++
+image:change_ip_tool_validate_sample_error_messages.gif["快照由周圍文字描述"]
+
++
+在此範例中，驗證已通過。
+
++
+image:change_ip_tool_validate_sample_passed_messages.gif["快照由周圍文字描述"]
+
+. 驗證通過後，選取 *10* 以套用新的網路組態。
+. ${post_edited_translations.segment}
++
+
+NOTE: 您必須選擇 *stage*。請勿執行滾動重新啟動，無論是手動重新啟動還是選擇 *apply* 而不是 *stage*；否則網格將無法成功啟動。
+
+. 更改完成後，選擇 *0* 以結束「變更 IP」工具。
+. ${post_edited_translations.segment}
++
+
+NOTE: ${post_edited_translations.segment}
+
+. 進行必要的實體或虛擬連網變更。
+. 確認所有網格節點均已關閉。
+. 打開所有節點的電源。
+. ${post_edited_translations.segment}
++
+.. 如果您新增了新的 NTP 伺服器，請刪除舊的 NTP 伺服器值。
+.. 如果您新增了新的 DNS 伺服器，請刪除舊的 DNS 伺服器值。
+
+
+. ${post_edited_translations.segment}
++
+.. 選擇 *Maintenance* > *System* > *Recovery package*。
+.. 請輸入佈建密碼。
+
+
+. 如果您已允許外部 SSH 存取，請在完成變更 IP 位址時link:../admin/manage-external-ssh-access.html["區塊存取"]。
+
+
+.相關資訊
+* link:adding-to-or-changing-subnet-lists-on-grid-network.html["${post_edited_translations.segment}"]
+* link:shutting-down-grid-node.html["關閉網格節點"]
+

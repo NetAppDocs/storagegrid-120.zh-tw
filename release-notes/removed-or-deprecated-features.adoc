@@ -1,0 +1,238 @@
+---
+permalink: release-notes/removed-or-deprecated-features.html 
+sidebar: sidebar 
+keywords:  
+summary: 了解 StorageGRID 12.0 中已移除或棄用的功能和特性。升級前，請檢查已移除或棄用的功能是否會影響您的用戶端應用程式或網格配置。 
+---
+= StorageGRID 中已移除或已棄用的功能
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+了解 StorageGRID 12.0 中已移除或棄用的功能和特性。升級前，請檢查已移除或棄用的功能是否會影響您的用戶端應用程式或網格配置。
+
+
+
+[[definitions]]
+== 定義
+
+已棄用:: 此功能 *不應* 用於新的生產環境。現有的生產環境可以繼續使用此功能。
+生命週期結束:: 最後一個支援該功能的已發布版本。在某些情況下，該功能的文件可能會在此階段移除。
+已移除:: 第一個*不支援*該功能的版本。
+
+
+
+
+[[storagegrid-end-of-feature-support]]
+== StorageGRID 功能支援終止
+
+已棄用的功能將在 N+2 個主要版本中移除。例如，如果某個功能在版本 N （例如 6.3） 中被棄用，那麼該功能存在的最後一個版本是 N+1 （例如 6.4）。版本 N+2 （例如 6.5） 是產品中首次不再包含該功能的版本。
+
+如需更多資訊，請參閱 https://mysupport.netapp.com/site/info/version-support["軟體版本支援頁面"^]。
+
+
+NOTE: 在某些情況下，NetApp 可能會比預期更早停止對特定功能的支援。
+
+[cols="2a,1a,1a,1a,3a"]
+|===
+| 功能 | 已棄用 | 生命週期結束 | 已移除 | 舊版文件的連結 
+
+
+ a| 
+警報，舊版（_非警示_）
+ a| 
+11.7
+ a| 
+11.8
+ a| 
+11.9
+ a| 
+https://docs.netapp.com/us-en/storagegrid-118/monitor/alarms-reference.html["${post_edited_translations.segment}"^]
+
+
+
+ a| 
+歸檔節點支援
+ a| 
+11.7
+ a| 
+11.8
+ a| 
+11.9
+ a| 
+https://docs.netapp.com/us-en/storagegrid-118/maintain/considerations-for-decommissioning-admin-or-gateway-nodes.html["歸檔節點退役注意事項（StorageGRID 11.8）"^]
+
+*注意*：在開始升級之前，您必須：
+
+. 停用所有歸檔節點。參見 https://docs.netapp.com/us-en/storagegrid-118/maintain/grid-node-decommissioning.html["網格節點退役（StorageGRID 11.8 文件網站）"^]。
+. 從儲存設備池和 ILM 原則中移除所有 Archive 節點參照。請參閱 https://kb.netapp.com/hybrid/StorageGRID/Maintenance/StorageGRID_11.9_software_upgrade_resolution_guide["NetApp 知識庫：StorageGRID 11.9 軟體升級解決方案指南"^]。
+
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+11.1
+ a| 
+11.6
+ a| 
+11.7
+ a| 
+
+
+
+ a| 
+CLB 服務
+ a| 
+11.4
+ a| 
+11.6
+ a| 
+11.7
+ a| 
+
+
+
+ a| 
+Docker container 引擎
+ a| 
+11.8
+ a| 
+11.9
+ a| 
+待定
+ a| 
+已棄用 Docker 作為純軟體部署的 Container 引擎。Docker 將在未來的版本中被其他 Container 引擎取代。請參閱link:../swnodes/software-requirements.html["基於軟體的節點的軟體需求"]以取得目前支援的 Docker 版本清單。
+
+
+
+ a| 
+電子郵件設定（舊版）
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+12.1
+ a| 
+https://docs.netapp.com/us-en/storagegrid-118/monitor/managing-alarms.html#configure-notifications-for-alarms-legacy-system["設定警報通知（舊系統）（StorageGRID 11.8）"^]
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+11.8
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+https://docs.netapp.com/us-en/storagegrid-118/admin/configuring-audit-client-access.html["${post_edited_translations.segment}"^]
+
+
+
+ a| 
+連接埠重映射
+ a| 
+12.0
+ a| 
+12.1
+ a| 
+12.2
+ a| 
+
+
+
+ a| 
+Swift API 支援
+ a| 
+11.7
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+https://docs.netapp.com/us-en/storagegrid-118/swift/index.html["${post_edited_translations.segment}"^]
+
+
+
+ a| 
+RHEL 8.8
+ a| 
+11.9
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+
+
+
+ a| 
+RHEL 9.0
+ a| 
+11.9
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+
+
+
+ a| 
+RHEL 9.2
+ a| 
+11.9
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+
+
+
+ a| 
+Ubuntu 18.04
+ a| 
+11.9
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+
+
+
+ a| 
+Ubuntu 20.04
+ a| 
+11.9
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+
+
+
+ a| 
+Debian 11
+ a| 
+11.9
+ a| 
+11.9
+ a| 
+12.0
+ a| 
+
+|===
+另請參閱：
+
+* link:changes-to-grid-management-api.html["網格管理 API 的變更"]
+* link:changes-to-tenant-management-api.html["租戶管理 API 的變更"]
+

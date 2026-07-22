@@ -1,0 +1,31 @@
+= 
+:allow-uri-read: 
+
+
+.步驟
+. 在每台主機上執行以下命令：
++
+[listing]
+----
+sudo systemctl enable storagegrid
+sudo systemctl start storagegrid
+----
+. 執行以下命令以確保部署正在進行中：
++
+[listing]
+----
+sudo storagegrid node status node-name
+----
+. 如果任何節點傳回「Not Running」或「Stopped」狀態，請執行以下命令：
++
+[listing]
+----
+sudo storagegrid node start node-name
+----
+. ${post_edited_translations.segment}
++
+[listing]
+----
+sudo systemctl reload-or-restart storagegrid
+----
+

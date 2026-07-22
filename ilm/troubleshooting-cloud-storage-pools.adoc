@@ -1,0 +1,171 @@
+---
+permalink: ilm/troubleshooting-cloud-storage-pools.html 
+sidebar: sidebar 
+keywords: cloud storage pool, troubleshoot 
+summary: ${post_edited_translations.segment} 
+---
+= 疑難排解 StorageGRID 中的雲端儲存資源池
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+
+[[determine-if-an-error-has-occurred]]
+== 確定是否發生錯誤
+
+StorageGRID 會透過讀取已知物件 `x-ntap-sgws-cloud-pool-uuid`，對每個 Cloud Storage Pool 進行簡單的資訊健檢，以確保可以存取 Cloud Storage Pool 且其運作正常。當 StorageGRID 在端點上遇到錯誤時，它會每分鐘從每個 Storage Node 進行一次資訊健檢。當問題解決後，資訊健檢就會停止。如果資訊健檢偵測到問題，系統會在 Storage pools 頁面的 Cloud Storage Pools 表格中的 Last error 欄位中顯示一條訊息。
+
+此表格顯示每個 Cloud Storage Pool 偵測到的最新錯誤，並指出錯誤發生的時間。
+
+此外，如果資訊健檢偵測到在過去 5 分鐘內發生了一或多個新的 Cloud Storage Pool 錯誤，則會觸發 *Cloud Storage Pool connectivity error* 警示。如果您收到此警示的電子郵件通知，請前往 Storage pools 頁面（選擇 *ILM* > *Storage pools*），審查 Last error 欄位中的錯誤訊息，並參閱下方的疑難排解指南。
+
+
+
+[[check-if-an-error-has-been-resolved]]
+== 檢查錯誤是否已解決
+
+解決任何基礎問題之後，您可以確定錯誤是否已解決。從「雲端儲存池」頁面中，選取端點，然後選取 *清除錯誤*。確認訊息表示 StorageGRID 已清除雲端儲存池的錯誤。
+
+如果根本問題已解決，則不再顯示錯誤訊息。但是，如果根本問題尚未解決（或遇到其他錯誤），則錯誤訊息將在幾分鐘內顯示在「上次錯誤」欄中。
+
+
+
+[[error-health-check-failed-error-from-endpoint]]
+== 錯誤：資訊健檢失敗。來自端點的錯誤
+
+當您開始將 Amazon S3 儲存桶用於雲端儲存池之後，為 Amazon S3 儲存桶啟用具有預設保留的 S3 物件鎖定時，可能會遇到此錯誤。當 PUT 操作缺少含有有效負載 Checksum 值（例如 `Content-MD5`）的 HTTP 標頭時，就會發生此錯誤。AWS 要求對已啟用 S3 物件鎖定的儲存桶執行 PUT 操作時，必須包含此標頭值。
+
+若要解決此問題，請按照 link:editing-cloud-storage-pool.html["${post_edited_translations.segment}"] 中的步驟操作，無需進行任何變更。此行動將觸發 Cloud Storage Pool 組態的驗證，該驗證會自動偵測並更新 Cloud Storage Pool 端點組態上的 S3 Object Lock 標誌。
+
+
+
+[[error-this-cloud-storage-pool-contains-unexpected-content]]
+== ${post_edited_translations.segment}
+
+當您嘗試建立、編輯或刪除 Cloud Storage Pool 時，可能會遇到此錯誤。如果 bucket 或 container 包含  `x-ntap-sgws-cloud-pool-uuid` 標記檔案，但該檔案不具有包含預期 UUID 的 metadata 欄位，則會發生此錯誤。
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 如果您正在設定新的 Cloud Storage Pool，且儲存桶包含 `x-ntap-sgws-cloud-pool-uuid`檔案及類似以下範例的其他物件索引鍵，請建立新儲存桶並改用此新儲存桶。
++
+額外物件金鑰的範例： `my-bucket.3E64CF2C-B74D-4B7D-AFE7-AD28BC18B2F6.1727326606730410`
+
+* 如果該 `x-ntap-sgws-cloud-pool-uuid`檔案是儲存桶中唯一的物件，則刪除該檔案。
+
+
+${post_edited_translations.segment}
+
+
+
+[[error-could-not-create-or-update-cloud-storage-pool-error-from-endpoint]]
+== 錯誤：無法建立或更新 Cloud Storage Pool。來自端點的錯誤
+
+在以下情況下您可能會遇到此錯誤：
+
+* 當您嘗試建立或編輯 Cloud Storage Pool 時。
+* 在組態新的 Cloud Storage Pool 時，如果選擇不支援的平台、驗證或協定組合搭配 S3 Object Lock。請參閱 link:../ilm/considerations-for-cloud-storage-pools.html["雲端儲存池的注意事項"]。
+
+
+此錯誤表示連線或組態問題導致 StorageGRID 無法寫入雲端儲存池。
+
+${post_edited_translations.segment}
+
+* 如果錯誤訊息包含 `Get _url_: EOF`，請檢查用於雲端儲存池的服務端點是否對需要 HTTPS 的 Container 或儲存桶使用 HTTP。
+* 如果錯誤訊息包含  `Get _url_: net/http: request canceled while waiting for connection`，請驗證網路組態是否允許 Storage Nodes 存取用於 Cloud Storage Pool 的服務端點。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
++
+** 建立一個與您為雲端儲存池輸入的名稱相同的外部 Container 或儲存桶，然後再次嘗試儲存新的雲端儲存池。
+** 請修正您為雲端儲存池指定的 Container 或儲存桶名稱，然後再次嘗試儲存新的雲端儲存池。
+
+
+
+
+
+
+[[error-failed-to-parse-ca-certificate]]
+== ${post_edited_translations.segment}
+
+當您嘗試建立或編輯雲端儲存池時，可能會遇到此錯誤。如果 StorageGRID 無法解析您在設定雲端儲存池時輸入的憑證，則會發生此錯誤。
+
+若要解決此問題，請檢查您提供的 CA 憑證是否有問題。
+
+
+
+[[error-a-cloud-storage-pool-with-this-id-was-not-found]]
+== 錯誤：找不到具有此 ID 的雲端儲存池
+
+當您嘗試編輯或刪除雲端儲存池時，可能會遇到此錯誤。如果端點傳回 404 回應，則會發生此錯誤，這可能表示以下兩種情況之一：
+
+* 用於雲端儲存池的憑證沒有對儲存桶的讀取權限。
+* 用於雲端儲存池的儲存桶不包含 `x-ntap-sgws-cloud-pool-uuid`標記檔案。
+
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* 使用具有必要權限的憑證編輯雲端儲存資源池。
+* ${post_edited_translations.segment}
+
+
+
+
+[[error-could-not-check-the-content-of-the-cloud-storage-pool-error-from-endpoint]]
+== 錯誤：無法檢查雲端儲存資源池的內容。來自端點的錯誤
+
+當您嘗試刪除 Cloud Storage Pool 時，可能會遇到此錯誤。此錯誤表示某種連線或組態問題正在阻止 StorageGRID 讀取 Cloud Storage Pool 貯體（bucket）的內容。
+
+${post_edited_translations.segment}
+
+
+
+[[error-objects-have-already-been-placed-in-this-bucket]]
+== ${post_edited_translations.segment}
+
+當您嘗試刪除雲端儲存資源池時，可能會遇到此錯誤。如果雲端儲存資源池包含由 ILM 移動至該處的資料、在您設定雲端儲存資源池之前已存在於儲存貯體中的資料，或是由其他來源在建立雲端儲存資源池之後放入儲存貯體中的資料，則無法刪除該雲端儲存資源池。
+
+${post_edited_translations.segment}
+
+* 依照「雲端儲存資源池物件的生命週期」中的說明，將物件移回 StorageGRID。
+* 如果您確定剩餘物件不是由 ILM 放入雲端儲存資源池中的，請手動從儲存桶中刪除這些物件。
++
+
+NOTE: 切勿手動刪除由 ILM 放置在雲端儲存資源池中的物件。如果您之後嘗試從 StorageGRID 存取已手動刪除的物件，則該物件將無法找到。
+
+
+
+
+
+[[error-proxy-encountered-an-external-error-while-trying-to-reach-the-cloud-storage-pool]]
+== 錯誤：Proxy 在嘗試連接雲端儲存資源池時遇到外部錯誤
+
+如果您在儲存節點和用於雲端儲存資源池的外部 S3 端點之間設定了非透明儲存設備 Proxy，則可能會遇到此錯誤。如果外部 Proxy 伺服器無法連線至雲端儲存資源池端點，則會發生此錯誤。例如，DNS 伺服器可能無法解析主機名稱，或者可能存在外部連網問題。
+
+${post_edited_translations.segment}
+
+* 檢查雲端儲存資源池的設定（*ILM* > *儲存資源池*）。
+* 檢查儲存設備 Proxy 伺服器的連網組態。
+
+
+
+
+[[error-x-509-certificate-is-out-of-validity-period]]
+== ${post_edited_translations.segment}
+
+嘗試刪除雲端儲存資源池時可能會遇到此錯誤。當驗證需要 X.509 憑證以確保正確的外部雲端儲存資源池通過驗證，且在刪除雲端儲存資源池組態之前外部儲存資源池為空時，就會發生此錯誤。
+
+請嘗試以下步驟解決此問題：
+
+* ${post_edited_translations.segment}
+* 請確保解決此 Cloud Storage Pool 上的所有憑證過期警報。
+
+
+.相關資訊
+link:lifecycle-of-cloud-storage-pool-object.html["雲端儲存資源池物件的生命週期"]

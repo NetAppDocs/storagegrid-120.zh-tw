@@ -1,0 +1,31 @@
+---
+permalink: expand/adding-grid-nodes-to-add-capabilities.html 
+sidebar: sidebar 
+keywords: grid nodes, expand, expansion, site, add, StorageGRID 
+summary: ${post_edited_translations.segment} 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+例如，您可以選擇新增 Gateway Nodes 以用於高可用度 （HA） 群組，或者您可以在遠端站台新增 Admin Node，以便使用本機節點進行監控。
+
+${post_edited_translations.segment}
+
+* 非主要管理節點
+* 儲存節點
+* 閘道節點
+
+
+準備新增網格節點時，請注意以下限制：
+
+* 主要管理節點是在初始安裝期間部署。您無法在擴充期間新增主要管理節點。
+* 您可以在相同擴充中新增儲存節點和其他類型的節點。
+* 新增儲存節點時，您必須仔細規劃新節點的數量和位置。請參閱 link:../expand/guidelines-for-adding-object-capacity.html["增加物件容量的指南"]。
+* 如果在「防火牆控制」頁面的「不受信任的用戶端網路」索引標籤上，「設定新節點預設值」選項為「不受信任」，則使用用戶端網路連線至擴充節點的用戶端應用程式，必須使用負載平衡器端點連接埠進行連線（*設定* > *安全性* > *防火牆控制*）。請參閱 link:../admin/configure-firewall-controls.html["更改新節點的安全性設定"] 與 link:../admin/configuring-load-balancer-endpoints.html["${post_edited_translations.segment}"] 的說明。
+

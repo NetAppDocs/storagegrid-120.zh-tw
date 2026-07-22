@@ -1,0 +1,66 @@
+---
+permalink: swnodes/cpu-and-ram-requirements.html 
+sidebar: sidebar 
+keywords: cpu, ram, cpu cores 
+summary: 安裝 StorageGRID 軟體之前，請先驗證並設定硬體，使其能夠支援 StorageGRID 系統。 
+---
+= StorageGRID 的 CPU 和 RAM 需求
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+安裝 StorageGRID 軟體之前，請先驗證並設定硬體，使其能夠支援 StorageGRID 系統。
+
+每個 StorageGRID 節點需要以下最低資源：
+
+* CPU 核心數：每個節點 8 個
+* 記憶體容量：取決於可用記憶體容量總量以及系統上執行的非 StorageGRID 軟體數量。
++
+** 通常，每個節點至少需要 24 GB，且比系統總 RAM 少 2 到 16 GB。
+** 每個租戶至少需要 64 GB 的空間，大約會有 5,000 個儲存桶
+
+
+
+
+基於軟體的純中繼資料節點資源必須與現有儲存節點資源相符。例如：
+
+* ${post_edited_translations.segment}
++
+** 128 GB RAM
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+
+
+* ${post_edited_translations.segment}
+
+
+${post_edited_translations.segment}
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+[role="tabbed-block"]
+====
+.Linux
+--
+請確保計劃在每個實體或虛擬主機上執行的 StorageGRID 節點數量不超過 CPU 核心數或可用實體記憶體容量。如果主機並非專用於執行 StorageGRID （不建議），請務必考慮其他應用程式的資源需求。
+
+--
+.VMware
+--
+VMware 支援每個虛擬機器使用一個節點。請確保 StorageGRID 節點的記憶體容量不超過可用實體記憶體容量。每個虛擬機器必須專用於執行 StorageGRID。
+
+--
+====
+
+CAUTION: 定期監控 CPU 和記憶體容量使用情況，確保這些資源持續容納您的工作負載。例如，將虛擬儲存節點的 RAM 和 CPU 分配增加一倍，即可獲得與 StorageGRID 應用裝置節點類似的資源。此外，如果每個節點的中繼資料量超過 500 GB，請考慮將每個節點的 RAM 增加至 48 GB 或更多。如需管理物件中繼資料儲存設備、增加中繼資料保留空間設定以及監控 CPU 和記憶體容量使用情況的相關資訊，請參閱 link:../admin/index.html["管理"]、link:../monitor/index.html["監控"] 和 link:../upgrade/index.html["升級"] StorageGRID 的相關說明。
+
+如果底層實體主機上啟用了超執行緒，您可以為每個節點提供 8 個虛擬核心（4 個實體核心）。如果底層實體主機上未啟用超執行緒，您必須為每個節點提供 8 個實體核心。
+
+如果您使用虛擬機器作為主機，並且可以控制虛擬機器的大小和數量，則應為每個 StorageGRID 節點使用單一虛擬機器，並相應調整虛擬機器的大小。
+
+（僅限 RHEL、Debian 和 Ubuntu）對於正式作業部署，不應在相同實體儲存設備硬體或虛擬主機上執行多個儲存節點。單一 StorageGRID 部署中的每個儲存節點都應位於其自身隔離的故障網域中。確保單一硬體故障只會影響單一儲存節點，即可最大化物件資料的持久性和可用度。
+
+另請參閱link:storage-and-performance-requirements.html["儲存設備與效能要求"]。

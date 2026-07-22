@@ -1,0 +1,19 @@
+---
+permalink: admin/global-certificate-types.html 
+sidebar: sidebar 
+keywords: rsa, ecdsa, custom certificate encryption 
+summary: StorageGRID 系統支援使用 RSA 或 ECDSA （橢圓曲線數位簽章演算法）加密的伺服器憑證。 
+---
+= StorageGRID 中支援的伺服器憑證類型
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 系統支援使用 RSA 或 ECDSA（橢圓曲線數位簽章演算法）加密的自訂憑證。
+
+
+TIP: 安全性原則的加密演算法類型必須與伺服器憑證類型相符。例如，RSA 加密演算法需要 RSA 憑證，而 ECDSA 加密演算法需要 ECDSA 憑證。請參閱 link:using-storagegrid-security-certificates.html["管理安全性證書"]。如果您設定了與伺服器憑證不相容的自訂安全性原則，您可以 link:manage-tls-ssh-policy.html#temporarily-revert-to-default-security-policy["暫時回復預設安全性原則"]。
+
+如需更多關於 StorageGRID 如何保護用戶端連線安全的資訊，請參閱 link:security-for-clients.html["${post_edited_translations.segment}"]。

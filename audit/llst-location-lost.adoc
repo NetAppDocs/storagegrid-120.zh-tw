@@ -1,0 +1,99 @@
+---
+permalink: audit/llst-location-lost.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, LLST, Location Lost 
+summary: 當找不到物件副本（複製的或糾刪碼的）的位置時，就會產生此訊息。 
+---
+= StorageGRID 中遺失物件複本位置的 LLST 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當找不到物件複本（複製的或糾刪碼的）的位置時，就會產生此訊息。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+CBIL
+ a| 
+CBID
+ a| 
+受影響的 CBID。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+糾刪碼設定檔
+ a| 
+對於銷毀編碼物件資料。所使用的銷毀編碼設定檔的 ID。
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+CLEC（線上）：用於糾刪碼物件資料
+
+CLNL（近線）：用於已歸檔的複製物件資料
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+來源節點 ID
+ a| 
+遺失位置資訊的節點 ID。
+
+
+
+ a| 
+PCLD
+ a| 
+複製物件的路徑
+ a| 
+遺失物件資料之磁碟位置的完整路徑。僅在 LTYP 的值為 CLDI （即針對複本物件）時傳回。
+
+採用形式 `/var/local/rangedb/2/p/13/13/00oJs6X%{h{U)SeUFxE@`
+
+
+
+ a| 
+RSLT
+ a| 
+結果
+ a| 
+一律為 NONE。RSLT 是必要的訊息欄位，但與此訊息無關。使用 NONE 而非 SUCS，如此才不會篩選此訊息。
+
+
+
+ a| 
+TSRC
+ a| 
+${post_edited_translations.segment}
+ a| 
+USER: 使用者觸發
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+UUID
+ a| 
+通用唯一識別符
+ a| 
+${post_edited_translations.segment}
+
+|===

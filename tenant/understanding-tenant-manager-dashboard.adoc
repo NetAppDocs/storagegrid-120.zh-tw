@@ -1,0 +1,99 @@
+---
+permalink: tenant/understanding-tenant-manager-dashboard.html 
+sidebar: sidebar 
+keywords: how to understand tenant manager dashboard 
+summary: Tenant Manager 儀表板提供租戶帳戶組態的總覽，以及租戶 S3 儲存桶中物件所使用的空間量。如果租戶有配額，儀表板會顯示已使用的配額量及剩餘的配額量。如果租戶帳戶有任何錯誤，這些錯誤會顯示在儀表板上。 
+---
+= StorageGRID 中的租戶管理器儀表板
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Tenant Manager 儀表板提供租戶帳戶組態的總覽，以及租戶 S3 儲存桶中物件所使用的空間量。如果租戶有配額，儀表板會顯示已使用的配額量及剩餘的配額量。如果租戶帳戶有任何錯誤，這些錯誤會顯示在儀表板上。
+
+
+NOTE: 屬於此租戶的所有物件之邏輯大小，包括未完成和進行中的多部分上傳。此大小不包括用於 ILM 規則的其他實體空間。已使用空間值為估計值。這些估計值會受到內嵌時間、網路連線能力和節點狀態的影響。
+
+物件上傳完成後，儀表板將顯示如下範例：
+
+image:tenant_dashboard_with_buckets.png["儀表板 - Bucket 清單"]
+
+
+
+[[tenant-account-information]]
+== 租戶帳戶資訊
+
+儀表板頂部顯示已設定的儲存桶或 Container、群組和使用者數量。如果已設定平台服務端點，也會顯示其數量。選取連結以檢視詳細資料。
+
+根據您擁有的link:tenant-management-permissions.html["租戶管理權限"]和您設定的選項，儀表板的其餘部分會顯示指南、儲存設備使用情況、物件資訊和租戶詳細資訊的各種組合。
+
+
+
+[[storage-and-quota-usage]]
+== 儲存設備與配額使用量
+
+儲存設備使用情況面板包含以下資訊：
+
+* 租戶的物件資料量。
++
+此值表示已上傳的物件資料總量，並不代表用於儲存這些物件複本及其中繼資料所使用的空間。
+
+* 如果設定了配額，則會顯示可用於物件資料的總空間量以及剩餘空間的大小和百分比。配額限制了可擷取的物件資料量。
++
+
+CAUTION: 配額使用量是根據內部估計值而定，在某些情況下可能會超出。例如，StorageGRID 會在租戶開始上傳物件時檢查配額，如果租戶已超出配額，則會拒絕新的內嵌。然而，StorageGRID 在判斷是否已超出配額時，並不會將目前上傳的大小考慮在內。如果刪除了物件，在重新計算配額使用量之前，可能會暫時阻止租戶上傳新物件。配額使用量計算可能需要 10 分鐘或更長時間。
+
+* 表示最大儲存貯體或 Container 相對大小的長條圖。
++
+您可以將遊標懸停在任何圖表段上，以檢視該儲存貯體或 Container 佔用的總空間。
+
++
+image:tenant_dashboard_storage_usage_segment.png["長條圖段"]
+
+* 與長條圖相對應，列出最大的儲存桶或 Container，包括每個儲存桶或 Container 的物件資料總量及物件數量。
++
+image:tenant_dashboard_buckets.png["租戶儀表板儲存桶"]
+
++
+如果租戶擁有超過九個儲存桶或 Container，則所有其他儲存桶或 Container 將合併為清單底部的單一條目。
+
+
+
+
+NOTE: 若要變更 Tenant Manager 中顯示的儲存設備值的單位，請選擇 Tenant Manager 右上角的使用者下拉式選單，然後選擇 *User preferences*。
+
+
+
+[[quota-usage-alerts]]
+== 配額使用警示
+
+如果已在 Grid Manager 中啟用配額使用量警示，則當配額不足或超出時，這些警示將顯示在 Tenant Manager 中，如下所示：
+
+* 如果租戶的配額已使用 90% 或以上，則會觸發「租戶配額使用率過高」警報。
++
+考慮請求您的網格系統管理員增加配額。
+
+* 如果超出配額，系統會通知您無法上傳新物件。
+
+
+
+
+[[bucket-capacity-usagecapacity-limit-usage]]
+== [[bucket-capacity-usage]]容量限制使用情形
+
+如果您為儲存桶設定了容量限制，則 Tenant Manager 儀表板會顯示依容量限制使用量排序的熱門儲存桶清單。
+
+如果儲存桶未設定容量限制，則其容量不受限制。但是，如果您的租戶帳戶設定了總儲存設備配額，且該配額已用完，則無論儲存桶的剩餘容量限制為何，您都將無法擷取更多物件。
+
+
+
+[[endpoint-errors]]
+== 端點錯誤
+
+如果您已使用 Grid Manager 設定一個或多個端點以供平台服務使用，且過去七天內發生任何端點錯誤，則租戶管理程式儀表板將顯示警示。
+
+image:tenant_dashboard_endpoint_error.png["儀表板顯示端點訊息"]
+
+若要查看有關 link:troubleshooting-platform-services-endpoint-errors.html["平台服務端點錯誤"] 的詳細資訊，請選取 *端點* 以顯示「端點」頁面。

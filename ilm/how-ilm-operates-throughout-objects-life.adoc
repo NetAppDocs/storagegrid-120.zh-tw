@@ -1,0 +1,32 @@
+---
+permalink: ilm/how-ilm-operates-throughout-objects-life.html 
+sidebar: sidebar 
+keywords: ilm lifecycle, object lifecycle and ILM 
+summary: 了解 StorageGRID 如何使用 ILM 來管理物件在其生命週期每個階段的方式，有助於您設計更有效的原則。 
+---
+= ILM 在 StorageGRID 中物件生命週期內的運作方式
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+了解 StorageGRID 如何使用 ILM 來管理物件在其生命週期每個階段的方式，有助於您設計更有效的原則。
+
+* *擷取*：當 S3 用戶端應用程式建立連線以將物件儲存至 StorageGRID 系統時，擷取即開始，並在 StorageGRID 向用戶端傳回「擷取成功」訊息時完成。物件資料在擷取期間會受到保護，不論是立即套用 ILM 指令（同步放置），或是建立過渡期複本並於稍後套用 ILM（雙重認可），具體取決於 ILM 需求的指定方式。
+* *複本管理*：在建立 ILM 放置指令中指定數量和類型的物件複本後，StorageGRID 管理物件位置並保護物件免於遺失。
++
+** *ILM 掃描與評估*：StorageGRID 持續掃描網格中儲存的物件清單，並檢查目前複本是否符合 ILM 要求。當需要不同類型、數量或位置的物件複本時，StorageGRID 會視需要建立、刪除或移動複本。
+** *背景驗證*：StorageGRID 會持續執行背景驗證，以檢查物件資料的完整性。如果發現問題，StorageGRID 會自動在符合目前 ILM 要求的位置建立新的物件複本或替換的銷毀編碼物件片段。請參閱link:../troubleshoot/verifying-object-integrity.html["${post_edited_translations.segment}"]。
+
+
+* *物件刪除*：當所有複本從 StorageGRID 系統移除時，物件的管理即告結束。物件可能因用戶端的刪除請求而移除，也可能因 ILM 的刪除或 S3 儲存桶生命週期到期而移除。
++
+
+NOTE: 如果儲存桶已啟用 S3 Object Lock，則處於合法持有狀態的物件，或已指定保留截止日期但尚未到期的物件，將無法刪除。
+
+
+
+${post_edited_translations.segment}
+
+image:overview_of_object_lifecycle.png["物件生命週期概述"]

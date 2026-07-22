@@ -1,0 +1,61 @@
+---
+permalink: maintain/obtaining-required-materials-for-hotfix.html 
+sidebar: sidebar 
+keywords: storagegrid, hotfix 
+summary: ${post_edited_translations.segment} 
+---
+= 取得 StorageGRID 熱修復程式所需的材料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+[cols="1a,2a"]
+|===
+| 項目 | 附註 
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+* ${post_edited_translations.segment}
+* link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]
+* ${post_edited_translations.segment}
+
+ a| 
+
+
+
+ a| 
+恢復套件 (`.zip`） 檔案
+ a| 
+在套用 Hotfix 之前、link:downloading-recovery-package.html["下載最新的恢復套件檔案"]以防 Hotfix 期間發生任何問題。套用 Hotfix 之後、請下載新的恢復套件檔案複本、並將其儲存在安全位置。更新後的恢復套件檔案可讓您在發生故障時還原系統。
+
+
+
+| ${post_edited_translations.segment}  a| 
+選填，且僅在您使用 SSH 用戶端手動套用 Hotfix 時使用。 `Passwords.txt` 檔案是恢復套件  `.zip` 檔案的一部分。
+
+
+
+ a| 
+佈建複雜密碼
+ a| 
+首次安裝 StorageGRID 系統時，會建立並記錄此複雜密碼。建置資源複雜密碼未列在  `Passwords.txt` 檔案中。
+
+
+
+ a| 
+相關文件
+ a| 
+`readme.txt` 檔案以取得 Hotfix。此檔案包含在 Hotfix 下載頁面中。在套用 Hotfix 之前，請務必仔細審查  `readme` 檔案。
+
+|===

@@ -1,0 +1,86 @@
+---
+permalink: admin/using-grid-management-api.html 
+sidebar: sidebar 
+keywords: use the Grid Management API, private API 
+summary: 您可以使用 Grid Management REST API 而非 Grid Manager 使用者介面來執行系統管理工作。例如，您可能想要使用 API 來自動化作業，或更快速地建立多個實體（例如使用者）。 
+---
+= 使用 StorageGRID Grid Management API
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 Grid Management REST API 而非 Grid Manager 使用者介面來執行系統管理工作。例如，您可能想要使用 API 來自動化作業，或更快速地建立多個實體（例如使用者）。
+
+
+
+[[top-level-resources]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* `/grid`: 存取僅限於 Grid Manager 使用者，並根據設定的群組權限而定。
+* `/org`：存取權限僅限於屬於租戶帳戶的本機或聯合 LDAP 群組的使用者。如需詳細資訊，請參閱 link:../tenant/index.html["使用租戶帳戶"]。
+* `/private`：存取權限僅限於 Grid Manager 使用者，並以設定的群組權限為基礎。私有 API 可能隨時變更，恕不另行通知。StorageGRID 私有端點也會忽略請求中的 API 版本。
+
+
+
+
+[[issue-api-requests]]
+== 發出 API 請求
+
+Grid Management API 使用 Swagger 開放原始碼 API 平台。Swagger 提供直覺式使用者介面，讓開發人員和非開發人員都能使用該 API 在 StorageGRID 中執行即時操作。
+
+${post_edited_translations.segment}
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["特定存取權限"]。
+
+
+
+CAUTION: 您透過 API 文件網頁執行的任何 API 操作都是即時操作。請務必小心，避免誤建立、更新或刪除組態資料或其他資料。
+
+.步驟
+. ${post_edited_translations.segment}
++
+image:help_menu.png["${post_edited_translations.segment}"] neoplasms_and_cancer_types_1000_1000.jpg (1000×1000)
+
+Neoplasms and cancer types are broad categories of abnormal cell growth. Neoplasms, commonly known as tumors, can be benign (non-cancerous) or malignant (cancerous). Cancer, on the other hand, refers specifically to malignant neoplasms that have the potential to invade or spread to other parts of the body.
+
+There are over 100 different types of cancer, which are typically classified by the type of cell or organ in which they originate. Some of the most common types of cancer include:
+
+1. Carcinoma: This is the most common type of cancer, originating in the epithelial cells that line the inside and outside of organs. Examples include breast, lung, prostate, and colon cancers.
+
+2. Sarcoma: This type of cancer originates in supportive and connective tissues, such as bones, tendons, cartilage, muscle, and fat.
+
+3. Leukemia: This is a cancer of the blood-forming tissues, including the bone marrow and lymphatic system. It leads to the overproduction of abnormal white blood cells.
+
+4. Lymphoma: This cancer originates in the lymphatic system, which is part of the body's immune system. It affects lymphocytes, a type of white blood cell.
+
+5. Myeloma: This cancer starts in the plasma cells of the bone marrow, which are responsible for producing antibodies.
+
+6. Central Nervous System Cancers: These cancers originate in the brain and spinal cord.
+
+Understanding the different types of neoplasms and cancers is crucial for accurate diagnosis, treatment planning, and prognosis. Treatment options vary widely depending on the type and stage of the cancer, and may include surgery, chemotherapy, radiation therapy, immunotherapy, and targeted therapy.
+
+. ${post_edited_translations.segment}
++
+私有 API 如有變更，恕不另行通知。StorageGRID 私有端點也會忽略要求的 API 版本。
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
++
+image:swagger_example.png["${post_edited_translations.segment}"]
+
+. 確定請求是否需要其他參數，例如群組 ID 或使用者 ID。然後，取得這些值。您可能需要先發出另一個 API 請求，才能獲得所需資訊。
+. 確定是否需要修改範例要求本文。如果需要，您可以選取 *Model* 來瞭解每個欄位的需求。
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 選擇 *Execute*。
+. ${post_edited_translations.segment}
+

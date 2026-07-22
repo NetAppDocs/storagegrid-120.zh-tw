@@ -1,0 +1,33 @@
+= 選用任務
+:allow-uri-read: 
+
+
+* link:../admin/managing-tenants.html["建立租戶帳戶"]用於在您的 StorageGRID 系統上儲存物件的 S3 用戶端協定。
+* link:../admin/controlling-storagegrid-access.html["控制系統存取"]透過設定群組和使用者帳戶。您也可以link:../admin/using-identity-federation.html["設定聯合身分來源"]（例如 Active Directory 或 OpenLDAP），以便匯入管理群組和使用者。或者，您可以link:../admin/managing-users.html#create-a-local-user["建立本機群組和使用者"]。
+* 整合並測試您將用於將物件上傳到 StorageGRID 系統的link:../s3/configuring-tenant-accounts-and-connections.html["S3 API"]用戶端應用程式。
+* link:../ilm/index.html["設定資訊生命週期管理 （ILM） 規則和 ILM 原則"]您要用來保護物件資料的項目。
+* 如果您的安裝包含應用裝置儲存節點，請使用 SANtricity 作業系統完成下列任務：
++
+** 連接到每個 StorageGRID 應用裝置。
+** 確認 AutoSupport 資料已收到。
++
+請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/configuring-hardware.html["設定硬體"^]。
+
+
+
+* 審查並遵循 link:../harden/index.html["StorageGRID 系統強化準則"] 以消除安全性風險。
+* link:../monitor/email-alert-notifications.html["設定系統警示的電子郵件通知"]。
+
+
+
+
+[[optional-tasks]]
+== 選用任務
+
+* link:../maintain/changing-ip-addresses-and-mtu-values-for-all-nodes-in-grid.html["更新網格節點 IP 位址"] 如果自您規劃部署並產生恢復套件以來，它們已發生變更。
+* link:../admin/changing-network-options-object-encryption.html["${post_edited_translations.segment}"]（如有需要）。
+* link:../admin/configuring-stored-object-compression.html["設定儲存設備壓縮"]必要時減少儲存物件的大小。
+* link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]必要時，隔離和劃分網路流量。
+* link:../admin/configure-high-availability-group.html["設定高可用度群組"] 以在需要時提升 Grid Manager、Tenant Manager 和 S3 用戶端的連線可用度。
+* link:../admin/configuring-load-balancer-endpoints.html["設定負載平衡器端點"] （如有需要），用於 S3 用戶端連線。
+

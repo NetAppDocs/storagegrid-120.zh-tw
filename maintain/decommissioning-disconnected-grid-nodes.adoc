@@ -1,0 +1,174 @@
+---
+permalink: maintain/decommissioning-disconnected-grid-nodes.html 
+sidebar: sidebar 
+keywords: storagegrid, disconnected nodes, decommission node 
+summary: ${post_edited_translations.segment} 
+---
+= 停用已中斷連線的 StorageGRID 節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.開始之前
+* 您已瞭解退役 link:considerations-for-decommissioning-admin-or-gateway-nodes.html["管理節點和 Gateway 節點"] 的考量事項，以及退役 link:considerations-for-decommissioning-storage-nodes.html["儲存節點"] 的考量事項。
+* 您已獲得所有必要的先決條件項目。
+* 您已確保沒有任何資料修理工作處於作用中。請參閱 link:checking-data-repair-jobs.html["檢查資料修理作業"]。
+* 您已確認網格中任何位置均未進行儲存節點恢復。如果正在進行恢復，則必須等待作為恢復一部分執行的 Cassandra 重新建置完成。之後即可繼續執行退役操作。
+* 您已確保在節點退役程序執行時不會執行其他維護程序，除非節點退役程序已暫停。
+* ${post_edited_translations.segment}
+* 您擁有佈建密碼。
+
+
+.關於此任務
+您可以透過在 *Health* 欄中尋找藍色的「未知」圖示 image:icon_alarm_blue_unknown.png["${post_edited_translations.segment}"] 或灰色的「管理關閉」圖示 image:icon_alarm_gray_administratively_down.png["圖示 Administratively down"] 來識別斷開連線的節點。
+
+${post_edited_translations.segment}
+
+* 此程序主要用於移除單一中斷連線的節點。如果您的網格包含多個中斷連線的節點，軟體會要求您同時將所有節點退役，這會增加發生意外結果的可能性。
++
+
+CAUTION: 如果一次退役多個已斷線的儲存節點，則可能會發生資料遺失。請參閱link:considerations-for-decommissioning-storage-nodes.html#considerations-disconnected-storage-nodes["斷開連接的儲存節點的相關注意事項"]。
+
++
+
+CAUTION: 在包含基於軟體的僅中繼資料節點的網格中退役儲存節點時，請務必注意。如果您退役所有設定為同時儲存物件和中繼資料的節點，則網格將無法儲存物件。如需有關僅中繼資料儲存節點的詳細資訊，請參閱 link:../primer/what-storage-node-is.html#types-of-storage-nodes["${post_edited_translations.segment}"]。
+
+* 如果無法移除斷開連線的節點（例如，ADC 仲裁所需的儲存節點），則無法移除其他已中斷連線的節點。
+
+
+.步驟
+. 除非您要將歸檔節點退役（必須中斷連線），否則請嘗試將任何已中斷連線的網格節點重新上線或予以恢復。
++
+請參閱 link:warnings-and-considerations-for-grid-node-recovery.html["網格節點恢復程序"] 以取得相關說明。
+
+. ${post_edited_translations.segment}
++
+
+NOTE: 如果您的網格包含多個中斷連線的節點，軟體會要求您同時退役所有這些節點，這會增加發生意外結果的潛力。
+
++
+
+CAUTION: 一次選擇將一個以上的已斷線網格節點退役時請務必小心，特別是當您選擇多個已斷線的儲存設備節點時。如果您有一個以上無法恢復的已斷線儲存設備節點，請聯絡技術支援以決定最佳行動方案。
+
+. 請輸入佈建密碼。
++
+*Start Decommission* 按鈕已啟用。
+
+. 點選 *Start Decommission*。
++
+出現警告，表示您已選取已中斷連線的節點，如果該節點擁有物件的唯一複本，則物件資料將會遺失。
+
+. 審查節點清單，然後按一下「確定」。
++
+退役程式啟動，並顯示每個節點的進度。在此過程中，將產生新的恢復套件，其中包含網格組態變更。
+
+. 新的恢復套件可用後，按一下連結或選擇 *Maintenance* > *System* > *Recovery package* 以存取恢復套件頁面。然後，下載 `.zip`檔案。
++
+請參閱相關說明link:downloading-recovery-package.html["下載恢復套件"]。
+
++
+
+NOTE: 請盡快下載恢復套件，以確保在退役程序期間發生問題時能夠恢復您的網格。
+
++
+
+CAUTION: 恢復套件檔案必須受到保護，因為它包含可用於從 StorageGRID 系統取得資料的加密金鑰和密碼。
+
+. 定期監控退役頁面，確保所有選定的節點已成功退役。
++
+儲存節點的退役可能需要數天甚至數週時間。所有工作完成後，節點選擇清單將重新顯示，並顯示成功訊息。如果您退役的是已中斷連線的儲存節點，則會顯示資訊訊息，指示已啟動修理作業。
+
+. 在節點依照退役程序自動關閉後，移除與退役節點關聯的任何剩餘虛擬機器或其他資源。
++
+
+CAUTION: 節點自動關閉之前，請勿執行此步驟。
+
+. 如果您要退役儲存節點，請監控在退役過程中自動啟動的*複製資料*和*銷除編碼 (EC) 資料*修理工作的狀態。
+
+
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+* 若要取得複寫修理的預估完成百分比，請將  `show-replicated-repair-status` 選項新增至 repair-data 命令。
++
+`repair-data show-replicated-repair-status`
+
+* 確定修理是否完成：
++
+.. ${post_edited_translations.segment}
+.. 請查看「評估」區段中的屬性。修理完成後，*Awaiting - All* 屬性將顯示 0 個物件。
+
+
+* 如需更詳細地監控修理：
++
+.. 選取 *Nodes* 。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+.. 在 ILM 佇列部分，查看以下屬性：
++
+*** *掃描週期 - 估計值*：完成所有物件的完整 ILM 掃描的估計時間。
++
+${post_edited_translations.segment}
+
+*** *修復嘗試次數*：指對被視為高風險的複製資料嘗試進行物件修理操作的總次數。高風險物件是指僅剩一個複本的物件，無論該複本是由 ILM 原則指定，或是由於複本遺失所造成。每次儲存節點嘗試修理高風險物件時，此計數都會遞增。如果網格繁忙，則會優先處理高風險 ILM 修復作業。
++
+如果修理後複寫失敗，同一物件的修理可能會再次增量。+ 這些屬性在監控儲存節點 Volume 恢復進度時非常有用。如果嘗試修理的次數已停止增加且已完成完整掃描，則修理可能已完成。
+
+
+
+.. 或者，提交  `storagegrid_ilm_scan_period_estimated_minutes` 和  `storagegrid_ilm_repairs_attempted` 的 Prometheus 查詢。
+
+
+
+
+--
+.糾刪碼（EC）資料
+--
+${post_edited_translations.segment}
+
+. 確定糾刪碼資料修理的狀態：
++
+** 選擇 *Support* > *Tools* > *計量* 以檢視目前工作預估的完成時間和完成百分比。然後，在 Grafana 區段中選擇 *EC Overview*。查看 *網格 EC 工作預估完成時間* 和 *網格 EC 工作完成百分比* 儀表板。
+** 使用此命令查看特定 `repair-data`操作的狀態：
++
+`repair-data show-ec-repair-status --repair-id repair ID`
+
+** 使用以下命令列出所有修理項目：
++
+`repair-data show-ec-repair-status`
+
++
+輸出結果列出了所有先前和當前正在執行的修理程序的資訊，包括 `repair ID`。
+
+
+
+. 如果輸出顯示修理操作失敗，請使用 `--repair-id`選項重試修理。
++
+此命令使用修理 ID 6949309319275667690 重試失敗的節點修理：
+
++
+`repair-data start-ec-node-repair --repair-id 6949309319275667690`
+
++
+此命令使用修理 ID 6949309319275667690 重試失敗的 Volume 修理：
+
++
+`repair-data start-ec-volume-repair --repair-id 6949309319275667690`
+
+
+
+--
+====
+.完成後
+一旦中斷連線的節點已退役，且所有資料修理工作均已完成，您即可視需要退役任何已連線的網格節點。
+
+完成退役程序後，請執行以下步驟：
+
+* 確保已退役網格節點的磁碟機已完全擦除。使用市售的資料擦除工具或服務，永久且安全地從磁碟機中移除資料。
+* 如果您已退役某個應用裝置節點，且該應用裝置上的資料已使用節點加密進行保護，請使用 StorageGRID Appliance Installer 清除金鑰管理伺服器組態（Clear KMS）。如果您想將該應用裝置新增至另一個網格，則必須清除 KMS 組態。如需相關指示，請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/commonhardware/monitoring-node-encryption-in-maintenance-mode.html["${post_edited_translations.segment}"^]。
+

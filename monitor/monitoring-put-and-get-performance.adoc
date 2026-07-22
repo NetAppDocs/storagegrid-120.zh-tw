@@ -1,0 +1,30 @@
+---
+permalink: monitor/monitoring-put-and-get-performance.html 
+sidebar: sidebar 
+keywords: put, get, performance 
+summary: ${post_edited_translations.segment} 
+---
+= 監控 StorageGRID 中的 PUT 和 GET 效能
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.關於此任務
+若要監控 PUT 和 GET 效能，您可以直接從工作站執行 S3 命令，也可以使用開源的 S3tester 應用程式。使用這些方法，您可以獨立於 StorageGRID 外部因素（例如用戶端應用程式問題或外部網路問題）來評估效能。
+
+在執行 PUT 和 GET 操作測試時，請遵循以下準則：
+
+* ${post_edited_translations.segment}
+* 對本地端和遠端站台執行操作。
+
+
+link:../audit/index.html["稽核日誌"] 中的訊息指出執行特定作業所需的總時間。例如，若要確定 S3 GET 要求的總處理時間，您可以審查 SGET 稽核訊息中 TIME 屬性的值。您也可以在下列 S3 作業的稽核訊息中找到 TIME 屬性：DELETE、GET、HEAD、Metadata Updated、POST、PUT
+
+分析結果時，請檢視滿足請求所需的平均時間，以及您可以達到的整體處理量。定期重複相同的測試並記錄結果，以便您識別可能需要調查的趨勢。
+
+* 您可以 https://github.com/s3tester["${post_edited_translations.segment}"^]。
+

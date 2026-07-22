@@ -1,0 +1,31 @@
+---
+permalink: admin/manually-triggering-autosupport-message.html 
+sidebar: sidebar 
+keywords: autosupport, how to send asup message 
+summary: 為了協助技術支援人員疑難排解 StorageGRID 系統的問題，您可以手動觸發傳送 AutoSupport 套件。 
+---
+= 手動觸發 StorageGRID 中的 AutoSupport 套件
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+為了協助技術支援人員疑難排解 StorageGRID 系統的問題，您可以手動觸發傳送 AutoSupport 套件。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您擁有 Root 存取或其他網格組態權限。
+
+
+.步驟
+. 選擇 *Support* > *Tools* > *AutoSupport*。
+. 在 *動作* 索引標籤上，選取 *傳送使用者觸發的 AutoSupport*。
++
+StorageGRID 嘗試傳送 AutoSupport 套件至 NetApp 支援網站。如果嘗試成功，則會更新「*結果*」索引標籤上的「*最新結果*」和「*上次成功時間*」值。如果發生問題，「*最新結果*」值會更新為「失敗」，且 StorageGRID 不會再次嘗試傳送 AutoSupport 套件。
+
+. 1 分鐘後，重新整理瀏覽器中的 AutoSupport 網頁，以存取最新結果。
+
+
+
+TIP: 此外，您也可以link:../monitor/collecting-log-files-and-system-data.html["${post_edited_translations.segment}"]將它們傳送到 NetApp 支援網站。

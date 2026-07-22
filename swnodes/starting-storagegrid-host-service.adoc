@@ -1,0 +1,45 @@
+---
+permalink: swnodes/starting-storagegrid-host-service.html 
+sidebar: sidebar 
+keywords: how to start host service 
+summary: 若要啟動 StorageGRID 節點，並確保它們在主機重新開機後重新啟動，您必須啟用並啟動 StorageGRID 主機服務。 
+---
+= 在 Linux 上啟動 StorageGRID 主機服務
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+若要啟動 StorageGRID 節點，並確保它們在主機重新開機後重新啟動，您必須啟用並啟動 StorageGRID 主機服務。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+.步驟
+. 在每台主機上執行以下命令：
++
+[listing]
+----
+sudo systemctl enable storagegrid
+sudo systemctl start storagegrid
+----
+. 執行以下命令以確保部署正在進行中：
++
+[listing]
+----
+sudo storagegrid node status node-name
+----
+. 如果任何節點傳回「Not Running」或「Stopped」狀態，請執行以下命令：
++
+[listing]
+----
+sudo storagegrid node start node-name
+----
+. ${post_edited_translations.segment}
++
+[listing]
+----
+sudo systemctl reload-or-restart storagegrid
+----
+

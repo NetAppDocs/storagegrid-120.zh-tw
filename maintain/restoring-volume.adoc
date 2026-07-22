@@ -1,0 +1,178 @@
+---
+permalink: maintain/restoring-volume.html 
+sidebar: sidebar 
+keywords: storagegrid, restore, volume 
+summary: 您可以使用 Grid Manager 還原故障儲存 Volume 或儲存節點的物件資料。您也可以使用 Grid Manager 監控正在進行的還原程序並顯示還原歷史記錄。 
+---
+= 使用 StorageGRID Grid Manager 還原物件資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 Grid Manager 還原故障儲存 Volume 或儲存節點的物件資料。您也可以使用 Grid Manager 監控正在進行的還原程序並顯示還原歷史記錄。
+
+.開始之前
+* 您已完成以下任一步驟來格式化失敗的磁碟區：
++
+** link:../maintain/remounting-and-reformatting-appliance-storage-volumes.html["重新掛載並重新格式化應用裝置儲存設備磁碟區（手動步驟）"]
+** link:../maintain/remounting-and-reformatting-storage-volumes-manual-steps.html["重新掛載並重新格式化儲存設備 Volume （手動步驟）"]
+
+
+* 您已確認，在 Grid Manager 的 *Nodes* > *Overview* 標籤中，您正在還原物件的儲存節點的連線狀態為 *Connected* image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]。
+* 您已確認以下內容：
++
+** 目前沒有進行增加儲存節點的網格擴充計畫。
+** 儲存節點退役操作未進行或已失敗。
+** 故障儲存 Volume 的恢復尚未進行中。
+** 儲存節點系統磁碟機發生故障後的恢復程序尚未開始。
+** EC 重新平衡作業尚未進行中。
+** 應用裝置節點複製作業尚未進行中。
+
+
+
+
+.關於此任務
+更換磁碟機並執行手動步驟格式化 Volume 後，Grid Manager 會將這些 Volume 顯示為 *Maintenance* > *Volume restoration* > *Nodes to restore* 索引標籤上的還原候選項目。
+
+盡可能使用 Grid Manager 中的「Volume 還原」頁面來還原物件資料。您可以選擇<<enable-auto-restore-mode,啟用自動還原模式>>在 Volume 準備好還原時自動啟動 Volume 還原，或手動啟動<<manually-restore,手動執行 Volume 還原>>。請遵循以下準則：
+
+* 如果 Volume 列在「維護」>「Volume 還原」>「要還原的節點」中，請依照下列步驟還原物件資料。Volume 將在以下情況下列出：
++
+** 節點中的部分儲存設備 Volume（但並非全部）發生故障
+** ${post_edited_translations.segment}
+
+
++
+網格管理器中的 Volume 還原頁面也可讓您 <<view-restoration-progress,${post_edited_translations.segment}>> 和 <<view-restoration-history,${post_edited_translations.segment}>>。
+
+* 如果 Volume 未在 Grid Manager 中列為可還原的候選 Volume，請依照使用 `repair-data`指令碼還原物件資料的相應步驟進行操作：
++
+** link:restoring-object-data-to-storage-volume.html["將物件資料還原至儲存 Volume（系統磁碟機故障）"]
+** link:restoring-object-data-to-storage-volume-where-system-drive-is-intact.html["將物件資料還原至系統磁碟機完好的儲存設備 Volume"]
+** link:restoring-object-data-to-storage-volume-for-appliance.html["將物件資料還原至應用裝置的儲存設備 Volume"]
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
++
+如果恢復的儲存節點包含的磁碟區比它要替換的節點少，則必須使用 `repair-data`指令碼。
+
+
+
+${post_edited_translations.segment}
+
+* 複製的資料物件將從其他位置還原，前提是網格的 ILM 規則已設定為提供物件複本。
++
+** ${post_edited_translations.segment}
+** 如果物件的唯一剩餘複本位於雲端儲存池中，StorageGRID 必須向雲端儲存池端點發出多個請求才能還原物件資料。
+
+
+* 糾刪碼 (EC) 資料物件透過重新組裝儲存的片段來還原。損壞或遺失的片段由糾刪碼演算法根據剩餘的資料片段和同位元檢查片段重新建立。
++
+即使部分儲存節點離線，也可以開始修理糾刪碼資料。但是，如果無法找到所有糾刪碼資料，則無法完成修理。修理將在所有節點可用後完成。
+
+
+
+
+NOTE: Volume 還原取決於儲存物件複本的資源可用度。Volume 還原進度並非線性，可能需要數天或數週才能完成。
+
+
+
+[[enable-auto-restore-modeenable-automatic-restore-mode]]
+== 啟用自動還原模式
+
+啟用自動還原模式後，當 Volume 準備好還原時，Volume 還原將自動開始。
+
+.步驟
+. 在 Grid Manager 中，前往 *Maintenance* > *Volume restoration*。
+. 選取「要還原的節點」索引標籤，然後將「自動還原模式」的切換開關滑動至啟用位置。
+. 當出現確認對話方塊時，審查詳細資訊。
++
+[NOTE]
+====
+** 您將無法在任何節點上手動啟動 Volume 還原作業。
+** 只有在沒有其他維護程序正在進行時，Volume 還原才會自動開始。
+** 您可以從進度監控頁面監控作業狀態。
+** StorageGRID 會自動重試啟動失敗的 Volume 還原作業。
+
+
+====
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+
+
+
+
+[[manually-restoremanually-restore-failed-volume-or-node]]
+== ${post_edited_translations.segment}
+
+請依照下列步驟還原故障的 Volume 或節點。
+
+.步驟
+. 在 Grid Manager 中，前往 *Maintenance* > *Volume restoration*。
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
+. 解決任何阻止還原各 Volume 的問題。如果 Volume 狀態顯示為「等待手動步驟」，選取該選項後會顯示問題所在。
+. 選擇要還原的節點，該節點上的所有 Volume 都顯示為「準備還原」狀態。
++
+${post_edited_translations.segment}
+
++
+節點中的每個 Volume 都必須表明它已準備好還原。
+
+. 選擇 *Start restore*。
+. 處理可能出現的任何警告，或選擇 *Start anyway* 以忽略警告並開始還原。
+
+
+恢復開始時，節點會從「待還原節點」索引標籤移至「恢復進度」索引標籤。
+
+如果無法啟動 Volume 還原，節點會返回「要還原的節點」索引標籤。
+
+
+
+[[view-restoration-progressview-restoration-progress]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+所有 Volume 中複寫和糾刪碼物件的資料修理率，是摘要所有進行中還原的平均值，包括使用  `repair-data` 指令碼所啟動的還原。同時也會指出這些 Volume 中完好無損且不需要還原的物件百分比。
+
+
+NOTE: 複寫資料還原取決於儲存複寫複本之處的資源可用度。複寫資料還原的進度是非線性的，且可能需要數天或數週才能完成。
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
++
+** ${post_edited_translations.segment}
+** 展開「詳細資料」欄，顯示還原開始時間和作業 ID。
+
+
+* 如果 Volume 還原失敗：
++
+** 狀態列顯示 `failed (attempting retry)`，將自動重試。
+** 如果多個還原任務失敗，系統會先自動重試最近一次的還原任務。
+** 如果重試持續失敗，則會觸發「EC repair failure」警報。請按照警報中的步驟解決此問題。
+
+
+
+
+
+
+[[view-restoration-historyview-restoration-history]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+
+NOTE: ${post_edited_translations.segment}

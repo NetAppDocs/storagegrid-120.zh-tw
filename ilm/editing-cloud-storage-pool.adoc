@@ -1,0 +1,49 @@
+---
+permalink: ilm/editing-cloud-storage-pool.html 
+sidebar: sidebar 
+keywords: edit cloud storage pool 
+summary: 您可以編輯雲端儲存池，變更其名稱、服務端點或其他詳細資訊。但是，您無法變更雲端儲存池的 S3 儲存桶或 Azure 容器。 
+---
+= 在 StorageGRID 中編輯雲端儲存資源池
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以編輯雲端儲存資源池來變更其名稱、服務終端點或其他詳細資訊；但是，您無法變更雲端儲存資源池的 S3 儲存桶或 Azure container。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+* 您已審閱 link:considerations-for-cloud-storage-pools.html["雲端儲存資源池的注意事項"]。
+
+
+.步驟
+. 選擇 *ILM* > *儲存資源池* > *雲端儲存資源池*。
++
+雲端儲存資源池表列出了現有的雲端儲存資源池。
+
+. 選取要編輯的雲端儲存資源池核取方塊，然後選取 *Actions* > *Edit*。
++
+${post_edited_translations.segment}
+
+. 根據需要變更 Cloud Storage Pool 名稱、服務端點、身分驗證認證資料或憑證驗證方法。
++
+
+NOTE: ${post_edited_translations.segment}
+
++
+如果您之前上傳過伺服器或用戶端憑證，您可以展開 *Certificate details* 折疊面板來審查目前正在使用的憑證。
+
+. 選取 *Save* 。
++
+${post_edited_translations.segment}
+
++
+如果 Cloud Storage Pool 驗證失敗，系統會顯示錯誤訊息。例如，如果發生憑證錯誤，系統可能會回報錯誤。
+
++
+請參閱 link:troubleshooting-cloud-storage-pools.html["雲端儲存資源池疑難排解"] 的說明，解決該問題，然後再次嘗試儲存雲端儲存資源池。
+
+

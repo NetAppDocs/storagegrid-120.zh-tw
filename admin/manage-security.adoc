@@ -1,0 +1,52 @@
+---
+permalink: admin/manage-security.html 
+sidebar: sidebar 
+keywords: how to manage security 
+summary: 您可以透過 Grid Manager 設定各種安全性設定，以協助保護您的 StorageGRID 系統。 
+---
+= 在 StorageGRID 中管理安全性
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以透過 Grid Manager 設定各種安全性設定，以協助保護您的 StorageGRID 系統。
+
+
+
+[[manage-encryption]]
+== 管理加密
+
+StorageGRID 提供數種加密資料的選項。您應該 link:reviewing-storagegrid-encryption-methods.html["審查可用的加密方法"]，以確定哪些選項符合您的資料保護需求。
+
+
+
+[[manage-certificates]]
+== 管理憑證
+
+您可以link:using-storagegrid-security-certificates.html["${post_edited_translations.segment}"]用於 HTTP 連線或用於向伺服器驗證用戶端或使用者身分的用戶端憑證。
+
+
+
+[[configure-key-management-servers]]
+== ${post_edited_translations.segment}
+
+使用 link:kms-configuring.html["${post_edited_translations.segment}"] 可讓您保護 StorageGRID 資料，即使應用裝置已從資料中心移除也是如此。在應用裝置磁碟區加密之後，除非節點可以與 KMS 進行通訊，否則您將無法存取應用裝置上的任何資料。
+
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+[[manage-proxy-settings]]
+== ${post_edited_translations.segment}
+
+如果您使用 S3 平台服務或雲端儲存池，則可以在儲存節點與外部 S3 端點之間設定 link:configuring-storage-proxy-settings.html["${post_edited_translations.segment}"]。如果您使用 HTTPS 或 HTTP 傳送 AutoSupport 套件，則可以在管理節點與技術支援之間設定 link:configuring-admin-proxy-settings.html["${post_edited_translations.segment}"]。
+
+
+
+[[control-firewalls]]
+== 控制防火牆
+
+為了增強系統的安全性，您可以透過在 link:controlling-access-through-firewalls.html["${post_edited_translations.segment}"] 開啟或關閉特定連接埠來控制對 StorageGRID 管理節點的存取。您也可以透過設定每個節點的 link:manage-firewall-controls.html["${post_edited_translations.segment}"] 來控制其網路存取。您可以封鎖部署所需連接埠以外的所有連接埠存取。

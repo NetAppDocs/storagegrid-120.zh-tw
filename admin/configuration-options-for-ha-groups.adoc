@@ -1,0 +1,66 @@
+---
+permalink: admin/configuration-options-for-ha-groups.html 
+sidebar: sidebar 
+keywords: ha groups, best practices, high availability group options 
+summary: 下圖展示了設定 HA 群組的不同方法範例。每種方法都有其優缺點。 
+---
+= StorageGRID 高可用性群組的設定選項
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+以下圖表提供了配置高可用性（ HA ）群組的不同方法範例。每個選項都有優點和缺點。
+
+在圖中，藍色表示 HA 群組中的主要介面，黃色表示 HA 群組中的備份介面。
+
+image:high_availability_examples.png["HA 範例"]
+
+表格總結了圖中所示的每種 HA 組態的優點。
+
+[cols="1a,2a,2a"]
+|===
+| 組態 | 優勢 | 缺點 
+
+
+ a| 
+Active-Backup HA
+ a| 
+* 由 StorageGRID 管理，無任何外部相依性。
+* 快速故障轉移。
+
+ a| 
+* HA 群組中只有一個節點處於作用中狀態。每個 HA 群組中至少有一個節點處於閒置狀態。
+
+
+
+
+ a| 
+DNS 循環配置
+ a| 
+* 提高彙總處理量。
+* 沒有閒置主機。
+
+ a| 
+* 故障轉移速度較慢，可能取決於用戶端行為。
+* 需要在 StorageGRID 之外設定硬體。
+* 需要客戶實施資訊健檢。
+
+
+
+
+ a| 
+主動-主動 HA
+ a| 
+* 流量分佈在多個 HA 群組。
+* 彙總處理量高，可隨 HA 群組的數量而擴充。
+* 快速故障轉移。
+
+ a| 
+* 設定起來更複雜。
+* 需要在 StorageGRID 之外設定硬體。
+* 需要客戶實施資訊健檢。
+
+
+|===

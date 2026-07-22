@@ -1,0 +1,232 @@
+---
+permalink: admin/configure-high-availability-group.html 
+sidebar: sidebar 
+keywords: how to configure high availability group, node priority order, failover 
+summary: ${post_edited_translations.segment} 
+---
+= 在 StorageGRID 中設定高可用性群組
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+
+NOTE: StorageGRID 系統最多可以有 255 個 HA 群組。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 如果您計劃在 HA 群組中使用 VLAN 介面，您已建立該 VLAN 介面。請參閱 link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]。
+* 如果您打算為 HA 群組中的節點使用存取介面，則您已建立了該介面：
++
+** *Linux （安裝節點之前）*: link:../swnodes/creating-node-configuration-files.html["建立節點組態檔"]
+** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+** *VMware（節點安裝完成後）*：link:../maintain/vmware-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+
+
+
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+
+
+[[create-a-high-availability-group]]
+== 建立高可用度群組
+
+當您建立高可用度群組時，您會選取一或多個介面，並依優先順序進行組織。然後，您會將一或多個 VIP 位址指派給該群組。
+
+若要將介面納入高可用度（HA）群組，此介面必須屬於閘道節點或管理節點。一個 HA 群組對於任何指定節點只能使用一個介面；但是，同一節點的其他介面可以用於其他 HA 群組。
+
+
+
+[[access-the-wizard]]
+=== ${post_edited_translations.segment}
+
+.步驟
+. 選擇 *Configuration* > *Network* > *High availability groups*。
+. 選擇 *Create* 。
+
+
+
+
+[[enter-details-for-the-ha-group]]
+=== 輸入 HA 群組的詳細資料
+
+.步驟
+. 請為 HA 群組提供唯一名稱。
+. （可選）輸入 HA 群組的執行摘要。
+. 選擇 *Continue* 。
+
+
+
+
+[[add-interfaces-to-the-ha-group]]
+=== 將介面新增至 HA 群組
+
+.步驟
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
++
+image:ha_group_add_interfaces.png["${post_edited_translations.segment}"]
+
++
+
+NOTE: ${post_edited_translations.segment}
+
++
+.介面選擇指南
+** ${post_edited_translations.segment}
+** 一個節點只能選擇一個介面。
+** ${post_edited_translations.segment}
+** 如果 HA 群組用於 S3 用戶端流量的 HA 保護，請選擇管理節點、閘道節點或兩者上的介面。
+** 如果您在不同類型的節點上選取介面，則會出現提示附註。系統會提醒您，如果發生容錯移轉，先前作用中節點所提供的服務可能無法在新作用中的節點上使用。例如，備份閘道節點無法提供管理節點服務的 HA 保護。同樣地，備份管理節點無法執行主要管理節點所能提供的所有維護程序。
+** 如果您無法選取介面，其核取方塊會被停用。工具提示會提供更多資訊。
++
+image:vlan_parent_interface_tooltip.png["${post_edited_translations.segment}"]
+
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+
+
+. 選擇 *Continue* 。
+
+
+
+
+[[determine-the-priority-order]]
+=== ${post_edited_translations.segment}
+
+如果 HA 群組包含多個介面，您可以決定哪個是主要介面，哪些是備份（容錯移轉）介面。如果主要介面發生故障，VIP 位址會移至可用度最高的優先順序介面。如果該介面發生故障，VIP 位址會移至下一個可用度最高的優先順序介面，依此類推。
+
+.步驟
+. ${post_edited_translations.segment}
++
+清單中的第一個介面是主要介面。除非發生故障，否則主要介面為作用中介面。
+
++
+image:ha_group_determine_failover.png["HA 群組決定優先順序"]
+
++
+
+TIP: 如果 HA 群組提供對 Grid Manager 的存取，則必須在主要管理節點上選擇一個介面作為主要介面。某些維護程序只能從主要管理節點執行。
+
+. 選擇 *Continue* 。
+
+
+
+
+[[enter-ip-addresses]]
+=== ${post_edited_translations.segment}
+
+.步驟
+. 在 *子網路 CIDR* 欄位中，以 CIDR 表示法指定 VIP 子網路——IPv4 位址後面接著一個斜槓和子網路長度（0-32）。
++
+網路位址不得設定任何主機位元。例如  `192.16.0.0/22`。
+
++
+
+NOTE: 如果使用 32 位元前綴，則 VIP 網路位址也可用作閘道位址和 VIP 位址。
+
++
+image:ha_group_select_virtual_ips.png["${post_edited_translations.segment}"]
+
+. 如果任何 S3 管理用戶端或租戶用戶端將從不同的子網路存取這些 VIP 位址，則可選擇輸入*閘道 IP 位址*。閘道位址必須位於 VIP 子網路內。
++
+用戶端和管理員用戶將使用此閘道存取虛擬 IP 位址。
+
+. 輸入至少一個且不超過十個 VIP 位址，供 HA 群組中的作用中介面使用。所有 VIP 位址都必須在 VIP 子網路內，且所有位址都將同時在作用中介面上處於作用中狀態。
++
+您必須提供至少一個 IPv4 位址。您也可以選擇指定其他 IPv4 和 IPv6 位址。
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+
+
+
+
+[[next-steps]]
+=== 後續步驟
+
+如果您將使用此 HA 群組進行負載平衡，請建立負載平衡器端點以決定連接埠與網路傳輸協定，並附加任何必要的憑證。請參閱 link:configuring-load-balancer-endpoints.html["設定負載平衡器端點"]。
+
+
+
+[[edit-a-high-availability-group]]
+== ${post_edited_translations.segment}
+
+您可以編輯高可用度 (HA) 群組，以變更其名稱和執行摘要、新增或移除介面、變更優先順序，或新增或更新虛擬 IP 位址。
+
+例如，如果您想要在網站或節點退役過程中移除與選定介面關聯的節點，則可能需要編輯 HA 群組。
+
+.步驟
+. 選擇 *Configuration* > *Network* > *High availability groups*。
++
+${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+** 選擇 *Actions* > *Edit virtual IP address* 以新增或移除 VIP 位址。
+** ${post_edited_translations.segment}
+
+
+. 如果您選擇了「編輯虛擬 IP 位址」：
++
+.. 更新 HA 群組的虛擬 IP 位址。
+.. 選取 *Save* 。
+.. 選擇 *Finish* 。
+
+
+. ${post_edited_translations.segment}
++
+.. ${post_edited_translations.segment}
+.. （可選）選取或取消選取核取方塊以新增或移除介面。
++
+
+NOTE: 如果 HA 群組提供對 Grid Manager 的存取，則必須在主要管理節點上選取一個介面作為主要介面。某些維護程序只能從主要管理節點執行。
+
+.. ${post_edited_translations.segment}
+.. （可選）更新虛擬 IP 位址。
+.. 選擇*儲存*，然後選擇*完成*。
+
+
+
+
+
+
+[[remove-a-high-availability-group]]
+== ${post_edited_translations.segment}
+
+您可以一次移除一個或多個高可用度（HA）群組。
+
+
+TIP: 如果 HA 群組已繫結至負載平衡端點，則無法將其移除。若要刪除 HA 群組，您必須將其從任何使用該群組的負載平衡端點中移除。
+
+為防止用戶端服務中斷，請在移除 HA 群組之前更新所有受影響的 S3 用戶端應用程式。更新每個用戶端，使其使用另一個 IP 位址連線，例如，使用不同 HA 群組的虛擬 IP 位址，或使用安裝期間為介面設定的 IP 位址。
+
+.步驟
+. 選擇 *Configuration* > *Network* > *High availability groups*。
+. 檢視您要移除之每個 HA 群組的 *負載平衡器端點* 欄。如果列出任何負載平衡器端點：
++
+.. 前往 *組態* > *網路* > *負載平衡器端點*。
+.. 選取端點的核取方塊。
+.. ${post_edited_translations.segment}
+.. 更新綁定模式以移除 HA 群組。
+.. 選擇 *Save changes* 。
+
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+您選擇的所有高可用度群組均已移除。高可用度群組頁面上將顯示綠色成功橫幅。
+
+

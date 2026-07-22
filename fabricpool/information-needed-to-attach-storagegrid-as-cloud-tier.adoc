@@ -1,0 +1,99 @@
+---
+permalink: fabricpool/information-needed-to-attach-storagegrid-as-cloud-tier.html 
+sidebar: sidebar 
+keywords: StorageGRID, fabricPool, ONTAP System Manager, ONTAP CLI, port, FQDN, object store name 
+summary: 在將 StorageGRID 作為 FabricPool 的雲端分層附加之前，您必須在 StorageGRID 中執行組態步驟並取得某些值。 
+---
+= 將 StorageGRID 附加為 FabricPool 雲端層所需的資訊
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在將 StorageGRID 附加為 FabricPool 的雲端分層之前，您必須在 StorageGRID 中執行組態步驟，並取得在 ONTAP 中使用的某些值。
+
+
+
+[[what-values-do-i-need]]
+== 我需要哪些數值？
+
+下表顯示您必須在 StorageGRID 中設定的值，以及 ONTAP 和 DNS 伺服器如何使用這些值。
+
+[cols="1a,1a,1a"]
+|===
+| 價值 | ${post_edited_translations.segment} | ${post_edited_translations.segment} 
+
+
+ a| 
+虛擬 IP（VIP）位址
+ a| 
+${post_edited_translations.segment}
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+連接埠
+ a| 
+StorageGRID > 負載平衡器端點
+ a| 
+ONTAP System Manager > 新增雲端層
+
+
+
+ a| 
+SSL 憑證
+ a| 
+StorageGRID > 負載平衡器端點
+ a| 
+ONTAP System Manager > 新增雲端層
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+StorageGRID > 負載平衡器端點
+ a| 
+${post_edited_translations.segment}
+
+
+
+ a| 
+存取金鑰 ID 和秘密存取金鑰
+ a| 
+StorageGRID > 租戶與儲存桶
+ a| 
+ONTAP System Manager > 新增雲端層
+
+
+
+ a| 
+儲存桶/Container 名稱
+ a| 
+StorageGRID > 租戶與儲存桶
+ a| 
+ONTAP System Manager > 新增雲端層
+
+|===
+
+
+[[how-do-i-get-these-values]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* 請使用 link:use-fabricpool-setup-wizard.html["FabricPool 設定精靈"]。FabricPool 設定精靈可協助您在 StorageGRID 中快速設定所需的數值，並輸出可用於設定 ONTAP System Manager 的檔案。此精靈會引導您完成必要的步驟，並協助確保您的設定符合 StorageGRID 和 FabricPool 的最佳實務做法。
+* 手動設定每個項目。然後，將這些值輸入 ONTAP System Manager 或 ONTAP CLI 中。請依照以下步驟操作：
++
+.. link:creating-ha-group-for-fabricpool.html["為 FabricPool 設定高可用度 （HA） 群組"]。
+.. link:creating-load-balancer-endpoint-for-fabricpool.html["為 FabricPool 建立負載平衡器端點"]。
+.. link:creating-tenant-account-for-fabricpool.html["為 FabricPool 建立租戶帳戶"]。
+.. 登入租戶帳戶，然後link:creating-s3-bucket-and-access-key.html["為 root 使用者建立儲存桶和存取金鑰"]。
+.. 為 FabricPool 資料建立 ILM 規則，並將其新增至您的作用中 ILM 原則。請參閱link:using-storagegrid-ilm-with-fabricpool-data.html["設定 ILM 以用於 FabricPool 資料"]。
+.. （可選）link:creating-traffic-classification-policy-for-fabricpool.html["為 FabricPool 建立流量分類原則"]
+
+
+

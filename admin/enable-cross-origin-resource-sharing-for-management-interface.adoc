@@ -1,0 +1,42 @@
+---
+permalink: admin/enable-cross-origin-resource-sharing-for-management-interface.html 
+sidebar: sidebar 
+keywords: how to configure cross-origin resource sharing, cors, management, api, domain 
+summary: 如果您希望可以使用管理 API 從另一個網域存取 StorageGRID 中的資料，則可以為 StorageGRID 的管理 API 請求啟用跨來源資源共用 （CORS）。 
+---
+= 為管理介面啟用 StorageGRID CORS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+身為網格系統管理員，如果您希望可以使用管理 API 從另一個網域存取 StorageGRID 中的資料，則可以為 StorageGRID 的管理 API 請求啟用跨來源資源共用 （CORS）。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* link:../tenant/tenant-management-permissions.html["${post_edited_translations.segment}"] 提供對所有 CORS 組態請求的存取。
+
+
+.關於此任務
+CORS 是一種安全性機制，允許一個網域中的用戶端 Web 應用程式存取另一個網域中的資源。例如，假設您想要在網域 `\http://www.example.com`中為 StorageGRID 建立監控儀表板。透過在 StorageGRID 中為 `\http://www.example.com`和「Grid Manager」啟用 CORS，StorageGRID 網域可回應來自 `\http://www.example.com`的 Grid Management API 請求。
+
+Management API (mgmt-api) 請求，包含 `application/json`或 `multipart/formdata`對 `Content-Type`的請求，均支援 CORS。
+
+.步驟
+. 在 Grid Manager 中，前往 *組態* > *網路* > *管理介面 CORS 設定*。
+. 選擇 *Grid Manager*、*Tenant Manager* 或同時選擇這兩個選項。
++
+** ${post_edited_translations.segment}
+** *Tenant Manager*：為跨網域租戶管理 API 請求啟用 CORS。
+
+
+. 在 *Domains* 欄位中輸入另一個網域的 URL。
++
+如果要為 StorageGRID 中的多個網域啟用 CORS，請選擇「新增另一個網域」。
+
+. 選取 *Save* 。
+
+
+.相關資訊
+link:../tenant/configuring-cross-origin-resource-sharing-for-buckets-and-objects.html["為儲存桶和物件設定 StorageGRID CORS"]

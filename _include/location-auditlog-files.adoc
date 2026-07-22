@@ -1,0 +1,36 @@
+= 
+:allow-uri-read: 
+
+
+稽核日誌目錄和適用節點取決於您的稽核目的地設定。
+
+[cols="1a,2a"]
+|===
+| 選項 | 目的地 
+
+
+ a| 
+本地節點（預設）
+ a| 
+`/var/local/log/localaudit.log`
+
+
+
+ a| 
+管理節點/本地節點
+ a| 
+* 管理節點（主節點和非主節點）： `/var/local/audit/export/audit.log`
+* 所有節點：在此模式下， `/var/local/log/localaudit.log`檔案通常為空或缺失。
+
+
+
+
+ a| 
+外部 syslog 伺服器
+ a| 
+`/var/local/log/localaudit.log`
+
+|===
+根據您的稽核目的地設定，輸入： `cd /var/local/log` 或 `/var/local/audit/export/`
+
+若要深入瞭解，請參閱 link:../monitor/configure-log-management.html#select-log-location["選擇日誌位置"]。

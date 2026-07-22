@@ -1,0 +1,71 @@
+---
+permalink: audit/etaf-security-authentication-failed.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, ETAF, Security Authentication Failed 
+summary: '當使用傳輸層安全性協定 (TLS) 的連線嘗試失敗時，會產生此訊息。' 
+---
+= StorageGRID 中安全驗證失敗的 ETAF 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當使用傳輸層安全性協定 (TLS) 的連線嘗試失敗時，會產生此訊息。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+CNID
+ a| 
+連線識別碼
+ a| 
+TCP/IP 連線的唯一系統識別碼，驗證失敗即發生於此連線。
+
+
+
+ a| 
+RUID
+ a| 
+使用者身分
+ a| 
+代表遠端使用者身分的服務相關識別碼。
+
+
+
+ a| 
+RSLT
+ a| 
+原因代碼
+ a| 
+故障的原因：
+
+SCNI：安全連線建立失敗。
+
+CERM：憑證遺失。
+
+CERT：憑證無效。
+
+CERE：憑證已過期。
+
+CERR：憑證已被撤銷。
+
+CSGN：憑證簽署無效。
+
+CSGU：憑證簽署者未知。
+
+UCRM：缺少使用者憑證。
+
+UCRI：使用者憑證無效。
+
+UCRU：使用者憑證已停用。
+
+TOUT：驗證逾時。
+
+|===
+當與使用 TLS 的安全服務建立連線時，系統會使用 TLS 設定檔和服務內建的附加邏輯來驗證遠端實體的憑證。如果因無效、意外或不允許的憑證或認證導致驗證失敗，則會記錄一條稽核訊息。這可用於查詢未經授權的存取嘗試及其他與安全性相關的連線問題。
+
+該訊息可能是由於遠端實體組態錯誤，或試圖向系統提供無效或被禁止的憑證所導致的。應監控此稽核訊息，以偵測試圖未經授權存取系統的企圖。

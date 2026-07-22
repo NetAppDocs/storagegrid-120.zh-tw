@@ -1,0 +1,18 @@
+---
+permalink: monitor/viewing-objects-tab.html 
+sidebar: sidebar 
+keywords: objects tab 
+summary: ${post_edited_translations.segment} 
+---
+= 檢視 StorageGRID Objects 標籤
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+「Objects」索引標籤提供關於 link:../s3/index.html["S3 擷取和擷取速率"] 的資訊。
+
+每個儲存節點、每個站台和整個網格都會顯示 Objects 索引標籤。對於儲存節點，Objects 索引標籤還提供物件計數以及有關中繼資料查詢和背景驗證的資訊。
+
+image:nodes_page_objects_tab.png["${post_edited_translations.segment}"]

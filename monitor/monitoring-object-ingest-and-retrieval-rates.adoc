@@ -1,0 +1,34 @@
+---
+permalink: monitor/monitoring-object-ingest-and-retrieval-rates.html 
+sidebar: sidebar 
+keywords: object ingest rates, object retrieval rates, monitor s3, client operations 
+summary: 您可以監控物件擷取和檢索速率，以及物件數量、查詢和驗證等計量。您可以檢視用戶端應用程式在 StorageGRID 系統中讀取、寫入和修改物件的成功和失敗嘗試次數。 
+---
+= 監控 StorageGRID 中的 S3 用戶端作業
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以監控物件擷取和檢索速率，以及物件數量、查詢和驗證等計量。您可以檢視用戶端應用程式在 StorageGRID 系統中讀取、寫入和修改物件的成功和失敗嘗試次數。
+
+.開始之前
+您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 選擇 *Nodes* 以存取節點頁面。
+. ${post_edited_translations.segment}
++
+此圖表顯示整個 StorageGRID 系統的 S3 擷取和擷取速率（以位元組/秒為單位）以及擷取或擷取的資料量。您可以選擇時間間隔，或套用自訂時間間隔。
+
+. 若要查看特定儲存節點的資訊，請從左側清單中選取該節點，然後選取 *Objects* 索引標籤。
++
+此圖表顯示該節點的擷取與擷取速率。此索引標籤也包含物件計數、中繼資料查詢和驗證作業的計量。
+
++
+image:nodes_storage_node_objects_help.png["節點 > _儲存節點_ > 物件 > 屬性說明的螢幕截圖"]
+
+

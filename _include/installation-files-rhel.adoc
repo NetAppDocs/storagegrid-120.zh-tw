@@ -1,0 +1,78 @@
+= 
+:allow-uri-read: 
+
+
+[cols="1a,1a"]
+|===
+| ${post_edited_translations.segment} | 說明 
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ./rpms/NLF000000.txt  a| 
+免費授權，不提供任何產品支援服務。
+
+
+
+| ${post_edited_translations.segment}  a| 
+${post_edited_translations.segment}
+
+
+
+| ./rpms/StorageGRID-Webscale-Service-_version_-SHA.rpm  a| 
+用於在 RHEL 主機上安裝 StorageGRID 主機服務的 RPM 套件。
+
+
+
+| ${post_edited_translations.segment} | 說明 
+
+
+| ./rpms/configure-storagegrid.py  a| 
+${post_edited_translations.segment}
+
+
+
+| ./rpms/configure-sga.py  a| 
+用於自動化 StorageGRID 應用裝置組態的 Python 指令碼。
+
+
+
+| ./rpms/configure-storagegrid.sample.json  a| 
+搭配  `configure-storagegrid.py` 指令碼使用的範例組態檔案。
+
+
+
+| ./rpms/storagegrid-ssoauth.py  a| 
+這是一個範例 Python 指令碼，可用於在啟用單一登入的情況下登入 Grid Management API。您也可以使用此指令碼進行 Ping Federate 整合。
+
+
+
+| ${post_edited_translations.segment}  a| 
+一個用於搭配  `configure-storagegrid.py` 指令碼使用的空白組態檔案。
+
+
+
+| ${post_edited_translations.segment}  a| 
+用於為 StorageGRID Container 部署設定 RHEL 主機的範例 Ansible 角色與 Playbook。您可以根據需要自訂角色或 Playbook。
+
+
+
+| ${post_edited_translations.segment}  a| 
+這是一個範例 Python 指令碼，當使用 Active Directory 或 Ping Federate 啟用單一登入 （SSO） 時，您可以使用該指令碼登入 Grid Management API。
+
+
+
+| ${post_edited_translations.segment}  a| 
+由隨附的  `storagegrid-ssoauth-azure.py` Python 指令碼所呼叫的輔助指令碼，用於與 Azure 進行 SSO 互動。
+
+
+
+| ./rpms/extras/api-schemas  a| 
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+|===

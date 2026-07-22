@@ -1,0 +1,310 @@
+---
+permalink: monitor/email-alert-notifications.html 
+sidebar: sidebar 
+keywords: how to disable alert rules, how to remove a custom alert rule 
+summary: 如果您希望在發生警報時收到電子郵件通知，則必須提供您的 SMTP 伺服器資訊。您還必須輸入警報通知收件人的電子郵件地址。 
+---
+= 設定 StorageGRID 警示的電子郵件通知
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您希望在發生警報時收到電子郵件通知，則必須提供您的 SMTP 伺服器資訊。您還必須輸入警報通知收件人的電子郵件地址。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.關於此任務
+用於警報通知的電子郵件設定不適用於 AutoSupport 套件。但是，您可以對所有通知使用同一個電子郵件伺服器。
+
+如果您的 StorageGRID 部署包含多個管理節點，則主要管理節點為警示通知、AutoSupport 套件、SNMP 陷阱和通知的慣用傳送者。如果主要管理節點無法使用，則通知將暫時由其他管理節點傳送。請參閱link:../primer/what-admin-node-is.html["什麼是管理節點？"]。
+
+.步驟
+. 選擇 *Alerts* > *Email setup*。
++
+顯示電子郵件設定頁面。
+
+. 勾選「啟用電子郵件通知」核取方塊，表示您希望在警示達到設定的閾值時傳送通知電子郵件。
++
+郵件 （SMTP） 伺服器、傳輸層安全性 （TLS）、電子郵件地址和篩選器部分隨即顯示。
+
+. 在電子郵件（SMTP）伺服器部分，輸入 StorageGRID 存取您的 SMTP 伺服器所需的資訊。
++
+如果您的 SMTP 伺服器需要驗證，則必須提供使用者名稱和密碼。
+
++
+[cols="1a,2a"]
+|===
+| 欄位 | 輸入 
+
+
+ a| 
+郵件伺服器
+ a| 
+SMTP 伺服器的完整網域名稱 (FQDN) 或 IP 位址。
+
+
+
+ a| 
+連接埠
+ a| 
+用於存取 SMTP 伺服器的連接埠。必須介於 1 和 65535 之間。
+
+
+
+ a| 
+使用者名稱（選用）
+ a| 
+如果您的 SMTP 伺服器需要驗證，請輸入用於驗證的使用者名稱。
+
+
+
+ a| 
+密碼（選用）
+ a| 
+如果您的 SMTP 伺服器需要驗證，請輸入用於驗證的密碼。
+
+|===
+. 在「電子郵件地址」部分，輸入寄件者和每位收件者的電子郵件地址。
++
+.. 對於「寄件者電子郵件地址」，請指定有效的電子郵件地址，作為警示通知的「寄件者」地址。
++
+例如： `storagegrid-alerts@example.com`
+
+.. 在「收件者」部分，為每個電子郵件清單或應在發生警示時收到電子郵件的人員輸入電子郵件地址。
++
+點選加號圖示 image:icon_plus_sign_black_on_white.gif["加號圖示"] 以新增收件人。
+
+
+
+. 如果與 SMTP 伺服器通訊需要傳輸層安全性協定 (TLS)，請在「傳輸層安全性協定 (TLS)」部分選擇「*需要 TLS*」。
++
+.. 在「CA 憑證」欄位中，提供將用於驗證 SMTP 伺服器身分的 CA 憑證。
++
+您可以複製內容並貼上到此欄位中，或選擇 *Browse* 並選擇檔案。
+
++
+您必須提供一個包含所有中間憑證授權單位 （CA） 憑證的單一檔案。該檔案應包含所有 PEM 編碼的 CA 憑證檔案，並按憑證鏈結順序串連。
+
+.. 如果您的 SMTP 電子郵件伺服器要求電子郵件寄件者提供用戶端憑證進行驗證，請勾選「傳送用戶端憑證」核取方塊。
+.. 在「用戶端憑證」欄位中，提供要傳送至 SMTP 伺服器的 PEM 編碼用戶端憑證。
++
+您可以複製內容並貼上到此欄位中，或選擇 *Browse* 並選擇檔案。
+
+.. 在「私鑰」欄位中，以未加密的 PEM 編碼輸入用戶端憑證的私鑰。
++
+您可以複製內容並貼上到此欄位中，或選擇 *Browse* 並選擇檔案。
+
++
+
+NOTE: 如果需要編輯電子郵件設定，請選擇鉛筆圖示 image:icon_edit_tm.png["${post_edited_translations.segment}"] 來更新此欄位。
+
+
+
+. 在「篩選器」部分，選擇哪些警示嚴重性層級應產生電子郵件通知，除非特定警示的規則已被靜音。
++
+[cols="1a,2a"]
+|===
+| ${post_edited_translations.segment} | 說明 
+
+
+ a| 
+次要、主要、關鍵
+ a| 
+當警報規則的輕微、重大或關鍵條件符合時，系統會發送電子郵件通知。
+
+
+
+ a| 
+重大、關鍵
+ a| 
+當警報規則的主要或關鍵條件滿足時，系統會發送電子郵件通知。次要警報不會發送通知。
+
+
+
+ a| 
+僅限關鍵
+ a| 
+僅在滿足警示規則的關鍵條件時，才會傳送電子郵件通知。系統不會針對次要或主要警示傳送通知。
+
+|===
+. 準備測試電子郵件設定時，請執行下列步驟：
++
+.. 選擇 *Send Test Email*。
++
+螢幕上會顯示確認訊息，表示已傳送測試郵件。
+
+.. 檢查所有電子郵件收件者的收件匣，並確認已收到測試郵件。
++
+
+NOTE: ${post_edited_translations.segment}
+
+.. ${post_edited_translations.segment}
++
+
+NOTE: 當您測試警示通知時，必須登入每個 Admin 節點以驗證連線能力。這與測試 AutoSupport 套件不同，後者是由所有 Admin 節點傳送測試電子郵件。
+
+
+
+. 選取 *Save* 。
++
+發送測試郵件不會儲存您的設定。您必須選取 *Save*。
+
++
+${post_edited_translations.segment}
+
+
+
+
+
+[[information-included-in-alert-email-notifications]]
+== ${post_edited_translations.segment}
+
+在您設定 SMTP 電子郵件伺服器之後，當觸發警示時，系統會將電子郵件通知傳送給指定的收件者，除非該警示規則已被靜音隱藏。請參閱 link:silencing-alert-notifications.html["靜音警報通知"]。
+
+${post_edited_translations.segment}
+
+image:alerts_email_notification.png["警示電子郵件通知"]
+
+[cols="1a,6a"]
+|===
+| 圖說文字 | 說明 
+
+
+ a| 
+1
+ a| 
+警報名稱，後面跟著該警報的活躍執行個體數。
+
+
+
+ a| 
+2
+ a| 
+警報執行摘要。
+
+
+
+ a| 
+3
+ a| 
+針對警報的任何建議動作。
+
+
+
+ a| 
+4
+ a| 
+有關警報的每個活動執行個體的詳細資訊，包括受影響的節點和站點、警報嚴重性、觸發警報規則的 UTC 時間以及受影響的作業和服務的名稱。
+
+
+
+ a| 
+5
+ a| 
+發送通知的管理節點的主機名稱。
+
+|===
+
+
+[[how-alerts-are-grouped]]
+== ${post_edited_translations.segment}
+
+若要防止觸發警示時傳送過多的電子郵件通知，StorageGRID 會嘗試將多個警示分組到相同通知中。
+
+請參閱下表，了解 StorageGRID 如何將多個警示分組到電子郵件通知中。
+
+[cols="1a,1a"]
+|===
+| 行為 | 範例 
+
+
+ a| 
+每個警報通知僅適用於名稱相同的警報。如果同時觸發兩個名稱不同的警報，則會傳送兩封電子郵件通知。
+ a| 
+* 警報 A 同時在兩個節點上觸發。僅傳送一則通知。
+* 節點 1 上觸發警報 A，節點 2 上同時觸發警報 B。系統會發送兩條通知——每個通知對應一則警報。
+
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+* 警報 A 已觸發，且次要、主要和關鍵警報閾值均已達到。系統將發送一則關鍵警報通知。
+
+
+
+
+ a| 
+首次觸發警示時，StorageGRID 會等待 2 分鐘，然後才傳送通知。如果在此期間觸發了其他具有相同名稱的警示，StorageGRID 會將所有警示分組在初始通知中。​
+ a| 
+. 警示 A 於 08:00 在節點 1 觸發。未傳送任何通知。
+. 警示 A 於 08:01 在節點 2 觸發。未傳送任何通知。
+. 08:02，系統發送通知以報告這兩個警示的執行個體。
+
+
+
+
+ a| 
+如果觸發了另一個同名警示，StorageGRID 會等待 10 分鐘後再傳送新的通知。新的通知會報告所有作用中警示（目前未被靜音的警示），即使這些警示之前已經報告過。
+ a| 
+. 節點 1 於 08:00 觸發警報 A。於 08:02 發送通知。
+. 警報 A 於 08:05 在節點 2 上觸發。第二份通知於 08:15 （10 分鐘後）發送。兩個節點均已回報。
+
+
+
+
+ a| 
+如果存在多個同名的當前警示，且其中一個警示已解決，則當警示在已解決的節點上再次出現時，不會傳送新的通知。
+ a| 
+. 節點 1 觸發警報 A。已發送通知。
+. 節點 2 觸發警報 A。已發送第二條通知。
+. 節點 2 的警報 A 已解決，但節點 1 的警報 A 仍然有效。
+. 節點 2 的警報 A 再次觸發。由於節點 1 的警報仍然有效，因此不會發送新的通知。
+
+
+
+
+ a| 
+StorageGRID 會繼續每 7 天發送電子郵件通知，直到所有警示的執行個體均已解決或警示規則已靜音為止。
+ a| 
+. 警示 A 於 3 月 8 日針對節點 1 觸發。已傳送通知。
+. 警報 A 尚未解決或關閉。將於 3 月 15 日、3 月 22 日、3 月 29 日及之後發送額外通知。
+
+
+|===
+
+
+[[troubleshoot-alert-email-notifications]]
+== ${post_edited_translations.segment}
+
+如果觸發了「電子郵件通知故障」警示，或您無法收到測試警示電子郵件通知，請按照以下步驟解決此問題。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您擁有 link:../admin/admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+.步驟
+. 請檢查您的設定。
++
+.. 選擇 *Alerts* > *Email setup*。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
+
+
+. 請檢查您的垃圾郵件過濾器，確保郵件未被傳送至垃圾郵件資料夾。
+. 請您的電子郵件系統管理員確認來自該寄件者地址的電子郵件未遭封鎖。
+. ${post_edited_translations.segment}
++
+技術支援可以利用日誌中的資訊來幫助確定問題所在。例如，prometheus.log 日誌檔可能會顯示連接到您指定的伺服器時發生的錯誤。
+
++
+請參閱 link:collecting-log-files-and-system-data.html["收集日誌檔和系統資料"]。
+
+

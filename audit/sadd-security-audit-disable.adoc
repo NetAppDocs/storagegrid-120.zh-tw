@@ -1,0 +1,47 @@
+---
+permalink: audit/sadd-security-audit-disable.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, SADD, Security Audit Disable 
+summary: 此訊息表示來源服務（節點 ID）已關閉稽核訊息日誌記錄。StorageGRID 不再收集或傳遞稽核訊息。 
+---
+= StorageGRID 中停用安全稽核的 SADD 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+此訊息表示來源服務（節點 ID）已關閉稽核訊息日誌記錄。StorageGRID 不再收集或傳遞稽核訊息。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+AETM
+ a| 
+啟用方法
+ a| 
+用於停用稽核的方法。
+
+
+
+ a| 
+AEUN
+ a| 
+使用者名稱
+ a| 
+執行停用稽核記錄命令的使用者名稱。
+
+
+
+ a| 
+RSLT
+ a| 
+結果
+ a| 
+此欄位值為 NONE。RSLT 是必填訊息欄位，但與此訊息無關。之所以使用 NONE 而不是 SUCS，是為了避免此訊息被過濾。
+
+|===
+該訊息表示記錄之前已啟用，但現在已停用。這通常僅在批次擷取期間使用，以改善系統效能。批次活動完成後，稽核功能將恢復（SADE），且停用稽核功能的功能將被永久封鎖。

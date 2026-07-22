@@ -1,0 +1,158 @@
+---
+permalink: monitor/commonly-used-prometheus-metrics.html 
+sidebar: sidebar 
+keywords: prometheus, Prometheus metrics, metrics 
+summary: 參考此常用 Prometheus 計量列表，以便更好地了解預設警示規則中的條件，或建立自訂警示規則的條件。 
+---
+= StorageGRID 中常用的 Prometheus 指標
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+參考此常用 Prometheus 計量列表，以便更好地了解預設警示規則中的條件，或建立自訂警示規則的條件。
+
+您還可以<<obtain-all-metrics,${post_edited_translations.segment}>>。
+
+有關 Prometheus 查詢語法的詳細資訊，請參閱 https://prometheus.io/docs/prometheus/latest/querying/basics/["${post_edited_translations.segment}"^]。
+
+
+
+[[what-are-prometheus-metrics]]
+== ${post_edited_translations.segment}
+
+Prometheus 計量是時間序列測量值。Admin Node 上的 Prometheus 服務會從所有節點上的服務收集這些計量。計量會儲存在每個 Admin Node 上，直到保留給 Prometheus 資料的空間全滿為止。當  `/var/local/mysql_ibdata/` Volume 容量達到上限時，系統會先刪除最舊的計量。
+
+
+
+[[where-are-prometheus-metrics-used]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* *節點頁面*：節點頁面標籤上的圖表使用 Grafana 視覺化工具顯示 Prometheus 收集的時間序列計量。Grafana 以圖表格式顯示時間序列資料，而 Prometheus 則作為後端資料來源。
++
+image:nodes_page_network_traffic_graph.png["${post_edited_translations.segment}"]
+
+* ${post_edited_translations.segment}
+* *Grid Management API*：您可以在自訂警示規則或外部自動化工具中使用 Prometheus 計量來監控 StorageGRID 系統。完整的 Prometheus 計量清單可透過 Grid Management API 取得。（從 Grid Manager 頂部，選取說明圖示，然後選取 *API documentation* > *metrics*。）雖然有超過一千個計量可用，但監控最關鍵的 StorageGRID 作業只需要相對較少的計量。
++
+
+NOTE: ${post_edited_translations.segment}
+
+* 「支援」>「工具」>「診斷」頁面和「支援」>「工具」>「計量」頁面：這些頁面主要供技術支援人員使用，提供了幾個使用 Prometheus 計量值的工具和圖表。
++
+
+NOTE: ${post_edited_translations.segment}
+
+
+
+
+
+[[list-of-most-common-metrics]]
+== 最常用計量列表
+
+以下清單包含最常用的 Prometheus 計量。
+
+
+NOTE: ${post_edited_translations.segment}
+
+alertmanager_notifications_failed_total:: 失敗的警報通知總數。
+${post_edited_translations.segment}:: 非 root 使用者可用的檔案系統空間大小（以位元組為單位）。
+node_memory_MemAvailable_bytes:: ${post_edited_translations.segment}
+node_network_carrier::  `/sys/class/net/_iface_` 的 Carrier 值。
+${post_edited_translations.segment}:: 網路裝置統計資料 `receive_errs`。
+node_network_transmit_errs_total:: 網路設備統計資訊 `transmit_errs`。
+storagegrid_administratively_down:: 由於預期原因，該節點未連接到網格。例如，該節點或節點上的服務已正常關閉、節點正在重新啟動或軟體正在升級。
+${post_edited_translations.segment}:: 應用裝置中運算控制器硬體的狀態。
+storagegrid_appliance_failed_disks:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
+storagegrid_content_buckets_and_containers:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: 此儲存節點已知的 S3 資料物件總數。計數僅對透過 S3 與系統介面的用戶端應用程式所建立的資料物件有效。
+${post_edited_translations.segment}:: 此服務偵測到 StorageGRID 系統中遺失的物件總數。應採取行動以確定遺失的原因，以及是否可以進行恢復。
++
+--
+link:../troubleshoot/troubleshooting-lost-and-missing-object-data.html["${post_edited_translations.segment}"]
+
+--
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
+storagegrid_http_sessions_incoming_failed:: 由於 HTTP 請求格式錯誤或處理作業時發生故障，而未能成功完成的 HTTP 工作階段總數。
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: 此節點上等待 ILM 評估掃描的物件總數。
+storagegrid_ilm_awaiting_client_evaluation_objects_per_second:: 目前在此節點上根據 ILM 原則評估物件的速率。
+storagegrid_ilm_awaiting_client_objects:: 此節點上等待用戶端操作（例如，擷取）進行 ILM 評估的物件總數。
+${post_edited_translations.segment}:: 等待 ILM 評估的物件總數。
+storagegrid_ilm_scan_objects_per_second:: ${post_edited_translations.segment}
+storagegrid_ilm_scan_period_estimated_minutes:: ${post_edited_translations.segment}
++
+--
+*注意：*完整掃描並不能保證 ILM 已套用至此節點擁有的所有物件。
+
+--
+storagegrid_load_balancer_endpoint_cert_expiry_time:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: 透過此服務對中繼資料儲存執行查詢所需的平均時間。
+${post_edited_translations.segment}:: 自安裝以來接收到的資料總量。
+storagegrid_network_transmitted_bytes:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: 此服務目前使用的可用 CPU 時間百分比。表示服務的繁忙程度。可用 CPU 時間取決於伺服器的 CPU 數量。
+${post_edited_translations.segment}:: 由所選時間來源提供之時間的系統性偏差。當到達時間來源的延遲不等於時間來源到達 NTP 用戶端所需的時間時，就會引入偏差。
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
+storagegrid_s3_data_transfers_bytes_ingested:: ${post_edited_translations.segment}
+storagegrid_s3_data_transfers_bytes_retrieved:: ${post_edited_translations.segment}
+storagegrid_s3_operations_failed:: 失敗的 S3 操作總數（HTTP 狀態碼 4xx 和 5xx），不包括由 S3 授權故障所引起的操作。
+storagegrid_s3_operations_successful:: ${post_edited_translations.segment}
+storagegrid_s3_operations_unauthorized:: ${post_edited_translations.segment}
+storagegrid_servercertificate_management_interface_cert_expiry_days:: ${post_edited_translations.segment}
+${post_edited_translations.segment}:: 物件儲存 API 憑證到期前的天數。
+${post_edited_translations.segment}:: 自安裝以來，此服務累計使用 CPU 的時間。
+storagegrid_service_memory_usage_bytes:: 此服務目前正在使用的記憶體容量（RAM）。此值與 Linux top 公用程式顯示為 RES 的值相同。
+${post_edited_translations.segment}:: 本服務自安裝以來接收到的資料總量。
+storagegrid_service_network_transmitted_bytes:: 此服務發送的資料總量。
+storagegrid_service_restarts:: 服務重啟的總次數。
+storagegrid_service_runtime_seconds:: 自安裝以來，服務已執行的總時間。
+storagegrid_service_uptime_seconds:: 自上次重新啟動以來，服務已執行的總時間。
+storagegrid_storage_state_current:: 儲存設備服務的目前狀態。屬性值如下：
++
+--
+* 10 = 離線
+* 15 = 維護
+* 20 = 唯讀
+* 30 = 線上
+
+
+--
+storagegrid_storage_status:: 儲存設備服務的目前狀態。屬性值如下：
++
+--
+* 0 = 無錯誤
+* 10 = 過渡期
+* 20 = 可用空間不足
+* 30 = Volume(s) 無法使用
+* 40 = 錯誤
+
+
+--
+storagegrid_storage_utilization_data_bytes:: 儲存節點上複製和銷除編碼物件資料總大小的估計值。
+storagegrid_storage_utilization_metadata_allowed_bytes:: 每個儲存節點 Volume 0 上允許用於物件中繼資料的總空間。該值始終小於節點上實際為中繼資料保留的空間，因為一部分保留空間用於必要的資料庫操作（例如資料精簡和修理）以及未來的硬體和軟體升級。允許用於物件中繼資料的空間可控制整體物件容量。
+storagegrid_storage_utilization_metadata_bytes:: 儲存設備 Volume 0 上的物件中繼資料量（以位元組為單位）。
+storagegrid_storage_utilization_total_space_bytes:: 分配給所有物件儲存設備的總儲存空間。
+storagegrid_storage_utilization_usable_space_bytes:: 剩餘物件儲存空間總量。透過將儲存節點上所有物件儲存區的可用空間相加計算得出。
+storagegrid_tenant_usage_data_bytes:: 租戶所有物件的邏輯大小。
+storagegrid_tenant_usage_object_count:: 租戶的物件數量。
+storagegrid_tenant_usage_quota_bytes:: 租戶物件可用的最大邏輯空間量。如果未提供配額計量，則可用空間無限制。
+
+
+
+
+[[get-a-list-of-all-metrics]]
+== 取得所有計量列表
+
+[[obtain-all-metrics]]要取得完整的計量列表，請使用網格管理 API。
+
+.步驟
+. ${post_edited_translations.segment}
+. 找到 *計量* 操作。
+. 執行 `GET /grid/metric-names`操作。
+. 下載結果。
+

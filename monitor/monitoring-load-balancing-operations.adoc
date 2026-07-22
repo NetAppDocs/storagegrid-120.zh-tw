@@ -1,0 +1,54 @@
+---
+permalink: monitor/monitoring-load-balancing-operations.html 
+sidebar: sidebar 
+keywords: load balancing, monitoring 
+summary: ${post_edited_translations.segment} 
+---
+= 監控 StorageGRID 中的負載平衡作業
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.關於此任務
+您可以使用管理節點或閘道節點上的負載平衡器服務，或使用外部第三方負載平衡器，將用戶端請求分散到多個儲存節點。
+
+設定負載平衡之後，您應該確認物件擷取與擷回作業已平均分佈到各個 Storage 節點。平均分佈的要求可確保 StorageGRID 在負載下仍能對用戶端要求做出回應，並有助於維持用戶端效能。
+
+${post_edited_translations.segment}
+
+如需詳細資訊，請參閱 link:../admin/configuring-client-connections.html["${post_edited_translations.segment}"]。
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 選取 *Nodes* 。
+.. 選擇 Gateway Node 或 Admin Node。
+.. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+.. 對於每個應主動分發用戶端要求的節點，選取 link:viewing-load-balancer-tab.html["負載平衡器索引標籤"]。
+.. 查看過去一週的負載平衡器請求網路流量圖表，以確保節點持續主動分配請求。
++
+在主備高可用度 (HA) 群組中，節點可能會不時承擔備份角色。在此期間，這些節點不會分發用戶端請求。
+
+.. 審查過去一週的負載平衡器傳入請求速率圖表，以審查節點的物件處理量。
+.. 對 StorageGRID 系統中的每個管理節點或閘道節點重複這些步驟。
+.. ${post_edited_translations.segment}
+
+
+. 確認這些請求是否均勻地分配到儲存節點。
++
+.. 選擇 *_儲存節點_* > *LDR* > *HTTP*。
+.. ${post_edited_translations.segment}
+.. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+
+
+

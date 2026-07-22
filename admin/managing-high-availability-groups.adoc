@@ -1,0 +1,97 @@
+---
+permalink: admin/managing-high-availability-groups.html 
+sidebar: sidebar 
+keywords: manage high availability group, ha groups, admin node, gateway node, active interface, backup interface, priority order 
+summary: 高可用度 （HA） 群組為 S3 用戶端提供高可用度的資料連線，並為 Grid Manager 和 Tenant Manager 提供高可用度的連線。 
+---
+= 了解 StorageGRID 高可用性群組
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+高可用度 （HA） 群組為 S3 用戶端提供高可用度的資料連線，並為 Grid Manager 和 Tenant Manager 提供高可用度的連線。
+
+您可以將多個管理節點和閘道節點的網路介面分組到一個高可用度 （HA） 群組中。如果 HA 群組中的作用中介面發生故障，備份介面可以管理工作負載。
+
+每個 HA 群組提供對所選節點上共享服務的存取。
+
+* 包含 Gateway Node、Admin Node 或兩者的 HA 群組為 S3 用戶端提供高可用度的資料連線。
+* 僅包含管理節點的 HA 群組可為 Grid Manager 和 Tenant Manager 提供高可用度的連線。
+* 僅包含服務設備和基於 VMware 的軟體節點的 HA 群組可以為link:../admin/manage-s3-select-for-tenant-accounts.html["使用 S3 Select 的 S3 租用戶"]提供高可用度的連線。建議在使用 S3 Select 時使用 HA 群組，但並非必要。
+
+
+
+
+[[how-do-you-create-an-ha-group]]
+== 如何建立 HA 群組？
+
+. 您可以為一個或多個管理節點或閘道節點選擇網路介面。您可以使用 Grid Network （eth0） 介面、Client Network （eth2） 介面、VLAN 介面或您已新增至節點的存取介面。
++
+
+NOTE: ${post_edited_translations.segment}
+
+. 您可以將一個介面指定為主要介面。除非發生故障，否則主要介面為作用中介面。
+. ${post_edited_translations.segment}
+. 您可以為該群組指派 1 到 10 個虛擬 IP （VIP） 位址。用戶端應用程式可以使用這些 VIP 位址中的任何一個連線至 StorageGRID。
+
+
+如需相關指示，請參閱 link:configure-high-availability-group.html["設定高可用度群組"]。
+
+
+
+[[what-is-the-active-interface]]
+== 目前啟動的介面是什麼？
+
+正常運作期間，HA 群組的所有 VIP 位址都會加入主介面（優先順序最高的介面）。只要主介面可用，用戶端連接到該群組的任何 VIP 位址時都會使用該介面。也就是說，在正常運作期間，主介面是該群組的「作用中」介面。
+
+同樣地，在正常運作期間，HA 群組中任何優先順序較低的介面都會充當「備份」介面。除非主要（目前作用中）介面變得無法使用，否則不會使用這些備份介面。
+
+
+
+[[view-the-current-ha-group-status-of-a-node]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+如果「概覽」標籤包含「HA 群組」條目，則表示該節點已指派到所列的 HA 群組。群組名稱後面的值表示該節點在 HA 群組中的目前狀態：
+
+* *Active*：HA 群組目前託管在此節點上。
+* *備份*：HA 群組目前未使用此節點；這是一個備份介面。
+* *已停止*：由於高可用度（keepalived）服務已手動停止，因此無法在此節點上託管 HA 群組。
+* ${post_edited_translations.segment}
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** 節點已關閉。
+
+
+
+
+在本例中，主管理節點已新增至兩個高可用度 （HA） 群組。該節點目前是 Admin clients 群組的作用中介面，也是 FabricPool clients 群組的備份介面。
+
+image:ha_group_primary_interface.png["HA 群組主要介面"]
+
+
+
+[[what-happens-when-the-active-interface-fails]]
+== ${post_edited_translations.segment}
+
+目前裝載 VIP 位址的介面即為作用中介面。如果 HA 群組包含多個介面，且作用中介面發生故障，則 VIP 位址會依優先順序移至第一個可用的備份介面。如果該介面發生故障，則 VIP 位址會移至下一個可用的備份介面，依此類推。
+
+${post_edited_translations.segment}
+
+* 設定該介面的節點發生故障。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 高可用度服務停止運作。
+
+
+
+NOTE: 裝載作用中介面的節點外部若發生網路故障，可能不會觸發容錯移轉。同樣地，Grid Manager 或 Tenant Manager 的服務也不會觸發容錯移轉。
+
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}

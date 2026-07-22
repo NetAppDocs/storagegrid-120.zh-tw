@@ -1,0 +1,55 @@
+---
+permalink: s3/s3-operations-tracked-in-audit-logs.html 
+sidebar: sidebar 
+keywords: audit log, auditing bucket and object operations, S3 audit messages 
+summary: StorageGRID 服務會產生稽核訊息並儲存在文字日誌檔案中。您可以在稽核日誌中審查 S3 特有的稽核訊息，以取得有關儲存桶和物件操作的詳細資訊。 
+---
+= StorageGRID 稽核日誌中追蹤的 S3 操作
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 服務會產生稽核訊息並儲存在文字日誌檔案中。您可以在稽核日誌中審查 S3 特有的稽核訊息，以取得有關儲存桶和物件操作的詳細資訊。
+
+
+
+[[bucket-operations-tracked-in-the-audit-logs]]
+== 稽核日誌中追蹤的儲存桶操作
+
+* CreateBucket
+* DeleteBucket
+* DeleteBucketTagging
+* DeleteObjects
+* GetBucketTagging
+* HeadBucket
+* ListObjects
+* ListObjectVersions
+* PUT Bucket 法規遵循
+* PutBucketTagging
+* PutBucketVersioning
+
+
+
+
+[[object-operations-tracked-in-the-audit-logs]]
+== 稽核日誌中追蹤的物件操作
+
+* CompleteMultipartUpload
+* CopyObject
+* DeleteObject
+* GetObject
+* HeadObject
+* PutObject
+* RestoreObject
+* SelectObject
+* UploadPart（當 ILM 規則使用平衡或嚴格擷取）
+* UploadPartCopy（當 ILM 規則使用平衡或嚴格擷取）
+
+
+.相關資訊
+* link:../audit/accessing-audit-log-file.html["存取稽核日誌檔案"]
+* link:../audit/client-write-audit-messages.html["用戶端寫入稽核訊息"]
+* link:../audit/client-read-audit-messages.html["用戶端讀取稽核訊息"]
+

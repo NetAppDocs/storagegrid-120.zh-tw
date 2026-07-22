@@ -1,0 +1,229 @@
+---
+permalink: ilm/creating-cloud-storage-pool.html 
+sidebar: sidebar 
+keywords: how to create cloud storage pool 
+summary: 雲端儲存資源池指定單一外部 Amazon S3 儲存桶或其他 S3 相容供應商或 Azure Blob 儲存 Container。 
+---
+= 在 StorageGRID 中建立雲端儲存資源池
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+雲端儲存資源池指定單一外部 Amazon S3 儲存桶或其他 S3 相容供應商或 Azure Blob 儲存 Container。
+
+建立雲端儲存資源池時，您可以指定 StorageGRID 將用於儲存物件的外部儲存桶或 Container 的名稱和位置、雲端供應商類型（Amazon S3/GCP 或 Azure Blob 儲存設備），以及 StorageGRID 存取外部儲存桶或 Container 所需的資訊。
+
+StorageGRID 會在您儲存雲端儲存資源池後立即進行驗證，因此您必須確保雲端儲存資源池中指定的儲存桶或 Container 存在且可存取。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["所需存取權限"]。
+* 您已審閱 link:considerations-for-cloud-storage-pools.html["雲端儲存資源池的注意事項"]。
+* 雲端儲存資源池引用的外部儲存桶或 Container 已存在，且您擁有 <<service-endpoint-info,服務端點資訊>>。
+* 要存取儲存貯體或 Container，您擁有<<authentication-account-info,驗證類型的帳戶資訊>>可供選擇。
+
+
+.步驟
+. 選擇 *ILM* > *儲存資源池* > *雲端儲存資源池*。
+. 選取 *Create*，然後輸入下列資訊：
++
+[cols="1a,3a"]
+|===
+| 欄位 | 說明 
+
+
+ a| 
+雲端儲存資源池名稱
+ a| 
+一個能夠簡要描述 Cloud Storage Pool 及其用途的名稱。請使用一個在設定 ILM 規則時易於識別的名稱。
+
+
+
+ a| 
+供應商類型
+ a| 
+您將使用哪家雲端供應商來建立此雲端儲存資源池？
+
+** *Amazon S3/GCP*：選擇此選項可使用 Amazon S3、Commercial Cloud Services (C2S) S3、Google Cloud Platform (GCP) 或其他 S3 相容供應商。
+** *Azure Blob Storage*
+
+
+
+
+ a| 
+儲存庫或 Container
+ a| 
+外部 S3 儲存貯體或 Azure Container 的名稱。儲存雲端儲存資源池後，即無法變更此值。
+
+|===
+. [[service-endpoint-info]]根據您選擇的供應商類型，輸入服務端點資訊。
++
+[role="tabbed-block"]
+====
+.Amazon S3/GCP
+--
+.. 協定方面，請選擇 HTTPS 或 HTTP。
++
+
+NOTE: 不要使用 HTTP 連線傳輸敏感資料。
+
+.. 請輸入主機名稱。例如：
++
+`s3-_aws-region_.amazonaws.com`
+
+.. 選擇網址樣式：
++
+[cols="1a,3a"]
+|===
+| 選項 | 說明 
+
+
+ a| 
+自動偵測
+ a| 
+根據提供的資訊，嘗試自動偵測要使用的 URL 樣式。例如，如果您指定了 IP 位址，StorageGRID 將使用路徑樣式的 URL。僅當您不確定要使用哪種特定樣式時，才選擇此選項。
+
+
+
+ a| 
+虛擬託管式
+ a| 
+使用虛擬託管式 URL 存取儲存桶。虛擬託管式 URL 將儲存桶名稱包含在網域名稱中。例如： `+https://bucket-name.s3.company.com/key-name+`
+
+
+
+ a| 
+路徑樣式
+ a| 
+使用路徑式 URL 存取儲存桶。路徑式 URL 的末端包含儲存桶名稱。例如： `+https://s3.company.com/bucket-name/key-name+`
+
+*注意：*不建議使用路徑樣式 URL 選項，該選項將在 StorageGRID 的未來版本中棄用。
+
+|===
+.. （可選）輸入連接埠號，或使用預設連接埠：HTTPS 為 443，HTTP 為 80。
+
+
+--
+.Azure Blob Storage
+--
+.. 請使用下列格式之一輸入服務端點的 URI。
++
+*** `+https://host:port+`
+*** `+http://host:port+`
+
+
+
+
+範例： `https://_myaccount_.blob.core.windows.net:443`
+
+如果您未指定連接埠，則預設情況下，HTTPS 使用連接埠 443，HTTP 使用連接埠 80。
+
+--
+====
+
+
+. [[authentication-account-info]]選擇「繼續」。然後選擇驗證類型，並輸入雲端儲存資源池端點所需的必要資訊：
++
+[role="tabbed-block"]
+====
+.存取密鑰
+--
+適用於 Amazon S3/GCP 或其他 S3 相容供應商
+
+.. *存取金鑰 ID*：輸入擁有外部儲存桶的帳戶的存取金鑰 ID。
+.. *Secret access key*：請輸入秘密存取金鑰。
+
+
+--
+.IAM Roles Anywhere
+--
+適用於 AWS IAM Roles Anywhere 服務
+
+StorageGRID 使用 AWS Security Token Service （STS） 動態產生短期權杖以存取 AWS 資源。
+
+.. *AWS IAM Roles Anywhere region*：選擇雲端儲存資源池的區域。例如， `us-east-1`。
+.. *信任錨 URN*：輸入用於驗證短期 STS 憑證請求的信任錨的 URN。可以是根目錄 CA 或中間 CA。
+.. *設定檔 URN*：輸入 IAM Roles Anywhere 設定檔的 URN，該設定檔列出任何受信任人員可承擔的角色。
+.. *角色 URN*：輸入任何受信任人員可承擔的 IAM 角色的 URN。
+.. *工作階段持續時間*：輸入臨時安全性憑證和角色工作階段的持續時間。最短輸入 15 分鐘，最長不超過 12 小時。
+.. *伺服器 CA 憑證*（選用）：一個或多個受信任的 CA 憑證（PEM 格式），用於驗證 IAM Roles Anywhere 伺服器。如果省略，則不會驗證伺服器。
+.. *終端實體憑證*：由信任錨簽署的 X509 憑證的公鑰，採用 PEM 格式。AWS IAM Roles Anywhere 使用此金鑰發出 STS 權杖。
+.. *終端實體私鑰*：終端實體憑證的私鑰。
+
+
+--
+.CAP（C2S 存取網站）
+--
+_適用於商業雲端服務 （C2S） S3 服務_
+
+.. *臨時憑證 URL*：輸入 StorageGRID 將用於從 CAP 伺服器取得臨時憑證的完整 URL，包括指派給您的 C2S 帳戶的所有必要和可選 API 參數。
+.. *伺服器 CA 憑證*：選取 *Browse* 並上傳 StorageGRID 將用於驗證 CAP 伺服器的 CA 憑證。憑證必須採用 PEM 編碼，並由適當的政府憑證授權單位 （CA） 核發。
+.. *用戶端憑證*：選擇*瀏覽*並上傳 StorageGRID 用於向 CAP 伺服器驗證身分的憑證。用戶端憑證必須採用 PEM 編碼，由相應的政府憑證授權單位（CA）頒發，並被授予存取您的 C2S 帳戶的權限。
+.. *用戶端私鑰*：選擇*瀏覽*並上傳用戶端憑證的 PEM 編碼私鑰。
+.. 如果用戶端私鑰已加密，請輸入用於解密用戶端私鑰的密碼。否則，請將 *Client private key passphrase* 欄位留空。
+
+
+
+NOTE: 如果需要加密用戶端憑證，請使用傳統加密格式。不支援 PKCS #8 加密格式。
+
+--
+.Azure Blob Storage
+--
+_僅適用於 Azure Blob 儲存體的共用金鑰_
+
+.. *帳戶名稱*：輸入擁有外部 Container 的儲存設備帳戶的名稱
+.. *帳戶金鑰*：輸入儲存設備帳戶的秘密金鑰
+
+
+您可以使用 Azure 入口網站來尋找這些值。
+
+--
+.匿名
+--
+無需提供其他資訊。
+
+--
+====
+. 選擇 *Continue*。然後選擇您要使用的伺服器驗證類型：
++
+[cols="1a,2a"]
+|===
+| 選項 | 說明 
+
+
+ a| 
+在儲存節點作業系統中使用根目錄 CA 憑證
+ a| 
+使用安裝在作業系統上的 Grid CA 憑證來保護連線安全。
+
+
+
+ a| 
+使用自訂 CA 憑證
+ a| 
+使用自訂 CA 憑證。選擇 *Browse* 並上傳 PEM 編碼的憑證。
+
+
+
+ a| 
+請勿驗證證書
+ a| 
+選擇此選項意味著與雲端儲存資源池的 TLS 連線並不安全。
+
+|===
+. 選取 *Save* 。
++
+儲存 Cloud Storage Pool 時，StorageGRID 會執行下列操作：
+
++
+** 驗證儲存桶或 Container 以及服務端點是否存在，並且可以使用您指定的憑證存取它們。
+** 將標記檔案寫入儲存桶或 Container，以將其識別為雲端儲存資源池。切勿移除此檔案，其名稱為 `x-ntap-sgws-cloud-pool-uuid`。
++
+如果 Cloud Storage Pool 驗證失敗，您會收到錯誤訊息，其中說明驗證失敗的原因。例如，如果存在憑證錯誤，或您指定的儲存桶或 Container 尚不存在，則可能會回報錯誤。
+
+
+
+. 如果發生錯誤，請查看 link:troubleshooting-cloud-storage-pools.html["雲端儲存資源池疑難排解指示"]，解決任何問題，然後再次嘗試儲存 Cloud Storage Pool。
+

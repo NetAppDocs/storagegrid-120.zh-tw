@@ -1,0 +1,61 @@
+---
+permalink: admin/deactivate-features-from-api.html 
+sidebar: sidebar 
+keywords: deactivate features from api 
+summary: 您可以使用 Grid Management API 完全停用 StorageGRID 系統中的特定功能。停用功能後，即無法指派任何人執行與該功能相關工作的權限。 
+---
+= 使用 API 停用 StorageGRID 功能
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 Grid Management API 完全停用 StorageGRID 系統中的特定功能。停用功能後，即無法指派任何人執行與該功能相關工作的權限。
+
+.關於此任務
+「已停用功能」系統可讓您封鎖對 StorageGRID 系統中某些功能的存取。停用功能是阻止 root 使用者或屬於具有 *Root access* 權限之管理員群組的使用者使用該功能的唯一方法。
+
+為了理解此功能的用途，請考慮以下場景：
+
+A 公司是一家服務供應商，透過建立租戶帳戶的方式出租其 StorageGRID 系統的儲存容量。為了保護租戶物件的安全性，A 公司希望確保其員工在帳戶部署後永遠無法存取任何租戶帳戶。
+
+公司 A 可以透過使用 Grid Management API 中的「停用功能」系統來達成此目標。透過在 Grid Manager （包括使用者介面和 API）中完全停用「變更租戶 root 密碼」功能，公司 A 可確保管理員使用者（包括 root 使用者和屬於具有「Root 存取權」權限之群組的使用者）無法變更任何租戶帳戶的 root 使用者密碼。
+
+.步驟
+. 存取網格管理 API 的 Swagger 文件。參見link:using-grid-management-api.html["${post_edited_translations.segment}"]。
+. 找到「停用功能」端點。
+. 若要停用某項功能（例如「變更租戶 root 使用者密碼」），請向 API 傳送如下的請求本文：
++
+`{ "grid": {"changeTenantRootPassword": true} }`
+
++
+當要求完成時，「變更租戶 root 密碼」功能即會停用。*變更租戶 root 密碼* 管理權限將不再出現在使用者介面中，且任何嘗試變更租戶 root 密碼的 API 要求都將失敗，並出現 "403 Forbidden"。
+
+
+
+
+
+[[reactivate-deactivated-features]]
+== ${post_edited_translations.segment}
+
+預設情況下，您可以使用 Grid Management API 重新啟用已停用的功能。但是，如果您希望防止已停用的功能被重新啟用，則可以停用 *activateFeatures* 功能本身。
+
+
+CAUTION: *activateFeatures* 功能無法重新啟動。如果您決定停用此功能，請注意，您將永久失去重新啟用任何其他已停用功能的能力。您必須聯絡技術支援以還原任何遺失的功能。
+
+.步驟
+. ${post_edited_translations.segment}
+. 找到「停用功能」端點。
+. ${post_edited_translations.segment}
++
+`{ "grid": null }`
+
++
+當此要求完成時，所有功能（包括變更租戶根目錄密碼功能）都會重新啟用。「*變更租戶根目錄密碼*」管理權限現在會顯示在使用者介面中，且任何嘗試變更租戶根目錄密碼的 API 要求都將成功，前提是使用者具有「*root 存取權*」或「*變更租戶根目錄密碼*」管理權限。
+
+
+
+
+TIP: 前面的範例會重新啟用所有已停用的功能。如果還有其他已停用但應保持停用狀態的功能，則必須在 PUT 請求中明確指定它們。例如，若要重新啟用「變更租戶根目錄密碼」功能並繼續停用 storageAdmin 管理權限，請傳送下列 PUT 要求：+
+`{ "grid": {"storageAdmin": true} }`

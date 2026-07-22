@@ -1,0 +1,29 @@
+---
+permalink: maintain/grid-node-procedures.html 
+sidebar: sidebar 
+keywords: storagegrid, grid node procedure 
+summary: ${post_edited_translations.segment} 
+---
+= StorageGRID 節點維護程序
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+${post_edited_translations.segment}:: link:../maintain/understanding-adc-service-quorum.html["ADC 服務"] 位於某些儲存節點上。在某些退役和節點轉換的情況下，您需要將 ADC 服務移動到同一站台上的另一個儲存節點。
+${post_edited_translations.segment}:: 您可以將不包含 ADC 服務的儲存節點轉換為僅儲存資料的儲存節點。
+${post_edited_translations.segment}:: ${post_edited_translations.segment}
+連接埠重映射:: ${post_edited_translations.segment}
+Server Manager:: Server Manager 在每個網格節點上執行，以監督服務的啟動與停止，並確保服務正常地參加與離開 StorageGRID 系統。Server Manager 也會監控每個網格節點上的服務，並將自動嘗試重新啟動任何報告故障的服務。
++
+--
+要執行 Server Manager 程序，通常需要存取節點的命令列。
+
+
+CAUTION: ${post_edited_translations.segment}
+
+--
+

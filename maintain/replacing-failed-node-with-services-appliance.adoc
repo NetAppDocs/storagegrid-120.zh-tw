@@ -1,0 +1,35 @@
+---
+permalink: maintain/replacing-failed-node-with-services-appliance.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, replace failed node, services appliance 
+summary: 您可以使用服務應用裝置來恢復故障的 Gateway Node、故障的非主要 Admin Node 或故障的主要 Admin Node，這些節點可能託管在 VMware、Linux 主機或服務應用裝置上。此程序是網格節點恢復程序的其中一個步驟。 
+---
+= 使用服務應用裝置更換故障的 StorageGRID 節點
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用服務應用裝置來恢復故障的 Gateway Node、故障的非主要 Admin Node 或故障的主要 Admin Node，這些節點可能託管在 VMware、Linux 主機或服務應用裝置上。此程序是網格節點恢復程序的其中一個步驟。
+
+.開始之前
+* ${post_edited_translations.segment}
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** 必須更換承載網格節點的服務應用裝置。
+
+
+* 您已確認服務應用裝置上的 StorageGRID 應用裝置安裝程式版本與 StorageGRID 系統的軟體版本相符。請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/verifying-and-upgrading-storagegrid-appliance-installer-version.html["${post_edited_translations.segment}"^]。
+
+
+
+NOTE: 請勿在同一站台同時部署 SG110 和 SG1100 服務應用裝置，或 SG100 和 SG1000 服務應用裝置。否則可能會導致效能出現不可預測的偏差。
+
+.關於此任務
+在下列情況下，您可以使用服務應用裝置來恢復發生故障的網格節點：
+
+* 故障節點是託管在 VMware 或 Linux 上（link:installing-services-appliance-platform-change-only.html["平台變更"]）
+* 故障節點託管於服務應用裝置上（link:preparing-appliance-for-reinstallation-platform-replacement-only.html["平台更換"]）
+

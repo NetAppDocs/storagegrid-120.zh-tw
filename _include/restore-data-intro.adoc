@@ -1,0 +1,89 @@
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+
+
+
+
+[[which-procedure-should-i-use]]
+== ${post_edited_translations.segment}
+
+盡可能使用 Grid Manager 中的「Volume 還原」頁面來還原物件資料。
+
+* 如果 Volume 列在 *維護* > *Volume 還原* > *要還原的節點*，請使用 link:../maintain/restoring-volume.html["${post_edited_translations.segment}"] 還原物件資料。
+* 如果 Volume 未列在「維護」>「Volume 還原」>「要還原的節點」中，請依照下列步驟使用 `repair-data`指令碼還原物件資料。
++
+如果恢復的儲存節點包含的磁碟區比它要替換的節點少，則必須使用 `repair-data`指令碼。
+
+
+
+
+NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["${post_edited_translations.segment}"]。
+
+
+
+[[use-the-repair-data-script-to-restore-object-data]]
+== 使用 `repair-data`指令碼還原物件資料
+
+.開始之前
+* 您已確認，在 Grid Manager 的「節點」>「概覽」標籤中，已復原的儲存節點的連線狀態為「已連線」image:icon_alert_green_checkmark.png["${post_edited_translations.segment}"]。
+
+
+.關於此任務
+假設網格的 ILM 規則已設定為允許物件複本可用，則可從其他儲存節點或 Cloud Storage Pool 還原物件資料。
+
+請注意下列事項：
+
+* ${post_edited_translations.segment}
+* 如果物件唯一剩餘的複本位於 Cloud Storage Pool 中，則 StorageGRID 必須向 Cloud Storage Pool 端點發出多個要求，以還原物件資料。執行此程序之前，請聯絡技術支援以協助估算恢復時間範圍及相關成本。
+
+
+
+
+[[about-the-repair-data-script]]
+== 關於  `repair-data` 指令碼
+
+若要還原物件資料，請執行 `repair-data`指令碼。此指令碼啟動物件資料還原程序，並與 ILM 掃描協同運作，以確保符合 ILM 規則。
+
+在下方選擇 *Replicated data* 或 *Erasure-coded (EC) data*，以根據您要還原的是複寫資料還是糾刪碼資料，了解  `repair-data` 指令碼的不同選項。如果您需要還原這兩種類型的資料，則必須執行這兩組命令。
+
+
+NOTE: 如需更多關於  `repair-data` 指令碼的資訊，請在主要 Admin Node 的命令列輸入  `repair-data --help`。
+
+
+NOTE: 修復資料指令碼已棄用，並將在未來的版本中移除。請盡可能使用link:../maintain/restoring-volume.html["${post_edited_translations.segment}"]。
+
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+${post_edited_translations.segment}
+
+`repair-data start-replicated-node-repair`
+
+`repair-data start-replicated-volume-repair`
+
+${post_edited_translations.segment}
+
+`repair-data show-replicated-repair-status`
+
+--
+.糾刪碼（EC）資料
+--
+${post_edited_translations.segment}
+
+`repair-data start-ec-node-repair`
+
+`repair-data start-ec-volume-repair`
+
+您可以使用以下命令追蹤銷毀編碼資料的修理情況：
+
+`repair-data show-ec-repair-status`
+
+
+NOTE: 糾刪碼資料的修理可在部分儲存設備節點離線時開始。然而，如果無法確認所有糾刪碼資料，則無法完成修理。修理將在所有節點均可用後完成。
+
+
+NOTE: EC 修理作業會暫時佔用大量儲存設備。可能會觸發儲存警報，但會在修理完成後解除警報。如果預留儲存設備不足，EC 修理作業將會失敗。無論 EC 修理作業成功或失敗，預留的儲存空間都會在作業完成後釋放。
+
+--
+====

@@ -1,0 +1,113 @@
+---
+permalink: swnodes/collecting-information-about-your-deployment-environment.html 
+sidebar: sidebar 
+keywords: how to collect information about your vmware deployment environment 
+summary: 在部署網格節點之前，您必須收集有關網路組態和 VMware 環境的資訊。 
+---
+= 收集有關您的 VMware 環境的 StorageGRID 資訊
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在部署網格節點之前，您必須收集有關網路組態和 VMware 環境的資訊。
+
+
+NOTE: 一次性安裝所有節點，比分批安裝更有效率。
+
+
+
+[[vmware-information]]
+== VMware 資訊
+
+您必須存取部署環境並收集有關 VMware 環境的資訊；為 Grid 、 Admin 和 Client 網路建立的網路；以及您計劃用於儲存節點的儲存 Volume 類型。
+
+您必須收集有關 VMware 環境的資訊，包括以下內容：
+
+* 具有完成部署所需權限的 VMware vSphere 帳戶的使用者名稱和密碼。
+* 每個 StorageGRID 節點虛擬機器的主機、資料存放區和網路組態資訊。
+
+
+
+NOTE: VMware live vMotion 會導致虛擬機器時鐘時間跳躍，且不支援任何類型的網格節點。雖然這種情況很少見，但錯誤的時鐘時間可能會導致資料遺失或組態更新。
+
+
+
+[[grid-network-information]]
+== Grid 網路資訊
+
+您必須收集有關為 StorageGRID Grid Network 建立的 VMware 網路的資訊（必要），包括：
+
+* 網路名稱。
+* 用來分配 IP 位址的方法，可以是靜態，也可以是 DHCP。
++
+** 如果您使用靜態 IP 位址，則需要每個網格節點所需的連網詳細資訊（IP 位址、閘道、網路遮罩）。
+** 如果您使用 DHCP，則需要網格網路上主管理節點的 IP 位址。如需詳細資訊、請參閱 link:how-grid-nodes-discover-primary-admin-node.html["網格節點如何發現主管理節點"]。
+
+
+
+
+
+
+[[admin-network-information]]
+== 管理網路訊息
+
+對於將連接到選用 StorageGRID 管理網路的節點，您必須收集有關為此網路建立的 VMware 網路的資訊，包括：
+
+* 網路名稱。
+* 用來分配 IP 位址的方法，可以是靜態，也可以是 DHCP。
++
+** 如果您使用靜態 IP 位址，則需要每個網格節點所需的連網詳細資訊（IP 位址、閘道、網路遮罩）。
+** 如果您使用 DHCP，則需要網格網路上主管理節點的 IP 位址。如需詳細資訊、請參閱 link:how-grid-nodes-discover-primary-admin-node.html["網格節點如何發現主管理節點"]。
+
+
+* 管理網路的外部子網路清單（ESL）。
+
+
+
+
+[[client-network-information]]
+== 用戶端網路資訊
+
+對於將連接到選用 StorageGRID 用戶端網路的節點，您必須收集有關為此網路建立的 VMware 網路的資訊，包括：
+
+* 網路名稱。
+* 用來分配 IP 位址的方法，可以是靜態，也可以是 DHCP。
+* 如果您使用靜態 IP 位址，則需要每個網格節點所需的連網詳細資訊（IP 位址、閘道、網路遮罩）。
+
+
+
+
+[[information-about-additional-interfaces]]
+== 有關其他介面的資訊
+
+安裝節點後，您可以選擇性地在 vCenter 的 VM 中新增主幹介面或存取介面。例如，您可能需要向管理節點或閘道節點新增主幹介面，以便使用 VLAN 介面隔離不同應用程式或租戶的流量。或者，您可能需要新增存取介面以用於高可用度 （HA） 群組。
+
+您新增的介面將顯示在 Grid Manager 的 VLAN 介面頁面和 HA 群組頁面上。
+
+* 如果新增中繼介面，請為每個新的父介面設定一個或多個 VLAN 介面。請參閱link:../admin/configure-vlan-interfaces.html["設定 VLAN 介面"]。
+* 如果新增存取介面，則必須將其直接新增至 HA 群組。請參閱link:../admin/configure-high-availability-group.html["設定高可用度群組"]。
+
+
+
+
+[[storage-volumes-for-virtual-storage-nodes]]
+== 虛擬儲存節點的儲存 Volume
+
+對於基於虛擬機器的儲存節點，您必須收集以下資訊：
+
+* 您計劃新增的儲存 Volume （儲存 LUN）的數量和大小。請參閱link:storage-and-performance-requirements.html["儲存設備與效能要求"]。
+
+
+
+
+[[grid-configuration-information]]
+== 網格組態資訊
+
+您必須收集資訊才能設定網格：
+
+* Grid 授權
+* 網路時間協定 (NTP) 伺服器 IP 位址
+* DNS 伺服器 IP 位址
+

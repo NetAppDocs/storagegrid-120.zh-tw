@@ -1,0 +1,156 @@
+---
+permalink: audit/s3-select-request.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, S3SL, S3 Select request 
+summary: 此訊息表示使用者已啟動 S3 Select 作業。 
+---
+= StorageGRID 中 S3 Select 請求的 S3SL 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+此訊息記錄 S3 Select 請求傳回給用戶端後的完成情況。S3SL 訊息可能包含錯誤訊息和錯誤代碼詳細資訊。該請求可能未成功。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+BYSC
+ a| 
+掃描位元組數
+ a| 
+從儲存節點掃描（接收）的位元組數。
+
+如果物件已壓縮，BYSC 和 BYPR 的值可能不同。如果物件已壓縮，BYSC 將包含壓縮後的位元組數，而 BYPR 將包含解壓縮後的位元組數。
+
+
+
+ a| 
+BYPR
+ a| 
+已處理位元組數
+ a| 
+已處理的位元組數。指示 S3 Select 作業實際處理或操作的「已掃描位元組」中的多少位元組。
+
+
+
+ a| 
+BYRT
+ a| 
+傳回的位元組數
+ a| 
+S3 Select 作業傳回給用戶端的位元組數。
+
+
+
+ a| 
+REPR
+ a| 
+已處理記錄
+ a| 
+S3 Select 作業從儲存節點接收的記錄數或行數。
+
+
+
+ a| 
+RERT
+ a| 
+傳回的記錄
+ a| 
+S3 Select 作業傳回給用戶端的記錄數或行數。
+
+
+
+ a| 
+JOFI
+ a| 
+工作完成
+ a| 
+指示 S3 Select 作業是否已完成處理。如果此值為 false，則表示作業未完成，錯誤欄位中可能包含資料。用戶端可能只收到部分結果，或根本沒有收到任何結果。
+
+
+
+ a| 
+REID
+ a| 
+請求 ID
+ a| 
+S3 Select 請求的識別碼。
+
+
+
+ a| 
+EXTM
+ a| 
+執行時間
+ a| 
+S3 Select Job 完成所花費的時間（以秒為單位）。
+
+
+
+ a| 
+ERMG
+ a| 
+錯誤訊息
+ a| 
+S3 Select 作業產生的錯誤訊息。
+
+
+
+ a| 
+ERTY
+ a| 
+錯誤類型
+ a| 
+S3 Select 作業產生的錯誤類型。
+
+
+
+ a| 
+ERST
+ a| 
+錯誤堆疊追蹤
+ a| 
+S3 Select 作業產生的錯誤堆疊追蹤。
+
+
+
+ a| 
+S3BK
+ a| 
+S3 儲存貯體
+ a| 
+S3 儲存桶名稱。
+
+
+
+ a| 
+S3AK
+ a| 
+S3 存取金鑰 ID（請求傳送者）
+ a| 
+傳送請求之使用者的 S3 存取金鑰 ID。
+
+
+
+ a| 
+S3AI
+ a| 
+S3 租戶帳戶 ID （請求傳送者）
+ a| 
+發送請求的使用者的租戶帳戶 ID。
+
+
+
+ a| 
+S3KY
+ a| 
+S3 金鑰
+ a| 
+S3 金鑰名稱，不包括儲存桶名稱。
+
+|===

@@ -1,0 +1,73 @@
+---
+permalink: maintain/recovering-from-storage-node-failures.html 
+sidebar: sidebar 
+keywords: recover, storage node failure, Reaper 
+summary: 恢復故障儲存節點的程序取決於故障類型和發生故障的儲存節點類型。 
+---
+= 從 StorageGRID 儲存節點故障中恢復
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+恢復故障儲存節點的程序取決於故障類型和發生故障的儲存節點類型。
+
+${post_edited_translations.segment}
+
+[cols="1a,1a,1a"]
+|===
+| 問題 | 行動 | 附註 
+
+
+ a| 
+* 多個儲存節點發生故障。
+
+ a| 
+聯絡技術支援。
+ a| 
+恢復多個儲存節點可能會影響 Cassandra 資料庫的完整性，進而導致資料遺失。
+
+技術支援可以確定何時可以安全地開始恢復第二個儲存節點。
+
+${post_edited_translations.segment}
+
+
+
+ a| 
+${post_edited_translations.segment}
+ a| 
+請聯絡技術支援。可能需要執行站台恢復程序。
+ a| 
+技術支援將評估您的狀況並制定恢復計畫。請參閱 link:how-site-recovery-is-performed-by-technical-support.html["${post_edited_translations.segment}"]。
+
+
+
+ a| 
+應用裝置儲存節點發生故障。
+ a| 
+link:recovering-storagegrid-appliance-storage-node.html["恢復應用裝置儲存節點"]
+ a| 
+對於所有故障，應用裝置儲存節點的恢復程序都是相同的。
+
+
+
+ a| 
+一個或多個儲存設備 Volume 發生故障，但系統磁碟機完好無損。
+ a| 
+link:recovering-from-storage-volume-failure-where-system-drive-is-intact.html["在系統磁碟機完好無損的情況下，從儲存設備 Volume 故障中恢復"]
+ a| 
+此程序用於軟體型儲存節點。
+
+
+
+ a| 
+系統磁碟機故障。
+ a| 
+link:reviewing-warnings-for-system-drive-recovery.html["${post_edited_translations.segment}"]
+ a| 
+${post_edited_translations.segment}
+
+|===
+
+NOTE: 某些 StorageGRID 恢復程序使用 Reaper 來處理 Cassandra 的修復。一旦相關或必要的服務啟動，修復就會自動進行。您可能會注意到指令碼輸出中提及「reaper」或「Cassandra repair」。如果您看到指示修復失敗的錯誤訊息，請執行錯誤訊息中指示的命令。

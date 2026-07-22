@@ -1,0 +1,71 @@
+---
+permalink: expand/updating-subnets-for-grid-network.html 
+sidebar: sidebar 
+keywords: expand, expansion, add subnets, Grid Network, StorageGRID 
+summary: ${post_edited_translations.segment} 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+StorageGRID 會維護一份網路子網路清單，用於在網格網路 (eth0) 上的網格節點之間進行通訊。這些項目包括您的 StorageGRID 系統中每個站台用於網格網路的子網路，以及用於透過網格網路閘道存取的 NTP、DNS、LDAP 或其他外部伺服器的任何子網路。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 您擁有佈建密碼。
+* 您擁有要設定的子網路的網路位址（CIDR 表示法）。
+
+
+.關於此任務
+如果任何新節點的 Grid Network IP 位址位於先前未使用的子網路上，您必須在開始擴充之前，將新的子網路新增至 Grid Network 子網路清單。否則，您將必須取消擴充、新增新的子網路，然後重新開始該程序。
+
+[NOTE]
+====
+${post_edited_translations.segment}
+
+* 192,168,130,101
+* 192,168,130,121
+* 192,168,131,101
+* 192,168,131,121
+* 192,168,130,102
+* 192,168,130,122
+* 192,168,131,102
+* 192,168,131,122
+* 198.51.100.2
+* 198.51.100.4
+
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 198.51.100.0/24，因為此子網路範圍包含 IP 位址 198.51.100.2 和 198.51.100.4
+
+
+====
+.步驟
+. 選擇 *Maintenance* > *Network* > *Grid Network*。
+. 選擇「新增另一個子網路」以新增 CIDR 表示法的新子網路。
++
+例如，輸入 `10.96.104.0/22`。
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+.. 選擇 *Maintenance* > *System* > *Recovery package*。
+.. 請輸入*佈建密碼*。
++
+
+CAUTION: 恢復套件檔案必須妥善保管，因為它包含可用於從 StorageGRID 系統取得資料的加密金鑰和密碼。它也用於恢復主要管理節點。
+
+
+
+
+
+您指定的子網路將自動為您的 StorageGRID 系統進行設定。

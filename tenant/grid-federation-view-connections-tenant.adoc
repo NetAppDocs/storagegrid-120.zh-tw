@@ -1,0 +1,92 @@
+---
+permalink: tenant/grid-federation-view-connections-tenant.html 
+sidebar: sidebar 
+keywords: grid federation connection, view, clear error, last error 
+summary: 如果您的租戶帳戶擁有「使用網格聯合連線」權限，則可以檢視允許的連線。 
+---
+= 在 StorageGRID 中檢視網格聯盟連線
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您的租戶帳戶擁有「使用網格聯合連線」權限，則可以檢視允許的連線。
+
+.開始之前
+* 租戶帳戶擁有「使用網格聯合連線」權限。
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於一個擁有 link:tenant-management-permissions.html["${post_edited_translations.segment}"] 的使用者群組。
+
+
+.步驟
+. 選擇 *STORAGE （S3）* > *Grid federation connections*。
++
+此時將顯示 Grid 聯盟連線頁面，其中包含一個表格，匯總了以下資訊：
+
++
+[cols="1a,2a"]
+|===
+| 欄 | 說明 
+
+
+ a| 
+連線名稱
+ a| 
+此租戶有權使用的網格聯盟連線。
+
+
+
+ a| 
+跨網格複寫的儲存桶
+ a| 
+對於每個網格聯合連線，都存在已啟用跨網格複寫的租戶儲存桶。新增至這些儲存桶的物件將複寫至連線中的另一個網格。
+
+
+
+ a| 
+最後錯誤
+ a| 
+對於每個網格聯合連接，記錄資料複寫到其他網格時發生的最新錯誤（如有）。參見<<clear-last-error,清除最後一個錯誤>>。
+
+|===
+. （可選）選擇儲存桶名稱以 link:viewing-s3-bucket-details.html["檢視儲存桶詳細資料"]。
+
+
+
+
+[[clear-last-errorclear-the-last-error]]
+== 清除最後一個錯誤
+
+「上次錯誤」欄位中出現錯誤可能由下列原因之一造成：
+
+* 找不到來源物件版本。
+* 找不到來源儲存桶。
+* 目的地儲存桶已刪除。
+* 目的地儲存桶已由其他帳戶重新建立。
+* 目的地儲存桶已暫停版本控制。
+* 目的地儲存桶由相同帳戶重新建立，但現在未進行版本控制。
+
+
+
+NOTE: 此欄僅顯示最後一次跨網格複寫錯誤；之前可能發生的錯誤將不會顯示。
+
+.步驟
+. 如果「上次錯誤」欄位中出現訊息，請檢視訊息文字。
++
+例如，此錯誤表示跨網格複寫的目的地儲存桶處於無效狀態，可能是因為版本控制已暫停或已啟用 S3 Object Lock。
+
++
+image:grid-federation-cgr-object-example-last-error.png["grid-federation-cgr-object-example-last-error"]
+
+. 執行任何建議的操作。例如，如果跨網格複寫的目的地儲存桶的版本控制已暫停，請重新啟用該儲存桶的版本控制。
+. 從表格中選取連線。
+. 選擇 *Clear error*。
+. 選擇 *Yes* 以清除訊息並更新系統狀態。
+. 等待 5-6 分鐘，然後將新物件擷取至儲存桶。確認錯誤訊息不再出現。
++
+
+NOTE: 為確保錯誤訊息已清除，請在訊息中的時間戳記之後至少等待 5 分鐘，再擷取新物件。
+
+. 若要確定是否有任何物件因儲存桶錯誤而未能複寫，請參閱link:../admin/grid-federation-retry-failed-replication.html["識別並重試失敗的複寫操作"]。
+

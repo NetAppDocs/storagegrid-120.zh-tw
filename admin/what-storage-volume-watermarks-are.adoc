@@ -1,0 +1,115 @@
+---
+permalink: admin/what-storage-volume-watermarks-are.html 
+sidebar: sidebar 
+keywords: what are storage volume watermarks, storage volume soft read-only watermark, storage volume hard read-only watermark, storage volume read-write watermark 
+summary: ${post_edited_translations.segment} 
+---
+= 了解 StorageGRID 中的儲存磁碟區浮水印
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+image:storage_volume_watermarks.png["${post_edited_translations.segment}"]
+
+
+NOTE: 儲存 Volume 水印僅適用於複製和銷除編碼物件資料所使用的空間。若要了解 Volume 0 上為物件中繼資料保留的空間，請前往 link:managing-object-metadata-storage.html["管理物件中繼資料儲存設備"]。
+
+
+
+[[what-is-the-soft-read-only-watermark]]
+== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+如果儲存節點中每個 Volume 的可用空間少於該 Volume 的軟唯讀浮水印，則該儲存節點將進入唯讀模式。唯讀模式表示此儲存節點向 StorageGRID 系統的其他部分通告唯讀服務，但會處理所有待處理的寫入要求。
+
+例如，假設儲存節點中的每個 Volume 都有一個 10 GB 的軟唯讀浮水印。一旦每個 Volume 的可用空間少於 10 GB，儲存節點就會轉換至軟唯讀模式。
+
+
+
+[[what-is-the-hard-read-only-watermark]]
+== 什麼是硬性唯讀水位標記？
+
+*儲存設備 Volume 硬唯讀浮水印*是下一個浮水印，用於指示節點的物件資料可用空間即將滿。
+
+如果某個 Volume 上的可用空間小於該 Volume 的硬性唯讀水位線，則對該 Volume 的寫入作業將會失敗。但是，其他 Volume 的寫入作業可以繼續進行，直到這些 Volume 上的可用空間小於其硬性唯讀水位線為止。
+
+例如，假設儲存節點中的每個 Volume 都有一個 5 GB 的強制唯讀浮水印。一旦每個 Volume 的可用空間少於 5 GB，儲存節點就不再接受任何寫入要求。
+
+硬性唯讀浮水印的值總是小於軟性唯讀浮水印的值。
+
+
+
+[[what-is-the-read-write-watermark]]
+== 什麼是讀寫浮水印？
+
+*儲存設備 Volume 讀寫浮水印*僅適用於已轉換為唯讀模式的 Storage Node。它決定節點何時可以再次變為讀寫狀態。當 Storage Node 中任何一個儲存設備 Volume 上的可用空間大於該 Volume 的讀寫浮水印時，節點會自動轉換回讀寫狀態。
+
+例如，假設儲存節點已轉換為唯讀模式。同時假設每個 Volume 的讀寫浮水印為 30 GB。一旦任何 Volume 的可用空間增加到 30 GB，該節點將再次變為讀寫模式。
+
+${post_edited_translations.segment}
+
+
+
+[[view-storage-volume-watermarks]]
+== 檢視儲存設備 Volume 浮水印
+
+您可以檢視目前的水位線設定與系統最佳化的值。如果未使用最佳化的水位線，您可以判定是否可以或應該調整設定。
+
+.開始之前
+* ${post_edited_translations.segment}
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+
+
+
+
+[[view-current-watermark-settings]]
+=== 檢視目前浮水印設定
+
+${post_edited_translations.segment}
+
+.步驟
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+** ${post_edited_translations.segment}
++
+這是預設設置，也是推薦設定。請勿更新這些值。您也可以選擇<<view-optimized-storage-watermarks,檢視最佳化的儲存設備浮水印>>。
+
+** 如果未選取「使用最佳化的值」複選框，則會使用自訂（非最佳化）浮水印。不建議使用自訂浮水印設定。請依照相關說明link:../troubleshoot/troubleshoot-low-watermark-alert.html["${post_edited_translations.segment}"]確定是否可以或應調整這些設定。
++
+指定自訂浮水印設定時，必須輸入大於 0 的值。
+
+
+
+
+
+
+
+[[view-optimized-storage-watermarksview-optimized-storage-watermarks]]
+=== [[view-optimized-storage-watermarks]]檢視最佳化的儲存設備浮水印
+
+StorageGRID 使用兩個 Prometheus 計量來顯示其為儲存 Volume 軟唯讀浮水印計算的最佳化值。您可以檢視網格中每個儲存節點的最小和最大最佳化值。
+
+. 選擇 *Support* > *Tools* > *Metrics*。
+. 在 Prometheus 部分，選擇連結以存取 Prometheus 使用者介面。
+. 若要查看建議的最小軟唯讀浮水印，請輸入以下 Prometheus 指標，然後選擇「執行」：
++
+`storagegrid_storage_volume_minimum_optimized_soft_readonly_watermark`
+
++
+最後一列顯示每個儲存節點上所有儲存 Volume 的軟唯讀浮水印最小最佳化值。如果此值大於儲存 Volume 軟唯讀浮水印的自訂設定，則會針對該儲存節點觸發 *Low read-only watermark override* 警示。
+
+. 若要查看建議的最大軟唯讀浮水印，請輸入以下 Prometheus 指標，然後選擇「執行」：
++
+`storagegrid_storage_volume_maximum_optimized_soft_readonly_watermark`
+
++
+最後一欄顯示每個儲存節點上所有儲存 Volume 的軟唯讀水位線最大最佳化值。
+
+

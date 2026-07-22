@@ -1,0 +1,172 @@
+---
+permalink: admin/configure-vlan-interfaces.html 
+sidebar: sidebar 
+keywords: how to configure vlan interfaces, vlan interfaces, trunk interface 
+summary: 您可以在管理節點和閘道節點上建立虛擬區域網路 （VLAN） 介面，並在 HA 群組和負載平衡器端點中使用這些介面來隔離和分割流量，以提升安全性、靈活性和效能。 
+---
+= 在 StorageGRID 中設定 VLAN 介面
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在管理節點和閘道節點上建立虛擬區域網路 （VLAN） 介面，並將其用於 HA 群組和負載平衡器端點，以隔離和劃分流量，從而提高安全性、靈活度和效能。HA 群組中選定的節點可以使用 VLAN 介面共享最多 10 個虛擬 IP 位址，這樣，如果某個節點發生故障，則另一個節點可以接管進出這些虛擬 IP 位址的流量。
+
+
+
+[[considerations-for-vlan-interfaces]]
+== VLAN 介面注意事項
+
+* 您可以透過輸入 VLAN ID 並選擇一個或多個節點上的父介面來建立 VLAN 介面。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 對於每個 VLAN 介面，您只能為指定的節點選取一個父介面。例如，您無法在同一個閘道節點上，將網格網路介面和用戶端網路介面同時用作同一個 VLAN 的父介面。
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* 如果需要新增主幹介面，詳情請參閱以下內容：
++
+** *VMware（節點安裝完成後）*：link:../maintain/vmware-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+** *Linux （安裝節點之前）*: link:../swnodes/creating-node-configuration-files.html["建立節點組態檔"]
+** *Linux （安裝節點後）*: link:../maintain/linux-adding-trunk-or-access-interfaces-to-node.html["${post_edited_translations.segment}"]
+
+
+
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+
+
+[[create-a-vlan-interface]]
+== 建立 VLAN 介面
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:admin-group-permissions.html["${post_edited_translations.segment}"]。
+* 網路中已設定主幹介面，並將其連接至 VM 或 Linux 節點。您知道該主幹介面的名稱。
+* 您知道您正在設定的 VLAN 的 ID。
+
+
+.關於此任務
+您的網路管理員可能已設定一個或多個中繼介面以及一個或多個 VLAN，用於隔離屬於不同應用程式或租用戶的用戶端或管理流量。每個 VLAN 都由一個數字 ID 或標籤來識別。例如，您的網路可能使用 VLAN 100 用於 FabricPool 流量，而使用 VLAN 200 用於歸檔應用程式。
+
+您可以使用 Grid Manager 建立 VLAN 介面，允許用戶端存取特定 VLAN 上的 StorageGRID。建立 VLAN 介面時，您需要指定 VLAN ID，並在一個或多個節點上選擇父（幹線）介面。
+
+
+
+[[access-the-wizard]]
+=== ${post_edited_translations.segment}
+
+.步驟
+. 選擇 *Configuration* > *Network* > *VLAN interfaces*。
+. 選擇 *Create* 。
+
+
+
+
+[[enter-details-for-the-vlan-interfaces]]
+=== 輸入 VLAN 介面的詳細資訊
+
+.步驟
+. 指定網路中 VLAN 的 ID。您可以輸入 1 到 4094 之間的任意值。
++
+VLAN ID 不需要唯一。例如，您可以在一個站點使用 VLAN ID 200 來傳輸管理流量，並在另一個站點使用相同的 VLAN ID 來傳輸用戶端流量。您可以在每個站點建立具有不同父介面集的分隔 VLAN 介面。但是，具有相同 ID 的兩個 VLAN 介面不能共享同一節點上的相同介面。如果您指定的 ID 已被使用，則會顯示一則訊息。
+
+. （可選）輸入 VLAN 介面的簡短執行摘要。
+. 選擇 *Continue* 。
+
+
+
+
+[[choose-parent-interfaces]]
+=== 選擇父介面
+
+此表列出網格中每個站台所有管理節點和閘道節點的可用介面。管理網路 （eth1） 介面不能用作父介面，因此不會顯示。
+
+.步驟
+. 選擇一個或多個父介面以將此 VLAN 附加到這些父介面。
++
+例如，您可能想要將 VLAN 附加到閘道節點和管理節點的用戶端網路 （eth2） 介面。
+
++
+image:vlan-create-parent-interfaces.png["VLAN 建立精靈父介面"]
+
+. 選擇 *Continue* 。
+
+
+
+
+[[confirm-the-settings]]
+=== 確認設定
+
+.步驟
+. 檢查組態並進行必要的變更。
++
+** 如果需要變更 VLAN ID 或執行摘要，請選擇頁面頂端的 *Enter VLAN details*。
+** 如果需要變更父介面，請選擇頁面頂部的「Choose parent interfaces」或選擇「Previous」。
+** 如果需要刪除父級介面，請選擇垃圾桶圖示image:icon-trash-can.png["垃圾桶圖示"]。
+
+
+. 選取 *Save* 。
+. 最多等待 5 分鐘，新介面才會出現在高可用度群組頁面上，並列在節點的*網路介面*表中（*節點* > *_父介面節點_* > *網路*）。
+
+
+
+
+[[edit-a-vlan-interface]]
+== 編輯 VLAN 介面
+
+編輯 VLAN 介面時，您可以進行以下類型的變更：
+
+* 更改 VLAN ID 或執行摘要。
+* 新增或移除父介面。
+
+
+例如，如果您計劃退役關聯的節點，則可能需要從 VLAN 介面中移除父介面。
+
+請注意下列事項：
+
+* 如果 VLAN 介面用於 HA 群組，則無法變更 VLAN ID。
+* 如果父介面在 HA 群組中使用，則無法移除該父介面。
++
+例如，假設 VLAN 200 連接到節點 A 和 B 的父介面。如果 HA 群組將 VLAN 200 介面用於節點 A，將 eth2 介面用於節點 B，則可以移除節點 B 未使用的父介面，但不能移除節點 A 已使用的父介面。
+
+
+
+.步驟
+. 選擇 *Configuration* > *Network* > *VLAN interfaces*。
+. 選取要編輯的 VLAN 介面對應的核取方塊。然後，選取 *Actions* > *Edit*。
+. （可選）更新 VLAN ID 或執行摘要。然後選擇 * 繼續 *。
++
+如果 VLAN 用於 HA 群組，則無法更新 VLAN ID。
+
+. （可選）選取或取消選取核取方塊以新增父介面或移除未使用的介面。然後，選取 *Continue*。
+. 檢查組態並進行必要的變更。
+. 選取 *Save* 。
+
+
+
+
+[[remove-a-vlan-interface]]
+== 移除 VLAN 介面
+
+您可以移除一個或多個 VLAN 介面。
+
+如果 VLAN 介面目前正在高可用性 （HA） 群組中使用，則無法移除。必須先將 VLAN 介面從 HA 群組中移除，才能移除。
+
+為避免用戶端流量中斷，請考慮執行下列其中一項操作：
+
+* 在移除此 VLAN 介面之前，請先將新的 VLAN 介面新增至 HA 群組。
+* 建立一個不使用此 VLAN 介面的新 HA 群組。
+* 如果要移除的 VLAN 介面目前是作用中介面，請編輯 HA 群組。將要移除的 VLAN 介面移至優先權清單的底部。等待新的主要介面建立通訊後，再從 HA 群組中移除舊介面。最後，刪除該節點上的 VLAN 介面。
+
+
+.步驟
+. 選擇 *Configuration* > *Network* > *VLAN interfaces*。
+. 選取要移除的每個 VLAN 介面對應的核取方塊。然後，選取 *Actions* > *Delete*。
+. 選取 *Yes* 以確認您的選擇。
++
+您選擇的所有 VLAN 介面均已移除。VLAN 介面頁面上將顯示綠色成功橫幅。
+
+

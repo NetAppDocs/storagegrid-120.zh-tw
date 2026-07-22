@@ -1,0 +1,32 @@
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+
+
+${post_edited_translations.segment}
+
+
+CAUTION: 對於非 Active Directory 或 Microsoft Entra ID 的身分識別來源，StorageGRID 不會自動封鎖在外部被停用之使用者的 S3 存取。若要封鎖 S3 存取，請刪除該使用者的任何 S3 金鑰，或將該使用者從所有群組中移除。
+
+
+
+[[memberof-and-refint-overlays]]
+=== ${post_edited_translations.segment}
+
+應啟用 memberof 與 refint 重疊。如需詳細資訊，請參閱 http://www.openldap.org/doc/admin24/index.html["OpenLDAP 文件：版本 2.4 管理員指南"^] 中的反向群組成員資格維護說明。
+
+
+
+[[indexing]]
+=== ${post_edited_translations.segment}
+
+${post_edited_translations.segment}
+
+* `olcDbIndex: objectClass eq`
+* `olcDbIndex: uid eq,pres,sub`
+* `olcDbIndex: cn eq,pres,sub`
+* `olcDbIndex: entryUUID eq`
+
+
+${post_edited_translations.segment}
+
+請參閱 http://www.openldap.org/doc/admin24/index.html["OpenLDAP 文件：版本 2.4 管理員指南"^] 中關於反向群組成員資格維護的資訊。

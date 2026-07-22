@@ -1,0 +1,41 @@
+---
+permalink: audit/accessing-audit-log-file.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, log, log file, access, accessing 
+summary: 稽核共享包含目前活動的 audit.log 檔案以及所有壓縮的稽核日誌檔。您可以直接從管理節點的命令列存取稽核日誌檔。 
+---
+= 從 StorageGRID 管理節點命令列存取稽核記錄檔
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+稽核共享包含活動 `audit.log`檔案和所有壓縮的稽核日誌檔。您可以直接從管理節點的命令列存取稽核日誌檔。
+
+The `audit.log`檔案將保持為空，除非您為*管理節點/本機節點*或*管理節點和外部 syslog 伺服器*設定 StorageGRID。如需詳細資訊，請參閱link:../monitor/configure-log-management.html#select-log-location["選擇日誌位置"]。
+
+.開始之前
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+* 您必須擁有該 `Passwords.txt`檔案。
+* 您必須知道管理節點的 IP 位址。
+
+
+.步驟
+. ${post_edited_translations.segment}
++
+.. 輸入以下命令： `ssh admin@_primary_Admin_Node_IP_`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
+.. 輸入以下命令以切換至根目錄： `su -`
+.. 請輸入 `Passwords.txt`檔案中列出的密碼。
++
+當您以根目錄身分登入時，提示符號會從 `$`變為 `#`。
+
+
+
+. 前往包含稽核日誌檔的目錄：
++
+`cd  /var/local/audit/export/`
+
+. 根據需要檢視目前或已儲存的稽核日誌檔。
+

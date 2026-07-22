@@ -1,0 +1,48 @@
+---
+permalink: maintain/downloading-hotfix-file.html 
+sidebar: sidebar 
+keywords: storagegrid, hotfix, download 
+summary: ${post_edited_translations.segment} 
+---
+= 下載 StorageGRID Hotfix 檔案
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+.步驟
+. 前往  https://mysupport.netapp.com/site/products/all/details/storagegrid/downloads-tab["NetApp 下載：StorageGRID"^]。
+. ${post_edited_translations.segment}
++
+
+NOTE: ${post_edited_translations.segment}
+
+. 審查更新中包含的變更。
++
+
+NOTE: 如果您剛 link:configuring-replacement-primary-admin-node.html["${post_edited_translations.segment}"] 且需要套用 Hotfix，請選取安裝在其他網格節點上的相同 Hotfix 版本。
+
++
+.. ${post_edited_translations.segment}
+.. 使用您 NetApp 帳戶的使用者名稱和密碼登入。
+.. 請閱讀並接受終端使用者授權合約。
++
+您所選版本的下載頁面隨即出現。
+
+.. 下載 Hotfix `readme.txt` 檔案以檢視 Hotfix 中包含的變更摘要。
+
+
+. 選擇 Hotfix 的下載按鈕，然後儲存檔案。
++
+
+NOTE: 請勿更改此檔案的名稱。
+
++
+
+NOTE: 如果您使用的是 macOS 裝置，Hotfix 檔案可能會自動儲存為  `.txt` 檔案。如果是，您必須重新命名該檔案，且不含  `.txt` 副檔名。
+
+. ${post_edited_translations.segment}
+

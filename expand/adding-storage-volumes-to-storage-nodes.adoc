@@ -1,0 +1,50 @@
+---
+permalink: expand/adding-storage-volumes-to-storage-nodes.html 
+sidebar: sidebar 
+keywords: storage volumes, expand, expansion, add, storage nodes, adding storage capacity, StorageGRID 
+summary: 您可以擴充低於最大支援 Volume 數量的 Storage Node 的儲存容量。您可能需要將儲存 Volume 新增至多個 Storage Node，以滿足複寫或銷毀編碼複本的 ILM 需求。 
+---
+= ${post_edited_translations.segment}
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以擴充低於最大支援 Volume 數量的 Storage Node 的儲存容量。您可能需要將儲存 Volume 新增至多個 Storage Node，以滿足複寫或銷毀編碼複本的 ILM 需求。
+
+.開始之前
+在新增儲存 Volume 之前，請審查 link:guidelines-for-adding-object-capacity.html["增加物件容量的指導原則"]，以確保您知道在何處新增 Volume 以符合 ILM 原則的要求。
+
+
+NOTE: 這些說明僅適用於軟體型儲存節點。請參閱 https://docs.netapp.com/us-en/storagegrid-appliances/sg6000/adding-expansion-shelf-to-deployed-sg6060.html["為已部署的 SG6060 新增擴充架"^] 或  https://docs.netapp.com/us-en/storagegrid-appliances/sg6100/adding-expansion-shelf-to-deployed-sg6160.html["為已部署的 SG6160 新增擴充架"^]，瞭解如何透過安裝擴充架向 SG6060 或 SG6160 新增儲存 Volume。其他應用裝置儲存節點無法擴充。
+
+.關於此任務
+儲存節點的基礎儲存設備分割為儲存 Volume。儲存 Volume 是區塊型儲存設備，由 StorageGRID 系統格式化並裝載以儲存物件。每個儲存節點最多可支援 48 個儲存 Volume，在 Grid Manager 中稱為_物件存放區_。
+
+
+NOTE: 物件中繼資料一律儲存在物件存放區 0 中。
+
+每個物件存放區都裝載在與其 ID 對應的 Volume 上。例如，ID 為 0000 的物件存放區對應於 `/var/local/rangedb/0`裝載點。
+
+在新增儲存 Volume 之前，請使用 Grid Manager 檢視每個儲存節點的目前物件存放區以及對應的裝載點。新增儲存 Volume 時可以使用這些資訊。
+
+.步驟
+. 選擇 *節點* > *_site_* > *_Storage Node_* > *儲存設備*。
+. 向下捲動以檢視每個 Volume 和物件存放區的可用儲存容量。
++
+對於應用裝置儲存節點，每個磁碟的全球名稱與在 SANtricity 作業系統（連接到應用裝置儲存控制器的管理軟體）中檢視標準 Volume 屬性時顯示的 Volume 全球識別碼 (WWID) 相符。
+
++
+為了幫助您理解與 Volume 安裝點相關的磁碟讀取和寫入統計資料，磁碟裝置表的「名稱」欄中顯示的名稱第一部分（即 _sdc_、_sdd_、_sde_ 等）與 Volume 表的「裝置」欄中顯示的值相符。
+
++
+image:nodes_page_storage_tables_vol_expansion.png["節點頁儲存表"]
+
+. 請依照您平台的說明，為儲存節點新增新的儲存 Volume。
++
+** link:vmware-adding-storage-volumes-to-storage-node.html["VMware：將 Volume 新增至儲存節點"]
+** link:linux-adding-direct-attached-or-san-volumes-to-storage-node.html["Linux：為儲存節點新增直連或 SAN Volume"]
+
+
+

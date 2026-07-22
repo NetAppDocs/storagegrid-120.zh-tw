@@ -1,0 +1,39 @@
+---
+permalink: audit/sysu-node-start.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, message, SYSU, Node Start 
+summary: 當服務重新啟動時，會產生此訊息以指示先前的關閉是否正常（已命令）或異常（意外）。 
+---
+= StorageGRID 中節點啟動的 SYSU 稽核訊息
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+當服務重新啟動時，會產生此訊息以指示先前的關閉是否正常（已命令）或異常（意外）。
+
+[cols="1a,1a,4a"]
+|===
+| 程式碼 | 欄位 | 說明 
+
+
+ a| 
+RSLT
+ a| 
+正常關機
+ a| 
+關機的性質：
+
+SUCS：系統已正常關閉。
+
+DSDN：系統未正常關機。
+
+VRGN：系統在伺服器安裝（或重新安裝）後首次啟動。
+
+|===
+該訊息並未指示主機伺服器是否已啟動，僅指示報告服務是否已啟動。此訊息可用於：
+
+* 檢測稽核追蹤中的不連續性。
+* 確定服務是否在運作期間發生故障（因為 StorageGRID 系統的分散特性可能會掩蓋這些故障）。Server Manager 會自動重新啟動發生故障的服務。
+

@@ -1,0 +1,57 @@
+---
+permalink: admin/troubleshooting-autosupport-messages.html 
+sidebar: sidebar 
+keywords: troubleshoot autosupport, asup package 
+summary: 如果嘗試傳送 AutoSupport 套件失敗，StorageGRID 系統會根據 AutoSupport 套件的類型採取不同的動作。 
+---
+= StorageGRID AutoSupport 套件故障排除
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果嘗試傳送 AutoSupport 套件失敗，StorageGRID 系統會根據 AutoSupport 套件的類型採取不同的動作。您可以透過選取 *支援* > *工具* > *AutoSupport* > *結果*，來檢查 AutoSupport 套件的狀態。
+
+當 AutoSupport 套件傳送失敗時，「Failed」會出現在 *AutoSupport* 頁面的 *Results* 索引標籤上。
+
+
+NOTE: 如果您已設定 Proxy 伺服器將 AutoSupport 封包轉寄至 NetApp，您應該 link:configuring-admin-proxy-settings.html["請確認 Proxy 伺服器組態設定是否正確"]。
+
+
+
+[[weekly-autosupport-package-failure]]
+== 每週 AutoSupport 套件故障
+
+如果每週的 AutoSupport 套件傳送失敗，StorageGRID 系統將採取下列動作：
+
+. 將「最新結果」屬性更新為「正在重試」。
+. 嘗試在一小時內每四分鐘重新傳送 AutoSupport 封包一次，共 15 次。
+. 發送失敗一小時後，將「最新結果」屬性更新為「失敗」。
+. 在下一個排定的時間嘗試再次傳送 AutoSupport 封包。
+. 如果因為 NMS 服務無法使用而導致套件傳送失敗，或在七天內傳送套件，則維持正常 AutoSupport 排程。
+. 當 NMS 服務再次可用時，如果套件已有七天或更長時間未傳送，則立即傳送 AutoSupport 套件。
+
+
+
+
+[[user-triggered-or-event-triggered-autosupport-package-failure]]
+== 使用者觸發或事件觸發的 AutoSupport 套件故障
+
+如果使用者觸發或事件觸發的 AutoSupport 套件傳送失敗，StorageGRID 系統會採取以下動作：
+
+. 如果已知錯誤，則顯示錯誤訊息。例如，如果使用者選擇 SMTP 協定但未提供正確的電子郵件組態設定，則會顯示以下錯誤： `AutoSupport packages cannot be sent using SMTP protocol due to incorrect settings on the E-mail Server page.`
+. 不會再嘗試傳送套件。
+. 將錯誤記錄在  `nms.log` 中。
+
+
+如果發生故障且選取的通訊協定為 SMTP，請驗證 StorageGRID 系統的電子郵件伺服器是否已正確設定，以及您的電子郵件伺服器是否正在執行（*支援* > *警報（舊版）* > *舊版電子郵件設定*）。AutoSupport 頁面上可能會出現以下錯誤訊息： `AutoSupport packages cannot be sent using SMTP protocol due to incorrect settings on the E-mail Server page.`
+
+瞭解如何link:../monitor/email-alert-notifications.html["${post_edited_translations.segment}"]。
+
+
+
+[[correct-an-autosupport-package-failure]]
+== 修復 AutoSupport 套件故障
+
+如果發生故障且選取的協定為 SMTP，請驗證 StorageGRID 系統的電子郵件伺服器是否已正確設定，以及您的電子郵件伺服器是否正在執行。以下錯誤訊息可能會顯示在 AutoSupport 頁面上： `AutoSupport packages cannot be sent using SMTP protocol due to incorrect settings on the E-mail Server page.`

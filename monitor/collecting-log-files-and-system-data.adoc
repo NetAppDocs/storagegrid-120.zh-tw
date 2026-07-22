@@ -1,0 +1,81 @@
+---
+permalink: monitor/collecting-log-files-and-system-data.html 
+sidebar: sidebar 
+keywords: how to collect system data, how to collect logs 
+summary: 您可以擷取 StorageGRID 日誌檔和系統資料（包括組態資料），並將其傳送給技術支援。 
+---
+= 收集 StorageGRID 日誌檔案和系統資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以擷取 StorageGRID 日誌檔和系統資料（包括組態資料），並將其傳送給技術支援。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入任何管理節點上的 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+* 您擁有佈建密碼。
+
+
+.關於此任務
+使用 Grid Manager 收集link:logs-files-reference.html["日誌檔"]、系統資料及組態資料，資料來源為您所選時間段內的任何網格節點。資料將被收集並歸檔至 `.tar.gz`檔案，您可以將其下載至本機電腦或傳送給技術支援。
+
+您可以選擇變更稽核日誌的目的地，並將稽核資訊傳送至外部 syslog 伺服器。設定外部 syslog 伺服器後，本機稽核記錄日誌仍會繼續產生和儲存。請參閱 link:../monitor/configure-log-management.html["${post_edited_translations.segment}"]。
+
+.步驟
+. 選取 *Support* > *Tools* > *Log collection*。節點表隨即顯示。
+. 選擇要收集日誌檔的網格節點。
++
+您可以按節點名稱、站台和節點類型進行排序。「站台」和「節點類型」欄包含篩選器，可用於依特定站台和節點類型進行選擇。
+
+. 選擇 *Continue* 。
+. 選擇要包含在日誌檔中的資料日期和時間範圍。
++
+如果選擇非常長的時間段或從大型網格中的所有節點收集日誌，則日誌歸檔可能會變得過大，以至於無法儲存在單一節點上，或者過大而無法被管理節點收集下載。如果出現上述任何一種情況，請使用較小的資料集重新啟動日誌收集。
+
+. 選擇您要收集的日誌類型。
++
+** *應用程式日誌*：技術支援最常用於疑難排解的應用程式特定日誌。收集的日誌是可用應用程式日誌的子集。
+** *稽核日誌*：包含在系統正常運作期間產生的稽核訊息的日誌。
+** *網路追蹤*：用於網路偵錯的日誌檔。
+** *Prometheus 資料庫*：所有節點上服務的時間序列計量。
+
+
+. 您也可以使用「備註」文字方塊，輸入有關您正在收集的日誌檔案的備註。
++
+您可以利用這些備註向技術支援提供您收集日誌檔案時遇到的問題資訊。您的備註會與其他日誌檔案收集資訊一起新增至名為 `info.txt`的檔案中。該 `info.txt`檔案儲存在日誌檔歸檔套件中。
+
+. 在 *Provisioning passphrase* 文字方塊中，輸入 StorageGRID 系統的佈建密碼。
+. 選擇 *Collect logs*。
++
+您可以使用日誌收集頁面來監控每個網格節點的日誌檔收集進度。
+
++
+如果收到有關日誌大小的錯誤訊息，請嘗試收集較短時間段或較少節點的日誌檔。
+
+. 如果日誌收集失敗：
++
+** 如果出現「日誌收集失敗」訊息，您可以重試日誌收集，或直接結束工作階段而不重試。
+** 如果出現「日誌收集部分失敗」訊息，您可以重試日誌收集、結束工作階段、下載部分日誌檔或將部分日誌檔傳送至 AutoSupport。
+
+
+. 日誌檔收集完成後：
++
+** 選擇 *Download* 以下載 `.tar.gz`檔案。
+** 選擇 *傳送至 AutoSupport* 以將 `.tar.gz`檔案傳送給技術支援。
++
+該 `.tar.gz`檔案包含所有成功收集日誌的網格節點的所有日誌檔。合併後的 `.tar.gz`檔案包含每個網格節點的一個日誌檔歸檔。
+
++
+AutoSupport 套件的主旨為 `USER_TRIGGERED_SUPPORT_BUNDLE`。
+
+
+
+. 選擇 *Finish* 。
++
+
+CAUTION: 當您選取 *Finish* 時， `.tar.gz`檔案將被刪除。請確保先下載或傳送檔案。
+
+

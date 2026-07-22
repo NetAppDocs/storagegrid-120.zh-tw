@@ -1,0 +1,8 @@
+---
+permalink: rhel/configuring-host-storage.html 
+redirect: storagegrid/swnodes/configuring-host-storage.html 
+---
+= 
+:allow-uri-read: 
+
+

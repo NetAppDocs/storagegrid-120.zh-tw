@@ -1,0 +1,267 @@
+---
+permalink: s3/put-object.html 
+sidebar: sidebar 
+keywords: object, add object, put, PutObject request 
+summary: 您可以使用 S3 PutObject 請求將物件新增至儲存桶。 
+---
+= 使用 S3 PutObject 請求將物件新增至 StorageGRID 中的儲存區
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用 S3 PutObject 請求將物件新增至儲存桶。
+
+
+
+[[resolve-conflicts]]
+== 解決衝突
+
+當用戶端請求發生衝突時，例如兩個用戶端同時寫入同一個金鑰，系統會遵循「最新優先」的原則來解決衝突。這種「最新優先」的判斷依據是 StorageGRID 系統完成請求的時間，而不是 S3 用戶端開始操作的時間。
+
+
+
+[[object-size]]
+== 物件大小
+
+單一 PutObject 操作的最大_建議_大小為 5 GiB（5,368,709,120 位元組）。如果物件大於 5 GiB，請改用 link:operations-for-multipart-uploads.html["多部分上傳"]。
+
+單一 PutObject 操作支援的最大大小為 5 TiB（5,497,558,138,880 位元組）。
+
+
+NOTE: 如果您是從 StorageGRID 11.6 或更早版本升級而來，嘗試上傳超過 5 GiB 的物件時，將會觸發「S3 PUT 物件大小過大」警報。如果您全新安裝了 StorageGRID 11.7 或 11.8，則不會觸發此警報。但是，為了遵守 AWS S3 標準，StorageGRID 的未來版本將不再支援上傳大於 5 GiB 的物件。
+
+
+
+[[user-metadata-size]]
+== 使用者中繼資料大小
+
+Amazon S3 將每個 PUT 請求標頭中使用者自訂中繼資料的大小限制為 2 KB。StorageGRID 將使用者中繼資料限制為 24 KiB。使用者自訂中繼資料的大小是透過計算每個索引鍵和值在 UTF-8 編碼下的位元組數總和來衡量的。
+
+
+
+[[utf-8-characters-in-user-metadata]]
+== 使用者中繼資料中的 UTF-8 字元
+
+如果請求中包含使用者定義中繼資料的鍵名或值中的（未轉義的）UTF-8 值，則 StorageGRID 的行為未定義。
+
+StorageGRID 不會解析或解釋使用者自訂中繼資料鍵名或值中包含的轉義 UTF-8 字元。轉義 UTF-8 字元將被視為 ASCII 字元：
+
+* PutObject、CopyObject、GetObject 和 HeadObject 請求在使用者定義的中繼資料包含轉義的 UTF-8 字元時將成功。
+* StorageGRID 不會傳回 `x-amz-missing-meta`標頭（如果鍵名或值的解釋值包含不可列印字符）。
+
+
+
+
+[[object-tag-limits]]
+== 物件標籤限制
+
+您可以在上傳新物件時為其新增標籤，也可以為現有物件新增標籤。StorageGRID 和 Amazon S3 都支援每個物件最多新增 10 個標籤。與物件關聯的標籤必須具有唯一的標籤鍵。標籤鍵的長度最多為 128 個 Unicode 字元，標籤值的長度最多為 256 個 Unicode 字元。鍵和值均區分大小寫。
+
+
+
+[[object-ownership]]
+== 物件所有權
+
+在 StorageGRID 中，所有物件都歸儲存桶擁有者帳戶所有，包括由非擁有者帳戶或匿名使用者建立的物件。
+
+
+
+[[supported-request-headers]]
+== 支援的要求標頭
+
+支援以下請求標頭：
+
+* `Cache-Control`
+* `Content-Disposition`
+* `Content-Encoding`
++
+當您為 ``Content-Encoding`` 指定  `aws-chunked` 時，StorageGRID 不會驗證以下項目：
+
++
+** StorageGRID 不會針對資料區塊驗證  `chunk-signature`。
+** StorageGRID 不會驗證您提供的值 `x-amz-decoded-content-length`是否與物件相符。
+
+
+* `Content-Language`
+* `Content-Length`
+* `Content-MD5`
+* `Content-Type`
+* `Expires`
+* `Transfer-Encoding`
++
+如果 `aws-chunked`同時使用有效負載簽名，則支援分塊傳輸編碼。
+
+* `x-amz-checksum-sha256`
+* `x-amz-meta-`，後面接著包含使用者定義中繼資料的名稱值對。
++
+指定使用者自訂中繼資料的名稱-值對時，請使用以下通用格式：
+
++
+[listing, subs="specialcharacters,quotes"]
+----
+x-amz-meta-_name_: _value_
+----
++
+如果要將「使用者定義的建立時間」選項用作 ILM 規則的參考時間，則必須使用 `creation-time`作為記錄物件建立時間的中繼資料名稱。例如：
+
++
+[listing]
+----
+x-amz-meta-creation-time: 1443399726
+----
++
+的值 `creation-time`以自 1970 年 1 月 1 日以來的秒數來評估。
+
++
+
+NOTE: ILM 規則不能同時使用「使用者定義的建立時間」作為參考時間，以及「平衡」或「嚴格」擷取選項。建立 ILM 規則時會傳回錯誤。
+
+* `x-amz-tagging`
+* S3 物件鎖定請求標頭
++
+** `x-amz-object-lock-mode`
+** `x-amz-object-lock-retain-until-date`
+** `x-amz-object-lock-legal-hold`
++
+如果請求中未包含這些標頭，則使用儲存桶的預設保留設定來計算物件版本模式和保留至日期。請參閱link:../s3/use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]。
+
+
+
+* SSE 要求標頭：
++
+** `x-amz-server-side-encryption`
+** `x-amz-server-side-encryption-customer-key-MD5`
+** `x-amz-server-side-encryption-customer-key`
+** `x-amz-server-side-encryption-customer-algorithm`
++
+請參閱 <<伺服器端加密的要求標頭>>
+
+
+
+
+
+
+
+[[unsupported-request-headers]]
+== 不支援的要求標頭
+
+不支援以下請求標頭：
+
+* `If-Match`
++
+ `If-Match header`已被接受，但無法正常使用。
+
+* `If-None-Match`
++
+ `If-None-Match header`已被接受，但無法正常使用。
+
+* `x-amz-acl`
+* `x-amz-sdk-checksum-algorithm`
+* `x-amz-trailer`
+* `x-amz-website-redirect-location`
++
+The `x-amz-website-redirect-location`標頭返回 `XNotImplemented`。
+
+
+
+
+
+[[storage-class-options]]
+== 儲存類別選項
+
+The `x-amz-storage-class`請求標頭受支援。提交的 `x-amz-storage-class`值會影響 StorageGRID 在擷取期間如何保護物件資料，而不會影響 StorageGRID 系統中儲存的物件持久複本數量（該數量由 ILM 決定）。
+
+如果與已擷取物件相符的 ILM 規則使用嚴格擷取選項，則  `x-amz-storage-class` 標頭無效。
+
+以下數值可用於 `x-amz-storage-class`：
+
+* `STANDARD` （預設）
++
+** *雙重提交*：如果 ILM 規則為擷取行為指定了雙重提交選項，則物件擷取後會立即建立該物件的第二個複本，並將其分發到不同的儲存節點（雙重提交）。在評估 ILM 時，StorageGRID 會決定這些初始臨時複本是否符合規則中的放置指令。如果不符合，則可能需要在不同的位置建立新的物件複本，並且可能需要刪除初始臨時複本。
+** *平衡*：如果 ILM 規則指定了平衡選項，且 StorageGRID 無法立即建立規則中指定的所有複本，StorageGRID 會在不同的 Storage Nodes 上建立兩個暫存複本。
++
+如果 StorageGRID 可以立即建立 ILM 規則中指定的所有物件複本（同步放置），則  `x-amz-storage-class` 標頭無效。
+
+
+
+* `REDUCED_REDUNDANCY`
++
+** *雙重提交*：如果 ILM 規則為擷取行為指定了雙重提交選項，StorageGRID 會在擷取物件時建立單一臨時複本（單一提交）。
+** *平衡*：如果 ILM 規則指定了「平衡」選項，則僅當系統無法立即建立規則中指定的所有複本時，StorageGRID 才會建立單一臨時複本。如果 StorageGRID 可以執行同步放置，則此標頭無效。 `REDUCED_REDUNDANCY` 選項最適合在與物件相符的 ILM 規則建立單一複寫複本時使用。在這種情況下，使用  `REDUCED_REDUNDANCY` 可避免每次擷取作業都不必要地建立和刪除額外的物件複本。
+
+
++
+不建議在其他情況下使用  `REDUCED_REDUNDANCY` 選項。 `REDUCED_REDUNDANCY` 會增加擷取期間物件資料遺失的風險。例如，如果單一複本最初儲存在儲存節點上，而該儲存節點在 ILM 評估完成之前發生故障，則可能會遺失資料。
+
+
+
+
+CAUTION: 在任何時間段內，僅保留一份複寫複本都會使資料面臨永久遺失的風險。如果某個物件僅存在一份複寫複本，則一旦 Storage Node 發生故障或發生重大錯誤，該物件就會遺失。此外，在升級等維護程序期間，您也會暫時失去對該物件的存取。
+
+指定 `REDUCED_REDUNDANCY`僅影響物件首次擷取時所建立的複本數量。它不會影響作用中 ILM 原則評估物件時所建立的物件複本數量，也不會導致 StorageGRID 系統中的資料以較低的備援等級儲存。
+
+
+NOTE: 如果將物件擷取至已啟用 S3 物件鎖定的儲存桶，則 `REDUCED_REDUNDANCY`選項將被忽略。如果將物件擷取至舊版法規遵循儲存桶，則 `REDUCED_REDUNDANCY`選項會傳回錯誤。StorageGRID 一律會執行雙重提交擷取，以確保符合法規遵循要求。
+
+
+
+[[request-headers-for-server-side-encryption]]
+== 伺服器端加密的要求標頭
+
+您可以使用下列請求標頭，透過伺服器端加密對物件進行加密。SSE 和 SSE-C 選項互斥。
+
+* *SSE*：如果要使用 StorageGRID 管理的唯一金鑰加密物件，請使用下列標頭。
++
+** `x-amz-server-side-encryption`
++
+當 `x-amz-server-side-encryption`標頭未包含在 PutObject 請求中時，網格範圍的link:../admin/changing-network-options-object-encryption.html["儲存物件加密設定"]將從 PutObject 回應中省略。
+
+
+
+* *SSE-C*：如果您想使用您提供和管理的唯一金鑰對物件進行加密，請使用這三個標頭。
++
+** `x-amz-server-side-encryption-customer-algorithm`：指定 `AES256`。
+** `x-amz-server-side-encryption-customer-key`：指定新物件的加密金鑰。
+** `x-amz-server-side-encryption-customer-key-MD5`：指定新物件加密金鑰的 MD5 摘要。
+
+
+
+
+
+CAUTION: 您提供的加密金鑰不會被儲存。如果您遺失加密金鑰，您將遺失對應的物件。在使用客戶提供的金鑰來保護物件資料之前，請審查 link:using-server-side-encryption.html["使用伺服器端加密"] 的相關注意事項。
+
+
+NOTE: 如果物件使用 SSE 或 SSE-C 加密，則任何儲存桶層級或網格層級的加密設定都會被忽略。
+
+
+
+[[versioning]]
+== 版本控制
+
+如果儲存桶啟用了版本控制，則會自動為儲存物件的版本產生一個唯一 `versionId`識別碼。此 `versionId`識別碼也會透過 `x-amz-version-id`回應標頭在回應中傳回。
+
+如果版本控制暫停，物件版本將以 null `versionId` 值儲存；如果已存在 null 版本，則會被覆寫。
+
+
+
+[[signature-calculations-for-the-authorization-header]]
+== 授權標頭的簽章計算
+
+在使用 `Authorization`標頭進行請求驗證時，StorageGRID 與 AWS 有以下不同：
+
+* StorageGRID 不需要將  `host` 標頭包含在  `CanonicalHeaders` 中。
+* StorageGRID 不需要 `Content-Type`包含在 `CanonicalHeaders`中。
+* StorageGRID 不需要將  `x-amz-*` 標頭包含在  `CanonicalHeaders` 內。
+
+
+
+NOTE: 一般而言，最佳實務做法是始終在 `CanonicalHeaders`中包含這些標頭，以確保它們得到驗證；但是，如果您排除這些標頭，StorageGRID 不會傳回錯誤。
+
+如需詳細資訊，請參閱 https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html["授權標頭的簽章計算：以單一資料區塊傳輸有效負載（AWS 簽章版本 4）"^]。
+
+.相關資訊
+* link:../ilm/index.html["使用 ILM 管理物件"]
+* link:https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html["Amazon Simple Storage Service API 參考：PutObject"^]
+

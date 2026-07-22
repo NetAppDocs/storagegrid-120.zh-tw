@@ -1,0 +1,380 @@
+---
+permalink: s3/error-responses.html 
+sidebar: sidebar 
+keywords: error, error responses 
+summary: StorageGRID 系統支援所有適用的標準 S3 REST API 錯誤回應。此外，StorageGRID 實作還新增了一些自訂回應。 
+---
+= StorageGRID S3 REST API 錯誤回應
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 系統支援所有適用的標準 S3 REST API 錯誤回應。此外，StorageGRID 實作還新增了一些自訂回應。
+
+
+
+[[supported-s3-api-error-codes]]
+== 支援的 S3 API 錯誤代碼
+
+[cols="1a,1a"]
+|===
+| Name | HTTP 狀態 
+
+
+ a| 
+AccessDenied
+ a| 
+403 禁止存取
+
+
+
+ a| 
+BadDigest
+ a| 
+400 Bad Request
+
+
+
+ a| 
+BucketAlreadyExists
+ a| 
+409 衝突
+
+
+
+ a| 
+BucketNotEmpty
+ a| 
+409 衝突
+
+
+
+ a| 
+IncompleteBody
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InternalError
+ a| 
+500 內部伺服器錯誤
+
+
+
+ a| 
+InvalidAccessKeyId
+ a| 
+403 禁止存取
+
+
+
+ a| 
+InvalidArgument
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidBucketName
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidBucketState
+ a| 
+409 衝突
+
+
+
+ a| 
+InvalidDigest
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidEncryptionAlgorithmError
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidPart
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidPartOrder
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidRange
+ a| 
+416 要求的範圍無法滿足
+
+
+
+ a| 
+InvalidRequest
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidStorageClass
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidTag
+ a| 
+400 Bad Request
+
+
+
+ a| 
+InvalidURI
+ a| 
+400 Bad Request
+
+
+
+ a| 
+KeyTooLong
+ a| 
+400 Bad Request
+
+
+
+ a| 
+MalformedXML
+ a| 
+400 Bad Request
+
+
+
+ a| 
+MetadataTooLarge
+ a| 
+400 Bad Request
+
+
+
+ a| 
+MethodNotAllowed
+ a| 
+405 Method Not Allowed
+
+
+
+ a| 
+MissingContentLength
+ a| 
+411 必須提供長度
+
+
+
+ a| 
+MissingRequestBodyError
+ a| 
+400 Bad Request
+
+
+
+ a| 
+MissingSecurityHeader
+ a| 
+400 Bad Request
+
+
+
+ a| 
+NoSuchBucket
+ a| 
+404 找不到
+
+
+
+ a| 
+NoSuchKey
+ a| 
+404 找不到
+
+
+
+ a| 
+NoSuchUpload
+ a| 
+404 找不到
+
+
+
+ a| 
+NotImplemented
+ a| 
+501 未實作
+
+
+
+ a| 
+NoSuchBucketPolicy
+ a| 
+404 找不到
+
+
+
+ a| 
+ObjectLockConfigurationNotFoundError
+ a| 
+404 找不到
+
+
+
+ a| 
+PreconditionFailed
+ a| 
+412 先決條件失敗
+
+
+
+ a| 
+RequestTimeTooSkewed
+ a| 
+403 禁止存取
+
+
+
+ a| 
+ServiceUnavailable
+ a| 
+503 服務無法使用
+
+
+
+ a| 
+SignatureDoesNotMatch
+ a| 
+403 禁止存取
+
+
+
+ a| 
+TooManyBuckets
+ a| 
+400 Bad Request
+
+
+
+ a| 
+UserKeyMustBeSpecified
+ a| 
+400 Bad Request
+
+|===
+
+
+[[storagegrid-custom-error-codes]]
+== StorageGRID 自訂錯誤代碼
+
+[cols="2a,2a,1a"]
+|===
+| Name | 說明 | HTTP 狀態 
+
+
+ a| 
+XBucketLifecycleNotAllowed
+ a| 
+舊版符合法規的儲存桶不允許儲存桶生命週期組態。
+ a| 
+400 Bad Request
+
+
+
+ a| 
+XBucketPolicyParseException
+ a| 
+無法解析接收的儲存桶原則 JSON。
+ a| 
+400 Bad Request
+
+
+
+ a| 
+XComplianceConflict
+ a| 
+由於舊版法規遵循設定，操作遭拒。
+ a| 
+403 禁止存取
+
+
+
+ a| 
+XComplianceReducedRedundancyForbidden
+ a| 
+舊版符合法規儲存桶不允許降低備援
+ a| 
+400 Bad Request
+
+
+
+ a| 
+XMaxBucketPolicyLengthExceeded
+ a| 
+您的原則超過了允許的最大儲存桶原則長度。
+ a| 
+400 Bad Request
+
+
+
+ a| 
+XMissingInternalRequestHeader
+ a| 
+內部請求缺少標頭。
+ a| 
+400 Bad Request
+
+
+
+ a| 
+XNoSuchBucketCompliance
+ a| 
+指定的儲存桶未啟用舊版合規性。
+ a| 
+404 找不到
+
+
+
+ a| 
+XNotAcceptable
+ a| 
+請求中包含一個或多個無法滿足的 Accept 標頭。
+ a| 
+406 Not Acceptable
+
+
+
+ a| 
+XNotImplemented
+ a| 
+您提出的要求涉及的功能尚未實作。
+ a| 
+501 未實作
+
+|===

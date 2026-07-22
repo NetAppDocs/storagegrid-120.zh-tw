@@ -1,0 +1,43 @@
+---
+permalink: ilm/view-cloud-storage-pool-details.html 
+sidebar: sidebar 
+keywords: view cloud storage pool 
+summary: 您可以檢視雲端儲存資源池的詳細資訊，以確定其使用位置以及包含哪些節點和儲存設備等級。 
+---
+= 在 StorageGRID 中檢視雲端儲存資源池詳細資料
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以檢視雲端儲存資源池的詳細資訊，以確定其使用位置以及包含哪些節點和儲存設備等級。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["特定存取權限"]。
+
+
+.步驟
+. 選擇 *ILM* > *儲存資源池* > *雲端儲存資源池*。
++
+${post_edited_translations.segment}
+
++
+** *名稱*：資源池的唯一顯示名稱。
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** *ILM 使用情況*：資源池目前的使用方式。雲端儲存 Pool 可能未使用，也可能用於一個或多個 ILM 規則、銷毀編碼設定檔，或兩者皆有。
+** ${post_edited_translations.segment}
+
+
+. ${post_edited_translations.segment}
++
+${post_edited_translations.segment}
+
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
+. 檢視 *ILM usage* 索引標籤，以判斷 Cloud Storage Pool 目前是否正在任何 ILM 規則或銷毀編碼設定檔中使用。
+. （可選）前往 *ILM 規則頁面* 以 link:working-with-ilm-rules-and-ilm-policies.html["了解並管理所有規則"] 使用 Cloud Storage Pool。
+

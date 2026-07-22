@@ -1,0 +1,86 @@
+---
+permalink: swnodes/index.html 
+sidebar: sidebar 
+keywords: about ubuntu, ubuntu overview, vnware, red hat enterprise linux, rhel, quick start 
+summary: 請依照下列高階步驟安裝 Linux 或 VMware StorageGRID 節點。 
+---
+= 在軟體型節點上安裝 StorageGRID 的快速入門指南
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+請依照下列高階步驟安裝 Linux 或 VMware StorageGRID 節點。
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一"] 準備
+[role="quick-margin-list"]
+* 了解更多link:../primer/storagegrid-architecture-and-network-topology.html["${post_edited_translations.segment}"]。
+* 了解 link:../network/index.html["StorageGRID 連網"] 的具體細節。
+* 收集並準備link:required-materials.html["所需資訊和材料"]。
+* （僅限 VMware）安裝和設定link:software-requirements.html["VMware vSphere Hypervisor、vCenter 和 ESX 主機"]。
+* 準備所需的link:cpu-and-ram-requirements.html["CPU 和記憶體"]。
+* 提供link:storage-and-performance-requirements.html["儲存設備和效能要求"]。
+* （僅限 Linux）link:how-host-wide-settings-change.html["準備 Linux 伺服器"]將託管您的 StorageGRID 節點。
+
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["二"] 部署
+[role="quick-margin-para"]
+部署網格節點。部署網格節點時，這些節點將作為 StorageGRID 系統的一部分建立，並連接到一或多個網路。
+
+[role="quick-margin-list"]
+* （僅限 Linux）若要將軟體型網格節點部署到您在步驟 1 中準備的主機上，請使用 Linux 命令列和 link:creating-node-configuration-files.html["節點組態檔"]。
+* （僅限 VMware）使用 VMware vSphere Web Client、.vmdk 檔案和一組 .ovf 檔案範本，link:collecting-information-about-your-deployment-environment.html["將基於軟體的節點部署為虛擬機器 (VM)"]在您於步驟 1 中準備的伺服器上。
+* 若要部署 StorageGRID 應用裝置節點，請依照 https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/index.html["硬體安裝快速入門"^]。
+
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["三"] 配置
+[role="quick-margin-para"]
+當所有節點都部署完畢後，使用 Grid Manager link:navigating-to-grid-manager.html["配置網格並完成安裝"]。
+
+
+
+[[automate-the-installation]]
+== 自動化安裝
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+[role="tabbed-block"]
+====
+.Linux
+--
+為了節省時間並提供一致性，您可以自動化安裝 StorageGRID 主機服務及設定網格節點。
+
+* 使用 Ansible、Puppet 或 Chef 等標準協調架構來自動化：
++
+** 安裝 Linux
+** 連網和儲存設備組態
+** 安裝 Container 引擎和 StorageGRID 主機服務
+** 虛擬網格節點的部署
+
+
++
+請參閱 link:automating-installation-linux.html#automate-the-installation-and-configuration-of-the-storagegrid-host-service["自動化安裝及設定 StorageGRID 主機服務"]。
+
+* 部署網格節點後，link:automating-installation-linux.html#automate-the-configuration-of-storagegrid["自動化 StorageGRID 系統的組態"]使用安裝歸檔中提供的 Python 組態指令碼。
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/automating-appliance-installation-and-configuration.html["自動化安裝和設定應用裝置網格節點"^]
+* 如果您是 StorageGRID 部署的進階開發人員，請使用 link:overview-of-installation-rest-api.html["安裝 REST API"] 自動化安裝網格節點。
+
+
+--
+.VMware
+--
+為了節省時間並提供一致性，您可以自動化網格節點的部署和組態，以及 StorageGRID 系統的組態。
+
+* link:automating-grid-node-deployment-in-vmware-vsphere.html#automate-grid-node-deployment["使用 VMware vSphere 自動化網格節點部署"]。
+* 部署網格節點後，link:automating-grid-node-deployment-in-vmware-vsphere.html#automate-the-configuration-of-storagegrid["自動化 StorageGRID 系統的組態"]使用安裝歸檔中提供的 Python 組態指令碼。
+* https://docs.netapp.com/us-en/storagegrid-appliances/installconfig/automating-appliance-installation-and-configuration.html["自動化安裝和設定應用裝置網格節點"^]
+* 如果您是 StorageGRID 部署的進階開發人員，請使用 link:overview-of-installation-rest-api.html["安裝 REST API"] 自動化安裝網格節點。
+
+
+--
+====

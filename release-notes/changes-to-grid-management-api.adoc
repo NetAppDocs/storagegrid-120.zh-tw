@@ -1,0 +1,56 @@
+---
+permalink: release-notes/changes-to-grid-management-api.html 
+sidebar: sidebar 
+keywords: grid management api, api, api version, swagger, rest api, usageCacheDuration 
+summary: StorageGRID 12.0 使用 Grid Management API 的第 4 版。第 4 版已棄用第 3 版。但是，第 1 版、第 2 版和第 3 版仍然受支援。 
+---
+= StorageGRID 中 Grid Management API 的變更
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+StorageGRID 12.0 使用第 4 版的 Grid Management API。第 4 版已淘汰第 3 版；然而，第 1、2 和 3 版仍受支援。
+
+
+NOTE: 您可以繼續在 StorageGRID 12.0 中使用已淘汰版本的管理 API ；然而，未來的 StorageGRID 版本將移除對這些 API 版本的支援。升級至 StorageGRID 12.0 後，您可以使用  `PUT /grid/config/management` API 來停用已淘汰的 API 。
+
+若要深入瞭解，請前往 link:../admin/using-grid-management-api.html["${post_edited_translations.segment}"]。
+
+
+
+[[new-endpoints-for-branch-buckets]]
+== 分支儲存桶的新端點
+
+已新增下列端點，以允許您 link:../tenant/what-is-branch-bucket.html["管理分支儲存桶"]：
+
+`GET /org/containers/{branchBucketName}/branch`
+
+`PUT /org/containers/{branchBucketName}/branch`
+
+
+
+[[new-private-endpoints-for-move-adc]]
+== Move ADC 的新私有端點
+
+為了讓您link:../maintain/move-adc-service.html["移動 ADC 服務"]從同一站台上的一個儲存節點存取另一個儲存節點，已新增下列私有端點：
+
+`/private/move-adc`
+
+`/private/move-adc/start`
+
+`/private/move-adc/retry`
+
+
+
+[[new-private-endpoints-for-convert-to-data-only-node]]
+== ${post_edited_translations.segment}
+
+已新增下列私有端點，可讓您link:../maintain/convert-to-data-only-node.html["${post_edited_translations.segment}"]將不包含 ADC 服務的節點轉換為僅資料節點。
+
+`/private/convert-to-data-only-node`
+
+`/private/convert-to-data-only-node/start`
+
+`/private/convert-to-data-only-node/retry`

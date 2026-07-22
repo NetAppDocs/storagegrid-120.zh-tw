@@ -1,0 +1,44 @@
+---
+permalink: s3/deprecated-bucket-requests-for-legacy-compliance.html 
+sidebar: sidebar 
+keywords: S3 REST API, S3 operations, deprecated bucket requests 
+summary: 您可能需要使用 StorageGRID S3 REST API 來管理使用舊版法規遵循功能建立的儲存桶。 
+---
+= 已棄用的儲存區請求（針對舊版 StorageGRID 法規遵循）
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可能需要使用 StorageGRID S3 REST API 來管理使用舊版法規遵循功能建立的儲存桶。
+
+
+
+[[compliance-feature-deprecated]]
+== 法規遵循功能已棄用
+
+先前 StorageGRID 版本中提供的 StorageGRID 法規遵循功能已過時，並已由 S3 Object Lock 取代。
+
+如果您之前啟用了全域法規遵循設定，則在 StorageGRID 11.6 中也會啟用全域 S3 物件鎖定設定。您將無法再建立啟用法規遵循的新儲存桶；但是，您可以視需要使用 StorageGRID S3 REST API 來管理任何現有的舊版合規儲存桶。
+
+* link:use-s3-api-for-s3-object-lock.html["使用 S3 REST API 設定 S3 物件鎖定"]
+* link:../ilm/index.html["使用 ILM 管理物件"]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Hybrid_Cloud_Infrastructure/StorageGRID/How_to_manage_legacy_Compliant_buckets_in_StorageGRID_11.5["NetApp 知識庫：如何在 StorageGRID 11.5 中管理舊版符合法規的儲存桶"^]
+
+
+已棄用的法規遵循請求：
+
+* link:../s3/deprecated-put-bucket-request-modifications-for-compliance.html["已棄用 - 為法規遵循而對 PUT Bucket 請求進行的修改"]
++
+SGCompliance XML 元素已棄用。以前，您可以在 PUT Bucket 請求的選用 XML 請求本文中包含此 StorageGRID 自訂元素，以建立法規遵循儲存桶。
+
+* link:../s3/deprecated-get-bucket-compliance-request.html["已棄用 - GET Bucket compliance"]
++
+GET Bucket 法規遵循請求已棄用。但是，您仍然可以使用此要求來確定現有舊版 Compliant 儲存桶目前生效的法規遵循設定。
+
+* link:../s3/deprecated-put-bucket-compliance-request.html["已棄用 - PUT Bucket 法規遵循"]
++
+PUT Bucket 法規遵循請求已棄用。但是，您仍然可以使用此請求來修改現有舊版符合法規儲存桶的法規遵循設定。例如，您可以將現有儲存桶置於合法持有或增加其保留期間。
+
+

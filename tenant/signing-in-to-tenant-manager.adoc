@@ -1,0 +1,92 @@
+---
+permalink: tenant/signing-in-to-tenant-manager.html 
+sidebar: sidebar 
+keywords: how to sign in to tenant manager 
+summary: 您可以透過在受支援的 Web 瀏覽器的網址列中輸入租戶的 URL 來存取 Tenant Manager。 
+---
+= 登入 StorageGRID Tenant Manager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以透過在 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 的網址列中輸入租戶的 URL 來存取 Tenant Manager。
+
+.開始之前
+* 您已擁有登入憑證。
+* 您的網格系統管理員會提供一個用於存取 Tenant Manager 的 URL。該 URL 的格式類似於以下範例之一：
++
+`\https://FQDN_or_Admin_Node_IP/`
+
++
+`\https://FQDN_or_Admin_Node_IP:port/`
+
++
+`\https://FQDN_or_Admin_Node_IP/?accountId=20-digit-account-id`
+
++
+`\https://FQDN_or_Admin_Node_IP:port/?accountId=20-digit-account-id`
+
++
+URL 始終包含完整網域名稱（FQDN）、管理節點的 IP 位址或管理節點 HA 群組的虛擬 IP 位址。它也可能包含連接埠號碼、20 位數的租戶帳戶 ID 或兩者。
+
+* 如果 URL 中不包含租戶的 20 位數帳戶 ID，則您擁有此帳戶 ID。
+* 您正在使用一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
+* 您的瀏覽器已啟用 Cookie。
+* 您屬於擁有 link:tenant-management-permissions.html["特定存取權限"] 的使用者群組。
+
+
+.步驟
+. 啟動一個link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"]。
+. 在瀏覽器的網址列中，輸入存取 Tenant Manager 的 URL。
+. 如果出現安全性警報，請使用瀏覽器的安裝精靈安裝憑證。
+. ${post_edited_translations.segment}
++
+顯示的登入畫面取決於您輸入的 URL 以及是否已為 StorageGRID 設定單一登入 （SSO）。
+
++
+[role="tabbed-block"]
+====
+.${post_edited_translations.segment}
+--
+如果 StorageGRID 未使用 SSO，則會顯示下列其中一個畫面：
+
+** Grid Manager 登入頁面。選取 *租戶登入* 連結。
+** 租戶管理員登入頁面。*帳戶*欄位可能已填寫。
++
+... 如果未顯示租戶的 20 位數帳戶 ID，請選擇最近帳戶清單中顯示的租戶帳戶名稱，或輸入帳戶 ID。
+... 請輸入您的使用者名稱和密碼。
+... ${post_edited_translations.segment}
++
+租戶管理員儀表板隨即顯示。
+
+... 如果您從其他人那裡收到了初始密碼，請選擇 *_username_* > *變更密碼* 以保護您的帳戶安全。
+
+
+
+
+--
+.使用 SSO
+--
+如果 StorageGRID 使用 SSO，則會顯示下列其中一個畫面：
+
+** 貴組織的單一登入頁面。
++
+輸入您的標準 SSO 憑證，然後選擇 *Sign in*。
+
+** 租戶管理員 SSO 登入頁面。
++
+... 如果未顯示租戶的 20 位數帳戶 ID，請選擇最近帳戶清單中顯示的租戶帳戶名稱，或輸入帳戶 ID。
+... ${post_edited_translations.segment}
+... 使用您的標準 SSO 憑證登入您組織的 SSO 登入頁面。
++
+租戶管理員儀表板隨即顯示。
+
+
+
+
+
+--
+====
+

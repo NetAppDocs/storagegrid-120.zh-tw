@@ -1,0 +1,112 @@
+---
+permalink: admin/managing-traffic-classification-policies.html 
+sidebar: sidebar 
+keywords: QoS, quality of service, traffic classification, best practices, limit traffic, monitor traffic 
+summary: '流量分類原則可讓您識別和監控不同類型的網路流量。這些原則有助於限制和監控流量，從而提升您的服務品質 (QoS)。' 
+---
+= StorageGRID 中的流量分類原則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+流量分類原則可讓您識別和監控不同類型的網路流量。這些原則有助於限制和監控流量，從而提升您的服務品質 (QoS)。
+
+流量分類原則會套用至 Gateway Nodes 和 Admin Nodes 上 StorageGRID Load Balancer 服務的端點。若要建立流量分類原則，您必須已建立負載平衡器端點。
+
+
+
+[[matching-rules]]
+== ${post_edited_translations.segment}
+
+每項流量分類原則都包含一條或多條符合規則，用於識別與以下一個或多個實體相關的網路流量：
+
+* 儲存貯格
+* 子網路
+* ${post_edited_translations.segment}
+* 負載平衡器端點
+
+
+StorageGRID 會根據規則的目標監控符合該原則中任何規則的流量。任何符合原則中任何規則的流量都會由該原則處理。反之，您也可以設定規則來符合除特定實體之外的所有流量。
+
+
+
+[[traffic-limiting]]
+== 流量限制
+
+${post_edited_translations.segment}
+
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+* ${post_edited_translations.segment}
+
+
+限制值是按負載平衡器強制執行的。如果流量同時分佈在多個負載平衡器上，則總最大速率是您指定的速率限制的倍數。
+
+
+NOTE: 您可以建立原則來限制 Aggregate 頻寬或限制每次要求頻寬。然而，StorageGRID 無法同時限制這兩種頻寬類型。Aggregate 頻寬限制可能會對未受限制的流量造成額外的輕微效能影響。
+
+對於 Aggregate 或單次請求頻寬限制，請求將按照您設定的速率進行入站或出站。StorageGRID 只能強制執行一種速度，因此將依比對器類型強制執行最特定的原則比對項目。請求所消耗的頻寬不會計入其他包含 Aggregate 頻寬限制原則的較不具體的比對原則。對於所有其他類型的限制，用戶端請求將延遲 250 毫秒，且對於超過任何比對原則限制的請求，將收到 503 Slow Down 回應。
+
+${post_edited_translations.segment}
+
+
+
+[[use-traffic-classification-policies-with-slas]]
+== 使用具有服務等級協定 (SLA) 的流量分類原則
+
+您可以結合容量限制和資料保護使用流量分類原則，以強制執行服務等級協定 （SLA），該協定對容量、資料保護和效能提供具體規定。
+
+以下範例展示了服務等級協定 （SLA） 的三個層級。您可以建立流量分類原則，以達成每個 SLA 分層的效能目標。
+
+[cols="1a,1a,1a,1a,1a"]
+|===
+| 服務等級層 | 容量 | 資料保護 | 允許的最大效能 | 成本 
+
+
+ a| 
+金級
+ a| 
+允許 1 PB 儲存設備
+ a| 
+3 複本 ILM 規則
+ a| 
+25 K 次請求/秒
+
+5 GB/秒（40 Gbps）頻寬
+ a| 
+每月$$$
+
+
+
+ a| 
+銀
+ a| 
+允許 250 TB 儲存設備
+ a| 
+2 複本 ILM 規則
+ a| 
+每秒 10 K 次請求
+
+1.25 GB/sec （10 Gbps）頻寬
+ a| 
+每月 $$
+
+
+
+ a| 
+銅級
+ a| 
+允許 100 TB 儲存設備
+ a| 
+2 複本 ILM 規則
+ a| 
+5 K 次請求/秒
+
+1 GB/秒（8 Gbps）頻寬
+ a| 
+每月 $
+
+|===

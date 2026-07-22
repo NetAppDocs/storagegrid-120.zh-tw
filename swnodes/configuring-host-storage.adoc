@@ -1,0 +1,109 @@
+---
+permalink: swnodes/configuring-host-storage.html 
+sidebar: sidebar 
+keywords: how to configure host storage 
+summary: 必須為每個 Linux 主機分配區塊儲存 Volume。 
+---
+= 為 Linux 部署配置 StorageGRID 主機儲存
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+必須為每個 Linux 主機分配區塊儲存 Volume。
+
+.開始之前
+您已閱讀以下主題，這些主題提供了完成此工作所需的資訊：
+
+* link:storage-and-performance-requirements.html["儲存設備與效能要求"]
+* link:node-container-migration-requirements.html["節點 Container 移轉要求"]
+
+
+
+NOTE: 「Linux」指的是 RHEL、Ubuntu 或 Debian 部署。如需支援版本的清單，請參閱 https://imt.netapp.com/matrix/#welcome["NetApp 互作業性矩陣工具（IMT）"^]。
+
+.關於此任務
+為主機分配區塊儲存 Volume（LUN）時，請使用「儲存需求」中的表格來確定以下內容：
+
+* 每個主機所需的 Volume 數量（根據將在該主機上部署的節點數量和類型）
+* 每個 Volume 的儲存類別（即系統資料或物件資料）
+* 每個 Volume 的大小
+
+
+在主機上部署 StorageGRID 節點時，您將使用此資訊以及 Linux 為每個實體 Volume 指派的持久名稱。
+
+
+NOTE: 您無需對這些 Volume 進行分割、格式化或裝載；您只需確保主機可以看到這些 Volume 即可。
+
+
+NOTE: 僅中繼資料儲存節點只需要一個物件資料 LUN。
+
+在建立 Volume 名稱清單時，請避免使用「原始」特殊裝置檔案 (`/dev/sdb`（例如）。這些檔案可能會在主機重新開機後發生變化，進而影響系統的正常運作。如果您使用 iSCSI LUN 和裝置對應器多重路徑，請考慮在  `/dev/mapper` 目錄中使用多重路徑別名，尤其是在您的 SAN 拓撲包含指向共享儲存設備的備援網路路徑的情況下。或者，您可以使用系統建立的軟連結  `/dev/disk/by-path/` 作為持久裝置名稱。
+
+例如：
+
+[listing]
+----
+ls -l
+$ ls -l /dev/disk/by-path/
+total 0
+lrwxrwxrwx 1 root root  9 Sep 19 18:53 pci-0000:00:07.1-ata-2 -> ../../sr0
+lrwxrwxrwx 1 root root  9 Sep 19 18:53 pci-0000:03:00.0-scsi-0:0:0:0 -> ../../sda
+lrwxrwxrwx 1 root root 10 Sep 19 18:53 pci-0000:03:00.0-scsi-0:0:0:0-part1 -> ../../sda1
+lrwxrwxrwx 1 root root 10 Sep 19 18:53 pci-0000:03:00.0-scsi-0:0:0:0-part2 -> ../../sda2
+lrwxrwxrwx 1 root root  9 Sep 19 18:53 pci-0000:03:00.0-scsi-0:0:1:0 -> ../../sdb
+lrwxrwxrwx 1 root root  9 Sep 19 18:53 pci-0000:03:00.0-scsi-0:0:2:0 -> ../../sdc
+lrwxrwxrwx 1 root root  9 Sep 19 18:53 pci-0000:03:00.0-scsi-0:0:3:0 -> ../../sdd
+----
+每次安裝的結果都會有所不同。
+
+為每個區塊儲存設備 Volume 指派易於理解的名稱，以簡化 StorageGRID 的初始安裝和後續維護流程。如果您使用裝置對應器多重路徑驅動程式來對共享儲存設備 Volume 進行備援存取，則可以使用 `alias`欄位（位於您的 `/etc/multipath.conf`檔案中）。
+
+例如：
+
+[listing]
+----
+multipaths {
+     multipath {
+          wwid 3600a09800059d6df00005df2573c2c30
+          alias docker-storage-volume-hostA
+     }
+     multipath {
+          wwid 3600a09800059d6df00005df3573c2c30
+          alias sgws-adm1-var-local
+     }
+     multipath {
+          wwid 3600a09800059d6df00005df4573c2c30
+          alias sgws-adm1-audit-logs
+     }
+     multipath {
+          wwid 3600a09800059d6df00005df5573c2c30
+          alias sgws-adm1-tables
+     }
+     multipath {
+          wwid 3600a09800059d6df00005df6573c2c30
+          alias sgws-gw1-var-local
+     }
+     multipath {
+          wwid 3600a09800059d6df00005df7573c2c30
+          alias sgws-sn1-var-local
+     }
+     multipath {
+          wwid 3600a09800059d6df00005df7573c2c30
+          alias sgws-sn1-rangedb-0
+     }
+     …
+----
+以這種方式使用別名欄位，別名將作為區塊裝置出現在主機上的 `/dev/mapper`目錄中，這樣，每當組態或維護作業需要指定區塊儲存設備 Volume 時，就可以指定一個友善且易於驗證的名稱。
+
+如果您正在設定共享儲存設備以支援 StorageGRID 節點移轉，且使用 Device Mapper Multipathing，您可以在所有共置主機上建立並安裝通用 `/etc/multipath.conf`。只需確保在每台主機上使用不同的 Container 引擎儲存設備 Volume 即可。建議使用別名，並在每個 Container 引擎儲存設備 Volume LUN 的別名中包含目標主機名稱，這將有助於記憶。
+
+
+NOTE: 已棄用 Docker 作為純軟體部署的 Container 引擎。Docker 將在未來的版本中被其他 Container 引擎取代。
+
+.相關資訊
+* link:configuring-docker-storage-volume.html["設定 Container 引擎儲存設備 Volume"]
+* link:storage-and-performance-requirements.html["儲存設備與效能要求"]
+* link:node-container-migration-requirements.html["節點 Container 移轉要求"]
+

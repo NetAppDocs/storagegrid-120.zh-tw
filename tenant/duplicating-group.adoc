@@ -1,0 +1,40 @@
+---
+permalink: tenant/duplicating-group.html 
+sidebar: sidebar 
+keywords: how to duplicate tenant group 
+summary: 複製現有群組可以更快建立新群組。 
+---
+= 複製 StorageGRID 租用戶群組
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+複製現有群組可以更快建立新群組。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入租戶管理員。
+* 您屬於擁有 Root 存取權限的使用者群組。請參閱link:tenant-management-permissions.html["租戶管理權限"]。
+
+
+.步驟
+. 選擇 *Access Management* > *Groups*。
+. 選取要複製的群組的核取方塊。
+. 選取 *Duplicate group*。有關建立群組的其他詳細資訊，請參閱建立群組的說明 link:creating-groups-for-s3-tenant.html["S3 租戶"]。
+. 選取「本機群組」索引標籤以建立本機群組，或選取「聯合群組」索引標籤，從先前設定的身分識別來源匯入群組。
++
+如果您的 StorageGRID 系統啟用了單一登入 （SSO），則屬於本機群組的使用者將無法登入 Tenant Manager，儘管他們可以根據 link:tenant-management-permissions.html["群組權限"] 使用用戶端應用程式來管理租戶的資源。
+
+. 請輸入群組名稱。
++
+** *本機群組*：請同時輸入顯示名稱和唯一名稱。您可以稍後編輯顯示名稱。
+** *聯合組*：輸入唯一名稱。對於 Active Directory，唯一名稱是與 `sAMAccountName`屬性關聯的名稱。對於 OpenLDAP，唯一名稱是與 `uid`屬性關聯的名稱。
+
+
+. 選擇 *Continue* 。
+. 視需要修改此群組的權限。
+. 選擇 *Continue* 。
+. 如有需要，如果您要為 S3 租戶複製群組，可以從 *新增 S3 原則* 單選按鈕中選擇不同的原則。如果您選擇了自訂原則，請視需要更新 JSON 字串。
+. ${post_edited_translations.segment}
+

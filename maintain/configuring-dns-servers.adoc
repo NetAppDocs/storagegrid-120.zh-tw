@@ -1,0 +1,66 @@
+---
+permalink: maintain/configuring-dns-servers.html 
+sidebar: sidebar 
+keywords: storagegrid, dns, configuring dns, configure dns, domain name system 
+summary: '您可以新增、刪除和更新 DNS 伺服器，以便使用完整網域名稱 (FQDN) 主機名稱，而非 IP 位址。' 
+---
+= 在 StorageGRID 中設定 DNS 伺服器
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+${post_edited_translations.segment}
+
+若要在指定外部目的地的執行主機名稱時，使用完整網域（FQDN）而非 IP 位址，請指定您將使用的每個 DNS 伺服器的 IP 位址。這些項目可用於 AutoSupport、警示電子郵件、SNMP 通知、平台服務端點、Cloud Storage Pools 等。
+
+.開始之前
+* 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+* 您有link:../admin/admin-group-permissions.html["維護或 Root 存取權限"]。
+* 您需要設定 DNS 伺服器的 IP 位址。
+
+
+.關於此任務
+為確保正常運作，請指定兩到三個 DNS 伺服器。如果指定超過三個，由於某些平台的作業系統限制，可能只會使用其中三個。如果您的環境有路由限制，您可以link:../maintain/modifying-dns-configuration-for-single-grid-node.html["自訂 DNS 伺服器清單"]讓個別節點（通常是站台上的所有節點）使用最多三個不同的 DNS 伺服器。
+
+如果可能，請使用每個站台都可以在本機存取的 DNS 伺服器，以確保孤立的站台能夠解析外部目標的 FQDN。
+
+
+
+[[add-a-dns-server]]
+== 新增 DNS 伺服器
+
+${post_edited_translations.segment}
+
+.步驟
+. 選擇 *Maintenance* > *Network* > *DNS 伺服器*。
+. 選擇*新增其他伺服器*以新增 DNS 伺服器。
+. 選取 *Save* 。
+
+
+
+
+[[modify-a-dns-server]]
+== 修改 DNS 伺服器
+
+${post_edited_translations.segment}
+
+.步驟
+. 選擇 *Maintenance* > *Network* > *DNS 伺服器*。
+. 選擇要編輯的伺服器名稱的 IP 位址，並進行必要的變更。
+. 選取 *Save* 。
+
+
+
+
+[[delete-a-dns-server]]
+== 刪除 DNS 伺服器
+
+${post_edited_translations.segment}
+
+.步驟
+. 選擇 *Maintenance* > *Network* > *DNS 伺服器*。
+. 選擇 IP 位址旁的刪除圖示 image:icon-x-to-remove.png["刪除圖示"]。
+. 選取 *Save* 。
+

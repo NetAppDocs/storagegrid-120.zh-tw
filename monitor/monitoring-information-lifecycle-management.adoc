@@ -1,0 +1,75 @@
+---
+permalink: monitor/monitoring-information-lifecycle-management.html 
+sidebar: sidebar 
+keywords: lifecycle management, lifecycle, monitoring, ILM, information lifecycle management 
+summary: 資訊生命週期管理 （ILM） 系統為儲存在網格上的所有物件提供資料管理。您必須監控 ILM 運作情況，以了解網格是否能夠處理目前負載，或是否需要更多資源。 
+---
+= 監控 StorageGRID 中的資訊生命週期管理
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+資訊生命週期管理 （ILM） 系統為儲存在網格上的所有物件提供資料管理。您必須監控 ILM 運作情況，以了解網格是否能夠處理目前負載，或是否需要更多資源。
+
+.關於此任務
+StorageGRID 系統透過套用有效的 ILM 原則來管理物件。ILM 原則和相關的 ILM 規則決定建立複本的數量、建立的複本類型、複本的存放位置以及每個複本的保留時間。
+
+物件擷取與其他物件相關活動可能會超過 StorageGRID 評估 ILM 的速率，導致系統將無法在近乎即時的情況下履行其 ILM 放置指示的物件排入佇列。您應該監控 StorageGRID 是否能跟上用戶端動作。
+
+
+
+[[use-grid-manager-dashboard-tab]]
+== 使用 Grid Manager 儀表板索引標籤
+
+.步驟
+${post_edited_translations.segment}
+
+. 登入網格管理器。
+. 從儀表板中，選取 ILM 索引標籤，並記下 ILM 佇列（物件）卡和 ILM 評估率卡上的值。
++
+儀表板的 ILM 佇列（物件）卡片出現暫時性峰值是正常的。但如果佇列持續成長且從未下降，則網格需要更多資源才能有效運作：若需要更多儲存節點，或者（如果 ILM 原則將物件放置在遠端位置）需要更多網路頻寬。
+
+
+
+
+
+[[use-the-nodes-page]]
+== ${post_edited_translations.segment}
+
+.步驟
+${post_edited_translations.segment}
+
+
+NOTE: ${post_edited_translations.segment}
+
+. 選取 *Nodes* 。
+. ${post_edited_translations.segment}
+. ${post_edited_translations.segment}
++
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+** ${post_edited_translations.segment}
+
+
++
+
+NOTE: ILM 佇列區段僅包含於網格。此資訊不會顯示在站台或 Storage 節點的 ILM 索引標籤上。
+
+. ${post_edited_translations.segment}
++
+** *掃描週期 - 估計值*：完成所有物件的完整 ILM 掃描的估計時間。
++
+
+NOTE: 完整掃描並不能保證 ILM 已套用至所有物件。
+
+** *已嘗試的修理*：已嘗試之複寫資料物件修理作業的總數。每次 Storage Node 嘗試修理高風險物件時，此計數即會增量。如果網格變得忙碌，系統會優先處理高風險 ILM 修理。
++
+如果修理後複寫失敗，相同的物件修理可能會再次增量。+ 當您在監控 Storage 節點 Volume 恢復的進度時，這些屬性可能會很有用。如果嘗試修理的次數已停止增加，且已完成完整掃描，則修理可能已經完成。
+
+
+
+. 或者，提交  `storagegrid_ilm_scan_period_estimated_minutes` 和  `storagegrid_ilm_repairs_attempted` 的 Prometheus 查詢。
+

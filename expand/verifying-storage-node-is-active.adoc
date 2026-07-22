@@ -1,0 +1,21 @@
+---
+permalink: expand/verifying-storage-node-is-active.html 
+sidebar: sidebar 
+keywords: expand, expansion, add storage nodes, verify node is active, StorageGRID 
+summary: 新增儲存節點的擴充作業完成後，StorageGRID 系統應自動開始使用新的儲存節點。您必須使用 StorageGRID 系統驗證新的儲存節點是否已啟動。 
+---
+= 驗證 StorageGRID 擴充後儲存節點是否處於作用中狀態
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+新增儲存節點的擴充作業完成後，StorageGRID 系統應自動開始使用新的儲存節點。您必須使用 StorageGRID 系統驗證新的儲存節點是否已啟動。
+
+.步驟
+. 使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
+. ${post_edited_translations.segment}
+. 將遊標停留在「已使用儲存設備 - 物件資料」圖表上，即可檢視「已使用」值，該值表示已用於物件資料的總可用空間量。
+. 確認當您將游標向右移動圖表時，*已使用* 的數值是否增加。
+

@@ -1,0 +1,52 @@
+---
+permalink: maintain/configuring-ip-addresses.html 
+sidebar: sidebar 
+keywords: configure ip address, change IP tool, ethernet, dhcp, ha group 
+summary: 您可以使用「變更 IP」工具為網格節點設定 IP 位址，以執行網路組態。 
+---
+= StorageGRID IP 位址準則
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用「變更 IP」工具為網格節點設定 IP 位址，以執行網路組態。
+
+您必須使用 Change IP 工具，對最初在網格部署期間設定的連網組態進行大多數變更。使用標準 Linux 連網命令和檔案進行的手動變更，可能不會傳播到所有 StorageGRID 服務，且在升級、重新開機或節點恢復程序後可能不會保留。
+
+
+NOTE: IP 位址變更程序可能會造成服務中斷。在新組態套用之前，網格的部分區域可能無法使用。
+
+
+NOTE: 如果您僅需變更 Grid Network Subnet List，請使用 Grid Manager 新增或變更網路組態。否則，如果由於網路組態問題導致無法存取 Grid Manager，或者您同時執行 Grid Network 路由變更和其他網路變更，請使用 Change IP 工具。
+
+
+TIP: 如果要變更網格中所有節點的網格網路 IP 位址，請使用link:changing-ip-addresses-and-mtu-values-for-all-nodes-in-grid.html["全網格範圍變更的特殊程序"]。
+
+
+
+[[ethernet-interfaces]]
+== 乙太網路介面
+
+指派給 eth0 的 IP 位址一律是網格節點的「網格網路」IP 位址。指派給 eth1 的 IP 位址一律是網格節點的「管理網路」IP 位址。指派給 eth2 的 IP 位址一律是網格節點的「用戶端網路」IP 位址。
+
+請注意，在某些平台（例如 StorageGRID 應用裝置）上，eth0、eth1 和 eth2 可能是由實體或 VLAN 介面的附屬橋接器或連結組成的彙總介面。在這些平台上，*SSM* > *資源* 索引標籤可能會顯示除了 eth0、eth1 或 eth2 之外，指派給其他介面的網格、管理和用戶端網路 IP 位址。
+
+
+
+[[dhcp]]
+== DHCP
+
+您只能在部署階段設定 DHCP。您無法在設定期間設定 DHCP。如果您要變更網格節點的 IP 位址、子網路遮罩和預設閘道，則必須使用 IP 位址變更程序。使用「變更 IP」工具將會使 DHCP 位址變成靜態。
+
+
+
+[[high-availability-ha-groups]]
+== 高可用度 （HA） 群組
+
+* ${post_edited_translations.segment}
+* 您無法將用戶端網路 IP 位址變更為指派給在用戶端網路介面上設定的 HA 群組的現有虛擬 IP 位址的值。
+* ${post_edited_translations.segment}
+* 您無法將網格網路 IP 位址變更為指派給在網格網路介面上設定的 HA 群組的現有虛擬 IP 位址的值。
+

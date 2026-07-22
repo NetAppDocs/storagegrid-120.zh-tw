@@ -1,0 +1,111 @@
+---
+permalink: maintain/step-5-resolve-node-conflicts.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, resolve node conflict 
+summary: 在「停用網站」精靈的第 5 步驟（解決節點衝突）中，您可以確定 StorageGRID 系統中是否有任何節點已中斷連線，或所選站台中是否有任何節點屬於高可用度 （HA） 群組。解決所有節點衝突後，您可以從此頁面開始退役程序。 
+---
+= 解決 StorageGRID 中的節點衝突並啟動站台汰除
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在「停用網站」精靈的第 5 步驟（解決節點衝突）中，您可以確定 StorageGRID 系統中是否有任何節點已中斷連線，或所選站台中是否有任何節點屬於高可用度 （HA） 群組。解決所有節點衝突後，您可以從此頁面開始退役程序。
+
+.開始之前
+${post_edited_translations.segment}
+
+* StorageGRID 系統中的所有節點都必須連接（image:icon_alert_green_checkmark.png["圖示提示 綠色對勾"]）。
++
+
+NOTE: ${post_edited_translations.segment}
+
++
+
+NOTE: 如果一個或多個磁碟區處於離線（未掛載）狀態，或處於線上（已掛載）但處於錯誤狀態，退役將不會開始。
+
++
+
+NOTE: 如果在退役進行期間有一個或多個磁碟區離線，則在這些磁碟區重新上線後，退役程序才會完成。
+
+* 您要移除的站台上的任何節點都不能具有屬於高可用度 （HA） 群組的介面。
+
+
+.關於此任務
+${post_edited_translations.segment}
+
+在從本頁面開始網站退役程序之前，請審查以下注意事項：
+
+* 您必須預留足夠的時間來完成退役程序。
++
+
+NOTE: ${post_edited_translations.segment}
+
+* 站台退役程序執行期間：
++
+** 您無法建立參照正在退役之站台的 ILM 規則。您也無法編輯現有的 ILM 規則以參照該站台。
+** ${post_edited_translations.segment}
++
+
+NOTE: 如果在連線站台退役期間需要執行其他維護程序，可以在移除 Storage Node 時暫停程序。*暫停* 按鈕在「退役複製和銷毀編碼資料」階段啟用。
+
+** ${post_edited_translations.segment}
+
+
+
+
+.步驟
+. 檢視步驟 5（解決節點衝突）中斷開連接的節點部分，以確認 StorageGRID 系統中是否有任何節點的連線狀態為未知（image:icon_alarm_blue_unknown.png["圖標警報 藍色 未知"]）或管理關閉（image:icon_alarm_gray_administratively_down.png["${post_edited_translations.segment}"]）。
++
+image:decommission_site_step_5_disconnected_nodes.png["站台退役步驟 5：解決節點衝突"]
+
+. ${post_edited_translations.segment}
++
+請參閱 link:../maintain/grid-node-procedures.html["節點程序"]。如果您需要協助，請聯絡技術支援。
+
+. 當所有斷線節點都恢復線上後，請審查步驟 5（解決節點衝突）中的 HA 群組部分。
++
+${post_edited_translations.segment}
+
++
+image:decommission_site_step_5_ha_groups.png["退役站台步驟 5 HA 群組"]
+
+. ${post_edited_translations.segment}
++
+** 編輯每個受影響的 HA 群組，移除節點介面。
+** 移除僅包含此站台節點的 HA 群組。請參閱 StorageGRID 管理說明。
+
+
++
+如果所有節點都已連線，且所選站台中沒有節點用於 HA 群組，則會啟用 *Provisioning Passphrase* 欄位。
+
+. 請輸入佈建密碼。
++
+*Start Decommission* 按鈕變為可用狀態。
+
++
+image:decommission_site_step_5_provision_passphrase.png["${post_edited_translations.segment}"]
+
+. 如果您準備開始網站退役程序，請選擇 *Start Decommission*。
++
+警告訊息列出將被移除的站台和節點。請注意，徹底移除該站台可能需要數天、數週甚至數月的時間。
+
++
+image:decommission_site_step_5_warning.png["退役站台步驟 5 警告"]
+
+. 審查警告訊息。如果您準備開始，請選擇 *OK*。
++
+產生新的網格組態時，會出現一條訊息。此程序可能需要一些時間，具體取決於退役網格節點的類型和數量。
+
++
+image:decommission_site_step_5_grid_configuration.png["退役站台步驟 5 網格組態"]
+
++
+${post_edited_translations.segment}
+
++
+
+NOTE: ${post_edited_translations.segment}
+
+
