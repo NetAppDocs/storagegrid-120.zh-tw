@@ -11,11 +11,11 @@ summary: 視需要設定稽核層級、通訊協定標頭，以及稽核訊息�
 
 
 [role="lead"]
-視需要設定稽核層級、通訊協定標頭，以及稽核訊息和稽核日誌的位置。
+根據需要設定稽核等級、協定標頭、稽核訊息和日誌的位置以及日誌保留。
 
 所有 StorageGRID 節點都會產生稽核訊息和日誌，用於追蹤系統活動和事件。稽核訊息和日誌是監控和疑難排解的重要工具。
 
-您可以選擇link:../monitor/considerations-for-external-syslog-server.html["設定外部 syslog 伺服器"]將稽核資訊遠端儲存。使用外部伺服器可將稽核訊息記錄的效能影響降至最低，同時不會降低稽核資料的完整性。如果您擁有大型網格、使用多種類型的 S3 應用程式或希望保留所有稽核資料，則外部 syslog 伺服器尤其有用。
+您可以選擇link:../monitor/considerations-for-external-syslog-server.html["設定外部 syslog 伺服器"]將稽核資訊遠端儲存。使用外部伺服器可以最大限度地降低稽核訊息記錄的效能影響，同時又不降低稽核資料的完整性。如果您擁有大型網格、使用多種類型的 S3 應用程式，或想要保留所有稽核資料，則外部 syslog 伺服器特別有用。
 
 .開始之前
 * 您已使用 link:../admin/web-browser-requirements.html["支援的網頁瀏覽器"] 登入 Grid Manager。
@@ -161,7 +161,7 @@ NOTE: 如果您不需要詳細記錄 S3 應用程式的用戶端讀取操作，�
 
 . 如果需要，請選擇 *Add another header* 以建立其他標題。
 +
-當在請求中找到 HTTP 標頭時，它們會包含在稽核訊息的 HTRH 欄位中。
+當 StorageGRID 在請求中發現 HTTP 標頭時，它會將這些標頭包含在稽核訊息的 HTRH 欄位中。
 
 +
 
@@ -175,7 +175,7 @@ NOTE: 只有當「用戶端讀取」或「用戶端寫入」的稽核層級不�
 [[configure-log-location]]
 == 設定日誌位置
 
-預設情況下，稽核訊息和日誌會保存在產生它們的節點上。它們會定期輪換，最終被刪除，以防止佔用過多磁碟空間。如果您希望將稽核訊息和部分日誌儲存到外部，<<use-external-syslog-server,使用外部 syslog 伺服器>>。
+預設情況下，稽核訊息和日誌會保存在產生它們的節點上。StorageGRID 會定期輪替並最終刪除稽核訊息和日誌，以防止佔用過多磁碟空間。若要將稽核訊息和部分日誌儲存到外部，<<use-external-syslog-server,使用外部 syslog 伺服器>>。
 
 如果要將日誌檔案儲存在內部，請選擇租戶和儲存桶以用於日誌儲存，並啟用日誌歸檔。
 
@@ -262,7 +262,7 @@ NOTE: Reliable Event Logging Protocol （RELP） 擴充了 syslog 協定的功�
 +
 .. 對於 *Severity*，請選擇 *Passthrough*，或選擇 0 到 7 之間的嚴重性值。
 +
-如果您選取某個值，選取的值將會套用至此類型的所有訊息。如果您使用固定值置換嚴重性，則關於不同嚴重性的資訊將會遺失。
+如果選擇一個值，StorageGRID 會將所選值套用至所有此類訊息。如果使用固定值置換嚴重性設定，則會遺失有關不同嚴重性的詳細資訊。
 
 +
 [cols="1a,3a"]
@@ -547,7 +547,7 @@ local7
 
 ==== 發送測試訊息
 
-在開始使用外部 syslog 伺服器之前，您應該要求網格中的所有節點傳送測試訊息至該外部 syslog 伺服器。您應該使用這些測試訊息來協助您驗證整個日誌收集基礎架構，然後再確定將資料傳送到外部 syslog 伺服器。
+在使用外部 syslog 伺服器之前，請要求網格中的所有節點向該外部 syslog 伺服器傳送測試訊息。這些測試訊息有助於您在將資料傳送至外部 syslog 伺服器之前，驗證整個記錄收集基礎架構。
 
 
 CAUTION: 在確認外部 syslog 伺服器已收到來自網格中每個節點的測試訊息，且該訊息已如預期處理之前，請勿使用外部 syslog 伺服器組態。
@@ -704,3 +704,52 @@ system-logs/{node_hostname}/{absolute_path_to_log_file_on_node}--{last_modified_
 system-logs/DC1-SN1/var/local/log/localaudit.log--2025-05-12_13:41:44.gz
 ----
 
+
+
+
+[[manage-log-retention]]
+== 管理記錄保留
+
+您可以透過建立 ILM 規則或設定 S3 儲存桶生命週期原則來管理 StorageGRID 保留記錄的時間。
+
+[role="tabbed-block"]
+====
+.ILM 規則
+--
+為儲存桶建立 ILM 規則，並將此規則新增至作用中的 ILM 原則。
+
+.步驟
+. 選擇 *ILM* > *規則*。
+. 選取 *建立*。link:../ilm/create-ilm-rule-enter-details.html["步驟 1（輸入詳細資料）"] 「建立 ILM 規則精靈」隨即出現：
++
+.. 請為該規則輸入唯一名稱。例如：ILM Rule for archived logs。
+.. 選擇日誌歸檔 S3 租戶帳戶。
+.. 指定日誌歸檔的 S3 儲存桶。
+
+
+. 繼續link:../ilm/create-ilm-rule-define-placements.html["步驟 2（確定位置）"]並定義歸檔日誌規則的存放位置。例如，ILM 規則在第一年於站台 1 和站台 2 各儲存一份複本。一年後、產生一份 2+1 銷毀編碼複本、並僅儲存在其中一個站台。
+. 建立規則後，將其新增至作用中的 ILM 原則。
+
+
+--
+.S3 bucket 生命週期
+--
+在日誌歸檔 S3 儲存桶上設定 S3 儲存桶生命週期原則：
+
+[listing]
+----
+{
+      "Rules": [
+        {
+            "ID": "Retain logs forever",
+            "Filter": {},
+            "Status": "Enabled"，
+            "Expiration": {}
+        }
+      ]
+}
+----
+在日誌歸檔 S3 儲存桶上設定 S3 儲存桶生命週期原則時，對於符合儲存桶生命週期篩選器的物件，生命週期過期作業會置換 ILM 原則。不符合儲存桶生命週期篩選器的物件將使用 ILM 原則的保留設定。如果物件符合儲存桶生命週期篩選器，但未明確指定過期作業，則不會使用 ILM 原則的保留設定，並隱含表示物件版本將永久保留。
+
+--
+====

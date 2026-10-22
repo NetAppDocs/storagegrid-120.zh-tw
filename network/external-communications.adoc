@@ -315,6 +315,21 @@ Cloud Storage Pools 請求傳送到使用 HTTPS 的 AWS 目標。網格系統管
 
 
  a| 
+636
+ a| 
+TCP/UDP
+ a| 
+LDAP
+ a| 
+含有 ADC 的儲存節點
+ a| 
+Active Directory/LDAP
+ a| 
+用於連線至 Active Directory 或 LDAP 伺服器以進行身分識別聯合。
+
+
+
+ a| 
 5353
  a| 
 UDP

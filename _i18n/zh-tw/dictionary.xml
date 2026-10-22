@@ -9276,7 +9276,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="85321652781c4865437b1177afe5e5fd" category="list-text">如有需要，請登出命令 shell：<block ref="f24f62eeb789199b9b2e467df3b1876b" prefix=" " category="inline-code"></block></block>
   <block id="2a1affd93f20a53c951036edbf25dbcd" category="list-text">如果您已允許外部 SSH 存取，<block ref="cea5be726029476f08dd23ff706969c9" category="inline-link-macro-rx"></block>在您完成關閉節點時。</block>
   <block id="a14d43653ae3e8fd1a70a5e24979abf5" category="section-title">啟動網格節點</block>
-  <block id="a02c2203cdb9b4fbfede8d5f7c6f0260" category="admonition">如果整個網格已關閉超過 15 天，您必須在啟動任何網格節點之前聯絡技術支援。請勿嘗試重新建置 Cassandra 資料的恢復程序。否則可能會導致資料遺失。</block>
   <block id="ffe12ec7a5bf3d7374916aa9d83bc015" category="paragraph">如果可以，請依照下列順序啟動網格節點：</block>
   <block id="d2eecd9251fc52187744ebe135762511" category="list-text">最後對閘道節點供電。</block>
   <block id="d2d95c94f0a62f36fbbbb18eab39955a" category="admonition">如果主機包含多個網格節點，則在主機通電時，這些節點將自動恢復線上狀態。</block>
@@ -11274,7 +11273,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="dae13a2a792b7021ff6f581d7786b1ec" category="doc">在 StorageGRID 中設定記錄管理</block>
   <block id="a9531673d181be6becdca88f3479b430" category="paragraph">所有 StorageGRID 節點都會產生稽核訊息和日誌，用於追蹤系統活動和事件。稽核訊息和日誌是監控和疑難排解的重要工具。</block>
   <block id="a97ac55076888ecbcd9a79c4da901b73" category="inline-link-macro">設定外部 syslog 伺服器</block>
-  <block id="008683e590a89e9045e928ce8893c4e1" category="paragraph">您可以選擇<block ref="cce9bd0d3068773003ba615e61c64bfc" category="inline-link-macro-rx"></block>將稽核資訊遠端儲存。使用外部伺服器可將稽核訊息記錄的效能影響降至最低，同時不會降低稽核資料的完整性。如果您擁有大型網格、使用多種類型的 S3 應用程式或希望保留所有稽核資料，則外部 syslog 伺服器尤其有用。</block>
   <block id="153ea3ecc269df0ece8fc3054252c198" category="inline-link-macro">使用外部 syslog 伺服器的注意事項</block>
   <block id="faa5e852b7952fb165d7bf3bc3566f5f" category="list-text">如果您打算設定外部 syslog 伺服器，您已查看並遵循<block ref="a923731f0649821fc25d6b3906f76f7b" category="inline-link-macro-rx"></block>。</block>
   <block id="2c2103b1718c2d1657f5280d91c5b91c" category="list-text">如果您打算使用 TLS 或 RELP/TLS 協定設定外部 syslog 伺服器，則您需要擁有所需的伺服器 CA 和用戶端憑證以及用戶端私鑰。</block>
@@ -11319,11 +11317,9 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="a50781a8ab093930700459f92341604c" category="list-text">在「稽核協定標頭」區段中，定義要包含在用戶端讀取和寫入稽核訊息中的 HTTP 請求標頭。</block>
   <block id="a6235fcb1b5b47e8bcb62c26da9ab610" category="paragraph">使用星號 (\*) 作為萬用字元，可比對零個或多個字元。使用逸出序列 (\*) 可比對字面上的星號。</block>
   <block id="9d1e6a94bc0d0fabf655a4392b69b71b" category="list-text">如果需要，請選擇 *Add another header* 以建立其他標題。</block>
-  <block id="a93dfbe1ade38b97fd4fb3a000cd4ad3" category="paragraph">當在請求中找到 HTTP 標頭時，它們會包含在稽核訊息的 HTRH 欄位中。</block>
   <block id="9b6623244c7ab8bd9eae7093b612876a" category="admonition">只有當「用戶端讀取」或「用戶端寫入」的稽核層級不是「關閉」時，才會記錄稽核協定請求標頭。</block>
   <block id="046dbf65afc322767458d67533c61122" category="section-title">設定日誌位置</block>
   <block id="3e6dcdf7a0cb5dd99131b899cb928f83" category="inline-xref">使用外部 syslog 伺服器</block>
-  <block id="67363dd27a766a549e49cd3bb3187aae" category="paragraph">預設情況下，稽核訊息和日誌會保存在產生它們的節點上。它們會定期輪換，最終被刪除，以防止佔用過多磁碟空間。如果您希望將稽核訊息和部分日誌儲存到外部，<block ref="a5f9463152b8158166c8239e67a8692c" category="inline-xref-macro-rx"></block>。</block>
   <block id="aa05a5f5491cc05e47f997bf1b986d94" category="paragraph">如果要將日誌檔案儲存在內部，請選擇租戶和儲存桶以用於日誌儲存，並啟用日誌歸檔。</block>
   <block id="60971ee036fc828a7f3f011d017e0050" category="section-title">使用外部 syslog 伺服器</block>
   <block id="6b0ec1175ef3fb75de2f76b033681e95" category="paragraph">您可以選擇設定外部 syslog 伺服器，將稽核日誌、應用程式日誌和安全性事件日誌儲存到網格之外的位置。</block>
@@ -11353,7 +11349,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="47fc39b6d07ce63f09a65601480d77a2" category="list-text"><block ref="4834b7cc19f7ec9afe37fed5fc065983" prefix="" category="inline-code"></block></block>
   <block id="5af4cafe296fc33b87245bb37bf70bd3" category="list-text"><block ref="b129bc122d9cf64dfc7ed35518a6885d" prefix="" category="inline-code"></block></block>
   <block id="047414e831cc68ab248d7f9440640f16" category="list-text">*傳送存取日誌*：將 HTTP 存取日誌傳送至 Grid Manager、Tenant Manager、已設定的負載平衡器端點，以及來自遠端系統的網格聯合請求。</block>
-  <block id="a553df609a474c1eddf19e9a11c154ab" category="paragraph">如果您選取某個值，選取的值將會套用至此類型的所有訊息。如果您使用固定值置換嚴重性，則關於不同嚴重性的資訊將會遺失。</block>
   <block id="ccd3e5e6fcf337a3ae4fba81db9d1cc8" category="list-text">對於安全性事件，嚴重性值由節點上的 Linux 發行版產生。</block>
   <block id="269b39c0a470321ff0da0132d62660d7" category="list-text">對於應用程式日誌，嚴重程度會根據問題的不同而有所區別，介於「info」和「notice」之間。例如，新增 NTP 伺服器和設定 HA 群組會產生「info」等級的日誌，而有意停止 SSM 或 RSM 服務則會產生「notice」等級的日誌。</block>
   <block id="29c966f10a0dbefb8734085d0074ff76" category="list-text">對於存取日誌，嚴重程度為「info」。</block>
@@ -11399,7 +11394,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="51ba87b7504c20a3ebbce00aacf4b5e1" category="paragraph">local6</block>
   <block id="37693cfc748049e45d87b8c7d8b9aacd" category="paragraph">23</block>
   <block id="1830d14f102923840362ae13e7f7f937" category="paragraph">local7</block>
-  <block id="520fc9507aac3561e96dd9d964620270" category="paragraph">在開始使用外部 syslog 伺服器之前，您應該要求網格中的所有節點傳送測試訊息至該外部 syslog 伺服器。您應該使用這些測試訊息來協助您驗證整個日誌收集基礎架構，然後再確定將資料傳送到外部 syslog 伺服器。</block>
   <block id="66267a397976d942cefe0473a7b473ec" category="admonition">在確認外部 syslog 伺服器已收到來自網格中每個節點的測試訊息，且該訊息已如預期處理之前，請勿使用外部 syslog 伺服器組態。</block>
   <block id="e07ce98c3766168a9fd3eeb752877a2b" category="paragraph">測試結果會持續顯示在頁面上，直到您停止測試為止。測試進行期間，您的稽核訊息會繼續傳送到您先前設定的目的地。</block>
   <block id="c38e5c9b85a303d81893dd02e1ae8b9d" category="inline-link-macro">疑難排解外部 syslog 伺服器</block>
@@ -14587,13 +14581,10 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="0ae08fe2e9e43e64570ed293e89de392" category="summary">StorageGRID 系統為每個 S3 租戶帳戶支援最多 5,000 個儲存桶。</block>
   <block id="d14406c13fd2e0d80173680f92e9fc98" category="doc">StorageGRID 中的 S3 儲存貯體作業和實作詳細資料</block>
   <block id="3b182a2bdfd785123519e4e31feaeed0" category="paragraph">每個網格最多可以有 100,000 個儲存桶。</block>
-  <block id="f31335f680f76932b1c3c1a6b099824d" category="paragraph">為了支援 5,000 個儲存桶，網格中的每個儲存節點必須至少有 64 GB 的 RAM。</block>
   <block id="5b46a37d451753ad9b51249b162f5137" category="paragraph">儲存桶名稱限制遵循 AWS 美國標準區域限制，但為了支援 S3 虛擬託管式請求，您應該進一步將其限制為 DNS 命名慣例。</block>
-  <block id="fdcbe80776d50dca3083a6eb75899bdd" category="paragraph">如需更多資訊，請參閱下列內容：</block>
   <block id="089dd85c11aa3893945f45e88f134e15" category="inline-link">Amazon Simple Storage Service 使用者指南：儲存桶配額、限制與約束</block>
   <block id="f00b5bc4d8d149e054687d090cdda367" category="list-text"><block ref="f00b5bc4d8d149e054687d090cdda367" category="inline-link-rx"></block></block>
   <block id="afd3aae038a6cc1a9aa7bab0b9add414" category="paragraph">ListObjects（GET Bucket）和 ListObjectVersions（GET Bucket 物件版本）操作支援 StorageGRID <block ref="2fac6fab6140bb69b5d83290782a5692" category="inline-link-macro-rx"></block>。</block>
-  <block id="a46f31210315a47a2c5f07c4d876ef5a" category="paragraph">您可以檢查是否已為各個儲存桶啟用或停用上次存取時間更新。請參閱<block ref="dcc85cafd1adb4db5f3bf68d48f423d2" category="inline-link-macro-rx"></block>。</block>
   <block id="95912013f7f2096e0ed8fa7176719a67" category="paragraph">下表說明 StorageGRID 如何實作 S3 REST API 儲存桶操作。若要執行任何這些操作，必須提供帳戶所需的存取憑證。</block>
   <block id="895c5eb40bfaf1d68b35892bc98c9ee4" category="paragraph">CreateBucket</block>
   <block id="6a72d80838e86f3a28494fa7a71d7be5" category="paragraph">建立新的儲存桶。建立儲存桶後，您將成為該儲存桶的擁有者。</block>
@@ -14606,21 +14597,18 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="54866248d1c9d3b909e7e8d595ccde2d" category="list-text">在虛擬託管風格的請求中，不應使用句點。句點會導致伺服器萬用字元憑證驗證出現問題。</block>
   <block id="19c22519dbbf02db4cc7fb69f420db89" category="list-text">預設情況下，儲存貯體是在 <block ref="c800b6d9163b0db7d28f86c1470a9542" prefix=" " category="inline-code"></block> 區域中建立；不過，您可以使用要求本文中的 <block ref="629c0730a42cc5a39f173be946b73847" prefix=" " category="inline-code"></block> 要求元素來指定不同的區域。使用 <block ref="629c0730a42cc5a39f173be946b73847" prefix=" " category="inline-code"></block> 元素時，您必須指定已使用 Grid Manager 或 Grid Management API 定義之區域的確切名稱。如果您不知道應使用的區域名稱，請聯絡您的系統管理員。</block>
   <block id="64530364bc7a24303ce8121e492420c3" category="paragraph">*注意*：如果您的 CreateBucket 要求使用了 StorageGRID 中未定義的區域，則會發生錯誤。</block>
-  <block id="9f1a4fa131f398ce48eb3936843026f4" category="list-text">您可以透過新增<block ref="289c5faa6802e638231e7e6ff257d3a4" prefix=" " category="inline-code"></block>請求標頭來建立啟用了 S3 物件鎖定的儲存桶。請參閱<block ref="68c667f0ce4a6f376dfff8a750bd7d7d" category="inline-link-macro-rx"></block>。</block>
   <block id="e145a6ea2ee73b80827aa3fb6a1c1a46" category="paragraph">建立儲存桶時必須啟用 S3 物件鎖定。儲存桶建立後無法新增或停用 S3 物件鎖定。S3 物件鎖定需要儲存桶版本控制，該功能會在建立儲存桶時自動啟用。</block>
   <block id="71e5ab731ab5629ab300b352d1da42f2" category="paragraph">DeleteBucket</block>
   <block id="71c1ace3698313ad784d26ba0272e181" category="paragraph">刪除儲存桶。</block>
   <block id="b5ef044f36f2f270aafbe292662370d0" category="paragraph">DeleteBucketCors</block>
   <block id="1686f05337a73f0d14bd5015146d1bf3" category="paragraph">刪除儲存桶的 CORS 組態。</block>
   <block id="474edf8ea8821ec1cba31c49f123ec20" category="paragraph">刪除儲存桶中的預設加密。現有加密物件仍保持加密狀態，但新增至儲存桶中的任何新物件都不會加密。</block>
-  <block id="1705f09f559c9ea2d2f9b08fa4a80986" category="paragraph">從儲存桶中刪除生命週期組態。請參閱 <block ref="899e48eb574f8c5912a7d048f8d748e8" category="inline-link-macro-rx"></block>。</block>
   <block id="bd1790f94d5a6095bc05f4fb3bbf2e93" category="paragraph">DeleteBucketPolicy</block>
   <block id="4c4f5aff111532846b63cc55bb0c4d99" category="paragraph">刪除附加至儲存桶的原則。</block>
   <block id="fa4914b8e5836b53607e4c9d85ba4fb2" category="paragraph">DeleteBucketReplication</block>
   <block id="088408f3c0dcc9fa859c5a55991a5f50" category="paragraph">刪除附加至儲存貯體的複寫組態。</block>
   <block id="2c46233cd08c14be3fb5c38312f379a6" category="paragraph">DeleteBucketTagging</block>
   <block id="84e929b005c83a02afd743cf624008f2" category="paragraph">使用<block ref="7083a19806d3d0e94bb134eb9cec3403" prefix=" " category="inline-code"></block>子資源從儲存桶中移除所有標籤。</block>
-  <block id="6764fc553c71fcb8641d4f24d3f35297" category="paragraph">*注意*：如果此儲存桶設定了非預設的 ILM 原則標籤，則會有一個<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤並已賦值。如果存在<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤，請勿發出 DeleteBucketTagging 要求。而應發出僅包含<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>標籤及其賦值的 PutBucketTagging 要求，以移除儲存桶中的所有其他標籤。請勿修改或移除<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤。</block>
   <block id="03ef0cfea403cffb798388f8b02e35d5" category="paragraph">GetBucketAcl</block>
   <block id="4188d21d16199511e8458513bb9c491e" category="paragraph">傳回肯定回應以及儲存桶擁有者的 ID、DisplayName 和權限，表示擁有者對儲存桶擁有完全存取權限。</block>
   <block id="f6658c946f667d0dd03682a0b57cfb57" category="paragraph">GetBucketCors</block>
@@ -14628,7 +14616,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="7a4a25f489596f5f8ad44e8779ca39fd" category="paragraph">GetBucketEncryption</block>
   <block id="300fa264f90c3b5ef5d5c82eb064a68a" category="paragraph">傳回儲存桶的預設加密組態。</block>
   <block id="96501f542f45104428243c88b0b2505a" category="paragraph">（之前名為 GET Bucket lifecycle）</block>
-  <block id="9c3ef3503c77608a13a22d71e2f7b0c4" category="paragraph">傳回儲存桶的生命週期組態。參見<block ref="899e48eb574f8c5912a7d048f8d748e8" category="inline-link-macro-rx"></block>。</block>
   <block id="ea8ebab648466a1d6a6fd9b6a32542d7" category="paragraph">GetBucketLocation</block>
   <block id="0024d60037fdf7fce3e908478763cfd6" category="paragraph">傳回在 CreateBucket 請求中使用<block ref="629c0730a42cc5a39f173be946b73847" prefix=" " category="inline-code"></block>元素設定的區域。如果儲存桶的區域為<block ref="c800b6d9163b0db7d28f86c1470a9542" prefix=" " category="inline-code"></block>，則該區域傳回空字串。</block>
   <block id="09a672e92705fe17edef60ba246d4b5a" category="paragraph">GetBucketNotificationConfiguration</block>
@@ -14640,7 +14627,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="a554ed6aa4f650c4d24e98f8bdccd5e1" category="paragraph">傳回附加至儲存貯體的複寫組態。</block>
   <block id="15da661f558260bd8570b8f21b4e9641" category="paragraph">GetBucketTagging</block>
   <block id="e71052daa7342f7fe14b8bf0409a8401" category="paragraph">使用<block ref="7083a19806d3d0e94bb134eb9cec3403" prefix=" " category="inline-code"></block>子資源傳回儲存桶的所有標籤。</block>
-  <block id="045025a75c437695d2714178dc6ff73e" category="paragraph">*注意*：如果為此儲存桶設定了非預設的 ILM 原則標籤，則會有一個<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤被賦予一個值。請勿修改或移除此標籤。</block>
   <block id="f8dd93da878bd2ba8afb5e07eec7b751" category="paragraph">GetBucketVersioning</block>
   <block id="c688cf56243f664d2f2da06508f53a74" category="paragraph">此實作使用<block ref="f775fa07e143b2e671946a48af8f42ca" prefix=" " category="inline-code"></block>子資源傳回儲存桶的版本控制狀態。</block>
   <block id="525ad44fa3fd04646bcd2cd028032e2f" category="list-text">_blank_: 版本控制從未啟用（儲存桶為「未版本化」）</block>
@@ -14648,7 +14634,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="e001cd096fa7cdd4effa158ceef1a1f1" category="list-text">已暫停：版本控制功能先前已啟用，現已暫停</block>
   <block id="b465c070848198971fade79c66a56509" category="paragraph">GetObjectLockConfiguration</block>
   <block id="41547bb5e8d1ecbf64157382c92ff5f3" category="paragraph">傳回儲存桶的預設保留模式和預設保留期間（如果已設定）。</block>
-  <block id="282c6dfc7e3671a8bee3a4ba60fa3562" category="paragraph">請參閱 <block ref="68c667f0ce4a6f376dfff8a750bd7d7d" category="inline-link-macro-rx"></block>。</block>
   <block id="7b5f92261dcdbdee8b8f2fd9d0e38eda" category="paragraph">HeadBucket</block>
   <block id="e82cd3ad0f3c4dabdcdf6744d49674fa" category="paragraph">判斷儲存桶是否存在以及您是否擁有存取權限。</block>
   <block id="290b954e17b0254e25b7b3f385d9a9a9" category="paragraph">此作業會傳回：</block>
@@ -14680,7 +14665,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="fce82da56cb8ca29658f445035073a3a" category="list-text">AbortIncompleteMultipartUpload</block>
   <block id="afedf9afee367f51f98d7cf030c976a6" category="list-text">過渡</block>
   <block id="6f02eeef8bac8a338b42a291f74f0ed8" category="inline-link-macro">ILM 如何在物件的整個生命週期中運作</block>
-  <block id="7d002d46b560bb735be81511030dd55b" category="paragraph">請參閱<block ref="899e48eb574f8c5912a7d048f8d748e8" category="inline-link-macro-rx"></block>。若要了解儲存桶生命週期中的到期行動如何與 ILM 放置指令互動，請參閱<block ref="2eebcc299dfcfbe3c659686c56f8a9eb" category="inline-link-macro-rx"></block>。</block>
   <block id="8a5f42cbf53b3e83a9b0c88eb780e402" category="paragraph">*注意*：儲存桶生命週期組態可用於已啟用 S3 Object Lock 的儲存桶，但不支援舊版 Compliant 儲存桶的儲存桶生命週期組態。</block>
   <block id="dc57e5637c3b251754cf83e2c4c05583" category="paragraph">PutBucketNotificationConfiguration</block>
   <block id="34ac839a541d8fabef4176a79ddd4e54" category="paragraph">（之前稱為 PUT Bucket notification）</block>
@@ -14701,7 +14685,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="f01c733be2ffd54c1451d3677d20b121" category="paragraph"><block ref="6e986cf3126d349a3cece9a996dcac93" prefix="" category="inline-code"></block></block>
   <block id="0d32d2377aa31d77bde77b8185253c02" category="paragraph">PutBucketPolicy</block>
   <block id="e51107c5ae712513ca093879e12faa0b" category="inline-link-macro">使用儲存桶和群組存取原則</block>
-  <block id="14e3911b99c1530e3b7f5a36c4c49610" category="paragraph">設定附加到儲存桶的原則。參見<block ref="df8686d57377200c27f81ca84f948011" category="inline-link-macro-rx"></block>。</block>
   <block id="9ba4979ce13ad4cb8f46026bd7b10d70" category="paragraph">PutBucketReplication</block>
   <block id="ccb4749182ee9901b8d03d43081bacb5" category="inline-link-macro">StorageGRID CloudMirror 複寫</block>
   <block id="5f3734c4900296d26b18798d27caddc9" category="paragraph">使用請求正文中提供的複寫組態 XML，為儲存桶設定 <block ref="5e7e61f123c774c65945463c9958cd85" category="inline-link-macro-rx"></block>。對於 CloudMirror 複寫，您應該注意以下實作細節：</block>
@@ -14710,7 +14693,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="e7b2c311ae6c2f201333bb704cde4024" category="list-text">可以在版本化儲存桶或非版本化儲存桶上設定儲存桶複寫。</block>
   <block id="b8c9ab8690fa534b26e98df699f3b8ae" category="list-text">您可以在複寫組態 XML 的每個規則中指定不同的目的地儲存桶。一個來源儲存桶可以複寫到多個目的地儲存桶。</block>
   <block id="7e325b4129f19b6582a079197f4b0ac0" category="inline-link-macro">設定 CloudMirror 複寫</block>
-  <block id="3f03252083053d9039285a57d4bc4ff1" category="list-text">目標儲存桶必須指定為租用戶管理器或租用戶管理 API 中指定的 StorageGRID 端點的 URN。請參閱<block ref="78ca258c698c6e5ef6dba3f53379e735" category="inline-link-macro-rx"></block>。</block>
   <block id="d5c9b8b845b7255c3a3b2b97c2e543d9" category="paragraph">要成功進行複寫組態，端點必須存在。如果端點不存在，則請求失敗為<block ref="6196dba52703776af2e6593f772ed7ce" prefix=" " category="inline-code"></block>。錯誤訊息如下：<block ref="3c5d9914e90ed77cef2b0bf6abe81deb" prefix=" " category="inline-code"></block></block>
   <block id="3e83b92885d95cc17b1d93c1e0e2377a" category="list-text">您無需在組態 XML 中指定 <block ref="bbbabdbe1b262f75d99d62880b953be1" prefix=" " category="inline-code"></block>。StorageGRID 不使用此值，提交後將被忽略。</block>
   <block id="c97cdfe07b799050f540c51ba193aed4" category="list-text">如果從組態 XML 中省略儲存設備類別，StorageGRID 預設會使用<block ref="94e94133f4bdc1794c6b647b8ea134d0" prefix=" " category="inline-code"></block>儲存設備類別。</block>
@@ -14723,7 +14705,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="7b82d7c03021df1db6c52454cee6e54c" category="list-text">與儲存桶關聯的標籤必須具有唯一的標籤鍵。標籤鍵的長度最多可達 128 個 Unicode 字元。</block>
   <block id="ab23af86227de7dcc931b4e8919c5ba7" category="list-text">標籤值最多可以包含 256 個 Unicode 字元。</block>
   <block id="a1a51b9ded79fb59e901c38b202a45de" category="list-text">鍵和值區分大小寫。</block>
-  <block id="dc7a64e89b4b9c7c3f78c5284357cceb" category="paragraph">*注意*：如果為此儲存桶設定了非預設的 ILM 原則標籤，則會有一個<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤及其賦值。請確保所有 PutBucketTagging 請求中都包含<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤及其賦值。請勿修改或移除此標籤。</block>
   <block id="e37b4537af0ba019153bda1ad5413d7b" category="paragraph">*注意*：此操作將覆寫儲存貯體中已有的所有標籤。如果從清單中省略任何現有標籤，這些標籤將從該儲存貯體中移除。</block>
   <block id="1110fc5a93153951bab9defba62634f7" category="paragraph">使用<block ref="f775fa07e143b2e671946a48af8f42ca" prefix=" " category="inline-code"></block>子資源設定現有儲存貯體的版本控制狀態。您可以使用下列值之一設定版本控制狀態：</block>
   <block id="312b5950c02eecf927bce9b6cf0f3ca6" category="list-text">已啟用：啟用儲存桶中物件的版本控制。新增到儲存桶的所有物件都會獲得一個唯一的版本 ID。</block>
@@ -16083,18 +16064,15 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="b86d659161b20616144f0039c1424b4e" category="list-text">CPU 核心數：每個節點 8 個</block>
   <block id="45f4c38ce1a63d1d358cc2bec8789aa1" category="list-text">記憶體容量：取決於可用記憶體容量總量以及系統上執行的非 StorageGRID 軟體數量。</block>
   <block id="df1f6ab1a0b09cb6d49788a9b9064924" category="list-text">通常，每個節點至少需要 24 GB，且比系統總 RAM 少 2 到 16 GB。</block>
-  <block id="e6964a3fc0e96b5235523f7e1dea30f4" category="list-text">每個租戶至少需要 64 GB 的空間，大約會有 5,000 個儲存桶</block>
   <block id="b99211e689eb30a0f585e81b64ad800d" category="paragraph">基於軟體的純中繼資料節點資源必須與現有儲存節點資源相符。例如：</block>
   <block id="d3ec908281cc94f5014ae8af540770e3" category="paragraph">請確保計劃在每個實體或虛擬主機上執行的 StorageGRID 節點數量不超過 CPU 核心數或可用實體記憶體容量。如果主機並非專用於執行 StorageGRID （不建議），請務必考慮其他應用程式的資源需求。</block>
   <block id="a1e58fa0194714dd0c7a86a457ff3114" category="paragraph">VMware 支援每個虛擬機器使用一個節點。請確保 StorageGRID 節點的記憶體容量不超過可用實體記憶體容量。每個虛擬機器必須專用於執行 StorageGRID。</block>
   <block id="5298a657a3477e152f5382255aade085" category="inline-link-macro">管理</block>
   <block id="89948c7f4890af5ff18524b4fc3f3611" category="inline-link-macro">監控</block>
   <block id="b1709369b19b51deac976f5fc9dce527" category="inline-link-macro">升級</block>
-  <block id="996d2c2fc1b957ecf27b24b85ee4db46" category="admonition">定期監控 CPU 和記憶體容量使用情況，確保這些資源持續容納您的工作負載。例如，將虛擬儲存節點的 RAM 和 CPU 分配增加一倍，即可獲得與 StorageGRID 應用裝置節點類似的資源。此外，如果每個節點的中繼資料量超過 500 GB，請考慮將每個節點的 RAM 增加至 48 GB 或更多。如需管理物件中繼資料儲存設備、增加中繼資料保留空間設定以及監控 CPU 和記憶體容量使用情況的相關資訊，請參閱 <block ref="d7da925960d077caca67b7da05f604eb" category="inline-link-macro-rx"></block>、<block ref="1bf03777f1f1ec6e39142eee6de42f7d" category="inline-link-macro-rx"></block> 和 <block ref="0c791c7b79ff656d42eedaf87006f706" category="inline-link-macro-rx"></block> StorageGRID 的相關說明。</block>
   <block id="ce3a426c90a57d6cc6ab7028dafe7ea5" category="paragraph">如果底層實體主機上啟用了超執行緒，您可以為每個節點提供 8 個虛擬核心（4 個實體核心）。如果底層實體主機上未啟用超執行緒，您必須為每個節點提供 8 個實體核心。</block>
   <block id="ba418964735823a19541da35fff05ec7" category="paragraph">如果您使用虛擬機器作為主機，並且可以控制虛擬機器的大小和數量，則應為每個 StorageGRID 節點使用單一虛擬機器，並相應調整虛擬機器的大小。</block>
   <block id="15961b19cec95b8b15d7735f4bdddf54" category="paragraph">（僅限 RHEL、Debian 和 Ubuntu）對於正式作業部署，不應在相同實體儲存設備硬體或虛擬主機上執行多個儲存節點。單一 StorageGRID 部署中的每個儲存節點都應位於其自身隔離的故障網域中。確保單一硬體故障只會影響單一儲存節點，即可最大化物件資料的持久性和可用度。</block>
-  <block id="5cfd6ff9bf8fe5f9c16cf16256aaddc4" category="paragraph">另請參閱<block ref="41a0318c71f0b54e9cd94d298967a056" category="inline-link-macro-rx"></block>。</block>
   <block id="e7199d6d21d0a283583e021d10d107a7" category="summary">節點組態檔是小型文字檔案，其中包含 StorageGRID 主機服務啟動節點並將其連接到對應的網路和區塊儲存資源所需的資訊。節點組態檔用於虛擬節點，不用於應用裝置節點。</block>
   <block id="a2467bb929f6e48e771a66fdeee1514f" category="doc">為 Linux 部署建立 StorageGRID 節點組態檔</block>
   <block id="b908401ad21f4d9a3afd6c30214c6393" category="paragraph">節點組態檔是小型文字檔案，其中包含 StorageGRID 主機服務啟動節點並將其連接到對應的網路和區塊儲存資源所需的資訊。節點組態檔用於虛擬節點，不用於應用裝置節點。</block>
@@ -17145,8 +17123,6 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="03f28cec004396bf5c903fe684a4095d" category="inline-link-macro">儲存桶原則或群組原則</block>
   <block id="1b0bcddd47961172ab90ebef0e44489d" category="admonition">設定或修改儲存桶或物件的 S3 Object Lock 屬性的權限，可透過 <block ref="aa991bb9a3a046f1daa5142d523d0255" category="inline-link-macro-rx"></block> 授予。</block>
   <block id="599405eaa0379eb6e96ccb9eeb3b6852" category="list-text">如果您打算為儲存桶啟用 S3 物件鎖定，則網格管理員已為 StorageGRID 系統啟用全域 S3 物件鎖定設定，並且您已檢視 S3 物件鎖定儲存桶和物件的要求。</block>
-  <block id="060a506b94206fd8099f53c701a4dfa8" category="list-text">如果每個租戶有 5,000 個儲存桶，則網格中的每個儲存節點至少有 64 GB 的 RAM。</block>
-  <block id="3a82a753ff85d79148050551b49f5872" category="admonition">每個網格最多可以有 100,000 個儲存桶，包括<block ref="d3df59ff33f05ec9d734c238966d59f9" category="inline-link-macro-rx"></block>。</block>
   <block id="e1d3e2753b576399328d6d39cc680896" category="list-text">請輸入儲存貯體的詳細資料。</block>
   <block id="83a9945f9788d7c276a31069ee1bb724" category="paragraph">符合以下規則的儲存桶名稱：</block>
   <block id="e53c957114009561725fc45998abd90c" category="list-text">每個標籤必須以小寫字母或數字開頭和結尾，並且只能使用小寫字母、數字和連字號。</block>
@@ -22991,4 +22967,43 @@ If you want to read it using the  module first (though  is preferred and faster)
   <block id="a8fae36af01c90403afff491e33fd58f" category="section-title">Cassandra 更新</block>
   <block id="d53e1e52a32cc0f6d90fc071ebe41ab1" category="inline-link-macro">從 StorageGRID 11.9 升級至 12.0</block>
   <block id="6724d3ee092686242b60e3c8029f5d05" category="inline-link-macro">最多可匯入 100 位聯合用戶</block>
+  <block id="77dbe057e796211ceb2bfd8050130794" category="paragraph">根據需要設定稽核等級、協定標頭、稽核訊息和日誌的位置以及日誌保留。</block>
+  <block id="04c545f098c1c4f6691c6fca831ed5db" category="paragraph">您可以選擇<block ref="cce9bd0d3068773003ba615e61c64bfc" category="inline-link-macro-rx"></block>將稽核資訊遠端儲存。使用外部伺服器可以最大限度地降低稽核訊息記錄的效能影響，同時又不降低稽核資料的完整性。如果您擁有大型網格、使用多種類型的 S3 應用程式，或想要保留所有稽核資料，則外部 syslog 伺服器特別有用。</block>
+  <block id="126039d47fa1abcec599acee7439e183" category="paragraph">當 StorageGRID 在請求中發現 HTTP 標頭時，它會將這些標頭包含在稽核訊息的 HTRH 欄位中。</block>
+  <block id="c8a69bceb48692adb5a23abc286aac3b" category="paragraph">預設情況下，稽核訊息和日誌會保存在產生它們的節點上。StorageGRID 會定期輪替並最終刪除稽核訊息和日誌，以防止佔用過多磁碟空間。若要將稽核訊息和部分日誌儲存到外部，<block ref="a5f9463152b8158166c8239e67a8692c" category="inline-xref-macro-rx"></block>。</block>
+  <block id="ebd4e194b1dd9efd7978eca20766eb20" category="paragraph">如果選擇一個值，StorageGRID 會將所選值套用至所有此類訊息。如果使用固定值置換嚴重性設定，則會遺失有關不同嚴重性的詳細資訊。</block>
+  <block id="cb021814749fbee1709b7752a040823f" category="paragraph">在使用外部 syslog 伺服器之前，請要求網格中的所有節點向該外部 syslog 伺服器傳送測試訊息。這些測試訊息有助於您在將資料傳送至外部 syslog 伺服器之前，驗證整個記錄收集基礎架構。</block>
+  <block id="ab4210f6537afcce8da7bca5960e27f6" category="section-title">管理記錄保留</block>
+  <block id="f3e526d2153877449624a3e293794b34" category="paragraph">您可以透過建立 ILM 規則或設定 S3 儲存桶生命週期原則來管理 StorageGRID 保留記錄的時間。</block>
+  <block id="25c65ead7a6db6f0d9f4842086ee9431" category="paragraph">為儲存桶建立 ILM 規則，並將此規則新增至作用中的 ILM 原則。</block>
+  <block id="356153229a08f1cf68e61ad58da78204" category="list-text">選取 *建立*。<block ref="f9b57d441319b31b2e3ec25cc64a83f0" category="inline-link-macro-rx"></block> 「建立 ILM 規則精靈」隨即出現：</block>
+  <block id="1548ef9af6f33f06754193b94be688e8" category="list-text">請為該規則輸入唯一名稱。例如：ILM Rule for archived logs。</block>
+  <block id="7d0c155836b712a2c98f4ff8d1a922e9" category="list-text">選擇日誌歸檔 S3 租戶帳戶。</block>
+  <block id="c00949c0410184e0e082ef1920dded43" category="list-text">指定日誌歸檔的 S3 儲存桶。</block>
+  <block id="b89f1b3ed01a73e6b9b4fde643679bc7" category="list-text">繼續<block ref="6e56ede41692ddead078b2f3951a1e02" category="inline-link-macro-rx"></block>並定義歸檔日誌規則的存放位置。例如，ILM 規則在第一年於站台 1 和站台 2 各儲存一份複本。一年後、產生一份 2+1 銷毀編碼複本、並僅儲存在其中一個站台。</block>
+  <block id="70af295dc254d1bfa2b2a3cb8aa5e1cd" category="list-text">建立規則後，將其新增至作用中的 ILM 原則。</block>
+  <block id="ac9d605581b1583465008b3be2876127" category="open-title">S3 bucket 生命週期</block>
+  <block id="72a13c08a34877b30bdf521c3bbfa70e" category="paragraph">在日誌歸檔 S3 儲存桶上設定 S3 儲存桶生命週期原則：</block>
+  <block id="a214d4bb971f11d8bd48b57da797b1b7" category="paragraph">在日誌歸檔 S3 儲存桶上設定 S3 儲存桶生命週期原則時，對於符合儲存桶生命週期篩選器的物件，生命週期過期作業會置換 ILM 原則。不符合儲存桶生命週期篩選器的物件將使用 ILM 原則的保留設定。如果物件符合儲存桶生命週期篩選器，但未明確指定過期作業，則不會使用 ILM 原則的保留設定，並隱含表示物件版本將永久保留。</block>
+  <block id="c5ab0bc60ac7929182aadd08703f1ec6" category="paragraph">636</block>
+  <block id="2f0dd37b661522a575ecc8de6795d039" category="paragraph">如果多個租戶各自擁有最多 5,000 個儲存桶，則網格中的每個 Storage Node 必須至少有 64 GB 的 RAM。</block>
+  <block id="4d1e88e0442bc4355dbcb9b4df61d6c7" category="paragraph">更多資訊請參考以下內容：</block>
+  <block id="3645f3bd0482b72744459cbe5741e4a8" category="paragraph">您可以檢查是否已為各個儲存桶啟用或停用上次存取時間更新。請參閱 <block ref="dcc85cafd1adb4db5f3bf68d48f423d2" category="inline-link-macro-rx"></block>。</block>
+  <block id="00b3b6be152329515868b69372f5b062" category="list-text">您可以透過新增<block ref="289c5faa6802e638231e7e6ff257d3a4" prefix=" " category="inline-code"></block>請求標頭來建立啟用了 S3 物件鎖定的儲存桶。請參閱 <block ref="68c667f0ce4a6f376dfff8a750bd7d7d" category="inline-link-macro-rx"></block>。</block>
+  <block id="e2e8b48c3e737979e8d162d74b4028e2" category="paragraph">從儲存桶中刪除生命週期組態。請參閱 <block ref="899e48eb574f8c5912a7d048f8d748e8" category="inline-link-macro-rx"></block>。</block>
+  <block id="7a187ce0023a42cf205c67d1e80b2fa9" category="paragraph">*注意*：如果為此儲存桶設定了非預設的 ILM 原則標籤，則會有一個<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤及其賦值。如果存在<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤，請勿發出 DeleteBucketTagging 要求。而應發出僅包含<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>標籤及其賦值的 PutBucketTagging 要求，以移除儲存桶中的所有其他標籤。請勿修改或移除<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤。</block>
+  <block id="476bcbaebcac49e5bd9fce2d6ba84d3b" category="paragraph">傳回儲存桶的生命週期組態。請參閱 <block ref="899e48eb574f8c5912a7d048f8d748e8" category="inline-link-macro-rx"></block>。</block>
+  <block id="e6de078fb949dad4aeacc957f067270a" category="paragraph">*注意*：如果為此儲存桶設定了非預設的 ILM 原則標籤，則會有一個<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤及其賦值。請勿修改或移除此標籤。</block>
+  <block id="1f95d56749d16d1e997cf8c891df6f75" category="paragraph">請參閱 <block ref="68c667f0ce4a6f376dfff8a750bd7d7d" category="inline-link-macro-rx"></block>。</block>
+  <block id="bbac00d2858f8df3b845189f4e6a1058" category="paragraph">請參閱 <block ref="899e48eb574f8c5912a7d048f8d748e8" category="inline-link-macro-rx"></block>。若要了解儲存桶生命週期中的到期行動如何與 ILM 放置指令互動，請參閱<block ref="2eebcc299dfcfbe3c659686c56f8a9eb" category="inline-link-macro-rx"></block>。</block>
+  <block id="bfebe611682c03a710c37bc9f41c7e51" category="paragraph">設定附加到儲存桶的原則。請參閱 <block ref="df8686d57377200c27f81ca84f948011" category="inline-link-macro-rx"></block>。</block>
+  <block id="b39a5414c4819d4f48582454a17254a2" category="list-text">目標儲存桶必須指定為租用戶管理器或租用戶管理 API 中指定的 StorageGRID 端點的 URN。請參閱 <block ref="78ca258c698c6e5ef6dba3f53379e735" category="inline-link-macro-rx"></block>。</block>
+  <block id="0f48dacf070b3b0117444b481bbdb982" category="paragraph">*注意*：如果為此儲存桶設定了非預設的 ILM 原則標籤，則會有一個<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤及其賦值。請確保所有 PutBucketTagging 請求中都包含<block ref="2ce3f7d0855e7a7db3be4bffab58af5a" prefix=" " category="inline-code"></block>儲存桶標籤及其賦值。請勿修改或移除此標籤。</block>
+  <block id="1cb3c9cf636ea55ccda3277942377191" category="list-text">如果多個租戶各自擁有最多 5,000 個儲存桶，則每個節點至少需要 64 GB 的空間。</block>
+  <block id="d969a1e03fcd8eeec67e80113b5eacf0" category="admonition">定期監控 CPU 和記憶體容量使用情況，確保這些資源持續容納您的工作負載。例如，將虛擬儲存節點的 RAM 和 CPU 分配增加一倍，即可獲得與 StorageGRID 應用裝置節點類似的資源。此外，如果每個節點的中繼資料量超過 500 GB，請考慮將每個節點的 RAM 增加至 48 GB 或更多。有關管理物件中繼資料儲存設備、增加中繼資料保留空間設定以及監控 CPU 和記憶體容量使用情況的資訊，請參閱 <block ref="d7da925960d077caca67b7da05f604eb" category="inline-link-macro-rx"></block>、<block ref="1bf03777f1f1ec6e39142eee6de42f7d" category="inline-link-macro-rx"></block> 和 <block ref="0c791c7b79ff656d42eedaf87006f706" category="inline-link-macro-rx"></block> StorageGRID 的相關說明。</block>
+  <block id="995ddab54dccc10c916863003cd4b12a" category="paragraph">請參閱 <block ref="41a0318c71f0b54e9cd94d298967a056" category="inline-link-macro-rx"></block>。</block>
+  <block id="ba81233e9af267a8db7dc3230f6db6a6" category="list-text">如果多個租戶各自擁有最多 5,000 個儲存桶，則網格中的每個儲存節點至少需要 64 GB 的 RAM。</block>
+  <block id="c3b4bb6f8dd3409ee70fe0263cf21429" category="inline-link-macro">分支桶深度</block>
+  <block id="345dde1cb2d56467b2738ee24b238a58" category="admonition">StorageGRID 系統為每個 S3 租戶帳戶支援最多 5,000 個儲存桶。每個網格最多可以有 100,000 個儲存桶，包括<block ref="d3df59ff33f05ec9d734c238966d59f9" category="inline-link-macro-rx"></block>。此外，<block ref="ce3c7022613649c3c66921047aafc7b1" category="inline-link-macro-rx"></block> 也有數量限制。</block>
+  <block id="98e500c14e3477e6ac46010a64b95e67" category="paragraph">如需詳細資訊，請參閱<block ref="c192042024a8f68be5a4c7bc34004895" category="inline-link-rx"></block>。</block>
 </blocks>
